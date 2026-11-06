@@ -1,0 +1,5 @@
+{
+  "faces_negative_y": true,
+  "eyes": {"L": "REPLACE_WITH_ANATOMICAL_LEFT_EYE_MESH", "R": "REPLACE_WITH_ANATOMICAL_RIGHT_EYE_MESH"},
+  "attribution": "REPLACE with asset names, authors, source URLs, and verified licenses."
+}
