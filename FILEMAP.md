@@ -4,9 +4,11 @@ Navigation index verified 6 November 2026. Inspect implementation before changin
 
 ## Status and flow
 
-GazeForge implements synthetic binocular gaze for Samsung PRISM-XR Track 01.
+Apollo implements synthetic binocular gaze for Samsung PRISM-XR Track 01.
 Source exists for the complete fixture/production pipeline. Blender 4.5.15 LTS is now installed and ten-frame fixture rendering and artifact validation now pass; full V1–V17 verification remains pending. Docker execution remains unavailable.
-The textured character asset is still a human handoff. Fixture results cannot be
+An MPFB textured character and explicit mapping now exist; production integration
+and initial geometry checks pass. Ten draft production frames validate, with maximum
+blind pupil-detector residual 0.171 px; full V1–V17 remains pending. Fixture results cannot be
 packaged as production. Generated artifacts belong under out/ and are not listed.
 
 Flow: character inspection/mapping or fixture → calibrated scene → standalone eye
@@ -34,8 +36,8 @@ wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → pr
 | --- | --- |
 | `tasks.py` | Portable CLI orchestrating test, inspection, scene build, sweep, framing, validation, sheet, prepare, demo, verify, bundle, all and Docker. |
 | `wrapper/eyes.py` | Standalone Blender API/CLI; embedded NumPy core; absolute pose, evaluated geometry/projection checks, atomic metadata output. |
-| `gazeforge_core/core.py` | Finite inputs/config, fixation, shortest-arc rotation, camera projection, exact pupil conic, sweep and annotations. |
-| `gazeforge_core/metadata.py` | Structural/semantic protocol checks and optional analytic checks against a supplied calibration. |
+| `apollo_core/core.py` | Finite inputs/config, fixation, shortest-arc rotation, camera projection, exact pupil conic, sweep and annotations. |
+| `apollo_core/metadata.py` | Structural/semantic protocol checks and optional analytic checks against a supplied calibration. |
 | `metadata.schema.json` | Ten-frame JSON Schema; mathematical consistency is enforced by Python validation. |
 | `check_core.py` | Direct reference assertion runner; normal task tests use pytest. |
 | `pyproject.toml`, `requirements.txt` | Pytest configuration and pinned Python tool dependencies. |
@@ -49,9 +51,11 @@ wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → pr
 | `build/fixture_scene.py` | Procedural face proxy, open scleral shells, iris/pupil meshes skinned to dedicated eye bones, camera/light calibration; explicitly marks fixture. |
 | `build/inspect_character.py` | Read-only source rig/mesh/material/image inventory for explicit mapping. |
 | `build/build_scene.py` | Load mapped source face, preserve measured spacing, hide stock eyes, integrate dedicated procedural eye rig, pack textures and save candidate. |
+| `build/finalize_mpfb_character.py` | Create/finalize the MPFB character in an MPFB-enabled Blender: CC0 assets, split stock eyes, uniform 63 mm spacing, packed source and mapping. |
+| `assets/character_mapping.json`, `assets/ATTRIBUTION.md` | Actual source-eye mapping and selected character asset provenance. |
 
-The human-provided `assets/base_character.blend` and completed mapping are not
-present yet. Integration requires -Y facing, meter scale, aligned anatomical eyes,
+`assets/base_character.blend` and its completed mapping are now present.
+Integration requires -Y facing, meter scale, aligned anatomical eyes,
 58–68 mm center spacing, actual stock-eye mesh names, and attribution.
 
 ## Verification and artifacts

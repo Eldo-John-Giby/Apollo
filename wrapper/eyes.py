@@ -15,7 +15,7 @@ try:
 except ImportError:
     bpy = None
 # BEGIN CORE
-"""gazeforge/core.py - pure-python (numpy only) reference math. No bpy imports. Frozen conventions: see 01_SOLUTION_TECHNICAL.md s3."""
+"""apollo/core.py - pure-python (numpy only) reference math. No bpy imports. Frozen conventions: see 01_SOLUTION_TECHNICAL.md s3."""
 import math
 from dataclasses import dataclass, field
 import numpy as np
@@ -180,9 +180,9 @@ _RIG = None
 class _Rig:
     def __init__(self):
         self.scene = bpy.context.scene
-        self.cfg = Config(**json.loads(self.scene['gazeforge_calibration']))
-        self.arm = bpy.data.objects[self.scene['gazeforge_armature']]
-        self.bones = json.loads(self.scene['gazeforge_bones'])
+        self.cfg = Config(**json.loads(self.scene['apollo_calibration']))
+        self.arm = bpy.data.objects[self.scene['apollo_armature']]
+        self.bones = json.loads(self.scene['apollo_bones'])
         self.rest = {}
         for side, name in self.bones.items():
             pb = self.arm.pose.bones[name]
@@ -219,11 +219,11 @@ class _Rig:
             if np.linalg.norm(pixel - record['pupil_center_2D_'+side]) > 1e-3:
                 raise ValueError('Camera projection disagrees with analytic intrinsics')
         record['extra']['clamped'] = self.clamped
-        record['extra']['fixture'] = bool(self.scene.get('gazeforge_fixture', False))
+        record['extra']['fixture'] = bool(self.scene.get('apollo_fixture', False))
         record['extra']['pose_sha256'] = hashlib.sha256(json.dumps({s:record['extra']['eye_quat_wxyz_'+s] for s in 'LR'},sort_keys=True).encode()).hexdigest()
         record['extra']['camera'] = {'position':[0.,-self.cfg.cam_dist,0.], 'focal_mm':self.cfg.focal_mm, 'sensor_mm':self.cfg.sensor_mm}
         record['extra']['render_samples'] = self.scene.cycles.samples
-        record['extra']['calibration'] = json.loads(self.scene['gazeforge_calibration'])
+        record['extra']['calibration'] = json.loads(self.scene['apollo_calibration'])
         record['extra']['blender_version'] = bpy.app.version_string
         lights = []
         for obj in sorted(self.scene.objects, key=lambda obj:obj.name):
@@ -237,7 +237,7 @@ def _rig():
     global _RIG
     if bpy is None:
         raise RuntimeError('This API requires Blender Python; use the CLI or run inside Blender')
-    if 'gazeforge_calibration' not in bpy.context.scene:
+    if 'apollo_calibration' not in bpy.context.scene:
         paths = [ROOT/'scene.blend', ROOT/'out/fixture/scene.blend']
         scene = next((p for p in paths if p.is_file()), None)
         if scene is None:
@@ -266,7 +266,7 @@ def state():
 
 
 def calibration():
-    return json.loads(_rig().scene['gazeforge_calibration'])
+    return json.loads(_rig().scene['apollo_calibration'])
 
 
 def render(path=None):

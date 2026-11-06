@@ -1,4 +1,4 @@
-# GAZEFORGE — Track 01 Winning Solution (Technical Specification)
+# APOLLO — Track 01 Winning Solution (Technical Specification)
 
 **Samsung PRISM-XR Hackathon 2026 · Theme 1 / Track 01 · Synthetic Eye Movement & Virtual Camera Rendering**
 **Doc status:** v1.0, written 6 Nov 2026. Companion file: `02_IMPLEMENTATION_PLAN.md` (hand that one to the coding agents; hand them this one as context).
@@ -7,7 +7,7 @@
 
 ## 0. The thesis in one paragraph
 
-The rubric is deterministic and cheap to satisfy *partially*. Almost every team will get a face, two eyes that move, ten PNGs and a JSON. The teams that lose points will lose them on **ambiguity** (axis signs, left/right naming, JSON shape), **fragility** (wrapper breaks when the grader calls it differently, Blender version drift, unpacked textures), and **invisibility** (pupil shift too small to see, pupil hard to detect). GazeForge wins by being **correct by construction, self-verifying, and unmistakable**:
+The rubric is deterministic and cheap to satisfy *partially*. Almost every team will get a face, two eyes that move, ten PNGs and a JSON. The teams that lose points will lose them on **ambiguity** (axis signs, left/right naming, JSON shape), **fragility** (wrapper breaks when the grader calls it differently, Blender version drift, unpacked textures), and **invisibility** (pupil shift too small to see, pupil hard to detect). Apollo wins by being **correct by construction, self-verifying, and unmistakable**:
 
 1. **Score-by-construction.** Every rubric line maps to a specific design decision and a specific automated test that proves it (Section 1).
 2. **Physically honest.** True 3D spherical eyeball rotation about the true center, binocular fixation on a real 3D point at 35 cm, Listing's-law-compliant (torsion-free) rotations, metric scale audited. Not texture sliding.

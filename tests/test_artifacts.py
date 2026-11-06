@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 from PIL import Image
 import pytest
-from gazeforge_core.core import Config,make_record,sweep_inputs
+from apollo_core.core import Config,make_record,sweep_inputs
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from validate_metadata import validate_artifacts

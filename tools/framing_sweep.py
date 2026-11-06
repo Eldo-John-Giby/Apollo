@@ -36,7 +36,7 @@ def run(folder):
     chosen=max(eligible,key=lambda row:row['focal_mm'])
     scene.camera.data.lens=chosen['focal_mm']
     rig.cfg=replace(rig.cfg,focal_mm=float(chosen['focal_mm']))
-    scene['gazeforge_calibration']=json.dumps(asdict(rig.cfg))
+    scene['apollo_calibration']=json.dumps(asdict(rig.cfg))
     eyes.reset()
     bpy.ops.wm.save_as_mainfile(filepath=str(folder/'scene.blend'),compress=True)
     (folder/'framing_report.json').write_text(json.dumps({'chosen':chosen,'measurements':rows,'limitation':'Eye sphere bounds only. Review brows/lashes and face crop manually before submission.'},indent=2),encoding='utf-8')

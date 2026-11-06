@@ -1,5 +1,5 @@
 import math, numpy as np
-from gazeforge_core.core import *
+from apollo_core.core import *
 C=Config()
 def test_sweep():
     s=sweep_inputs()

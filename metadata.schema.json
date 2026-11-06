@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "GazeForge ten-frame sweep",
+  "title": "Apollo ten-frame sweep",
   "type": "array",
   "minItems": 10,
   "maxItems": 10,

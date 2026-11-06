@@ -38,3 +38,23 @@ all twenty eye/frame pairs has maximum residual 0.116304 px. This is initial ren
 validation, not completion of V1–V17, production integration, or cross-version tests.
 MPFB 2.0.18 is installed in the user's Blender extensions. Character handoff remains
 pending. Factory-startup background jobs avoid modifying user add-on state.
+
+Production character milestone (6 November 2026): created MPFB adult neutral male
+with default 163-bone rig, young_asian_male skin, eyebrow001 and eyelashes01.
+Selected asset MHCLO/MHMAT headers explicitly declare CC0. Split stock eye pair
+into StockEye.L/R and uniformly scaled the hierarchy to measured 62.999994 mm
+spacing. Saved packed assets/base_character.blend, mapping and attribution;
+production integration succeeds. Initial 100 random evaluated poses: maximum
+axis vector error 2.216e-7; fixation ray error 1.117e-7 m. All four packed textures
+load correctly. Draft production sweep started; full V1–V17 remains pending.
+Packed-image audit now requests pixels before has_data, because freshly opened
+packed images are loaded lazily and otherwise give a false missing-texture failure.
+
+Initial production sweep exposed lash interference at upward gaze. Increased
+symmetric eye-opening targets from 0.35 to 0.65 and refitted brows/lashes.
+Regenerated all ten draft production frames: metadata/schema/image validation
+passes; blind detector maximum residual is 0.170610 px across all twenty pupils.
+Contact sheet, GIF and candidate documents regenerated. Corrected production
+scene is loaded in live Blender at reset. Full V1–V17 remains pending; these
+initial checks do not qualify the scene for submission packaging. Python tests:
+51 passed; character finalizer and verifier compile successfully.

@@ -1,4 +1,4 @@
-"""Portable end-to-end GazeForge task runner."""
+"""Portable end-to-end Apollo task runner."""
 import argparse
 import os
 from pathlib import Path
@@ -37,7 +37,7 @@ def main():
         print('Secondary:',os.environ.get('BLENDER_SECONDARY_BIN','not configured'))
         print('Character:',args.source if args.source.is_file() else 'pending')
         return 0 if blender else 2
-    if args.task=='docker': return run(['docker','build','-t','gazeforge',str(ROOT)])
+    if args.task=='docker': return run(['docker','build','-t','apollo',str(ROOT)])
     if args.task=='all':
         pipeline=['test','sync','production-scene' if args.production else 'scene','sweep','validate','sheet','prepare','demo','verify']
         if args.production and args.team: pipeline.append('bundle')

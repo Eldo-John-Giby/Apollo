@@ -12,8 +12,8 @@ import tempfile
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from gazeforge_core.core import Config,make_record,eye_state,angle_from_primary,MAX_ECCENTRICITY
-from gazeforge_core.metadata import load
+from apollo_core.core import Config,make_record,eye_state,angle_from_primary,MAX_ECCENTRICITY
+from apollo_core.metadata import load
 from validate_metadata import validate_artifacts
 from grader_sim import gray,detect,centroid,template_shift
 
@@ -32,7 +32,7 @@ def write_report(folder,report):
     report['passed']=all(report['checks'][f'V{i}']['status']=='PASS' for i in range(1,18))
     report['artifact_hashes']=hashes(folder)
     (folder/'verification_report.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n',encoding='utf-8')
-    lines=['# GazeForge verification','',f"Production asset: {report['production']}",f"All checks passed: {report['passed']}",'','| Check | Status | Evidence |','| --- | --- | --- |']
+    lines=['# Apollo verification','',f"Production asset: {report['production']}",f"All checks passed: {report['passed']}",'','| Check | Status | Evidence |','| --- | --- | --- |']
     for name,item in report['checks'].items():
         detail=str(item.get('measurement',item.get('detail',''))).replace('|','/').replace('\n',' ')
         lines.append(f"| {name} | {item['status']} | {detail} |")

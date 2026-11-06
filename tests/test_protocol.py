@@ -5,8 +5,8 @@ from pathlib import Path
 import sys
 import numpy as np
 import pytest
-from gazeforge_core.core import Config, eye_state, make_record, project, pupil_ellipse_2d, sweep_inputs
-from gazeforge_core.metadata import validate
+from apollo_core.core import Config, eye_state, make_record, project, pupil_ellipse_2d, sweep_inputs
+from apollo_core.metadata import validate
 ROOT = Path(__file__).resolve().parents[1]
 
 def records():

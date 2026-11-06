@@ -22,6 +22,14 @@ python tasks.py all
 
 ## Character handoff
 
+The initial character is now saved as assets/base_character.blend, with mapping
+and attribution alongside it. It uses the default 163-bone MPFB rig, CC0
+young_asian_male skin, eyebrow001 and eyelashes01, with uniform 63 mm eye spacing.
+To recreate it in a fresh Blender scene with MPFB and the four packs enabled,
+run build/finalize_mpfb_character.py. The script also supports finalizing an
+existing unsplit Apollo_Face character; it intentionally rejects repeated
+finalization. Production render/verification evidence belongs in out/production.
+
 Save the textured MPFB character as assets/base_character.blend. It must face -Y,
 use meter-scale geometry, have roughly 58–68 mm eye spacing, and retain textures.
 Original rigging, brows, lashes, and skin are preserved; procedural eye meshes are

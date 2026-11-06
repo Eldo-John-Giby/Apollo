@@ -2,3 +2,6 @@ __pycache__/
 .pytest_cache/
 .venv/
 out/
+*.blend1
+*.blend2
+assets/*.zip

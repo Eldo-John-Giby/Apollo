@@ -4,7 +4,7 @@ import argparse
 import math
 from PIL import Image, ImageDraw
 from validate_metadata import validate_artifacts
-from gazeforge_core.core import Config, eye_state
+from apollo_core.core import Config, eye_state
 
 
 def create(folder):

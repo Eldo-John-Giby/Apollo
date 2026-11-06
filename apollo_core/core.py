@@ -1,4 +1,4 @@
-"""gazeforge/core.py - pure-python (numpy only) reference math. No bpy imports. Frozen conventions: see 01_SOLUTION_TECHNICAL.md s3."""
+"""apollo/core.py - pure-python (numpy only) reference math. No bpy imports. Frozen conventions: see 01_SOLUTION_TECHNICAL.md s3."""
 from __future__ import annotations
 import math
 from dataclasses import dataclass, field

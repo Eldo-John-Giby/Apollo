@@ -6,7 +6,7 @@ import json
 import jsonschema
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from gazeforge_core.metadata import load
+from apollo_core.metadata import load
 from PIL import Image
 
 

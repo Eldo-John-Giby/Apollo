@@ -1,4 +1,4 @@
-# GazeForge
+# Apollo
 
 Synthetic binocular gaze pipeline for Samsung PRISM-XR Track 01.
 
@@ -71,11 +71,17 @@ accuracy on synthetic images, and missing-runtime/report behavior.
 Blender 4.5.15 LTS is now installed at C:\Program Files\Blender Foundation\Blender 4.5\blender.exe. Earlier, the environment denied network
 socket access for downloading it. The Docker executable exists, but its daemon
 is unavailable. The fixture builder and a single-pose render now run successfully; the Dockerfile has
-not been executed here. The ten-frame fixture sweep, metadata validation, contact sheet and GIF now succeed; full V1–V17 verification remains pending; no production scene, final verification,
-or submission ZIP is claimed to pass. Tests use synthetic images, not Blender
+not been executed here. The ten-frame fixture sweep, metadata validation, contact sheet
+and GIF now succeed; a textured production scene also builds. Full V1–V17
+verification and a submission ZIP remain pending. Tests use synthetic images, not Blender
 renders. Missing runtime reports explicitly remain NOT RUN/FAIL.
 
-Your textured assets/base_character.blend is still pending. There are no automatic
+The MPFB textured assets/base_character.blend and character_mapping.json now exist.
+The production scene builds and an initial 100-pose check passes. Ten draft
+production frames validate; maximum blind pupil-detector residual is 0.171 px
+across all twenty pupils. Contact sheet and GIF are in out/production.
+Full V1–V17 production verification remains pending.
+There are no automatic
 emails, publication, uploads, or organizer submissions. Optional dataset/live-aim/
 refraction experiments are deferred until a verified submission candidate exists.
 

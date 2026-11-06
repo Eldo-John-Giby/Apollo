@@ -23,7 +23,7 @@ def collect(folder):
     rig=eyes._rig(); scene=rig.scene; cfg=rig.cfg
     shipped=json.loads((folder/'metadata.json').read_text(encoding='utf-8'))
     scene.cycles.samples=int(shipped[0]['extra']['render_samples'])
-    result={'blender':bpy.app.version_string,'config':eyes.calibration(),'fixture':bool(scene.get('gazeforge_fixture',True)),'checks':{},'directions':{}}
+    result={'blender':bpy.app.version_string,'config':eyes.calibration(),'fixture':bool(scene.get('apollo_fixture',True)),'checks':{},'directions':{}}
     def check(name,fn):
         try:
             measurement=fn()
@@ -109,7 +109,10 @@ def collect(folder):
     def resources():
         for image in bpy.data.images:
             if image.source in {'FILE','TILED'}:
-                assert image.has_data and image.packed_file, 'Unpacked/missing texture: '+image.name
+                # Packed images load lazily after opening a blend file. Demand
+                # pixels before checking has_data, including unused stock eyes.
+                pixels = len(image.pixels)
+                assert pixels > 0 and image.has_data and image.packed_file, 'Unpacked/missing texture: '+image.name
         return 'all external textures packed'
     check('resources',resources)
     # Capture normal frames before any diagnostic material modifications.

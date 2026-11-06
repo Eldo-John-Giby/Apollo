@@ -15,11 +15,11 @@ def export(folder):
         draw=ImageDraw.Draw(frame)
         draw.rectangle((0,0,768,36),fill='black')
         fixture=record.get('extra',{}).get('fixture',True)
-        draw.text((12,10),('DEVELOPMENT FIXTURE | ' if fixture else '')+f'GazeForge frame {k:02d} h={record["input"]["h"]:+.3f} v={record["input"]["v"]:+.3f}',fill='white')
+        draw.text((12,10),('DEVELOPMENT FIXTURE | ' if fixture else '')+f'Apollo frame {k:02d} h={record["input"]["h"]:+.3f} v={record["input"]["v"]:+.3f}',fill='white')
         frames.append(frame)
     output=folder/'sweep.gif'
     frames[0].save(output,save_all=True,append_images=frames[1:],duration=180,loop=0)
-    (folder/'PRESENTATION.md').write_text('''# GazeForge presentation outline
+    (folder/'PRESENTATION.md').write_text('''# Apollo presentation outline
 
 1. Theme 01; registered team and members (fill before submission).
 2. Synthetic gaze data gap and why spherical eye rotation matters.

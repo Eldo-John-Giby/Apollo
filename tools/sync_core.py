@@ -5,7 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def sync(check=False):
     path = ROOT/'wrapper/eyes.py'
     wrapper = path.read_text(encoding='utf-8-sig')
-    core = (ROOT/'gazeforge_core/core.py').read_text(encoding='utf-8-sig')
+    core = (ROOT/'apollo_core/core.py').read_text(encoding='utf-8-sig')
     # Future imports must be at module start, rather than inside the embedded block.
     core = core.replace('from __future__ import annotations\n', '')
     before, tail = wrapper.split('# BEGIN CORE\n', 1)

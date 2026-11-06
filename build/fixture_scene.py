@@ -8,7 +8,7 @@ import bpy
 from mathutils import Vector
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from gazeforge_core.core import Config
+from apollo_core.core import Config
 
 
 def material(name, color):
@@ -122,10 +122,10 @@ def build(output=None):
     scene.render.image_settings.color_mode = 'RGB'
     scene.render.image_settings.color_depth = '8'
     scene.view_settings.view_transform = 'Standard'
-    scene['gazeforge_calibration'] = json.dumps(asdict(cfg))
-    scene['gazeforge_armature'] = arm.name
-    scene['gazeforge_bones'] = json.dumps({'L':'eye.L','R':'eye.R'})
-    scene['gazeforge_fixture'] = True
+    scene['apollo_calibration'] = json.dumps(asdict(cfg))
+    scene['apollo_armature'] = arm.name
+    scene['apollo_bones'] = json.dumps({'L':'eye.L','R':'eye.R'})
+    scene['apollo_fixture'] = True
     sys.path.insert(0, str(ROOT / 'wrapper'))
     import eyes
     eyes.reset()

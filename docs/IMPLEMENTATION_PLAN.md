@@ -1,4 +1,4 @@
-# GAZEFORGE — Implementation Plan for AI Coding Agents
+# APOLLO — Implementation Plan for AI Coding Agents
 
 **Project:** Samsung PRISM-XR Hackathon 2026 · Track 01 · Synthetic Eye Movement & Virtual Camera Rendering
 **Audience:** Codex / Claude Code agents, plus one human operator (Eldo's team).
@@ -10,7 +10,7 @@
 
 ## 0. Agent brief (paste this at the top of every agent session)
 
-> You are building **GazeForge**, a Blender-based synthetic eye-movement pipeline that is graded on a deterministic 100-point rubric. The goal is a *provably correct, grader-proof* submission, not a flashy one.
+> You are building **Apollo**, a Blender-based synthetic eye-movement pipeline that is graded on a deterministic 100-point rubric. The goal is a *provably correct, grader-proof* submission, not a flashy one.
 >
 > Non-negotiable rules:
 > 1. **Frozen conventions** (units, axes, signs, naming, pixel origin, sweep) are defined in `01_SOLUTION_TECHNICAL.md` §3. Never change them. If you think one is wrong, stop and write the reasoning in `DECISIONS.md` for the human.
@@ -76,7 +76,7 @@ Record the voice-over (or screen-record per the storyboard), upload the video (Y
 ## 3. Repository layout
 
 ```
-gazeforge/
+apollo/
 ├── Makefile
 ├── README.md                    # becomes bundle README (generated sections from verify)
 ├── DECISIONS.md                 # any deviation or open question, dated
@@ -88,7 +88,7 @@ gazeforge/
 │   └── anatom_eye.py            # T1.5 (Tier B)
 ├── wrapper/
 │   └── eyes.py                  # self-contained; embeds a copy of core math
-├── gazeforge_core/
+├── apollo_core/
 │   ├── core.py                  # pure math (reference below); source of truth
 │   └── test_core.py
 ├── tools/
@@ -104,7 +104,7 @@ gazeforge/
 └── out/                         # build products (gitignored): scene.blend, renders/, metadata.json, bundle zip
 ```
 
-**Core-math sync rule:** `wrapper/eyes.py` must be self-contained, so it embeds the contents of `gazeforge_core/core.py` between `# BEGIN CORE` / `# END CORE` markers, written by `tools/sync_core.py`. A test fails if the embedded copy differs from `core.py`.
+**Core-math sync rule:** `wrapper/eyes.py` must be self-contained, so it embeds the contents of `apollo_core/core.py` between `# BEGIN CORE` / `# END CORE` markers, written by `tools/sync_core.py`. A test fails if the embedded copy differs from `core.py`.
 
 **Makefile targets:** `test` (pure-Python tests), `scene` (build `out/scene.blend`), `sweep` (run the default sweep headless), `verify` (V1–V17 and report), `sheet`, `bundle`, `docker`, `all` (= test, scene, sweep, verify, sheet, bundle).
 
@@ -124,10 +124,10 @@ gazeforge/
 
 This is the single source of truth for rotations, projection and the sweep. It was run against the tests below (11 passed). Do not "improve" the conventions. Extend only by adding.
 
-`gazeforge_core/core.py`
+`apollo_core/core.py`
 
 ```python
-"""gazeforge/core.py - pure-python (numpy only) reference math. No bpy imports. Frozen conventions: see 01_SOLUTION_TECHNICAL.md s3."""
+"""apollo/core.py - pure-python (numpy only) reference math. No bpy imports. Frozen conventions: see 01_SOLUTION_TECHNICAL.md s3."""
 from __future__ import annotations
 import math
 from dataclasses import dataclass, field
@@ -254,7 +254,7 @@ PUPIL_RADIUS = 0.002  # m (d = 4 mm)
 MAX_ECCENTRICITY = math.radians(35.0)  # oculomotor-plausible bound; assert in dataset mode so pupils never roll into the skull
 ```
 
-`gazeforge_core/test_core.py`
+`apollo_core/test_core.py`
 
 ```python
 import math, numpy as np
@@ -344,9 +344,9 @@ Print and save `out/inspect.json`:
 2. **Units:** `scene.unit_settings.system='METRIC'`, `scale_length=1.0`.
 3. **Camera** `Camera.Gaze`: location `(0, −0.400, 0)`, rotation Euler `(π/2, 0, 0)`, `lens=100`, `sensor_width=36`, `sensor_fit='HORIZONTAL'`, `shift_x=shift_y=0`, `clip_start=0.05`, `clip_end=5`, perspective, no DOF. Set as `scene.camera`.
 4. **Empties:** `EyeMidpoint` (0,0,0); `FixationTarget` (0,−0.350,0); optional hidden `FixationBounds` wireframe plane/box ±0.05 m at y=−0.35 (hide_render=True, for the GUI audience).
-5. **Lights:** 1 area key (large, soft), 1 weak area fill, neutral gray world. **No animation data, no drivers** on any light/camera/world. Pick the key position so the corneal catchlight lands away from the pupil (tuned in P5). Store a canonical JSON of all light params → `scene["gazeforge_lighting"]`.
+5. **Lights:** 1 area key (large, soft), 1 weak area fill, neutral gray world. **No animation data, no drivers** on any light/camera/world. Pick the key position so the corneal catchlight lands away from the pupil (tuned in P5). Store a canonical JSON of all light params → `scene["apollo_lighting"]`.
 6. **Render settings:** Cycles, CPU, `samples=128` (tunable), `use_adaptive_sampling=False`, `seed=0`, `use_animated_seed=False`, OIDN denoise on, `film_transparent=False`, `view_transform='Standard'`, `look='None'`, resolution 1024×1024 @ 100 %, PNG 8-bit RGB, fixed compression. `scene.frame_set(1)`.
-7. **Calibration block:** `scene["gazeforge_calibration"] = json.dumps({...Config values, measured IPD, conventions...})`.
+7. **Calibration block:** `scene["apollo_calibration"] = json.dumps({...Config values, measured IPD, conventions...})`.
 8. **Pose:** leave the scene saved in the `reset` pose (applied via the same function the wrapper uses).
 9. **Pack and clean:** `bpy.ops.file.pack_all()`, downscale any image > 2048 px, purge orphans, `bpy.ops.wm.save_as_mainfile(filepath=..., compress=True)`.
 - **Acceptance:** `out/scene.blend` opens headless with no missing files; V1 passes.
@@ -390,7 +390,7 @@ except ImportError:
     HAVE_BPY = False
 
 # BEGIN CORE
-# (contents of gazeforge_core/core.py, written by tools/sync_core.py)
+# (contents of apollo_core/core.py, written by tools/sync_core.py)
 # END CORE
 
 ROOT = Path(__file__).resolve().parent.parent if "__file__" in globals() else Path.cwd()
@@ -399,7 +399,7 @@ BONES = {"L": "eye.L", "R": "eye.R"}          # replace with observed names from
 class _Rig:
     def __init__(self):
         self.scene = bpy.context.scene
-        self.cfg = _load_cfg(self.scene)                    # from scene["gazeforge_calibration"]
+        self.cfg = _load_cfg(self.scene)                    # from scene["apollo_calibration"]
         self.arm = next(o for o in bpy.data.objects if o.type == "ARMATURE")
         self.rest = {}
         for s in "LR":
@@ -553,7 +553,7 @@ Record with OBS; render the 10-frame loop as MP4/GIF via `ffmpeg`. Keep audio cl
 
 | Layer | Tests | Runs where |
 |---|---|---|
-| Core math | `pytest gazeforge_core` (11 given + extend) | any Python |
+| Core math | `pytest apollo_core` (11 given + extend) | any Python |
 | Schema | `validate_metadata.py` against `metadata.schema.json` | any Python |
 | Scene | V1, V2, V3, V4, V5 | Blender headless |
 | Pixels | V6, V7, V8, V9, V10, V14 | Blender + OpenCV |
@@ -583,10 +583,10 @@ Record with OBS; render the 10-frame loop as MP4/GIF via `ffmpeg`. Keep audio cl
 | **C (QA/docs)** | verify driver, determinism, cross-version, Docker, README, demo/slide assets | Yes |
 
 **Prompt for Agent B (copy/paste):**
-> Read `docs/01_SOLUTION_TECHNICAL.md` and `docs/02_IMPLEMENTATION_PLAN.md` fully. Implement T1.1 first and show me its output. Then implement T1.2 and T1.3 so that `make sweep` produces 10 PNGs and a valid `metadata.json` from a scene built from `assets/base_character.blend`. Use the reference math in `gazeforge_core/core.py`; do not change conventions. Run headless only. Before using any bpy call you are not 100 % sure about, write a tiny experiment script and print its output. Report which bone names, eye geometry measurements, and measured IPD you observed. Stop at Gate G1 and summarize the results with numbers.
+> Read `docs/01_SOLUTION_TECHNICAL.md` and `docs/02_IMPLEMENTATION_PLAN.md` fully. Implement T1.1 first and show me its output. Then implement T1.2 and T1.3 so that `make sweep` produces 10 PNGs and a valid `metadata.json` from a scene built from `assets/base_character.blend`. Use the reference math in `apollo_core/core.py`; do not change conventions. Run headless only. Before using any bpy call you are not 100 % sure about, write a tiny experiment script and print its output. Report which bone names, eye geometry measurements, and measured IPD you observed. Stop at Gate G1 and summarize the results with numbers.
 
 **Prompt for Agent A:**
-> Read both docs. Set up the repo, Makefile and `pytest` for `gazeforge_core`. Write `metadata.schema.json` and `tools/validate_metadata.py` (exact key order and types as in `01` §9). Implement `tools/grader_sim.py` with blind detector A (threshold + ellipse fit) and detector B (template matching) and test both on synthetic images that you render with numpy (an iris disc and a black pupil at known sub-pixel positions on a skin-like background with noise). Prove sub-pixel accuracy numbers. Do not touch Blender code.
+> Read both docs. Set up the repo, Makefile and `pytest` for `apollo_core`. Write `metadata.schema.json` and `tools/validate_metadata.py` (exact key order and types as in `01` §9). Implement `tools/grader_sim.py` with blind detector A (threshold + ellipse fit) and detector B (template matching) and test both on synthetic images that you render with numpy (an iris disc and a black pupil at known sub-pixel positions on a skin-like background with noise). Prove sub-pixel accuracy numbers. Do not touch Blender code.
 
 **Prompt for Agent C:**
 > Read both docs. Once `out/scene.blend` and `wrapper/eyes.py` exist, implement `tools/verify.py` V1–V17 exactly as specified in §8, including the mask-render variant for V7. Produce `extras/verification_report.md`. Then Dockerize, run cross-version checks on Blender 4.5 LTS and 5.2 LTS, and report any API drift.

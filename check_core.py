@@ -10,7 +10,7 @@ for name in sorted(vars(module)):
     if name.startswith('test_'):
         getattr(module, name)()
         print('PASS', name)
-from gazeforge_core.core import Config, make_record, sweep_inputs
-from gazeforge_core.metadata import validate
+from apollo_core.core import Config, make_record, sweep_inputs
+from apollo_core.metadata import validate
 validate([make_record(k, theta, h, v, Config(), f'frame_{k:02}.png') for k,theta,h,v in sweep_inputs()])
 print('PASS metadata protocol')
