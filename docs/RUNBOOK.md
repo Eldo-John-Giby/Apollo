@@ -83,6 +83,17 @@ masks, clean-room regeneration, and secondary-version checks. Keep draft quality
 for development and run final quality for the release candidate. Reports list
 PASS, FAIL, or NOT RUN. No missing evidence is counted as a pass.
 
+The Blender worker writes verification/progress.json after geometry, direction,
+repeatability and mask stages. Once the direction stage finishes, run
+`python tools/direction_report.py out/production` for a measured five-direction
+report and enlarged comparison image. This report does not replace full verification.
+The template detector tracks a pupil-sized circular crop so stationary lids/lashes
+cannot dominate whole-eye correlation. PNG text chunks containing render dates,
+timings and source paths are removed losslessly by the standalone wrapper; pixel
+and color-management chunks are retained. Raw timings remain in render logs.
+Diagnostic occluder materials preserve alpha maps and polygon material indices,
+so transparent lash cards are not mistakenly treated as opaque geometry.
+
 Packaging checks all seventeen statuses and exact hashes of the scene, wrapper,
 metadata, and official renders, then creates and reopens/extracts the ZIP. Any
 post-verification changes to those artifacts require re-verification. The ZIP
@@ -100,3 +111,18 @@ The generated sweep.gif and PRESENTATION.md are demo source materials. Record th
 100–110 second final video, export the presentation to PPT/PDF with team details,
 check public/shared links, and submit via the organizer form yourself. Registration,
 email, uploads, and final submission are never performed automatically.
+
+## Qualified radial-iris development look
+
+Production builds now default to --look radial; use --look flat for the original
+material. build/polish_scene.py exposes the same material function used by the
+builder. Current artifacts are under out/production; the previous verified flat
+scene is preserved under out/verified-flat-20261107. Both are local development
+artifacts. All seventeen checks pass on 4.5.15 with 5.2.3 secondary qualification.
+
+The task runner detects the pinned portable secondary runtime under
+out/runtimes/blender-5.2.3/blender-5.2.3-windows-x64/blender.exe.
+BLENDER_SECONDARY_BIN overrides this path. Verify the official archive checksum
+before using downloaded runtimes; see PERFORMANCE.md. The primary V16 result
+contains the secondary version. Its nested secondary report leaves its own V16
+NOT RUN because it does not recursively test a third runtime.

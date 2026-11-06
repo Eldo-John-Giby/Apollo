@@ -3,3 +3,7 @@ out/
 .git/
 __pycache__/
 .pytest_cache/
+assets/*.zip
+*.blend1
+*.blend2
+milestones/

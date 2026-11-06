@@ -73,3 +73,27 @@ def test_standalone_wrapper_import():
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     assert np.allclose(module.eye_state(.3,.4,module.Config())[0]['L']['pupil2d'],eye_state(.3,.4,Config())[0]['L']['pupil2d'])
+
+
+def test_png_determinism_removes_volatile_text_preserves_pixels(tmp_path):
+    from PIL import Image, PngImagePlugin
+    spec=importlib.util.spec_from_file_location('png_eyes',ROOT/'wrapper/eyes.py')
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    pixels=np.arange(12*13*3,dtype=np.uint8).reshape((12,13,3))
+    paths=[]
+    for i in range(2):
+        info=PngImagePlugin.PngInfo()
+        info.add_text('Date',f'2026/11/0{i+1}')
+        info.add_text('RenderTime',str(i),zip=True)
+        info.add_itxt('File',f'different-directory-{i}/scene.blend')
+        path=tmp_path/f'{i}.png'
+        Image.fromarray(pixels).save(path,pnginfo=info,dpi=(72,72))
+        module.canonicalize_png(path)
+        with Image.open(path) as result:
+            assert np.array_equal(np.asarray(result),pixels)
+            assert not any(k in result.info for k in ['Date','RenderTime','File'])
+            assert 'dpi' in result.info
+        paths.append(path)
+    assert paths[0].read_bytes()==paths[1].read_bytes()

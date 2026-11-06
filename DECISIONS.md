@@ -58,3 +58,71 @@ Contact sheet, GIF and candidate documents regenerated. Corrected production
 scene is loaded in live Blender at reset. Full V1–V17 remains pending; these
 initial checks do not qualify the scene for submission packaging. Python tests:
 51 passed; character finalizer and verifier compile successfully.
+
+Primary correctness baseline achieved: V1–V15 and V17 PASS on Blender 4.5.15
+with the draft production scene; V16 remains NOT RUN. Mask centroid residual
+0.039657 px; minimum visible/dark pupil fraction 1.0; blind residual 0.170610 px;
+template displacement error 0.039628 px. Two sweeps and clean-room regeneration
+are byte-identical. 59 Python tests pass, including stationary-lid detector and
+PNG metadata determinism regressions.
+Corrections: tight circular pupil template avoids stationary lid bias; standalone
+PNG output strips volatile text chunks without recompressing pixels; diagnostic
+materials retain alpha and polygon material indices; diagnostic dithering is zero
+so background noise cannot bias centroids. Visibility checks full-coverage pupil
+interiors for darkness and independently checks integrated linear-light coverage
+to retain detection of clipping, with the 98% requirement unchanged.
+Mask-only reruns and evidence reuse require unchanged scene/wrapper/metadata/render
+hashes; clean-room PASS is retained only for those same inputs. Original failed
+mask report is retained under out/production/verification_before_fixes.
+
+7 November visual-polish experiment: build/polish_scene.py creates an isolated
+procedural radial iris material and planar UVs without changing eye vertices,
+pupils, calibration or lighting. First dark variant rejected (cardinal pupil
+residual 1.168 px). Revised green-hazel variant passes five-direction checks,
+with maximum cardinal pupil error 0.159424 px and template displacement error
+0.042945 px; reset byte-identical. Saved under out/polish-iris-clear with
+comparison.png and visual_review.json. Not promoted; full sweep and correctness
+verification still required for this material candidate. Verified production
+baseline remains unchanged.
+
+7 November: qualified and promoted radial-iris draft to out/production, preserving
+the flat-eye verified baseline in out/verified-flat-20261107. V1–V15 and V17 PASS;
+V16 NOT RUN. Sweep pupil error 0.199946 px, mask error 0.039657 px, template
+error 0.042945 px, visibility 1.0. Two sweeps and standalone clean-room
+regeneration are byte-identical. A source rebuild using --look radial reproduces
+the center PNG exactly; production defaults to radial, with flat available.
+Retained 100 mm lens after analytical brow/lash screening (brow margin 8.7%;
+115 mm leaves 2.5%, 130 mm crops). No geometry/calibration/lighting changes.
+Draft CPU sweep: mean 23.653 s/frame, maximum 25.70 s on i5-1135G7 (4 cores,
+8 logical processors). This is a local baseline for M4, not an official limit.
+59 tests pass. Final-quality and secondary-version qualification still pending.
+
+7 November M4: official Blender 5.2.3 LTS Windows portable archive downloaded
+and SHA-256 verified, build e13b728c6880. Secondary qualification succeeds;
+primary report now has all V1–V17 PASS. Secondary directions, visibility,
+repeat hashes and clean-room regeneration also pass. Retained nested reports
+and version-specific PNG/metadata/mask evidence. tasks.py detects the pinned
+portable runtime without changing global Blender/user configuration.
+Qualified scene stays at 32 samples. Isolated center/up/down: 8 samples average
+5.094 s (max pupil error 0.149 px); 16 samples 12.896 s (0.173 px). Mean center
+grayscale difference from 32 samples: 1.997/255 and 1.332/255 respectively.
+Preview profiles are not promoted or claimed fully verified. Docker info failed
+with absent Linux engine pipe; automatic approval review blocked a command with
+Desktop launch (reason: blocked by policy); no alternate launch attempted.
+59 tests pass. Source documentation encoding normalized to UTF-8 and clean LF.
+
+7 November M5 development freeze: user started Docker Desktop. Image build and
+Linux doctor/60 tests/packed-scene center render pass (max pupil residual
+0.078047 px). No full Linux V1–V17 claim. Downloaded asset ZIPs, caches, runtimes
+and frozen archives are excluded from Docker context.
+Compared 32 versus 128 samples at center: grayscale difference 0.768678/255,
+detected pupil center difference <=0.082210 px, slightly smoother at 128.
+Selected the qualified 32-sample artifacts for the development freeze based on
+visual readability, accuracy and CPU cost. CLI final remains 128; it was not
+renamed or silently treated as qualified. 128 render took 113.58 s concurrent
+with Docker build; no controlled speedup claim.
+Development-only archive uses the same fixture/stale/all-17 qualification gates
+as packaging, without inventing a registered team. ZIP integrity and per-file
+manifest pass; exact extracted archive reproduced ten PNGs and metadata
+byte-identical from another working directory. Added versioned archive, reports,
+comparison and checksums under milestones/dev-freeze-2026-11-07.

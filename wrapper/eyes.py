@@ -8,6 +8,7 @@ import subprocess
 import argparse
 import time
 import hashlib
+import struct
 try:
     import bpy
     from mathutils import Matrix, Vector
@@ -269,6 +270,36 @@ def calibration():
     return json.loads(_rig().scene['apollo_calibration'])
 
 
+def canonicalize_png(path):
+    """Remove variable PNG text metadata without changing compressed pixels.
+
+    Blender embeds wall-clock dates, source paths and Cycles timings even when
+    the visible stamp is disabled. Keep image/color chunks byte-for-byte so
+    reset/repeat/clean-room file hashes describe deterministic image artifacts.
+    """
+    path=Path(path)
+    data=path.read_bytes()
+    signature=b'\x89PNG\r\n\x1a\n'
+    if data[:8]!=signature: raise ValueError('Render is not a PNG')
+    output=bytearray(signature); offset=8; ended=False
+    while offset<len(data):
+        if offset+12>len(data): raise ValueError('Truncated PNG chunk')
+        length=struct.unpack('>I',data[offset:offset+4])[0]
+        end=offset+12+length
+        if end>len(data): raise ValueError('Truncated PNG payload')
+        kind=data[offset+4:offset+8]
+        if kind not in {b'tEXt',b'zTXt',b'iTXt'}:
+            output.extend(data[offset:end])
+        offset=end
+        if kind==b'IEND':
+            ended=True
+            break
+    if not ended or offset!=len(data): raise ValueError('Invalid PNG termination')
+    temp=path.with_suffix(path.suffix+'.tmp')
+    temp.write_bytes(output)
+    temp.replace(path)
+
+
 def render(path=None):
     rig = _rig()
     path = Path(path) if path else ROOT/'output'/f'render_h{rig.h:+.4f}_v{rig.v:+.4f}.png'
@@ -277,6 +308,7 @@ def render(path=None):
     record = rig.record(image=path.name)
     rig.scene.render.filepath = str(path)
     bpy.ops.render.render(write_still=True)
+    canonicalize_png(path)
     return {'path': str(path), 'record': record}
 
 

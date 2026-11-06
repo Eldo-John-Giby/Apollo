@@ -17,7 +17,7 @@ from fixture_scene import build
 import eyes
 
 
-def integrate(source,mapping_path,output):
+def integrate(source,mapping_path,output,look="radial"):
     mapping=json.loads(mapping_path.read_text(encoding='utf-8'))
     if mapping.get('faces_negative_y') is not True:
         raise ValueError('Confirm source orientation in character mapping')
@@ -72,6 +72,9 @@ def integrate(source,mapping_path,output):
     scene['apollo_source']=source.name
     eyes._RIG=None
     eyes.reset()
+    if look=='radial':
+        from polish_scene import apply_iris
+        apply_iris()
     for image in bpy.data.images:
         if image.size[0]>2048 or image.size[1]>2048:
             scale=2048/max(image.size)
@@ -87,5 +90,6 @@ if __name__=='__main__':
     p.add_argument('--source',type=Path,required=True)
     p.add_argument('--mapping',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--look',choices=['flat','radial'],default='radial')
     args=p.parse_args(sys.argv[sys.argv.index('--')+1:])
-    integrate(args.source,args.mapping,args.out)
+    integrate(args.source,args.mapping,args.out,args.look)

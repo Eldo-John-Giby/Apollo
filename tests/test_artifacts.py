@@ -10,6 +10,7 @@ sys.path.insert(0,str(ROOT/'tools'))
 from validate_metadata import validate_artifacts
 from contact_sheet import create
 from make_bundle import bundle
+from freeze_candidate import freeze
 
 @pytest.fixture
 def artifacts(tmp_path):
@@ -85,6 +86,18 @@ def test_changed_scene_invalidates_report(artifacts):
     (artifacts/'scene.blend').write_bytes(b'changed-scene')
     with pytest.raises(ValueError,match='changed since verification'):
         bundle(artifacts,'College_TestTeam')
+
+
+def test_development_freeze_preserves_manifest_and_rejects_stale_inputs(artifacts,tmp_path):
+    import hashlib,zipfile
+    production_stage(artifacts)
+    output=freeze(artifacts,tmp_path/'development.zip')
+    with zipfile.ZipFile(output) as archive:
+        manifest=json.loads(archive.read('apollo-development/MANIFEST.json'))
+        assert all(hashlib.sha256(archive.read('apollo-development/'+name)).hexdigest()==value for name,value in manifest.items())
+        assert 'not an organizer submission' in archive.read('apollo-development/README.md').decode()
+    (artifacts/'scene.blend').write_bytes(b'changed')
+    with pytest.raises(ValueError,match='changed since verification'):freeze(artifacts,output)
 
 
 def test_missing_check_invalidates_pass_flag(artifacts):

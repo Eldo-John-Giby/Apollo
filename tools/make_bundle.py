@@ -11,9 +11,7 @@ from verify import hashes
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def bundle(folder, team):
-    if not re.fullmatch(r'[A-Za-z0-9]+_[A-Za-z0-9_]+',team) or any(t in team.lower() for t in ['teamname','yourteam','placeholder']):
-        raise ValueError('Supply the registered CollegeName_TeamName')
+def qualified_candidate(folder):
     folder = Path(folder).resolve()
     records = validate_artifacts(folder)
     if any(r.get('extra',{}).get('fixture',True) for r in records):
@@ -28,6 +26,13 @@ def bundle(folder, team):
     required = ['scene.blend','metadata.json','contact_sheet.png','README.md','ATTRIBUTION.md','verification_report.json','verification_report.md']
     for name in required:
         if not (folder/name).is_file(): raise ValueError(f'Missing {name}')
+    return folder,required
+
+
+def bundle(folder, team):
+    if not re.fullmatch(r'[A-Za-z0-9]+_[A-Za-z0-9_]+',team) or any(t in team.lower() for t in ['teamname','yourteam','placeholder']):
+        raise ValueError('Supply the registered CollegeName_TeamName')
+    folder,required=qualified_candidate(folder)
     output = folder.parent/(team+'.zip')
     with tempfile.TemporaryDirectory(dir=folder.parent) as temporary:
         stage = Path(temporary)/team

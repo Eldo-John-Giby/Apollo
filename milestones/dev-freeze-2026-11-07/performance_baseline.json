@@ -1,0 +1,25 @@
+{
+  "hardware": "Intel Core i5-1135G7, 4 cores / 8 logical processors",
+  "samples": 32,
+  "resolution": [
+    1024,
+    1024
+  ],
+  "frames": 10,
+  "per_frame_seconds": [
+    18.56,
+    25.7,
+    23.78,
+    23.56,
+    23.84,
+    24.19,
+    25.11,
+    23.8,
+    24.22,
+    23.77
+  ],
+  "mean_seconds": 23.653,
+  "maximum_seconds": 25.7,
+  "total_frame_seconds": 236.53000000000003,
+  "scope": "Draft sweep, measured locally; not an organizer runtime requirement."
+}

@@ -2,6 +2,13 @@
 
 Synthetic binocular gaze pipeline for Samsung PRISM-XR Track 01.
 
+Current development scene uses procedural radial irises. All V1–V17 checks pass on Blender 4.5.15 with Blender 5.2.3 LTS secondary
+qualification.
+Artifacts and measured report are under out/production. Rebuild production with
+`--look radial` (default); `--look flat` retains the original eye appearance.
+
+See [the development roadmap](docs/ROADMAP.md) for current priorities and milestone gates.
+
 ## Run the complete development pipeline
 
 Install requirements.txt in an isolated Python 3.10+ environment. Set BLENDER_BIN
@@ -63,27 +70,21 @@ manifests are removed at regeneration start.
 
 ## Current validation evidence
 
-51 pytest tests pass in the current Python 3.10.7 / NumPy 1.26.4 environment.
-Coverage includes reference geometry, invalid inputs/metadata, exact conic boundary,
-standalone core synchronization, image artifacts, contact sheet, detector subpixel
-accuracy on synthetic images, and missing-runtime/report behavior.
+60 Python tests pass. The polished 32-sample development candidate passes all
+V1–V17 checks: calibration, 1000 evaluated poses, directions, pixel truth,
+visibility, repeated hashes, clean-room regeneration and cross-version checks.
+Primary Blender: 4.5.15 LTS; secondary: 5.2.3 LTS (official portable, checksum verified).
+Reports and retained secondary evidence are under out/production/verification/.
+The top-level measured report is out/production/verification_report.md.
 
-Blender 4.5.15 LTS is now installed at C:\Program Files\Blender Foundation\Blender 4.5\blender.exe. Earlier, the environment denied network
-socket access for downloading it. The Docker executable exists, but its daemon
-is unavailable. The fixture builder and a single-pose render now run successfully; the Dockerfile has
-not been executed here. The ten-frame fixture sweep, metadata validation, contact sheet
-and GIF now succeed; a textured production scene also builds. Full V1–V17
-verification and a submission ZIP remain pending. Tests use synthetic images, not Blender
-renders. Missing runtime reports explicitly remain NOT RUN/FAIL.
+Maximum sweep pupil error: 0.200 px; mask centroid error: 0.040 px; visibility:
+100%. The isolated 8/16-sample benchmark averaged 5.094/12.896 s per frame for
+center/up/down; these settings remain experimental. The qualified 32-sample
+sweep averaged 23.653 s per frame. See docs/PERFORMANCE.md for scope and noise.
 
-The MPFB textured assets/base_character.blend and character_mapping.json now exist.
-The production scene builds and an initial 100-pose check passes. Ten draft
-production frames validate; maximum blind pupil-detector residual is 0.171 px
-across all twenty pupils. Contact sheet and GIF are in out/production.
-Full V1–V17 production verification remains pending.
-There are no automatic
-emails, publication, uploads, or organizer submissions. Optional dataset/live-aim/
-refraction experiments are deferred until a verified submission candidate exists.
-
-
-
+Docker image build, diagnostic, 60 tests and a packed-scene center render pass
+in Linux; full Linux V1–V17 qualification is not claimed. M5 development freeze
+is complete at 32 samples, selected after a 128-sample comparison. The exact ZIP,
+reports and reconstruction evidence are in [the milestone](milestones/dev-freeze-2026-11-07/README.md).
+See [the freeze rationale](docs/DEVELOPMENT_FREEZE.md) for settings and limits.
+No organizer submissions or uploads are performed automatically.

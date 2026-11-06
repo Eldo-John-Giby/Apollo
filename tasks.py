@@ -17,6 +17,7 @@ def main():
     p.add_argument('--team')
     p.add_argument('--quality',choices=['draft','final'])
     p.add_argument('--production',action='store_true')
+    p.add_argument('--look',choices=['flat','radial'],default='radial')
     args=p.parse_args()
     args.folder=(args.folder or ROOT/('out/production' if args.production else 'out/fixture')).resolve()
     python=sys.executable
@@ -31,6 +32,10 @@ def main():
         if installed.is_file(): blender=str(installed)
     if blender:
         os.environ['BLENDER_BIN']=blender
+    secondary=os.environ.get('BLENDER_SECONDARY_BIN')
+    portable=ROOT/'out/runtimes/blender-5.2.3/blender-5.2.3-windows-x64/blender.exe'
+    if not secondary and portable.is_file(): secondary=str(portable)
+    if secondary: os.environ['BLENDER_SECONDARY_BIN']=secondary
     if args.task=='doctor':
         print('Python:',sys.version)
         print('Blender:',blender or 'NOT AVAILABLE: set BLENDER_BIN')
@@ -43,6 +48,7 @@ def main():
         if args.production and args.team: pipeline.append('bundle')
         for task in pipeline:
             command=[python,ROOT/'tasks.py',task,'--folder',args.folder,'--source',args.source]
+            command+=['--look',args.look]
             if args.mapping: command+=['--mapping',args.mapping]
             if args.team: command+=['--team',args.team]
             if args.quality: command+=['--quality',args.quality]
@@ -62,7 +68,7 @@ def main():
         elif args.task=='production-scene':
             if not args.source.is_file() or not args.mapping or not args.mapping.is_file():
                 p.error('Production build requires --source asset and --mapping JSON')
-            command+=['-P',ROOT/'build/build_scene.py','--','--source',args.source,'--mapping',args.mapping,'--out',args.folder/'scene.blend']
+            command+=['-P',ROOT/'build/build_scene.py','--','--source',args.source,'--mapping',args.mapping,'--out',args.folder/'scene.blend','--look',args.look]
         elif args.task=='framing':
             scene=args.folder/'scene.blend'
             if not scene.is_file(): p.error('Build the scene first')

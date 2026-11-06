@@ -6,6 +6,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from grader_sim import centroid,detect,template_shift
 from verify import verify
+from direction_report import measure
 
 
 def image(dx=0.,dy=0.):
@@ -32,6 +33,21 @@ def test_template_directions(dx,dy):
         assert np.linalg.norm(value-[dx,dy])<.3
 
 
+@pytest.mark.parametrize('dy',[-10.3,10.3])
+def test_template_ignores_stationary_eyelids(dy):
+    reference=image()
+    current=image(0,dy)
+    # Strong stationary bands near the eyes mimic lashes/lids. A whole-eye
+    # template locks onto these instead of measuring the moving pupil.
+    for pixels in [reference,current]:
+        for x in [289,735]:
+            pixels[477:487,x-65:x+65]=8
+            pixels[541:548,x-65:x+65]=8
+    shifts=template_shift(reference,current)
+    for value in shifts.values():
+        assert np.linalg.norm(value-[0,dy])<.3
+
+
 def test_weighted_centroid_pixel_convention():
     mask=np.zeros((1024,1024))
     mask[510:514,288:290]=1
@@ -43,6 +59,18 @@ def test_weighted_centroid_pixel_convention():
 
 def test_empty_mask_fails():
     with pytest.raises(ValueError): centroid(np.zeros((1024,1024)))
+
+
+@pytest.mark.parametrize('defect',[None,'reversed','stationary','cross_axis','reset'])
+def test_direction_suite_detects_behavior_failures(defect):
+    commands={'left':(-10.3,0),'right':(10.3,0),'up':(0,-10.3),
+              'down':(0,10.3),'reset':(0,0)}
+    if defect=='reversed': commands['left']=(10.3,0)
+    if defect=='stationary': commands['right']=(0,0)
+    if defect=='cross_axis': commands['up']=(2,-10.3)
+    images={name:image(*delta) for name,delta in commands.items()}
+    result=measure(image(),images,reset_identical=defect!='reset')
+    assert result['passed'] is (defect is None)
 
 
 def test_missing_blender_never_passes(tmp_path,monkeypatch):

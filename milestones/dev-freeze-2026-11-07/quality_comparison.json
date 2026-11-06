@@ -1,0 +1,10 @@
+{
+  "compared_samples": [
+    32,
+    128
+  ],
+  "mean_absolute_luma_difference": 0.7686777114868164,
+  "max_detector_center_difference_px": 0.08220929312182973,
+  "render_128_seconds": 113.58,
+  "timing_note": "Docker image build was concurrent; not a controlled timing benchmark."
+}

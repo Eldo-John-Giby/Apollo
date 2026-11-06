@@ -16,7 +16,7 @@ import eyes
 def digest(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def collect(folder):
+def collect(folder, masks_only=False):
     folder=Path(folder)
     evidence=folder/'verification'
     evidence.mkdir(parents=True,exist_ok=True)
@@ -24,6 +24,10 @@ def collect(folder):
     shipped=json.loads((folder/'metadata.json').read_text(encoding='utf-8'))
     scene.cycles.samples=int(shipped[0]['extra']['render_samples'])
     result={'blender':bpy.app.version_string,'config':eyes.calibration(),'fixture':bool(scene.get('apollo_fixture',True)),'checks':{},'directions':{}}
+    def checkpoint(stage):
+        result['stage']=stage
+        (evidence/'progress.json').write_text(json.dumps(result,indent=2,allow_nan=False),encoding='utf-8')
+        print('Verification stage:',stage,flush=True)
     def check(name,fn):
         try:
             measurement=fn()
@@ -115,21 +119,31 @@ def collect(folder):
                 assert pixels > 0 and image.has_data and image.packed_file, 'Unpacked/missing texture: '+image.name
         return 'all external textures packed'
     check('resources',resources)
-    # Capture normal frames before any diagnostic material modifications.
-    eyes.reset()
-    baseline=evidence/'baseline.png'; eyes.render(baseline)
-    result['baseline']=str(baseline)
-    for name,h,v in [('left',-1,0),('right',1,0),('up',0,1),('down',0,-1),('reset',0,0)]:
-        eyes.move(h,v)
-        path=evidence/(name+'.png')
-        result['directions'][name]=eyes.render(path)['record']
-    result['reset_identical']=digest(baseline)==digest(evidence/'reset.png')
-    # Two independent full sweeps, plus compare against the shipped artifacts.
-    eyes.sweep(out_dir=evidence/'repeat_a')
-    eyes.sweep(out_dir=evidence/'repeat_b')
-    names=['metadata.json']+[f'renders/frame_{k:02d}.png' for k in range(10)]
-    identical=all(digest(evidence/'repeat_a'/name)==digest(evidence/'repeat_b'/name)==digest(folder/name) for name in names)
-    result['checks']['V12']={'status':'PASS' if identical else 'FAIL','measurement':'two sweeps and shipped artifacts SHA-256 comparison'}
+    checkpoint('geometry_complete')
+    if masks_only:
+        prior=json.loads((folder/'verification_report.json').read_text())
+        paths=[folder/'scene.blend',folder/'metadata.json',ROOT/'wrapper/eyes.py']+sorted((folder/'renders').glob('*.png'))
+        current={('wrapper/eyes.py' if p==ROOT/'wrapper/eyes.py' else str(p.relative_to(folder)).replace('\\','/')):digest(p) for p in paths}
+        assert prior['artifact_hashes']==current, 'Inputs changed; full verification required'
+        result=json.loads((evidence/'blender_evidence.json').read_text())
+    else:
+        # Capture normal frames before any diagnostic material modifications.
+        eyes.reset()
+        baseline=evidence/'baseline.png'; eyes.render(baseline)
+        result['baseline']=str(baseline)
+        for name,h,v in [('left',-1,0),('right',1,0),('up',0,1),('down',0,-1),('reset',0,0)]:
+            eyes.move(h,v)
+            path=evidence/(name+'.png')
+            result['directions'][name]=eyes.render(path)['record']
+        result['reset_identical']=digest(baseline)==digest(evidence/'reset.png')
+        checkpoint('directions_complete')
+        # Two independent full sweeps, plus compare against the shipped artifacts.
+        eyes.sweep(out_dir=evidence/'repeat_a')
+        eyes.sweep(out_dir=evidence/'repeat_b')
+        names=['metadata.json']+[f'renders/frame_{k:02d}.png' for k in range(10)]
+        identical=all(digest(evidence/'repeat_a'/name)==digest(evidence/'repeat_b'/name)==digest(folder/name) for name in names)
+        result['checks']['V12']={'status':'PASS' if identical else 'FAIL','measurement':'two sweeps and shipped artifacts SHA-256 comparison'}
+        checkpoint('repeated_sweeps_complete')
     # Dedicated diagnostic pass: transparent occluders are excluded only for unoccluded truth.
     mask=bpy.data.materials.new('Verification white emission')
     mask.use_nodes=True
@@ -142,14 +156,46 @@ def collect(folder):
     nodes=black.node_tree.nodes; nodes.clear()
     e=nodes.new('ShaderNodeEmission'); e.inputs[0].default_value=(0,0,0,1)
     out=nodes.new('ShaderNodeOutputMaterial'); black.node_tree.links.new(e.outputs[0],out.inputs[0])
+    occluders={}
+    def occluder(source):
+        if source is None or not source.use_nodes: return black
+        if source.name in occluders: return occluders[source.name]
+        material=source.copy()
+        nodes=material.node_tree.nodes
+        shader=next((n for n in nodes if n.type=='BSDF_PRINCIPLED'),None)
+        if shader is None: raise ValueError('Unsupported occluder shader: '+source.name)
+        alpha=shader.inputs['Alpha']
+        output=next(n for n in nodes if n.type=='OUTPUT_MATERIAL' and n.is_active_output)
+        emission=nodes.new('ShaderNodeEmission')
+        emission.inputs[0].default_value=(0,0,0,1)
+        transparent=nodes.new('ShaderNodeBsdfTransparent')
+        mix=nodes.new('ShaderNodeMixShader')
+        links=material.node_tree.links
+        links.new(transparent.outputs[0],mix.inputs[1])
+        links.new(emission.outputs[0],mix.inputs[2])
+        if alpha.is_linked:
+            links.new(alpha.links[0].from_socket,mix.inputs[0])
+        else:
+            mix.inputs[0].default_value=alpha.default_value
+        links.new(mix.outputs[0],output.inputs['Surface'])
+        occluders[source.name]=material
+        return material
     for obj in scene.objects:
         if obj.type=='MESH':
-            obj.data.materials.clear()
-            obj.data.materials.append(mask if obj.name in {'Pupil.L','Pupil.R'} else black)
+            # Keep polygon material indices and alpha maps. Turning a lash
+            # card opaque invents pupil occlusion that isn't in the scene.
+            if obj.name in {'Pupil.L','Pupil.R'}:
+                obj.data.materials.clear(); obj.data.materials.append(mask)
+            elif obj.data.materials:
+                for i,material in enumerate(list(obj.data.materials)):
+                    obj.data.materials[i]=occluder(material)
+            else:
+                obj.data.materials.append(black)
         if obj.type=='LIGHT': obj.hide_render=True
     scene.world.node_tree.nodes['Background'].inputs[0].default_value=(0,0,0,1)
     scene.world.node_tree.nodes['Background'].inputs[1].default_value=0
     scene.cycles.samples=32
+    scene.render.dither_intensity=0
     scene.cycles.use_denoising=False
     original={obj.name:obj.hide_render for obj in scene.objects}
     poses=[(f'frame_{k:02d}',h,v) for k,theta,h,v in eyes.sweep_inputs()]
@@ -160,10 +206,12 @@ def collect(folder):
             for obj in scene.objects:
                 if obj.type=='MESH': obj.hide_render=(obj.name not in {'Pupil.L','Pupil.R'}) if mode=='unoccluded' else original[obj.name]
             eyes.render(evidence/'masks'/mode/(name+'.png'))
+        checkpoint('masks_'+name)
     eyes.reset()
     (evidence/'blender_evidence.json').write_text(json.dumps(result,indent=2,allow_nan=False),encoding='utf-8')
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(); p.add_argument('--folder',type=Path,required=True)
+    p.add_argument('--masks-only',action='store_true')
     args=p.parse_args(sys.argv[sys.argv.index('--')+1:])
-    collect(args.folder)
+    collect(args.folder,args.masks_only)

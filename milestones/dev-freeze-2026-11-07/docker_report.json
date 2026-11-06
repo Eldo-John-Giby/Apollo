@@ -1,0 +1,14 @@
+{
+  "daemon": "28.3.2",
+  "image": "sha256:8dcc332b9e0bce811808f1d3e746345b4221eb2b122b77ac960ceb60b2642137",
+  "image_build": "PASS",
+  "doctor": "PASS",
+  "pytest": "60 passed",
+  "linux_blender": "4.5.15 LTS",
+  "standalone_packed_scene_center_render": "PASS",
+  "pupil_residuals_px": {
+    "L": 0.02144317014722225,
+    "R": 0.07804662183012526
+  },
+  "scope": "Tests and one pose; full V1-V17 Linux qualification not claimed."
+}

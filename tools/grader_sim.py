@@ -46,15 +46,27 @@ def centroid(image):
 
 def template_shift(reference,current):
     centers=detect(reference)
+    # Track the pupil and a small iris border. A whole-eye template can lock
+    # onto stationary lids/lashes while the pupil moves underneath them.
+    _,labels,stats,_=cv2.connectedComponentsWithStats((reference<60).astype(np.uint8))
     shifts={}
     for side,p in centers.items():
         x,y=np.floor(p).astype(int)
-        radius,margin=48,24
+        label=labels[y,x]
+        if label==0: raise ValueError('Reference pupil center is not dark')
+        _,_,w,h,_=stats[label]
+        radius,margin=int(np.ceil(max(w,h)/2))+2,24
+        if radius>32: raise ValueError('Reference pupil is connected to a large dark region')
         template=reference[y-radius:y+radius,x-radius:x+radius]
         region=current[y-radius-margin:y+radius+margin,x-radius-margin:x+radius+margin]
-        if template.shape != (96,96) or region.shape != (144,144):
+        if template.shape != (2*radius,2*radius) or region.shape != (2*(radius+margin),2*(radius+margin)):
             raise ValueError('Template crop outside image')
-        scores=cv2.matchTemplate(region.astype(np.float32),template.astype(np.float32),cv2.TM_CCOEFF_NORMED)
+        yy,xx=np.indices(template.shape)
+        pupil_mask=(((xx+.5-radius-(p[0]-x))**2+
+                     (yy+.5-radius-(p[1]-y))**2)<(radius-1)**2).astype(np.float32)
+        scores=cv2.matchTemplate(region.astype(np.float32),template.astype(np.float32),
+                                cv2.TM_CCOEFF_NORMED,mask=pupil_mask)
+        scores[~np.isfinite(scores)]=-1.
         _,_,_,(px,py)=cv2.minMaxLoc(scores)
         delta=[]
         for axis,index in [(1,px),(0,py)]:

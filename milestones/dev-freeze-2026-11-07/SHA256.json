@@ -1,0 +1,46 @@
+{
+  "apollo-development.zip": {
+    "sha256": "ae57bb792768e830e40b70ad6598ea0fd88a228c49c4fd646c70abd927cc1f6d",
+    "bytes": 22936219
+  },
+  "contact_sheet.png": {
+    "sha256": "353fb041065a754da2d6c118830213d732db6d9d4012b19fcf76151f4529bb5e",
+    "bytes": 666094
+  },
+  "docker_report.json": {
+    "sha256": "b5993c6e636e8737f7a4fbb9965d861f72182633a30f5efb955c5e0316586f5b",
+    "bytes": 434
+  },
+  "performance_baseline.json": {
+    "sha256": "47b8a5b56649a0dbfd508ee6ab53ba0be35657f13aaabcede9d95d3d24884096",
+    "bytes": 466
+  },
+  "quality_comparison.json": {
+    "sha256": "1b17ba848d9ec885451162b2a18d00f8a45332eea33f6fa3524a0f90f8ba6b08",
+    "bytes": 285
+  },
+  "quality_comparison.png": {
+    "sha256": "151eb3bbd369cccc6f5aead0f120b150d8381d6b9e44d6a2b0002b8b525c68ab",
+    "bytes": 882443
+  },
+  "README.md": {
+    "sha256": "c344ed7d24edbc7031332cfa37ee52656908f492d78e2ef48eb7e411aaeaec81",
+    "bytes": 1880
+  },
+  "reconstruction_report.json": {
+    "sha256": "e2fa8418f7eb43527e4aa5b9028144a66b6fe0e50693955b0d625a56d21b0020",
+    "bytes": 573
+  },
+  "secondary_report.json": {
+    "sha256": "dfeaf9bc6bfcaf301d5d78c2779b52e7aca2a88c8348e30f1a9b1f68d08fac24",
+    "bytes": 3618
+  },
+  "verification_report.json": {
+    "sha256": "f73805b5772704f998f506d19f9103d6e8f35c8f934400f1cc58eb0f7186cd88",
+    "bytes": 3574
+  },
+  "verification_report.md": {
+    "sha256": "2fffad578e6ff1e41c927fc4de1f81b754c747ae7eaac9b93f96fab0a6f6bd60",
+    "bytes": 1183
+  }
+}
