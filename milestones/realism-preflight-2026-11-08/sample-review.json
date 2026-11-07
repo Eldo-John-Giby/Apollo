@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "reviewer": "Codex",
+  "scope": "Agent inspection of all nine sample renders at native output resolution; not independent human ratings.",
+  "scene_sha256": "13a29bdfe9430ebac5aca13219dbb28856b438dce35647fbd459676aa8d17966",
+  "checkpoint": "finished-v9",
+  "selected_samples": 32,
+  "benchmark_sha256": "f52a66172a07b1c6dd32446ef89f95c0c5ab9c52dc42ebbab9c5f7e6ed9573a2",
+  "reason": "All profiles preserve clear pupils. At 1024 output, 64/128 provide negligible visible improvement over the denoised 32-sample image; retain the lowest acceptable profile.",
+  "reference_comparison": "32 to 128 whole-image mean absolute luma difference about 0.382/255 and forehead skin ROI about 0.182/255; these are differences, not objective realism scores.",
+  "reviewed_artifacts": {
+    "samples/32/center.png": "89678ac2c73ad9eaaea2dd9c086501fb4a5e164884ddab898256620319bf41d9",
+    "samples/32/up.png": "fcb91c84f4154fbe83b7e7964865e2880c683c083bf72049ed6f970f5e81e7a8",
+    "samples/32/corner.png": "341a9a760ccf3976c569ad33b5d7307d120d144aec95bb6ce1e011f1794834b0",
+    "samples/64/center.png": "da235f07009d9130c5162393658a96695520f0a971d2a042936158a12c64035b",
+    "samples/64/up.png": "4f066b6e773e04408f4e7661bf6619a2a0eac2cc3a7a5c5203fbf1ee6ae8c831",
+    "samples/64/corner.png": "0719c15337f5a7f66220065b1b6c36ad7b30d4ec41e62afd1b6678bb1bf209d4",
+    "samples/128/center.png": "e77516174de1dcc90ec3785927e4bbc95f57edc7254cf12fe8d2fdc1a7141450",
+    "samples/128/up.png": "05aab28aa93f9d32423e6dd7b6eada9bdfbcd13dc9bf75e3befb8cd3e4d603f4",
+    "samples/128/corner.png": "c72e0587ec13604c3ba2e134569daa0e520327656bfbfe6e190c30dac5ce40cd"
+  }
+}

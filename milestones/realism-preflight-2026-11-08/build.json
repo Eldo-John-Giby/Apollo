@@ -1,0 +1,38 @@
+{
+  "stage": "finished",
+  "config": {
+    "seed": 20261108,
+    "lid_opening": 0.45,
+    "rim_radius_m": 0.00012,
+    "skin_roughness": 0.46,
+    "skin_subsurface": 0.065,
+    "skin_bump_m": 2.5e-05,
+    "sclera_color": [
+      0.64,
+      0.67,
+      0.62,
+      1.0
+    ],
+    "hair_strands": 12000,
+    "hair_radius_m": 3.5e-05,
+    "samples": 32,
+    "world_strength": 0.4,
+    "key_energy": 0.65,
+    "fill_energy": 0.18,
+    "denoising": true,
+    "rim_energy": 0.025,
+    "fill_position": [
+      0.04,
+      -0.22,
+      -0.015
+    ]
+  },
+  "source_sha256": "3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d",
+  "eye_mesh_sha256": "8eb88401a28c48aceaaa678874005b4b08ac8e5c756e3dd54050ea6cd48316a6",
+  "eye_meshes_unchanged": true,
+  "config_sha256": "4a158c71211c6d5e482614d64861362ec338a5fdf3909a4c1adf45273e65e2a5",
+  "recipe_sha256": "5ddbc91da380f965592dea3b792f31886cdb7a0c65dd014948c59b1631507cca",
+  "scene_sha256": "13a29bdfe9430ebac5aca13219dbb28856b438dce35647fbd459676aa8d17966",
+  "qualified": false,
+  "status": "Visual checkpoint; requires all acceptance gates"
+}

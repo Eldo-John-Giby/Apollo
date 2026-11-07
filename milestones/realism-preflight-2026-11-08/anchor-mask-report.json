@@ -1,0 +1,125 @@
+{
+  "passed": true,
+  "poses": 9,
+  "minimum_visible_dark_fraction": 1.0,
+  "maximum_mask_centroid_error_px": 0.026707222466783528,
+  "injected_half_pupil_fraction": 0.4994801024689167,
+  "injected_occlusion_detected": true,
+  "measurements": [
+    {
+      "frame": 0,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 0,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 1,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 1,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 2,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 2,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 3,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 3,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 4,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 4,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 5,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 5,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 6,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 6,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 7,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 7,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 8,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 8,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    }
+  ],
+  "scene_sha256": "13a29bdfe9430ebac5aca13219dbb28856b438dce35647fbd459676aa8d17966",
+  "evidence_sha256": "3048c10109f9e4d27ba8e9c5f994218224192ca397e6009dd724af85a2d8dd92",
+  "analysis_source_sha256": "ffed39561dba6795ef974168a523d30c55a13c9c1c1c51c6374b785029d30da8",
+  "mask_sha256": {
+    "fault_expected.png": "865a3517c2135d63c798865a77e3db9dc536419503acdc3f4ac860864f58a27b",
+    "fault_occluded.png": "72005ce5a7d2edf9b1fb622dfc14d581dd857a7d52b6e8a98231b5ff74ef3278",
+    "occluded/frame_000000.png": "eaef6cc5c0e0279f7b734536e1f8f4d0b475094e89e52f8d213f53d6b9e4fc25",
+    "occluded/frame_000001.png": "ea02234f0388e4be0393e03d0bd05a5bb77a1c08521f3ea09710d46b2f884063",
+    "occluded/frame_000002.png": "5e90388574ee975d40e50b2fad642198106623d98bb08b05ef1be1d9be196f2d",
+    "occluded/frame_000003.png": "ad0d4b3cf536e938479661c2fa615b2d5bb86dc03c24accce0e71ecb7eeb2356",
+    "occluded/frame_000004.png": "865a3517c2135d63c798865a77e3db9dc536419503acdc3f4ac860864f58a27b",
+    "occluded/frame_000005.png": "0478379bf1ea72803f57d91c79fcb4cf55c0e7bd44101e5e35469bff90f4a39b",
+    "occluded/frame_000006.png": "2e40feae7ef797ddafa85f48bdef144602c9c3df414995fadcd027e5bdead0ac",
+    "occluded/frame_000007.png": "c799598fbd1a12ce529c4d9b600f80fd61be4d8acaedd8581efd601d94cfd1e7",
+    "occluded/frame_000008.png": "160438a18a1211c62dc72246e2965a4954b29a3aea08281605872a16bf5c5ec4",
+    "unoccluded/frame_000000.png": "eaef6cc5c0e0279f7b734536e1f8f4d0b475094e89e52f8d213f53d6b9e4fc25",
+    "unoccluded/frame_000001.png": "ea02234f0388e4be0393e03d0bd05a5bb77a1c08521f3ea09710d46b2f884063",
+    "unoccluded/frame_000002.png": "5e90388574ee975d40e50b2fad642198106623d98bb08b05ef1be1d9be196f2d",
+    "unoccluded/frame_000003.png": "ad0d4b3cf536e938479661c2fa615b2d5bb86dc03c24accce0e71ecb7eeb2356",
+    "unoccluded/frame_000004.png": "865a3517c2135d63c798865a77e3db9dc536419503acdc3f4ac860864f58a27b",
+    "unoccluded/frame_000005.png": "0478379bf1ea72803f57d91c79fcb4cf55c0e7bd44101e5e35469bff90f4a39b",
+    "unoccluded/frame_000006.png": "2e40feae7ef797ddafa85f48bdef144602c9c3df414995fadcd027e5bdead0ac",
+    "unoccluded/frame_000007.png": "c799598fbd1a12ce529c4d9b600f80fd61be4d8acaedd8581efd601d94cfd1e7",
+    "unoccluded/frame_000008.png": "160438a18a1211c62dc72246e2965a4954b29a3aea08281605872a16bf5c5ec4"
+  }
+}

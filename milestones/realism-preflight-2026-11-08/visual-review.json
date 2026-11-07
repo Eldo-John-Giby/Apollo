@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "reviewer": "Codex",
+  "scope": "Agent visual assessment of matched baseline/candidate images and native crops; not official scores or independent human naturalness ratings.",
+  "scene_sha256": "13a29bdfe9430ebac5aca13219dbb28856b438dce35647fbd459676aa8d17966",
+  "categories": {
+    "socket_integration": {
+      "baseline": 2,
+      "candidate": 3,
+      "reason": "Lid margins, creases and tear-duct contact integrate the eye with the surrounding face; enlarged nine-pose crops show no obvious gap or collision."
+    },
+    "eye_appearance": {
+      "baseline": 2,
+      "candidate": 3,
+      "reason": "Softer iris/sclera transition and more coherent wet shading reduce the inserted-disc appearance, while simplified non-refractive eyes remain evident."
+    },
+    "skin_response": {
+      "baseline": 2,
+      "candidate": 3,
+      "reason": "Regional roughness, restrained subsurface response and shaped illumination give more volume than the flatter baseline. This is still a synthetic MPFB face."
+    },
+    "grooming": {
+      "baseline": 2,
+      "candidate": 3,
+      "reason": "Tapered geometric lashes are less heavy than the original fan cards; the seeded short scalp groom is coherent in front and three-quarter portraits. Existing directional brow maps are retained."
+    },
+    "pupil_readability": {
+      "baseline": 5,
+      "candidate": 5,
+      "reason": "All five direction/reset checks and all nine anchor image/mask checks pass unchanged thresholds; pupils remain visibly clear across matched views."
+    }
+  },
+  "reviewed_artifacts": {
+    "comparisons/center-comparison.png": "7c0a8872122e3f824b8bf994b805355b2e19bf1bac2298a345f6628a8905941d",
+    "comparisons/pose-comparison.png": "8902f960d9602b75363fce46db80dc49482d106773bf7dd792697c59d5e29bdc",
+    "comparisons/eye-details.png": "ac4791d16ed5343ee26a9d9424c86df8b53f4d2bf0f52bf97cff2a28493c4ec4",
+    "portraits/front.png": "1c0716619f4c17f1021dcee8435f34c9fcad877a7e856ba824da13bf965e4fe1",
+    "portraits/three-quarter.png": "67b8eef6d04a170e9f7679cd7db5f97020b2b0b6000ce2f9a0b39f9bc9ba04d7"
+  },
+  "limitations": [
+    "Static neutral expression",
+    "Simplified non-refractive eyes",
+    "Short scalp groom is stylized; existing brow textures retained",
+    "No downstream ML accuracy benchmark"
+  ]
+}

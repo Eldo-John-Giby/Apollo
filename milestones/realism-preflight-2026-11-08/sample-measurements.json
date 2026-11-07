@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "max_pixel_oracle_error_px": 0.19083184961415442,
+  "measurements": [
+    {
+      "samples": 32,
+      "pose": "center",
+      "seconds": 74.03099999998813,
+      "mean_luma_difference_from_128": 0.3820466995239258,
+      "skin_roi_difference_from_128": 0.1823151515151515,
+      "max_pixel_oracle_error_px": 0.065668751853238
+    },
+    {
+      "samples": 64,
+      "pose": "center",
+      "seconds": 143.10899999999674,
+      "mean_luma_difference_from_128": 0.32919883728027344,
+      "skin_roi_difference_from_128": 0.15752121212121212,
+      "max_pixel_oracle_error_px": 0.08265491246889757
+    },
+    {
+      "samples": 128,
+      "pose": "center",
+      "seconds": 273.2969999999914,
+      "mean_luma_difference_from_128": 0.0,
+      "skin_roi_difference_from_128": 0.0,
+      "max_pixel_oracle_error_px": 0.040696905337428604
+    },
+    {
+      "samples": 32,
+      "pose": "up",
+      "seconds": 75.60999999998603,
+      "mean_luma_difference_from_128": 0.3815908432006836,
+      "skin_roi_difference_from_128": 0.18235757575757575,
+      "max_pixel_oracle_error_px": 0.13488331460930203
+    },
+    {
+      "samples": 64,
+      "pose": "up",
+      "seconds": 140.7029999999795,
+      "mean_luma_difference_from_128": 0.32895946502685547,
+      "skin_roi_difference_from_128": 0.15752727272727274,
+      "max_pixel_oracle_error_px": 0.17311326603185143
+    },
+    {
+      "samples": 128,
+      "pose": "up",
+      "seconds": 277.59399999998277,
+      "mean_luma_difference_from_128": 0.0,
+      "skin_roi_difference_from_128": 0.0,
+      "max_pixel_oracle_error_px": 0.10353328917595958
+    },
+    {
+      "samples": 32,
+      "pose": "corner",
+      "seconds": 75.78200000000652,
+      "mean_luma_difference_from_128": 0.3820972442626953,
+      "skin_roi_difference_from_128": 0.18233939393939394,
+      "max_pixel_oracle_error_px": 0.1400529749285438
+    },
+    {
+      "samples": 64,
+      "pose": "corner",
+      "seconds": 139.10900000002584,
+      "mean_luma_difference_from_128": 0.3286762237548828,
+      "skin_roi_difference_from_128": 0.15752121212121212,
+      "max_pixel_oracle_error_px": 0.19083184961415442
+    },
+    {
+      "samples": 128,
+      "pose": "corner",
+      "seconds": 263.26500000001397,
+      "mean_luma_difference_from_128": 0.0,
+      "skin_roi_difference_from_128": 0.0,
+      "max_pixel_oracle_error_px": 0.09841697652709025
+    }
+  ],
+  "scope": "Luma differences from a higher-sample reference, not objective realism scores. Geometry-guided pixel oracle is not blind detection."
+}

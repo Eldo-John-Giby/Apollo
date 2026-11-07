@@ -1,0 +1,19 @@
+{
+  "anchor-image-report.json": "abe60afc80689da07ea274883042b0e5d0a1f394eb6d6c117a56137db344f0d4",
+  "anchor-mask-report.json": "a2074ea6023c2c1c50ca65dddc954eb920dd5b507685135168ea5058573b2e8a",
+  "before-after.png": "7c0a8872122e3f824b8bf994b805355b2e19bf1bac2298a345f6628a8905941d",
+  "build.json": "967b6013a274a6d08696cb4fda2f9fc4d67b29001e9e07441fe2ed2686becbe0",
+  "cardinal-report.json": "3c110f33ce8c717b5b3caa6b972f8145a8de38e14b3bd9ebffed7fec5cc9ba45",
+  "center.png": "89678ac2c73ad9eaaea2dd9c086501fb4a5e164884ddab898256620319bf41d9",
+  "eye-details.png": "ac4791d16ed5343ee26a9d9424c86df8b53f4d2bf0f52bf97cff2a28493c4ec4",
+  "independent-geometry.json": "17656cee133064ef2e5859a8a40d0674f60e5666b5990f41f62ce0219614e7b2",
+  "nine-poses.png": "8902f960d9602b75363fce46db80dc49482d106773bf7dd792697c59d5e29bdc",
+  "portrait-front.png": "1c0716619f4c17f1021dcee8435f34c9fcad877a7e856ba824da13bf965e4fe1",
+  "portrait-three-quarter.png": "67b8eef6d04a170e9f7679cd7db5f97020b2b0b6000ce2f9a0b39f9bc9ba04d7",
+  "README.md": "8fd543fba6ac1f902b883659323942bbf92178bc4f93d77909313d85b364bc27",
+  "sample-measurements.json": "0629017dd91072537260cb18a351ef89ed50b25455bf1071f717400f81e27c43",
+  "sample-review.json": "1bfd56138cb4ef5df609e9700a38e023f7855163e6cba64e2e8be6ac41ce5def",
+  "scene-preview.blend": "13a29bdfe9430ebac5aca13219dbb28856b438dce35647fbd459676aa8d17966",
+  "tests-native.log": "554054553225ccf403dc4296f6bf5931aa738df9110ce696c316c460d2f32907",
+  "visual-review.json": "27d0be8214e7d9236cf26a5ea7b6ddd24ceb51a83850609e80fb83e137b6f049"
+}
