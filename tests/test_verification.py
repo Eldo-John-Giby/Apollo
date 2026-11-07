@@ -61,6 +61,20 @@ def test_empty_mask_fails():
     with pytest.raises(ValueError): centroid(np.zeros((1024,1024)))
 
 
+def test_template_rejects_pupil_joined_to_dark_iris():
+    # Regression from the rejected dark-hazel material: a valid black pupil can
+    # still join a much larger iris region at the tracker's reference threshold.
+    reference=image();yy,xx=np.indices(reference.shape,dtype=float)
+    # A separate dark brow band keeps the ellipse detector's adaptive threshold
+    # below the iris level; the template's broader threshold still joins them.
+    reference[340:348,:]=4
+    for x in [289.,735.]:
+        iris=((xx+.5-x)**2+(yy+.5-512)**2<42**2)&(reference>20)
+        reference[iris]=50
+    with pytest.raises(ValueError,match='large dark region'):
+        template_shift(reference,reference)
+
+
 @pytest.mark.parametrize('defect',[None,'reversed','stationary','cross_axis','reset'])
 def test_direction_suite_detects_behavior_failures(defect):
     commands={'left':(-10.3,0),'right':(10.3,0),'up':(0,-10.3),

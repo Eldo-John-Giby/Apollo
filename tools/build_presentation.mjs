@@ -70,7 +70,7 @@ s=slide('Direction and sequence are checked in the pixels','Required movement',
 await pic(s,'candidate/contact_sheet.png',64,188,1148,410,'Ten-frame clockwise sweep with recorded inputs');
 text(s,'Left · Right · Up · Down · Reset     |     Shared target, separate eye-center rotations',64,610,1140,37,22,accent,true);
 
-s=slide('Correctness is challenged with deliberate faults','Independent evidence',
+s=slide('Correctness is challenged with deliberate faults','Engineering highlights',
   'Sources: candidate/verification/independent_geometry.json, candidate/verification_report.json and dataset-visibility/report.json. Thresholds are project acceptance gates, not official Samsung scoring methods. Fault injection runs in a disposable process.');
 const passCount=qualification?Object.values(qualification.checks).filter(x=>x.status==='PASS').length:null;
 const metrics=[['1009','evaluated geometry poses'],['14','injected geometry / resource faults'],[visibility?.passed?String(visibility.poses):'Pending','mask-tested dataset poses']];
@@ -87,7 +87,7 @@ try{await pic(s,'dataset-256/coverage.png',680,186,520,446,'Measured normalized 
 
 s=slide('Interactive controls call the exact same wrapper','Operator experience',
   'Actual screenshot from the existing live Blender scene, preserving unsaved edits. This viewport uses the earlier look; final-quality renders use the selected candidate. Interactive five-direction/reset and pose-render checks supplement background API/operator parity.');
-await pic(s,'ui/sidebar.jpg',64,180,440,467,'Crop of the observed Blender Apollo sidebar; original screenshot retained', {left:990/1536,top:97/864,right:285/1536,bottom:428/864});
+await pic(s,'ui/sidebar.jpg',144,180,360,467,'Crop of the observed Blender Apollo sidebar; original screenshot retained', {left:990/1536,top:97/864,right:285/1536,bottom:428/864});
 para(s,'One API for both workflows','Move and reset the eyes.\nRender the current pose.\nGenerate the official ten-frame sweep.',600,214,590);
 text(s,'The optional sidebar adds convenience.\nEvaluators run wrapper/eyes.py directly.',600,505,590,120,28,accent);
 

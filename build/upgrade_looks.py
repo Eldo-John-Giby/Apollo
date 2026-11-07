@@ -29,8 +29,14 @@ def style_iris(material,cool):
     boundary.color_ramp.elements[1].color=(1,1,1,1)
     links.new(distance.outputs['Value'],boundary.inputs[0])
     color=shader.inputs['Base Color'].links[0].from_socket
+    # Raise iris reflectance while preserving fibers and the limbal pattern.
+    # The first dark-hazel candidate joined the pupil in the unchanged tracker.
+    boost=nodes.new('ShaderNodeMixRGB');boost.blend_type='ADD';boost.use_clamp=True
+    boost.inputs[0].default_value=1
+    boost.inputs[2].default_value=(.12,.22,.24,1) if cool else (.28,.24,.12,1)
+    links.new(color,boost.inputs[1])
     mix=nodes.new('ShaderNodeMixRGB');mix.blend_type='MIX'
-    links.new(boundary.outputs[0],mix.inputs[0]);links.new(color,mix.inputs[1])
+    links.new(boundary.outputs[0],mix.inputs[0]);links.new(boost.outputs[0],mix.inputs[1])
     mix.inputs[2].default_value=(.8,.8,.75,1)
     links.new(mix.outputs[0],shader.inputs['Base Color'])
 
@@ -65,6 +71,9 @@ def run(folder,variants=('B','C'),optimized=False):
             cycles=bpy.context.scene.cycles
             cycles.max_bounces=2;cycles.diffuse_bounces=1;cycles.glossy_bounces=1
             cycles.transmission_bounces=0
+            cycles.transparent_max_bounces=8;cycles.use_adaptive_sampling=False
+            cycles.samples=32
+            bpy.context.scene.render.use_persistent_data=True
         destination=folder/variant;destination.mkdir(parents=True,exist_ok=True)
         bpy.ops.file.pack_all()
         bpy.ops.wm.save_as_mainfile(filepath=str(destination/'scene.blend'),compress=True)

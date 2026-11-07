@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import numpy as np
-from PIL import Image,ImageDraw
+from PIL import Image,ImageDraw,ImageFont
 from dataset_protocol import inputs,resume
 from reference_geometry import reference
 from pixel_oracle import measure
@@ -27,6 +27,9 @@ def analyze(folder):
     folder=Path(folder);manifest=json.loads((folder/'dataset.json').read_text(encoding='utf-8'))
     frames=resume(folder,manifest['run'])
     if frames!=manifest['frames'] or len(frames)!=manifest['run']['count']:raise ValueError('Incomplete/inconsistent dataset')
+    lighting={r['extra']['lighting_sha256'] for r in frames}
+    samples={r['extra']['render_samples'] for r in frames}
+    if len(lighting)!=1 or samples!={manifest['run']['samples']}:raise ValueError('Dataset render configuration changed')
     results=[]
     for record in frames:
         cfg=record['extra']['calibration']
@@ -45,7 +48,7 @@ def analyze(folder):
             radius=cfg['focal_mm']/cfg['sensor_mm']*1024*.002/(r['pupil'][1]+.4)
             result=measure(image,r['pixel'],radius)
             result.update(frame=record['frame'],eye=side);results.append(result)
-    report={'passed':True,'frames':len(frames),'max_pixel_oracle_error_px':max(x['error_px'] for x in results),'method':'Independent geometry-guided connected dark surface; not blind detection or a visibility-mask qualification.','dataset_sha256':hashlib.sha256((folder/'dataset.json').read_bytes()).hexdigest(),'measurements':results}
+    report={'passed':True,'frames':len(frames),'render_samples':next(iter(samples)),'lighting_sha256':next(iter(lighting)),'max_pixel_oracle_error_px':max(x['error_px'] for x in results),'method':'Independent geometry-guided connected dark surface; not blind detection or a visibility-mask qualification.','dataset_sha256':hashlib.sha256((folder/'dataset.json').read_bytes()).hexdigest(),'analysis_sources':{name:hashlib.sha256(Path(__file__).with_name(name).read_bytes()).hexdigest() for name in ['analyze_dataset.py','reference_geometry.py','pixel_oracle.py','dataset_protocol.py']},'measurements':results}
     (folder/'analysis.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     import matplotlib
     matplotlib.use('Agg')
@@ -53,10 +56,12 @@ def analyze(folder):
     poses=inputs(len(frames),manifest['run']['seed'])
     fig,axis=plt.subplots(figsize=(5,5));axis.scatter(*np.array(poses).T,s=12);axis.set(xlim=(-1.1,1.1),ylim=(-1.1,1.1),xlabel='Horizontal input',ylabel='Vertical input',title=f'Seeded gaze coverage: {len(frames)} frames');axis.set_aspect('equal');axis.grid(alpha=.3);fig.tight_layout();fig.savefig(folder/'coverage.png',dpi=160);plt.close(fig)
     sheet=Image.new('RGB',(1024,820),'#151b24');draw=ImageDraw.Draw(sheet)
+    from matplotlib.font_manager import findfont
+    font=ImageFont.truetype(findfont('DejaVu Sans'),20)
     for i,r in enumerate(frames[:9]):
-        x,y=(i%3)*340,(i//3)*270
+        x,y=round((r['input']['h']+1)*340),round((1-r['input']['v'])*270)
         with Image.open(folder/r['extra']['image']) as im:sheet.paste(im.resize((256,256)),(x,y))
-        draw.text((x+258,y+10),f"{r['input']['h']:+.0f}\n{r['input']['v']:+.0f}",fill='white')
+        draw.text((x+258,y+10),f"h {r['input']['h']:+.0f}\nv {r['input']['v']:+.0f}",fill='white',font=font)
     sheet.save(folder/'anchors.png')
     return report
 

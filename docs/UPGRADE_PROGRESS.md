@@ -42,7 +42,9 @@ Replacement comparison: out/upgrade/looks-v2/comparison.png. B/C use a smaller
 colored iris region (unchanged annulus/pupil geometry), distinct warm/cool iris
 materials, reduced eye-opening targets and MPFB-refitted lashes; C also changes
 constant key/fill lighting. Camera/target calibration and eye geometry remain
-fixed. This build experiment requires MPFB loaded; packed candidates render with
+fixed. This comparison predates the dark-iris tracker rejection described below;
+the corrected B center is out/upgrade/corrected-fibers/B/center.png.
+This build experiment requires MPFB loaded; packed candidates render with
 factory startup and need no addon. No candidate is promoted from a center image.
 Human naturalness/pupil-clarity ratings select which candidate receives complete
 direction, sweep, corner-visibility and new-verifier qualification. Further socket
@@ -94,24 +96,46 @@ This optional UI is not enabled in the graded scene or required by the wrapper.
 
 ## Active complete-run gates
 
-Preferred technical candidate: B (warm iris, reduced colored region, refitted
-lashes), with two total path bounces and one diffuse/glossy bounce. A center
-probe measured a mean luma change of 0.058/255 and unchanged pupil centers
-against the unoptimized B look. This is not a final speed benchmark while
-multiple CPU render jobs run concurrently. Human preference is not fabricated.
+The original dark-hazel B prototype was rejected by the image-only direction
+tracker: its iris joined the pupil into a dark region larger than the allowed
+reference patch. Geometry/visibility passing did not override that failure.
+Its 41 completed dataset frames and partial qualification are preserved under
+out/upgrade/rejected-dark-iris, with rejection.json and the failed direction log.
+The original fallback remains unchanged. Detector thresholds were not relaxed.
 
-The candidate passed all nine dataset anchor mask tests: full pupil visibility,
+The corrected B raises iris reflectance while retaining its fiber pattern,
+reduced colored region and refitted lashes. Two path bounces, one diffuse/glossy
+bounce and persistent render data are used in the new candidate; those settings
+must pass fresh qualification. Earlier 0.058/255 optimization comparison data
+belongs to the rejected dark prototype, not the corrected candidate. Human
+naturalness preference is not fabricated.
+
+The rejected prototype passed all nine dataset anchor mask tests: full visibility,
 maximum independent mask-centroid error 0.030619 px. An actual injected half-pupil
 obstruction measured 0.499356 coverage and was rejected. Evidence:
-out/upgrade/corner-visibility/report.json. The planned 25-pose mask extension
-adds sixteen fixed seeded random poses and remains a separate gate.
+out/upgrade/rejected-dark-iris/corner-visibility/report.json. The 25-pose extension also passed:
+nine anchors plus sixteen fixed seeded random poses, minimum visible/dark fraction
+1.0, maximum mask-centroid error 0.030619 px and the same obstructed-pupil rejection.
+Evidence: out/upgrade/rejected-dark-iris/dataset-visibility/report.json. A rendered loss-of-illumination
+fault was rejected by both the lighting signature and the pixel oracle; see
+out/upgrade/rejected-dark-iris/lighting-adversary/report.json.
 
-The actual 256-frame, seed-0, 32-sample run and fresh native/secondary/Linux
-qualification are running. No pending result is counted as passed. The evidence
-deck is authored with editable text/architecture and actual render images; the
-105-second demo builder requires completed passing evidence before export.
-Its local synthesized narration has passed timing checks. Team identity is
-requested separately and is never invented.
+These mask/lighting results belong to that prototype and are not transferred
+to the corrected scene. Corrected B passes the real five-direction/reset check:
+reset byte-identical, maximum template/projection error 0.050578 px. Evidence:
+out/upgrade/corrected-fibers-smoke/verification/direction_report.json. Builder
+and factory-startup center PNGs also match byte-for-byte before enabling the
+render cache. The new full sweep receives early blind/template checks before
+long jobs. The count-256 dataset is intentionally interrupted after its first
+nine completed anchors, checked with actual pixels/masks, then resumed.
+
+Fresh corrected-scene 256-frame, seed-0, 32-sample generation and complete
+native/secondary/Linux qualification are gated on those preflights. No pending
+result is a pass. The editable evidence deck has passed structural/layout/font
+and import checks, and PowerPoint exported all ten preview slides. Final claims
+are rebuilt from final reports. The 105-second demo builder requires completed
+passing evidence before export; its local synthesized narration passes timing.
+Team identity is requested separately and never invented.
 
 ## Remaining gates and order
 

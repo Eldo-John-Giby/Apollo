@@ -14,20 +14,32 @@ Rendering a packed scene does not require MPFB. Building the character/look does
 For the selected look, use a disposable Blender process with MPFB enabled:
 
 ```powershell
-& $env:BLENDER_BIN -b out/production/scene.blend --python-exit-code 1 -P build/upgrade_looks.py -- --folder out/rebuilt-look --variant B --optimized
+Expand-Archive milestones/dev-freeze-2026-11-07/apollo-development.zip out/fallback-source
+& $env:BLENDER_BIN -b out/fallback-source/apollo-development/scene.blend --python-exit-code 1 -P build/upgrade_looks.py -- --folder out/rebuilt-look --variant B --optimized
 ```
 
 The builder changes iris materials, lid targets and lash fit, and sets two total
-path bounces with one diffuse/glossy bounce. It never changes physical pupil
+path bounces with one diffuse/glossy bounce and persistent render data. It never changes physical pupil
 size, eye centers, fixation/camera distances or the gaze solver. Use a separate
 output directory. Do not rebuild over a qualified scene.
 
 ## Qualification
 
+Before expensive runs, render/check the cardinal/reset preflight and the actual
+ten-frame sweep. A darker iris trial passed geometry/masks but failed the
+unchanged image-only tracker; the early gate prevents spending the whole dataset
+budget on such a candidate.
+
+```powershell
+& $env:BLENDER_BIN -b --factory-startup out/upgrade/candidate/scene.blend --python-exit-code 1 -P tools/direction_smoke.py -- --folder out/direction-preflight
+python tools/direction_report.py out/direction-preflight
+```
+
 ```powershell
 python -m pytest -q
 python tasks.py sweep --folder out/upgrade/candidate --quality draft
 python tasks.py validate --folder out/upgrade/candidate
+python tools/early_image_gate.py out/upgrade/candidate --baseline out/direction-preflight/verification/baseline.png
 python tasks.py sheet --folder out/upgrade/candidate
 python tasks.py prepare --folder out/upgrade/candidate
 python tasks.py verify --folder out/upgrade/candidate

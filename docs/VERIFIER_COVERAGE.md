@@ -30,7 +30,7 @@ needs a new full run before upgrade release. The new V16 gate requires every
 secondary check except recursive V16 itself; the older gate policy above remains
 an accurate description of the protected historical report.
 
-The rendered half-pupil fault was rejected, and all nine anchors passed the
+On the subsequently rejected dark-iris prototype, the half-pupil fault was rejected and all nine anchors passed the
 independent mask gate. A rendered loss-of-illumination fault was rejected by
 both the lighting signature and the connected-dark-surface pixel check. Actual
 25-pose masks, complete Linux qualification and extracted-archive/256-frame
