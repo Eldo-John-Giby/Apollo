@@ -84,25 +84,7 @@ def export(upgrade,destination,delivery,profile='upgrade'):
     archive=upgrade/'apollo-competition.zip'
     assert reports['rehearsal']['archive_sha256']==digest(archive)
     assert reports['rehearsal']['scene_sha256']==scene_hash
-    pptx=upgrade/'presentation-final/Apollo_Submission_ppt.pptx'
-    with zipfile.ZipFile(pptx) as z:
-        assert z.testzip() is None
-        assert len([n for n in z.namelist() if n.startswith('ppt/slides/slide') and n.endswith('.xml')])==10
-    deck_receipt=upgrade/'deck-build/validation-final.json'
-    deck_validation=json.loads(deck_receipt.read_text())
-    assert deck_validation['finalSha256']==digest(pptx)
-    assert deck_validation['packageIntegrity']['status']=='pass' and deck_validation['firstPartyImport']['passed']
-    native_receipt=upgrade/'presentation-final/native-review.json'
-    native_review=json.loads(native_receipt.read_text())
-    assert native_review['passed'] and native_review['reviewed_slides']==10 and native_review['presentation_sha256']==digest(pptx)
-    assert len(native_review['native_png_sha256'])==10
-    assert all(digest(upgrade/'presentation-final/native'/name)==value for name,value in native_review['native_png_sha256'].items())
-    video=upgrade/'video/apollo-demo.mp4';assert video.is_file() and video.stat().st_size>100000
-    receipt=json.loads((upgrade/'video/video-receipt.json').read_text());assert receipt['duration_seconds']==105 and receipt['decoded_frames']==2520 and abs(receipt['actual_duration_seconds']-105)<.2
-    video_review_path=upgrade/'video/visual-review.json'
-    video_review=json.loads(video_review_path.read_text())
-    assert video_review['passed'] and video_review['video_sha256']==digest(video)
-    assert len(video_review['reviewed_timestamps_seconds'])>=10
+    # Videos and presentations are excluded by the standing user rule in AGENTS.md.
     # Complete all checks before creating reviewable delivery directories.
     destination.mkdir(parents=True);delivery.mkdir(parents=True)
     for name in required:shutil.copy2(candidate/name,delivery/name)
@@ -110,7 +92,7 @@ def export(upgrade,destination,delivery,profile='upgrade'):
     (delivery/'wrapper').mkdir();shutil.copy2(ROOT/'wrapper/eyes.py',delivery/'wrapper/eyes.py')
     for key,value in json.loads((candidate/'verification_report.json').read_text())['artifact_hashes'].items():
         assert digest(delivery/key)==value,'Unpacked delivery differs from qualified artifacts'
-    files={'apollo-competition.zip':archive,'Apollo_Submission_ppt.pptx':pptx,'apollo-demo.mp4':video,
+    files={'apollo-competition.zip':archive,
            'contact_sheet.png':candidate/'contact_sheet.png','verification_report.json':candidate/'verification_report.json',
            'verification_report.md':candidate/'verification_report.md',
            'dataset-analysis.json':upgrade/'dataset-256/analysis.json','dataset-visibility.json':upgrade/'dataset-visibility/report.json',
@@ -119,10 +101,7 @@ def export(upgrade,destination,delivery,profile='upgrade'):
            'linux-qualification.log':upgrade/'docker-candidate/qualification.log',
            'linux-preflight-geometry.json':upgrade/'docker-candidate/preflight-geometry.json',
            'ui-rehearsal.json':upgrade/'ui/operator-final/report.json','lighting-adversary.json':upgrade/'lighting-adversary/report.json',
-           'narration.txt':upgrade/'video/narration.txt','video-receipt.json':upgrade/'video/video-receipt.json',
-           'video-visual-review.json':video_review_path,
            'look-rebuild-report.json':upgrade/'look-rebuild-report.json',
-           'presentation-validation.json':deck_receipt,'presentation-native-review.json':native_receipt,
            'tests-native.log':upgrade/'tests-final-native.log','tests-linux.log':upgrade/'docker-candidate/tests-final.log'}
     for name,source in files.items():shutil.copy2(source,destination/name)
     if profile=='realism':
@@ -132,11 +111,13 @@ def export(upgrade,destination,delivery,profile='upgrade'):
         shutil.copy2(upgrade/'baseline-samples/benchmark.json',destination/'baseline-benchmark.json')
         shutil.copytree(upgrade/'comparisons',destination/'comparisons')
         shutil.copytree(upgrade/'portraits',destination/'portraits')
+        if (upgrade/'checkpoint-comparisons').is_dir():
+            shutil.copytree(upgrade/'checkpoint-comparisons',destination/'checkpoint-comparisons')
         shutil.copytree(upgrade/'stress-rgb',destination/'visibility-stress')
         with zipfile.ZipFile(destination/'sample-evidence.zip','w',zipfile.ZIP_DEFLATED) as z:
             for file in sorted((upgrade/'samples').rglob('*')):
                 if file.is_file():z.write(file,Path('samples')/file.relative_to(upgrade/'samples'))
-    for folder,prefix in [(candidate/'verification','native'),(upgrade/'docker-candidate/verification','linux'),(upgrade/'dataset-visibility','dataset-visibility'),(upgrade/'ui/operator-final','ui'),(upgrade/'lighting-adversary','lighting'),(upgrade/'presentation-final/native','presentation')]:
+    for folder,prefix in [(candidate/'verification','native'),(upgrade/'docker-candidate/verification','linux'),(upgrade/'dataset-visibility','dataset-visibility'),(upgrade/'ui/operator-final','ui'),(upgrade/'lighting-adversary','lighting')]:
         with zipfile.ZipFile(destination/(prefix+'-evidence.zip'),'w',zipfile.ZIP_DEFLATED) as z:
             for file in sorted(folder.rglob('*')):
                 if file.is_file():z.write(file,Path(prefix)/file.relative_to(folder))
@@ -170,7 +151,7 @@ blender -b delivery/apollo/scene.blend --python-exit-code 1 -P delivery/apollo/w
 - [Unpacked executable delivery](../../delivery/apollo/README.md)
 - [Ten-frame development ZIP](apollo-competition.zip)
 - [Measured native report](verification_report.md) and [Linux report](linux-verification.json)
-- [Contact sheet](contact_sheet.png), [105-second video](apollo-demo.mp4), [editable deck](Apollo_Submission_ppt.pptx)
+- [Contact sheet](contact_sheet.png)
 - [Complete research manifest](dataset-256/dataset.json) and [image analysis](dataset-analysis.json)
 - [Per-file checksums](MANIFEST.json)
 
@@ -180,9 +161,8 @@ reports. Local project checks are not official competition scores. The complete
 256-image research example is in `dataset-256/`; an additional ZIP is generated
 under the working output's `dataset-256.zip`. Keep its seeded manifest and images together.
 
-The 105-second video uses actual artifacts with local synthesized narration.
-The editable deck retains a technical-prototype identity if team details have
-not been supplied. Human naturalness preference and independent human usability
+Videos and presentations are excluded from this technical release by the
+standing user rule. Human naturalness preference and independent human usability
 ratings are not invented. See `docs/UPGRADE_RUNBOOK.md` for reproduction commands.
 '''
     if profile=='realism':

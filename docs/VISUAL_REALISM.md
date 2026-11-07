@@ -1,6 +1,6 @@
 # Visual realism implementation â€” 8 November 2026
 
-Work branch: visual-realism. Protected fallback: competition-qualified-2026-11-07.
+Work branch: visual-realism. Protected fallback: apollo-v0.2.0.
 The existing delivery and all released milestones remain unchanged.
 
 ## Current state
@@ -48,7 +48,7 @@ These are development comparisons, not promoted results or human ratings.
    masks with actual occlusion. The stress manifest has a distinct schema.
 5. Full independent geometry, native/secondary/Linux qualification, adversaries,
    repeated hashes and fresh-CWD reconstruction; regenerate the 256-image corpus.
-6. Refreshed reviewed media, exact archive/manifests and committed-byte checks,
+6. Reviewed still-image evidence, exact archive/manifests and committed-byte checks,
    then tag/push only a passing final release. Event administration is separate.
 
 ```powershell
@@ -101,7 +101,8 @@ maximum blind error 0.230891 px, template error 0.093563 px. Actual masks show
 full visible/dark coverage, maximum centroid residual 0.026708 px, and reject a
 real half-pupil obstruction. All 80 native unit tests pass. The serial 32/64/128
 sample comparison is running. Complete native/secondary/Linux qualification,
-113-pose coverage, final corpus and refreshed media remain gated.
+113-pose coverage and the final corpus remain gated. Videos and presentations
+are excluded by the standing user rule recorded in AGENTS.md.
 
 ## Sample selection and reproducibility
 
@@ -136,3 +137,11 @@ This preserves the older executable delivery. The new profile also includes the
 113-pose RGB/mask evidence, matched comparisons, portraits and sample evidence.
 Manifest, ZIP and committed Git blob checks precede tagging. Event administration,
 registered team filenames and sharing remain team-owned.
+
+## User scope update — 8 November 2026
+
+Do not create or regenerate videos or presentations. The queued media worker
+was stopped before authoring. Technical qualification, still-image review,
+datasets, archive rehearsals and release packaging continue. Export no longer
+requires or ships newly authored decks or movies. Historical artifacts remain
+unchanged. Release names and the version mapping are in [RELEASES.md](RELEASES.md).

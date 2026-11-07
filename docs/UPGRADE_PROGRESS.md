@@ -1,6 +1,6 @@
 # Competition upgrade — execution record
 
-Branch: `competition-upgrade`. Protected fallback: `dev-freeze-2026-11-07`.
+Branch: `competition-upgrade`. Protected fallback: `apollo-v0.1.0`.
 Technical gates A–F are complete. The evidence-bound release is staged under
 `milestones/competition-upgrade-2026-11-07` with executable `delivery/apollo`. Registration and event administration are outside
 this workstream. No official score or independent human preference is claimed.
@@ -105,6 +105,6 @@ by design; no missing check is relabelled.
 `tools/export_upgrade.py` has validated and exported the conventional
 `delivery/apollo` layout, development ZIP, full separate 256-image corpus,
 deck/video and hashed evidence archives. Final manifests, ZIP CRCs and Git blob hashes are checked before tagging.
-Release tag: `competition-qualified-2026-11-07`. No new feature work is needed for this
+Release tag: `apollo-v0.2.0`. No new feature work is needed for this
 release. College/team filenames, evaluator access and organizer forms remain
 team-owned.

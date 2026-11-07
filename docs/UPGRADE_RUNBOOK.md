@@ -1,6 +1,6 @@
 # Competition upgrade operator guide
 
-The protected development fallback is `dev-freeze-2026-11-07`. Upgrade work lives
+The protected development fallback is `apollo-v0.1.0`. Upgrade work lives
 on `competition-upgrade`. Read the execution record for actual completed gates;
 this guide describes commands, not a claim that every output already exists.
 

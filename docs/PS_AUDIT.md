@@ -57,3 +57,11 @@ submission. The exact event filename and sharing checks must use real team data.
 - Team ZIP plus GitHub, video, deck and form are complementary deliverables.
 - Event dates are supplied as tentative. Registration/submission status and any
   organizer updates must be confirmed separately.
+
+## Current automation scope — 8 November 2026
+
+The user explicitly prohibits creating or regenerating videos and presentations.
+This overrides earlier implementation plans for new media. Historical media stay
+archived. The event requirements above still describe organizer requirements;
+they are not waived or marked complete for the new realism candidate. Any future
+media preparation and event upload are outside the current automated work.

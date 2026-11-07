@@ -158,3 +158,15 @@ milestones/competition-upgrade-2026-11-07. Preserve mixed qualified Python/JSON
 source bytes with Git -text; automatic line-ending conversion otherwise breaks
 raw provenance hashes on checkout. Actual registered identity, final naming,
 evaluator sharing and event uploads remain team-owned. No official score claimed.
+
+## 8 November 2026 — User scope and release naming
+
+Videos and presentations must not be created, regenerated or queued. The pending
+realism media worker was stopped before authoring. Preserve historical artifacts,
+and finish technical qualification, still images, datasets and executable archives.
+The technical exporter no longer requires or copies decks/movies; numerical,
+image, source-hash and replay gates remain unchanged.
+
+Use uniform Apollo semantic-version tags and display names from docs/RELEASES.md.
+The two existing tags were renamed atomically on GitHub while preserving their
+original target commits. Historical archive paths and checksums remain unchanged.

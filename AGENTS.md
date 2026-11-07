@@ -1,5 +1,18 @@
 # Codex Project Instructions
 
+## Standing user rules
+
+- Do not create, regenerate, edit, or schedule videos or presentations. This
+  includes demo movies, narrated clips, slide decks, PowerPoint and PDF decks.
+  The user explicitly set this rule on 8 November 2026. Only an explicit user
+  instruction revoking this rule may override it. Preserve historical artifacts.
+- Still images, render contact sheets, technical reports, tests, datasets and
+  executable release archives remain in scope. Do not make technical packaging
+  depend on new videos or presentations.
+- Use uniform release tags `apollo-vMAJOR.MINOR.PATCH` and display names
+  `Apollo vMAJOR.MINOR.PATCH — Short Descriptive Name`. See `docs/RELEASES.md`.
+- Commit meaningful completed checkpoints periodically and push at completion.
+
 ## Codebase navigation
 
 - At the beginning of each coding task, consult `FILEMAP.md` to locate relevant files and understand their responsibilities.

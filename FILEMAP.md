@@ -20,7 +20,7 @@ wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → pr
 
 | File | Responsibility |
 | --- | --- |
-| `AGENTS.md` | Repository navigation and file-map maintenance rules. |
+| `AGENTS.md` | Navigation, standing no-video/no-presentation rule, release naming and checkpoint commits. |
 | `docs/problem_statement.md` | Screenshot-transcribed requirements, rubric, deliverables, unresolved organizer questions. |
 | `docs/SOLUTION_TECHNICAL.md` | Proposed geometry, conventions, API, verification checks, risks, and limitations. |
 | `docs/IMPLEMENTATION_PLAN.md` | Original phased plan and embedded reference math/tests; numbered companion references mean the unnumbered files here. |
@@ -36,6 +36,7 @@ wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → pr
 | `docs/PS_AUDIT.md` | Requirement-by-requirement technical coverage and remaining event/submission deliverables against the user's consolidated specification. |
 | `docs/UPGRADE_PROGRESS.md`, `docs/VERIFIER_COVERAGE.md` | Upgrade execution gates, measured prototype status and verifier independence/coverage limitations. |
 | `docs/UPGRADE_RUNBOOK.md` | Reproduction commands for upgraded looks, independent/dataset adversaries, controls, Linux qualification, deck/video and archive rehearsals. |
+| `docs/RELEASES.md` | Uniform release/tag names, historical version mapping and promotion policy. |
 | `docs/VISUAL_REALISM.md` | Current appearance work, rejected prototypes, reproducible checkpoints and remaining visual/technical gates. |
 | `docs/character_mapping.example.json` | Explicit stock-eye identifiers, orientation confirmation and attribution template. |
 
@@ -103,7 +104,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/make_bundle.py` | Reject fixtures, stale evidence and incomplete reports; stage ZIP, size/integrity/extraction checks. |
 | `tools/freeze_candidate.py` | Development-only archive using shared qualification gates; per-file manifest, ZIP integrity and extraction checks. |
 | `tools/release_rehearsal.py` | Actual ZIP regeneration from clean config/different CWD; complete and interrupted 255→256 dataset resume reproduction. |
-| `tools/export_upgrade.py` | Gate the upgrade milestone, conventional unpacked delivery, evidence archive and complete separate research-dataset ZIP. |
+| `tools/export_upgrade.py` | Gate technical milestones, executable delivery, still-image evidence and complete research-dataset ZIP; excludes videos/decks. |
 
 ## Tests and relationships
 
