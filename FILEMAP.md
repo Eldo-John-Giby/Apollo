@@ -8,7 +8,9 @@ Apollo implements synthetic binocular gaze for Samsung PRISM-XR Track 01.
 The protected radial-iris development freeze remains available. The competition
 upgrade adds a qualified warm-iris/lid/lash look, independent geometry audits,
 a complete seeded 256-image dataset, optional controls and evidence media.
-Native and Linux V1–V17 and all applicable secondary-version checks pass. 79 tests pass on Windows/Linux. Generated temporary
+The protected competition-qualified release passes native/Linux V1–V17 and all
+applicable secondary checks, with 79 tests on both platforms. The visual-realism
+branch is under development; its checkpoints have not been promoted. Generated temporary
 artifacts belong under out/ and are not listed here.
 
 Flow: character inspection/mapping or fixture → calibrated scene → standalone eye
@@ -34,6 +36,7 @@ wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → pr
 | `docs/PS_AUDIT.md` | Requirement-by-requirement technical coverage and remaining event/submission deliverables against the user's consolidated specification. |
 | `docs/UPGRADE_PROGRESS.md`, `docs/VERIFIER_COVERAGE.md` | Upgrade execution gates, measured prototype status and verifier independence/coverage limitations. |
 | `docs/UPGRADE_RUNBOOK.md` | Reproduction commands for upgraded looks, independent/dataset adversaries, controls, Linux qualification, deck/video and archive rehearsals. |
+| `docs/VISUAL_REALISM.md` | Current appearance work, rejected prototypes, reproducible checkpoints and remaining visual/technical gates. |
 | `docs/character_mapping.example.json` | Explicit stock-eye identifiers, orientation confirmation and attribution template. |
 
 ## Entry points and core
@@ -81,13 +84,17 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/live_controls.py` | Optional Blender sidebar invoking the public wrapper; never required or automatically enabled in graded scenes. |
 | `tools/ui_rehearsal.py` | Real Blender panel operators: pose-render/API byte parity and official sweep output validation. |
 | `build/upgrade_looks.py` | Distinct iris-region/shading/light candidates and MPFB lid/lash refit; preserves pupil/eye geometry and calibration, requires MPFB for building only. |
+| `build/realism_scene.py`, `build/realism_config.json` | Isolated anatomy/surface/groom checkpoints with seeded baked strands, actual lid/sphere contour fitting, preserved eye meshes and source-bound build receipts. |
+| `tools/realism_visibility.py` | Resumable 81-grid + 32-random RGB stress poses and real occlusion masks; separate from official and research protocols. |
+| `tools/realism_hero.py` | Separate front/three-quarter presentation portraits; preserves the saved calibrated scene and writes no graded metadata. |
+| `tools/realism_comparison.py` | Hash-checked, pose/calibration-matched baseline/candidate sheets and native eye crops; leaves visual ratings to explicit review. |
 | `tools/direction_report.py` | Five-direction measurements, reset comparison and enlarged visual comparison from checkpointed verification renders. |
 | `tools/direction_smoke.py` | Six real baseline/cardinal/reset renders for the unchanged image-only direction gate before expensive candidate runs. |
 | `tools/early_image_gate.py` | Early blind/template checks on the actual sweep or checkpointed dataset using independent projections and unchanged thresholds. |
 | `tools/blender_verify.py` | Blender evidence worker with progress checkpoints: calibration/metrics, random evaluated poses, repeated sweeps, direction images, isolated/occluded masks, packed resource audit; hash-guarded mask-only reruns. |
 | `tools/verify.py` | V1–V17 coordinator, pixel/direction/visibility checks, clean-room/secondary subprocesses, evidence-bound JSON/Markdown reports and hash-guarded evidence reuse. |
 | `tools/framing_sweep.py` | 85–135 mm experiments and eye-sphere margin/shift selection; brows/lashes still need visual review. |
-| `tools/benchmark_render.py` | Isolated 8/16-sample center/up/down timings and pose records; leaves the source scene and qualified settings unchanged. |
+| `tools/benchmark_render.py` | Isolated Configurable 8–128-sample center/up/down or corner timings and pose records; leaves the source scene and qualified settings unchanged. |
 | `tools/contact_sheet.py` | 5×2 annotated sheet, crosshairs, reset rings, direction clocks, fixture label. |
 | `tools/prepare_candidate.py` | Candidate-specific README and fixture attribution; production attribution must already exist. |
 | `tools/demo.py` | Labeled sweep GIF and presentation/recording outline; not a final narrated video. |
@@ -104,6 +111,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 - `tests/test_protocol.py`: invalid inputs/config/metadata, exact conic boundary, embedded core and standalone import parity.
 - `tests/test_artifacts.py`: image/sheet validation and production packaging gates.
 - `tests/test_verification.py`: blind detector/template synthetic accuracy, centroid coordinates and missing-runtime report behavior.
+- `tests/test_realism_visibility.py`: deterministic 113-pose square-boundary coverage.
 - Core is authoritative; regenerate wrapper embedding with `python tasks.py sync` after core edits.
 - Reports bind scene, wrapper, metadata and render hashes. Regenerate/reverify after changing these artifacts.
 - `all` orders tests → sync → scene → sweep → validate → sheet → prepare → demo → verify → optional production bundle.

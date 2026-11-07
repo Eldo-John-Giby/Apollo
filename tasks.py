@@ -21,7 +21,7 @@ def main():
     p.add_argument('--scene',type=Path,default=ROOT/'out/production/scene.blend')
     p.add_argument('--count',type=int,default=256)
     p.add_argument('--seed',type=int,default=0)
-    p.add_argument('--samples',type=int,choices=[8,32],default=32)
+    p.add_argument('--samples',type=int,choices=[8,32,64,128],default=32)
     args=p.parse_args()
     args.folder=(args.folder or ROOT/('out/dataset' if args.task=='dataset' else 'out/production' if args.production else 'out/fixture')).resolve()
     python=sys.executable

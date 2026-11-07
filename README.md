@@ -2,6 +2,10 @@
 
 Synthetic binocular gaze pipeline for Samsung PRISM-XR Track 01.
 
+Appearance work continues on `visual-realism`; see [its execution record](docs/VISUAL_REALISM.md).
+Those development checkpoints are not qualified releases. The complete protected
+competition release described below remains available unchanged.
+
 The qualified upgrade is developed on `competition-upgrade`. The protected
 `dev-freeze-2026-11-07` milestone remains unchanged. See the
 [execution record](docs/UPGRADE_PROGRESS.md), [reproduction runbook](docs/UPGRADE_RUNBOOK.md)

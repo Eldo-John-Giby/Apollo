@@ -5,7 +5,7 @@ import {Presentation,PresentationFile} from '@oai/artifact-tool';
 
 const root=path.resolve(process.argv[2]??'.');
 const output=path.resolve(process.argv[3]??path.join(root,'out/upgrade/presentation'));
-const u=path.join(root,'out/upgrade');
+const u=path.resolve(process.argv[4]??path.join(root,'out/upgrade'));
 await fs.mkdir(output,{recursive:true});
 async function report(file){try{return JSON.parse(await fs.readFile(path.join(u,file),'utf8'));}catch{return null;}}
 const qualification=await report('candidate/verification_report.json');

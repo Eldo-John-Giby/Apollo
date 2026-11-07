@@ -20,8 +20,8 @@ def coverage(expected,visible,final=None):
     return fraction
 
 
-def analyze(folder):
-    folder=Path(folder);e=json.loads((folder/'evidence.json').read_text());dataset=Path(e['dataset']);rows=[];residuals=[]
+def analyze(folder,dataset_override=None):
+    folder=Path(folder);e=json.loads((folder/'evidence.json').read_text());dataset=Path(dataset_override) if dataset_override is not None else Path(e['dataset']);rows=[];residuals=[]
     for frame in e['frames']:
         i=frame['frame'];expected=gray(folder/'unoccluded'/f'frame_{i:06d}.png');visible=gray(folder/'occluded'/f'frame_{i:06d}.png');image=dataset/frame['extra']['image']
         assert hashlib.sha256(image.read_bytes()).hexdigest()==frame['extra']['image_sha256'],'Dataset image changed'
@@ -42,4 +42,5 @@ def analyze(folder):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('folder',type=Path);a=p.parse_args();raise SystemExit(0 if analyze(a.folder)['passed'] else 1)
+    p=argparse.ArgumentParser();p.add_argument('folder',type=Path);p.add_argument('--dataset',type=Path)
+    a=p.parse_args();raise SystemExit(0 if analyze(a.folder,a.dataset)['passed'] else 1)

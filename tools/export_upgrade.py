@@ -14,7 +14,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def export(upgrade,destination,delivery):
+def export(upgrade,destination,delivery,profile='upgrade'):
     upgrade=Path(upgrade).resolve();destination=Path(destination).resolve();delivery=Path(delivery).resolve()
     if destination.exists() or delivery.exists():raise ValueError('Use new release/delivery directories')
     candidate,required=qualified_candidate(upgrade/'candidate')
@@ -27,7 +27,8 @@ def export(upgrade,destination,delivery):
     assert linux['production'] and all(linux['checks'][f'V{i}']['status']=='PASS' for i in range(1,18))
     assert linux['artifact_hashes']==hashes(linux_folder)
     assert linux['verifier_sha256']==verifier_sources() and linux['evidence_sha256']==evidence_hashes(linux_folder)
-    assert reports['dataset']['frames']==256 and reports['visibility']['poses']==25
+    assert profile in ('upgrade','realism')
+    assert reports['dataset']['frames']==256 and reports['visibility']['poses']==(113 if profile=='realism' else 25)
     manifest=json.loads((upgrade/'dataset-256/dataset.json').read_text(encoding='utf-8'))
     scene_hash=digest(candidate/'scene.blend')
     assert manifest['run']['scene_sha256']==scene_hash
@@ -39,7 +40,40 @@ def export(upgrade,destination,delivery):
     assert reports['ui']['panel_source_sha256']==digest(ROOT/'tools/live_controls.py')
     assert reports['visibility']['scene_sha256']==scene_hash
     assert reports['rebuild']['candidate_scene_sha256']==scene_hash
-    assert reports['rebuild']['recipe_source_sha256']==digest(ROOT/'build/upgrade_looks.py')
+    recipe='build/realism_scene.py' if profile=='realism' else 'build/upgrade_looks.py'
+    assert reports['rebuild']['recipe_source_sha256']==digest(ROOT/recipe)
+    if profile=='realism':
+        assert reports['rebuild']['config_sha256']==digest(ROOT/'build/realism_config.json')
+        visual=json.loads((upgrade/'visual-review.json').read_text())
+        assert visual['passed'] and visual['scene_sha256']==scene_hash
+        samples=json.loads((upgrade/'sample-review.json').read_text())
+        assert samples['passed'] and samples['scene_sha256']==scene_hash
+        categories=visual['categories']
+        assert set(categories)=={'socket_integration','eye_appearance','skin_response','grooming','pupil_readability'}
+        assert all(1<=v['baseline']<=5 and 1<=v['candidate']<=5 for v in categories.values())
+        assert sum(v['candidate']>v['baseline'] for v in categories.values())>=3
+        assert any(categories[k]['candidate']>categories[k]['baseline'] for k in ['socket_integration','eye_appearance'])
+        assert categories['pupil_readability']['candidate']>=categories['pupil_readability']['baseline']
+        for review in [visual,samples]:
+            assert review['reviewed_artifacts']
+            for name,value in review['reviewed_artifacts'].items():
+                path=(upgrade/name).resolve();assert path.is_relative_to(upgrade)
+                assert digest(path)==value,'Reviewed image changed'
+        benchmark=json.loads((upgrade/'samples/benchmark.json').read_text())
+        assert samples['benchmark_sha256']==digest(upgrade/'samples/benchmark.json')
+        assert benchmark['completed'] and set(benchmark['profiles'])=={'32','64','128'}
+        assert benchmark['worker_sha256']==digest(ROOT/'tools/benchmark_render.py')
+        assert benchmark['wrapper_sha256']==digest(ROOT/'wrapper/eyes.py')
+        selected=samples['selected_samples'];assert selected==manifest['run']['samples']
+        assert selected==json.loads((ROOT/'build/realism_config.json').read_text())['samples']
+        assert digest(upgrade/'samples'/str(selected)/'center.png')==digest(candidate/'verification/baseline.png')
+        assert digest(upgrade/'samples'/str(selected)/'up.png')==digest(candidate/'verification/up.png')
+        from realism_visibility import poses
+        stress=json.loads((upgrade/'stress-rgb/dataset.json').read_text())
+        assert stress['run']['scene_sha256']==scene_hash
+        assert stress['run']['worker_sha256']==digest(ROOT/'tools/realism_visibility.py')
+        assert [(f['input']['h'],f['input']['v']) for f in stress['frames']]==poses()
+        assert all(digest(upgrade/'stress-rgb'/f['extra']['image'])==f['extra']['image_sha256'] for f in stress['frames'])
     visibility_folder=upgrade/'dataset-visibility'
     assert reports['visibility']['evidence_sha256']==digest(visibility_folder/'evidence.json')
     assert reports['visibility']['analysis_source_sha256']==digest(ROOT/'tools/analyze_visibility.py')
@@ -90,6 +124,15 @@ def export(upgrade,destination,delivery):
            'presentation-validation.json':deck_receipt,'presentation-native-review.json':native_receipt,
            'tests-native.log':upgrade/'tests-final-native.log','tests-linux.log':upgrade/'docker-candidate/tests-final.log'}
     for name,source in files.items():shutil.copy2(source,destination/name)
+    if profile=='realism':
+        for name in ['visual-review.json','sample-review.json']:
+            shutil.copy2(upgrade/name,destination/name)
+        shutil.copytree(upgrade/'comparisons',destination/'comparisons')
+        shutil.copytree(upgrade/'portraits',destination/'portraits')
+        shutil.copytree(upgrade/'stress-rgb',destination/'visibility-stress')
+        with zipfile.ZipFile(destination/'sample-evidence.zip','w',zipfile.ZIP_DEFLATED) as z:
+            for file in sorted((upgrade/'samples').rglob('*')):
+                if file.is_file():z.write(file,Path('samples')/file.relative_to(upgrade/'samples'))
     for folder,prefix in [(candidate/'verification','native'),(upgrade/'docker-candidate/verification','linux'),(upgrade/'dataset-visibility','dataset-visibility'),(upgrade/'ui/operator-final','ui'),(upgrade/'lighting-adversary','lighting'),(upgrade/'presentation-final/native','presentation')]:
         with zipfile.ZipFile(destination/(prefix+'-evidence.zip'),'w',zipfile.ZIP_DEFLATED) as z:
             for file in sorted(folder.rglob('*')):
@@ -129,16 +172,19 @@ blender -b delivery/apollo/scene.blend --python-exit-code 1 -P delivery/apollo/w
 - [Per-file checksums](MANIFEST.json)
 
 Native 4.5 and secondary 5.2 qualification, full Linux qualification, the actual
-256-frame dataset and 25-pose visibility checks are recorded in the attached
+256-frame dataset and pose-grid visibility checks are recorded in the attached
 reports. Local project checks are not official competition scores. The complete
 256-image research example is in `dataset-256/`; an additional ZIP is generated
-under `out/upgrade/dataset-256.zip`. Keep its seeded manifest and images together.
+under the working output's `dataset-256.zip`. Keep its seeded manifest and images together.
 
 The 105-second video uses actual artifacts with local synthesized narration.
 The editable deck retains a technical-prototype identity if team details have
 not been supplied. Human naturalness preference and independent human usability
 ratings are not invented. See `docs/UPGRADE_RUNBOOK.md` for reproduction commands.
 '''
+    if profile=='realism':
+        readme=readme.replace('delivery/apollo','delivery/'+delivery.name)
+        readme+='\nThe realism profile includes 113 mask-tested poses, matched comparisons, sample\nexperiments and separate presentation-only portraits. Recheck extracted masks\nwith tools/analyze_visibility.py --dataset pointing to visibility-stress.\n'
     (destination/'README.md').write_text(readme,encoding='utf-8',newline='\n')
     manifest_hashes={str(p.relative_to(destination)).replace('\\','/'):digest(p) for p in sorted(destination.rglob('*')) if p.is_file()}
     (destination/'MANIFEST.json').write_text(json.dumps(manifest_hashes,indent=2)+'\n',encoding='utf-8',newline='\n')
@@ -147,4 +193,5 @@ ratings are not invented. See `docs/UPGRADE_RUNBOOK.md` for reproduction command
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('upgrade',type=Path);p.add_argument('--out',type=Path,required=True);p.add_argument('--delivery',type=Path,required=True)
-    a=p.parse_args();print(export(a.upgrade,a.out,a.delivery))
+    p.add_argument('--profile',choices=['upgrade','realism'],default='upgrade')
+    a=p.parse_args();print(export(a.upgrade,a.out,a.delivery,a.profile))

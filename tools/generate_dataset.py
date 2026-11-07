@@ -46,5 +46,5 @@ def run(folder,count,seed,samples):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--folder',type=Path,required=True);p.add_argument('--count',type=int,default=256);p.add_argument('--seed',type=int,default=0);p.add_argument('--samples',type=int,choices=[8,32],default=32)
+    p=argparse.ArgumentParser();p.add_argument('--folder',type=Path,required=True);p.add_argument('--count',type=int,default=256);p.add_argument('--seed',type=int,default=0);p.add_argument('--samples',type=int,choices=[8,32,64,128],default=32)
     args=p.parse_args(sys.argv[sys.argv.index('--')+1:]);run(args.folder,args.count,args.seed,args.samples)

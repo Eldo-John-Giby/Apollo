@@ -1,0 +1,27 @@
+{
+  "seed": 20261108,
+  "lid_opening": 0.45,
+  "rim_radius_m": 0.00012,
+  "skin_roughness": 0.46,
+  "skin_subsurface": 0.065,
+  "skin_bump_m": 2.5e-05,
+  "sclera_color": [
+    0.64,
+    0.67,
+    0.62,
+    1.0
+  ],
+  "hair_strands": 12000,
+  "hair_radius_m": 3.5e-05,
+  "samples": 32,
+  "world_strength": 0.4,
+  "key_energy": 0.65,
+  "fill_energy": 0.18,
+  "denoising": true,
+  "rim_energy": 0.025,
+  "fill_position": [
+    0.04,
+    -0.22,
+    -0.015
+  ]
+}
