@@ -137,6 +137,25 @@ are rebuilt from final reports. The 105-second demo builder requires completed
 passing evidence before export; its local synthesized narration passes timing.
 Team identity is requested separately and never invented.
 
+## Corrected-scene completed gates
+
+Scene SHA-256: 3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d.
+All native V1–V17 checks now pass, including the complete applicable Blender 5.2
+secondary suite. All ten official images pass the early blind/template check:
+maximum errors 0.175464 px and 0.061253 px respectively. The independent
+1009-pose audit passes. All nine anchor images also pass both detectors.
+
+The corrected 25-pose visibility suite passes with full pupil coverage and a
+0.030619 px maximum mask-centroid residual. Its actual half-pupil fault is
+detected. Reports bind the scene, evidence JSON, mask PNGs and analyzer source.
+The rendered lighting fault is rejected. The real UI operators produce an
+API-identical pose PNG and a valid ten-frame sweep.
+
+Rebuilding from the protected frozen source using MPFB and the committed look
+recipe produces a byte-identical center PNG. Binary blend saves are not claimed
+identical. The full 256-frame dataset, Linux qualification and final extracted
+archive/resume rehearsals remain pending until their own reports pass.
+
 ## Remaining gates and order
 
 1. Complete the verifier coverage review, image/lighting adversarial cases and

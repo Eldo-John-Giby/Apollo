@@ -20,7 +20,7 @@ def export(upgrade,destination,delivery):
     reports={name:json.loads((upgrade/file).read_text(encoding='utf-8')) for name,file in {
         'dataset':'dataset-256/analysis.json','visibility':'dataset-visibility/report.json',
         'linux':'docker-candidate/verification_report.json','ui':'ui/operator-final/report.json',
-        'lighting':'lighting-adversary/report.json','rehearsal':'release-rehearsal.json'}.items()}
+        'lighting':'lighting-adversary/report.json','rehearsal':'release-rehearsal.json','rebuild':'look-rebuild-report.json'}.items()}
     assert all(r['passed'] for r in reports.values()),'A release gate did not pass'
     assert reports['dataset']['frames']==256 and reports['visibility']['poses']==25
     manifest=json.loads((upgrade/'dataset-256/dataset.json').read_text(encoding='utf-8'))
@@ -28,6 +28,13 @@ def export(upgrade,destination,delivery):
     assert manifest['run']['scene_sha256']==scene_hash
     assert reports['linux']['artifact_hashes']['scene.blend']==scene_hash
     assert reports['ui']['scene_sha256']==scene_hash and reports['lighting']['scene_sha256']==scene_hash
+    assert reports['visibility']['scene_sha256']==scene_hash
+    assert reports['rebuild']['candidate_scene_sha256']==scene_hash
+    assert reports['rebuild']['recipe_source_sha256']==digest(ROOT/'build/upgrade_looks.py')
+    visibility_folder=upgrade/'dataset-visibility'
+    assert reports['visibility']['evidence_sha256']==digest(visibility_folder/'evidence.json')
+    assert reports['visibility']['analysis_source_sha256']==digest(ROOT/'tools/analyze_visibility.py')
+    assert all(digest(visibility_folder/name)==value for name,value in reports['visibility']['mask_sha256'].items())
     assert len(resume(upgrade/'dataset-256',manifest['run']))==256
     assert reports['dataset']['dataset_sha256']==digest(upgrade/'dataset-256/dataset.json')
     archive=upgrade/'apollo-competition.zip'
@@ -48,18 +55,23 @@ def export(upgrade,destination,delivery):
         assert digest(delivery/key)==value,'Unpacked delivery differs from qualified artifacts'
     files={'apollo-competition.zip':archive,'Apollo_Submission_ppt.pptx':pptx,'apollo-demo.mp4':video,
            'contact_sheet.png':candidate/'contact_sheet.png','verification_report.json':candidate/'verification_report.json',
-           'verification_report.md':candidate/'verification_report.md','dataset.json':upgrade/'dataset-256/dataset.json',
+           'verification_report.md':candidate/'verification_report.md',
            'dataset-analysis.json':upgrade/'dataset-256/analysis.json','dataset-visibility.json':upgrade/'dataset-visibility/report.json',
            'dataset-coverage.png':upgrade/'dataset-256/coverage.png','dataset-anchors.png':upgrade/'dataset-256/anchors.png',
            'linux-verification.json':upgrade/'docker-candidate/verification_report.json','release-rehearsal.json':upgrade/'release-rehearsal.json',
            'ui-rehearsal.json':upgrade/'ui/operator-final/report.json','lighting-adversary.json':upgrade/'lighting-adversary/report.json',
-           'narration.txt':upgrade/'video/narration.txt','video-receipt.json':upgrade/'video/video-receipt.json'}
+           'narration.txt':upgrade/'video/narration.txt','video-receipt.json':upgrade/'video/video-receipt.json',
+           'look-rebuild-report.json':upgrade/'look-rebuild-report.json'}
     for name,source in files.items():shutil.copy2(source,destination/name)
     for folder,prefix in [(candidate/'verification','native'),(upgrade/'docker-candidate/verification','linux'),(upgrade/'dataset-visibility','dataset-visibility')]:
         with zipfile.ZipFile(destination/(prefix+'-evidence.zip'),'w',zipfile.ZIP_DEFLATED) as z:
             for file in sorted(folder.rglob('*')):
                 if file.is_file():z.write(file,Path(prefix)/file.relative_to(folder))
-    # The complete research example is a separate local artifact, not the graded ZIP.
+    example=destination/'dataset-256';example.mkdir()
+    for name in ['dataset.json','progress.json','analysis.json','coverage.png','anchors.png']:
+        shutil.copy2(upgrade/'dataset-256'/name,example/name)
+    shutil.copytree(upgrade/'dataset-256/renders',example/'renders')
+    # Keep the complete research corpus separate from the graded ten-frame ZIP.
     with zipfile.ZipFile(upgrade/'dataset-256.zip','w',zipfile.ZIP_STORED) as z:
         for name in ['dataset.json','progress.json','analysis.json','coverage.png','anchors.png']:
             z.write(upgrade/'dataset-256'/name,Path('dataset-256')/name)
@@ -77,9 +89,9 @@ in the repository, outside the required wrapper path.
 
 Native 4.5 and secondary 5.2 qualification, full Linux qualification, the actual
 256-frame dataset and 25-pose visibility checks are recorded in the attached
-reports. Local project checks are not official competition scores. The actual
-complete dataset ZIP is generated separately under `out/upgrade/dataset-256.zip`;
-its source manifest and measured analysis are retained here.
+reports. Local project checks are not official competition scores. The complete
+256-image research example is in `dataset-256/`; an additional ZIP is generated
+under `out/upgrade/dataset-256.zip`. Keep its seeded manifest and images together.
 
 The 105-second video uses actual artifacts with local synthesized narration.
 The editable deck retains a technical-prototype identity if team details have
