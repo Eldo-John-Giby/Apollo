@@ -13,13 +13,21 @@ import numpy as np
 from PIL import Image,ImageDraw,ImageFont
 import imageio_ffmpeg
 
+DIRECTION_WORDS=[
+    'Left. Both eyes turn to the left of the image.',
+    'Right. Both eyes turn to the right.',
+    'Up. Both pupils shift upward.',
+    'Down. Both pupils shift downward.',
+    'Reset. Both eyes return to the center target.',
+]
+
 CHAPTERS=[
     (10,'Apollo: calibrated synthetic gaze',
      'Apollo implements Track One: Synthetic Eye Movement and Virtual Camera Rendering. It generates binocular poses, images and gaze labels in Blender.'),
     (14,'Physical eye centers. Shared fixation.',
      'Each eye rotates in three dimensions around its own center. Both aim at one fixation target, thirty five centimeters forward. The camera stays forty centimeters away. Horizontal and vertical target motion is bounded to five centimeters.'),
     (25,'Left / Right / Up / Down / Reset',
-     'These are actual rendered outputs from the same scene and wrapper. Left and right shift both pupils horizontally. Up and down shift them vertically. Reset returns to the central convergent pose. Independent geometry and image measurements verify the direction, position and visibility of both pupils.'),
+     ' '.join(DIRECTION_WORDS)),
     (15,'Ten poses, clockwise from the top',
      'The required sequence has ten equally spaced clockwise poses, starting at the top. Every output is a one thousand and twenty four pixel square PNG, paired with inputs, world rotations, pupil projections and camera calibration.'),
     (18,'A separate, seeded research dataset',
@@ -31,15 +39,31 @@ CHAPTERS=[
 ]
 
 
+def synthesize(wav,words):
+    script="$ErrorActionPreference='Stop'; $v=New-Object -ComObject SAPI.SpVoice; $s=New-Object -ComObject SAPI.SpFileStream; $s.Open('"+str(wav).replace("'","''")+"',3,$false); $v.AudioOutputStream=$s; $v.Rate=2; $null=$v.Speak('"+words.replace("'","''")+"'); $s.Close()"
+    subprocess.run(['powershell','-NoProfile','-Command',script],check=True,capture_output=True)
+    with wave.open(str(wav)) as audio:return audio.getnframes()/audio.getframerate()
+
+
 def narration(folder):
     folder.mkdir(parents=True,exist_ok=True)
     for i,(_,_,words) in enumerate(CHAPTERS):
         wav=folder/f'voice-{i}.wav'
-        script="$ErrorActionPreference='Stop'; $v=New-Object -ComObject SAPI.SpVoice; $s=New-Object -ComObject SAPI.SpFileStream; $s.Open('"+str(wav).replace("'","''")+"',3,$false); $v.AudioOutputStream=$s; $v.Rate=2; $null=$v.Speak('"+words.replace("'","''")+"'); $s.Close()"
-        subprocess.run(['powershell','-NoProfile','-Command',script],check=True,capture_output=True)
-        with wave.open(str(wav)) as audio:
-            duration=audio.getnframes()/audio.getframerate()
-        if duration>CHAPTERS[i][0]-.3:raise ValueError(f'Narration {i} too long: {duration}')
+        if i==2:
+            chunks=[];parameters=None
+            for j,line in enumerate(DIRECTION_WORDS):
+                part=folder/f'voice-{i}-{j}.wav';duration=synthesize(part,line)
+                if duration>4.7:raise ValueError(f'Direction narration {j} too long: {duration}')
+                with wave.open(str(part)) as audio:
+                    current=(audio.getnchannels(),audio.getsampwidth(),audio.getframerate(),0,audio.getcomptype(),audio.getcompname())
+                    if parameters is None:parameters=current
+                    if current!=parameters:raise ValueError('Narration PCM formats differ')
+                    count=audio.getnframes();data=audio.readframes(count)
+                    chunks.append(data+bytes((5*audio.getframerate()-count)*audio.getnchannels()*audio.getsampwidth()))
+            with wave.open(str(wav),'wb') as audio:audio.setparams(parameters);audio.writeframes(b''.join(chunks))
+        else:
+            duration=synthesize(wav,words)
+            if duration>CHAPTERS[i][0]-.3:raise ValueError(f'Narration {i} too long: {duration}')
 
 
 def build(upgrade,output):

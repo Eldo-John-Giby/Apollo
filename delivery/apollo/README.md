@@ -1,0 +1,67 @@
+# Apollo submission candidate
+
+## Run
+
+Requires Blender (tested version and platform are in verification_report.json).
+From this directory:
+
+```
+blender -b scene.blend --python-exit-code 1 -P wrapper/eyes.py
+```
+
+The wrapper resolves its own bundle location and works from other directories.
+No MPFB add-on is needed to render the packed scene. Default execution writes ten
+1024x1024 PNGs under renders/ and an atomic metadata.json array. Existing metadata
+is invalidated before regeneration. Back up shipped artifacts before experimenting.
+
+Individual pose:
+
+```
+blender -b scene.blend --python-exit-code 1 -P wrapper/eyes.py -- --h 1 --v 0 --out right.png
+```
+
+Inside Blender Python, import wrapper/eyes.py as eyes and call move(h,v), reset(),
+render(path), sweep(), state(), or calibration(). Inputs are finite numbers,
+clamped to [-1,1]. Movement is absolute. reset() converges on the center target.
+Quality flags: --quality draft (32 samples) and --quality final (128 samples).
+Without a quality flag, stored scene settings are used.
+
+## Calibration and metadata
+
+Meters; world subject faces -Y; +Z up. Anatomical L = image right.
++h means image right; +v means image up. Camera (0,-0.400,0).
+Fixation (0.05h,-0.350,0.05v). Pixel coordinates originate at the top-left corner
+of the image, x right/y down. Rotations are world-relative Euler XYZ in radians.
+The camera_matrix field is the 3x3 intrinsic matrix, not the extrinsic transform.
+Sweep theta=2*pi*k/10, h=sin(theta), v=cos(theta), k=0..9, clockwise from top.
+
+Measured/calibrated camera metadata:
+
+```json
+{
+  "position": [
+    0.0,
+    -0.4,
+    0.0
+  ],
+  "focal_mm": 100.0,
+  "sensor_mm": 36.0
+}
+```
+
+The JSON array contains frame, theta, input, eye_rotation_L/R,
+pupil_center_2D_L/R, camera_matrix, and additional annotations under extra.
+Ground truth is analytic and checked against evaluated Blender pupil transforms
+and camera projection before a record is written.
+
+## Verification and limitations
+
+See verification_report.md and verification_report.json for every measured result,
+actual runtime versions, status, and artifact hashes. Missing checks are not passes.
+Determinism is assessed only for the same Blender build/machine; cross-version
+geometry/pixel tolerances are tested separately. Report status is required before
+submission; a candidate label alone does not imply successful verification.
+
+Static identity and lighting; fixed 4 mm pupils; no blink or eye-surface refraction.
+The eye geometry is intentionally simplified. This candidate still requires visual review of skin, socket fit, brows, lashes, and contact-sheet framing.
+Asset details are in ATTRIBUTION.md.

@@ -5,10 +5,11 @@ Navigation index verified 7 November 2026. Inspect implementation before changin
 ## Status and flow
 
 Apollo implements synthetic binocular gaze for Samsung PRISM-XR Track 01.
-The radial-iris 32-sample scene is frozen as the current development milestone.
-All V1–V17 checks pass on Blender 4.5.15 with Blender 5.2.3 secondary qualification, including directions,
-visibility, two identical sweeps and clean-room regeneration. Docker image build, 60 tests and a Linux packed-scene pose render pass. The flat-eye verified baseline is
-preserved locally. Generated artifacts belong under out/ and are not listed.
+The protected radial-iris development freeze remains available. The competition
+upgrade adds a qualified warm-iris/lid/lash look, independent geometry audits,
+a complete seeded 256-image dataset, optional controls and evidence media.
+Native and Linux V1–V17 and all applicable secondary-version checks pass. 79 tests pass on Windows/Linux. Generated temporary
+artifacts belong under out/ and are not listed here.
 
 Flow: character inspection/mapping or fixture → calibrated scene → standalone eye
 wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → production ZIP.
@@ -46,7 +47,7 @@ wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → pr
 | `metadata.schema.json` | Ten-frame JSON Schema; mathematical consistency is enforced by Python validation. |
 | `check_core.py` | Direct reference assertion runner; normal task tests use pytest. |
 | `pyproject.toml`, `requirements.txt` | Pytest configuration and pinned Python tool dependencies. |
-| `Makefile`, `Dockerfile`, `.dockerignore` | Task aliases and pinned Blender/Linux container build (not executed in current environment). |
+| `Makefile`, `Dockerfile`, `.dockerignore` | Task aliases and pinned Blender/Linux container build (built and tested locally). |
 | `README.md`, `DECISIONS.md` | Current usage/evidence and recorded implementation decisions/remaining validation. |
 | `.gitignore`, `.dockerignore`, `.gitattributes` | Exclude caches/downloads from source and containers; preserve exact milestone payload bytes for checksums. |
 

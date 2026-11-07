@@ -1,0 +1,12 @@
+{
+  "duration_seconds": 105,
+  "actual_duration_seconds": 105.05,
+  "decoded_frames": 2520,
+  "audio_mean_db": -21.8,
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "audio": "Local Windows SAPI synthesized narration",
+  "source": "Actual Blender renders, measured reports and observed UI screenshot",
+  "limitations": "Edited pose sequence; not a real-time rendering-speed recording"
+}

@@ -2,18 +2,28 @@
 
 Synthetic binocular gaze pipeline for Samsung PRISM-XR Track 01.
 
-Competition-upgrade work is isolated on `competition-upgrade`; see
-[upgrade progress](docs/UPGRADE_PROGRESS.md) and [verifier coverage](docs/VERIFIER_COVERAGE.md).
-The independent geometry audit, resumable dataset prototype and optional Blender
-controls are implemented. Nine-frame dataset smoke and UI/API parity pass;
-the complete 256-frame example and visual promotion are not yet qualified.
+The qualified upgrade is developed on `competition-upgrade`. The protected
+`dev-freeze-2026-11-07` milestone remains unchanged. See the
+[execution record](docs/UPGRADE_PROGRESS.md), [reproduction runbook](docs/UPGRADE_RUNBOOK.md)
+and [verifier coverage](docs/VERIFIER_COVERAGE.md).
 
-Current development scene uses procedural radial irises. All V1–V17 checks pass on Blender 4.5.15 with Blender 5.2.3 LTS secondary
-qualification.
-Artifacts and measured report are under out/production. Rebuild production with
-`--look radial` (default); `--look flat` retains the original eye appearance.
+The selected scene has warm fiber-patterned irises, refitted lids/lashes and
+32-sample rendering. Native Blender 4.5.15 qualification passes all V1–V17,
+including the complete applicable Blender 5.2.3 suite. The 256-frame seeded
+dataset, 25-pose visibility checks, actual UI operators, extracted-archive
+regeneration and interrupted dataset resume pass. The 105-second narrated video
+and editable ten-slide deck have been built and visually reviewed.
+Full Linux V1–V17 qualification also passes, including its applicable 5.2 suite.
+The [technical release](milestones/competition-upgrade-2026-11-07/README.md) contains
+the complete reports, [demo](milestones/competition-upgrade-2026-11-07/apollo-demo.mp4),
+[deck](milestones/competition-upgrade-2026-11-07/Apollo_Submission_ppt.pptx) and research corpus.
+Use [delivery/apollo](delivery/apollo/README.md) for the conventional executable layout.
+These measurements are local engineering checks, not official rubric scores.
 
-See [the development roadmap](docs/ROADMAP.md) for current priorities and milestone gates.
+The earlier development pipeline below builds the original radial appearance.
+Use [the upgrade recipe](docs/UPGRADE_RUNBOOK.md) to rebuild the selected look.
+`--quality final` in the older pipeline means 128 samples; the qualified upgrade
+uses its separately measured 32-sample settings.
 
 ## Run the complete development pipeline
 
@@ -76,21 +86,24 @@ manifests are removed at regeneration start.
 
 ## Current validation evidence
 
-60 Python tests pass. The polished 32-sample development candidate passes all
-V1–V17 checks: calibration, 1000 evaluated poses, directions, pixel truth,
-visibility, repeated hashes, clean-room regeneration and cross-version checks.
-Primary Blender: 4.5.15 LTS; secondary: 5.2.3 LTS (official portable, checksum verified).
-Reports and retained secondary evidence are under out/production/verification/.
-The top-level measured report is out/production/verification_report.md.
+79 Python tests pass on Windows and Linux. The exact selected scene SHA-256 is
+`3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d`.
+Its independent audit covers 1009 actual deformed geometry poses and detects
+14 injected faults. All five directions/reset pass. Official sweep blind/template
+maximum errors are 0.175464/0.061253 px. The separate 256-image pixel check
+has maximum error 0.217847 px; the 25-pose mask residual is at most 0.030619 px
+with full visible/dark coverage. A real half-pupil obstruction and lighting-loss
+render are rejected. These finite checks do not establish human naturalness,
+universal detector robustness or downstream gaze-estimator accuracy.
 
-Maximum sweep pupil error: 0.200 px; mask centroid error: 0.040 px; visibility:
-100%. The isolated 8/16-sample benchmark averaged 5.094/12.896 s per frame for
-center/up/down; these settings remain experimental. The qualified 32-sample
-sweep averaged 23.653 s per frame. See docs/PERFORMANCE.md for scope and noise.
+The actual development ZIP regenerates all ten PNGs and metadata identically
+from a clean configuration and different working directory. Completed and
+interrupted 255-to-256 dataset resumes preserve all image and manifest bytes.
+The scene rebuild produces an identical center PNG, without claiming identical
+binary `.blend` saves. See [the original freeze](milestones/dev-freeze-2026-11-07/README.md)
+for historical measurements; those are not substituted for new qualification.
 
-Docker image build, diagnostic, 60 tests and a packed-scene center render pass
-in Linux; full Linux V1–V17 qualification is not claimed. M5 development freeze
-is complete at 32 samples, selected after a 128-sample comparison. The exact ZIP,
-reports and reconstruction evidence are in [the milestone](milestones/dev-freeze-2026-11-07/README.md).
-See [the freeze rationale](docs/DEVELOPMENT_FREEZE.md) for settings and limits.
-No organizer submissions or uploads are performed automatically.
+The demo uses local synthesized narration and edited actual artifacts. It does
+not represent real-time rendering speed. Team identity, final event filenames,
+repository sharing and organizer uploads remain team-owned. No organizer
+submission has been performed.

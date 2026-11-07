@@ -1,3 +1,8 @@
+# Provenance-bound source bytes must be identical on Windows and Linux.
+*.py -text
+*.json -text
+*.md text eol=lf
+*.mjs text eol=lf
 # Freeze payload bytes must survive checkout unchanged for SHA-256 verification.
 milestones/** -text
 delivery/** -text

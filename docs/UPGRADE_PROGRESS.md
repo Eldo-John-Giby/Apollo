@@ -1,172 +1,110 @@
 # Competition upgrade — execution record
 
-Branch: competition-upgrade. Protected fallback: dev-freeze-2026-11-07.
-This record describes work completed so far, not completion of the whole upgrade.
-Human input budget: approximately two hours/day; laptop CPU only. Registration
-and event administration are outside this workstream.
+Branch: `competition-upgrade`. Protected fallback: `dev-freeze-2026-11-07`.
+Technical gates A–F are complete. The evidence-bound release is staged under
+`milestones/competition-upgrade-2026-11-07` with executable `delivery/apollo`. Registration and event administration are outside
+this workstream. No official score or independent human preference is claimed.
 
-## Locked direction
+## A — Independent verification: complete
 
-Rubric reliability plus a realistic technical demonstration, seeded dataset
-generation and optional Blender-native controls. No ML accuracy claims, cloud
-dependency or refractive cornea in the graded path. Engineering freeze target:
-16 November, delivery-ready assets on 17 November. New features stay outside
-the frozen wrapper/scene until their acceptance gates pass.
+The separate NumPy Rodrigues/pinhole reference imports no production math. It
+fits physical eye centers/radii from deformed scleral vertices and measures
+area-weighted pupil centroids and full pupil surfaces on 1009 poses (nine anchors
+plus 1000 seeded random inputs). Fourteen injected faults are detected, covering
+motion, unilateral failure, bounds, labels, pivots, camera, annotations, pupil
+mesh, missing texture and lighting. The geometry-guided connected-dark-surface
+oracle is independent of both OpenCV trackers; it is not blind detection or a
+substitute for visibility masks.
 
-## A — Independent verification: first tranche implemented
+All native V1–V17 checks pass on Blender 4.5.15, including every applicable
+Blender 5.2.3 secondary check. Source/artifact/diagnostic hashes bind reports;
+changed inputs or verifier sources invalidate reuse and packaging. Missing
+results stay NOT RUN. No detector threshold or qualification gate was relaxed.
+79 tests pass on Windows and Linux. The complete Linux V1–V17 run also passes, including its applicable 5.2 suite.
 
-- Separate Rodrigues rotation/projection reference imports no production math.
-- Fits eye centers/radii from deformed scleral vertices and computes area-weighted
-  pupil centroids from actual evaluated triangles; checks the entire pupil mesh.
-- 1009 poses pass: nine anchors plus 1000 deterministic random inputs.
-- Fourteen injected faults detected: reversed horizontal/vertical, disabled
-  motion, scaled target bounds, swapped eye labels, camera distance/lens/rotation,
-  unilateral eye failure, displaced pivot, bad annotation, displaced pupil mesh,
-  missing texture reference and changed lighting.
-- Independent geometry-guided connected-dark-surface check shares neither
-  OpenCV detector. It rejects half-pupil occlusion and displaced pupils in tests.
-  It is not blind detection and does not replace the full visibility-mask suite.
-- New full verification reports bind verifier code and diagnostic files.
-  Reuse rejects legacy reports without provenance, altered diagnostics and changed
-  verifier versions. Input/source changes during a run invalidate the result.
+## B — Appearance and selected candidate: technically qualified
 
-Evidence: out/upgrade/audit/independent.json and run.log. New provenance changes
-are unit tested; a full upgraded V1–V17 qualification still needs a fresh run.
-Historical freeze reports are not silently upgraded.
+The first comparison was rejected by the user because its variants looked the
+same. The replacement changes the colored iris radius/material, lid opening and
+MPFB-refitted lashes. A dark-hazel prototype then failed the unchanged image-only
+direction tracker because its iris merged with the dark pupil. Its partial run
+and 41 dataset frames are retained under `out/upgrade/rejected-dark-iris`.
+Neither geometry success nor failed-prototype masks were accepted as a release.
 
-## B — Visual comparisons: human review pending
+Corrected B raises iris reflectance while preserving the fiber pattern, pupil
+geometry, physical centers and calibration. It uses 32 samples, two path bounces,
+one diffuse/glossy bounce and persistent render data. Scene SHA-256:
+`3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d`.
 
-The first comparison in out/upgrade/looks/comparison.png was rejected by the
-user because differences were imperceptible. It is not evidence of visual improvement.
-Replacement comparison: out/upgrade/looks-v2/comparison.png. B/C use a smaller
-colored iris region (unchanged annulus/pupil geometry), distinct warm/cool iris
-materials, reduced eye-opening targets and MPFB-refitted lashes; C also changes
-constant key/fill lighting. Camera/target calibration and eye geometry remain
-fixed. This comparison predates the dark-iris tracker rejection described below;
-the corrected B center is out/upgrade/corrected-fibers/B/center.png.
-This build experiment requires MPFB loaded; packed candidates render with
-factory startup and need no addon. No candidate is promoted from a center image.
-Human naturalness/pupil-clarity ratings select which candidate receives complete
-direction, sweep, corner-visibility and new-verifier qualification. Further socket
-remodelling remains untested. Keep the fallback if variants do not
-improve naturalness without reducing clarity.
+The corrected real cardinal/reset check passes, reset PNGs are byte-identical,
+and maximum template/projection error is 0.050578 px. The ten-frame sweep's blind
+and template maxima are 0.175464 and 0.061253 px. All native qualification checks
+pass on these exact bytes. Rebuilding from the protected frozen source with the
+MPFB recipe produces an identical center PNG; binary `.blend` identity is not
+claimed. Human naturalness/preference ratings remain unmeasured.
 
-## C — Dataset generator: implemented, anchor smoke verified
+## C — Separate research dataset: complete
 
-```powershell
-python tasks.py dataset --scene out/production/scene.blend --folder out/dataset --count 256 --seed 0
-python tools/analyze_dataset.py out/dataset
-```
+Actual seed-0, 32-sample generation contains 256 rendered poses: nine normalized
+square anchors plus 247 seeded random inputs. Manifest `apollo.dataset/1` keeps
+camera, lighting, identity and pupil size fixed. Source/config/runtime signatures,
+per-image hashes and atomic progress protect resume. Random records do not invent
+a clockwise theta, and the official ten-frame metadata schema is unchanged.
 
-Defaults: 256 frames, seed 0, 32 samples. First nine frames are the normalized
-3x3 anchors; the remainder are seeded uniform square samples. Fixed identity,
-camera, pupil size and lighting. The --samples 8 option is experimental.
+All 256 images pass independent geometry-guided pixel checks, maximum residual
+0.217847 px. Coverage and spatial anchor plots are generated. All 25 visibility
+poses (nine anchors plus sixteen seeded random inputs) have full visible/dark
+coverage; maximum mask-centroid residual is 0.030619 px. A real half-pupil fault
+measures 0.499356 coverage and is rejected. A rendered lighting-loss fault is
+rejected by both signature and image checks. Reports bind the corrected scene,
+evidence JSON, mask PNGs and analyzer source.
 
-Official ten-frame schema remains unchanged. Dataset manifest uses
-apollo.dataset/1 with run signature and frames; random records have no invented
-clockwise theta. Each image is hashed, progress is atomic, source/configuration
-or completed-image changes reject resume. Outputs must be separate from source.
+Completed 256-frame resume changes no bytes. A real 255-to-256 interrupted run
+reconstructs every PNG and the manifest identically. These are finite geometric
+and image checks, not an ML benchmark or a diverse-identity dataset.
 
-Nine 32-sample anchor frames have actually rendered. Independent pixel maximum:
-0.141464 px. Interrupted-after-eight reconstruction matches all nine PNGs and
-dataset.json byte-for-byte. Evidence: out/upgrade/dataset-smoke and
-out/upgrade/audit/resume.json. Coverage plot and anchor sheet are generated.
+## D — Blender controls: complete
 
-Research reporting dependencies: pip install -r requirements-research.txt.
-The actual 256-frame example, sixteen fixed random pixel/mask samples and full
-corner visibility qualification remain outstanding. No dataset/ML performance
-claim is made from the nine-frame smoke test.
+The optional Apollo sidebar calls the public wrapper for normalized sliders,
+Left/Right/Up/Down/Reset, pose render and official sweep. All five buttons and
+pose rendering were exercised in live Blender while preserving the unsaved user
+scene and restoring its pose/render settings. The final candidate operator
+rehearsal produces an API-identical pose PNG and valid ten-frame sweep; cleanup
+passes. The panel is not installed or required in the evaluator scene.
 
-## D — Live controls: implemented, interactive checks completed
+## E — Evidence presentation and demonstration: complete
 
-Run tools/live_controls.py in Blender's Text Editor with a calibrated scene open.
-Apollo sidebar: normalized sliders, cardinal/reset buttons, distances, current
-pose render and sweep into a separate demo folder. Controls invoke the existing
-wrapper. No handlers, gaze constraints or alternate articulation algorithm.
+The editable ten-slide deck uses actual scene images and measured reports.
+Package, layout, font and import checks pass. PowerPoint exported every slide;
+all ten final slides were individually visually inspected. The 105.05-second
+1280×720/24-fps video fully decodes (2520 frames); measured narration level is
+-21.8 dB. Thirteen representative frames were reviewed, including directions,
+reset, sequence, dataset, controls and limitations. Direction utterances are
+separately generated and padded to five seconds each. Local Windows SAPI
+synthesized narration and edited-artifact timing are explicitly disclosed.
+Team/member names are not invented. No independent human usability study or
+real-time render-speed demonstration is claimed.
 
-Background Blender test passes API/UI parity at all nine anchors and clean
-unregister/re-register cycles. Evidence: out/upgrade/audit/ui.json. The agent
-clicked all five cardinal/reset buttons in the actual Blender sidebar and
-rendered a pose using its render button. The existing dirty scene was preserved;
-its original pose and render settings were restored without saving. Evidence:
-out/upgrade/ui/sidebar.jpg and live-panel.png. A separate operator rehearsal
-checks pose-render byte parity and the real sweep operator; its result is only
-accepted when out/upgrade/ui/operator-rehearsal/report.json passes.
-This optional UI is not enabled in the graded scene or required by the wrapper.
+## F — Reproduction and release: complete
 
-## Active complete-run gates
+The actual `apollo-competition.zip` passes extraction and regenerates all ten
+PNGs and metadata identically with fresh configuration from a different CWD.
+Archive SHA-256:
+`2c3031176adbe5758155914a9291f6073905e37a6ef6e4ff91284d01db1ff09e`.
+The earlier development freeze remains byte-for-byte protected.
 
-The original dark-hazel B prototype was rejected by the image-only direction
-tracker: its iris joined the pupil into a dark region larger than the allowed
-reference patch. Geometry/visibility passing did not override that failure.
-Its 41 completed dataset frames and partial qualification are preserved under
-out/upgrade/rejected-dark-iris, with rejection.json and the failed direction log.
-The original fallback remains unchanged. Detector thresholds were not relaxed.
+The first Linux retry exposed a project-relative provenance-path requirement;
+its failed evidence is retained under `out/upgrade/rejected-external-mount`.
+Qualification was restarted under writable `/workspace/out/upgrade`. A slow
+Windows-mounted runtime extraction was replaced by copying and extracting the
+same runtime archive on the container filesystem. Geometry preflight and all
+79 Linux tests pass. Full primary/secondary Linux qualification passes all seventeen outer checks;
+all sixteen applicable nested checks pass. Recursive nested V16 remains NOT RUN
+by design; no missing check is relabelled.
 
-The corrected B raises iris reflectance while retaining its fiber pattern,
-reduced colored region and refitted lashes. Two path bounces, one diffuse/glossy
-bounce and persistent render data are used in the new candidate; those settings
-must pass fresh qualification. Earlier 0.058/255 optimization comparison data
-belongs to the rejected dark prototype, not the corrected candidate. Human
-naturalness preference is not fabricated.
-
-The rejected prototype passed all nine dataset anchor mask tests: full visibility,
-maximum independent mask-centroid error 0.030619 px. An actual injected half-pupil
-obstruction measured 0.499356 coverage and was rejected. Evidence:
-out/upgrade/rejected-dark-iris/corner-visibility/report.json. The 25-pose extension also passed:
-nine anchors plus sixteen fixed seeded random poses, minimum visible/dark fraction
-1.0, maximum mask-centroid error 0.030619 px and the same obstructed-pupil rejection.
-Evidence: out/upgrade/rejected-dark-iris/dataset-visibility/report.json. A rendered loss-of-illumination
-fault was rejected by both the lighting signature and the pixel oracle; see
-out/upgrade/rejected-dark-iris/lighting-adversary/report.json.
-
-These mask/lighting results belong to that prototype and are not transferred
-to the corrected scene. Corrected B passes the real five-direction/reset check:
-reset byte-identical, maximum template/projection error 0.050578 px. Evidence:
-out/upgrade/corrected-fibers-smoke/verification/direction_report.json. Builder
-and factory-startup center PNGs also match byte-for-byte before enabling the
-render cache. The new full sweep receives early blind/template checks before
-long jobs. The count-256 dataset is intentionally interrupted after its first
-nine completed anchors, checked with actual pixels/masks, then resumed.
-
-Fresh corrected-scene 256-frame, seed-0, 32-sample generation and complete
-native/secondary/Linux qualification are gated on those preflights. No pending
-result is a pass. The editable evidence deck has passed structural/layout/font
-and import checks, and PowerPoint exported all ten preview slides. Final claims
-are rebuilt from final reports. The 105-second demo builder requires completed
-passing evidence before export; its local synthesized narration passes timing.
-Team identity is requested separately and never invented.
-
-## Corrected-scene completed gates
-
-Scene SHA-256: 3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d.
-All native V1–V17 checks now pass, including the complete applicable Blender 5.2
-secondary suite. All ten official images pass the early blind/template check:
-maximum errors 0.175464 px and 0.061253 px respectively. The independent
-1009-pose audit passes. All nine anchor images also pass both detectors.
-
-The corrected 25-pose visibility suite passes with full pupil coverage and a
-0.030619 px maximum mask-centroid residual. Its actual half-pupil fault is
-detected. Reports bind the scene, evidence JSON, mask PNGs and analyzer source.
-The rendered lighting fault is rejected. The real UI operators produce an
-API-identical pose PNG and a valid ten-frame sweep.
-
-Rebuilding from the protected frozen source using MPFB and the committed look
-recipe produces a byte-identical center PNG. Binary blend saves are not claimed
-identical. The full 256-frame dataset, Linux qualification and final extracted
-archive/resume rehearsals remain pending until their own reports pass.
-
-## Remaining gates and order
-
-1. Complete the verifier coverage review, image/lighting adversarial cases and
-   fresh full qualification under new provenance; retain old failure evidence.
-2. Review visual candidates; qualify the selected look before adoption.
-3. Validate the actual 256-frame dataset and live interaction, not just smoke tests.
-4. Prepare the 100–110 second demo and required deck, with claims linked to
-   measured evidence and honest limitations; human review before final export.
-5. Run unfamiliar-user/different-CWD/container/extracted-archive rehearsals;
-   bind the final reports and tag only the exact passing artifacts.
-
-Priority on schedule slip: correctness/delivery, visual clarity, dataset, controls,
-extra polish. No new features after 15 November. Dataset generation and visual
-experiments do not run as competing performance benchmarks.
+`tools/export_upgrade.py` has validated and exported the conventional
+`delivery/apollo` layout, development ZIP, full separate 256-image corpus,
+deck/video and hashed evidence archives. Final manifests, ZIP CRCs and Git blob hashes are checked before tagging.
+Release tag: `competition-qualified-2026-11-07`. No new feature work is needed for this
+release. College/team filenames, evaluator access and organizer forms remain
+team-owned.

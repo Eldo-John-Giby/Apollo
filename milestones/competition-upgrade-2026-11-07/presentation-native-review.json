@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "reviewed_slides": 10,
+  "presentation_sha256": "35630e4e52b473251c2f9ed29b12bcaede0519572ca6b3417ee7e5cf21ba10ce",
+  "reviewer": "Codex",
+  "method": "Individually inspected all ten final native PowerPoint PNG exports for clipping, overlap, readability and claim consistency.",
+  "scope": "Technical prototype; team identity is not invented and no independent human preference ratings are claimed.",
+  "native_png_sha256": {
+    "slide-01.png": "06488cfa712f61b20861b0a3992ed8785b26d57068ec19a0fa16fe4545823931",
+    "slide-02.png": "243db73b6e0de39817781acf168728c6a7a235be2daca93efcf91e88a0fc7410",
+    "slide-03.png": "3dd6025d9486d4733d47446fe7c5b29570774eaa58b06e972b07cf23d0636358",
+    "slide-04.png": "21982e329241ed24d75010500740840a35f2e3463ae0337e33490628167ab30b",
+    "slide-05.png": "3239cf327a90dd21eb2d129270625edf177783e46db658c312f55f05246dba31",
+    "slide-06.png": "a385ea056a2f70b85f7b90c23530847833336da23853b151518ea7dd4188650a",
+    "slide-07.png": "de1171ab85a92028eacaf04ac65b51d3c508bc1f21d56f54a49f7b2080cacf45",
+    "slide-08.png": "c5c3b12607d841a98034756031af21bb496d266a0bbd01c181e953dabfe91ac2",
+    "slide-09.png": "d83e6592ed51287d4cff930a26fcef0b6c53fde42d6959a68e59f0ecab9c07f2",
+    "slide-10.png": "65f99b27f5481aaf53afa4e772b5ce26d0e3d89a1adb75f196ebc59c8b629b63"
+  }
+}

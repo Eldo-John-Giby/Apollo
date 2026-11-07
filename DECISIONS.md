@@ -138,3 +138,23 @@ as packaging, without inventing a registered team. ZIP integrity and per-file
 manifest pass; exact extracted archive reproduced ten PNGs and metadata
 byte-identical from another working directory. Added versioned archive, reports,
 comparison and checksums under milestones/dev-freeze-2026-11-07.
+
+7 November competition upgrade closeout: retain the original freeze unchanged.
+Select corrected warm-fiber B with reduced iris region and refitted lids/lashes;
+reject the dark prototype rather than relax image thresholds. The exact scene
+3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d passes
+all V1–V17 on Windows and Linux, each with the full applicable 5.2 suite.
+Independent geometry covers 1009 poses and 14 injected faults. The separate
+seed-0 dataset contains 256 actual images, with 25 mask-tested poses and rendered
+occlusion/lighting faults. Completed and interrupted resume plus clean-CWD
+archive reconstruction reproduce exact bytes. 79 tests pass on both platforms.
+
+The 105-second demo uses actual artifacts and disclosed local synthesized
+narration. The editable ten-slide deck and representative video frames were
+visually reviewed; human naturalness preference and independent human usability
+are not invented. Research images remain separate from the graded ten-frame ZIP.
+Conventional execution layout is delivery/apollo; evidence and corpus are under
+milestones/competition-upgrade-2026-11-07. Preserve mixed qualified Python/JSON
+source bytes with Git -text; automatic line-ending conversion otherwise breaks
+raw provenance hashes on checkout. Actual registered identity, final naming,
+evaluator sharing and event uploads remain team-owned. No official score claimed.

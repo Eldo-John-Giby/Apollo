@@ -1,6 +1,6 @@
 # Apollo development roadmap
 
-Updated 6 November 2026. Objective: maximize the documented 100-point rubric
+Updated 7 November 2026. Objective: maximize the documented 100-point rubric
 through visible correctness, reliable automation and reproducible evidence.
 This is the current execution roadmap; IMPLEMENTATION_PLAN.md remains the
 original design/reference plan. We are developing locally, not submitting now.
@@ -12,10 +12,10 @@ problem_statement.md, section 2.8. No points are claimed as awarded.
 
 | Category | Weight | Evidence already available | Remaining proof |
 | --- | ---: | --- | --- |
-| Direction pass/fail | 40 | Ten-frame sweep; all twenty blind pupil detections within 0.171 px | Dedicated Left/Right/Up/Down/Reset renders; both detectors; visibility and visual review |
-| Calibration | 20 | Configured metric camera/target; 63 mm spacing; 100 evaluated random poses | Complete scene audit, 1000-pose geometry checks, independent projection and pixel-mask checks |
-| Automation | 20 | Headless character integration and sweep; standalone wrapper; 51 Python tests | Repeated output hashes, call-order independence, clean-room execution, measured runtime |
-| Sequence and metadata | 20 | Ten 1024x1024 PNGs; clockwise inputs; metadata/schema validation | Bind final pixels to annotations, constant scene/lighting audit and reproducible final artifacts |
+| Direction pass/fail | 40 | Actual cardinal/reset checks, two detectors, exact reset, reviewed sequence | Organizer evaluation; human naturalness preference unmeasured |
+| Calibration | 20 | Full scene audit; 1009 independent deformed-geometry poses; 25 mask-tested dataset poses | Organizer-specific measurement method remains unspecified |
+| Automation | 20 | Standalone wrapper; 79 tests; repeated hashes; clean-CWD archive reconstruction; dataset resume | Native/Linux primary and full applicable secondary suites pass; organizer timing criteria unspecified |
+| Sequence and metadata | 20 | Ten 1024x1024 PNGs; clockwise inputs; schema/projection/pixel checks; artifact hashes | Technical release and checksums complete; organizer evaluation remains external |
 
 V1–V17, detector tolerances, the 60 MiB budget and render-time targets are our
 engineering checks, not additional official scoring categories. The official
@@ -164,7 +164,11 @@ submission are later activities, performed when requested.
 - Organizer ambiguities (runtime/version, JSON expectations, naming and limits)
   remain unresolved until confirmed from supplied official material or organizers.
 
-M0–M5 development milestones are complete to the scopes above. Docker smoke
-validation is complete; all seventeen native/secondary checks pass. No packaging
-gate was weakened. Preview sample reductions need broader validation. Video,
-slides and organizer submission remain separate activities when requested.
+M0–M5 remain protected in the original development freeze. The subsequent
+competition upgrade implements independent verification, a qualified appearance,
+the complete 256-image research corpus, Blender controls, and reviewed video/deck.
+Archive regeneration and interrupted resume pass. Full Linux qualification and technical release export pass. The exact release
+is preserved under milestones/competition-upgrade-2026-11-07 with conventional
+execution layout under delivery/apollo. See
+[the execution record](UPGRADE_PROGRESS.md) and [reproduction commands](UPGRADE_RUNBOOK.md).
+Organizer submission remains outside the technical workstream.

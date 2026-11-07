@@ -7,6 +7,7 @@ import shutil
 import zipfile
 from make_bundle import qualified_candidate
 from dataset_protocol import resume
+from verify import hashes,verifier_sources,evidence_hashes
 ROOT=Path(__file__).resolve().parents[1]
 
 
@@ -22,12 +23,20 @@ def export(upgrade,destination,delivery):
         'linux':'docker-candidate/verification_report.json','ui':'ui/operator-final/report.json',
         'lighting':'lighting-adversary/report.json','rehearsal':'release-rehearsal.json','rebuild':'look-rebuild-report.json'}.items()}
     assert all(r['passed'] for r in reports.values()),'A release gate did not pass'
+    linux=reports['linux'];linux_folder=upgrade/'docker-candidate'
+    assert linux['production'] and all(linux['checks'][f'V{i}']['status']=='PASS' for i in range(1,18))
+    assert linux['artifact_hashes']==hashes(linux_folder)
+    assert linux['verifier_sha256']==verifier_sources() and linux['evidence_sha256']==evidence_hashes(linux_folder)
     assert reports['dataset']['frames']==256 and reports['visibility']['poses']==25
     manifest=json.loads((upgrade/'dataset-256/dataset.json').read_text(encoding='utf-8'))
     scene_hash=digest(candidate/'scene.blend')
     assert manifest['run']['scene_sha256']==scene_hash
+    for key,name in {'wrapper_sha256':'wrapper/eyes.py','generator_sha256':'tools/generate_dataset.py','protocol_sha256':'tools/dataset_protocol.py','reference_sha256':'tools/reference_geometry.py'}.items():
+        assert manifest['run'][key]==digest(ROOT/name)
+    assert all(value==digest(ROOT/'tools'/name) for name,value in reports['dataset']['analysis_sources'].items())
     assert reports['linux']['artifact_hashes']['scene.blend']==scene_hash
     assert reports['ui']['scene_sha256']==scene_hash and reports['lighting']['scene_sha256']==scene_hash
+    assert reports['ui']['panel_source_sha256']==digest(ROOT/'tools/live_controls.py')
     assert reports['visibility']['scene_sha256']==scene_hash
     assert reports['rebuild']['candidate_scene_sha256']==scene_hash
     assert reports['rebuild']['recipe_source_sha256']==digest(ROOT/'build/upgrade_looks.py')
@@ -44,8 +53,21 @@ def export(upgrade,destination,delivery):
     with zipfile.ZipFile(pptx) as z:
         assert z.testzip() is None
         assert len([n for n in z.namelist() if n.startswith('ppt/slides/slide') and n.endswith('.xml')])==10
+    deck_receipt=upgrade/'deck-build/validation-final.json'
+    deck_validation=json.loads(deck_receipt.read_text())
+    assert deck_validation['finalSha256']==digest(pptx)
+    assert deck_validation['packageIntegrity']['status']=='pass' and deck_validation['firstPartyImport']['passed']
+    native_receipt=upgrade/'presentation-final/native-review.json'
+    native_review=json.loads(native_receipt.read_text())
+    assert native_review['passed'] and native_review['reviewed_slides']==10 and native_review['presentation_sha256']==digest(pptx)
+    assert len(native_review['native_png_sha256'])==10
+    assert all(digest(upgrade/'presentation-final/native'/name)==value for name,value in native_review['native_png_sha256'].items())
     video=upgrade/'video/apollo-demo.mp4';assert video.is_file() and video.stat().st_size>100000
     receipt=json.loads((upgrade/'video/video-receipt.json').read_text());assert receipt['duration_seconds']==105 and receipt['decoded_frames']==2520 and abs(receipt['actual_duration_seconds']-105)<.2
+    video_review_path=upgrade/'video/visual-review.json'
+    video_review=json.loads(video_review_path.read_text())
+    assert video_review['passed'] and video_review['video_sha256']==digest(video)
+    assert len(video_review['reviewed_timestamps_seconds'])>=10
     # Complete all checks before creating reviewable delivery directories.
     destination.mkdir(parents=True);delivery.mkdir(parents=True)
     for name in required:shutil.copy2(candidate/name,delivery/name)
@@ -59,11 +81,16 @@ def export(upgrade,destination,delivery):
            'dataset-analysis.json':upgrade/'dataset-256/analysis.json','dataset-visibility.json':upgrade/'dataset-visibility/report.json',
            'dataset-coverage.png':upgrade/'dataset-256/coverage.png','dataset-anchors.png':upgrade/'dataset-256/anchors.png',
            'linux-verification.json':upgrade/'docker-candidate/verification_report.json','release-rehearsal.json':upgrade/'release-rehearsal.json',
+           'linux-qualification.log':upgrade/'docker-candidate/qualification.log',
+           'linux-preflight-geometry.json':upgrade/'docker-candidate/preflight-geometry.json',
            'ui-rehearsal.json':upgrade/'ui/operator-final/report.json','lighting-adversary.json':upgrade/'lighting-adversary/report.json',
            'narration.txt':upgrade/'video/narration.txt','video-receipt.json':upgrade/'video/video-receipt.json',
-           'look-rebuild-report.json':upgrade/'look-rebuild-report.json'}
+           'video-visual-review.json':video_review_path,
+           'look-rebuild-report.json':upgrade/'look-rebuild-report.json',
+           'presentation-validation.json':deck_receipt,'presentation-native-review.json':native_receipt,
+           'tests-native.log':upgrade/'tests-final-native.log','tests-linux.log':upgrade/'docker-candidate/tests-final.log'}
     for name,source in files.items():shutil.copy2(source,destination/name)
-    for folder,prefix in [(candidate/'verification','native'),(upgrade/'docker-candidate/verification','linux'),(upgrade/'dataset-visibility','dataset-visibility')]:
+    for folder,prefix in [(candidate/'verification','native'),(upgrade/'docker-candidate/verification','linux'),(upgrade/'dataset-visibility','dataset-visibility'),(upgrade/'ui/operator-final','ui'),(upgrade/'lighting-adversary','lighting'),(upgrade/'presentation-final/native','presentation')]:
         with zipfile.ZipFile(destination/(prefix+'-evidence.zip'),'w',zipfile.ZIP_DEFLATED) as z:
             for file in sorted(folder.rglob('*')):
                 if file.is_file():z.write(file,Path(prefix)/file.relative_to(folder))
@@ -71,6 +98,7 @@ def export(upgrade,destination,delivery):
     for name in ['dataset.json','progress.json','analysis.json','coverage.png','anchors.png']:
         shutil.copy2(upgrade/'dataset-256'/name,example/name)
     shutil.copytree(upgrade/'dataset-256/renders',example/'renders')
+    assert len(resume(example,manifest['run']))==256,'Staged research images differ'
     # Keep the complete research corpus separate from the graded ten-frame ZIP.
     with zipfile.ZipFile(upgrade/'dataset-256.zip','w',zipfile.ZIP_STORED) as z:
         for name in ['dataset.json','progress.json','analysis.json','coverage.png','anchors.png']:
@@ -87,6 +115,19 @@ layout, or extract `apollo-competition.zip`. Run `wrapper/eyes.py` directly in
 Blender as described in its README. Optional controls and research tooling live
 in the repository, outside the required wrapper path.
 
+From the repository root (writes a separate replay, preserving shipped images):
+
+```powershell
+blender -b delivery/apollo/scene.blend --python-exit-code 1 -P delivery/apollo/wrapper/eyes.py -- --out out/replay
+```
+
+- [Unpacked executable delivery](../../delivery/apollo/README.md)
+- [Ten-frame development ZIP](apollo-competition.zip)
+- [Measured native report](verification_report.md) and [Linux report](linux-verification.json)
+- [Contact sheet](contact_sheet.png), [105-second video](apollo-demo.mp4), [editable deck](Apollo_Submission_ppt.pptx)
+- [Complete research manifest](dataset-256/dataset.json) and [image analysis](dataset-analysis.json)
+- [Per-file checksums](MANIFEST.json)
+
 Native 4.5 and secondary 5.2 qualification, full Linux qualification, the actual
 256-frame dataset and 25-pose visibility checks are recorded in the attached
 reports. Local project checks are not official competition scores. The complete
@@ -99,8 +140,8 @@ not been supplied. Human naturalness preference and independent human usability
 ratings are not invented. See `docs/UPGRADE_RUNBOOK.md` for reproduction commands.
 '''
     (destination/'README.md').write_text(readme,encoding='utf-8',newline='\n')
-    hashes={str(p.relative_to(destination)).replace('\\','/'):digest(p) for p in sorted(destination.rglob('*')) if p.is_file()}
-    (destination/'MANIFEST.json').write_text(json.dumps(hashes,indent=2)+'\n',encoding='utf-8',newline='\n')
+    manifest_hashes={str(p.relative_to(destination)).replace('\\','/'):digest(p) for p in sorted(destination.rglob('*')) if p.is_file()}
+    (destination/'MANIFEST.json').write_text(json.dumps(manifest_hashes,indent=2)+'\n',encoding='utf-8',newline='\n')
     return destination
 
 

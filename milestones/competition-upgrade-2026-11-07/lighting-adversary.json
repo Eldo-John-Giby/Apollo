@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "lighting_signature_rejected": true,
+  "pixel_fault_rejections": {
+    "L": "Pupil area inconsistent with geometry",
+    "R": "Pupil area inconsistent with geometry"
+  },
+  "blender": "4.5.15 LTS",
+  "scene_sha256": "3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d",
+  "scope": "Disposable rendered loss-of-illumination fault; not universal detector robustness."
+}

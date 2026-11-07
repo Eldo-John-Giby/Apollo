@@ -1,0 +1,20 @@
+Apollo: calibrated synthetic gaze
+Apollo implements Track One: Synthetic Eye Movement and Virtual Camera Rendering. It generates binocular poses, images and gaze labels in Blender.
+
+Physical eye centers. Shared fixation.
+Each eye rotates in three dimensions around its own center. Both aim at one fixation target, thirty five centimeters forward. The camera stays forty centimeters away. Horizontal and vertical target motion is bounded to five centimeters.
+
+Left / Right / Up / Down / Reset
+Left. Both eyes turn to the left of the image. Right. Both eyes turn to the right. Up. Both pupils shift upward. Down. Both pupils shift downward. Reset. Both eyes return to the center target.
+
+Ten poses, clockwise from the top
+The required sequence has ten equally spaced clockwise poses, starting at the top. Every output is a one thousand and twenty four pixel square PNG, paired with inputs, world rotations, pupil projections and camera calibration.
+
+A separate, seeded research dataset
+The research dataset contains two hundred and fifty six rendered poses: nine anchors and seeded random inputs. Per-image hashes and atomic checkpoints support safe resume. This is geometric and image validation for one synthetic identity, not a machine learning accuracy benchmark.
+
+Optional Blender controls, same public API
+The optional Blender sidebar invokes the same public wrapper for movement, reset, pose rendering and the official sweep. Evaluators can run the standalone wrapper directly, without installing the panel or the character building addon.
+
+Evidence-bound release
+One thousand and nine geometry poses and fourteen faults support our tests. Simplified eyes remain a limitation. No official score is claimed.

@@ -25,16 +25,16 @@ passing is not proof of perfection or a competition-score estimate.
 New report provenance includes scene/wrapper/render/metadata hashes, verifier
 sources and raw diagnostic hashes. Legacy cache reuse is rejected; source/input
 changes during qualification fail rather than creating a fresh-looking PASS.
-Packaging now enforces the same verifier/evidence bindings. Qualification still
-needs a new full run before upgrade release. The new V16 gate requires every
+Packaging now enforces the same verifier/evidence bindings. The corrected upgrade now passes a fresh native full run. The new V16 gate requires every
 secondary check except recursive V16 itself; the older gate policy above remains
 an accurate description of the protected historical report.
 
-On the subsequently rejected dark-iris prototype, the half-pupil fault was rejected and all nine anchors passed the
-independent mask gate. A rendered loss-of-illumination fault was rejected by
-both the lighting signature and the connected-dark-surface pixel check. Actual
-25-pose masks, complete Linux qualification and extracted-archive/256-frame
-resume rehearsals have separate reports and remain pending until those pass.
+The corrected candidate also passes 25 actual pose masks, a rendered half-pupil
+occlusion rejection and a rendered loss-of-illumination rejection. The separate
+256-image corpus passes its independent pixel check. Actual extracted-archive
+regeneration and completed/interrupted dataset resume pass. Full Linux qualification and its complete applicable secondary suite also pass. See UPGRADE_PROGRESS.md
+for the selected scene hash and final evidence locations.
+
 Broader detector robustness and human naturalness are not established by these
 finite tests. Packaging tests cover changed diagnostics, missing frames, stale
 inputs, fixtures, archive layout and manifest integrity. No existing threshold

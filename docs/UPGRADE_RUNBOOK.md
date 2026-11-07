@@ -89,7 +89,15 @@ rehearsal is never described as an independent human usability study.
 ## Linux
 
 `python tasks.py docker` builds the current source. Mount the repository read-only
-and a separate writable output directory for runs. The default Dockerfile supplies
+and mount `out/` writable at `/workspace/out`. Qualification provenance uses
+project-relative paths, and its clean-room/secondary runs need a writable output
+parent. Keep qualification folders under `/workspace/out/`, for example:
+
+```powershell
+docker run --rm -v "${PWD}:/workspace:ro" -v "${PWD}/out:/workspace/out" apollo python tasks.py verify --folder out/upgrade/docker-candidate
+```
+
+The default Dockerfile supplies
 the primary Blender runtime. A full cross-version Linux run additionally needs
 the official Linux Blender 5.2 LTS distribution, extracted to a separate path;
 pass it as `--secondary` to `tools/verify.py`. With no secondary runtime, V16 is
@@ -130,3 +138,24 @@ match. Preserve the original fallback unchanged. Tag exact passing inputs only.
 
 Registration, organizer forms, team identity and public upload links remain
 team-owned. No local verifier result is an official competition score.
+
+## Stage the technical release
+
+After both full reports pass and final visual review receipts exist:
+
+```powershell
+python tools/export_upgrade.py out/upgrade --out milestones/competition-upgrade-2026-11-07 --delivery delivery/apollo
+```
+
+This checks report/source/evidence hashes, complete dataset resume hashes,
+scene-bound adversaries, archive rehearsal, deck validation and visual reviews.
+The conventional delivery includes the standalone wrapper and ten graded frames.
+The milestone contains the reviewed video/deck, raw diagnostic archives and the
+complete 256-image corpus. A separate full research ZIP stays under ignored out/.
+The exporter refuses an existing destination rather than silently overwriting it.
+
+Verify MANIFEST.json against disk and committed Git blobs before tagging.
+Provenance-bound Python/JSON sources and delivery/milestone payloads use Git
+`-text` to preserve their exact qualified bytes across Windows/Linux checkouts.
+The original source includes mixed line endings; normalizing it after qualification
+requires fresh reports. Markdown/JavaScript authoring files use LF.
