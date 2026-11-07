@@ -7,7 +7,7 @@ import shutil
 import tempfile
 import zipfile
 from validate_metadata import validate_artifacts
-from verify import hashes
+from verify import hashes,verifier_sources,evidence_hashes
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -23,6 +23,8 @@ def qualified_candidate(folder):
         raise ValueError('All seventeen verification checks must pass')
     if report.get('artifact_hashes') != hashes(folder):
         raise ValueError('Artifacts changed since verification; rerun verify')
+    if report.get('verifier_sha256') != verifier_sources() or report.get('evidence_sha256') != evidence_hashes(folder):
+        raise ValueError('Verifier/evidence changed or provenance missing; rerun verify')
     required = ['scene.blend','metadata.json','contact_sheet.png','README.md','ATTRIBUTION.md','verification_report.json','verification_report.md']
     for name in required:
         if not (folder/name).is_file(): raise ValueError(f'Missing {name}')

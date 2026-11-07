@@ -30,6 +30,9 @@ wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → pr
 | `docs/RUNBOOK.md` | Operator setup, fixture workflow, character handoff, framing, verification, Docker and submission steps. |
 | `docs/PERFORMANCE.md` | Measured sample-count timing/noise tradeoffs, secondary-runtime provenance and Docker limitations. |
 | `docs/DEVELOPMENT_FREEZE.md` | Chosen freeze quality, rubric evidence, archive reproduction and explicit validation limits. |
+| `docs/PS_AUDIT.md` | Requirement-by-requirement technical coverage and remaining event/submission deliverables against the user's consolidated specification. |
+| `docs/UPGRADE_PROGRESS.md`, `docs/VERIFIER_COVERAGE.md` | Upgrade execution gates, measured prototype status and verifier independence/coverage limitations. |
+| `docs/UPGRADE_RUNBOOK.md` | Reproduction commands for upgraded looks, independent/dataset adversaries, controls, Linux qualification, deck/video and archive rehearsals. |
 | `docs/character_mapping.example.json` | Explicit stock-eye identifiers, orientation confirmation and attribution template. |
 
 ## Entry points and core
@@ -69,6 +72,14 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/sync_core.py` | Embed core math in wrapper or check drift; strips the source future import for embedding. |
 | `tools/validate_metadata.py` | JSON Schema/semantic checks and exactly ten 1024×1024 PNG validation. |
 | `tools/grader_sim.py` | Image-only ellipse pupil detector, weighted mask centroid, subpixel template-displacement detector. |
+| `tools/reference_geometry.py`, `tools/independent_audit.py` | Independent Rodrigues/projection oracle, deformed mesh measurements and disposable Blender defect injection. |
+| `tools/pixel_oracle.py` | Geometry-guided dark-surface pixel check independent of OpenCV detectors; not a visibility-mask replacement. |
+| `tools/visibility_audit.py`, `tools/analyze_visibility.py` | Dataset corner/random occlusion masks, independent mask centroids and rendered half-pupil fault detection. |
+| `tools/lighting_adversary.py` | Disposable rendered lighting-loss fault, requiring lighting signature and pupil-pixel rejection. |
+| `tools/dataset_protocol.py`, `tools/generate_dataset.py`, `tools/analyze_dataset.py` | Separate seeded/resumable dataset protocol, Blender generation, independent image checks and coverage artifacts. |
+| `tools/live_controls.py` | Optional Blender sidebar invoking the public wrapper; never required or automatically enabled in graded scenes. |
+| `tools/ui_rehearsal.py` | Real Blender panel operators: pose-render/API byte parity and official sweep output validation. |
+| `build/upgrade_looks.py` | Distinct iris-region/shading/light candidates and MPFB lid/lash refit; preserves pupil/eye geometry and calibration, requires MPFB for building only. |
 | `tools/direction_report.py` | Five-direction measurements, reset comparison and enlarged visual comparison from checkpointed verification renders. |
 | `tools/blender_verify.py` | Blender evidence worker with progress checkpoints: calibration/metrics, random evaluated poses, repeated sweeps, direction images, isolated/occluded masks, packed resource audit; hash-guarded mask-only reruns. |
 | `tools/verify.py` | V1–V17 coordinator, pixel/direction/visibility checks, clean-room/secondary subprocesses, evidence-bound JSON/Markdown reports and hash-guarded evidence reuse. |
@@ -77,8 +88,11 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/contact_sheet.py` | 5×2 annotated sheet, crosshairs, reset rings, direction clocks, fixture label. |
 | `tools/prepare_candidate.py` | Candidate-specific README and fixture attribution; production attribution must already exist. |
 | `tools/demo.py` | Labeled sweep GIF and presentation/recording outline; not a final narrated video. |
+| `tools/build_presentation.mjs`, `tools/build_demo_video.py` | Editable Artifact Tool evidence deck and 105-second actual-artifact demonstration with local synthesized narration. |
+| `requirements-research.txt`, `requirements-media.txt` | Optional measured dataset plots and demo-video authoring dependencies. |
 | `tools/make_bundle.py` | Reject fixtures, stale evidence and incomplete reports; stage ZIP, size/integrity/extraction checks. |
 | `tools/freeze_candidate.py` | Development-only archive using shared qualification gates; per-file manifest, ZIP integrity and extraction checks. |
+| `tools/release_rehearsal.py` | Actual ZIP regeneration from clean config/different CWD; complete and interrupted 255→256 dataset resume reproduction. |
 
 ## Tests and relationships
 

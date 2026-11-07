@@ -58,7 +58,7 @@ def test_demo_and_candidate_docs(artifacts):
 
 def production_stage(artifacts):
     import json
-    from verify import hashes
+    from verify import hashes,verifier_sources,evidence_hashes
     records=json.loads((artifacts/'metadata.json').read_text())
     for record in records: record['extra']['fixture']=False
     (artifacts/'metadata.json').write_text(json.dumps(records))
@@ -66,7 +66,7 @@ def production_stage(artifacts):
     create(artifacts)
     for name in ['README.md','ATTRIBUTION.md','verification_report.md']:
         (artifacts/name).write_text('Test-only artifact, not a real verified Blender scene.')
-    report={'production':True,'passed':True,'checks':{f'V{i}':{'status':'PASS'} for i in range(1,18)},'artifact_hashes':hashes(artifacts)}
+    report={'production':True,'passed':True,'checks':{f'V{i}':{'status':'PASS'} for i in range(1,18)},'artifact_hashes':hashes(artifacts),'verifier_sha256':verifier_sources(),'evidence_sha256':evidence_hashes(artifacts)}
     (artifacts/'verification_report.json').write_text(json.dumps(report))
     return report
 
@@ -105,4 +105,12 @@ def test_missing_check_invalidates_pass_flag(artifacts):
     report['checks']['V7']['status']='NOT RUN'
     (artifacts/'verification_report.json').write_text(json.dumps(report))
     with pytest.raises(ValueError,match='seventeen'):
+        bundle(artifacts,'College_TestTeam')
+
+
+def test_changed_diagnostic_invalidates_package(artifacts):
+    production_stage(artifacts)
+    evidence=artifacts/'verification';evidence.mkdir()
+    (evidence/'baseline.png').write_bytes(b'added-after-qualification')
+    with pytest.raises(ValueError,match='Verifier/evidence'):
         bundle(artifacts,'College_TestTeam')

@@ -2,6 +2,12 @@
 
 Synthetic binocular gaze pipeline for Samsung PRISM-XR Track 01.
 
+Competition-upgrade work is isolated on `competition-upgrade`; see
+[upgrade progress](docs/UPGRADE_PROGRESS.md) and [verifier coverage](docs/VERIFIER_COVERAGE.md).
+The independent geometry audit, resumable dataset prototype and optional Blender
+controls are implemented. Nine-frame dataset smoke and UI/API parity pass;
+the complete 256-frame example and visual promotion are not yet qualified.
+
 Current development scene uses procedural radial irises. All V1–V17 checks pass on Blender 4.5.15 with Blender 5.2.3 LTS secondary
 qualification.
 Artifacts and measured report are under out/production. Rebuild production with

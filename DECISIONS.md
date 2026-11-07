@@ -1,5 +1,17 @@
 # Decisions and validation status
 
+Competition-upgrade execution started on a separate branch. Frozen release and
+its payload hashes remain untouched. Independent Rodrigues/pinhole reference
+measures actual evaluated pupil triangles and fitted scleral spheres; 1009 poses
+and fourteen injected defects pass/detect respectively. Geometry-guided pixel
+oracle is separate from OpenCV detectors and explicitly not a visibility-mask
+replacement. Nine 32-sample dataset anchors render and pass (max error 0.141464 px);
+interrupted-after-eight resume matches PNGs/manifest byte-identically. Optional
+sidebar matches API at nine poses and clean registration cycles; no graded
+scene activation. New verifier provenance guards diagnostic/source changes and
+rejects legacy cache reuse. 74 tests pass; fresh full qualification and visual
+human review remain gates. See UPGRADE_PROGRESS.md for remaining work.
+
 - Fixture-first implementation selected by the user. Fixture scenes/metadata are explicitly labeled and rejected by submission packaging.
 - Preserve measured production IPD (58–68 mm); fixture defaults to 63 mm. Horizontal sensor fit fixes square-camera calibration.
 - A separate dedicated armature articulates procedural replacement eyes while preserving imported facial mesh and original rig. Explicit mesh mapping avoids guessing bone/mesh names.

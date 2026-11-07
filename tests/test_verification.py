@@ -5,7 +5,7 @@ import pytest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from grader_sim import centroid,detect,template_shift
-from verify import verify
+from verify import verify,write_report
 from direction_report import measure
 
 
@@ -81,3 +81,19 @@ def test_missing_blender_never_passes(tmp_path,monkeypatch):
     assert report['checks']['V1']['status']=='NOT RUN'
     assert report['checks']['V13']['status']=='FAIL'
     assert (tmp_path/'verification_report.md').exists()
+
+
+def test_modified_diagnostics_cannot_reuse_a_pass(tmp_path):
+    import json
+    evidence=tmp_path/'verification';evidence.mkdir();mask=evidence/'baseline.png';mask.write_bytes(b'original')
+    report={'production':True,'checks':{f'V{i}':{'status':'PASS'} for i in range(1,18)}}
+    write_report(tmp_path,report)
+    mask.write_bytes(b'replaced')
+    with pytest.raises(ValueError,match='Verifier/evidence'):
+        verify(tmp_path,blender='unused-blender',reuse_evidence=True)
+
+
+def test_verifier_change_during_run_invalidates_result(tmp_path):
+    report={'production':True,'run_start':{'artifacts':{},'verifier':{}},'checks':{f'V{i}':{'status':'PASS'} for i in range(1,18)}}
+    assert write_report(tmp_path,report)['passed'] is False
+    assert report['checks']['V13']['status']=='FAIL'

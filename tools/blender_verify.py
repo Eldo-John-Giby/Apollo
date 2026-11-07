@@ -16,6 +16,63 @@ import eyes
 def digest(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def prepare_masks(scene):
+    mask=bpy.data.materials.new('Verification white emission')
+    mask.use_nodes=True
+    nodes=mask.node_tree.nodes; nodes.clear()
+    emission=nodes.new('ShaderNodeEmission'); emission.inputs[0].default_value=(1,1,1,1)
+    output=nodes.new('ShaderNodeOutputMaterial')
+    mask.node_tree.links.new(emission.outputs[0],output.inputs[0])
+    black=bpy.data.materials.new('Verification black emission')
+    black.use_nodes=True
+    nodes=black.node_tree.nodes; nodes.clear()
+    e=nodes.new('ShaderNodeEmission'); e.inputs[0].default_value=(0,0,0,1)
+    out=nodes.new('ShaderNodeOutputMaterial'); black.node_tree.links.new(e.outputs[0],out.inputs[0])
+    occluders={}
+    def occluder(source):
+        if source is None or not source.use_nodes: return black
+        if source.name in occluders: return occluders[source.name]
+        material=source.copy()
+        nodes=material.node_tree.nodes
+        shader=next((n for n in nodes if n.type=='BSDF_PRINCIPLED'),None)
+        if shader is None: raise ValueError('Unsupported occluder shader: '+source.name)
+        alpha=shader.inputs['Alpha']
+        output=next(n for n in nodes if n.type=='OUTPUT_MATERIAL' and n.is_active_output)
+        emission=nodes.new('ShaderNodeEmission')
+        emission.inputs[0].default_value=(0,0,0,1)
+        transparent=nodes.new('ShaderNodeBsdfTransparent')
+        mix=nodes.new('ShaderNodeMixShader')
+        links=material.node_tree.links
+        links.new(transparent.outputs[0],mix.inputs[1])
+        links.new(emission.outputs[0],mix.inputs[2])
+        if alpha.is_linked:
+            links.new(alpha.links[0].from_socket,mix.inputs[0])
+        else:
+            mix.inputs[0].default_value=alpha.default_value
+        links.new(mix.outputs[0],output.inputs['Surface'])
+        occluders[source.name]=material
+        return material
+    for obj in scene.objects:
+        if obj.type=='MESH':
+            # Keep polygon material indices and alpha maps. Turning a lash
+            # card opaque invents pupil occlusion that isn't in the scene.
+            if obj.name in {'Pupil.L','Pupil.R'}:
+                obj.data.materials.clear(); obj.data.materials.append(mask)
+            elif obj.data.materials:
+                for i,material in enumerate(list(obj.data.materials)):
+                    obj.data.materials[i]=occluder(material)
+            else:
+                obj.data.materials.append(black)
+        if obj.type=='LIGHT': obj.hide_render=True
+    scene.world.node_tree.nodes['Background'].inputs[0].default_value=(0,0,0,1)
+    scene.world.node_tree.nodes['Background'].inputs[1].default_value=0
+    scene.cycles.samples=32
+    scene.render.dither_intensity=0
+    scene.cycles.use_denoising=False
+    original={obj.name:obj.hide_render for obj in scene.objects}
+    return original
+
+
 def collect(folder, masks_only=False):
     folder=Path(folder)
     evidence=folder/'verification'
@@ -119,9 +176,15 @@ def collect(folder, masks_only=False):
                 assert pixels > 0 and image.has_data and image.packed_file, 'Unpacked/missing texture: '+image.name
         return 'all external textures packed'
     check('resources',resources)
+    sys.path.insert(0,str(ROOT/'tools'))
+    from independent_audit import run as independent_run
+    check('independent_geometry',lambda:independent_run(evidence/'independent_geometry.json',1000))
     checkpoint('geometry_complete')
     if masks_only:
         prior=json.loads((folder/'verification_report.json').read_text())
+        assert prior.get('verifier_sha256') and prior.get('evidence_sha256'), 'Legacy provenance; full verification required'
+        assert all(digest(ROOT/name)==value for name,value in prior['verifier_sha256'].items()), 'Verifier changed; full verification required'
+        assert all((folder/name).is_file() and digest(folder/name)==value for name,value in prior['evidence_sha256'].items()), 'Diagnostics changed; full verification required'
         paths=[folder/'scene.blend',folder/'metadata.json',ROOT/'wrapper/eyes.py']+sorted((folder/'renders').glob('*.png'))
         current={('wrapper/eyes.py' if p==ROOT/'wrapper/eyes.py' else str(p.relative_to(folder)).replace('\\','/')):digest(p) for p in paths}
         assert prior['artifact_hashes']==current, 'Inputs changed; full verification required'
@@ -144,60 +207,7 @@ def collect(folder, masks_only=False):
         identical=all(digest(evidence/'repeat_a'/name)==digest(evidence/'repeat_b'/name)==digest(folder/name) for name in names)
         result['checks']['V12']={'status':'PASS' if identical else 'FAIL','measurement':'two sweeps and shipped artifacts SHA-256 comparison'}
         checkpoint('repeated_sweeps_complete')
-    # Dedicated diagnostic pass: transparent occluders are excluded only for unoccluded truth.
-    mask=bpy.data.materials.new('Verification white emission')
-    mask.use_nodes=True
-    nodes=mask.node_tree.nodes; nodes.clear()
-    emission=nodes.new('ShaderNodeEmission'); emission.inputs[0].default_value=(1,1,1,1)
-    output=nodes.new('ShaderNodeOutputMaterial')
-    mask.node_tree.links.new(emission.outputs[0],output.inputs[0])
-    black=bpy.data.materials.new('Verification black emission')
-    black.use_nodes=True
-    nodes=black.node_tree.nodes; nodes.clear()
-    e=nodes.new('ShaderNodeEmission'); e.inputs[0].default_value=(0,0,0,1)
-    out=nodes.new('ShaderNodeOutputMaterial'); black.node_tree.links.new(e.outputs[0],out.inputs[0])
-    occluders={}
-    def occluder(source):
-        if source is None or not source.use_nodes: return black
-        if source.name in occluders: return occluders[source.name]
-        material=source.copy()
-        nodes=material.node_tree.nodes
-        shader=next((n for n in nodes if n.type=='BSDF_PRINCIPLED'),None)
-        if shader is None: raise ValueError('Unsupported occluder shader: '+source.name)
-        alpha=shader.inputs['Alpha']
-        output=next(n for n in nodes if n.type=='OUTPUT_MATERIAL' and n.is_active_output)
-        emission=nodes.new('ShaderNodeEmission')
-        emission.inputs[0].default_value=(0,0,0,1)
-        transparent=nodes.new('ShaderNodeBsdfTransparent')
-        mix=nodes.new('ShaderNodeMixShader')
-        links=material.node_tree.links
-        links.new(transparent.outputs[0],mix.inputs[1])
-        links.new(emission.outputs[0],mix.inputs[2])
-        if alpha.is_linked:
-            links.new(alpha.links[0].from_socket,mix.inputs[0])
-        else:
-            mix.inputs[0].default_value=alpha.default_value
-        links.new(mix.outputs[0],output.inputs['Surface'])
-        occluders[source.name]=material
-        return material
-    for obj in scene.objects:
-        if obj.type=='MESH':
-            # Keep polygon material indices and alpha maps. Turning a lash
-            # card opaque invents pupil occlusion that isn't in the scene.
-            if obj.name in {'Pupil.L','Pupil.R'}:
-                obj.data.materials.clear(); obj.data.materials.append(mask)
-            elif obj.data.materials:
-                for i,material in enumerate(list(obj.data.materials)):
-                    obj.data.materials[i]=occluder(material)
-            else:
-                obj.data.materials.append(black)
-        if obj.type=='LIGHT': obj.hide_render=True
-    scene.world.node_tree.nodes['Background'].inputs[0].default_value=(0,0,0,1)
-    scene.world.node_tree.nodes['Background'].inputs[1].default_value=0
-    scene.cycles.samples=32
-    scene.render.dither_intensity=0
-    scene.cycles.use_denoising=False
-    original={obj.name:obj.hide_render for obj in scene.objects}
+    original=prepare_masks(scene)
     poses=[(f'frame_{k:02d}',h,v) for k,theta,h,v in eyes.sweep_inputs()]
     poses += [(name,r['input']['h'],r['input']['v']) for name,r in result['directions'].items()]
     for name,h,v in poses:
