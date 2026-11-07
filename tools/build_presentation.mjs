@@ -13,6 +13,14 @@ const dataset=await report('dataset-256/analysis.json');
 const independent=await report('candidate/verification/independent_geometry.json');
 const visibility=await report('dataset-visibility/report.json')??await report('corner-visibility/report.json');
 const identity=await report('identity.json');
+const realism=await report('visual-review.json');
+const sampleReview=await report('sample-review.json');
+const sampleBenchmark=await report('samples/benchmark.json');
+const baselineBenchmark=await report('baseline-samples/benchmark.json');
+function meanSeconds(benchmark,samples){
+  const poses=Object.values(benchmark?.profiles?.[String(samples)]?.poses??{});
+  return poses.length?poses.reduce((sum,p)=>sum+p.seconds,0)/poses.length:null;
+}
 const p=Presentation.create({slideSize:{width:1280,height:720}});
 const ink='#142B3B',muted='#526571',accent='#087F8C',paper='#F4F6F5';
 function text(s,value,x,y,w,h,size=24,color=ink,bold=false){
@@ -39,13 +47,25 @@ text(s,'APOLLO',64,200,555,90,64,ink,true);
 text(s,'Synthetic Eye Movement &\nVirtual Camera Rendering',64,310,555,110,32,ink);
 text(s,identity?.team??'Technical prototype',64,482,555,40,23,accent,true);
 text(s,identity?.members?.join('  •  ')??'College and member identity: maintained by the team',64,534,555,85,19,muted);
-await pic(s,'candidate/renders/frame_00.png',670,176,540,465,'Actual top-gaze render from the candidate scene');
+if(realism?.passed){
+  await pic(s,'portraits/three-quarter.png',670,176,540,430,'Same rig in a presentation view; graded camera remains fixed',{left:.05,top:.1,right:.05,bottom:.04});
+  text(s,'Presentation portrait of the same calibrated rig',692,622,515,30,18,muted);
+}else await pic(s,'candidate/renders/frame_00.png',670,176,540,465,'Actual top-gaze render from the candidate scene');
 
 s=slide('A gaze label needs a physical eye model','Problem',
   'Requirements source: docs/problem_statement.md and user-supplied consolidated problem statement. No claim of demonstrated gaze-estimator accuracy or capture-cost savings.');
 para(s,'Capturing extreme gaze','XR training needs gaze-labelled images. Real-eye capture at extreme angles is slow, sensitive and difficult to calibrate.',64,204,520);
 para(s,'Planar motion is insufficient','Moving a pupil across a flat surface cannot reproduce rotation around an eye center or binocular convergence.',670,204,520);
-text(s,'Our scope: a textured rig, metric fixation, deterministic articulation,\nand a directly executable render package.',64,484,1130,115,30,accent,true);
+if(realism?.passed){
+  const before=path.relative(u,path.join(root,'milestones/competition-upgrade-2026-11-07/dataset-256/renders/frame_000004.png'));
+  const crop={left:140/1024,top:390/1024,right:139/1024,bottom:434/1024};
+  text(s,'Earlier appearance',64,426,520,32,22,accent,true);
+  text(s,'Current appearance',670,426,520,32,22,accent,true);
+  await pic(s,before,64,469,520,140,'Earlier center pose, same calibration',crop);
+  await pic(s,'candidate/verification/baseline.png',670,469,520,140,'Current center pose, same calibration',crop);
+  text(s,'Matched center poses preserve the physical eye centers and camera calibration',64,622,1140,28,19,muted);
+  s.speakerNotes.text+=' Appearance sources: protected competition-upgrade dataset center frame 4 and current verification baseline. Agent visual assessment is in visual-review.json. These are synthetic renders.';
+}else text(s,'Our scope: a textured rig, metric fixation, deterministic articulation,\nand a directly executable render package.',64,484,1130,115,30,accent,true);
 
 s=slide('One articulation API, two ways to operate it','Solution architecture',
   'Editable native architecture diagram. Public wrapper remains standalone; optional panel invokes that wrapper. Independent oracle imports no production geometry. See wrapper/eyes.py, tools/live_controls.py and tools/reference_geometry.py.');
@@ -58,7 +78,7 @@ for(let i=0;i<4;i++){
   if(i<3)s.shapes.add({geometry:'rightArrow',position:{left:x+263,top:286,width:27,height:23},fill:accent,line:{fill:'none',width:0}});
 }
 para(s,'Optional live controls','Blender sidebar uses the same API. No alternate gaze solver or background handlers.',64,444,525);
-para(s,'Independent verification','NumPy reference → deformed mesh measurements → rendered pupil and mask checks.',670,444,525);
+para(s,'Independent verification','A separate NumPy reference checks actual deformed pupil surfaces and rendered masks.',670,444,525);
 
 s=slide('Metric constraints are explicit and testable','Calibration',
   'World subject faces −Y; +Z up. Camera at (0,−0.4,0), target (0.05h,−0.35,0.05v). IPD measured from rig, not inferred from rendered pixels. Anatomical L is image right. Metadata camera_matrix is intrinsic 3×3; world Euler XYZ rotations are radians.');
@@ -96,13 +116,19 @@ s=slide('Reproducible delivery is part of the product','Stack and deployment',
 para(s,'Standalone package','scene.blend · wrapper/eyes.py · renders/\nmetadata.json · README.md\nContact sheet and packed textures included.',64,205,530);
 para(s,'Repeatable execution','Native Blender and Docker workflows.\nClean configuration, different working directory, extracted archive reproduction.',670,205,530);
 text(s,'Blender + Python / bpy + NumPy + OpenCV + pytest + Docker',64,465,1130,85,29,accent,true);
-text(s,'Reports bind scene, wrapper, images, verification sources and diagnostic evidence.',64,575,1130,65,23,muted);
+const selectedSamples=sampleReview?.selected_samples;
+const currentMean=meanSeconds(sampleBenchmark,selectedSamples);
+const priorMean=meanSeconds(baselineBenchmark,32);
+if(realism?.passed&&currentMean!==null&&priorMean!==null){
+  text(s,`Local CPU mean: ${currentMean.toFixed(1)} s/frame at ${selectedSamples} samples\nPrior scene: ${priorMean.toFixed(1)} s/frame in a separate run`,64,556,1130,72,22,muted);
+  s.speakerNotes.text+=' Measured serial center/up/corner runs: samples/benchmark.json and baseline-samples/benchmark.json. The new appearance costs more CPU time. No speedup is claimed.';
+}else text(s,'Reports bind scene, wrapper, images, verification sources and diagnostic evidence.',64,575,1130,65,23,muted);
 
 s=slide('A measured prototype, with clear limits','Results and limitations',
   'No official evaluation score or jury result is claimed. Registration, event submission, final identity and upload links are maintained by the team. Human visual preference remains a human judgement. Technical artifact status is in docs/UPGRADE_PROGRESS.md and final release receipts.');
 para(s,'Demonstrated capabilities','Calibrated binocular articulation, ten-frame automation, independent geometry/pixel checks, dataset generation and shared-API live controls.',64,208,520);
 para(s,'Model limits','One face identity and fixed 4 mm pupils. Static lids and lighting. Simplified eye surfaces; no refractive cornea, blink or trained estimator.',670,208,520);
-text(s,'Our benchmark is reproducibility and geometric/image correctness.\nThe official score belongs to the evaluators.',64,495,1130,115,31,accent,true);
+text(s,'Measured calibration and reproducibility results accompany every release.\nOfficial evaluation results remain external to these local checks.',64,495,1130,115,31,accent,true);
 
 for(let i=0;i<p.slides.items.length;i++){
   const blob=await p.export({slide:p.slides.items[i],format:'png',scale:1});

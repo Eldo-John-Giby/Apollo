@@ -68,6 +68,7 @@ def export(upgrade,destination,delivery,profile='upgrade'):
         assert selected==json.loads((ROOT/'build/realism_config.json').read_text())['samples']
         assert digest(upgrade/'samples'/str(selected)/'center.png')==digest(candidate/'verification/baseline.png')
         assert digest(upgrade/'samples'/str(selected)/'up.png')==digest(candidate/'verification/up.png')
+        assert digest(upgrade/'samples'/str(selected)/'corner.png')==digest(upgrade/'stress-rgb/renders/frame_000008.png')
         from realism_visibility import poses
         stress=json.loads((upgrade/'stress-rgb/dataset.json').read_text())
         assert stress['run']['scene_sha256']==scene_hash
@@ -127,6 +128,8 @@ def export(upgrade,destination,delivery,profile='upgrade'):
     if profile=='realism':
         for name in ['visual-review.json','sample-review.json']:
             shutil.copy2(upgrade/name,destination/name)
+        shutil.copy2(upgrade/'sample-measurements.json',destination/'sample-measurements.json')
+        shutil.copy2(upgrade/'baseline-samples/benchmark.json',destination/'baseline-benchmark.json')
         shutil.copytree(upgrade/'comparisons',destination/'comparisons')
         shutil.copytree(upgrade/'portraits',destination/'portraits')
         shutil.copytree(upgrade/'stress-rgb',destination/'visibility-stress')

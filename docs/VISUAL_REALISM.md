@@ -102,3 +102,37 @@ full visible/dark coverage, maximum centroid residual 0.026708 px, and reject a
 real half-pupil obstruction. All 80 native unit tests pass. The serial 32/64/128
 sample comparison is running. Complete native/secondary/Linux qualification,
 113-pose coverage, final corpus and refreshed media remain gated.
+
+## Sample selection and reproducibility
+
+All nine 32/64/128 sample images were reviewed, including center, up and corner.
+Retain 32 samples: local means are about 75, 141 and 271 seconds respectively.
+Mean luma difference between 32 and the 128-sample reference is about 0.382/255
+for the full image and 0.182/255 for the forehead region. These are differences,
+not objective naturalness scores. All nine sample images pass the independent
+guided pupil check (maximum 0.190832 px). Selected center/up/corner PNGs match
+the built checkpoint and early checks byte-for-byte. The matched sheets and both
+portrait views have been inspected. Scene/image-bound agent review receipts
+record modest improvements and explicit limitations, without human-study claims.
+
+The fresh baseline averages about 27 seconds per frame in a separate serial run.
+The new appearance costs more CPU time; no rendering-speed improvement is claimed.
+
+For reproduction, build a separate finished checkpoint, select its saved sample
+settings, copy the exact scene to out/realism/candidate, retain attribution, then
+run the standard sweep/validate/sheet/prepare/verify commands from UPGRADE_RUNBOOK.
+Do not pass a draft/final override when testing a stored 64-sample scene. Generate
+its separate dataset with tasks.py dataset --scene ... --folder ... --count 256
+--seed 0 --samples matching the saved scene. Analyze all images, then run the full
+realism_visibility worker with --cache pointing to that validated corpus.
+
+Final staging command (only after complete reviews and passing reports):
+
+```powershell
+python tools/export_upgrade.py out/realism --out milestones/visual-realism-2026-11-08 --delivery delivery/realism --profile realism
+```
+
+This preserves the older executable delivery. The new profile also includes the
+113-pose RGB/mask evidence, matched comparisons, portraits and sample evidence.
+Manifest, ZIP and committed Git blob checks precede tagging. Event administration,
+registered team filenames and sharing remain team-owned.
