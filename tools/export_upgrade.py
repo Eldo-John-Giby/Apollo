@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import shutil
 import zipfile
@@ -14,7 +15,10 @@ ROOT=Path(__file__).resolve().parents[1]
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def export(upgrade,destination,delivery,profile='upgrade'):
+def export(upgrade,destination,delivery,profile='upgrade',version=None):
+    if version is not None and not re.fullmatch(r'v\d+\.\d+\.\d+',version):
+        raise ValueError('Release version must use vMAJOR.MINOR.PATCH')
+    archive_name=f'apollo-{version}.zip' if version else 'apollo-competition.zip'
     upgrade=Path(upgrade).resolve();destination=Path(destination).resolve();delivery=Path(delivery).resolve()
     if destination.exists() or delivery.exists():raise ValueError('Use new release/delivery directories')
     candidate,required=qualified_candidate(upgrade/'candidate')
@@ -44,9 +48,9 @@ def export(upgrade,destination,delivery,profile='upgrade'):
     assert reports['rebuild']['recipe_source_sha256']==digest(ROOT/recipe)
     if profile=='realism':
         assert reports['rebuild']['config_sha256']==digest(ROOT/'build/realism_config.json')
-        visual=json.loads((upgrade/'visual-review.json').read_text())
+        visual=json.loads((upgrade/'visual-review.json').read_text(encoding='utf-8'))
         assert visual['passed'] and visual['scene_sha256']==scene_hash
-        samples=json.loads((upgrade/'sample-review.json').read_text())
+        samples=json.loads((upgrade/'sample-review.json').read_text(encoding='utf-8'))
         assert samples['passed'] and samples['scene_sha256']==scene_hash
         categories=visual['categories']
         assert set(categories)=={'socket_integration','eye_appearance','skin_response','grooming','pupil_readability'}
@@ -59,18 +63,18 @@ def export(upgrade,destination,delivery,profile='upgrade'):
             for name,value in review['reviewed_artifacts'].items():
                 path=(upgrade/name).resolve();assert path.is_relative_to(upgrade)
                 assert digest(path)==value,'Reviewed image changed'
-        benchmark=json.loads((upgrade/'samples/benchmark.json').read_text())
+        benchmark=json.loads((upgrade/'samples/benchmark.json').read_text(encoding='utf-8'))
         assert samples['benchmark_sha256']==digest(upgrade/'samples/benchmark.json')
         assert benchmark['completed'] and set(benchmark['profiles'])=={'32','64','128'}
         assert benchmark['worker_sha256']==digest(ROOT/'tools/benchmark_render.py')
         assert benchmark['wrapper_sha256']==digest(ROOT/'wrapper/eyes.py')
         selected=samples['selected_samples'];assert selected==manifest['run']['samples']
-        assert selected==json.loads((ROOT/'build/realism_config.json').read_text())['samples']
+        assert selected==json.loads((ROOT/'build/realism_config.json').read_text(encoding='utf-8'))['samples']
         assert digest(upgrade/'samples'/str(selected)/'center.png')==digest(candidate/'verification/baseline.png')
         assert digest(upgrade/'samples'/str(selected)/'up.png')==digest(candidate/'verification/up.png')
         assert digest(upgrade/'samples'/str(selected)/'corner.png')==digest(upgrade/'stress-rgb/renders/frame_000008.png')
         from realism_visibility import poses
-        stress=json.loads((upgrade/'stress-rgb/dataset.json').read_text())
+        stress=json.loads((upgrade/'stress-rgb/dataset.json').read_text(encoding='utf-8'))
         assert stress['run']['scene_sha256']==scene_hash
         assert stress['run']['worker_sha256']==digest(ROOT/'tools/realism_visibility.py')
         assert [(f['input']['h'],f['input']['v']) for f in stress['frames']]==poses()
@@ -90,9 +94,9 @@ def export(upgrade,destination,delivery,profile='upgrade'):
     for name in required:shutil.copy2(candidate/name,delivery/name)
     shutil.copytree(candidate/'renders',delivery/'renders')
     (delivery/'wrapper').mkdir();shutil.copy2(ROOT/'wrapper/eyes.py',delivery/'wrapper/eyes.py')
-    for key,value in json.loads((candidate/'verification_report.json').read_text())['artifact_hashes'].items():
+    for key,value in json.loads((candidate/'verification_report.json').read_text(encoding='utf-8'))['artifact_hashes'].items():
         assert digest(delivery/key)==value,'Unpacked delivery differs from qualified artifacts'
-    files={'apollo-competition.zip':archive,
+    files={archive_name:archive,
            'contact_sheet.png':candidate/'contact_sheet.png','verification_report.json':candidate/'verification_report.json',
            'verification_report.md':candidate/'verification_report.md',
            'dataset-analysis.json':upgrade/'dataset-256/analysis.json','dataset-visibility.json':upgrade/'dataset-visibility/report.json',
@@ -168,6 +172,10 @@ ratings are not invented. See `docs/UPGRADE_RUNBOOK.md` for reproduction command
     if profile=='realism':
         readme=readme.replace('delivery/apollo','delivery/'+delivery.name)
         readme+='\nThe realism profile includes 113 mask-tested poses, matched comparisons, sample\nexperiments and separate presentation-only portraits. Recheck extracted masks\nwith tools/analyze_visibility.py --dataset pointing to visibility-stress.\n'
+    readme=readme.replace('apollo-competition.zip',archive_name)
+    if version:
+        label='Visual Realism' if profile=='realism' else 'Competition Baseline'
+        readme=readme.replace('# Apollo competition technical release',f'# Apollo {version} — {label}')
     (destination/'README.md').write_text(readme,encoding='utf-8',newline='\n')
     manifest_hashes={str(p.relative_to(destination)).replace('\\','/'):digest(p) for p in sorted(destination.rglob('*')) if p.is_file()}
     (destination/'MANIFEST.json').write_text(json.dumps(manifest_hashes,indent=2)+'\n',encoding='utf-8',newline='\n')
@@ -177,4 +185,5 @@ ratings are not invented. See `docs/UPGRADE_RUNBOOK.md` for reproduction command
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('upgrade',type=Path);p.add_argument('--out',type=Path,required=True);p.add_argument('--delivery',type=Path,required=True)
     p.add_argument('--profile',choices=['upgrade','realism'],default='upgrade')
-    a=p.parse_args();print(export(a.upgrade,a.out,a.delivery,a.profile))
+    p.add_argument('--version',help='Uniform release version, e.g. v0.3.0')
+    a=p.parse_args();print(export(a.upgrade,a.out,a.delivery,a.profile,a.version))

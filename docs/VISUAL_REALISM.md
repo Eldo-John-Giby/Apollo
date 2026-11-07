@@ -130,7 +130,7 @@ realism_visibility worker with --cache pointing to that validated corpus.
 Final staging command (only after complete reviews and passing reports):
 
 ```powershell
-python tools/export_upgrade.py out/realism --out milestones/visual-realism-2026-11-08 --delivery delivery/realism --profile realism
+python tools/export_upgrade.py out/realism --out milestones/apollo-v0.3.0 --delivery delivery/realism --profile realism --version v0.3.0
 ```
 
 This preserves the older executable delivery. The new profile also includes the
@@ -145,3 +145,14 @@ was stopped before authoring. Technical qualification, still-image review,
 datasets, archive rehearsals and release packaging continue. Export no longer
 requires or ships newly authored decks or movies. Historical artifacts remain
 unchanged. Release names and the version mapping are in [RELEASES.md](RELEASES.md).
+
+The new release archive uses `apollo-v0.3.0.zip`. After staging, run
+`python tools/check_release.py milestones/apollo-v0.3.0 --delivery delivery/realism --revision :`
+and repeat against HEAD after committing. This verifies actual Git bytes rather
+than assuming local working-file hashes survive checkout/staging unchanged.
+
+For the already-running local qualification batch, `python tools/finish_realism.py
+--publish` waits for actual passing evidence and completed construction renders,
+then exports, checks staged/committed Git bytes, commits, tags and pushes. It
+stops on failed evidence or a changed checkout. Its status is recorded under
+`out/realism/finish-status.json`. It never creates videos or presentations.

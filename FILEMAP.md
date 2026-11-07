@@ -104,6 +104,8 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/make_bundle.py` | Reject fixtures, stale evidence and incomplete reports; stage ZIP, size/integrity/extraction checks. |
 | `tools/freeze_candidate.py` | Development-only archive using shared qualification gates; per-file manifest, ZIP integrity and extraction checks. |
 | `tools/release_rehearsal.py` | Actual ZIP regeneration from clean config/different CWD; complete and interrupted 255→256 dataset resume reproduction. |
+| `tools/finish_realism.py` | Wait for existing qualification/checkpoints, gate technical export, verify Git bytes and optionally commit/tag/push; never authors media. |
+| `tools/check_release.py` | Verify release manifests, ZIP integrity and source/payload hashes against staged or committed Git blobs. |
 | `tools/export_upgrade.py` | Gate technical milestones, executable delivery, still-image evidence and complete research-dataset ZIP; excludes videos/decks. |
 
 ## Tests and relationships
