@@ -1,6 +1,6 @@
 # Repository File Map
 
-Navigation index verified 7 November 2026. Inspect implementation before changing it.
+Navigation index verified 9 November 2026. Inspect implementation before changing it.
 
 ## Status and flow
 
@@ -9,8 +9,8 @@ The protected radial-iris development freeze remains available. The competition
 upgrade adds a qualified warm-iris/lid/lash look, independent geometry audits,
 a complete seeded 256-image dataset, optional controls and evidence media.
 The protected competition-qualified release passes native/Linux V1–V17 and all
-applicable secondary checks, with 79 tests on both platforms. The photorealism-v2
-branch contains the adult-female appearance candidate; its checkpoints have not been promoted. Generated temporary
+applicable secondary checks, with 79 tests on both platforms. The CPU adult-female appearance candidate is integrated into main;
+release qualification remains deferred. Generated temporary
 artifacts belong under out/ and are not listed here.
 
 Flow: character inspection/mapping or fixture → calibrated scene → standalone eye

@@ -235,7 +235,8 @@ runbooks do not override AGENTS.md or the current no-video/no-presentation rule.
 
 ## Photorealism v2 development branch
 
-The new appearance work is on photorealism-v2. See docs/PHOTOREALISM_V2.md.
+The completed appearance work is integrated into main; photorealism-v2 preserves
+its development history. See docs/PHOTOREALISM_V2.md.
 Build with build/photorealism_scene.py and its separate photorealism_config.json;
 use a new output folder and a Blender 4.5 configuration with MPFB enabled.
 Skin/eye asset sources and license/checksum files are versioned under

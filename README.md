@@ -4,13 +4,14 @@ Synthetic binocular gaze pipeline for Samsung PRISM-XR Track 01.
 
 Joining the team? Start with [TEAM_SETUP.md](TEAM_SETUP.md).
 
-This phase is wrapped up as the [v0.3.0-rc.1 prerelease](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.1).
+The earlier realism phase is preserved as the [v0.3.0-rc.1 prerelease](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.1).
 See [the handoff](docs/PHASE_HANDOFF.md) for completed/deferred checks and preserved working files.
 
 Standing project rule: do not create videos or presentations. Technical work and
 still-image evidence continue. See [release versions](docs/RELEASES.md).
 
-Appearance work continues on `photorealism-v2`; see [its execution record](docs/PHOTOREALISM_V2.md).
+The completed CPU appearance upgrade is integrated into `main`; see [its execution record](docs/PHOTOREALISM_V2.md).
+The `photorealism-v2` branch preserves its development history.
 The packed development candidate and still-image evidence are in
 [milestones/photorealism-v2-candidate](milestones/photorealism-v2-candidate/README.md).
 Those development checkpoints are not qualified releases. The complete protected

@@ -26,3 +26,14 @@ New technical releases include the executable layout, calibrated renders,
 metadata, still-image evidence, test/qualification reports and checksums.
 Do not create videos or presentations; see the standing rule in AGENTS.md.
 Event identity, registration and organizer uploads remain team-owned.
+
+
+## CPU appearance integration, 9 November 2026
+
+The completed photorealism-v2 work through `7dbbb07` is integrated into main.
+The packed adult-female candidate and targeted evidence are under
+`milestones/photorealism-v2-candidate`. Its 80 unit tests, local geometry/image
+checks and exact center-render rebuild evidence do not replace full cross-
+platform release qualification. No new tag or Release object was created for
+this source integration. The published v0.3.0-rc.1 preview and protected v0.2.0
+qualified fallback remain unchanged; v0.3.0 stays reserved until its gates pass.
