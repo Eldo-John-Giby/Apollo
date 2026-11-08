@@ -214,13 +214,7 @@ Apollo is a systematic way to ensure that XR headsets can accurately track where
 
 The project has reached a mature state where all 17 validation checks pass consistently, and all results can be reproduced exactly - which is crucial for regulatory and quality assurance purposes in XR development.
 
-<<<<<<< HEAD
-**The development freeze from November 7, 2026** represents a polished, documented state of the project where all evidence is preserved and ready for review.
-=======
-Use --folder to select an artifact directory. Production defaults to out/production;
-fixtures default to out/fixture. Bundle requires the actual --team name. Set
---quality final for 128 samples; draft uses 32. Wrapper commands are self-contained
-and support importable move/reset/render/sweep/state/calibration functions.
+
 
 ## Geometry and guarantees
 
