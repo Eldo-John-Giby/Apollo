@@ -201,3 +201,16 @@ Review cumulative anatomy/surface/finished construction stills before starting
 the long qualification batch. Intermediate stages remain unqualified. Final
 export also requires an image-bound construction review. Videos and decks stay
 excluded; only passing technical evidence may receive apollo-v0.3.0.
+
+## Construction review complete
+
+Both replacement anatomy/surface checkpoints were rebuilt from the frozen
+baseline using the final recipe. Their five-direction/reset and nine-anchor
+mask checks pass. The six matched comparison sheets (including every eye-pose
+row), both intermediate centers and cumulative four-stage sheet were inspected.
+The image-bound construction review records actual observations and explicitly
+keeps intermediate stages unqualified. Only the finished replacement receives
+full release qualification. Curated images/review are in the development snapshot.
+
+Full qualification now proceeds against the exact reviewed finished scene;
+no new videos or presentations are part of the remaining batch or export.

@@ -1,0 +1,19 @@
+{
+  "stages": [
+    {
+      "stage": "anatomy",
+      "direction_report_exit": 0,
+      "mask_report_exit": 0,
+      "qualified": false,
+      "scope": "Cumulative construction checkpoint, not a separately qualified release"
+    },
+    {
+      "stage": "surface",
+      "direction_report_exit": 0,
+      "mask_report_exit": 0,
+      "qualified": false,
+      "scope": "Cumulative construction checkpoint, not a separately qualified release"
+    }
+  ],
+  "scope": "Cumulative changes, not isolated-factor ablations. Only the final candidate receives full release qualification."
+}

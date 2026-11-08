@@ -66,6 +66,7 @@ def finish(output, publish=False):
         review = load(review_path)
         assert review['passed'] and review['scope'] == 'Agent construction-image review; intermediate stages remain unqualified'
         from check_release import digest
+        assert review['scene_sha256'] == digest(output / 'candidate/scene.blend')
         for name, sha in review['reviewed_artifacts'].items():
             path = (review_path.parent / name).resolve()
             assert path.is_relative_to(review_path.parent) and digest(path) == sha

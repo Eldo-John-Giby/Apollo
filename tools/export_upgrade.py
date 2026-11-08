@@ -53,7 +53,7 @@ def export(upgrade,destination,delivery,profile='upgrade',version=None):
         assert preflight['worker_sha256']==digest(ROOT/'tools/scene_preflight.py')
         construction_folder=upgrade/'checkpoint-comparisons'
         construction=json.loads((construction_folder/'review.json').read_text(encoding='utf-8'))
-        assert construction['passed'] and construction['reviewed_artifacts']
+        assert construction['passed'] and construction['reviewed_artifacts'] and construction['scene_sha256']==scene_hash
         for name,value in construction['reviewed_artifacts'].items():
             path=(construction_folder/name).resolve()
             assert path.is_relative_to(construction_folder.resolve()) and digest(path)==value

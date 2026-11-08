@@ -1,0 +1,32 @@
+{
+  "review_required": true,
+  "baseline_scene_sha256": "3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d",
+  "scene_sha256": "0f34558cd1c2e35e0b08f8545c44b70b8260b99e7c4cd5101871ce40197c3b65",
+  "worker_sha256": "8d0ce37e8f74afd58441c67d599076b35b2ef7d6b3e88d3bc2dc9fe2b2a2bb2f",
+  "source_images": {
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\milestones\\competition-upgrade-2026-11-07\\dataset-256\\renders\\frame_000000.png": "51fe77d416c7c6ceb0ef00447c3714a60f1e8fae4414c36822e378e8fa9b256c",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\milestones\\competition-upgrade-2026-11-07\\dataset-256\\renders\\frame_000001.png": "423030eecb857a8917f8744b5b5b967da5639d3fa748108390eb0f0acc8581a7",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\milestones\\competition-upgrade-2026-11-07\\dataset-256\\renders\\frame_000002.png": "35d85f4bfa14372bb3181bbf4dabf2b81c117a463618b6e4421b41184c959dbd",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\milestones\\competition-upgrade-2026-11-07\\dataset-256\\renders\\frame_000003.png": "f5ee603c2a1cfbcde3b029b6bc6caa717432373065ceaecd888cb23c2f2e1129",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\milestones\\competition-upgrade-2026-11-07\\dataset-256\\renders\\frame_000004.png": "0e90c5d2d57d8ee3caecff7471f923345382738ee04097cb4dc02bf5dc50218d",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\milestones\\competition-upgrade-2026-11-07\\dataset-256\\renders\\frame_000005.png": "91bcb0b02a1aeabe53d4d75b7d95e828aaeb96f7a7dc9aa325fc3186997c92fa",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\milestones\\competition-upgrade-2026-11-07\\dataset-256\\renders\\frame_000006.png": "27a51e9ae9e3804b28661160c3446131b78b6f9f9782c255327ab4035d0d710d",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\milestones\\competition-upgrade-2026-11-07\\dataset-256\\renders\\frame_000007.png": "8b4f5b627e87f115807db9c2571e107842924e204d0ed3530a3554ed96165b45",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\milestones\\competition-upgrade-2026-11-07\\dataset-256\\renders\\frame_000008.png": "fe2b087bdea98056400b13fa593291801374f3311c1bd4ad24d43130f8681921",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\realism\\seed-zero\\checkpoints\\anatomy\\anchors\\renders\\frame_000000.png": "d1039360f732608bfe5bfbd359a05afb48629442e906235a9dd5a6391d0d8332",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\realism\\seed-zero\\checkpoints\\anatomy\\anchors\\renders\\frame_000001.png": "77c65b02eb7bc56ba4cd996163ab5b692cf4a5bb3a8b0caa8e221fbfa471eac5",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\realism\\seed-zero\\checkpoints\\anatomy\\anchors\\renders\\frame_000002.png": "f652bc896487c74e62b4a9bc1929a68c9ed66819882ec59e8268da231299440e",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\realism\\seed-zero\\checkpoints\\anatomy\\anchors\\renders\\frame_000003.png": "10be6afb194c79b5bd4e5e9c678647ad1d5965c63e10b96eff8d8c5bb3e64192",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\realism\\seed-zero\\checkpoints\\anatomy\\anchors\\renders\\frame_000004.png": "dc075c90f0786c6036c4e4c04627ac79d0b10e219be23cd39ae1e49aaa2905fa",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\realism\\seed-zero\\checkpoints\\anatomy\\anchors\\renders\\frame_000005.png": "27bcb299a71557c4a9a61c4832632019167dec0d3269be8408cb06ada089caed",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\realism\\seed-zero\\checkpoints\\anatomy\\anchors\\renders\\frame_000006.png": "11a06015ca5c35f196c0c91ffce3fa22de93ec0356af58b92ae078e9c591f427",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\realism\\seed-zero\\checkpoints\\anatomy\\anchors\\renders\\frame_000007.png": "1a9a182493d0337caedb766212f068a68716a8f46fecc18cf265927f3fa2b666",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\realism\\seed-zero\\checkpoints\\anatomy\\anchors\\renders\\frame_000008.png": "ad8c30c928dc0a8c0b0cabaee7f9f0802174ba4b73bdbed73a5419d590046e38"
+  },
+  "sheets": {
+    "center-comparison.png": "5f67ceb156760360d225623ff370f89b317a11fbfa32e39e933e778a10debe7f",
+    "eye-details.png": "1bc7d031a25ab27b306826c636a09a2e1e59645257729ba512975bb37fa94766",
+    "pose-comparison.png": "1e7815c6e6fd0697f313618ddd156fad8f1caa2ed84c6cb2edce14a353b4f98b"
+  },
+  "scope": "Matched poses/calibration; deliberate material, grooming and lighting changes. Agent review is separate."
+}

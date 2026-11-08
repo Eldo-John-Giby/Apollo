@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "reviewer": "Codex",
+  "scope": "Agent construction-image review; intermediate stages remain unqualified",
+  "scene_sha256": "450bd7a7f03dff6c267e339eb8311912a6e8c375e5026bdfcdb51619bd3f8db5",
+  "reviewed_artifacts": {
+    "cumulative-checkpoints.png": "f34369e5c7518eff936f7eb0777004178a8bce97286890c1c30c6c09367d49f9",
+    "anatomy/center-comparison.png": "5f67ceb156760360d225623ff370f89b317a11fbfa32e39e933e778a10debe7f",
+    "anatomy/pose-comparison.png": "1e7815c6e6fd0697f313618ddd156fad8f1caa2ed84c6cb2edce14a353b4f98b",
+    "anatomy/eye-details.png": "1bc7d031a25ab27b306826c636a09a2e1e59645257729ba512975bb37fa94766",
+    "surface/center-comparison.png": "e56b55bb6cfa8aadace218938f871ad202d2714d607eec03631409a97d168519",
+    "surface/pose-comparison.png": "390a8d2aea79fe3e0d89b8f563aa1e0067c2aa2c9ab25e79093b4372f35f5c39",
+    "surface/eye-details.png": "aaf973c4679fe127408324689d9557b728a2bfa4553c793a3396086153ba62aa",
+    "construction.json": "ebed553ae84f427d33ef21d55a972447187b2ce75c2009e81e9d0b1a0846ef58"
+  },
+  "observations": [
+    "Inspected both intermediate center images and all six matched pose/eye-detail sheets, including all nine pose rows per stage.",
+    "Anatomy stage replaces heavy lash cards and improves lid/tear-duct fit; surface stage adds brighter, shaped skin and eye response; finished stage adds the short scalp groom.",
+    "Cumulative sheet shows the actual construction progression, not isolated-factor causal ablations.",
+    "Both intermediate five-direction/reset and nine-anchor mask checks pass, but neither stage has full release qualification.",
+    "Final scene remains a static synthetic head with simplified non-refractive eyes, stylized hairline and texture mottling."
+  ]
+}
