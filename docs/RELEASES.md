@@ -1,5 +1,9 @@
 # Apollo release versions
 
+Published preview: `apollo-v0.3.0-rc.1` — Apollo v0.3.0-rc.1 — Visual Realism Preview.
+The suffix `-rc.N` marks a prerelease. Full v0.3.0 qualification is deferred;
+see PHASE_HANDOFF.md for completed and remaining checks.
+
 Use tags `apollo-vMAJOR.MINOR.PATCH` and display names
 `Apollo vMAJOR.MINOR.PATCH — Short Descriptive Name`.
 Increment minor for a qualified capability or appearance milestone and patch

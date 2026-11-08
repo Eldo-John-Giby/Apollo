@@ -4,6 +4,9 @@ Synthetic binocular gaze pipeline for Samsung PRISM-XR Track 01.
 
 Joining the team? Start with [TEAM_SETUP.md](TEAM_SETUP.md).
 
+This phase is wrapped up as the [v0.3.0-rc.1 prerelease](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.1).
+See [the handoff](docs/PHASE_HANDOFF.md) for completed/deferred checks and preserved working files.
+
 Standing project rule: do not create videos or presentations. Technical work and
 still-image evidence continue. See [release versions](docs/RELEASES.md).
 

@@ -18,6 +18,9 @@ wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → pr
 
 ## Requirements and research
 
+Phase closure and next-work boundaries: `docs/PHASE_HANDOFF.md`. The realism
+preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred.
+
 | File | Responsibility |
 | --- | --- |
 | `TEAM_SETUP.md` | Teammate onboarding, pinned tools, packed-scene workflow, MPFB assets, daily checks, collaboration and release boundaries. |
