@@ -68,6 +68,11 @@ def check(release, delivery, revision='HEAD'):
     expect(ROOT / 'build' / recipe, rebuild['recipe_source_sha256'])
     if 'config_sha256' in rebuild:
         expect(ROOT / 'build/realism_config.json', rebuild['config_sha256'])
+    if (release / 'scene-preflight.json').exists():
+        preflight = load(release / 'scene-preflight.json')
+        assert preflight['passed']
+        expect(ROOT / 'tools/scene_preflight.py', preflight['worker_sha256'])
+        expect(ROOT / 'tools/blender_verify.py', preflight['verifier_sha256'])
 
     git = ['git', '-c', 'safe.directory=' + ROOT.as_posix()]
     process = subprocess.Popen(git + ['cat-file', '--batch'], cwd=ROOT,

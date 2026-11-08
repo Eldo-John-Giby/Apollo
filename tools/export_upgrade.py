@@ -47,6 +47,10 @@ def export(upgrade,destination,delivery,profile='upgrade',version=None):
     recipe='build/realism_scene.py' if profile=='realism' else 'build/upgrade_looks.py'
     assert reports['rebuild']['recipe_source_sha256']==digest(ROOT/recipe)
     if profile=='realism':
+        preflight=json.loads((upgrade/'scene-preflight.json').read_text(encoding='utf-8'))
+        assert preflight['passed'] and preflight['scene_sha256']==scene_hash
+        assert preflight['verifier_sha256']==digest(ROOT/'tools/blender_verify.py')
+        assert preflight['worker_sha256']==digest(ROOT/'tools/scene_preflight.py')
         assert reports['rebuild']['config_sha256']==digest(ROOT/'build/realism_config.json')
         visual=json.loads((upgrade/'visual-review.json').read_text(encoding='utf-8'))
         assert visual['passed'] and visual['scene_sha256']==scene_hash
@@ -109,6 +113,7 @@ def export(upgrade,destination,delivery,profile='upgrade',version=None):
            'tests-native.log':upgrade/'tests-final-native.log','tests-linux.log':upgrade/'docker-candidate/tests-final.log'}
     for name,source in files.items():shutil.copy2(source,destination/name)
     if profile=='realism':
+        shutil.copy2(upgrade/'scene-preflight.json',destination/'scene-preflight.json')
         for name in ['visual-review.json','sample-review.json']:
             shutil.copy2(upgrade/name,destination/name)
         shutil.copy2(upgrade/'sample-measurements.json',destination/'sample-measurements.json')

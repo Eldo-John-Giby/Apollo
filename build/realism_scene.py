@@ -269,10 +269,15 @@ def run(folder, config_path, stage):
     if stage == 'finished': grooming(config)
     assert eyes.calibration()==original
     assert eye_mesh_hash()==geometry_hash,'Appearance builder changed physical eye meshes'
-    scene=bpy.context.scene; scene.cycles.samples=config['samples']; scene.cycles.seed=config['seed']
+    scene=bpy.context.scene; scene.cycles.samples=config['samples']
+    # config['seed'] controls authored hair geometry, not the qualified renderer.
+    scene.cycles.seed=0
     scene.cycles.use_denoising = config['denoising']
     folder.mkdir(parents=True); eyes.reset(); bpy.ops.file.pack_all()
     bpy.ops.wm.save_as_mainfile(filepath=str(folder/'scene.blend'),compress=True)
+    sys.path.insert(0, str(ROOT/'tools'))
+    from scene_preflight import run as scene_preflight
+    scene_preflight(folder/'scene-preflight.json')
     eyes.render(folder/'center.png')
     assert hashlib.sha256(Path(__file__).read_bytes()).hexdigest()==recipe_hash,'Recipe changed during build'
     assert hashlib.sha256(Path(config_path).read_bytes()).hexdigest()==config_hash,'Config changed during build'

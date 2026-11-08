@@ -92,6 +92,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/direction_report.py` | Five-direction measurements, reset comparison and enlarged visual comparison from checkpointed verification renders. |
 | `tools/direction_smoke.py` | Six real baseline/cardinal/reset renders for the unchanged image-only direction gate before expensive candidate runs. |
 | `tools/early_image_gate.py` | Early blind/template checks on the actual sweep or checkpointed dataset using independent projections and unchanged thresholds. |
+| `tools/scene_preflight.py` | Run the existing verifier V1/V2 functions without renders; scene/source-bound early failure report, never full qualification. |
 | `tools/blender_verify.py` | Blender evidence worker with progress checkpoints: calibration/metrics, random evaluated poses, repeated sweeps, direction images, isolated/occluded masks, packed resource audit; hash-guarded mask-only reruns. |
 | `tools/verify.py` | V1–V17 coordinator, pixel/direction/visibility checks, clean-room/secondary subprocesses, evidence-bound JSON/Markdown reports and hash-guarded evidence reuse. |
 | `tools/framing_sweep.py` | 85–135 mm experiments and eye-sphere margin/shift selection; brows/lashes still need visual review. |

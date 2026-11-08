@@ -156,3 +156,25 @@ For the already-running local qualification batch, `python tools/finish_realism.
 then exports, checks staged/committed Git bytes, commits, tags and pushes. It
 stops on failed evidence or a changed checkout. Its status is recorded under
 `out/realism/finish-status.json`. It never creates videos or presentations.
+
+## Render-seed regression and replacement candidate
+
+The v9 full run failed V1 on native and secondary Blender. The appearance
+builder accidentally assigned its geometry/groom seed (20261108) to Cycles;
+the unchanged verifier requires the renderer seed to remain 0. All other native
+checks passed, including directions, visibility and extracted-archive replay.
+V9 is not qualified. Its earlier image/sample reviews describe that rejected
+checkpoint and cannot qualify the replacement candidate.
+
+The builder now keeps the grooming seed separate and uses render seed 0. Before
+rendering the center image it executes tools/scene_preflight.py, which extracts
+and runs the exact existing V1/V2 verifier functions without duplicating or
+relaxing their rules. The old v9 scene fails this quick check at the seed
+assertion; the replacement passes both checks. Full V1–V17 is still required.
+
+Replacement evidence is isolated under out/realism/seed-zero. The original
+failed evidence stays under out/realism. All replacement sample renders, review
+bindings, qualification, datasets and archive rehearsals must be regenerated;
+old image hashes and ratings must not be relabelled as replacement evidence.
+Use tools/finish_realism.py --out out/realism/seed-zero --publish only after the
+replacement reviews exist and its qualification/checkpoint workers are running.
