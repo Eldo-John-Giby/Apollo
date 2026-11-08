@@ -232,3 +232,26 @@ Read FILEMAP.md for navigation, docs/VISUAL_REALISM.md for current appearance wo
 docs/RELEASES.md for versions, docs/UPGRADE_RUNBOOK.md for advanced qualification,
 and docs/PS_AUDIT.md for requirement coverage. Historical statements in older
 runbooks do not override AGENTS.md or the current no-video/no-presentation rule.
+
+## Photorealism v2 development branch
+
+The new appearance work is on photorealism-v2. See docs/PHOTOREALISM_V2.md.
+Build with build/photorealism_scene.py and its separate photorealism_config.json;
+use a new output folder and a Blender 4.5 configuration with MPFB enabled.
+Skin/eye asset sources and license/checksum files are versioned under
+assets/photorealism-v2. Saved packed scenes need no MPFB for playback.
+
+Targeted development checks (approximately tens of minutes on the current CPU,
+not a release run):
+
+```powershell
+python tools/photorealism_checks.py --scene out/my-v2/scene.blend --out out/my-v2-checks
+```
+
+This runner needs the local nine-pose baseline under
+out/photorealism-v2/baseline-poses for its final comparison step. On a fresh
+clone, first create that baseline from the reviewed prerelease using
+realism_visibility.py --limit 9 as described in the v2 execution record.
+It never runs full Windows/Linux qualification, generates the 256-image research
+corpus, publishes tags, or creates videos/decks. Inspect the output stills before
+accepting the candidate. CLI output and status.json report failures explicitly.
