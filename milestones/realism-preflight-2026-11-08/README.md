@@ -1,25 +1,32 @@
 # Realism visual preflight checkpoint
 
-Development snapshot, not the fully qualified release or an organizer submission.
-Open scene-preview.blend to inspect the new appearance in Blender. All textures
-and cosmetic mesh geometry are packed. The registered delivery layout remains
-separate; use the protected competition-qualified-2026-11-07 release until the
-new complete qualification finishes.
+Development snapshot, not a qualified release or an organizer submission.
+This replaces the earlier v9 snapshot after its full run exposed a render-seed
+regression. The old snapshot remains in Git history; it was never promoted.
+Use the protected `apollo-v0.2.0` release until the replacement is fully qualified.
 
-This checkpoint passes 80 native tests, all five direction/reset checks, nine
-anchor image/mask checks and the independent 1009-pose geometry audit. Repeated
-sweeps, clean-room and full secondary/Linux qualification, the updated 256-image
-corpus and expanded 113-pose visibility are not claimed complete here.
+Open scene-preview.blend to inspect the replacement appearance in Blender.
+Textures and cosmetic geometry are packed. The renderer seed is 0; the separate
+groom geometry seed remains 20261108. Scene SHA-256:
+450bd7a7f03dff6c267e339eb8311912a6e8c375e5026bdfcdb51619bd3f8db5.
 
-The selected profile uses 32 samples with denoising. All nine 32/64/128 sample
-images were actually reviewed; the higher counts offered little visible gain
-at the required resolution. Local means: about 75/141/271 s per frame. The older
-scene averages about 27 s in a separate run. The new look costs more CPU time.
+This snapshot passes 80 native tests, all five direction/reset checks, nine
+anchor image/mask checks and the independent 1009-pose geometry audit, including
+14 detected mutations. The exact V1/V2 preflight passes on native and Linux
+Blender 4.5/5.2. Full V1-V17, repeated sweeps, clean-room replay, updated 256-image
+corpus and expanded 113-pose visibility remain pending for this replacement.
 
-The visual ratings are an agent assessment, not independent human ratings or
-competition points. Simplified non-refractive eyes and a static neutral head
-remain limitations. Before/after images use matched poses and calibration.
-Full-head portraits use separate presentation cameras and are not graded views.
+Retain 32 denoised samples after inspecting all nine new 32/64/128 images.
+Three-pose local means: about 63/126/269 seconds; these are measured examples,
+not official benchmarks. The earlier scene averaged about 27 seconds in its
+separate run. The appearance upgrade costs more CPU time.
 
-Reproduce with build/realism_scene.py and build/realism_config.json as described
-in docs/VISUAL_REALISM.md. No new qualified tag is associated with this snapshot.
+The image-bound ratings are an agent assessment, not independent human ratings
+or competition points. Simplified non-refractive eyes, texture mottling, a
+stylized short groom and a static neutral expression remain limitations.
+Before/after images use matched poses/calibration. Full-head portraits use
+separate cameras and are not graded views. No videos or decks are created.
+
+Reproduce using build/realism_scene.py and build/realism_config.json; see
+/docs/VISUAL_REALISM.md for the replacement evidence path and qualification.
+No qualified tag is associated with this development snapshot.

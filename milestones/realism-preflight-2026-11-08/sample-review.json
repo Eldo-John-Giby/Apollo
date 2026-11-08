@@ -1,22 +1,22 @@
 {
   "passed": true,
   "reviewer": "Codex",
-  "scope": "Agent inspection of all nine sample renders at native output resolution; not independent human ratings.",
-  "scene_sha256": "13a29bdfe9430ebac5aca13219dbb28856b438dce35647fbd459676aa8d17966",
-  "checkpoint": "finished-v9",
+  "scope": "Agent inspection of all nine replacement sample images at native 1024 output; not independent human ratings.",
+  "scene_sha256": "450bd7a7f03dff6c267e339eb8311912a6e8c375e5026bdfcdb51619bd3f8db5",
+  "checkpoint": "finished",
   "selected_samples": 32,
-  "benchmark_sha256": "f52a66172a07b1c6dd32446ef89f95c0c5ab9c52dc42ebbab9c5f7e6ed9573a2",
-  "reason": "All profiles preserve clear pupils. At 1024 output, 64/128 provide negligible visible improvement over the denoised 32-sample image; retain the lowest acceptable profile.",
-  "reference_comparison": "32 to 128 whole-image mean absolute luma difference about 0.382/255 and forehead skin ROI about 0.182/255; these are differences, not objective realism scores.",
+  "benchmark_sha256": "69dc6558fbea16616f8e1088a73187b105d441f4778376799802c85ee071d463",
+  "reason": "Center, upward and corner images remain clear across all sample counts. At 1024 output the 64/128-sample results have negligible visible improvement over the denoised 32-sample results; retain the lowest adequate profile.",
+  "reference_comparison": "32-to-128 mean absolute luma difference about 0.383/255; forehead ROI about 0.186/255. Differences are not objective naturalness scores. See sample-measurements.json for ROI and per-pose measurements.",
   "reviewed_artifacts": {
-    "samples/32/center.png": "89678ac2c73ad9eaaea2dd9c086501fb4a5e164884ddab898256620319bf41d9",
-    "samples/32/up.png": "fcb91c84f4154fbe83b7e7964865e2880c683c083bf72049ed6f970f5e81e7a8",
-    "samples/32/corner.png": "341a9a760ccf3976c569ad33b5d7307d120d144aec95bb6ce1e011f1794834b0",
-    "samples/64/center.png": "da235f07009d9130c5162393658a96695520f0a971d2a042936158a12c64035b",
-    "samples/64/up.png": "4f066b6e773e04408f4e7661bf6619a2a0eac2cc3a7a5c5203fbf1ee6ae8c831",
-    "samples/64/corner.png": "0719c15337f5a7f66220065b1b6c36ad7b30d4ec41e62afd1b6678bb1bf209d4",
-    "samples/128/center.png": "e77516174de1dcc90ec3785927e4bbc95f57edc7254cf12fe8d2fdc1a7141450",
-    "samples/128/up.png": "05aab28aa93f9d32423e6dd7b6eada9bdfbcd13dc9bf75e3befb8cd3e4d603f4",
-    "samples/128/corner.png": "c72e0587ec13604c3ba2e134569daa0e520327656bfbfe6e190c30dac5ce40cd"
+    "samples/32/center.png": "dcbeac70bfd439a4be353063d5a42abdfd537480c453c925ef7314c1ae6a5841",
+    "samples/32/up.png": "60438ff74bb94c059a947d25867ea77b3669e06839de7b23ce84d868f1d9f39d",
+    "samples/32/corner.png": "5f1ceb0bc01b9e014705c14adc69d20f02cf6a65d7600388e86f693eb4739b76",
+    "samples/64/center.png": "3b62da2c091d3d3da3cf03df7fe6a9a51ccf74d31e22ec56c2353e60cae8d0c3",
+    "samples/64/up.png": "0ee3cd865e82ea50d6c46ed7f4ffa9ffb8b4c91a29eb4e5a3c93ca6c59e41a65",
+    "samples/64/corner.png": "d6381e465fe89c8e75cc39fa22573266fc5263afebc2bda04af5a0fc7190e4f1",
+    "samples/128/center.png": "66b21d2d7941dfcdc2e44d63985493a1f899f8ad40aa4be164097145289cfe04",
+    "samples/128/up.png": "486754c5da765da0b1ef7310a87f89ce1bf81587e4dc7cce4e41548f46cbb6d6",
+    "samples/128/corner.png": "85b4a6fd6595c3b372dfa95f8641ee92ade9778e852f572d9c6c6a37abd41035"
   }
 }

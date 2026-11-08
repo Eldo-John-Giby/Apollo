@@ -31,8 +31,8 @@
   "eye_mesh_sha256": "8eb88401a28c48aceaaa678874005b4b08ac8e5c756e3dd54050ea6cd48316a6",
   "eye_meshes_unchanged": true,
   "config_sha256": "4a158c71211c6d5e482614d64861362ec338a5fdf3909a4c1adf45273e65e2a5",
-  "recipe_sha256": "5ddbc91da380f965592dea3b792f31886cdb7a0c65dd014948c59b1631507cca",
-  "scene_sha256": "13a29bdfe9430ebac5aca13219dbb28856b438dce35647fbd459676aa8d17966",
+  "recipe_sha256": "ea1765270c7fa6f8d9fefd877cf82caa8c4161a38c9b1b790b3c6e461c0b6b6b",
+  "scene_sha256": "450bd7a7f03dff6c267e339eb8311912a6e8c375e5026bdfcdb51619bd3f8db5",
   "qualified": false,
   "status": "Visual checkpoint; requires all acceptance gates"
 }

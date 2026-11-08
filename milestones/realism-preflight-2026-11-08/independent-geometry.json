@@ -66,7 +66,7 @@
     }
   },
   "inputs": {
-    "out\\realism\\candidate\\scene.blend": "13a29bdfe9430ebac5aca13219dbb28856b438dce35647fbd459676aa8d17966",
+    "out\\realism\\seed-zero\\finished\\scene.blend": "450bd7a7f03dff6c267e339eb8311912a6e8c375e5026bdfcdb51619bd3f8db5",
     "wrapper\\eyes.py": "b16d1f681628686b0d23e1ad751d469710dd71043bc5de075fd0d20a1ec7bf0e",
     "tools\\independent_audit.py": "9013dfca9815c8205fb5a0c1221b4b5f2b03cec4158c5bd6d08ae14cbfb6303f",
     "tools\\reference_geometry.py": "1edf576b6b7aedad90eaf6b0a5f35f767dc896486a3495606eab25e002e98678"

@@ -1,79 +1,87 @@
 {
   "passed": true,
-  "max_pixel_oracle_error_px": 0.19083184961415442,
+  "scene_sha256": "450bd7a7f03dff6c267e339eb8311912a6e8c375e5026bdfcdb51619bd3f8db5",
+  "benchmark_sha256": "69dc6558fbea16616f8e1088a73187b105d441f4778376799802c85ee071d463",
+  "max_pixel_oracle_error_px": 0.1948304980332574,
+  "skin_roi_xyxy": [
+    330,
+    180,
+    690,
+    360
+  ],
   "measurements": [
     {
       "samples": 32,
       "pose": "center",
-      "seconds": 74.03099999998813,
-      "mean_luma_difference_from_128": 0.3820466995239258,
-      "skin_roi_difference_from_128": 0.1823151515151515,
-      "max_pixel_oracle_error_px": 0.065668751853238
+      "seconds": 61.703000000008615,
+      "mean_luma_difference_from_128": 0.38301753997802734,
+      "skin_roi_difference_from_128": 0.1862962962962963,
+      "max_pixel_oracle_error_px": 0.04026081099696222
     },
     {
       "samples": 64,
       "pose": "center",
-      "seconds": 143.10899999999674,
-      "mean_luma_difference_from_128": 0.32919883728027344,
-      "skin_roi_difference_from_128": 0.15752121212121212,
-      "max_pixel_oracle_error_px": 0.08265491246889757
+      "seconds": 125.51499999998487,
+      "mean_luma_difference_from_128": 0.33000946044921875,
+      "skin_roi_difference_from_128": 0.15276234567901234,
+      "max_pixel_oracle_error_px": 0.038954865605379765
     },
     {
       "samples": 128,
       "pose": "center",
-      "seconds": 273.2969999999914,
+      "seconds": 254.71899999998277,
       "mean_luma_difference_from_128": 0.0,
       "skin_roi_difference_from_128": 0.0,
-      "max_pixel_oracle_error_px": 0.040696905337428604
+      "max_pixel_oracle_error_px": 0.03388745899623983
     },
     {
       "samples": 32,
       "pose": "up",
-      "seconds": 75.60999999998603,
-      "mean_luma_difference_from_128": 0.3815908432006836,
-      "skin_roi_difference_from_128": 0.18235757575757575,
-      "max_pixel_oracle_error_px": 0.13488331460930203
+      "seconds": 63.187000000005355,
+      "mean_luma_difference_from_128": 0.38337230682373047,
+      "skin_roi_difference_from_128": 0.18631172839506172,
+      "max_pixel_oracle_error_px": 0.1948304980332574
     },
     {
       "samples": 64,
       "pose": "up",
-      "seconds": 140.7029999999795,
-      "mean_luma_difference_from_128": 0.32895946502685547,
-      "skin_roi_difference_from_128": 0.15752727272727274,
-      "max_pixel_oracle_error_px": 0.17311326603185143
+      "seconds": 126.92200000002049,
+      "mean_luma_difference_from_128": 0.32996559143066406,
+      "skin_roi_difference_from_128": 0.15280864197530863,
+      "max_pixel_oracle_error_px": 0.1448430922606892
     },
     {
       "samples": 128,
       "pose": "up",
-      "seconds": 277.59399999998277,
+      "seconds": 272.26500000001397,
       "mean_luma_difference_from_128": 0.0,
       "skin_roi_difference_from_128": 0.0,
-      "max_pixel_oracle_error_px": 0.10353328917595958
+      "max_pixel_oracle_error_px": 0.13669802724095
     },
     {
       "samples": 32,
       "pose": "corner",
-      "seconds": 75.78200000000652,
-      "mean_luma_difference_from_128": 0.3820972442626953,
-      "skin_roi_difference_from_128": 0.18233939393939394,
-      "max_pixel_oracle_error_px": 0.1400529749285438
+      "seconds": 63.39100000000326,
+      "mean_luma_difference_from_128": 0.38320446014404297,
+      "skin_roi_difference_from_128": 0.18632716049382717,
+      "max_pixel_oracle_error_px": 0.19382786467884966
     },
     {
       "samples": 64,
       "pose": "corner",
-      "seconds": 139.10900000002584,
-      "mean_luma_difference_from_128": 0.3286762237548828,
-      "skin_roi_difference_from_128": 0.15752121212121212,
-      "max_pixel_oracle_error_px": 0.19083184961415442
+      "seconds": 126.01500000001397,
+      "mean_luma_difference_from_128": 0.33002471923828125,
+      "skin_roi_difference_from_128": 0.1527777777777778,
+      "max_pixel_oracle_error_px": 0.15272146829271044
     },
     {
       "samples": 128,
       "pose": "corner",
-      "seconds": 263.26500000001397,
+      "seconds": 279.625,
       "mean_luma_difference_from_128": 0.0,
       "skin_roi_difference_from_128": 0.0,
-      "max_pixel_oracle_error_px": 0.09841697652709025
+      "max_pixel_oracle_error_px": 0.18082873932567697
     }
   ],
-  "scope": "Luma differences from a higher-sample reference, not objective realism scores. Geometry-guided pixel oracle is not blind detection."
+  "scope": "Luma differences from the 128-sample reference, not objective realism scores. Independent geometry-guided pixel oracle, not blind detection or visibility-mask qualification."
 }
