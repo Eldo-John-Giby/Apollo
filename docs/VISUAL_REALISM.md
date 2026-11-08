@@ -130,7 +130,7 @@ realism_visibility worker with --cache pointing to that validated corpus.
 Final staging command (only after complete reviews and passing reports):
 
 ```powershell
-python tools/export_upgrade.py out/realism --out milestones/apollo-v0.3.0 --delivery delivery/realism --profile realism --version v0.3.0
+python tools/export_upgrade.py out/realism/seed-zero --out milestones/apollo-v0.3.0 --delivery delivery/realism --profile realism --version v0.3.0
 ```
 
 This preserves the older executable delivery. The new profile also includes the
@@ -178,3 +178,26 @@ bindings, qualification, datasets and archive rehearsals must be regenerated;
 old image hashes and ratings must not be relabelled as replacement evidence.
 Use tools/finish_realism.py --out out/realism/seed-zero --publish only after the
 replacement reviews exist and its qualification/checkpoint workers are running.
+
+## Replacement early evidence
+
+The render-seed-zero replacement scene SHA-256 is
+450bd7a7f03dff6c267e339eb8311912a6e8c375e5026bdfcdb51619bd3f8db5.
+Exact V1/V2 configuration preflight, all five direction/reset checks, nine-anchor
+blind/template image checks and actual mask checks pass. Reset is byte-identical;
+maximum direction template error is 0.074464 px. Nine-anchor blind error is at
+most 0.215781 px; all nine masks retain full visible/dark pupil coverage and
+reject the real half-pupil obstruction. All 80 native unit tests pass.
+
+All nine new 32/64/128 renders were individually inspected. Retain 32 samples:
+three-pose means are about 63, 126 and 269 seconds. The 32-to-128 luma difference
+is about 0.383/255 overall and 0.186/255 in the documented forehead ROI. The
+independent guided pupil check passes all nine (maximum error 0.194831 px).
+These are engineering measurements, not naturalness scores. New scene/image-
+bound reviews cover the three matched sheets, all nine eye rows and both new
+portrait views. No old v9 review was relabelled as replacement evidence.
+
+Review cumulative anatomy/surface/finished construction stills before starting
+the long qualification batch. Intermediate stages remain unqualified. Final
+export also requires an image-bound construction review. Videos and decks stay
+excluded; only passing technical evidence may receive apollo-v0.3.0.

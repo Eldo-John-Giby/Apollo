@@ -51,6 +51,12 @@ def export(upgrade,destination,delivery,profile='upgrade',version=None):
         assert preflight['passed'] and preflight['scene_sha256']==scene_hash
         assert preflight['verifier_sha256']==digest(ROOT/'tools/blender_verify.py')
         assert preflight['worker_sha256']==digest(ROOT/'tools/scene_preflight.py')
+        construction_folder=upgrade/'checkpoint-comparisons'
+        construction=json.loads((construction_folder/'review.json').read_text(encoding='utf-8'))
+        assert construction['passed'] and construction['reviewed_artifacts']
+        for name,value in construction['reviewed_artifacts'].items():
+            path=(construction_folder/name).resolve()
+            assert path.is_relative_to(construction_folder.resolve()) and digest(path)==value
         assert reports['rebuild']['config_sha256']==digest(ROOT/'build/realism_config.json')
         visual=json.loads((upgrade/'visual-review.json').read_text(encoding='utf-8'))
         assert visual['passed'] and visual['scene_sha256']==scene_hash

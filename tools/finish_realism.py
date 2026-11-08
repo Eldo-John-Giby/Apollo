@@ -59,6 +59,16 @@ def finish(output, publish=False):
             if state['stage'] == 'awaiting-checkpoint-visual-review':
                 break
             time.sleep(15)
+        status('waiting-for-construction-image-review')
+        review_path = output / 'checkpoint-comparisons/review.json'
+        while not review_path.exists():
+            time.sleep(15)
+        review = load(review_path)
+        assert review['passed'] and review['scope'] == 'Agent construction-image review; intermediate stages remain unqualified'
+        from check_release import digest
+        for name, sha in review['reviewed_artifacts'].items():
+            path = (review_path.parent / name).resolve()
+            assert path.is_relative_to(review_path.parent) and digest(path) == sha
         # Final-look reviews already bind the exact candidate images. Construction
         # stages are explicitly unqualified and do not receive invented ratings.
         assert git('rev-parse', 'HEAD') == start and not git('status', '--porcelain'), 'Checkout changed; inspect before publishing'
