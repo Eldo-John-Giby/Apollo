@@ -12,7 +12,7 @@ still-image evidence continue. See [release versions](docs/RELEASES.md).
 
 Appearance work continues on `photorealism-v2`; see [its execution record](docs/PHOTOREALISM_V2.md).
 The packed development candidate and still-image evidence are in
-[milestones/photorealism-v2-development](milestones/photorealism-v2-development/README.md).
+[milestones/photorealism-v2-candidate](milestones/photorealism-v2-candidate/README.md).
 Those development checkpoints are not qualified releases. The complete protected
 competition release described below remains available unchanged.
 

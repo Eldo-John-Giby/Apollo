@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "scene_sha256": "8acd0df98cd2581f54bf83901d56c669795c5eef14e853a378bcb18e6bf71c4d",
+  "reference_persistent_data": true,
+  "measurements": [
+    {
+      "pose": "center",
+      "persistent_off_seconds": 56.51600000000326,
+      "reference_seconds": 54.59399999998277,
+      "png_identical": true
+    },
+    {
+      "pose": "up",
+      "persistent_off_seconds": 61.96899999998277,
+      "reference_seconds": 58.03100000001723,
+      "png_identical": true
+    }
+  ],
+  "scope": "Single serial local trials; timing variation is not a statistical performance claim. No source scene save."
+}

@@ -248,20 +248,20 @@ not a release run):
 python tools/photorealism_checks.py --scene out/my-v2/scene.blend --out out/my-v2-checks
 ```
 
-This runner needs the local nine-pose baseline under
-out/photorealism-v2/baseline-poses for its final comparison step. On a fresh
-clone, first create that baseline from the reviewed prerelease using
-realism_visibility.py --limit 9 as described in the v2 execution record.
+The runner uses the local baseline poses when available and automatically falls
+back to the tracked `milestones/photorealism-v2-development/baseline/poses` on a
+fresh clone. An explicit `--baseline PATH` selects another matching pose set;
+a missing baseline fails before expensive rendering.
 It never runs full Windows/Linux qualification, generates the 256-image research
 corpus, publishes tags, or creates videos/decks. Inspect the output stills before
 accepting the candidate. CLI output and status.json report failures explicitly.
 
-Open `milestones/photorealism-v2-development/scene.blend` for the packed v2
+Open `milestones/photorealism-v2-candidate/scene.blend` for the packed v2
 development candidate. Its README records measured checks and limitations.
 To regenerate the official sweep from the repository root:
 
 ```powershell
-& $env:BLENDER_BIN -b --factory-startup milestones/photorealism-v2-development/scene.blend --python-exit-code 1 -P wrapper/eyes.py -- --out out/teammate-v2
+& $env:BLENDER_BIN -b --factory-startup milestones/photorealism-v2-candidate/scene.blend --python-exit-code 1 -P wrapper/eyes.py -- --out out/teammate-v2
 ```
 
 No MPFB or Blender MCP is needed for this packed-scene playback. MCP is useful

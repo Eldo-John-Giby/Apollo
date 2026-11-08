@@ -1,6 +1,6 @@
 # Photorealism v2 execution
 
-Current handoff: [packed development candidate](../milestones/photorealism-v2-development/README.md).
+Current handoff: [completed CPU appearance candidate](../milestones/photorealism-v2-candidate/README.md).
 The chronology below records intermediate experiments; the measured status at
 the end supersedes their pending-work statements. This is not a release.
 
@@ -169,3 +169,56 @@ and each image hash. Reset is always freshly rendered after an actual corner
 move and eyes.reset(). This avoids five duplicate CPU renders without reusing
 any evidence from the previous appearance or relaxing image thresholds.
 Native-resolution checks are currently running for the frozen refinement.
+
+
+## Final CPU appearance handoff
+
+The refined candidate is now `milestones/photorealism-v2-candidate/scene.blend`,
+SHA-256 `8acd0df98cd2581f54bf83901d56c669795c5eef14e853a378bcb18e6bf71c4d`.
+The earlier development checkpoint and exact baseline remain intact. The final
+recipe has 10,000 scalp strands, 250 overlapping hair locks, five strand tones,
+2100 brows, irregular tapered lashes, softened UV-aligned skin color and smooth
+sclera normals. It contains 464,088 visible evaluated polygons. No protected eye
+vertex changed. Skin remains native 2K; this is an explicit asset limitation.
+
+All 15 bounded check stages completed successfully on this exact scene, including
+both diagnostic images. All 80 unit tests passed. The independent 1009-pose audit
+and 14 injected faults pass. The nine representative pose RGB/mask reports pass:
+maximum blind error 0.278 px (rounded upward), minimum visible pupil fraction 1.0.
+A real corner-to-reset render is byte-identical to center. The official ten-frame
+sweep passes metadata and blind/template checks; maximum blind error 0.108 px
+(rounded upward). Native center/up/corner timings are 54.59/58.03/72.55 seconds;
+peak measured process RSS is 1,507,520,512 bytes (1.40 GiB). Persistent-data-off
+center/up measurements are 56.52/61.97 seconds, with byte-identical PNGs. Reuse
+remains enabled; these single trials do not establish statistical speed gains.
+
+The final native center, upward/corner images, all-pose/eye crop comparison,
+official sheet, front/three-quarter portraits and neutral/clay images were
+inspected. Hair now has readable locks rather than a smooth cap, broad color
+mottling is reduced and brows are fuller. Non-refractive eye shading and efficient
+hair geometry retain CG simplifications; no photographic equivalence or official
+score is claimed. Manual review is recorded against the actual image hashes.
+The scoped construction, iteration, targeted testing and development handoff are
+complete; full release qualification remains intentionally deferred.
+
+The check runner now supports `--baseline` and automatically uses the tracked
+baseline poses when local generated poses are absent. This permits fresh-clone
+checks without first rerendering the old baseline. Its direction reuse validates
+scene/wrapper/worker/runtime/calibration and image hashes, and always freshly
+renders eyes.reset(); a stale-scene negative check confirms rejection.
+
+Current packed-scene playback from the repository root:
+
+```powershell
+& $env:BLENDER_BIN -b --factory-startup milestones/photorealism-v2-candidate/scene.blend --python-exit-code 1 -P wrapper/eyes.py -- --out out/my-v2-sweep
+```
+
+No MPFB or MCP is needed for playback. All release/media/submission boundaries
+in the original plan and AGENTS.md remain in force.
+
+A fresh full recipe rebuild from the tracked baseline reproduced the protected
+eye hashes, evaluated geometry and native center PNG exactly. The saved blend
+container hash differs, so the evidence records both containers and binds the
+actual identical PNG; it does not claim byte-identical blend serialization.
+The tracked-baseline comparison was also rerun and all three sheets match the
+local-baseline sheets byte for byte.

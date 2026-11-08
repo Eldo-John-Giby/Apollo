@@ -3,8 +3,13 @@ import argparse,hashlib,json,os,shutil,subprocess,sys,time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 
-def run(scene,out,blender):
+def run(scene,out,blender,baseline=None):
     scene=scene.resolve();out=out.resolve()
+    if baseline is None:
+        baseline=ROOT/'out/photorealism-v2/baseline-poses'
+        if not baseline.exists():baseline=ROOT/'milestones/photorealism-v2-development/baseline/poses'
+    else:baseline=Path(baseline)
+    if not (baseline/'progress.json').is_file():raise ValueError('Missing baseline poses; provide --baseline')
     if out.exists():raise ValueError('Use a new check output directory')
     out.mkdir(parents=True);source_sha=hashlib.sha256(scene.read_bytes()).hexdigest();peaks=[]
     def status(stage,**fields):
@@ -60,11 +65,11 @@ def run(scene,out,blender):
         command('sheet',[py,ROOT/'tasks.py','sheet','--folder',official])
         command('portraits',worker('tools/realism_hero.py','--folder',out/'portraits'))
         command('diagnostics',worker('tools/photorealism_diagnostics.py','--folder',out/'diagnostics'))
-        command('comparisons',[py,ROOT/'tools/realism_comparison.py','--before',ROOT/'out/photorealism-v2/baseline-poses','--after',out/'poses','--out',out/'comparisons'])
+        command('comparisons',[py,ROOT/'tools/realism_comparison.py','--before',baseline,'--after',out/'poses','--out',out/'comparisons'])
         peak=max(p['peak_process_rss_bytes'] for p in peaks);assert 0<peak<=4*1024**3,'Memory budget failed/unmeasured'
         (out/'resources.json').write_text(json.dumps({'peak_process_rss_bytes':peak,'stages':peaks},indent=2)+'\n',encoding='utf-8')
         status('targeted-checks-complete-awaiting-visual-review',scene_sha256=source_sha,qualified=False)
     except Exception as exc:
         (out/'resources.json').write_text(json.dumps({'stages':peaks},indent=2)+'\n',encoding='utf-8');status('failed',error=str(exc));raise
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--scene',type=Path,required=True);p.add_argument('--out',type=Path,required=True);p.add_argument('--blender',default=os.environ.get('BLENDER_BIN') or shutil.which('blender'));a=p.parse_args();assert a.blender,'Set BLENDER_BIN';run(a.scene,a.out,a.blender)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--scene',type=Path,required=True);p.add_argument('--out',type=Path,required=True);p.add_argument('--baseline',type=Path);p.add_argument('--blender',default=os.environ.get('BLENDER_BIN') or shutil.which('blender'));a=p.parse_args();assert a.blender,'Set BLENDER_BIN';run(a.scene,a.out,a.blender,a.baseline)

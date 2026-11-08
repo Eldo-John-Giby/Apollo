@@ -1,0 +1,32 @@
+{
+  "review_required": true,
+  "baseline_scene_sha256": "4aa9df8db265417c0ae442c45c29a647a00238a05423e7c1f30638baacd1c70d",
+  "scene_sha256": "8acd0df98cd2581f54bf83901d56c669795c5eef14e853a378bcb18e6bf71c4d",
+  "worker_sha256": "5811ca670fbbb5579439740a6a0807b6ed8c42d013deff6560ea3bd73dc029e8",
+  "source_images": {
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\baseline-poses\\renders\\frame_000000.png": "dc5df9157bf9b5a35bc69f89ae1cd460d2b47ab4c5e7a84a18515f5c4d2d4278",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\baseline-poses\\renders\\frame_000001.png": "550da2143e6461531a02b359b5be3bec4b93b640383789cf0b4fde324c5a9c96",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\baseline-poses\\renders\\frame_000002.png": "975ad495e60cfb20c64b663be911fb1c6bd73349fb82efb181512c3cf6cddb12",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\baseline-poses\\renders\\frame_000003.png": "8acea36109907feb753f6115ab32f08c70773e42028199e51e2f56f5ecc5155b",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\baseline-poses\\renders\\frame_000004.png": "dcbeac70bfd439a4be353063d5a42abdfd537480c453c925ef7314c1ae6a5841",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\baseline-poses\\renders\\frame_000005.png": "60438ff74bb94c059a947d25867ea77b3669e06839de7b23ce84d868f1d9f39d",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\baseline-poses\\renders\\frame_000006.png": "771458b497d40e5228cbf3ed9e91d9d185ebd503ffbd4b748630aeae21e6daeb",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\baseline-poses\\renders\\frame_000007.png": "af852bc9702e15a77046a3cfff26849d372a50497cb244b6801a1288b7746c03",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\baseline-poses\\renders\\frame_000008.png": "5f1ceb0bc01b9e014705c14adc69d20f02cf6a65d7600388e86f693eb4739b76",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\refined-checks\\poses\\renders\\frame_000000.png": "bfe6e590409670fa1feab4056c30c25f7dbdf28d2d0aecc8418a1f12b51fdfb3",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\refined-checks\\poses\\renders\\frame_000001.png": "43d4701be77aa25a89d97959d453a91be93a0053df577afe1f1ebca60c886694",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\refined-checks\\poses\\renders\\frame_000002.png": "34d19e9a9d7de08c87fd523e6274cd3e8b026eee0811a1266ccf9decbdc564cb",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\refined-checks\\poses\\renders\\frame_000003.png": "c429445ecba0618a24f7cef83034e045e8d432ad907147d6b42ce7b533708fb1",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\refined-checks\\poses\\renders\\frame_000004.png": "4a87bdecbc8a6f9cdc809287222813bb162fcb596a171b6333ab4ee9f7e2e1ff",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\refined-checks\\poses\\renders\\frame_000005.png": "5ff5bcce68764361e5dfe51a58e7b7005d1d89b04bb6b75978dc57a17af96f2b",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\refined-checks\\poses\\renders\\frame_000006.png": "4754b4a5fc63cf973a8d96e1431127655885d50d697031619544dbcd4d438d06",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\refined-checks\\poses\\renders\\frame_000007.png": "77766724d47a66015fe1b32f092a640309e9b8c00e0d89f3ae9931f855ca79a2",
+    "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\photorealism-v2\\refined-checks\\poses\\renders\\frame_000008.png": "badeb7e4f644bf197922be8b2feba2c3cd6a19353439715606edc6f77d7286e7"
+  },
+  "sheets": {
+    "center-comparison.png": "644fe919a6d3bcf534b09f3d3434c3437359a2232f19b3ecbb88e2ce20d2dd15",
+    "eye-details.png": "24197373670d0c04975b5fe8176d5bb16af6e9a66612ea32da2be5a10abdb325",
+    "pose-comparison.png": "732197992b337429c412cea4fda039cf13a76a7eb76c1ceb37d7c9c26a672207"
+  },
+  "scope": "Matched poses/calibration; deliberate material, grooming and lighting changes. Agent review is separate."
+}
