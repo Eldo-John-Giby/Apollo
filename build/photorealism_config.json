@@ -1,0 +1,14 @@
+{
+  "gender": 0.0,
+  "age": 0.5,
+  "mouth_close": -0.08,
+  "groom_seed": 20261108,
+  "scalp_strands": 8000,
+  "brow_strands": 1400,
+  "samples": 32,
+  "render_seed": 0,
+  "skin_subsurface": 0.045,
+  "skin_bump_m": 1.2e-05,
+  "skin_bump_strength": 0.12,
+  "hair_roughness": 0.48
+}

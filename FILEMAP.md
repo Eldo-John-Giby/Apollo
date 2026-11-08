@@ -89,7 +89,8 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/live_controls.py` | Optional Blender sidebar invoking the public wrapper; never required or automatically enabled in graded scenes. |
 | `tools/ui_rehearsal.py` | Real Blender panel operators: pose-render/API byte parity and official sweep output validation. |
 | `build/upgrade_looks.py` | Distinct iris-region/shading/light candidates and MPFB lid/lash refit; preserves pupil/eye geometry and calibration, requires MPFB for building only. |
-| `build/photorealism_scene.py` | Isolated v2 clean review baseline and adult female MPFB morph prototype with orbital alignment and protected-eye checks; later appearance stages pending. |
+| `build/photorealism_scene.py`, `build/photorealism_config.json` | Separate v2 adult female bake, preserved orbital contact, licensed skin/iris materials and baked bun/brow groom; source/config/asset receipts and protected-eye checks. |
+| `assets/photorealism-v2/ATTRIBUTION.md` | Native skin/eye texture provenance, licensing and checksums. |
 | `build/realism_scene.py`, `build/realism_config.json` | Isolated anatomy/surface/groom checkpoints with seeded baked strands, actual lid/sphere contour fitting, preserved eye meshes and source-bound build receipts. |
 | `tools/realism_visibility.py` | Resumable 81-grid + 32-random RGB stress poses and real occlusion masks; separate from official and research protocols. |
 | `tools/realism_hero.py` | Separate front/three-quarter presentation portraits; preserves the saved calibrated scene and writes no graded metadata. |
