@@ -1,0 +1,39 @@
+{
+  "scene_sha256": "8acd0df98cd2581f54bf83901d56c669795c5eef14e853a378bcb18e6bf71c4d",
+  "accepted_as": "CPU appearance development candidate",
+  "qualified": false,
+  "photographic_realism_certified": false,
+  "scope": "Actual native Cycles stills and live MCP front/rear/three-quarter inspected; assistant review, no independent human rating",
+  "inspected_images": {
+    "contact_sheet.png": "6c054b7334cd19b3d0fabe68ed611314ad9b9e21d8a2b77b520c1087a130be7f",
+    "evidence/refinement-comparison/center-comparison.png": "b99b4489a7b0bf715abd24b0eef5c1947acb77ca9cadc577465fb466a1866b15",
+    "evidence/refinement-comparison/eye-details.png": "9332cb2fbf1462f3125719dfb1b725f5d0beac59ddfdb3bdc069e1c538611d54",
+    "evidence/refinement-comparison/pose-comparison.png": "7fcacef56d273a306ce79bf612283a3ef0bd231d14b0f7c79832ff7331aecfe0",
+    "evidence/portraits/front.png": "3ad48042daf559bc275fc6bec6221191b7d4cea7bc8e4ff5639bd03c7adabe08",
+    "evidence/portraits/three-quarter.png": "502f148bb051ae3501edffbccb715cd9427c6e332bfa872d1db7e7b9cc237e65",
+    "evidence/diagnostics/neutral-light.png": "b2fd62793d3bca53fad13479a6961b282e4de8f3659cf9b495399408e7e2a12f",
+    "evidence/diagnostics/clay-front.png": "ef4683f987b98590cb05bcf3b0f5374b006ebf820a8ee9ec922c7faa7fa40478"
+  },
+  "observations": [
+    "Broad albedo mottling reduced while UV-aligned color detail remains.",
+    "Denser brows, varied tapered lashes and smooth sclera normals remove sparse/comb/ring artifacts.",
+    "Raised overlapping locks and multiple fiber tones give hair a readable flow instead of a smooth cap.",
+    "No obvious pupil clipping or orbital collision in the nine representative poses.",
+    "Clay and portrait anatomy retain relaxed mouth closure and female adult proportions."
+  ],
+  "limitations": [
+    "Native albedo remains 2K; no fabricated 4K detail.",
+    "Hair locks and non-refractive eyes still show synthetic simplifications, especially outside the graded view.",
+    "No official score, subjective photorealism study or release qualification is implied."
+  ],
+  "unit_tests": {
+    "passed": 80,
+    "elapsed_seconds": 58.41,
+    "command": "python -m pytest -q"
+  },
+  "rebuild_center_png_identical": true,
+  "persistence_pngs_identical": true,
+  "tracked_baseline_comparison_identical": true,
+  "technical_checks_passed": true,
+  "implementation_phase_complete": true
+}

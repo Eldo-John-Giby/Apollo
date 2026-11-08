@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parent
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('task',choices=['test','doctor','sync','inspect','scene','production-scene','sweep','framing','verify','validate','sheet','prepare','demo','bundle','all','docker'])
+    p.add_argument('task',choices=['test','doctor','sync','inspect','scene','production-scene','sweep','framing','verify','validate','sheet','prepare','demo','bundle','all','docker','dataset'])
     p.add_argument('--folder',type=Path)
     p.add_argument('--source',type=Path,default=ROOT/'assets/base_character.blend')
     p.add_argument('--mapping',type=Path)
@@ -18,8 +18,12 @@ def main():
     p.add_argument('--quality',choices=['draft','final'])
     p.add_argument('--production',action='store_true')
     p.add_argument('--look',choices=['flat','radial'],default='radial')
+    p.add_argument('--scene',type=Path,default=ROOT/'out/production/scene.blend')
+    p.add_argument('--count',type=int,default=256)
+    p.add_argument('--seed',type=int,default=0)
+    p.add_argument('--samples',type=int,choices=[8,32,64,128],default=32)
     args=p.parse_args()
-    args.folder=(args.folder or ROOT/('out/production' if args.production else 'out/fixture')).resolve()
+    args.folder=(args.folder or ROOT/('out/dataset' if args.task=='dataset' else 'out/production' if args.production else 'out/fixture')).resolve()
     python=sys.executable
     def run(command,**kwargs):
         return subprocess.call([str(item) for item in command],**kwargs)
@@ -36,6 +40,9 @@ def main():
     portable=ROOT/'out/runtimes/blender-5.2.3/blender-5.2.3-windows-x64/blender.exe'
     if not secondary and portable.is_file(): secondary=str(portable)
     if secondary: os.environ['BLENDER_SECONDARY_BIN']=secondary
+    if args.task=='dataset':
+        if not blender or not args.scene.is_file():p.error('Dataset requires Blender and an existing --scene')
+        return run([blender,'-b','--factory-startup',args.scene.resolve(),'--python-exit-code','1','-P',ROOT/'tools/generate_dataset.py','--','--folder',args.folder,'--count',args.count,'--seed',args.seed,'--samples',args.samples])
     if args.task=='doctor':
         print('Python:',sys.version)
         print('Blender:',blender or 'NOT AVAILABLE: set BLENDER_BIN')

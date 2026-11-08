@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "reviewer": "Codex",
+  "scope": "Agent inspection of the replacement matched comparison sheets, all nine eye-pose rows and both portrait renders; not official scores or independent human naturalness ratings.",
+  "scene_sha256": "450bd7a7f03dff6c267e339eb8311912a6e8c375e5026bdfcdb51619bd3f8db5",
+  "categories": {
+    "socket_integration": {
+      "baseline": 2,
+      "candidate": 3,
+      "reason": "Matched nine-pose crops show fitted lid margins and tear ducts with less visible separation around the eyes."
+    },
+    "eye_appearance": {
+      "baseline": 2,
+      "candidate": 3,
+      "reason": "Softer iris/sclera transitions and restrained moist shading integrate the eyes better; the non-refractive synthetic appearance remains visible."
+    },
+    "skin_response": {
+      "baseline": 2,
+      "candidate": 3,
+      "reason": "Shaped lighting and regional roughness/subsurface response give more facial volume than the flatter baseline; texture mottling remains a limitation."
+    },
+    "grooming": {
+      "baseline": 2,
+      "candidate": 3,
+      "reason": "Tapered lashes replace heavy fan cards; front and three-quarter portraits show a coherent short swept-back groom. Brows remain texture-based and the hairline is stylized."
+    },
+    "pupil_readability": {
+      "baseline": 5,
+      "candidate": 5,
+      "reason": "Pupils remain clearly readable across the nine matched poses and both portraits. Unchanged five-direction/reset and nine-anchor image/mask gates pass."
+    }
+  },
+  "reviewed_artifacts": {
+    "comparisons/center-comparison.png": "e3175bbd9c1f7bb39e509fa5b088a0baae4e3e0c9a65ead85ed4f0f13780885e",
+    "comparisons/pose-comparison.png": "eb81fa09d4823d031aafb6c32b2560bd6210a52b8c6fbb5407f5efff17071e4d",
+    "comparisons/eye-details.png": "ca438fcf9384acc3276ae6a174af5617d05ffc015dd2f527f7538cd6eb77c96d",
+    "portraits/front.png": "32af80337760fe18d069305047c3794a8100ce165a347d0161f8a7b2d78b4bc6",
+    "portraits/three-quarter.png": "072117d0a04435ceded3d470bab3130e120af64103e7238c908acc87110d6a0b"
+  },
+  "limitations": [
+    "Static neutral expression",
+    "Simplified non-refractive eyes",
+    "Stylized short groom and hairline; existing textured brows",
+    "Skin texture mottling",
+    "No downstream ML accuracy benchmark"
+  ]
+}

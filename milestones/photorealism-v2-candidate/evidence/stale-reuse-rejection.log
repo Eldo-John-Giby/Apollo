@@ -1,0 +1,14 @@
+Blender 4.5.15 LTS (hash 5afeabba6097 built 2026-10-22 01:35:27)
+Read blend: "C:\Users\eldoj\PycharmProjects\Samsung XR\out\photorealism-v2\refined-2\scene.blend"
+Traceback (most recent call last):
+  File "C:\Users\eldoj\PycharmProjects\Samsung XR\tools\direction_smoke.py", line 53, in <module>
+    a=p.parse_args(sys.argv[sys.argv.index('--')+1:]);run(a.folder,a.reuse_poses)
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\eldoj\PycharmProjects\Samsung XR\tools\direction_smoke.py", line 22, in run
+    assert run['scene_sha256']==digest(bpy.data.filepath),'Cached scene mismatch'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Cached scene mismatch
+
+Error: script failed, file: 'tools/direction_smoke.py', exiting.
+
+Blender quit

@@ -1,0 +1,8 @@
+{
+  "scene_sha256": "34b1e13554c789baa522d32445972a91cafef2b7e9c366c8d5c13f73072db752",
+  "scope": "Inspection-only lighting/material/camera variations; no graded metadata and no scene save",
+  "images": {
+    "clay-front.png": "60852e0364c22fa2c85117c451dabe505c67efaf80c651cf19d72dc4c671f733",
+    "neutral-light.png": "f571ce51de158fbadc3e2fe73f1ce8608ff2bd0999b2f569a1cb790d7e67c801"
+  }
+}

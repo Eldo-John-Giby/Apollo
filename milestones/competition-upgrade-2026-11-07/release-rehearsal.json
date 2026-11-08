@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "archive_sha256": "2c3031176adbe5758155914a9291f6073905e37a6ef6e4ff91284d01db1ff09e",
+  "scene_sha256": "3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d",
+  "dataset_sha256": "afc799e77249af16631008bcd71e8152df1845785dd8e3b958446c091bc9b6f1",
+  "extracted_archive_regenerated_identically": true,
+  "different_cwd_and_clean_user_config": true,
+  "completed_256_resume_unchanged": true,
+  "interrupted_255_to_256_identical": true,
+  "scope": "Automated operator rehearsal, not a claimed independent human usability study."
+}

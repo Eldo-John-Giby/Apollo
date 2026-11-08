@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "candidate_scene_sha256": "8acd0df98cd2581f54bf83901d56c669795c5eef14e853a378bcb18e6bf71c4d",
+  "rebuilt_scene_sha256": "dc96b1525470f363db21989266bafe965ecfb593478b2fb3abfe09a5f31d1430",
+  "source_sha256": "4aa9df8db265417c0ae442c45c29a647a00238a05423e7c1f30638baacd1c70d",
+  "center_png_sha256": "4a87bdecbc8a6f9cdc809287222813bb162fcb596a171b6333ab4ee9f7e2e1ff",
+  "center_png_identical": true,
+  "recipe_config_assets_geometry_identical": true,
+  "scope": "Fresh complete anatomy/material/groom rebuild from exact tracked baseline; native 32-sample center PNG comparison"
+}

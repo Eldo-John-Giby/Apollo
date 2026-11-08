@@ -1,0 +1,125 @@
+{
+  "passed": true,
+  "poses": 9,
+  "minimum_visible_dark_fraction": 1.0,
+  "maximum_mask_centroid_error_px": 0.03061872166044486,
+  "injected_half_pupil_fraction": 0.49935601022212484,
+  "injected_occlusion_detected": true,
+  "measurements": [
+    {
+      "frame": 0,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 0,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 1,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 1,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 2,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 2,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 3,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 3,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 4,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 4,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 5,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 5,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 6,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 6,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 7,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 7,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 8,
+      "eye": "R",
+      "visible_dark_fraction": 1.0
+    },
+    {
+      "frame": 8,
+      "eye": "L",
+      "visible_dark_fraction": 1.0
+    }
+  ],
+  "scene_sha256": "4aa9df8db265417c0ae442c45c29a647a00238a05423e7c1f30638baacd1c70d",
+  "evidence_sha256": "a3a4425ea2cbaefe11e61882b8095ac656757cf41259bf660662f8408f66e6f3",
+  "analysis_source_sha256": "ffed39561dba6795ef974168a523d30c55a13c9c1c1c51c6374b785029d30da8",
+  "mask_sha256": {
+    "fault_expected.png": "2839075c57beeac074206a2ebcd0fc476e298f3038c334d9beb2e31ab3277f29",
+    "fault_occluded.png": "6cacb48c1520e39aacbb968aff29bf395d6f26c0e89821460904fbe125c48145",
+    "occluded/frame_000000.png": "f761aa037438268378db3f74b34cd2f83f7740ed6c5ee129fdcd7aef865c5959",
+    "occluded/frame_000001.png": "6730431d5f5188155a8ef96388648690d87c24ecc7a619f40fd99c1610cf5e2c",
+    "occluded/frame_000002.png": "0e02a60438c07df3c6de37e9744f366da71cbe8c28f9148306ba77a406dc350f",
+    "occluded/frame_000003.png": "6cec167b0c8dd7821f64d381e91c1eceef560d5eef4c3b6bfd9d8d62e3d28f46",
+    "occluded/frame_000004.png": "2839075c57beeac074206a2ebcd0fc476e298f3038c334d9beb2e31ab3277f29",
+    "occluded/frame_000005.png": "ccac07386d32f04d98569dee3680bc98741e2f0d043601e2160c3f30addfd577",
+    "occluded/frame_000006.png": "df0bb8e334953a4798a686eda9ecc4805952b9401b8c6ae19d378094ae696fef",
+    "occluded/frame_000007.png": "4d2600b3481d3784f4f6f717c9202974c2c5459605279cc7775ee7ad18691d27",
+    "occluded/frame_000008.png": "c60dd069ddb23fdb02309cab59ad00d3869fb870f6f7d9a27d0f9270ff0e2a39",
+    "unoccluded/frame_000000.png": "f761aa037438268378db3f74b34cd2f83f7740ed6c5ee129fdcd7aef865c5959",
+    "unoccluded/frame_000001.png": "6730431d5f5188155a8ef96388648690d87c24ecc7a619f40fd99c1610cf5e2c",
+    "unoccluded/frame_000002.png": "0e02a60438c07df3c6de37e9744f366da71cbe8c28f9148306ba77a406dc350f",
+    "unoccluded/frame_000003.png": "6cec167b0c8dd7821f64d381e91c1eceef560d5eef4c3b6bfd9d8d62e3d28f46",
+    "unoccluded/frame_000004.png": "2839075c57beeac074206a2ebcd0fc476e298f3038c334d9beb2e31ab3277f29",
+    "unoccluded/frame_000005.png": "ccac07386d32f04d98569dee3680bc98741e2f0d043601e2160c3f30addfd577",
+    "unoccluded/frame_000006.png": "df0bb8e334953a4798a686eda9ecc4805952b9401b8c6ae19d378094ae696fef",
+    "unoccluded/frame_000007.png": "4d2600b3481d3784f4f6f717c9202974c2c5459605279cc7775ee7ad18691d27",
+    "unoccluded/frame_000008.png": "c60dd069ddb23fdb02309cab59ad00d3869fb870f6f7d9a27d0f9270ff0e2a39"
+  }
+}

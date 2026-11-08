@@ -1,23 +1,30 @@
 # Repository File Map
 
-Navigation index verified 7 November 2026. Inspect implementation before changing it.
+Navigation index verified 9 November 2026. Inspect implementation before changing it.
 
 ## Status and flow
 
 Apollo implements synthetic binocular gaze for Samsung PRISM-XR Track 01.
-The radial-iris 32-sample scene is frozen as the current development milestone.
-All V1–V17 checks pass on Blender 4.5.15 with Blender 5.2.3 secondary qualification, including directions,
-visibility, two identical sweeps and clean-room regeneration. Docker image build, 60 tests and a Linux packed-scene pose render pass. The flat-eye verified baseline is
-preserved locally. Generated artifacts belong under out/ and are not listed.
+The protected radial-iris development freeze remains available. The competition
+upgrade adds a qualified warm-iris/lid/lash look, independent geometry audits,
+a complete seeded 256-image dataset, optional controls and evidence media.
+The protected competition-qualified release passes native/Linux V1–V17 and all
+applicable secondary checks, with 79 tests on both platforms. The CPU adult-female appearance candidate is integrated into main;
+release qualification remains deferred. Generated temporary
+artifacts belong under out/ and are not listed here.
 
 Flow: character inspection/mapping or fixture → calibrated scene → standalone eye
 wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → production ZIP.
 
 ## Requirements and research
 
+Phase closure and next-work boundaries: `docs/PHASE_HANDOFF.md`. The realism
+preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred.
+
 | File | Responsibility |
 | --- | --- |
-| `AGENTS.md` | Repository navigation and file-map maintenance rules. |
+| `TEAM_SETUP.md` | Teammate onboarding, pinned tools, packed-scene workflow, MPFB assets, daily checks, collaboration and release boundaries. |
+| `AGENTS.md` | Navigation, standing no-video/no-presentation rule, release naming and checkpoint commits. |
 | `docs/problem_statement.md` | Screenshot-transcribed requirements, rubric, deliverables, unresolved organizer questions. |
 | `docs/SOLUTION_TECHNICAL.md` | Proposed geometry, conventions, API, verification checks, risks, and limitations. |
 | `docs/IMPLEMENTATION_PLAN.md` | Original phased plan and embedded reference math/tests; numbered companion references mean the unnumbered files here. |
@@ -30,20 +37,26 @@ wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → pr
 | `docs/RUNBOOK.md` | Operator setup, fixture workflow, character handoff, framing, verification, Docker and submission steps. |
 | `docs/PERFORMANCE.md` | Measured sample-count timing/noise tradeoffs, secondary-runtime provenance and Docker limitations. |
 | `docs/DEVELOPMENT_FREEZE.md` | Chosen freeze quality, rubric evidence, archive reproduction and explicit validation limits. |
+| `docs/PS_AUDIT.md` | Requirement-by-requirement technical coverage and remaining event/submission deliverables against the user's consolidated specification. |
+| `docs/UPGRADE_PROGRESS.md`, `docs/VERIFIER_COVERAGE.md` | Upgrade execution gates, measured prototype status and verifier independence/coverage limitations. |
+| `docs/UPGRADE_RUNBOOK.md` | Reproduction commands for upgraded looks, independent/dataset adversaries, controls, Linux qualification, deck/video and archive rehearsals. |
+| `docs/RELEASES.md` | Uniform release/tag names, historical version mapping and promotion policy. |
+| `docs/PHOTOREALISM_V2.md` | V2 construction, appearance review, measured CPU checks, deviations and development handoff. |
+| `docs/VISUAL_REALISM.md` | Current appearance work, rejected prototypes, reproducible checkpoints and remaining visual/technical gates. |
 | `docs/character_mapping.example.json` | Explicit stock-eye identifiers, orientation confirmation and attribution template. |
 
 ## Entry points and core
 
 | File | Responsibility |
 | --- | --- |
-| `tasks.py` | Portable CLI orchestrating test, inspection, scene build, sweep, framing, validation, sheet, prepare, demo, verify, bundle, all and Docker. |
+| `tasks.py` | Portable CLI orchestrating test, inspection, scene build, sweep, framing, validation, sheet, prepare, demo, verify, bundle, Docker and separate seeded dataset generation. |
 | `wrapper/eyes.py` | Standalone Blender API/CLI; embedded NumPy core; absolute pose, evaluated geometry/projection checks, atomic metadata output. |
 | `apollo_core/core.py` | Finite inputs/config, fixation, shortest-arc rotation, camera projection, exact pupil conic, sweep and annotations. |
 | `apollo_core/metadata.py` | Structural/semantic protocol checks and optional analytic checks against a supplied calibration. |
 | `metadata.schema.json` | Ten-frame JSON Schema; mathematical consistency is enforced by Python validation. |
 | `check_core.py` | Direct reference assertion runner; normal task tests use pytest. |
 | `pyproject.toml`, `requirements.txt` | Pytest configuration and pinned Python tool dependencies. |
-| `Makefile`, `Dockerfile`, `.dockerignore` | Task aliases and pinned Blender/Linux container build (not executed in current environment). |
+| `Makefile`, `Dockerfile`, `.dockerignore` | Task aliases and pinned Blender/Linux container build (built and tested locally). |
 | `README.md`, `DECISIONS.md` | Current usage/evidence and recorded implementation decisions/remaining validation. |
 | `.gitignore`, `.dockerignore`, `.gitattributes` | Exclude caches/downloads from source and containers; preserve exact milestone payload bytes for checksums. |
 
@@ -69,16 +82,42 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/sync_core.py` | Embed core math in wrapper or check drift; strips the source future import for embedding. |
 | `tools/validate_metadata.py` | JSON Schema/semantic checks and exactly ten 1024×1024 PNG validation. |
 | `tools/grader_sim.py` | Image-only ellipse pupil detector, weighted mask centroid, subpixel template-displacement detector. |
+| `tools/reference_geometry.py`, `tools/independent_audit.py` | Independent Rodrigues/projection oracle, deformed mesh measurements and disposable Blender defect injection. |
+| `tools/pixel_oracle.py` | Geometry-guided dark-surface pixel check independent of OpenCV detectors; not a visibility-mask replacement. |
+| `tools/visibility_audit.py`, `tools/analyze_visibility.py` | Dataset corner/random occlusion masks, independent mask centroids and rendered half-pupil fault detection. |
+| `tools/lighting_adversary.py` | Disposable rendered lighting-loss fault, requiring lighting signature and pupil-pixel rejection. |
+| `tools/dataset_protocol.py`, `tools/generate_dataset.py`, `tools/analyze_dataset.py` | Separate seeded/resumable dataset protocol, Blender generation, independent image checks and coverage artifacts. |
+| `tools/live_controls.py` | Optional Blender sidebar invoking the public wrapper; never required or automatically enabled in graded scenes. |
+| `tools/ui_rehearsal.py` | Real Blender panel operators: pose-render/API byte parity and official sweep output validation. |
+| `build/upgrade_looks.py` | Distinct iris-region/shading/light candidates and MPFB lid/lash refit; preserves pupil/eye geometry and calibration, requires MPFB for building only. |
+| `build/photorealism_scene.py`, `build/photorealism_config.json` | Separate v2 adult female bake, preserved orbital contact, licensed skin/iris materials and baked bun/brow groom; source/config/asset receipts and protected-eye checks. |
+| `assets/photorealism-v2/ATTRIBUTION.md` | Native skin/eye texture provenance, licensing and checksums. |
+| `build/realism_scene.py`, `build/realism_config.json` | Isolated anatomy/surface/groom checkpoints with seeded baked strands, actual lid/sphere contour fitting, preserved eye meshes and source-bound build receipts. |
+| `tools/realism_visibility.py` | Resumable 81-grid + 32-random RGB stress poses and real occlusion masks; separate from official and research protocols. |
+| `tools/realism_hero.py` | Separate front/three-quarter presentation portraits; preserves the saved calibrated scene and writes no graded metadata. |
+| `tools/realism_comparison.py` | Hash-checked, pose/calibration-matched baseline/candidate sheets and native eye crops; leaves visual ratings to explicit review. |
 | `tools/direction_report.py` | Five-direction measurements, reset comparison and enlarged visual comparison from checkpointed verification renders. |
+| `tools/direction_smoke.py` | Actual baseline/cardinal/reset image gate; optional hash-bound pose reuse with a fresh eyes.reset() render. |
+| `tools/early_image_gate.py` | Early blind/template checks on the actual sweep or checkpointed dataset using independent projections and unchanged thresholds. |
+| `tools/photorealism_checks.py` | Targeted v2 geometry, CPU/RSS benchmark, 9-pose visibility, directions, official sweep, still diagnostics and comparisons; never releases. |
+| `tools/photorealism_persistence.py` | Serial persistent-data-off timing and exact image comparison against a matching baseline benchmark. |
+| `tools/photorealism_diagnostics.py` | Disposable neutral-light and clay portrait renders without modifying saved scene or graded metadata. |
+| `tools/scene_preflight.py` | Run the existing verifier V1/V2 functions without renders; scene/source-bound early failure report, never full qualification. |
 | `tools/blender_verify.py` | Blender evidence worker with progress checkpoints: calibration/metrics, random evaluated poses, repeated sweeps, direction images, isolated/occluded masks, packed resource audit; hash-guarded mask-only reruns. |
 | `tools/verify.py` | V1–V17 coordinator, pixel/direction/visibility checks, clean-room/secondary subprocesses, evidence-bound JSON/Markdown reports and hash-guarded evidence reuse. |
 | `tools/framing_sweep.py` | 85–135 mm experiments and eye-sphere margin/shift selection; brows/lashes still need visual review. |
-| `tools/benchmark_render.py` | Isolated 8/16-sample center/up/down timings and pose records; leaves the source scene and qualified settings unchanged. |
+| `tools/benchmark_render.py` | Isolated Configurable 8–128-sample center/up/down or corner timings and pose records; leaves the source scene and qualified settings unchanged. |
 | `tools/contact_sheet.py` | 5×2 annotated sheet, crosshairs, reset rings, direction clocks, fixture label. |
 | `tools/prepare_candidate.py` | Candidate-specific README and fixture attribution; production attribution must already exist. |
 | `tools/demo.py` | Labeled sweep GIF and presentation/recording outline; not a final narrated video. |
+| `tools/build_presentation.mjs`, `tools/build_demo_video.py` | Editable Artifact Tool evidence deck and 105-second actual-artifact demonstration with local synthesized narration. |
+| `requirements-research.txt`, `requirements-media.txt` | Optional measured dataset plots and demo-video authoring dependencies. |
 | `tools/make_bundle.py` | Reject fixtures, stale evidence and incomplete reports; stage ZIP, size/integrity/extraction checks. |
 | `tools/freeze_candidate.py` | Development-only archive using shared qualification gates; per-file manifest, ZIP integrity and extraction checks. |
+| `tools/release_rehearsal.py` | Actual ZIP regeneration from clean config/different CWD; complete and interrupted 255→256 dataset resume reproduction. |
+| `tools/finish_realism.py` | Wait for existing qualification/checkpoints, gate technical export, verify Git bytes and optionally commit/tag/push; never authors media. |
+| `tools/check_release.py` | Verify release manifests, ZIP integrity and source/payload hashes against staged or committed Git blobs. |
+| `tools/export_upgrade.py` | Gate technical milestones, executable delivery, still-image evidence and complete research-dataset ZIP; excludes videos/decks. |
 
 ## Tests and relationships
 
@@ -86,6 +125,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 - `tests/test_protocol.py`: invalid inputs/config/metadata, exact conic boundary, embedded core and standalone import parity.
 - `tests/test_artifacts.py`: image/sheet validation and production packaging gates.
 - `tests/test_verification.py`: blind detector/template synthetic accuracy, centroid coordinates and missing-runtime report behavior.
+- `tests/test_realism_visibility.py`: deterministic 113-pose square-boundary coverage.
 - Core is authoritative; regenerate wrapper embedding with `python tasks.py sync` after core edits.
 - Reports bind scene, wrapper, metadata and render hashes. Regenerate/reverify after changing these artifacts.
 - `all` orders tests → sync → scene → sweep → validate → sheet → prepare → demo → verify → optional production bundle.

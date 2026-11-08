@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "reviewer": "Codex visual inspection of decoded representative frames",
+  "video_sha256": "fab2bfb34fb36c5a5e8cf54cd7ed258faa20ad073a187663443d68fdcca60024",
+  "reviewed_timestamps_seconds": [
+    0,
+    12,
+    23,
+    26,
+    32,
+    36,
+    41,
+    46,
+    51,
+    66,
+    76,
+    89,
+    99
+  ],
+  "checks": [
+    "Readable titles and evidence",
+    "Actual cardinal/reset images and correctly aligned labels",
+    "Actual sweep and research images",
+    "Blender-only controls screenshot",
+    "Limitations and synthesized narration disclosed"
+  ],
+  "audio_validation": "Full decode: 2520 frames; measured audio mean -21.8 dB. Cardinal narration uses five separately generated utterances padded to five seconds each.",
+  "scope": "Representative-frame visual review and automated stream/timing checks; not an independent human review or a real-time performance recording."
+}

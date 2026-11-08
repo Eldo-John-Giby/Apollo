@@ -1,0 +1,26 @@
+{
+  "scope": "Presentation views only; outside the calibrated graded camera and metadata",
+  "scene_sha256": "34b1e13554c789baa522d32445972a91cafef2b7e9c366c8d5c13f73072db752",
+  "views": [
+    {
+      "view": "front",
+      "camera_position": [
+        0,
+        -0.68,
+        -0.015
+      ],
+      "focal_mm": 70,
+      "image_sha256": "6054b1d3c3e80df2f579af094bbd89fd62a000daee55999f37031b3356e27ef8"
+    },
+    {
+      "view": "three-quarter",
+      "camera_position": [
+        0.25,
+        -0.64,
+        0.015
+      ],
+      "focal_mm": 70,
+      "image_sha256": "7b787941ce997121c88c8420dd545a16c41b82d127665d2de37ef133062e9e36"
+    }
+  ]
+}

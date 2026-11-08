@@ -5,7 +5,7 @@ import pytest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from grader_sim import centroid,detect,template_shift
-from verify import verify
+from verify import verify,write_report
 from direction_report import measure
 
 
@@ -61,6 +61,20 @@ def test_empty_mask_fails():
     with pytest.raises(ValueError): centroid(np.zeros((1024,1024)))
 
 
+def test_template_rejects_pupil_joined_to_dark_iris():
+    # Regression from the rejected dark-hazel material: a valid black pupil can
+    # still join a much larger iris region at the tracker's reference threshold.
+    reference=image();yy,xx=np.indices(reference.shape,dtype=float)
+    # A separate dark brow band keeps the ellipse detector's adaptive threshold
+    # below the iris level; the template's broader threshold still joins them.
+    reference[340:348,:]=4
+    for x in [289.,735.]:
+        iris=((xx+.5-x)**2+(yy+.5-512)**2<42**2)&(reference>20)
+        reference[iris]=50
+    with pytest.raises(ValueError,match='large dark region'):
+        template_shift(reference,reference)
+
+
 @pytest.mark.parametrize('defect',[None,'reversed','stationary','cross_axis','reset'])
 def test_direction_suite_detects_behavior_failures(defect):
     commands={'left':(-10.3,0),'right':(10.3,0),'up':(0,-10.3),
@@ -81,3 +95,19 @@ def test_missing_blender_never_passes(tmp_path,monkeypatch):
     assert report['checks']['V1']['status']=='NOT RUN'
     assert report['checks']['V13']['status']=='FAIL'
     assert (tmp_path/'verification_report.md').exists()
+
+
+def test_modified_diagnostics_cannot_reuse_a_pass(tmp_path):
+    import json
+    evidence=tmp_path/'verification';evidence.mkdir();mask=evidence/'baseline.png';mask.write_bytes(b'original')
+    report={'production':True,'checks':{f'V{i}':{'status':'PASS'} for i in range(1,18)}}
+    write_report(tmp_path,report)
+    mask.write_bytes(b'replaced')
+    with pytest.raises(ValueError,match='Verifier/evidence'):
+        verify(tmp_path,blender='unused-blender',reuse_evidence=True)
+
+
+def test_verifier_change_during_run_invalidates_result(tmp_path):
+    report={'production':True,'run_start':{'artifacts':{},'verifier':{}},'checks':{f'V{i}':{'status':'PASS'} for i in range(1,18)}}
+    assert write_report(tmp_path,report)['passed'] is False
+    assert report['checks']['V13']['status']=='FAIL'

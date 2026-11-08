@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "pose_render_api_identical": true,
+  "sweep_frames": 10,
+  "scene_sha256": "3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d",
+  "panel_source_sha256": "ca7974bc81b2bc43cec3b0045ce0534e8716a063af8b3d469577334acce22644",
+  "blender": "4.5.15 LTS",
+  "scope": "Real Blender operators; interactive cardinal/reset and pose-render checks recorded separately."
+}

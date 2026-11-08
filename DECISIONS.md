@@ -1,5 +1,17 @@
 # Decisions and validation status
 
+Competition-upgrade execution started on a separate branch. Frozen release and
+its payload hashes remain untouched. Independent Rodrigues/pinhole reference
+measures actual evaluated pupil triangles and fitted scleral spheres; 1009 poses
+and fourteen injected defects pass/detect respectively. Geometry-guided pixel
+oracle is separate from OpenCV detectors and explicitly not a visibility-mask
+replacement. Nine 32-sample dataset anchors render and pass (max error 0.141464 px);
+interrupted-after-eight resume matches PNGs/manifest byte-identically. Optional
+sidebar matches API at nine poses and clean registration cycles; no graded
+scene activation. New verifier provenance guards diagnostic/source changes and
+rejects legacy cache reuse. 74 tests pass; fresh full qualification and visual
+human review remain gates. See UPGRADE_PROGRESS.md for remaining work.
+
 - Fixture-first implementation selected by the user. Fixture scenes/metadata are explicitly labeled and rejected by submission packaging.
 - Preserve measured production IPD (58–68 mm); fixture defaults to 63 mm. Horizontal sensor fit fixes square-camera calibration.
 - A separate dedicated armature articulates procedural replacement eyes while preserving imported facial mesh and original rig. Explicit mesh mapping avoids guessing bone/mesh names.
@@ -126,3 +138,35 @@ as packaging, without inventing a registered team. ZIP integrity and per-file
 manifest pass; exact extracted archive reproduced ten PNGs and metadata
 byte-identical from another working directory. Added versioned archive, reports,
 comparison and checksums under milestones/dev-freeze-2026-11-07.
+
+7 November competition upgrade closeout: retain the original freeze unchanged.
+Select corrected warm-fiber B with reduced iris region and refitted lids/lashes;
+reject the dark prototype rather than relax image thresholds. The exact scene
+3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d passes
+all V1–V17 on Windows and Linux, each with the full applicable 5.2 suite.
+Independent geometry covers 1009 poses and 14 injected faults. The separate
+seed-0 dataset contains 256 actual images, with 25 mask-tested poses and rendered
+occlusion/lighting faults. Completed and interrupted resume plus clean-CWD
+archive reconstruction reproduce exact bytes. 79 tests pass on both platforms.
+
+The 105-second demo uses actual artifacts and disclosed local synthesized
+narration. The editable ten-slide deck and representative video frames were
+visually reviewed; human naturalness preference and independent human usability
+are not invented. Research images remain separate from the graded ten-frame ZIP.
+Conventional execution layout is delivery/apollo; evidence and corpus are under
+milestones/competition-upgrade-2026-11-07. Preserve mixed qualified Python/JSON
+source bytes with Git -text; automatic line-ending conversion otherwise breaks
+raw provenance hashes on checkout. Actual registered identity, final naming,
+evaluator sharing and event uploads remain team-owned. No official score claimed.
+
+## 8 November 2026 — User scope and release naming
+
+Videos and presentations must not be created, regenerated or queued. The pending
+realism media worker was stopped before authoring. Preserve historical artifacts,
+and finish technical qualification, still images, datasets and executable archives.
+The technical exporter no longer requires or copies decks/movies; numerical,
+image, source-hash and replay gates remain unchanged.
+
+Use uniform Apollo semantic-version tags and display names from docs/RELEASES.md.
+The two existing tags were renamed atomically on GitHub while preserving their
+original target commits. Historical archive paths and checksums remain unchanged.

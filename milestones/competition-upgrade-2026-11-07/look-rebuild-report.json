@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "rebuild_center_png_identical": true,
+  "source_is_frozen_archive_scene": true,
+  "source_scene_sha256": "a4d360b6941c69ea522cfa862e134d822c2f6c3dacca9e187f2efc2e6eaac52d",
+  "candidate_scene_sha256": "3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d",
+  "recipe_source_sha256": "dd9b09889c65a0c1641025de8c57def423381c84f5b52718eb1bfbd8e09e1cd0",
+  "center_png_sha256": "0e90c5d2d57d8ee3caecff7471f923345382738ee04097cb4dc02bf5dc50218d",
+  "scope": "Rebuild from frozen source with MPFB; center PNG identical. Binary blend saves are not claimed identical."
+}

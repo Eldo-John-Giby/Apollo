@@ -1,0 +1,35 @@
+{
+  "scene_sha256": "34b1e13554c789baa522d32445972a91cafef2b7e9c366c8d5c13f73072db752",
+  "scope": "Manual assistant review of actual native renders and live MCP; no independent human rating",
+  "technical_checks_passed": true,
+  "artistic_target_met": false,
+  "release_qualified": false,
+  "inspected_images": {
+    "contact_sheet.png": "6c7b1adac35be3b1fb536180885f15d8e8c8950e45fc7bf08a65a560ae07ca63",
+    "evidence/comparisons/center-comparison.png": "e884942a383474cd30a34b78187366bc4c495810d41200ba84caa499db2b51b4",
+    "evidence/comparisons/pose-comparison.png": "5103d0cf15d7ae0461ced26168272cd49338a0d53ea6e723f2d59ce425ab8abc",
+    "evidence/comparisons/eye-details.png": "48ee404a608d476b95413996cc0bbeceda88565a3165859228856c50393e463d",
+    "evidence/portraits/front.png": "6054b1d3c3e80df2f579af094bbd89fd62a000daee55999f37031b3356e27ef8",
+    "evidence/portraits/three-quarter.png": "7b787941ce997121c88c8420dd545a16c41b82d127665d2de37ef133062e9e36",
+    "evidence/diagnostics/neutral-light.png": "f571ce51de158fbadc3e2fe73f1ce8608ff2bd0999b2f569a1cb790d7e67c801",
+    "evidence/diagnostics/clay-front.png": "60852e0364c22fa2c85117c451dabe505c67efaf80c651cf19d72dc4c671f733"
+  },
+  "observations": [
+    "Adult female anatomy and relaxed mouth differ from original male macro; gray face inspected.",
+    "Representative eyes remain readable with no obvious tissue collisions or pupil obstruction.",
+    "MCP rear inspection confirms compact bun; front and three-quarter groom silhouette inspected.",
+    "Skin still has broad mottling; brows are sparse; smooth cap and simple eye shading remain synthetic."
+  ],
+  "deviations": [
+    "Native compatible CC0 albedo is 2K, not 4K.",
+    "Industry-grade photorealistic artistic acceptance remains open."
+  ],
+  "diagnostic_recovery": "Original helper failed after graded checks; fixed direct render and absolute paths. Corrected outputs and hashes inspected. Original failure log retained.",
+  "unit_tests": {
+    "command": "python -m pytest -q",
+    "passed": 80,
+    "elapsed_seconds": 34.79
+  },
+  "persistence_comparison_passed": true,
+  "official_schema_validated": true
+}

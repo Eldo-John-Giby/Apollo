@@ -1,0 +1,21 @@
+{
+  "gender": 0.0,
+  "age": 0.5,
+  "mouth_close": -0.08,
+  "groom_seed": 20261108,
+  "scalp_strands": 10000,
+  "brow_strands": 2100,
+  "samples": 32,
+  "render_seed": 0,
+  "skin_subsurface": 0.045,
+  "skin_bump_m": 1.2e-05,
+  "skin_bump_strength": 0.12,
+  "hair_roughness": 0.48,
+  "iris_lift_linear": [
+    0.055,
+    0.04,
+    0.02
+  ],
+  "fill_energy": 0.24,
+  "skin_color_softening": 0.28
+}

@@ -1,0 +1,94 @@
+{
+  "stage": "finished",
+  "source_sha256": "4aa9df8db265417c0ae442c45c29a647a00238a05423e7c1f30638baacd1c70d",
+  "scene_sha256": "34b1e13554c789baa522d32445972a91cafef2b7e9c366c8d5c13f73072db752",
+  "recipe_sha256": "dc5758586f3466478ae8832f88d34180ad4476dfff0a2ec769d0e64cc19a98c3",
+  "config_sha256": "9760cc184f28eb1c9dcea74bf98b98ed23c51b86730ce044d0c22a509bbc3596",
+  "config": {
+    "gender": 0.0,
+    "age": 0.5,
+    "mouth_close": -0.08,
+    "groom_seed": 20261108,
+    "scalp_strands": 8000,
+    "brow_strands": 1400,
+    "samples": 32,
+    "render_seed": 0,
+    "skin_subsurface": 0.045,
+    "skin_bump_m": 1.2e-05,
+    "skin_bump_strength": 0.12,
+    "hair_roughness": 0.48,
+    "iris_lift_linear": [
+      0.055,
+      0.04,
+      0.02
+    ],
+    "fill_energy": 0.24
+  },
+  "asset_sha256": {
+    "ATTRIBUTION.md": "25daa36f864a303e0bd6e6f68ccfa00ee66b52769c8ab880fb91d9d473739d96",
+    "brown_eye.png": "4659691c7295ad6206c78b003e5fd0e5f91dcd53032fa914a229bb48cabe424b",
+    "SHA256.json": "d9129d5431f5d7c19c97e599092af23fe33122421bdee0118facfee77fac4f82",
+    "young_asian_female.mhmat": "2baeded5fdfd31acc187e83b278f9c4e4cbb59a7ffedf50ebcffcc44e4eab220",
+    "young_lightskinned_female_diffuse3.png": "1d82f782b7d2da732229633bd2d14754d873fff53cdb1d088977bcf67ae19dde"
+  },
+  "socket_fitter_sha256": "ea1765270c7fa6f8d9fefd877cf82caa8c4161a38c9b1b790b3c6e461c0b6b6b",
+  "protected_eye_mesh_sha256": {
+    "Pupil.L": "80b2164b328c68a13f0b13986465149d27dbf9cf44c0160555010ffe078f202c",
+    "Iris.L": "aacc5fe2e57bfb5bea74860c9b499c4ed55dd0824959d3efb006ade9da71eebc",
+    "Sclera.L": "13fbdde83bf15786e86533f9ed0efe02244db1e1197072814c97e1fe576d91e0",
+    "Pupil.R": "7227adc44bb7b85bd0908f47a71e2818642b4eecdcb826d00b4582cb623b26e5",
+    "Iris.R": "5351b582bde7188e3f108b15dcd95da641f14739ad226923f45273c8e01f4714",
+    "Sclera.R": "cea53a111eb547127acbf0a2a3b5e74af2662fee5e5a50eba1407d63540ae1da"
+  },
+  "anatomy": {
+    "macro": {
+      "gender": 0.0,
+      "age": 0.5,
+      "muscle": 0.5,
+      "weight": 0.5,
+      "proportions": 0.5,
+      "height": 0.5,
+      "cupsize": 0.5,
+      "firmness": 0.5,
+      "race": {
+        "asian": 1.0,
+        "caucasian": 0.0,
+        "african": 0.0
+      }
+    },
+    "orbital_alignment_scale": 1.0091836020728582,
+    "orbital_anchor_counts": [
+      1180,
+      1180
+    ]
+  },
+  "skin": {
+    "albedo_sha256": "1d82f782b7d2da732229633bd2d14754d873fff53cdb1d088977bcf67ae19dde",
+    "native_albedo_resolution": [
+      2048,
+      2048
+    ],
+    "license": "CC0; see assets/photorealism-v2/ATTRIBUTION.md"
+  },
+  "groom": {
+    "seed": 20261108,
+    "scalp_strands": 8000,
+    "bun_strands": 360,
+    "style": "pulled back, offset flow and compact bun",
+    "runtime_geometry": "baked mesh strands for real occlusion checks"
+  },
+  "brows": {
+    "strands": 1400,
+    "source_alpha_image": "eyebrow001.png"
+  },
+  "eye_shading": {
+    "refractive_cornea": false,
+    "method": "CC0 stock iris atlas with organic fibers and limbus, restrained micro-normal and non-refractive coat",
+    "atlas_sha256": "4659691c7295ad6206c78b003e5fd0e5f91dcd53032fa914a229bb48cabe424b"
+  },
+  "geometry_stats": {
+    "evaluated_polygons": 387912
+  },
+  "qualified": false,
+  "scope": "Development checkpoint; final visual, geometry, visibility and CPU acceptance remain required"
+}
