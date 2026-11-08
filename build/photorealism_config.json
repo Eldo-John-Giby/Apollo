@@ -3,8 +3,8 @@
   "age": 0.5,
   "mouth_close": -0.08,
   "groom_seed": 20261108,
-  "scalp_strands": 8000,
-  "brow_strands": 1400,
+  "scalp_strands": 10000,
+  "brow_strands": 2100,
   "samples": 32,
   "render_seed": 0,
   "skin_subsurface": 0.045,
@@ -16,5 +16,6 @@
     0.04,
     0.02
   ],
-  "fill_energy": 0.24
+  "fill_energy": 0.24,
+  "skin_color_softening": 0.28
 }

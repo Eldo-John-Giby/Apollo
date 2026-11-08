@@ -149,3 +149,23 @@ Persistent-data off was measured separately for center/up: 60.66/66.48 seconds
 versus 55.28/62.77 with reuse. Both PNGs are byte-identical. These are single
 serial trials; persistent data remains enabled. See evidence/persistence in the
 tracked development handoff.
+
+
+## Final appearance refinement
+
+The next revision attenuates the licensed albedo's broad color variation in the
+material (without editing or inventing texture detail), improves brow density
+and growth direction, and breaks uniform lash spacing. Flat-shaded sclera faces
+were the cause of visible ring bands: smooth normals now remove those bands
+without changing any protected vertex. Hair now has five strand tones, a
+flow-coordinate micro-normal, 10,000 visible strands and 250 raised overlapping
+locks that survive native-resolution denoising. Geometry remains below 500,000
+visible polygons. Matching graded/front/three-quarter 512 px Cycles previews
+were inspected before native-resolution checks began.
+
+The bounded check runner can reuse its own matching nine-pose RGB cardinal
+images for the direction gate, checking scene/wrapper/worker/runtime/calibration
+and each image hash. Reset is always freshly rendered after an actual corner
+move and eyes.reset(). This avoids five duplicate CPU renders without reusing
+any evidence from the previous appearance or relaxing image thresholds.
+Native-resolution checks are currently running for the frozen refinement.

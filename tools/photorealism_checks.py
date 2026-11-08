@@ -51,7 +51,7 @@ def run(scene,out,blender):
         command('anchors',worker('tools/realism_visibility.py','--folder',out/'poses','--masks',out/'masks','--limit','9'))
         command('anchor-images',[py,ROOT/'tools/early_image_gate.py',out/'poses','--baseline',out/'performance/32/center.png','--progress'])
         command('mask-analysis',[py,ROOT/'tools/analyze_visibility.py',out/'masks'])
-        command('directions',worker('tools/direction_smoke.py','--folder',out/'directions'))
+        command('directions',worker('tools/direction_smoke.py','--folder',out/'directions','--reuse-poses',out/'poses'))
         command('direction-report',[py,ROOT/'tools/direction_report.py',out/'directions'])
         official=out/'official';official.mkdir();shutil.copy2(scene,official/'scene.blend')
         command('official-sweep',worker('wrapper/eyes.py','--out',official))

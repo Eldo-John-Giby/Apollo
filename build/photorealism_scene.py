@@ -91,6 +91,9 @@ def anatomy():
     start=legacy_source.index('    tree = BVHTree.FromObject')
     end=legacy_source.index("    iris = bpy.data.materials",start)
     fitter="def refit(config):\n    human=bpy.data.objects['Apollo_Face']\n"+legacy_source[start:end]
+    # Preserve the contour fitter while breaking its evenly spaced lash comb.
+    fitter=fitter.replace('upper=p.z>0', 'upper=p.z>0\n            if rng.random()<.13:continue\n            p=p.lerp(points[(i+1)%len(points)],rng.uniform(0,.45))')
+    fitter=fitter.replace('rng.uniform(.65,1.15)', 'rng.uniform(.55,1.25)')
     namespace=dict(vars(realism_scene));exec(compile(fitter,'<v2 socket fitter>','exec'),namespace)
     namespace['refit'](config)
     bpy.context.view_layer.update()
@@ -107,7 +110,12 @@ def surfaces():
         output=nodes.new('ShaderNodeOutputMaterial');p=nodes.new('ShaderNodeBsdfPrincipled')
         links.new(p.outputs[0],output.inputs['Surface'])
         texture=nodes.new('ShaderNodeTexImage');texture.image=image
-        links.new(texture.outputs['Color'],p.inputs['Base Color'])
+        # Retain UV-aligned detail but attenuate broad baked color mottling.
+        tone=nodes.new('ShaderNodeHueSaturation');tone.inputs['Saturation'].default_value=.9
+        links.new(texture.outputs['Color'],tone.inputs['Color'])
+        soften=nodes.new('ShaderNodeMixRGB');soften.inputs[0].default_value=CONFIG['skin_color_softening']
+        soften.inputs[2].default_value=(.46,.28,.20,1)
+        links.new(tone.outputs[0],soften.inputs[1]);links.new(soften.outputs[0],p.inputs['Base Color'])
         p.inputs['Subsurface Weight'].default_value=CONFIG['skin_subsurface'];p.inputs['Subsurface Scale'].default_value=.001
         p.inputs['Subsurface Radius'].default_value=(1,.45,.25)
         p.inputs['Specular IOR Level'].default_value=.28
@@ -139,6 +147,13 @@ def eye_surfaces():
     output=nodes.new('ShaderNodeOutputMaterial');links.new(shader.outputs[0],output.inputs['Surface'])
     for side in 'LR':
         bpy.data.objects['Iris.'+side].data.materials.clear();bpy.data.objects['Iris.'+side].data.materials.append(material)
+        # Normal interpolation removes polygon-ring shading without moving any
+        # measured vertex, physical pupil boundary or eye pivot.
+        sclera=bpy.data.objects['Sclera.'+side]
+        for poly in sclera.data.polygons:poly.use_smooth=True
+        for mat in sclera.data.materials:
+            principled=next(n for n in mat.node_tree.nodes if n.type=='BSDF_PRINCIPLED')
+            principled.inputs['Roughness'].default_value=.27
     return {'refractive_cornea':False,'method':'CC0 stock iris atlas with organic fibers and limbus, restrained micro-normal and non-refractive coat','atlas_sha256':digest(ROOT/'assets/photorealism-v2/brown_eye.png')}
 
 
@@ -167,8 +182,8 @@ def brows():
         root=sum((source.matrix_world@source.data.vertices[i].co*w for i,w in zip(tri.vertices,weights)),Vector())
         point=front(root.x,root.z)
         if point is None:continue
-        length=rng.uniform(.0012,.0028);sign=1 if point.x>0 else -1
-        slope=max(-.5,min(.9,(.035-abs(point.x))*35));direction=Vector((sign,.0,slope)).normalized()
+        length=rng.uniform(.0015,.0033);sign=1 if point.x>0 else -1
+        slope=max(-.45,min(1.1,(.033-abs(point.x))*45))+rng.uniform(-.08,.08);direction=Vector((sign,.0,slope)).normalized()
         strand=[]
         for j in range(4):
             t=j/3;q=point+direction*length*t;surface=front(q.x,q.z)
@@ -178,7 +193,7 @@ def brows():
         if len(paths)>=CONFIG['brow_strands']:break
     if len(paths)<300:raise ValueError('Eyebrow texture sampling failed')
     source.hide_render=True;source.hide_set(True)
-    tube('Apollo v2 individual brows',paths,.000023,material('Apollo v2 brow fibers',(.025,.012,.007,1),.5))
+    tube('Apollo v2 individual brows',paths,.000025,material('Apollo v2 brow fibers',(.035,.018,.010,1),.5))
     return {'strands':len(paths),'source_alpha_image':image.name}
 
 
@@ -202,7 +217,8 @@ def grooming():
         for _ in range(15):
             z=(lo+hi)/2;n=direction(theta,z);p=scalp(n)
             front=max(0,min(1,(.35-n.y)/.8));front=front*front*(3-2*front)
-            limit=front*(.072-.016*min(abs(p.x)/.075,1))+(1-front)*.008
+            irregular=.0009*math.sin(theta*9+.7)+.0005*math.sin(theta*17)
+            limit=front*(.072-.016*min(abs(p.x)/.075,1)+irregular)+(1-front)*.008
             if p.z<limit:lo=z
             else:hi=z
         return hi
@@ -218,6 +234,12 @@ def grooming():
             a=j*columns+i;b=j*columns+(i+1)%columns
             faces.append((a,b,b+columns,a+columns))
     mesh=bpy.data.meshes.new('V2 scalp foundation');mesh.from_pydata(vertices,[],faces);mesh.update()
+    uv=mesh.uv_layers.new(name='Groom flow')
+    for poly in mesh.polygons:
+        column=poly.index%columns
+        for loop_index in poly.loop_indices:
+            vertex=mesh.loops[loop_index].vertex_index;row,index=divmod(vertex,columns)
+            uv.data[loop_index].uv=((columns if column==columns-1 and index==0 else index)/columns,row/rows)
     cap=bpy.data.objects.new('Apollo v2 scalp foundation',mesh);bpy.context.collection.objects.link(cap)
     hair=material('Apollo v2 dark brown hair',(.022,.010,.006,1),CONFIG['hair_roughness']);
     next(n for n in hair.node_tree.nodes if n.type=='BSDF_PRINCIPLED').inputs['Specular IOR Level'].default_value=.28;
@@ -232,7 +254,12 @@ def grooming():
     mask=nodes.new('ShaderNodeMath');mask.operation='MULTIPLY';links.new(stripe.outputs[0],mask.inputs[0]);links.new(upper.outputs[0],mask.inputs[1])
     front=nodes.new('ShaderNodeMath');front.operation='LESS_THAN';front.inputs[1].default_value=.075;links.new(separate.outputs['Y'],front.inputs[0])
     frontmask=nodes.new('ShaderNodeMath');frontmask.operation='MULTIPLY';links.new(front.outputs[0],frontmask.inputs[0]);links.new(mask.outputs[0],frontmask.inputs[1])
-    mix=nodes.new('ShaderNodeMixRGB');mix.inputs[1].default_value=(.022,.010,.006,1);mix.inputs[2].default_value=(.32,.18,.12,1);links.new(frontmask.outputs[0],mix.inputs[0]);links.new(mix.outputs[0],shader.inputs['Base Color'])
+    mix=nodes.new('ShaderNodeMixRGB');mix.inputs[1].default_value=(.022,.010,.006,1);mix.inputs[2].default_value=(.18,.095,.060,1);links.new(frontmask.outputs[0],mix.inputs[0]);links.new(mix.outputs[0],shader.inputs['Base Color'])
+    coord=nodes.new('ShaderNodeTexCoord');scale=nodes.new('ShaderNodeVectorMath');scale.operation='MULTIPLY';scale.inputs[1].default_value=(420,7,1);links.new(coord.outputs['UV'],scale.inputs[0])
+    fibers=nodes.new('ShaderNodeTexNoise');fibers.inputs['Scale'].default_value=1;fibers.inputs['Detail'].default_value=2;links.new(scale.outputs[0],fibers.inputs['Vector'])
+    bump=nodes.new('ShaderNodeBump');bump.inputs['Distance'].default_value=.00009;bump.inputs['Strength'].default_value=.22;links.new(fibers.outputs['Fac'],bump.inputs['Height']);links.new(bump.outputs[0],shader.inputs['Normal'])
+    rough=nodes.new('ShaderNodeMapRange');rough.inputs['To Min'].default_value=.34;rough.inputs['To Max'].default_value=.54;links.new(fibers.outputs['Fac'],rough.inputs['Value']);links.new(rough.outputs[0],shader.inputs['Roughness'])
+    shader.inputs['Anisotropic'].default_value=.35
     for poly in mesh.polygons:poly.use_smooth=True
     paths=[]
     for i in range(CONFIG['scalp_strands']):
@@ -246,7 +273,30 @@ def grooming():
             point=scalp(d,.0012+.003*math.sin(math.pi*t))
             strand.append(point)
         paths.append((strand,False))
-    tube('Apollo v2 pulled back strands',paths,.000036,hair)
+    for group in range(5):
+        strand_material=hair.copy();strand_material.name='Apollo v2 strand tone '+str(group)
+        strand_mix=next(n for n in strand_material.node_tree.nodes if n.type=='MIX_RGB')
+        factor=.65+.22*group;strand_mix.inputs[1].default_value=(.022*factor,.010*factor,.006*factor,1)
+        tube('Apollo v2 pulled back strands '+str(group),paths[group::5],.000030+.000003*group,strand_material)
+    # Mid-scale overlapping locks survive native-resolution denoising where
+    # individual subpixel fibers disappear. Their raised centers catch light.
+    lock_vertices=[];lock_faces=[]
+    for index,(points,_) in enumerate(paths[::40]):
+        width=rng.uniform(.00045,.00105)
+        for j,p in enumerate(points):
+            tangent=(points[min(j+1,len(points)-1)]-points[max(j-1,0)]).normalized()
+            normal=(p-center).normalized();across=tangent.cross(normal).normalized()
+            taper=.2+.8*math.sin(math.pi*(.08+.84*j/(len(points)-1)))
+            for lateral in [-1,0,1]:
+                q=p+across*width*taper*lateral+normal*(.00025 if lateral==0 else -.00005)
+                lock_vertices.append(q)
+            if j:
+                a=len(lock_vertices)-6
+                lock_faces.extend([(a,a+1,a+4,a+3),(a+1,a+2,a+5,a+4)])
+    lock_mesh=bpy.data.meshes.new('V2 overlapping hair locks');lock_mesh.from_pydata(lock_vertices,[],lock_faces);lock_mesh.update()
+    locks=bpy.data.objects.new('Apollo v2 overlapping hair locks',lock_mesh);bpy.context.collection.objects.link(locks)
+    for i in range(5):locks.data.materials.append(bpy.data.materials['Apollo v2 strand tone '+str(i)])
+    for poly in lock_mesh.polygons:poly.use_smooth=True;poly.material_index=(poly.index//16)%5
     baby=[]
     for i in range(1100):
         theta=rng.uniform(-math.pi,0);low=line(theta);z=low+rng.uniform(-.025,.045);n=direction(theta,z);points=[]
