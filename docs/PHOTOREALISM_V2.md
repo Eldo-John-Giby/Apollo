@@ -1,5 +1,9 @@
 # Photorealism v2 execution
 
+Current handoff: [packed development candidate](../milestones/photorealism-v2-development/README.md).
+The chronology below records intermediate experiments; the measured status at
+the end supersedes their pending-work statements. This is not a release.
+
 Branch photorealism-v2; preserved baseline is apollo-v0.3.0-rc.1.
 No release pipeline, videos or presentations are authorized for this phase.
 
@@ -76,3 +80,72 @@ Replacement candidate is out/photorealism-v2/candidate-2. Exact scene preflight,
 pass. Targeted nine-pose/mask, direction/reset, official sweep, diagnostic stills
 and visual acceptance are in progress under out/photorealism-v2/checks-2.
 The target runner never runs the release verifier/finalizer or 256-image corpus.
+
+
+## Development-candidate handoff, 9 November 2026
+
+The packed candidate, exact baseline build input, wrapper, ten native frames,
+metadata, contact sheet and selected evidence are tracked under
+`milestones/photorealism-v2-development`. Its README is the teammate entry point.
+Source/config/asset receipts identify the build; the packed scene SHA-256 is
+`34b1e13554c789baa522d32445972a91cafef2b7e9c366c8d5c13f73072db752`.
+
+| Area | Actual result |
+| --- | --- |
+| P0 | Named collections, clean camera workspace, helper visibility fixed, nine matched baseline RGB/mask poses captured. |
+| P1 | Baked adult-female macro/anatomy and closed relaxed mouth; orbital contact zone preserved; gray/front and actual portraits inspected. |
+| P2 | Licensed native 2K skin, roughness/micro-normal/SSS, textured iris and tear/lid integration implemented. Broad mottling and synthetic shading remain visual gaps. |
+| P3 | Baked side-part pulled-back hair/bun, 8000 scalp strands, hairline fibers, 1400 brows, fitted lashes. Front/three-quarter and MCP rear views inspected; smooth cap and sparse brows remain visible. |
+| P4 | Fixed lighting and CPU budget pass on this laptop; 387,912 visible evaluated polygons, 32 fixed samples, no DOF/refraction/lid simulation. |
+| P5 | Packed development handoff, exact source baseline, recipes/assets/licenses and scene-bound targeted reports. No release qualification or photographic-quality certification. |
+
+Targeted results: V1/V2 pass; independent 1009 poses and all 14 geometry mutations
+pass; four cardinal directions and byte-identical reset pass; nine-pose RGB and
+actual masks pass, with minimum pupil visibility 1.0 and injected half-pupil
+occlusion detected. Maximum blind error is 0.276 px for nine poses and 0.111 px
+(rounded upward) for the ten-frame official sweep. Official metadata/image
+validation passes. All 80 unit tests pass. No detector threshold was relaxed.
+
+Center/up/corner CPU measurements at 32 samples are 55.28/62.77/63.52 seconds.
+OS peak process RSS across measured core stages is 1,428,791,296 bytes (1.33 GiB),
+not Blender's internal memory display. Both budgets meet the local targets;
+these measurements do not promise identical performance on teammates' CPUs.
+
+The check driver completed all graded checks and portraits, then correctly
+stopped when the diagnostic helper tried to call the calibrated API after
+moving the camera. The helper now renders inspection portraits directly and
+resolves output paths absolutely. Corrected neutral/clay outputs are rerun
+separately; the original failure log remains available. The source scene and
+passed graded artifacts were not changed to bypass that error.
+
+The actual front, three-quarter, gray and neutral-light stills plus the official
+sheet and matched eye/pose crops were inspected. The anatomy/mouth and gaze
+integration improve on the baseline; no obvious representative-pose socket
+collisions or pupil obstruction were observed. Appearance remains synthetic.
+Native 2K skin, broad mottling, smooth cap-like hair, sparse brows and non-
+refractive eye shading limit the industry-grade ambition. This handoff closes
+the implementation/checkpoint work; it does not claim all aspirational visual
+acceptance criteria have been achieved or assign official scores.
+
+To reproduce from the exact cleaned baseline (MPFB required for build only):
+
+```powershell
+& $env:BLENDER_BIN -b milestones/photorealism-v2-development/baseline/scene.blend --python-exit-code 1 -P build/photorealism_scene.py -- --folder out/rebuilt-v2 --stage finished
+```
+
+For matched comparisons on a fresh clone, create the nine baseline poses first:
+
+```powershell
+& $env:BLENDER_BIN -b --factory-startup milestones/photorealism-v2-development/baseline/scene.blend --python-exit-code 1 -P tools/realism_visibility.py -- --folder out/photorealism-v2/baseline-poses --masks out/photorealism-v2/baseline-masks --limit 9
+```
+
+Then run the bounded check command in TEAM_SETUP.md, review actual stills and
+commit changed evidence with the changed scene. Any later release selection
+needs its separately scheduled Windows/Linux and secondary-version qualification.
+The qualified fallback and reviewed prerelease were preserved. No new release,
+videos, presentations, submission or sharing changes are part of this handoff.
+
+Persistent-data off was measured separately for center/up: 60.66/66.48 seconds
+versus 55.28/62.77 with reuse. Both PNGs are byte-identical. These are single
+serial trials; persistent data remains enabled. See evidence/persistence in the
+tracked development handoff.

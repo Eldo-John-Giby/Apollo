@@ -44,7 +44,7 @@ def create(before,after,output):
                 details.paste(image.crop((140,390,885,590)),(745*column,i*232+32))
     sheet.save(output/'pose-comparison.png');details.save(output/'eye-details.png')
     center=Image.new('RGB',(2048,1060),'#e9ecec');d=ImageDraw.Draw(center)
-    for i,(label,records) in enumerate([('Qualified baseline',old),('Realism candidate',new)]):
+    for i,(label,records) in enumerate([('Baseline',old),('Realism candidate',new)]):
         d.text((1024*i+12,6),label,fill='#142b3b',font=font)
         with Image.open(records[(0,0)][0]) as im:center.paste(im.convert('RGB'),(1024*i,36))
     center.save(output/'center-comparison.png')

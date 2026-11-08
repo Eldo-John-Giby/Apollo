@@ -1,0 +1,32 @@
+{
+  "review_required": true,
+  "baseline_scene_sha256": "4aa9df8db265417c0ae442c45c29a647a00238a05423e7c1f30638baacd1c70d",
+  "scene_sha256": "34b1e13554c789baa522d32445972a91cafef2b7e9c366c8d5c13f73072db752",
+  "worker_sha256": "5811ca670fbbb5579439740a6a0807b6ed8c42d013deff6560ea3bd73dc029e8",
+  "source_images": {
+    "out\\photorealism-v2\\baseline-poses\\renders\\frame_000000.png": "dc5df9157bf9b5a35bc69f89ae1cd460d2b47ab4c5e7a84a18515f5c4d2d4278",
+    "out\\photorealism-v2\\baseline-poses\\renders\\frame_000001.png": "550da2143e6461531a02b359b5be3bec4b93b640383789cf0b4fde324c5a9c96",
+    "out\\photorealism-v2\\baseline-poses\\renders\\frame_000002.png": "975ad495e60cfb20c64b663be911fb1c6bd73349fb82efb181512c3cf6cddb12",
+    "out\\photorealism-v2\\baseline-poses\\renders\\frame_000003.png": "8acea36109907feb753f6115ab32f08c70773e42028199e51e2f56f5ecc5155b",
+    "out\\photorealism-v2\\baseline-poses\\renders\\frame_000004.png": "dcbeac70bfd439a4be353063d5a42abdfd537480c453c925ef7314c1ae6a5841",
+    "out\\photorealism-v2\\baseline-poses\\renders\\frame_000005.png": "60438ff74bb94c059a947d25867ea77b3669e06839de7b23ce84d868f1d9f39d",
+    "out\\photorealism-v2\\baseline-poses\\renders\\frame_000006.png": "771458b497d40e5228cbf3ed9e91d9d185ebd503ffbd4b748630aeae21e6daeb",
+    "out\\photorealism-v2\\baseline-poses\\renders\\frame_000007.png": "af852bc9702e15a77046a3cfff26849d372a50497cb244b6801a1288b7746c03",
+    "out\\photorealism-v2\\baseline-poses\\renders\\frame_000008.png": "5f1ceb0bc01b9e014705c14adc69d20f02cf6a65d7600388e86f693eb4739b76",
+    "out\\photorealism-v2\\checks-2\\poses\\renders\\frame_000000.png": "b6b962af99237c3cbecb5528df9e39a3c0bddfa69bf45655e9efbbdc980efb6f",
+    "out\\photorealism-v2\\checks-2\\poses\\renders\\frame_000001.png": "d26805a42cc001f5461f3e453b6648f65db51835072054b4eb0db15265f7af8d",
+    "out\\photorealism-v2\\checks-2\\poses\\renders\\frame_000002.png": "895875442cafe07c079ac68f1002ae4414ad426e78ee5ecdedd40370576f5f92",
+    "out\\photorealism-v2\\checks-2\\poses\\renders\\frame_000003.png": "25a5fc596f5fcbc7903a88e295011843382dd4cbb842b6848df8f32e11ff2007",
+    "out\\photorealism-v2\\checks-2\\poses\\renders\\frame_000004.png": "f5e0f6563540e68330536e356f55a5f65f61baf54e77faa7b7ef2a6eb91d52e4",
+    "out\\photorealism-v2\\checks-2\\poses\\renders\\frame_000005.png": "ac190e0f84be30e11f87d2530e0c54ab32a45ed1398419e059d87907ea1c2941",
+    "out\\photorealism-v2\\checks-2\\poses\\renders\\frame_000006.png": "57dc0127d7ff9b24dbb896db5f107be8effad6ec1a3b6ee3a7d70af5985c2b75",
+    "out\\photorealism-v2\\checks-2\\poses\\renders\\frame_000007.png": "bca8d94418db5d93fe31764b43b829800f1f26c94e25abe862f309b17f29c4cb",
+    "out\\photorealism-v2\\checks-2\\poses\\renders\\frame_000008.png": "863da9da7f2e29ad6111f38e73616fd27787971404ec4e6d7e846a5b519f97e1"
+  },
+  "sheets": {
+    "center-comparison.png": "e884942a383474cd30a34b78187366bc4c495810d41200ba84caa499db2b51b4",
+    "eye-details.png": "48ee404a608d476b95413996cc0bbeceda88565a3165859228856c50393e463d",
+    "pose-comparison.png": "5103d0cf15d7ae0461ced26168272cd49338a0d53ea6e723f2d59ce425ab8abc"
+  },
+  "scope": "Matched poses/calibration; deliberate material, grooming and lighting changes. Agent review is separate."
+}

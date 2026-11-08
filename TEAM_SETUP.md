@@ -255,3 +255,14 @@ realism_visibility.py --limit 9 as described in the v2 execution record.
 It never runs full Windows/Linux qualification, generates the 256-image research
 corpus, publishes tags, or creates videos/decks. Inspect the output stills before
 accepting the candidate. CLI output and status.json report failures explicitly.
+
+Open `milestones/photorealism-v2-development/scene.blend` for the packed v2
+development candidate. Its README records measured checks and limitations.
+To regenerate the official sweep from the repository root:
+
+```powershell
+& $env:BLENDER_BIN -b --factory-startup milestones/photorealism-v2-development/scene.blend --python-exit-code 1 -P wrapper/eyes.py -- --out out/teammate-v2
+```
+
+No MPFB or Blender MCP is needed for this packed-scene playback. MCP is useful
+for interactive artistic iteration; MPFB is required only when rebuilding anatomy.

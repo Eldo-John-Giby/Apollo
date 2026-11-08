@@ -9,8 +9,8 @@ The protected radial-iris development freeze remains available. The competition
 upgrade adds a qualified warm-iris/lid/lash look, independent geometry audits,
 a complete seeded 256-image dataset, optional controls and evidence media.
 The protected competition-qualified release passes native/Linux V1–V17 and all
-applicable secondary checks, with 79 tests on both platforms. The visual-realism
-branch is under development; its checkpoints have not been promoted. Generated temporary
+applicable secondary checks, with 79 tests on both platforms. The photorealism-v2
+branch contains the adult-female appearance candidate; its checkpoints have not been promoted. Generated temporary
 artifacts belong under out/ and are not listed here.
 
 Flow: character inspection/mapping or fixture → calibrated scene → standalone eye
@@ -41,6 +41,7 @@ preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred
 | `docs/UPGRADE_PROGRESS.md`, `docs/VERIFIER_COVERAGE.md` | Upgrade execution gates, measured prototype status and verifier independence/coverage limitations. |
 | `docs/UPGRADE_RUNBOOK.md` | Reproduction commands for upgraded looks, independent/dataset adversaries, controls, Linux qualification, deck/video and archive rehearsals. |
 | `docs/RELEASES.md` | Uniform release/tag names, historical version mapping and promotion policy. |
+| `docs/PHOTOREALISM_V2.md` | V2 construction, appearance review, measured CPU checks, deviations and development handoff. |
 | `docs/VISUAL_REALISM.md` | Current appearance work, rejected prototypes, reproducible checkpoints and remaining visual/technical gates. |
 | `docs/character_mapping.example.json` | Explicit stock-eye identifiers, orientation confirmation and attribution template. |
 

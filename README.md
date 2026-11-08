@@ -10,7 +10,9 @@ See [the handoff](docs/PHASE_HANDOFF.md) for completed/deferred checks and prese
 Standing project rule: do not create videos or presentations. Technical work and
 still-image evidence continue. See [release versions](docs/RELEASES.md).
 
-Appearance work continues on `visual-realism`; see [its execution record](docs/VISUAL_REALISM.md).
+Appearance work continues on `photorealism-v2`; see [its execution record](docs/PHOTOREALISM_V2.md).
+The packed development candidate and still-image evidence are in
+[milestones/photorealism-v2-development](milestones/photorealism-v2-development/README.md).
 Those development checkpoints are not qualified releases. The complete protected
 competition release described below remains available unchanged.
 
