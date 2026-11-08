@@ -2,7 +2,7 @@
 
 ## What is Apollo?
 
-<<<<<<< HEAD
+
 Apollo is a tool that helps create realistic eye movements and gaze direction for Samsung XR headsets. Think of it like a sophisticated puppeteer for digital eyes - it makes sure virtual characters look at the right things in the right way.
 
 **The simple version:** Apollo takes a 3D character model and calculates where their eyes should look, then generates pictures (images) that prove the eyes are working correctly. It's used to make sure XR headsets can track gaze accurately for things like:
@@ -47,7 +47,7 @@ The earlier development pipeline below builds the original radial appearance.
 Use [the upgrade recipe](docs/UPGRADE_RUNBOOK.md) to rebuild the selected look.
 `--quality final` in the older pipeline means 128 samples; the qualified upgrade
 uses its separately measured 32-sample settings.
->>>>>>> fda66c74332314bc89316f17881887baac016151
+
 
 ## What's Inside the Project?
 
@@ -258,4 +258,4 @@ The demo uses local synthesized narration and edited actual artifacts. It does
 not represent real-time rendering speed. Team identity, final event filenames,
 repository sharing and organizer uploads remain team-owned. No organizer
 submission has been performed.
->>>>>>> fda66c74332314bc89316f17881887baac016151
+
