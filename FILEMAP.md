@@ -20,6 +20,7 @@ wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → pr
 
 | File | Responsibility |
 | --- | --- |
+| `TEAM_SETUP.md` | Teammate onboarding, pinned tools, packed-scene workflow, MPFB assets, daily checks, collaboration and release boundaries. |
 | `AGENTS.md` | Navigation, standing no-video/no-presentation rule, release naming and checkpoint commits. |
 | `docs/problem_statement.md` | Screenshot-transcribed requirements, rubric, deliverables, unresolved organizer questions. |
 | `docs/SOLUTION_TECHNICAL.md` | Proposed geometry, conventions, API, verification checks, risks, and limitations. |

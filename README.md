@@ -2,6 +2,8 @@
 
 Synthetic binocular gaze pipeline for Samsung PRISM-XR Track 01.
 
+Joining the team? Start with [TEAM_SETUP.md](TEAM_SETUP.md).
+
 Standing project rule: do not create videos or presentations. Technical work and
 still-image evidence continue. See [release versions](docs/RELEASES.md).
 
