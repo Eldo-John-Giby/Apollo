@@ -22,4 +22,3 @@ Maximum template/annotation error: 0.037215 px
 | down | L | template | 0.0069 | 10.2944 | True |
 | down | R | ellipse | -0.1129 | 10.1965 | True |
 | down | R | template | -0.0242 | 10.2631 | True |
-
