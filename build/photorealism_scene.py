@@ -119,6 +119,7 @@ def surfaces():
         rough=nodes.new('ShaderNodeMapRange');rough.inputs['To Min'].default_value=.39 if 'lips' not in mat.name else .29
         rough.inputs['To Max'].default_value=.53 if 'lips' not in mat.name else .37
         links.new(noise.outputs['Fac'],rough.inputs['Value']);links.new(rough.outputs[0],p.inputs['Roughness'])
+    bpy.data.objects['Fill'].data.energy=CONFIG['fill_energy']
     return {'albedo_sha256':digest(asset),'native_albedo_resolution':list(image.size),'license':'CC0; see assets/photorealism-v2/ATTRIBUTION.md'}
 
 
@@ -130,7 +131,8 @@ def eye_surfaces():
     scaled=nodes.new('ShaderNodeVectorMath');scaled.operation='MULTIPLY';scaled.inputs[1].default_value=(.25,.25,1);links.new(coord.outputs['UV'],scaled.inputs[0])
     offset=nodes.new('ShaderNodeVectorMath');offset.operation='ADD';offset.inputs[1].default_value=(.583,.583,0);links.new(scaled.outputs[0],offset.inputs[0]);links.new(offset.outputs[0],atlas.inputs['Vector'])
     tone=nodes.new('ShaderNodeHueSaturation');tone.inputs['Saturation'].default_value=.75;tone.inputs['Value'].default_value=1.25;links.new(atlas.outputs['Color'],tone.inputs['Color'])
-    shader=nodes.new('ShaderNodeBsdfPrincipled');links.new(tone.outputs[0],shader.inputs['Base Color'])
+    lift=nodes.new('ShaderNodeMixRGB');lift.blend_type='ADD';lift.inputs[0].default_value=1;lift.inputs[2].default_value=(*CONFIG['iris_lift_linear'],1);links.new(tone.outputs[0],lift.inputs[1])
+    shader=nodes.new('ShaderNodeBsdfPrincipled');links.new(lift.outputs[0],shader.inputs['Base Color'])
     shader.inputs['Roughness'].default_value=.28;shader.inputs['Specular IOR Level'].default_value=.24;shader.inputs['Coat Weight'].default_value=.12
     noise=nodes.new('ShaderNodeTexNoise');noise.inputs['Scale'].default_value=85;noise.inputs['Detail'].default_value=3;links.new(coord.outputs['UV'],noise.inputs['Vector'])
     bump=nodes.new('ShaderNodeBump');bump.inputs['Strength'].default_value=.08;bump.inputs['Distance'].default_value=.000008;links.new(noise.outputs['Fac'],bump.inputs['Height']);links.new(bump.outputs[0],shader.inputs['Normal'])

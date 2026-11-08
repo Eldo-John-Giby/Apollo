@@ -61,3 +61,18 @@ Rebuild from the preserved prerelease scene in Blender 4.5 with MPFB enabled:
 Use a new folder. Baseline/anatomy/surface/finished stages are supported. Rendering
 saved packed candidates requires no MPFB. Never invoke the release finalizer for
 this development phase.
+
+## Early image rejection and correction
+
+The first stock-atlas iris passed center geometry but failed the unchanged blind
+image detector in upward/corner gaze because dark iris/lid regions connected.
+The check runner stopped immediately after its three-pose benchmark, before the
+larger pose set. The replacement raises iris reflectance with a constant material
+color lift and modestly strengthens the existing frontal fill. No pupil geometry,
+image-space position, annotation or detector threshold was changed.
+
+Replacement candidate is out/photorealism-v2/candidate-2. Exact scene preflight,
+1009-pose independent geometry/14 mutations and all three benchmark pupil checks
+pass. Targeted nine-pose/mask, direction/reset, official sweep, diagnostic stills
+and visual acceptance are in progress under out/photorealism-v2/checks-2.
+The target runner never runs the release verifier/finalizer or 256-image corpus.
