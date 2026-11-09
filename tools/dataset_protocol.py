@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import random
+import time
 
 
 def inputs(count,seed):
@@ -17,7 +18,17 @@ def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 def atomic_json(path,value):
     path=Path(path);temporary=path.with_suffix(path.suffix+'.tmp')
-    temporary.write_text(json.dumps(value,indent=2,allow_nan=False)+'\n',encoding='utf-8');temporary.replace(path)
+    temporary.write_text(json.dumps(value,indent=2,allow_nan=False)+'\n',encoding='utf-8')
+    # Windows readers can briefly deny replacement of an open checkpoint.
+    # Retain the previous complete checkpoint while retrying the atomic rename.
+    for attempt in range(6):
+        try:
+            temporary.replace(path)
+            return
+        except PermissionError:
+            if attempt == 5:
+                raise
+            time.sleep(.1 * (attempt + 1))
 
 
 def signature(scene,wrapper,count,seed,samples,version):

@@ -1,0 +1,29 @@
+{
+  "scene_sha256": "8acd0df98cd2581f54bf83901d56c669795c5eef14e853a378bcb18e6bf71c4d",
+  "completed_utc": "2026-11-09T22:35:14.459656+00:00",
+  "passed": true,
+  "reviewed": [
+    "worst-case visibility and pixel-residual native frames",
+    "eight-image worst-case contact sheet",
+    "nine anchor overview",
+    "256-pose coverage plot"
+  ],
+  "observations": [
+    "Pupils readable in reviewed worst cases",
+    "No obvious new lid collision or groom obstruction in reviewed cases"
+  ],
+  "scope": "Assistant review of selected worst cases and overview; automated checks cover every generated frame",
+  "unit_tests_passed": 82,
+  "unit_test_seconds": 10.72,
+  "recovery": [
+    "Corrected launcher --progress flag after all visibility renders completed",
+    "Resumed dataset at checkpoint 150 after Windows denied checkpoint replace; rerendered frame 150",
+    "Added bounded atomic rename retries and regression tests in main workspace; frozen rendering source retained"
+  ],
+  "archive": {
+    "local_path": "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\out\\full-test-20261109\\apollo-appearance-stress-evidence.zip",
+    "sha256": "e8646d49e8c410f04b7f290de2b8cdc9cbdd0c59dc79eb2e401e79d83c7571bd",
+    "bytes": 376474808
+  },
+  "raw_files": 609
+}

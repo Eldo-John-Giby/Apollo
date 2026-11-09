@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\Users\eldoj\PycharmProjects\Samsung XR\out\full-test-20261109\runner.py", line 30, in <module>
+    run('visibility-images',[sys.executable,ROOT/'tools/early_image_gate.py',OUT/'poses113','--baseline',baseline])
+  File "C:\Users\eldoj\PycharmProjects\Samsung XR\out\full-test-20261109\runner.py", line 23, in run
+    if code:raise RuntimeError(stage+' failed with code '+str(code))
+RuntimeError: visibility-images failed with code 1
