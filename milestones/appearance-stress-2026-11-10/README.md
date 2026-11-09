@@ -19,7 +19,7 @@ All RGB images were freshly rendered at 1024x1024, 32 fixed samples on CPU.
 | Corpus template error | Maximum 0.1379384871446995 px |
 | Current workspace tests after checkpoint fix | 82 passed in 10.72 seconds |
 
-Automated completion took 1.96 hours wall time, including monitoring gaps
+Automated completion took 8.02 hours wall time, including monitoring gaps
 and recovery. Selected worst-visibility and worst-pixel-error images, anchor
 overview and coverage plot were visually inspected. No obvious new pupil
 obstruction or socket collision appeared in those reviewed images.

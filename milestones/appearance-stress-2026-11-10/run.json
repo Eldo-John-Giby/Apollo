@@ -44,8 +44,12 @@
     "tools\\visibility_audit.py": "0142b9619673cce96502ce112975aa517810916baf6cee79aea5bb2d0477847d",
     "wrapper\\eyes.py": "b16d1f681628686b0d23e1ad751d469710dd71043bc5de075fd0d20a1ec7bf0e"
   },
-  "started_utc": "2026-11-09T20:33:31.291975+00:00",
+  "started_utc": "2026-11-09T14:29:34.780647+00:00",
   "resolution": 1024,
   "samples": 32,
-  "mode": "serial full 113 RGB + actual masks, then fresh 256 RGB and independent/blind analyses"
+  "mode": "serial full 113 RGB + actual masks, then fresh 256 RGB and independent/blind analyses",
+  "resumed_started_utc": "2026-11-09T20:33:31.291975+00:00",
+  "automated_completed_utc": "2026-11-09T22:30:51.431339+00:00",
+  "elapsed_hours": 8.021291858888889,
+  "start_time_source": "Original console file creation timestamp, preserved across resumed console files"
 }
