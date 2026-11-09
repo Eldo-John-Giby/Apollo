@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\Users\eldoj\PycharmProjects\Samsung XR\out\full-test-20261109\runner.py", line 33, in <module>
+    run('dataset256',worker('tools/generate_dataset.py','--folder',OUT/'dataset256','--count','256','--seed','0','--samples','32'))
+  File "C:\Users\eldoj\PycharmProjects\Samsung XR\out\full-test-20261109\runner.py", line 23, in run
+    if code:raise RuntimeError(stage+' failed with code '+str(code))
+RuntimeError: dataset256 failed with code 1

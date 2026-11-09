@@ -222,3 +222,15 @@ container hash differs, so the evidence records both containers and binds the
 actual identical PNG; it does not claim byte-identical blend serialization.
 The tracked-baseline comparison was also rerun and all three sheets match the
 local-baseline sheets byte for byte.
+
+
+## Expanded CPU stress evidence, 10 November 2026
+
+The full 113-pose RGB/actual-mask suite and fresh seeded 256-image corpus pass
+on the final candidate. Minimum pupil visibility is 99.826%, maximum mask
+centroid residual is 0.044821 px and independent corpus pixel error is 0.153842 px
+(upper-rounded). Blind/template maxima are 0.277359/0.137939 px. All 82 current
+unit tests pass after a bounded checkpoint-file retry fix. See
+[the full stress report](../milestones/appearance-stress-2026-11-10/README.md)
+for scene/source bindings, interruption recovery, reviewed worst cases and local
+raw archive identity. Native expanded stress evidence is complete.

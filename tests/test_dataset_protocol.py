@@ -1,4 +1,5 @@
 import copy
+import json
 from pathlib import Path
 import sys
 import pytest
@@ -33,3 +34,30 @@ def test_resume_requires_same_inputs_and_intact_images(tmp_path):
 def test_nonempty_output_is_not_silently_overwritten(tmp_path):
     (tmp_path/'unrelated.txt').write_text('preserve')
     with pytest.raises(ValueError,match='Nonempty'):resume(tmp_path,{'count':9,'seed':0})
+
+
+@pytest.mark.parametrize('blocked_attempts', [2, 6])
+def test_checkpoint_replace_retries_preserving_previous_data(tmp_path, monkeypatch, blocked_attempts):
+    checkpoint = tmp_path/'progress.json'
+    atomic_json(checkpoint, {'frame': 1})
+    original_replace = Path.replace
+    attempts = []
+
+    def replace_with_reader_lock(temporary, target):
+        attempts.append(target)
+        if len(attempts) <= blocked_attempts:
+            assert json.loads(checkpoint.read_text()) == {'frame': 1}
+            raise PermissionError('Checkpoint reader holds a Windows handle')
+        return original_replace(temporary, target)
+
+    monkeypatch.setattr(Path, 'replace', replace_with_reader_lock)
+    monkeypatch.setattr('dataset_protocol.time.sleep', lambda seconds: None)
+    if blocked_attempts == 6:
+        with pytest.raises(PermissionError):
+            atomic_json(checkpoint, {'frame': 2})
+        assert json.loads(checkpoint.read_text()) == {'frame': 1}
+        assert json.loads(checkpoint.with_suffix('.json.tmp').read_text()) == {'frame': 2}
+    else:
+        atomic_json(checkpoint, {'frame': 2})
+        assert len(attempts) == 3
+        assert json.loads(checkpoint.read_text()) == {'frame': 2}
