@@ -97,6 +97,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/realism_hero.py` | Separate front/three-quarter presentation portraits; preserves the saved calibrated scene and writes no graded metadata. |
 | `tools/realism_comparison.py` | Hash-checked, pose/calibration-matched baseline/candidate sheets and native eye crops; leaves visual ratings to explicit review. |
 | `tools/direction_report.py` | Five-direction measurements, reset comparison and enlarged visual comparison from checkpointed verification renders. |
+| `tools/direction_review.py` | Scene/hash-checked shuffled center-reference pairs, human response sheet and separate assessor key for direction readability. |
 | `tools/direction_smoke.py` | Actual baseline/cardinal/reset image gate; optional hash-bound pose reuse with a fresh eyes.reset() render. |
 | `tools/early_image_gate.py` | Early blind/template checks on the actual sweep or checkpointed dataset using independent projections and unchanged thresholds. |
 | `tools/photorealism_checks.py` | Targeted v2 geometry, CPU/RSS benchmark, 9-pose visibility, directions, official sweep, still diagnostics and comparisons; never releases. |

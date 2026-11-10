@@ -1,0 +1,40 @@
+{
+  "scene_sha256": "8acd0df98cd2581f54bf83901d56c669795c5eef14e853a378bcb18e6bf71c4d",
+  "shuffle_seed": 20261111,
+  "coordinate_convention": "viewer image directions",
+  "answers": [
+    {
+      "case": "01",
+      "expected": "reset",
+      "image_sha256": "bb870b0698bbdc78f4df70c668a5c0b11cf282aeb43aead860f0036494733c29",
+      "source_sha256": "4a87bdecbc8a6f9cdc809287222813bb162fcb596a171b6333ab4ee9f7e2e1ff"
+    },
+    {
+      "case": "02",
+      "expected": "left",
+      "image_sha256": "c0037c081ac172587d2a34319f8e828d706c12d61e7e0910c6ee6b1c734b7a7b",
+      "source_sha256": "43d4701be77aa25a89d97959d453a91be93a0053df577afe1f1ebca60c886694"
+    },
+    {
+      "case": "03",
+      "expected": "right",
+      "image_sha256": "8dc54bc83982a0444b837d9cb457d882b87c746ce7da7bafc32eff7530787d91",
+      "source_sha256": "77766724d47a66015fe1b32f092a640309e9b8c00e0d89f3ae9931f855ca79a2"
+    },
+    {
+      "case": "04",
+      "expected": "up",
+      "image_sha256": "33d03c303d02673461ae0eadac4e375047997f974eb95e18a3291fec2d92ed0f",
+      "source_sha256": "5ff5bcce68764361e5dfe51a58e7b7005d1d89b04bb6b75978dc57a17af96f2b"
+    },
+    {
+      "case": "05",
+      "expected": "down",
+      "image_sha256": "934be479eb445af4e7cc1d582031d53708684dfe665b94e2526ac5c4f343a774",
+      "source_sha256": "c429445ecba0618a24f7cef83034e045e8d432ad907147d6b42ce7b533708fb1"
+    }
+  ],
+  "source": "C:\\Users\\eldoj\\PycharmProjects\\Samsung XR\\milestones\\photorealism-v2-candidate\\evidence\\directions",
+  "operation": "Unaltered native RGB images paired at equal scale",
+  "responses_collected": false
+}
