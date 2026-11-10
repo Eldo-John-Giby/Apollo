@@ -1,6 +1,6 @@
 {
   "seed": 20261111,
-  "upper_lid_drop_m": 0.00065,
+  "upper_lid_drop_m": 0.00015,
   "cheek_lift_m": 0.00065,
   "jaw_softening_m": 0.00065,
   "lip_projection_m": 0.0011,

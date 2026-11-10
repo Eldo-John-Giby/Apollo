@@ -102,6 +102,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/direction_review.py` | Scene/hash-checked shuffled center-reference pairs, human response sheet and separate assessor key for direction readability. |
 | `tools/direction_smoke.py` | Actual baseline/cardinal/reset image gate; optional hash-bound pose reuse with a fresh eyes.reset() render. |
 | `tools/early_image_gate.py` | Early blind/template checks on the actual sweep or checkpointed dataset using independent projections and unchanged thresholds. |
+| `tools/appearance_stress.py` | Full 113-pose RGB/mask and 256-image CPU orchestration with immutable source receipts, stage-output hashes and verified checkpoint resume. |
 | `tools/photorealism_checks.py` | Targeted v2 geometry, CPU/RSS benchmark, 9-pose visibility, directions, official sweep, still diagnostics and comparisons; never releases. |
 | `tools/photorealism_persistence.py` | Serial persistent-data-off timing and exact image comparison against a matching baseline benchmark. |
 | `tools/photorealism_diagnostics.py` | Disposable neutral-light and clay portrait renders without modifying saved scene or graded metadata. |

@@ -61,3 +61,18 @@ The initial low temple wisps were rejected as skin marks. Final upper-lid
 relaxation is 0.65 mm in the local weighted sculpt, with protected central pupil
 clearance. Groom collections and source dependency receipts were completed.
 Candidate-1 now undergoes native targeted checks before full stress testing.
+
+Candidate-1 was rejected at the native benchmark: the larger lid reduction
+caused blind pupil errors of 6.08 px upward and 9.30 px in the corner on one eye.
+Candidate-2 retains only a 0.15 mm weighted upper-lid adjustment and the proven
+iris reflectance. A mesh-distance lip-interior attribute now fades colour and
+roughness at the actual vermilion boundary. All three native benchmark pupil
+checks pass; measured center/up/corner times are 53.20/56.80/57.97 seconds.
+A resumable full-suite runner now preserves the original start time, source
+hashes and per-stage output hashes, addressing weaknesses found in the earlier
+long-run launcher. Remaining stages continue serially.
+
+The user added a later creative direction after this phase: leaner lower-face
+proportions, more defined cheekbones/jaw/chin, fuller brows and refined lips,
+with stronger dimensionality and a CPU ceiling. This follows the current phase
+and will be compared against the completed candidate before selection.

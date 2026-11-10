@@ -10,6 +10,7 @@ from pathlib import Path
 import bpy
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree
+from mathutils.kdtree import KDTree
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT/'build/appearance_v3_config.json'
@@ -113,6 +114,24 @@ def spatial_mask(nodes, links, position, center, widths):
 
 def refine_materials():
     human = bpy.data.objects['Apollo_Face']
+    lip_index = next(i for i, mat in enumerate(human.data.materials) if mat.name.endswith('.lips'))
+    membership = [set() for vertex in human.data.vertices]
+    for polygon in human.data.polygons:
+        for index in polygon.vertices:
+            membership[index].add(polygon.material_index)
+    boundary = [i for i, groups in enumerate(membership) if lip_index in groups and len(groups) > 1]
+    if not boundary:
+        raise ValueError('Cannot locate lip material boundary')
+    tree = KDTree(len(boundary))
+    for index, vertex_index in enumerate(boundary):
+        tree.insert(human.matrix_world@human.data.vertices[vertex_index].co, index)
+    tree.balance()
+    attribute = human.data.attributes.new('apollo_lip_interior', 'FLOAT', 'POINT')
+    for i, vertex in enumerate(human.data.vertices):
+        if lip_index in membership[i]:
+            distance = tree.find(human.matrix_world@vertex.co)[2]
+            weight = min(1, distance/.0018)
+            attribute.data[i].value = weight*weight*(3-2*weight)
     for mat in human.data.materials:
         if not mat:
             continue
@@ -140,10 +159,16 @@ def refine_materials():
             colour = blush.outputs[0]
         if mat.name.endswith('.lips'):
             lip_mask = spatial_mask(nodes, links, position, (0, -.025, -.073), (.027, .017, .012))
+            interior = nodes.new('ShaderNodeAttribute')
+            interior.attribute_name = 'apollo_lip_interior'
+            fade = nodes.new('ShaderNodeMath')
+            fade.operation = 'MULTIPLY'
+            links.new(interior.outputs['Fac'], fade.inputs[0])
+            links.new(lip_mask, fade.inputs[1])
             strength = nodes.new('ShaderNodeMath')
             strength.operation = 'MULTIPLY'
             strength.inputs[1].default_value = CONFIG['lip_tint_strength']
-            links.new(lip_mask, strength.inputs[0])
+            links.new(fade.outputs[0], strength.inputs[0])
             lip_colour = nodes.new('ShaderNodeMixRGB')
             lip_colour.inputs[2].default_value = (.36, .115, .105, 1)
             links.new(strength.outputs[0], lip_colour.inputs[0])
@@ -166,15 +191,23 @@ def refine_materials():
             links.new(bump.outputs[0], shader.inputs['Normal'])
             for link in list(shader.inputs['Roughness'].links):
                 links.remove(link)
-            shader.inputs['Roughness'].default_value = .36
-            shader.inputs['Coat Weight'].default_value = .06
+            roughness = nodes.new('ShaderNodeMapRange')
+            roughness.inputs['To Min'].default_value = .46
+            roughness.inputs['To Max'].default_value = .36
+            links.new(fade.outputs[0], roughness.inputs['Value'])
+            links.new(roughness.outputs[0], shader.inputs['Roughness'])
+            coat = nodes.new('ShaderNodeMath')
+            coat.operation = 'MULTIPLY'
+            coat.inputs[1].default_value = .06
+            links.new(fade.outputs[0], coat.inputs[0])
+            links.new(coat.outputs[0], shader.inputs['Coat Weight'])
         links.new(colour, shader.inputs['Base Color'])
         shader.inputs['Subsurface Weight'].default_value = .055
     for side in 'LR':
         shader = next(n for n in bpy.data.objects['Iris.'+side].data.materials[0].node_tree.nodes
                       if n.type == 'BSDF_PRINCIPLED')
-        shader.inputs['Roughness'].default_value = .23
-        shader.inputs['Coat Weight'].default_value = .18
+        shader.inputs['Roughness'].default_value = .28
+        shader.inputs['Coat Weight'].default_value = .12
 
 
 def build_brows():
