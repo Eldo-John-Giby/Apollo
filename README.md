@@ -1,254 +1,266 @@
-# Apollo: Gaze Tracking for Samsung XR
+**Built for the Samsung R&D XR Team by AICA**
 
-## What is Apollo?
+# Apollo
+### Synthetic binocular gaze. Analytical labels. Independently checked pixels.
 
-Apollo is a tool that helps create realistic eye movements and gaze direction for Samsung XR headsets. It works as a sophisticated puppeteer for digital eyes, ensuring virtual characters look at the right things in the right way.
+Apollo turns a calibrated 3D character into reproducible eye images and gaze annotations for **Samsung PRISM-XR Track 01**. Give it a fixation target: both eyes converge, Blender renders the pose, and independent checks compare the intended geometry with the actual image.
 
-**In simple terms:** Apollo takes a 3D character model, calculates where eyes should look, and generates images that prove the eyes are working correctly. It's used to make sure XR headsets can track gaze accurately for things like:
-- Where a person is looking
-- Whether the eyes are tracking properly
-- Making sure the eyes look natural and not "glitchy"
+**The central contribution: closing the loop from gaze command to rendered evidence.** Apollo combines binocular control, exact projected pupil geometry, pixel measurements, deliberate fault injection, and reproducible delivery in one pipeline.
 
-## Joining the Team
+<p align="center">
+  <img src="milestones/photorealism-v2-candidate/evidence/portraits/three-quarter.png" width="440" alt="Apollo CPU appearance candidate, rendered three-quarter inspection portrait">
+</p>
 
-If you're new to the project, start with [TEAM_SETUP.md](TEAM_SETUP.md).
+<p align="center"><em>Actual Blender output from the CPU appearance candidate. Inspection portrait uses a separate camera; benchmark images use the calibrated camera.</em></p>
 
-The earlier realism phase is preserved as the [v0.3.0-rc.1 prerelease](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.1).
+| At a glance | Recorded evidence |
+| --- | --- |
+| Qualified competition build | All 17 verification gates pass on Windows and Linux |
+| Independent geometry audit | 1,009 poses · 14 injected faults detected |
+| Latest appearance stress suite | 113/113 poses · 256/256 corpus images pass |
+| Delivery | Packed Blender scene · standalone wrapper · PNGs + JSON |
 
-See [the handoff](docs/PHASE_HANDOFF.md) for completed/deferred checks and preserved working files.
+[Run Apollo](#quick-start) · [Results](#results-and-benchmarks) · [Team setup](TEAM_SETUP.md) · [Technical delivery](delivery/apollo/README.md)
 
-**Standing project rule:** Do not create videos or presentations. Technical work and still-image evidence continue. See [release versions](docs/RELEASES.md).
+## Index
 
-## Project Highlights
+1. [Why Apollo](#why-apollo)
+2. [Output gallery](#output-gallery)
+3. [Architecture](#architecture)
+4. [How gaze becomes ground truth](#how-gaze-becomes-ground-truth)
+5. [Results and benchmarks](#results-and-benchmarks)
+6. [Quick start](#quick-start)
+7. [API and output contract](#api-and-output-contract)
+8. [Reproducibility and release status](#reproducibility-and-release-status)
+9. [Limits and next steps](#limits-and-next-steps)
+10. [Explore the repository](#explore-the-repository)
 
-The completed CPU appearance upgrade is integrated into `main`; see [its execution record](docs/PHOTOREALISM_V2.md). The `photorealism-v2` branch preserves its development history.
+## Why Apollo
 
-The packed development candidate and still-image evidence are in [milestones/photorealism-v2-candidate](milestones/photorealism-v2-candidate/README.md).
+Synthetic eye images are useful only when their labels describe what was actually rendered. A correct rotation formula alone cannot catch a displaced mesh, hidden pupil, stale output, or broken light. Apollo checks these failure modes across the full pipeline.
 
-The qualified upgrade is developed on `competition-upgrade`. The protected `apollo-v0.1.0` development baseline remains unchanged. See the [execution record](docs/UPGRADE_PROGRESS.md), [reproduction runbook](docs/UPGRADE_RUNBOOK.md) and [verifier coverage](docs/VERIFIER_COVERAGE.md).
+| Core contribution | What Apollo implements | Why it matters |
+| --- | --- | --- |
+| **Shared-target binocular control** | Absolute shortest-arc eye rotations toward one 3D fixation point | Preserves vergence and avoids accumulating incremental rotation errors |
+| **Analytical pupil annotations** | Calibrated pinhole projection and exact projected-circle conics | Supplies pupil centers and ellipse annotations directly from geometry |
+| **Independent verification** | Separate Rodrigues/projection reference, evaluated mesh measurements, blind detectors, templates and real occlusion masks | Checks agreement between mathematics, deformed geometry and pixels |
+| **Tests that must catch defects** | Geometry mutations, rendered half-pupil obstruction and lighting-loss adversaries | Demonstrates that checks reject tested failures, beyond passing clean inputs |
+| **Reproducible artifacts** | Fixed seeds, atomic metadata, hash-bound reports, archive replay and resumable corpus generation | Makes evidence traceable to the exact scene and outputs |
+| **Appearance with protected geometry** | Packed character assets, fitted lids/lashes, skin and baked groom; protected eye-vertex checks | Allows visual iteration while retaining calibrated eye geometry |
 
-The selected scene has warm fiber-patterned irises, refitted lids/lashes and 32-sample rendering. Native Blender 4.5.15 qualification passes all V1–V17, including the complete applicable Blender 5.2.3 suite. The 256-frame seeded dataset, 25-pose visibility checks, actual UI operators, extracted-archive regeneration and interrupted dataset resume pass. The 105-second narrated video and editable ten-slide deck have been built and visually reviewed.
+These are Apollo's integrated engineering contributions, not claims that quaternion rotation, synthetic eyes, or conic projection are new inventions. The [component reconnaissance](docs/Synthetic%20Gaze%20Reconnaissance%20Plan.docx) and [literature review](docs/Synthetic%20Gaze%20Literature%20Discovery.docx) informed the design. The implemented stack uses Blender, MakeHuman/MPFB assets and Apollo's NumPy geometry core; see [asset attribution](assets/ATTRIBUTION.md).
 
-Full Linux V1–V17 qualification also passes, including its applicable 5.2 suite. The [technical release](milestones/competition-upgrade-2026-11-07/README.md) contains the complete reports, [demo](milestones/competition-upgrade-2026-11-07/apollo-demo.mp4), [deck](milestones/competition-upgrade-2026-11-07/Apollo_Submission_ppt.pptx) and research corpus.
+## Output gallery
 
-Use [delivery/apollo](delivery/apollo/README.md) for the conventional executable layout. These measurements are local engineering checks, not official rubric scores.
+### Gaze in motion
 
-The earlier development pipeline below builds the original radial appearance. Use [the upgrade recipe](docs/UPGRADE_RUNBOOK.md) to rebuild the selected look. --quality final in the older pipeline means 128 samples; the qualified upgrade uses its separately measured 32-sample settings.
+![Apollo gaze sweep preview](docs/images/apollo-gaze-sweep.gif)
 
----
+*Animated gaze preview. Playback timing is illustrative and does not represent render throughput; use the benchmark table for measured timing.*
 
-## What's Inside the Project
+### Calibrated ten-frame output
 
-Apollo contains everything needed to build, test, and verify gaze tracking:
+![CPU appearance candidate ten-frame contact sheet](milestones/photorealism-v2-candidate/contact_sheet.png)
 
-### 1. **The Eye System**
-- Two eyes that can look in different directions (left, right, up, down)
-- Special "pupil" that detects and measures eye position
-- Two modes:
-  - **Radial mode**: Enhanced eye appearance (default)
-  - **Flat mode**: Original, simpler eye appearance
+*Actual CPU appearance candidate sweep. The protocol starts at the top and moves clockwise; image and annotation checks accompany the native frames.*
 
-### 2. **Testing Suite**
-- 60 different tests (labeled V1 through V17) that check if everything works
-- Each test checks something specific:
-  - V1-V6: Basic eye setup, size, pivots, convergence
-  - V7-V10: Pupil detection, movement, direction checks
-  - V11-V14: Call sequences, repeatability, pupil visibility
-  - V15-V17: Texture integrity, annotation checks, rotation limits
+<details>
+<summary><strong>Inspect the qualified baseline and stress-test evidence</strong></summary>
 
-### 3. **Build Commands** (like steps in a recipe)
+![Qualified competition build contact sheet](milestones/competition-upgrade-2026-11-07/contact_sheet.png)
 
-| Command | What it does |
-|---------|--------------|
-| `test` | Runs all 60 tests to check the eye system |
-| `doctor` | Checks if the environment is set up correctly (like a health check) |
-| `sync` | Synchronizes core files |
-| `inspect` | Examines the character model |
-| `scene` | Builds the base 3D scene |
-| `production-scene` | Builds the final scene for production |
-| `sweep` | Runs a framing protocol (checks eye positions) |
-| `framing` | Experiments with different camera angles |
-| `validate` | Validates metadata (information about the renders) |
-| `sheet` | Generates a contact sheet (contact sheet is like a photo collage) |
-| `prepare` | Prepares candidate artifacts |
-| `demo` | Generates demonstration artifacts |
-| `verify` | Verifies everything works with provenance checks |
-| `bundle` | Packs everything into a ZIP file (requires a team name) |
-| `all` | Runs the complete pipeline from start to finish |
+*Protected competition build: the scene to which the full Windows/Linux release qualification applies.*
 
-### 4. **Development Milestones** (Major achievements)
+![Appearance stress worst-case review sheet](milestones/appearance-stress-2026-11-10/worst-cases.png)
 
-The project has reached 5 major milestones, like checkpoints in a video game:
+*Selected stress cases from the newer appearance evaluation. [Review scope and results](milestones/appearance-stress-2026-11-10/README.md).*
 
-- **M0**: Basic setup working - character model loaded, initial renders created
-- **M1**: Direction testing passed - eyes can look left, right, up, down, and reset correctly
-- **M2**: Full baseline established - all tests V1-V15 and V17 pass; can regenerate results identically
-- **M3**: Visual improvements - made eyes look better without breaking the tests
-- **M5**: Development freeze - final polished version ready; all tests pass with evidence preserved
+</details>
 
----
+## Architecture
 
-## Key Achievements
-
-### **All 17 Tests Pass**
-
-After lots of work, every single one of the 17 validation checks (V1-V17) passes. This means the eye tracking is reliable and reproducible.
-
-### **Three Blender Versions Supported**
-
-The project works with:
-- **Blender 4.5.15 LTS**: Primary version (pinned for exact results)
-- **Blender 5.2.3 LTS**: Secondary version (portable, for verification)
-- Both versions have been tested and verified
-
-### **Performance Numbers**
-
-- A single eye render takes about 23.653 seconds on average (with 32 samples)
-- Higher quality (128 samples) takes about 113.58 seconds but looks slightly better
-- The project balances quality and speed carefully
-
-### **Evidence and Documentation**
-
-Everything documented with:
-- Before/after comparisons
-- Measurement records
-- SHA-256 hash verification (like digital fingerprints to ensure nothing changed)
-- 60 Python tests that act as a safety net
-
----
-
-## How to Get Started (Simple Steps)
-
-### Step 1: Install Dependencies
-
-```bash
-pip install -r requirements.txt
+```mermaid
+flowchart TB
+    A[Character assets and explicit eye mapping] --> B[Scene construction and calibration]
+    B --> C[Packed Blender scene]
+    H[Gaze input h, v] --> D[Standalone eyes.py wrapper]
+    C --> D
+    E[NumPy geometry core] -->|embedded by sync_core| D
+    D --> F[Absolute binocular pose]
+    F --> G[Cycles CPU render]
+    F --> I[Analytical annotations]
+    G --> J[1024 x 1024 PNGs]
+    I --> K[Atomic JSON metadata]
+    J --> V[Independent verification]
+    K --> V
+    C --> V
+    V --> R[Reports and artifact hashes]
+    R --> P[Qualification-gated ZIP]
+    style E fill:#dbeafe,stroke:#2563eb,color:#172554
+    style V fill:#dcfce7,stroke:#16a34a,color:#14532d
+    style P fill:#fef3c7,stroke:#d97706,color:#78350f
 ```
 
-This installs the Python tools needed.
+The [pure NumPy core](apollo_core/core.py) owns the math. [The wrapper](wrapper/eyes.py) embeds it for standalone delivery, applies poses inside Blender, and checks evaluated projection before accepting records. [The verifier](tools/verify.py) coordinates artifact, image, geometry, runtime and replay checks. MPFB is needed for relevant character-building workflows, not for rendering the packed delivery.
 
-### Step 2: Set Up Blender (Required)
+## How gaze becomes ground truth
 
-You need Blender installed (version 4.5 LTS recommended). Think of Blender as the 3D software that actually creates the images.
-
-### Step 3: Run the Full Pipeline
-
-```bash
-python tasks.py all
+```mermaid
+flowchart LR
+    HV["h, v in [-1, 1]"] --> T["Target: (0.05h, -0.350, 0.05v) m"]
+    T --> L[Left eye direction]
+    T --> R[Right eye direction]
+    L --> Q[Shortest-arc rotations]
+    R --> Q
+    Q --> M[Evaluated pupil meshes]
+    Q --> P[Analytical pupil centers and conics]
+    M --> RGB[Rendered pixels and masks]
+    P --> C[Compare predictions and observations]
+    RGB --> C
 ```
 
-This runs the complete workflow - it tests, builds, verifies, and generates all the output files.
+The target plane sits 35 cm in front of the eye midpoint; the camera sits 40 cm in front. Each eye points from its own center to the same target. `reset()` returns to centered fixation, including convergence.
 
-### Step 4: Explore the Results
+The ten-frame protocol uses `theta = 2*pi*k/10`, `h = sin(theta)`, `v = cos(theta)`. Separate research protocols sample the wider input domain rather than treating ten sweep frames as exhaustive coverage.
 
-After running the pipeline, you'll find:
-- **out/production/**: Final verified outputs
-- **milestones/dev-freeze-2026-11-07/**: The final frozen milestone with all evidence
-- Various reports and logs showing what passed and what didn't
-
----
-
-## What the Outputs Look Like
-
-### **Ten 1024x1024 PNG Images**
-
-Ten high-resolution pictures (1024x1024 pixels) showing the eye in different directions, taken clockwise around a circle.
-
-### **Contact Sheet**
-
-A single image that combines all ten PNGs into a grid - like a photo album page.
-
-### **GIF Animation**
-
-A looping animation showing the eyes moving through different directions.
-
-### **Verification Reports**
-
-Documents that prove all 17 tests passed, with measurements and hash values.
-
-### **MANIFEST.json**
-
-A special file that contains "digital fingerprints" (SHA-256 hashes) for every important file. This ensures that if anyone tries to change something, it can be detected.
-
----
-
-## Important Notes for Non-Technical Users
-
-### **This is Development Evidence, Not a Finished Product**
-
-- The outputs are for verification and testing purposes
-- They prove the eye tracking works correctly
-- Actual XR submission would require additional steps not included here
-
-### **Blender is Required**
-
-- You need Blender 4.5.15 LTS installed
-- There's also a secondary Blender 5.2.3 LTS for verification
-- These are professional 3D creation tools
-
-### **Everything is Documented**
-
-- All measurements are recorded
-- All test results are logged
-- All file hashes are tracked
-- This ensures nothing changes secretly
-
-### **Two Eye Modes Available**
-
-- **Radial** (default): Enhanced, more detailed eye appearance
-- **Flat** (optional): Original, simpler appearance - like switching between a detailed painting and a sketch
-
----
-
-## Project Structure (High-Level Overview)
-
-```
-Apollo/
-├── tasks.py          # The main recipe runner (15 different steps)
-├── requirements.txt  # Python packages needed
-├── tools/            # Helper scripts for various tasks
-├── wrapper/          # Eye rendering functions
-├── apollo_core/      # Core pipeline logic
-├── assets/           # Character models and source files
-├── docs/             # Documentation and reports
-├── milestones/       # Major achievement checkpoints
-├── tests/            # The 60 validation tests
-├── build/            # Blender scripts
-├── out/              # Generated outputs and reports
-├── Dockerfile        # Container build definition (for advanced users)
-└── FILEMAP.md        # Map of all the code files
+```mermaid
+flowchart LR
+    A[Candidate artifacts] --> B[Geometry and calibration]
+    B --> C[Image and visibility checks]
+    C --> D[Repeatability and clean-room replay]
+    D --> E[Runtime qualification]
+    E --> F{All required gates pass?}
+    F -->|Yes| G[Evidence-bound technical package]
+    F -->|No or missing evidence| H[Retain candidate status]
+    X[Injected defects] --> B
+    X --> C
 ```
 
+## Results and benchmarks
+
+**These are measured local engineering results, not official competition scores or downstream gaze-estimation accuracy.** Each column below belongs to a different frozen scene and evaluation scope.
+
+### Correctness and coverage
+
+| Measurement | Qualified competition build · 7 Nov | CPU appearance candidate · latest evidence through 10 Nov |
+| --- | --- | --- |
+| Full release verification | Windows/Linux V1–V17 pass; applicable secondary-runtime checks pass | Full cross-platform release qualification outstanding |
+| Independent geometry audit | 1,009 poses; 14/14 faults detected | 1,009 poses; 14/14 faults detected |
+| Ten-frame sweep, maximum blind pupil error | 0.175464 px | 0.108 px, rounded upward |
+| Separate seeded corpus | 256/256 images pass | 256/256 images pass |
+| Corpus maximum geometry-guided pixel error | 0.217847 px | 0.153842 px, rounded upward |
+| Actual-mask visibility coverage | 25 poses | 113/113 stress poses pass |
+| Maximum mask-centroid residual | 0.030619 px | 0.044821 px, rounded upward |
+| Minimum visible dark pupil fraction | 1.0 | 0.9982608696 |
+| Rendered half-pupil obstruction | Detected | Detected; measured fraction 0.499356 |
+| Reset reproduction | Byte-identical center image | Byte-identical corner-to-reset center image |
+| Recorded Python test suite | 79 passing on Windows and Linux | 82 passing in workspace after checkpoint retry fix |
+
+Sources: [competition verification](milestones/competition-upgrade-2026-11-07/verification_report.md), [upgrade evidence and corpus analysis](docs/UPGRADE_PROGRESS.md), [appearance candidate checks](milestones/photorealism-v2-candidate/README.md), and [113-pose / 256-image stress evaluation](milestones/appearance-stress-2026-11-10/README.md). The 82-test result covers the later checkpoint fix; the stress images were rendered using the frozen source recorded in that evaluation.
+
+The latest appearance stress suite also records maximum blind/template pupil errors of **0.277359 / 0.137939 px** across its stress/corpus checks (rounded upward). Different detectors measure different quantities; these residuals are not interchangeable with mask-centroid or conic-center errors. See [verification methods and limits](docs/VERIFIER_COVERAGE.md).
+
+### CPU rendering cost
+
+| Scene / experiment | Samples | Pose scope | Measured frame time |
+| --- | ---: | --- | ---: |
+| Earlier radial development baseline | 32 | Ten-frame sweep | 23.653 s mean |
+| Earlier radial sample experiment | 16 | Center / up / down | 12.896 s mean |
+| Earlier radial sample experiment | 8 | Center / up / down | 5.094 s mean |
+| Final CPU appearance candidate | 32 | Center | 54.59 s |
+| Final CPU appearance candidate | 32 | Up | 58.03 s |
+| Final CPU appearance candidate | 32 | Corner | 72.55 s |
+
+Recorded on the project's Intel Core i5-1135G7 laptop using Cycles CPU at 1024×1024. The earlier sample experiment used fixed seeds and no denoising. Pose sets and scene complexity differ: this is not a controlled speedup comparison. Lower sample settings are iteration experiments, not replacements for qualified settings. Sources: [baseline timing methodology](docs/PERFORMANCE.md) and [appearance benchmark](milestones/photorealism-v2-candidate/evidence/performance/benchmark.json).
+
+The final appearance candidate contains **464,088 visible evaluated polygons**, with **1.40 GiB peak measured process RSS** across the measured stages. Its full stress automation took **8.02 hours**, including monitoring gaps and recovery; that duration is not a pure rendering benchmark.
+
+## Quick start
+
+### Replay the qualified packed scene
+
+Install Blender compatible with the recorded release runtime (primary: **4.5.15 LTS**). From the repository root, with `blender` on `PATH`:
+
+```powershell
+blender -b delivery/apollo/scene.blend --python-exit-code 1 -P delivery/apollo/wrapper/eyes.py -- --out out/replay
+```
+
+This writes ten PNGs and `metadata.json` into a separate replay directory. The packed scene needs no MPFB add-on. Omit quality overrides to retain its stored render settings.
+
+Render one pose:
+
+```powershell
+blender -b delivery/apollo/scene.blend --python-exit-code 1 -P delivery/apollo/wrapper/eyes.py -- --h 1 --v 0 --out out/right.png
+```
+
+### Set up development
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+$env:BLENDER_BIN = 'C:\Program Files\Blender Foundation\Blender 4.5\blender.exe'
+python tasks.py test
+python tasks.py doctor
+```
+
+Use Python 3.10+ and the pinned dependencies. Set `BLENDER_SECONDARY_BIN` for secondary-runtime qualification. Follow [TEAM_SETUP.md](TEAM_SETUP.md) for assets and teammate setup, [RUNBOOK.md](docs/RUNBOOK.md) for individual pipeline stages, and [UPGRADE_RUNBOOK.md](docs/UPGRADE_RUNBOOK.md) to reproduce the competition look. The original development builder produces the earlier radial appearance; it does not reproduce the latest appearance candidate automatically.
+
+## API and output contract
+
+Inside Blender Python, import the standalone `wrapper/eyes.py` module as `eyes`:
+
+```python
+eyes.move(0.5, 0.25)       # Absolute pose; finite inputs clamp to [-1, 1].
+eyes.render('out/pose.png')
+eyes.reset()               # Centered binocular fixation.
+eyes.sweep(out_dir='out/sweep')
+```
+
+| Interface / artifact | Contract |
+| --- | --- |
+| `move(h, v)`, `reset()` | Absolute gaze control; centered reset |
+| `render(path)`, `sweep(...)` | Single still or default ten-frame protocol |
+| `state()`, `calibration()` | Current state and camera/scene calibration |
+| `renders/frame_00.png` … `frame_09.png` | Ten 1024×1024 rendered images |
+| `metadata.json` | Frame index, sweep angle, input, left/right eye rotations, projected pupil centers, intrinsics and extra annotations |
+| Verification reports | Results tied to scene, wrapper, metadata and image hashes |
+
+World units are meters; the subject faces −Y and +Z is up. Anatomical left appears on image right. Positive `h` is image right; positive `v` is image up. Pixels use a top-left origin. Eye rotations are world-relative XYZ Euler angles in radians. `camera_matrix` is the 3×3 intrinsic matrix.
+
+Metadata is replaced atomically only after a complete successful sweep; regeneration invalidates the previous manifest first. See [the metadata schema](metadata.schema.json) and [semantic validation](apollo_core/metadata.py).
+
+## Reproducibility and release status
+
+| Artifact | Role | Where to start |
+| --- | --- | --- |
+| Protected competition build | Full qualified technical reference | [Release evidence](milestones/competition-upgrade-2026-11-07/README.md) · [Executable layout](delivery/apollo/README.md) |
+| CPU appearance candidate | Refined skin, hair, brows and lashes; targeted checks and native stress evidence | [Candidate handoff](milestones/photorealism-v2-candidate/README.md) · [Stress report](milestones/appearance-stress-2026-11-10/README.md) |
+| Earlier development freeze | Historical radial-iris reference | [Freeze evidence](milestones/dev-freeze-2026-11-07/README.md) |
+
+The competition archive regenerated all ten sweep PNGs and metadata byte for byte from an extracted layout and different working directory. Interrupted 255→256 corpus resume reproduced the completed dataset. Determinism claims apply to the tested runtime/machine; cross-version correctness is checked separately with tolerances. Identical image output does not imply identical binary `.blend` saves.
+
+The newer appearance candidate is integrated into `main`, but its native stress results do not promote it to a fully qualified cross-platform release. Release names and promotion rules are documented in [RELEASES.md](docs/RELEASES.md). Organizer upload and submission remain team-owned.
+
+## Limits and next steps
+
+Apollo currently generates synthetic gaze data; it does not establish headset tracking accuracy or trained gaze-estimator performance. The scene uses a fixed identity and controlled lighting, fixed pupils, and simplified non-refractive eyes. Native 2K skin and efficient baked hair retain visible CG limitations. Finite test coverage does not establish universal detector robustness or human-rated naturalness.
+
+Next evidence gaps are full cross-platform qualification of the appearance candidate, independent teammate/human review, and downstream evaluation if the generated data is used to train an estimator. See [the roadmap](docs/ROADMAP.md) and [phase handoff](docs/PHASE_HANDOFF.md).
+
+## Explore the repository
+
+| Area | Entry point |
+| --- | --- |
+| Teammate onboarding | [TEAM_SETUP.md](TEAM_SETUP.md) |
+| Source navigation | [FILEMAP.md](FILEMAP.md) |
+| Requirements and rubric | [Problem statement](docs/problem_statement.md) |
+| Geometry and design | [Technical solution](docs/SOLUTION_TECHNICAL.md) · [Core implementation](apollo_core/core.py) |
+| Standalone Blender interface | [wrapper/eyes.py](wrapper/eyes.py) |
+| Verification and fault coverage | [Verifier coverage](docs/VERIFIER_COVERAGE.md) |
+| Appearance construction and measurements | [Photorealism execution record](docs/PHOTOREALISM_V2.md) |
+| Character and texture provenance | [Character attribution](assets/ATTRIBUTION.md) · [Appearance asset attribution](assets/photorealism-v2/ATTRIBUTION.md) |
+
 ---
 
-## Summary
-
-Apollo is a systematic way to ensure that XR headsets can accurately track where a user is looking. It:
-
-1. **Sets up** a 3D character with eyes
-2. **Tests** extensively (60 tests, 17 validation checks)
-3. **Verifies** everything works correctly
-4. **Documents** all results with measurements and hashes
-5. **Preserves** evidence for review
-
-The project has reached a mature state where all 17 validation checks pass consistently, and all results can be reproduced exactly - which is crucial for regulatory and quality assurance purposes in XR development.
-
----
-
-## Geometry and Guarantees
-
-Meters; subject faces -Y, up +Z. Camera (0,-0.400,0); target (0.05h,-0.350,0.05v). Anatomical L is image right. Positive h is image right, positive v is image up. Pixels use a top-left origin; rotations are world-relative XYZ Euler in radians. reset() converges on the centered target. Movement is absolute and finite inputs are clamped to [-1,1].
-
-Analytic pupil positions are checked against evaluated Blender transforms and projection before records are accepted. Pupil ellipse annotations use a projected conic. Sweep metadata is replaced atomically only after all frames succeed; stale manifests are removed at regeneration start.
-
----
-
-## Current Validation Evidence
-
-79 Python tests pass on Windows and Linux. The exact selected scene SHA-256 is `3fdc93632a84011cc78c3210e703ad0f6653fcef68375d21a741af76b951605d`. Its independent audit covers 1009 actual deformed geometry poses and detects 14 injected faults. All five directions/reset pass. Official sweep blind/template maximum errors are 0.175464/0.061253 px. The separate 256-image pixel check has maximum error 0.217847 px; the 25-pose mask residual is at most 0.030619 px with full visible/dark coverage. A real half-pupil obstruction and lighting-loss render are rejected.
-
-These finite checks do not establish human naturalness, universal detector robustness or downstream gaze-estimator accuracy.
-
-The actual development ZIP regenerates all ten PNGs and metadata identically from a clean configuration and different working directory. Completed and interrupted 255-to-256 dataset resumes preserve all image and manifest bytes. The scene rebuild produces an identical center PNG, without claiming identical binary `.blend` saves. See [the original freeze](milestones/dev-freeze-2026-11-07/README.md) for historical measurements; those are not substituted for new qualification.
-
-The demo uses local synthesized narration and edited actual artifacts. It does not represent real-time rendering speed. Team identity, final event filenames, repository sharing and organizer uploads remain team-owned. No organizer submission has been performed.
+**Apollo · AICA · Samsung PRISM-XR Track 01**
