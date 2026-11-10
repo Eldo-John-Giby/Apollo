@@ -2,6 +2,9 @@
 
 ## Standing user rules
 
+- Edit README files only when the user explicitly requests a README change.
+  General development, documentation, cleanup, merge, push or release requests
+  do not authorize README edits. This rule was set on 10 November 2026.
 - Do not create, regenerate, edit, or schedule videos or presentations. This
   includes demo movies, narrated clips, slide decks, PowerPoint and PDF decks.
   The user explicitly set this rule on 8 November 2026. Only an explicit user
