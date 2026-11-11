@@ -1,0 +1,32 @@
+{
+  "review_required": true,
+  "baseline_scene_sha256": "8acd0df98cd2581f54bf83901d56c669795c5eef14e853a378bcb18e6bf71c4d",
+  "scene_sha256": "6d45df6b9413213d48111adf5d3a9f544f2c54029448b782de29b55dd20bd0c4",
+  "worker_sha256": "5811ca670fbbb5579439740a6a0807b6ed8c42d013deff6560ea3bd73dc029e8",
+  "source_images": {
+    "milestones\\photorealism-v2-candidate\\evidence\\poses\\renders\\frame_000000.png": "bfe6e590409670fa1feab4056c30c25f7dbdf28d2d0aecc8418a1f12b51fdfb3",
+    "milestones\\photorealism-v2-candidate\\evidence\\poses\\renders\\frame_000001.png": "43d4701be77aa25a89d97959d453a91be93a0053df577afe1f1ebca60c886694",
+    "milestones\\photorealism-v2-candidate\\evidence\\poses\\renders\\frame_000002.png": "34d19e9a9d7de08c87fd523e6274cd3e8b026eee0811a1266ccf9decbdc564cb",
+    "milestones\\photorealism-v2-candidate\\evidence\\poses\\renders\\frame_000003.png": "c429445ecba0618a24f7cef83034e045e8d432ad907147d6b42ce7b533708fb1",
+    "milestones\\photorealism-v2-candidate\\evidence\\poses\\renders\\frame_000004.png": "4a87bdecbc8a6f9cdc809287222813bb162fcb596a171b6333ab4ee9f7e2e1ff",
+    "milestones\\photorealism-v2-candidate\\evidence\\poses\\renders\\frame_000005.png": "5ff5bcce68764361e5dfe51a58e7b7005d1d89b04bb6b75978dc57a17af96f2b",
+    "milestones\\photorealism-v2-candidate\\evidence\\poses\\renders\\frame_000006.png": "4754b4a5fc63cf973a8d96e1431127655885d50d697031619544dbcd4d438d06",
+    "milestones\\photorealism-v2-candidate\\evidence\\poses\\renders\\frame_000007.png": "77766724d47a66015fe1b32f092a640309e9b8c00e0d89f3ae9931f855ca79a2",
+    "milestones\\photorealism-v2-candidate\\evidence\\poses\\renders\\frame_000008.png": "badeb7e4f644bf197922be8b2feba2c3cd6a19353439715606edc6f77d7286e7",
+    "C:\\Users\\eldoj\\PycharmProjects\\Apollo-appearance-v3\\out\\appearance-v3\\checks-2\\poses\\renders\\frame_000000.png": "6cec01319ae47275c37f327b40bfe9a0b890230bb59f9fb1bc000c22e1c343b8",
+    "C:\\Users\\eldoj\\PycharmProjects\\Apollo-appearance-v3\\out\\appearance-v3\\checks-2\\poses\\renders\\frame_000001.png": "85a99d4557eb65f6372e8f80fb9bda7d6828af06070853796bae3e891fe2e50c",
+    "C:\\Users\\eldoj\\PycharmProjects\\Apollo-appearance-v3\\out\\appearance-v3\\checks-2\\poses\\renders\\frame_000002.png": "a6fefcb53bf2c4f94744b1a0c14ffea8c0dc4cfecab8e9969989ef852cd055c6",
+    "C:\\Users\\eldoj\\PycharmProjects\\Apollo-appearance-v3\\out\\appearance-v3\\checks-2\\poses\\renders\\frame_000003.png": "ddcd37ced26eebd132d4326d1693b06d55707112193db0db66a934855220bb25",
+    "C:\\Users\\eldoj\\PycharmProjects\\Apollo-appearance-v3\\out\\appearance-v3\\checks-2\\poses\\renders\\frame_000004.png": "722597bf60b9110b3d1aceeaac57dc4b200ddab42664e63a89ec083cc8d9df63",
+    "C:\\Users\\eldoj\\PycharmProjects\\Apollo-appearance-v3\\out\\appearance-v3\\checks-2\\poses\\renders\\frame_000005.png": "3e7b0865a59cb8b30cb65e35a71f8119c5b173ce1625eb44b08955e35f385773",
+    "C:\\Users\\eldoj\\PycharmProjects\\Apollo-appearance-v3\\out\\appearance-v3\\checks-2\\poses\\renders\\frame_000006.png": "10e22802d9b03998287743f019c5de41cdb6f22187f9090766b0fa06477fc942",
+    "C:\\Users\\eldoj\\PycharmProjects\\Apollo-appearance-v3\\out\\appearance-v3\\checks-2\\poses\\renders\\frame_000007.png": "be6cf169f31a1154b845c71eba83617dcf7b65acc072e6a473a8c7b2c04efb64",
+    "C:\\Users\\eldoj\\PycharmProjects\\Apollo-appearance-v3\\out\\appearance-v3\\checks-2\\poses\\renders\\frame_000008.png": "7a0df8f958119de2395d19ce23cb67f65c6fa1e344c63133e12e4dd4edce65b7"
+  },
+  "sheets": {
+    "center-comparison.png": "d9154c35b927fbbfcc2402f982926c768c3ecee431d3cbf1a8a811e10394918f",
+    "eye-details.png": "3bbb8d6341a35188971da624b36fd4856a68c37c27a53254ce63cfd43d844bd8",
+    "pose-comparison.png": "b9ffaee9d701fd1d36ab7f8a60656457807603b7792eb296044a520e907e8e7e"
+  },
+  "scope": "Matched poses/calibration; deliberate material, grooming and lighting changes. Agent review is separate."
+}

@@ -1,0 +1,16 @@
+{
+  "scene_sha256": "6d45df6b9413213d48111adf5d3a9f544f2c54029448b782de29b55dd20bd0c4",
+  "passed_technical_checks": true,
+  "visual_review": "Native front/three-quarter, neutral/clay and nine-pose eye crops inspected by assistant",
+  "unit_tests_passed": 82,
+  "full_visibility_poses": 113,
+  "full_corpus_images": 256,
+  "archive_local_path": "C:\\Users\\eldoj\\PycharmProjects\\Apollo-appearance-v3\\out\\appearance-v3\\natural-stress-raw.zip",
+  "archive_sha256": "332f83eb0dc1ce77260a8abccefde8f00e2948fc1f9b977196133fa8bf41575b",
+  "raw_files": 609,
+  "limitations": [
+    "Human attractiveness/readability ratings remain pending",
+    "Native 2K skin and efficient non-refractive eye/hair representation retain CG simplifications"
+  ],
+  "rejected_change": "0.65 mm upper-lid reduction failed unchanged blind pupil gate; accepted candidate uses 0.15 mm"
+}

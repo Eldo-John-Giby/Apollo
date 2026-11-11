@@ -76,3 +76,14 @@ The user added a later creative direction after this phase: leaner lower-face
 proportions, more defined cheekbones/jaw/chin, fuller brows and refined lips,
 with stronger dimensionality and a CPU ceiling. This follows the current phase
 and will be compared against the completed candidate before selection.
+
+## Natural makeover completed
+
+Candidate-2 passes all targeted stages, 113 stress RGB/mask poses and 256 fresh
+corpus images. Minimum full visibility is 99.826%, maximum blind error is
+0.316136 px and independent corpus error is 0.153842 px (upper-rounded). Native
+portraits, diagnostics, all-pose eye crops and worst-case overview were inspected.
+Packed scene, conventional wrapper/renders/metadata, comparisons and source-bound
+reports are in milestones/appearance-v3-natural with HANDOFF.md. The complete raw
+stress ZIP is local and checksum-bound. 82 unit tests pass. The first requested
+makeover is complete; the subsequent creative sculpting pass now starts.
