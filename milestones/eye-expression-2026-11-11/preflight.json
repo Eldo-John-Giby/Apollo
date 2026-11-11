@@ -1,0 +1,22 @@
+{
+  "schema_version": "apollo.scene-preflight/1",
+  "passed": true,
+  "qualified": false,
+  "checks": {
+    "V1": {
+      "status": "PASS",
+      "measurement": "camera/target/units/render/static lighting audited"
+    },
+    "V2": {
+      "status": "PASS",
+      "measurement": {
+        "ipd_m": 0.06299999409086146,
+        "radius_m": 0.012
+      }
+    }
+  },
+  "scene_sha256": "3b0a520a667bc9aa8a5c44709eef4a6bd6ac8ee9ed18a1d3f1463b433cf40452",
+  "verifier_sha256": "513cf17350211d547e15d85490234cdb275b3bdfb34d83a44f6fce684a5780c4",
+  "worker_sha256": "b34866bcc57ebf24c8ee9e021e2d437d4498189c14763fd29a9d70120eebebb2",
+  "scope": "Only the existing V1/V2 scene checks; full V1\u2013V17 remains required."
+}

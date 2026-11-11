@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "blender": "4.5.15 LTS",
+  "poses": 1009,
+  "maxima": {
+    "pupil_world_m": 2.786046441926517e-09,
+    "surface_world_m": 7.755550848938966e-09,
+    "annotation_px": 1.850342200391982e-05
+  },
+  "mutations": {
+    "reversed_horizontal": {
+      "detected": true,
+      "reason": "pupil surface convergence: 0.0019712613505311854"
+    },
+    "reversed_vertical": {
+      "detected": true,
+      "reason": "pupil surface convergence: 0.0011409390214528997"
+    },
+    "disabled_movement": {
+      "detected": true,
+      "reason": "pupil surface convergence: 0.0011482244261343075"
+    },
+    "wrong_target_bounds": {
+      "detected": true,
+      "reason": "pupil surface convergence: 0.0005750263778085645"
+    },
+    "swapped_anatomical_labels": {
+      "detected": true,
+      "reason": "anatomical eye mapping"
+    },
+    "wrong_camera_distance": {
+      "detected": true,
+      "reason": "camera distance"
+    },
+    "wrong_lens": {
+      "detected": true,
+      "reason": "camera distance"
+    },
+    "wrong_camera_orientation": {
+      "detected": true,
+      "reason": "camera orientation"
+    },
+    "one_eye_disabled": {
+      "detected": true,
+      "reason": "pupil surface convergence: 0.0019555040534237934"
+    },
+    "displaced_rotation_pivot": {
+      "detected": true,
+      "reason": "physical center"
+    },
+    "bad_annotation": {
+      "detected": true,
+      "reason": "annotation projection: 5.000011653567526"
+    },
+    "displaced_pupil_geometry": {
+      "detected": true,
+      "reason": "pupil surface convergence: 0.002999999972129507"
+    },
+    "missing_texture_reference": {
+      "detected": true,
+      "reason": "missing referenced texture"
+    },
+    "changed_lighting": {
+      "detected": true,
+      "reason": "lighting changed"
+    }
+  },
+  "inputs": {
+    "out\\character-polish\\refined\\scene.blend": "f919e35256eb7865cef1488c8a2e77dec4cb5288592ead3f561730a7462f9977",
+    "wrapper\\eyes.py": "b16d1f681628686b0d23e1ad751d469710dd71043bc5de075fd0d20a1ec7bf0e",
+    "tools\\independent_audit.py": "9013dfca9815c8205fb5a0c1221b4b5f2b03cec4158c5bd6d08ae14cbfb6303f",
+    "tools\\reference_geometry.py": "1edf576b6b7aedad90eaf6b0a5f35f767dc896486a3495606eab25e002e98678"
+  },
+  "limits": "Geometry/projection audit only; image visibility, lighting and archive checks remain separate."
+}

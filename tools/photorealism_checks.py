@@ -3,15 +3,30 @@ import argparse,hashlib,json,os,shutil,subprocess,sys,time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 
-def run(scene,out,blender,baseline=None):
+def resume_anchors(scene, out):
+    """Only accept an interrupted anchor worker for the exact same saved scene."""
+    scene, out = Path(scene), Path(out)
+    status = json.loads((out/'status.json').read_text(encoding='utf-8'))
+    if status.get('stage') != 'anchors':
+        raise ValueError('Resume is limited to an interrupted anchors stage')
+    source_sha = hashlib.sha256(scene.read_bytes()).hexdigest()
+    preflight = json.loads((out/'scene-preflight.json').read_text(encoding='utf-8'))
+    progress = json.loads((out/'poses/progress.json').read_text(encoding='utf-8'))
+    if preflight.get('scene_sha256') != source_sha or progress['run'].get('scene_sha256') != source_sha:
+        raise ValueError('Cannot resume evidence from a different scene')
+
+
+def run(scene,out,blender,baseline=None,resume=False):
     scene=scene.resolve();out=out.resolve()
     if baseline is None:
         baseline=ROOT/'out/photorealism-v2/baseline-poses'
         if not baseline.exists():baseline=ROOT/'milestones/photorealism-v2-development/baseline/poses'
     else:baseline=Path(baseline)
     if not (baseline/'progress.json').is_file():raise ValueError('Missing baseline poses; provide --baseline')
-    if out.exists():raise ValueError('Use a new check output directory')
-    out.mkdir(parents=True);source_sha=hashlib.sha256(scene.read_bytes()).hexdigest();peaks=[]
+    if resume:
+        resume_anchors(scene,out)
+    elif out.exists():raise ValueError('Use a new check output directory')
+    out.mkdir(parents=True,exist_ok=resume);source_sha=hashlib.sha256(scene.read_bytes()).hexdigest();peaks=[]
     def status(stage,**fields):
         p=out/'status.json';tmp=p.with_suffix('.tmp');tmp.write_text(json.dumps({'stage':stage,**fields},indent=2)+'\n',encoding='utf-8');tmp.replace(p);print(stage,flush=True)
     def command(stage,args):
@@ -72,4 +87,6 @@ def run(scene,out,blender,baseline=None):
     except Exception as exc:
         (out/'resources.json').write_text(json.dumps({'stages':peaks},indent=2)+'\n',encoding='utf-8');status('failed',error=str(exc));raise
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--scene',type=Path,required=True);p.add_argument('--out',type=Path,required=True);p.add_argument('--baseline',type=Path);p.add_argument('--blender',default=os.environ.get('BLENDER_BIN') or shutil.which('blender'));a=p.parse_args();assert a.blender,'Set BLENDER_BIN';run(a.scene,a.out,a.blender,a.baseline)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--scene',type=Path,required=True);p.add_argument('--out',type=Path,required=True);p.add_argument('--baseline',type=Path);p.add_argument('--blender',default=os.environ.get('BLENDER_BIN') or shutil.which('blender'))
+    p.add_argument('--resume-anchors',action='store_true',help='Resume interrupted anchor images; repeat preflight, geometry and timing before continuing')
+    a=p.parse_args();assert a.blender,'Set BLENDER_BIN';run(a.scene,a.out,a.blender,a.baseline,a.resume_anchors)

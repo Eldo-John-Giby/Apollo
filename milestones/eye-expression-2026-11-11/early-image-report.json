@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "frames": 3,
+  "max_blind_error_px": 0.1716388719115642,
+  "max_template_error_px": 0.12109797826627319,
+  "failures": [],
+  "baseline_sha256": "4fcef7967d2feff37cb9c156b384226929bdca56c1471b0b0862dfd9345074f8",
+  "grader_sha256": "cbce830393f19ec418da75f6b4532605ff1b4123110b910b5f275d95d909c10a",
+  "scene_sha256": "3b0a520a667bc9aa8a5c44709eef4a6bd6ac8ee9ed18a1d3f1463b433cf40452"
+}

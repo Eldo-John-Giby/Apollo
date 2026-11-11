@@ -1,0 +1,21 @@
+{
+  "source_sha256": "8acd0df98cd2581f54bf83901d56c669795c5eef14e853a378bcb18e6bf71c4d",
+  "scene_sha256": "f919e35256eb7865cef1488c8a2e77dec4cb5288592ead3f561730a7462f9977",
+  "recipe_sha256": "72ec9a6dbb1b52259d6e436d710b0dbd4b46b6a5800795c6672c483be3c76241",
+  "brow_helper_sha256": "ea1765270c7fa6f8d9fefd877cf82caa8c4161a38c9b1b790b3c6e461c0b6b6b",
+  "protected_eye_meshes": {
+    "Pupil.L": "f88f09da800282029ddfa4040f8810342621664702b8fef561e579db0187f9f4",
+    "Iris.L": "ebf7c4643b5a3c52e5472485e8a9979e946922b4ff9b7150dcb6ea0bd8897d3f",
+    "Sclera.L": "409a88e670341412fdaba1dc6d772e7a16a5b7caec868ef7e331759c9de31f5c",
+    "Pupil.R": "23aceb8a56b0a77d52996dde7c6f503b48344fd3975e6c122cc60a96ecae14d4",
+    "Iris.R": "5dda2b0f033d48303f2429dbf0fda3721fd0a326b3ffa43877a50482049c5885",
+    "Sclera.R": "69232cf8e788f702125fd2f3bb1549fdc8a206e7867da9c8fb2c2943612297d4"
+  },
+  "visible_evaluated_polygons": 464088,
+  "brow_strands": 2100,
+  "face_contour": {
+    "changed_vertices": 4775,
+    "maximum_displacement_m": 0.004293462933374582
+  },
+  "qualified": false
+}

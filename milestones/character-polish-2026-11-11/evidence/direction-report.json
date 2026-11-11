@@ -1,0 +1,169 @@
+{
+  "passed": true,
+  "reset_identical": true,
+  "reset_detection_error_px": 0.0,
+  "measurements": [
+    {
+      "direction": "left",
+      "eye": "L",
+      "detector": "ellipse",
+      "dx_px": -10.1890869140625,
+      "dy_px": -0.07696533203125,
+      "signed_motion_px": 10.1890869140625,
+      "cross_axis_px": 0.07696533203125,
+      "passed": true
+    },
+    {
+      "direction": "left",
+      "eye": "L",
+      "detector": "template",
+      "dx_px": -10.148244176815364,
+      "dy_px": 0.008816355932132789,
+      "signed_motion_px": 10.148244176815364,
+      "cross_axis_px": 0.008816355932132789,
+      "passed": true
+    },
+    {
+      "direction": "left",
+      "eye": "R",
+      "detector": "ellipse",
+      "dx_px": -10.38995361328125,
+      "dy_px": 0.01434326171875,
+      "signed_motion_px": 10.38995361328125,
+      "cross_axis_px": 0.01434326171875,
+      "passed": true
+    },
+    {
+      "direction": "left",
+      "eye": "R",
+      "detector": "template",
+      "dx_px": -10.367947642390918,
+      "dy_px": 0.013656422091432084,
+      "signed_motion_px": 10.367947642390918,
+      "cross_axis_px": 0.013656422091432084,
+      "passed": true
+    },
+    {
+      "direction": "right",
+      "eye": "L",
+      "detector": "ellipse",
+      "dx_px": 10.3370361328125,
+      "dy_px": 0.0126495361328125,
+      "signed_motion_px": 10.3370361328125,
+      "cross_axis_px": 0.0126495361328125,
+      "passed": true
+    },
+    {
+      "direction": "right",
+      "eye": "L",
+      "detector": "template",
+      "dx_px": 10.375029881248658,
+      "dy_px": 0.011341934487676458,
+      "signed_motion_px": 10.375029881248658,
+      "cross_axis_px": 0.011341934487676458,
+      "passed": true
+    },
+    {
+      "direction": "right",
+      "eye": "R",
+      "detector": "ellipse",
+      "dx_px": 10.095855712890625,
+      "dy_px": 0.0105133056640625,
+      "signed_motion_px": 10.095855712890625,
+      "cross_axis_px": 0.0105133056640625,
+      "passed": true
+    },
+    {
+      "direction": "right",
+      "eye": "R",
+      "detector": "template",
+      "dx_px": 10.091230749291679,
+      "dy_px": -0.017900079576180377,
+      "signed_motion_px": 10.091230749291679,
+      "cross_axis_px": 0.017900079576180377,
+      "passed": true
+    },
+    {
+      "direction": "up",
+      "eye": "L",
+      "detector": "ellipse",
+      "dx_px": 0.05419921875,
+      "dy_px": -10.334808349609375,
+      "signed_motion_px": 10.334808349609375,
+      "cross_axis_px": 0.05419921875,
+      "passed": true
+    },
+    {
+      "direction": "up",
+      "eye": "L",
+      "detector": "template",
+      "dx_px": -0.0040748768309936696,
+      "dy_px": -10.287015903691522,
+      "signed_motion_px": 10.287015903691522,
+      "cross_axis_px": 0.0040748768309936696,
+      "passed": true
+    },
+    {
+      "direction": "up",
+      "eye": "R",
+      "detector": "ellipse",
+      "dx_px": -0.08404541015625,
+      "dy_px": -10.367156982421875,
+      "signed_motion_px": 10.367156982421875,
+      "cross_axis_px": 0.08404541015625,
+      "passed": true
+    },
+    {
+      "direction": "up",
+      "eye": "R",
+      "detector": "template",
+      "dx_px": -0.010100850256835336,
+      "dy_px": -10.287706918797241,
+      "signed_motion_px": 10.287706918797241,
+      "cross_axis_px": 0.010100850256835336,
+      "passed": true
+    },
+    {
+      "direction": "down",
+      "eye": "L",
+      "detector": "ellipse",
+      "dx_px": 0.06298828125,
+      "dy_px": 10.249130249023438,
+      "signed_motion_px": 10.249130249023438,
+      "cross_axis_px": 0.06298828125,
+      "passed": true
+    },
+    {
+      "direction": "down",
+      "eye": "L",
+      "detector": "template",
+      "dx_px": 0.00546751291350407,
+      "dy_px": 10.295034357151637,
+      "signed_motion_px": 10.295034357151637,
+      "cross_axis_px": 0.00546751291350407,
+      "passed": true
+    },
+    {
+      "direction": "down",
+      "eye": "R",
+      "detector": "ellipse",
+      "dx_px": -0.11285400390625,
+      "dy_px": 10.196517944335938,
+      "signed_motion_px": 10.196517944335938,
+      "cross_axis_px": 0.11285400390625,
+      "passed": true
+    },
+    {
+      "direction": "down",
+      "eye": "R",
+      "detector": "template",
+      "dx_px": -0.023896148217859157,
+      "dy_px": 10.262136981030995,
+      "signed_motion_px": 10.262136981030995,
+      "cross_axis_px": 0.023896148217859157,
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "max_template_annotation_error_px": 0.03678123957650575
+}

@@ -43,6 +43,7 @@ preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred
 | `docs/RELEASES.md` | Uniform release/tag names, historical version mapping and promotion policy. |
 | `docs/PHOTOREALISM_V2.md` | V2 construction, appearance review, measured CPU checks, deviations and development handoff. |
 | `docs/VISUAL_REALISM.md` | Current appearance work, rejected prototypes, reproducible checkpoints and remaining visual/technical gates. |
+| `docs/CHARACTER_POLISH.md` | Adult-face refinement plan, matched still review, CPU checks and release boundary. |
 | `docs/character_mapping.example.json` | Explicit stock-eye identifiers, orientation confirmation and attribution template. |
 
 ## Entry points and core
@@ -91,6 +92,13 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/ui_rehearsal.py` | Real Blender panel operators: pose-render/API byte parity and official sweep output validation. |
 | `build/upgrade_looks.py` | Distinct iris-region/shading/light candidates and MPFB lid/lash refit; preserves pupil/eye geometry and calibration, requires MPFB for building only. |
 | `build/photorealism_scene.py`, `build/photorealism_config.json` | Separate v2 adult female bake, preserved orbital contact, licensed skin/iris materials and baked bun/brow groom; source/config/asset receipts and protected-eye checks. |
+| `build/portrait_refinement.py`, `docs/PORTRAIT_REFINEMENT.md` | Packed-v2 portrait refinement: cheek contour, feathered satin lips, fuller fitted brows and temple fibers; isolated build and targeted acceptance plan. |
+| `tools/portrait_checkpoint.py` | Gate targeted portrait evidence and package a development scene with matched portrait stills and a hash manifest. |
+| `build/eye_expression.py` | Build skin microdetail, iris reflections and gaze-driven eyelid shape keys from a packed appearance scene. |
+| `build/complexion_polish.py` | Refine nose and jaw proportions and add procedural freckles and rose lipstick over the eye-expression scene. |
+| `build/brow_fill.py` | Pack a feathered pigment mask beneath the existing eyebrow fibers to fill visible gaps. |
+| `build/skin_realism.py` | Add procedural pore relief, subtle complexion variation and varying sheen to the packed portrait. |
+| `build/character_polish.py` | Source-bound v2 appearance pass with lower-face contour, feathered lip shading and a replacement brow groom. |
 | `assets/photorealism-v2/ATTRIBUTION.md` | Native skin/eye texture provenance, licensing and checksums. |
 | `build/realism_scene.py`, `build/realism_config.json` | Isolated anatomy/surface/groom checkpoints with seeded baked strands, actual lid/sphere contour fitting, preserved eye meshes and source-bound build receipts. |
 | `tools/realism_visibility.py` | Resumable 81-grid + 32-random RGB stress poses and real occlusion masks; separate from official and research protocols. |

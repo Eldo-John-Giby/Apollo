@@ -1,0 +1,80 @@
+{
+  "peak_process_rss_bytes": 1516392448,
+  "stages": [
+    {
+      "stage": "preflight",
+      "elapsed_seconds": 1.547000000020489,
+      "peak_process_rss_bytes": 279867392
+    },
+    {
+      "stage": "geometry",
+      "elapsed_seconds": 26.01600000000326,
+      "peak_process_rss_bytes": 324628480
+    },
+    {
+      "stage": "benchmark",
+      "elapsed_seconds": 218.3279999999795,
+      "peak_process_rss_bytes": 1508577280
+    },
+    {
+      "stage": "anchors",
+      "elapsed_seconds": 1025.3439999999828,
+      "peak_process_rss_bytes": 1516392448
+    },
+    {
+      "stage": "anchor-images",
+      "elapsed_seconds": 1.5619999999762513,
+      "peak_process_rss_bytes": 60051456
+    },
+    {
+      "stage": "mask-analysis",
+      "elapsed_seconds": 2.577999999979511,
+      "peak_process_rss_bytes": 88211456
+    },
+    {
+      "stage": "directions",
+      "elapsed_seconds": 74.98399999999674,
+      "peak_process_rss_bytes": 1419317248
+    },
+    {
+      "stage": "direction-report",
+      "elapsed_seconds": 1.0619999999762513,
+      "peak_process_rss_bytes": 68190208
+    },
+    {
+      "stage": "official-sweep",
+      "elapsed_seconds": 708.4220000000205,
+      "peak_process_rss_bytes": 1512980480
+    },
+    {
+      "stage": "official-validation",
+      "elapsed_seconds": 4.64100000000326,
+      "peak_process_rss_bytes": 63389696
+    },
+    {
+      "stage": "official-images",
+      "elapsed_seconds": 2.0619999999762513,
+      "peak_process_rss_bytes": 60125184
+    },
+    {
+      "stage": "sheet",
+      "elapsed_seconds": 3.5929999999934807,
+      "peak_process_rss_bytes": 14508032
+    },
+    {
+      "stage": "portraits",
+      "elapsed_seconds": 80.09299999999348,
+      "peak_process_rss_bytes": 1422901248
+    },
+    {
+      "stage": "diagnostics",
+      "elapsed_seconds": 95.10899999999674,
+      "peak_process_rss_bytes": 1443774464
+    },
+    {
+      "stage": "comparisons",
+      "elapsed_seconds": 1.5630000000237487,
+      "peak_process_rss_bytes": 52338688
+    }
+  ]
+}

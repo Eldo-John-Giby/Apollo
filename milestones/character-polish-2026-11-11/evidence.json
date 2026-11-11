@@ -1,0 +1,41 @@
+{
+  "scope": "CPU development candidate with bounded native checks",
+  "scene_sha256": "f919e35256eb7865cef1488c8a2e77dec4cb5288592ead3f561730a7462f9977",
+  "source_scene_sha256": "8acd0df98cd2581f54bf83901d56c669795c5eef14e853a378bcb18e6bf71c4d",
+  "qualified": false,
+  "native_blender": "4.5.15 LTS",
+  "benchmark_seconds": {
+    "center": 64.42099999997299,
+    "up": 66.46900000004098,
+    "corner": 85.20299999997951
+  },
+  "peak_process_rss_bytes": 1516392448,
+  "visible_polygons": 464088,
+  "anchor_max_blind_error_px": 0.27735891861172496,
+  "anchor_max_template_error_px": 0.1373280358107256,
+  "minimum_visible_dark_fraction": 1.0,
+  "max_mask_centroid_error_px": 0.03061872166044486,
+  "direction_max_template_error_px": 0.03678123957650575,
+  "reset_byte_identical": true,
+  "official_max_blind_error_px": 0.10705580086680525,
+  "official_max_template_error_px": 0.07057599853963732,
+  "files": {
+    "scene.blend": "f919e35256eb7865cef1488c8a2e77dec4cb5288592ead3f561730a7462f9977",
+    "build.json": "490e5bf089d2ba1742252b2bf000a5998fd13b4cf12f2b84578683b0a4960223",
+    "ATTRIBUTION.md": "04c0686ebc0dc7c1f386ca56583b67adf05865914b6d7efe7c059cb2754ef0c6",
+    "Apollo-character-comparison.webp": "ce4909af15311211df46af5789ffa368253ce2afd37316c3d83a543f11087f1d",
+    "portraits/front.png": "43352edea391650815ab631a26e069b3df339d1e8a2bb9a477b83f787f840cfe",
+    "portraits/three-quarter.png": "c7b28ee3d64edff5a2271eb715bb199dc129004b2076fc5ebabd545aeb8888cf",
+    "portraits/portraits.json": "f99bdd1f1d31a2cc9167802c21212f84f0d6129724fa931bc894b86a40fcb09f",
+    "evidence/scene-preflight.json": "906b47dde1406ad3fd3c9286e7dbe6fa69331ce7d0c9a52e79335dab5b5f323a",
+    "evidence/geometry.json": "07a34b8e86ecbf4c30f7182ef71faf44f62b2633cdd36eec265e43061655f536",
+    "evidence/benchmark.json": "c1403143d589184218584b6f7c629e4dd474bff7ed2b7e68493ea242b92c5ae7",
+    "evidence/anchor-images.json": "f8b3b9697988d7bd04ea0e1fabf03ab52dbdb5cbdbd33de332de8e5275ced6c7",
+    "evidence/pupil-masks.json": "d36eb87b156404c60033a38779312664e93ee772c0fa2cca5f414aca3a922988",
+    "evidence/direction-report.json": "2ea32c4b811ad4b0f612158e74954feabf1661e9a8ae01a9503ff505d2862036",
+    "evidence/official-images.json": "15ba100cf5aead0e4ba5ea080eea99c11cd8c3099e4e1c57398a44239237b631",
+    "evidence/official-validation.log": "ffff68facf261a61e576b3a868cab2f420831fe08acc6b8772aaca2eac6c5a4b",
+    "evidence/resources.json": "45eec6bac3eeea299c9bc6aadae903159283607e9059672281f1da3ff4e9e2b9",
+    "evidence/official-contact-sheet.png": "b63b66e7bf5b649030cd313eea14e35c0b682f01e2e1aab761caf5cc5ad2cbd1"
+  }
+}
