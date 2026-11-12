@@ -144,8 +144,10 @@ eyelid issues by mode and frame number.
 
 ## Full-quality CPU fallback
 
-Generate the five variants and both matched still sets as above. Render from
-saved timelines built by the current motion tool. The same render command can
+Generate the five variants and both matched still sets under `$textures`
+using the commands above. Write calibrated-light renders to `$textures/neutral`
+and side-key renders to `$textures/oblique` with `--oblique-light`. Render
+from saved timelines built by the current motion tool. The same render command can
 be rerun after an interruption. It binds the output to the exact saved scene
 and Blender build, validates PNG dimensions and chunk checksums, and replaces
 missing or corrupt frames. Use the same flags on resume. The verifier requires
