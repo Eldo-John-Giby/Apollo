@@ -28,12 +28,50 @@ PALETTES = {
 }
 
 
+# Local MPFB face landmarks in UV coordinates. Values control cheek warmth,
+# nose warmth and temple tone independently of the atlas-wide palette.
+SKIN_REGIONS = {
+    'rose-brown': (.065, .030, -.012),
+    'golden-hazel': (.021, .012, .026),
+    'olive-amber': (.014, .034, -.031),
+    'neutral-deep': (.033, .019, .015),
+    'cool-grey': (.046, .025, -.022),
+}
+IRIS_DETAILS = {
+    'rose-brown': ((14, -19), (.18, .06, -.05), .070),
+    'golden-hazel': ((31, -12), (.34, .25, -.12), .065),
+    'olive-amber': ((-22, 38), (.25, .31, -.12), .084),
+    'neutral-deep': ((43, -35), (.08, .02, -.09), .076),
+    'cool-grey': ((-48, 24), (-.12, .14, .38), .088),
+}
+
+
+def complexion(image, variant):
+    u = np.linspace(0, 1, image.width, dtype=np.float32)[None, :]
+    v = np.linspace(1, 0, image.height, dtype=np.float32)[:, None]
+
+    def region(x, y, width, height):
+        return np.exp(-((u - x) / width) ** 2 - ((v - y) / height) ** 2)
+
+    cheek, nose, temple = SKIN_REGIONS[variant]
+    warmth = cheek * (region(.863, .518, .018, .024)
+                      + .91 * region(.863, .449, .018, .024))
+    warmth += nose * region(.861, .483, .021, .014)
+    shading = temple * (region(.818, .534, .022, .017)
+                        + region(.818, .432, .022, .017))
+    detail = image.filter(ImageFilter.UnsharpMask(radius=1.5, percent=28, threshold=3))
+    color = np.asarray(detail, dtype=np.float32)
+    color *= 1 + warmth[..., None] * np.array((1, -.42, -.22), dtype=np.float32)
+    color *= 1 + shading[..., None]
+    return Image.fromarray(np.clip(np.rint(color), 0, 255).astype(np.uint8))
+
+
 def color_variant(source, gain):
     curves = [[min(255, round(value * scale)) for value in range(256)] for scale in gain]
     return source.convert('RGB').point(sum(curves, []))
 
 
-def reference_iris(image, side):
+def reference_iris(image, variant, side):
     # The local shader samples the upper-right iris of this stock atlas.
     # Rotate its fibers within a feathered annulus, leaving pupil and limbus fixed.
     center = (.708 * image.width, .292 * image.height)
@@ -41,9 +79,13 @@ def reference_iris(image, side):
     radius = np.hypot(x - center[0], y - center[1]) / image.width
     annulus = np.clip((radius - .041) / .018, 0, 1)
     annulus *= np.clip((.113 - radius) / .018, 0, 1)
-    fibers = image.rotate(14 if side == 1 else -19, Image.Resampling.BICUBIC,
-                          center=center)
+    angles, tint, ring_radius = IRIS_DETAILS[variant]
+    fibers = image.rotate(angles[side - 1], Image.Resampling.BICUBIC, center=center)
     fibers = fibers.filter(ImageFilter.UnsharpMask(radius=1.2, percent=55, threshold=2))
+    ring = np.exp(-((radius - ring_radius) / .015) ** 2)
+    color = np.asarray(fibers, dtype=np.float32)
+    color *= 1 + ring[..., None] * np.array(tint, dtype=np.float32)
+    fibers = Image.fromarray(np.clip(np.rint(color), 0, 255).astype(np.uint8))
     return Image.composite(fibers, image, Image.fromarray((annulus * 255).astype(np.uint8)))
 
 
@@ -61,12 +103,8 @@ def generate(out, polished_reference=False):
                 else:
                     gain = eye if index == 1 else (eye[0] * .985, eye[1], eye[2] * 1.025)
                     image = color_variant(iris, gain)
-                if polished_reference:
-                    if index == 0:
-                        image = image.filter(ImageFilter.UnsharpMask(
-                            radius=1.5, percent=28, threshold=3))
-                    else:
-                        image = reference_iris(image, index)
+                image = (complexion(image, name) if index == 0
+                         else reference_iris(image, name, index))
                 file = directory / f'{role}.png'
                 image.save(file)
                 maps.append({
@@ -81,9 +119,8 @@ def generate(out, polished_reference=False):
                     'license': 'CC0', 'attribution': 'assets/photorealism-v2/ATTRIBUTION.md',
                     'sources': {name: hashlib.sha256((ASSETS / name).read_bytes()).hexdigest()
                                 for name in (FACE, EYE)},
-                    'method': ('Color variant with local skin detail and distinct iris fiber patterns.'
-                               if polished_reference else
-                               'Color variants of the existing skin and stock eye atlas.'),
+                    'method': 'CC0 derivatives with regional skin tones and distinct iris fibers.',
+                    'recipe': 'regional-mpfb-v1',
                 },
                 'maps': maps,
             }

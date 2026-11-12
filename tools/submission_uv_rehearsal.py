@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 from types import SimpleNamespace
 
+import bmesh
 import bpy
 import numpy as np
 
@@ -27,6 +28,30 @@ def change_uv(uv):
         loop.uv = (1 - loop.uv.x, 1 - loop.uv.y)
 
 
+def change_topology(mesh):
+    # Keep the UVs interpolated while changing connectivity and the surface.
+    bm = bmesh.new()
+    try:
+        bm.from_mesh(mesh)
+        bmesh.ops.subdivide_edges(bm, edges=list(bm.edges), cuts=1, use_grid_fill=True)
+        bmesh.ops.triangulate(bm, faces=list(bm.faces))
+        bm.normal_update()
+        for vertex in bm.verts:
+            vertex.co += .00008 * vertex.normal
+        bm.to_mesh(mesh)
+    finally:
+        bm.free()
+    mesh.update()
+
+
+def prepare_target(obj, uv_name, changed_geometry):
+    if changed_geometry:
+        change_topology(obj.data)
+    uv = obj.data.uv_layers[uv_name]
+    change_uv(uv)
+    return uv
+
+
 def pixels(path):
     image = bpy.data.images.load(str(path))
     try:
@@ -36,23 +61,26 @@ def pixels(path):
         bpy.data.images.remove(image)
 
 
-def bake_copy(obj, role, uv_name, out, size, rotated):
+def bake_copy(obj, role, uv_name, out, size, rotated, changed_geometry=False):
     source = clone(obj, f'{role} source')
     target = clone(obj, f'{role} target')
     try:
-        uv = target.data.uv_layers[uv_name]
-        if rotated:
-            change_uv(uv)
+        uv = (prepare_target(target, uv_name, changed_geometry) if rotated
+              else target.data.uv_layers[uv_name])
         sig = fingerprint(target.data, uv)
+        # The fixture is only 80 microns off the source. A short cage
+        # avoids picking up the opposite lid or lip on a nearby surface.
+        cage, distance = (.00035, .001) if changed_geometry else (.002, .008)
         bake(SimpleNamespace(source=source.name, target=target.name, uv=uv_name,
-                             out=out, size=size, cage=.002, distance=.008))
-        return sig
+                             out=out, size=size, cage=cage, distance=distance,
+                             margin_type='EXTEND' if changed_geometry else 'ADJACENT_FACES'))
+        return sig, len(target.data.polygons)
     finally:
         for copy in (source, target):
             bpy.data.objects.remove(copy, do_unlink=True)
 
 
-def run(out, variant, size):
+def run(out, variant, size, changed_geometry=False):
     out.mkdir(parents=True, exist_ok=False)
     pristine = bpy.data.filepath
     original = json.loads(variant.read_text(encoding='utf-8'))
@@ -64,8 +92,11 @@ def run(out, variant, size):
         obj = bpy.context.scene.objects[entry['object']]
         baseline = out / f'{role}-reference.png'
         transfer = out / f'{role}.png'
-        reference_sig = bake_copy(obj, role, uv_name, baseline, size, False)
-        target_sig = bake_copy(obj, role, uv_name, transfer, size, True)
+        reference_sig, source_faces = bake_copy(obj, role, uv_name, baseline, size, False, changed_geometry)
+        target_sig, target_faces = bake_copy(obj, role, uv_name, transfer, size, True,
+                                             changed_geometry)
+        if changed_geometry and target_faces <= source_faces:
+            raise RuntimeError(f'{role} did not change mesh topology')
         if target_sig == reference_sig:
             raise RuntimeError(f'{role} did not change UV layouts')
         first, second = pixels(baseline), pixels(transfer)[::-1, ::-1]
@@ -81,6 +112,7 @@ def run(out, variant, size):
         if mae > .02:
             raise RuntimeError(f'{role} baked color MAE {mae:.4f} > 0.02')
         results[role] = {'source_uv_sha256': reference_sig, 'target_uv_sha256': target_sig,
+                         'source_faces': source_faces, 'target_faces': target_faces,
                          'coverage_overlap': overlap, 'color_mae': mae}
         bindings.append({'role': role, 'object': obj.name, 'uv': uv_name,
                          'slot': entry['slot'], 'all_slots': entry.get('replace_on_all_slots', False),
@@ -89,9 +121,11 @@ def run(out, variant, size):
     bpy.ops.wm.open_mainfile(filepath=pristine)
     for binding in bindings:
         obj = bpy.context.scene.objects[binding['object']]
-        change_uv(obj.data.uv_layers[binding['uv']])
+        prepare_target(obj, binding['uv'], changed_geometry)
     manifest = out / 'variant.json'
-    manifest.write_text(json.dumps({'target': 'MPFB with rotated UV coordinates',
+    label = ('Subdivided and triangulated MPFB with rotated UV coordinates'
+             if changed_geometry else 'MPFB with rotated UV coordinates')
+    manifest.write_text(json.dumps({'target': label,
                                     'provenance': original['provenance'], 'maps': bindings},
                                    indent=2) + '\n', encoding='utf-8')
     apply_variant(manifest)
@@ -120,8 +154,10 @@ def main():
     parser.add_argument('--variant', required=True, type=Path)
     parser.add_argument('--out', required=True, type=Path)
     parser.add_argument('--size', type=int, default=2048)
+    parser.add_argument('--changed-geometry', action='store_true',
+                        help='Subdivide, triangulate and offset the local target surface')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
-    run(args.out.resolve(), args.variant.resolve(), args.size)
+    run(args.out.resolve(), args.variant.resolve(), args.size, args.changed_geometry)
 
 
 if __name__ == '__main__':

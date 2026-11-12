@@ -56,6 +56,7 @@ def bake(args):
     scene.render.engine = 'CYCLES'
     scene.cycles.device = 'CPU'
     bpy.ops.object.bake(type='EMIT', use_selected_to_active=True, margin=16,
+                        margin_type=args.margin_type,
                         cage_extrusion=args.cage, max_ray_distance=args.distance,
                         uv_layer=args.uv)
     args.out.parent.mkdir(parents=True, exist_ok=True)
@@ -73,6 +74,8 @@ def main():
     parser.add_argument('--size', type=int, default=2048)
     parser.add_argument('--cage', type=float, default=.002)
     parser.add_argument('--distance', type=float, default=.008)
+    parser.add_argument('--margin-type', choices=('ADJACENT_FACES', 'EXTEND'),
+                        default='ADJACENT_FACES')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     if args.size <= 0 or args.cage <= 0 or args.distance <= args.cage:
         parser.error('Choose a positive size and 0 < cage < distance')

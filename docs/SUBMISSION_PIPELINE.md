@@ -118,10 +118,18 @@ tests the transfer and manifest workflow with a controlled layout change.
 A different head topology and the evaluator's eye material layout still
 require the official GNM asset.
 
-The polished rose-brown study uses the existing skin and stock iris
-sources with restrained local sharpening and separately rotated iris
-fiber patterns. It can be rendered under the calibrated lights and with
-`--oblique-light` to check detail under a side key. Use `--draft` alongside
+Use the same camera for all five variants under the calibrated lights and repeat
+with `--oblique-light` for a side-key comparison. Use
+`--polished-reference` to generate only rose-brown for a quick bake rehearsal.
+Add `--changed-geometry` to the UV rehearsal to subdivide, triangulate, and offset
+the face and iris targets before baking. This changes connectivity and surface
+position, with related geometry and UV islands. The 1024-pixel rehearsal
+used extended padding and a short projection cage. The face target changed
+from 53,512 to 428,096 polygons and each iris changed from 128 to 1,024.
+All three maps exceeded 99.997% coverage overlap, and the largest mean
+absolute color error was 0.000473. The rebound scene rendered after the maps
+were assigned to fresh target objects. The evaluator mesh may differ in
+facial proportions and seams and still requires its own validation. Use `--draft` alongside
 `--render` for a 25% resolution, four-sample motion review. Omit `--draft`
 for the team capture. The motion scene is saved at the original resolution
 and sample count in both cases.
