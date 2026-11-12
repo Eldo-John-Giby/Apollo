@@ -39,7 +39,7 @@ def apply_variant(path):
         raise ValueError('Provide face, iris_left and iris_right maps')
     if len(spec['maps']) != 3 or not spec['provenance']:
         raise ValueError('Provide one binding per map and texture provenance')
-    prepared = []
+    prepared = {}
     for binding in spec['maps']:
         obj, uv = resolve(binding)
         if fingerprint(obj.data, uv) != binding['mesh_uv_sha256']:
@@ -49,21 +49,32 @@ def apply_variant(path):
             raise ValueError('Map must be inside the variant directory')
         if hashlib.sha256(asset.read_bytes()).hexdigest() != binding['sha256']:
             raise ValueError(f'Texture hash mismatch: {asset.name}')
-        slots = [obj.material_slots[binding['slot']]]
+        indices = [binding['slot']]
         source = binding.get('replace_image')
         if binding.get('all_slots') or (source and binding.get('replace_on_all_slots')):
-            slots = list(obj.material_slots)
-        for slot in slots:
+            indices = range(len(obj.material_slots))
+        for index in indices:
+            slot = obj.material_slots[index]
             node = None
             if source:
+                if slot.material is None or slot.material.node_tree is None:
+                    raise ValueError(f'{obj.name} slot {index} has no image material')
                 nodes = [node.name for node in slot.material.node_tree.nodes
                          if node.type == 'TEX_IMAGE' and node.image
                          and re.fullmatch(re.escape(source) + r'(\.\d+)?', node.image.name)]
                 if len(nodes) != 1:
                     raise ValueError(f'{obj.name} needs exactly one image node for {source}')
                 node = nodes[0]
-            prepared.append((binding, slot, asset, node))
-    for binding, slot, asset, node in prepared:
+            key = (obj.name, index)
+            previous = prepared.get(key)
+            if previous:
+                old_binding, _, old_asset, old_node = previous
+                if (old_binding['uv'], old_asset, old_node) != (binding['uv'], asset, node):
+                    raise ValueError(f'Conflicting texture bindings for {obj.name} slot {index}. '
+                                     'Use the same map and UV for shared material slots.')
+                continue
+            prepared[key] = (binding, slot, asset, node)
+    for binding, slot, asset, node in prepared.values():
         image = bpy.data.images.load(str(asset), check_existing=True)
         image.colorspace_settings.name = 'sRGB'
         if node:
@@ -86,6 +97,13 @@ def apply_variant(path):
 
 def inventory():
     return {obj.name: {
+        'vertices': len(obj.data.vertices),
+        'polygons': len(obj.data.polygons),
+        'dimensions': list(obj.dimensions),
+        'active_uv': obj.data.uv_layers.active.name if obj.data.uv_layers.active else None,
+        'shape_keys': list(obj.data.shape_keys.key_blocks.keys()) if obj.data.shape_keys else [],
+        'armatures': [modifier.object.name for modifier in obj.modifiers
+                      if modifier.type == 'ARMATURE' and modifier.object],
         'uv': {uv.name: fingerprint(obj.data, uv) for uv in obj.data.uv_layers},
         'slots': [
             {'material': slot.material.name, 'images': [

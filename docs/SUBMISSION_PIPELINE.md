@@ -52,13 +52,16 @@ official template deck and submission.
    a scratch scene that contains the source and the aligned target meshes.
 2. Run `submission_textures.py -- --inventory` through Blender on the fresh
    target to get its object names, UV names, fingerprints, and material
-   slots. For each map, use `submission_bake.py -- --source SOURCE --target
+   slots, along with mesh dimensions, armatures and shape keys. For each map, use `submission_bake.py -- --source SOURCE --target
    TARGET --uv UV_NAME --out MAP.png` in a disposable background process.
    The source must use Principled materials. This bakes base color through
    emission without lighting. Set `--cage` and `--distance` to suit the
    alignment and scale. Inspect for ray misses, seams and eye distortion.
    Bake separate eyes where the evaluator layout permits and adapt the
-   binding if the supplied mesh uses a shared atlas.
+   binding if the supplied mesh uses a shared atlas. If both eyes share
+   one material slot, reference the same packed eye atlas, slot and UV for
+   both manifest roles. Conflicting entries are rejected before materials
+   change.
 3. Copy the manifest shape from a generated local variant. Set the target
    label, target object and UV names, material slot indices, UV fingerprints,
    map SHA-256 digests and source provenance. Omit `replace_image` and
