@@ -198,3 +198,11 @@ seam edges and two per iris. All 53,768 expected polygon color samples
 remained covered. Mean absolute color error was at most 0.00202 on a 0–1
 scale. It is a local stress test.
 Evaluator geometry and licenses still depend on the organizer asset.
+
+
+The 13 November fallback checkpoint verified 576 PNGs and the archive
+manifest, then extracted the ZIP into a fresh directory. It reproduced
+one rose-brown still and Left frames 21–22 pixel-for-pixel, with hold reuse
+disabled during reproduction. The [fallback receipt](../milestones/submission-fallback-rehearsal-2026-11-13/fallback-receipt.json)
+records the archive checksum, frame receipts, and reproduction results.
+The ZIP remains a local technical fallback for team review and media capture.

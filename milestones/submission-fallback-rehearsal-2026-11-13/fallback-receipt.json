@@ -1,0 +1,49 @@
+{
+  "target": "Apollo MakeHuman fallback",
+  "archive": "apollo-mpfb-fallback.zip",
+  "archive_bytes": 780766358,
+  "archive_sha256": "bf5233520b49950c0d137eb5335c136cf685a6847dd504c538982ce74d307388",
+  "payload_files_verified": 641,
+  "blender": "4.5.15 LTS",
+  "device": "CPU",
+  "settings": {
+    "resolution": [
+      1024,
+      1024
+    ],
+    "samples": 32,
+    "fps": 24
+  },
+  "modes": {
+    "left": {
+      "frames": 192,
+      "distinct_renders": 13,
+      "receipt_sha256": "501128ceb8643cafa9c401b364f361d2c42563ba8d177b1ef456df7200e8a3ff",
+      "scene_sha256": "3b461ec7ffbf15f2cbc016551f60ae8ad5270cbd7864620ce9c81770e71a25fd"
+    },
+    "right": {
+      "frames": 192,
+      "distinct_renders": 13,
+      "receipt_sha256": "d928e9d83a74547a31664d138bbedef06ad208b6fec48016219da42333082490",
+      "scene_sha256": "b2acd9e71cd75241965bde1189b210da27678b4fa74bb7883525e36679f3a904"
+    },
+    "generate-motion": {
+      "frames": 192,
+      "distinct_renders": 37,
+      "receipt_sha256": "194f02a0a8699cd60103a949f8bbe3b405988b8b0de889d6d6b4dda643cc5116",
+      "scene_sha256": "60ff6540e171f7b9150b49486f27080f0d994d34cbc62a07dfad1e5600d852b1"
+    }
+  },
+  "clean_extraction_reproduction": {
+    "still": {
+      "max_rgb_difference": 0
+    },
+    "left-hold": {
+      "max_rgb_difference": 0
+    },
+    "left-transition": {
+      "max_rgb_difference": 0
+    }
+  },
+  "organizer_gnm_validation": "pending exact evaluator asset"
+}
