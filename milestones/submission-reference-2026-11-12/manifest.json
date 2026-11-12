@@ -1,0 +1,22 @@
+{
+  "target": "Apollo MPFB development rig",
+  "gnm_qualification": "pending official asset",
+  "source_scene_sha256": "3b0a520a667bc9aa8a5c44709eef4a6bd6ac8ee9ed18a1d3f1463b433cf40452",
+  "sha256": {
+    "ATTRIBUTION.md": "04c0686ebc0dc7c1f386ca56583b67adf05865914b6d7efe7c059cb2754ef0c6",
+    "blink-adjusted.png": "2ad0e3ab6588438f88a82b41ef11eeae873b45f010204c541b088d545016149e",
+    "contact-sheet.png": "f49a942c879c230f1a4b3ea9ad87b84c6b6a36d6e11472fb073ab8a0ae202d10",
+    "expression.blend": "852a6622ac9f05762e3684970d02f1c602c6f1e2e4612e87fd6e8f5d817dc277",
+    "eye-crops/cool-grey.png": "c7d456d16f48295b34f245069b870b7c2cc8d9d8dd2404b5f79671ba93a2c905",
+    "eye-crops/golden-hazel.png": "16f593635529471b2732687d3d35ede42e3cada2f61c2856c5a1afaf9cb0181c",
+    "eye-crops/neutral-deep.png": "f3c33ab15a93d067ef6878629665b01d545413abbb3af37d0c16092629e68973",
+    "eye-crops/olive-amber.png": "5500cf4cc32328d4dc78a916c7be1148523923439f365dd74ecea24663edf77d",
+    "eye-crops/rose-brown.png": "84541d227a576e2313d3a8334157879a34b27e4ed607fd8cec6bd934721bae3c",
+    "stills/cool-grey.png": "6532052733c67cc0eba5ce45744d54bf51bb57ed572f412f77d77a9022efdee1",
+    "stills/golden-hazel.png": "c27d511983a6e18ca0cc1a7cec563fcd3a8379380745d54058be2a2e6b382da7",
+    "stills/neutral-deep.png": "e165e1e282d110752e5318985dc88ff50457906d4768889fae6d32dde622c38c",
+    "stills/olive-amber.png": "0fdd63679393befcded19be1552250c9cab862510009277d9d12e4d27d4d28fb",
+    "stills/rose-brown.png": "65cb413b4e3d4ab36514ae41115cad1884e7d5407177377fafb36a44ff949ffe",
+    "timeline-check.json": "34285e5bd605117ee981c2591e7875cd74a49a6560f3de817bbeba03cecf1205"
+  }
+}
