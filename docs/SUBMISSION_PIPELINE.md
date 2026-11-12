@@ -140,3 +140,55 @@ The numbered sequence stays at 24 fps. Rebuild full-quality frames with
 the normal render command for team capture. Review the unlabeled direction
 sheet before opening the separate answer key, then record any expression or
 eyelid issues by mode and frame number.
+
+
+## Full-quality CPU fallback
+
+Generate the five variants and both matched still sets as above. Render from
+saved timelines built by the current motion tool. The same render command can
+be rerun after an interruption. It binds the output to the exact saved scene
+and Blender build, validates PNG dimensions and chunk checksums, and replaces
+missing or corrupt frames. Use the same flags on resume. The verifier requires
+all 192 numbered PNGs for a mode.
+
+```powershell
+$motion = 'out/submission-fallback'
+$textures = 'out/submission-score'
+$seams = "$motion/seams"
+$scene = 'milestones/eye-expression-2026-11-11/scene.blend'
+foreach ($mode in 'left', 'right', 'generate-motion') {
+    & $env:BLENDER_BIN -b --factory-startup $scene --python-exit-code 1 `
+        -P tools/submission_motion.py -- --mode $mode `
+        --variant "$textures/variants/rose-brown/variant.json" --out "$motion/$mode"
+    if ($LASTEXITCODE -ne 0) { throw "Timeline build failed: $mode" }
+    & $env:BLENDER_BIN -b --factory-startup "$motion/$mode/expression.blend" `
+        --python-exit-code 1 -P tools/submission_render.py -- `
+        --out "$motion/$mode/frames" --reuse-holds
+    if ($LASTEXITCODE -ne 0) { throw "Render failed: $mode" }
+}
+& $env:BLENDER_BIN -b --factory-startup --python-exit-code 1 `
+    -P tools/submission_motion_check.py -- --root $motion
+& $env:BLENDER_BIN -b --factory-startup $scene --python-exit-code 1 `
+    -P tools/submission_seams.py -- --out $seams `
+    --variant "$textures/variants/rose-brown/variant.json"
+python tools/submission_bundle.py --motion $motion --textures $textures `
+    --seams $seams --out "$motion/apollo-mpfb-fallback.zip"
+```
+
+After building a timeline, rerun only its render command to resume.
+`--first` and `--last` can render a subset for inspection. Pass `--verify-only`
+with the original flags to check all 192 frames. Use `--reuse-holds` only on
+unedited timelines from Apollo's static reference scene. It reuses the full
+resolution render for the exact same gaze and blink pose with fixed render
+seed and motion blur off. Each frame still has its own numbered PNG and
+receipt. Omit the flag and use a fresh output folder for custom timelines
+with extra animation or any frame-dependent shading.
+
+The seam rehearsal cuts originally continuous UV edges, packs the two
+regions into separate atlas areas, and compares baked colors at matching
+polygon sample positions. It rebinds the maps on a fresh scene, verifies the
+target UV fingerprints, and renders a still. The local run added 217 face
+seam edges and two per iris. All 53,768 expected polygon color samples
+remained covered. Mean absolute color error was at most 0.00202 on a 0–1
+scale. It is a local stress test.
+Evaluator geometry and licenses still depend on the organizer asset.

@@ -65,6 +65,7 @@ def closure_key(obj, ipd):
 
 def build(mode):
     scene = bpy.context.scene
+    scene['apollo_submission_mode'] = mode
     scene.render.fps = 24
     scene.render.fps_base = 1
     scene.frame_start, scene.frame_end = 1, 192
