@@ -8,6 +8,7 @@ import struct
 import sys
 
 import bpy
+from mathutils import Vector
 
 
 def fingerprint(mesh, uv):
@@ -50,7 +51,7 @@ def apply_variant(path):
             raise ValueError(f'Texture hash mismatch: {asset.name}')
         slots = [obj.material_slots[binding['slot']]]
         source = binding.get('replace_image')
-        if source and binding.get('replace_on_all_slots'):
+        if binding.get('all_slots') or (source and binding.get('replace_on_all_slots')):
             slots = list(obj.material_slots)
         for slot in slots:
             node = None
@@ -100,6 +101,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--variant', type=Path)
     parser.add_argument('--inventory', action='store_true')
+    parser.add_argument('--oblique-light', action='store_true',
+                        help='Move the Apollo Key light for a texture inspection still')
     parser.add_argument('--out', type=Path)
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     if args.inventory:
@@ -110,6 +113,10 @@ def main():
     apply_variant(args.variant)
     scene = bpy.context.scene
     scene.cycles.device = 'CPU'
+    if args.oblique_light:
+        key = scene.objects['Key']
+        key.location.x += .16
+        key.rotation_euler = (-Vector(key.location)).to_track_quat('-Z', 'Y').to_euler()
     scene.render.image_settings.file_format = 'PNG'
     args.out.parent.mkdir(parents=True, exist_ok=True)
     scene.render.filepath = str(args.out.resolve())

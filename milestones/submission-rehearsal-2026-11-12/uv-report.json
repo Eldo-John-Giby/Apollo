@@ -1,0 +1,20 @@
+{
+  "face": {
+    "source_uv_sha256": "1348145f0a5e621a7a066852c0c4307de91ad8615949d5f510469f3f643b2ec8",
+    "target_uv_sha256": "c1913ff65f838e0fc3ef6381072fda7a72703eb928242daa2438efec98a968af",
+    "coverage_overlap": 0.9998550636490573,
+    "color_mae": 0.0002831628080457449
+  },
+  "iris_left": {
+    "source_uv_sha256": "3672d47296e696514323c58d4ab8e3ca5d989d57973b110521c177a25da3415d",
+    "target_uv_sha256": "b933f885565d8aafce6550168ce41058389f7aacbef2f9593877e8813dcdd4ea",
+    "coverage_overlap": 0.9999845915212278,
+    "color_mae": 3.914117769454606e-05
+  },
+  "iris_right": {
+    "source_uv_sha256": "5c67f3307fc5a50a86e64f5c916569741f9c4e4ae47c711b9f819579d5d2988b",
+    "target_uv_sha256": "a8eea9d07ac84f1baca846118c773abdc07cae84af6e066bf7ad8c7d2d4e47ea",
+    "coverage_overlap": 0.9999845915212278,
+    "color_mae": 3.8922960811760277e-05
+  }
+}

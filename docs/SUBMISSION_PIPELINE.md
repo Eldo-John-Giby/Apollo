@@ -82,12 +82,53 @@ official template deck and submission.
 
 ## Development evidence
 
-The MPFB checkpoint uses Blender 4.5.15 LTS on CPU. Five 1024 × 1024
-stills rendered with the same calibrated camera and 32 samples. A 256-pixel
-emission bake onto a duplicate iris exercised the bake path. All three packed
-timelines reopened with frames 1–192 at 24 fps. Five sampled frames per mode
-matched the requested target and blink weights, and eye rotations matched
-across two builds. Preview renders confirmed lateral motion and showed a
-small gap at peak blink even after adjustment. The eyelid fit needs another
-pass on the evaluator mesh. Full frame sequences, independent visual review
-and GNM qualification remain pending.
+The first MPFB checkpoint used Blender 4.5.15 LTS on CPU. Five 1024 × 1024
+stills rendered at 32 samples with the same camera and lights. The later
+motion checkpoint was reopened and checked at the two peak-blink frames for
+each mode. Camera rays to both evaluated pupil meshes were blocked at both
+peaks. The pupils were visible before and after the blink. Projected pupil
+positions also confirmed the expected left and right shifts. A human
+reviewer should still judge the expression timing and the lid crease in
+the preview frames.
+
+Run these commands from the repository root after generating the original
+development variants and all three updated timelines. The paths below are
+examples. Choose unused output directories when rebuilding.
+
+```powershell
+$work = 'out/submission-dev'
+$scene = 'milestones/eye-expression-2026-11-11/scene.blend'
+& $env:BLENDER_BIN -b --factory-startup --python-exit-code 1 `
+    -P tools/submission_motion_check.py -- --root $work
+& $env:BLENDER_BIN -b --factory-startup $scene --python-exit-code 1 `
+    -P tools/submission_uv_rehearsal.py -- `
+    --variant "$work/variants/rose-brown/variant.json" --out "$work/uv" --size 1024
+python tools/submission_variants.py generate "$work/polish" --polished-reference
+& $env:BLENDER_BIN -b --factory-startup $scene --python-exit-code 1 `
+    -P tools/submission_textures.py -- --variant "$work/polish/rose-brown/variant.json" `
+    --out "$work/oblique.png" --oblique-light
+```
+
+The UV rehearsal rotates the face and both iris UV layouts by 180 degrees
+on the local rig. It bakes in both layouts, compares covered texels, then
+reopens the source and applies the transferred maps to fresh objects with
+the new UVs. At 1024 pixels all three maps exceeded 99.98% coverage overlap,
+and the largest mean absolute color error was below 0.00029. The rehearsal
+tests the transfer and manifest workflow with a controlled layout change.
+A different head topology and the evaluator's eye material layout still
+require the official GNM asset.
+
+The polished rose-brown study uses the existing skin and stock iris
+sources with restrained local sharpening and separately rotated iris
+fiber patterns. It can be rendered under the calibrated lights and with
+`--oblique-light` to check detail under a side key. Use `--draft` alongside
+`--render` for a 25% resolution, four-sample motion review. Omit `--draft`
+for the team capture. The motion scene is saved at the original resolution
+and sample count in both cases.
+
+The MPFB review handoff contains 192 draft PNGs for each mode. It renders
+each unique pose and reuses the resulting PNG during identical holds.
+The numbered sequence stays at 24 fps. Rebuild full-quality frames with
+the normal render command for team capture. Review the unlabeled direction
+sheet before opening the separate answer key, then record any expression or
+eyelid issues by mode and frame number.

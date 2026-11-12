@@ -4,7 +4,8 @@ import hashlib
 import json
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
+import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / 'assets/photorealism-v2'
@@ -32,9 +33,24 @@ def color_variant(source, gain):
     return source.convert('RGB').point(sum(curves, []))
 
 
-def generate(out):
+def reference_iris(image, side):
+    # The local shader samples the upper-right iris of this stock atlas.
+    # Rotate its fibers within a feathered annulus, leaving pupil and limbus fixed.
+    center = (.708 * image.width, .292 * image.height)
+    y, x = np.ogrid[:image.height, :image.width]
+    radius = np.hypot(x - center[0], y - center[1]) / image.width
+    annulus = np.clip((radius - .041) / .018, 0, 1)
+    annulus *= np.clip((.113 - radius) / .018, 0, 1)
+    fibers = image.rotate(14 if side == 1 else -19, Image.Resampling.BICUBIC,
+                          center=center)
+    fibers = fibers.filter(ImageFilter.UnsharpMask(radius=1.2, percent=55, threshold=2))
+    return Image.composite(fibers, image, Image.fromarray((annulus * 255).astype(np.uint8)))
+
+
+def generate(out, polished_reference=False):
     with Image.open(ASSETS / FACE) as face, Image.open(ASSETS / EYE) as iris:
-        for name, (skin, eye) in PALETTES.items():
+        palettes = {'rose-brown': PALETTES['rose-brown']} if polished_reference else PALETTES
+        for name, (skin, eye) in palettes.items():
             directory = out / name
             directory.mkdir(parents=True, exist_ok=False)
             maps = []
@@ -45,6 +61,12 @@ def generate(out):
                 else:
                     gain = eye if index == 1 else (eye[0] * .985, eye[1], eye[2] * 1.025)
                     image = color_variant(iris, gain)
+                if polished_reference:
+                    if index == 0:
+                        image = image.filter(ImageFilter.UnsharpMask(
+                            radius=1.5, percent=28, threshold=3))
+                    else:
+                        image = reference_iris(image, index)
                 file = directory / f'{role}.png'
                 image.save(file)
                 maps.append({
@@ -59,7 +81,9 @@ def generate(out):
                     'license': 'CC0', 'attribution': 'assets/photorealism-v2/ATTRIBUTION.md',
                     'sources': {name: hashlib.sha256((ASSETS / name).read_bytes()).hexdigest()
                                 for name in (FACE, EYE)},
-                    'method': 'Color variants of the existing skin and stock eye atlas.',
+                    'method': ('Color variant with local skin detail and distinct iris fiber patterns.'
+                               if polished_reference else
+                               'Color variants of the existing skin and stock eye atlas.'),
                 },
                 'maps': maps,
             }
@@ -90,9 +114,11 @@ def main():
     parser.add_argument('action', choices=('generate', 'sheet'))
     parser.add_argument('directory', type=Path)
     parser.add_argument('--out', type=Path)
+    parser.add_argument('--polished-reference', action='store_true',
+                        help='Generate only the rose-brown reference with extra texture detail')
     args = parser.parse_args()
     if args.action == 'generate':
-        generate(args.directory)
+        generate(args.directory, args.polished_reference)
     elif args.out:
         contact_sheet(args.directory, args.out)
     else:

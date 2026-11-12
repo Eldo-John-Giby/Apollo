@@ -91,6 +91,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/dataset_protocol.py`, `tools/generate_dataset.py`, `tools/analyze_dataset.py` | Separate seeded/resumable dataset protocol, Blender generation, independent image checks and coverage artifacts. |
 | `tools/submission_variants.py`, `tools/submission_bake.py`, `tools/submission_textures.py` | Generate MPFB development palettes, bake base color to aligned target UVs, and validate and render texture manifests. |
 | `tools/submission_motion.py` | Build packed 24 fps expression timelines for Left, Right and Generate Motion, with optional PNG frame rendering. |
+| `tools/submission_motion_check.py`, `tools/submission_uv_rehearsal.py` | Validate saved timeline gaze and pupil coverage, and rehearse color transfer onto a changed local UV layout. |
 | `tools/live_controls.py` | Optional Blender sidebar invoking the public wrapper; never required or automatically enabled in graded scenes. |
 | `tools/ui_rehearsal.py` | Real Blender panel operators: pose-render/API byte parity and official sweep output validation. |
 | `build/upgrade_looks.py` | Distinct iris-region/shading/light candidates and MPFB lid/lash refit; preserves pupil/eye geometry and calibration, requires MPFB for building only. |

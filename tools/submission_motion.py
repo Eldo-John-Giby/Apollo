@@ -54,11 +54,11 @@ def closure_key(obj, ipd):
         across = smooth((.014 - lateral) / .006)
         anterior = smooth((.005 - point.y) / .01)
         if point.z >= 0:
-            displacement = -.009 * smooth((.017 - point.z) / .009)
+            displacement = -.010 * smooth((.017 - point.z) / .009)
         else:
             displacement = .0017 * smooth((point.z + .010) / .007)
         point.z += across * anterior * displacement
-        point.y -= .20 * across * anterior * abs(displacement)
+        point.y -= .26 * across * anterior * abs(displacement)
         destination.co = inverse @ point
     return key
 
@@ -114,6 +114,8 @@ def main():
     parser.add_argument('--render', action='store_true')
     parser.add_argument('--preview-frame', type=int, choices=range(1, 193),
                         metavar='1..192')
+    parser.add_argument('--draft', action='store_true',
+                        help='Render at 25% resolution and four samples for motion review')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -123,6 +125,9 @@ def main():
     bpy.ops.file.pack_all()
     bpy.ops.wm.save_as_mainfile(filepath=str(out / 'expression.blend'), compress=True)
     scene = bpy.context.scene
+    if args.draft:
+        scene.render.resolution_percentage = 25
+        scene.cycles.samples = 4
     if args.preview_frame is not None:
         scene.frame_set(args.preview_frame)
         scene.render.filepath = str(out / 'preview.png')

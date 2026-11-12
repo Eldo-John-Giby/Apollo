@@ -1,0 +1,17 @@
+{
+  "target": "Apollo MPFB development rig",
+  "source_scene_sha256": "3b0a520a667bc9aa8a5c44709eef4a6bd6ac8ee9ed18a1d3f1463b433cf40452",
+  "timeline_sha256": {
+    "left": "d4f4ec756e94850d5c1d0840d11b69012e98557cc7d74c7aca351e2f22914190",
+    "right": "e9c13de124ec6bb68d7f9c684338edbf49fe2ff8aec6ed1ab80fed5af8bcdf68",
+    "generate-motion": "607efeced1058a996283e6ee6e18ce938aa3bac2aac7a68794cffda8b453f546"
+  },
+  "sha256": {
+    "blink-frames.png": "f78791897c410a862e98b735971c7f70ac8e98dabf7abff89a58b5f2bd942169",
+    "motion-report.json": "c24d91224d3e42c856865fbf0992b6f9189c56b601226601d2420d0b726dc4e2",
+    "reference-neutral.png": "6dff0426730ce415d6cb4de57b5fd6a0be01cec211735a700bc6264ce67be051",
+    "reference-oblique.png": "94acc04cb959b3d39c7ffc06c97d0eb12784b3174295f02cbfe19fc42341684f",
+    "uv-rebound.png": "33ea812f4cc55d061189b735cb0ef6802132a2f0abd77d0a8cac233df5e2624d",
+    "uv-report.json": "82274ac3cfb3b20f35fd25a00700991ef949917fdd5cfcb3f5eb5a186aba5ae5"
+  }
+}
