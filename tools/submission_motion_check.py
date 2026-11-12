@@ -1,5 +1,6 @@
 """Check direction and peak-blink pupil coverage on saved submission timelines."""
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -26,11 +27,32 @@ def measure(scene, side):
             'visible_samples': visible}
 
 
-def check(root):
+def packed_maps(scene, manifest):
+    maps = {}
+    for entry in manifest['maps']:
+        obj = scene.objects[entry['object']]
+        slots = obj.material_slots if entry.get('replace_on_all_slots') else [obj.material_slots[entry['slot']]]
+        for slot in slots:
+            images = [node.image for node in slot.material.node_tree.nodes
+                      if node.type == 'TEX_IMAGE' and node.image and node.image.packed_file]
+            if not any(hashlib.sha256(image.packed_file.data).hexdigest() == entry['sha256']
+                       for image in images):
+                raise ValueError(f"{obj.name} is missing its packed {entry['role']} map")
+        maps[entry['role']] = entry['sha256']
+    return maps
+
+
+def check(root, variant=None):
     report = {}
+    packed = {}
+    manifest = json.loads(variant.read_text(encoding='utf-8')) if variant else None
     for mode in ('left', 'right', 'generate-motion'):
-        bpy.ops.wm.open_mainfile(filepath=str(root / mode / 'expression.blend'))
+        path = root / mode / 'expression.blend'
+        bpy.ops.wm.open_mainfile(filepath=str(path))
         scene = bpy.context.scene
+        if manifest:
+            packed[mode] = {'scene_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                            'maps': packed_maps(scene, manifest)}
         if (scene.frame_start, scene.frame_end, scene.render.fps, scene.render.fps_base) != (1, 192, 24, 1.):
             raise ValueError(f'{mode} must be 192 frames at 24 fps')
         frames = (1, 26, 101, 102, 103, 105, 108) if mode != 'generate-motion' else (
@@ -57,14 +79,18 @@ def check(root):
         report[mode] = results
     (root / 'motion-report.json').write_text(json.dumps(report, indent=2) + '\n',
                                             encoding='utf-8')
+    if packed:
+        (root / 'timeline-textures.json').write_text(json.dumps(packed, indent=2) + '\n',
+                                                   encoding='utf-8')
     print('Passed direction and peak-blink checks on all three saved timelines')
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', required=True, type=Path)
+    parser.add_argument('--variant', type=Path, help='Also verify packed maps against this manifest')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
-    check(args.root.resolve())
+    check(args.root.resolve(), args.variant)
 
 
 if __name__ == '__main__':

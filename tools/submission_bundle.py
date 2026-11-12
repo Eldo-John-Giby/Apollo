@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+from tempfile import TemporaryDirectory
 from pathlib import Path
 from zipfile import ZIP_STORED, ZipFile
 
@@ -86,6 +87,14 @@ def package(motion, textures, seams, output):
     files = {}
     modes = add_frames(files, motion)
     add_textures(files, textures)
+    packed_receipt = motion / 'timeline-textures.json'
+    packed = read_json(packed_receipt)
+    rose = read_json(files['variants/rose-brown/variant.json'])
+    maps = {entry['role']: entry['sha256'] for entry in rose['maps']}
+    for mode, record in modes.items():
+        if packed.get(mode) != {'scene_sha256': record['settings']['scene_sha256'], 'maps': maps}:
+            raise ValueError(f'{mode} packed textures were not verified against rose-brown')
+    files['timeline-textures.json'] = packed_receipt
     for name in ('report.json', 'rebound.png', 'variant.json', 'face.png',
                  'iris_left.png', 'iris_right.png', 'rebound.blend'):
         files[f'seam-rehearsal/{name}'] = seams / name
@@ -106,9 +115,9 @@ def package(motion, textures, seams, output):
     if output.exists():
         raise FileExistsError(output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    temp = output.with_suffix('.partial')
     manifest = {'target': 'Apollo MPFB fallback', 'modes': modes, 'sha256': {}}
-    try:
+    with TemporaryDirectory(prefix='.apollo-bundle-', dir=output.parent) as scratch:
+        temp = Path(scratch) / output.name
         with ZipFile(temp, 'x', compression=ZIP_STORED) as archive:
             for name, path in sorted(files.items()):
                 data = path.read_bytes()
@@ -119,9 +128,9 @@ def package(motion, textures, seams, output):
             for name, expected in manifest['sha256'].items():
                 if sha256(archive.read(name)) != expected:
                     raise ValueError(f'Archive verification failed: {name}')
+        if output.exists():
+            raise FileExistsError(output)
         temp.replace(output)
-    finally:
-        temp.unlink(missing_ok=True)
     print(f'Verified {output} with 576 full-quality frames, 15 texture maps and ten stills')
 
 

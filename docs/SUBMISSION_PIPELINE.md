@@ -169,7 +169,8 @@ foreach ($mode in 'left', 'right', 'generate-motion') {
     if ($LASTEXITCODE -ne 0) { throw "Render failed: $mode" }
 }
 & $env:BLENDER_BIN -b --factory-startup --python-exit-code 1 `
-    -P tools/submission_motion_check.py -- --root $motion
+    -P tools/submission_motion_check.py -- --root $motion `
+    --variant "$textures/variants/rose-brown/variant.json"
 & $env:BLENDER_BIN -b --factory-startup $scene --python-exit-code 1 `
     -P tools/submission_seams.py -- --out $seams `
     --variant "$textures/variants/rose-brown/variant.json"

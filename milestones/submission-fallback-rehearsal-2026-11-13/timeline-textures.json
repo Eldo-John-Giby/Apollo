@@ -1,0 +1,26 @@
+{
+  "left": {
+    "scene_sha256": "3b461ec7ffbf15f2cbc016551f60ae8ad5270cbd7864620ce9c81770e71a25fd",
+    "maps": {
+      "face": "e1cf3a2ca9a436657697afa78869e2eabd0a76f4974865e2b19fda6f024a76a3",
+      "iris_left": "c8badf4c67b28126fc6e250c556849b484ab321ca555ae0df1cd7cfc842f300c",
+      "iris_right": "552625fccac726976441805c6b2bd642260412304df8ad4b80500e0f813198e6"
+    }
+  },
+  "right": {
+    "scene_sha256": "b2acd9e71cd75241965bde1189b210da27678b4fa74bb7883525e36679f3a904",
+    "maps": {
+      "face": "e1cf3a2ca9a436657697afa78869e2eabd0a76f4974865e2b19fda6f024a76a3",
+      "iris_left": "c8badf4c67b28126fc6e250c556849b484ab321ca555ae0df1cd7cfc842f300c",
+      "iris_right": "552625fccac726976441805c6b2bd642260412304df8ad4b80500e0f813198e6"
+    }
+  },
+  "generate-motion": {
+    "scene_sha256": "60ff6540e171f7b9150b49486f27080f0d994d34cbc62a07dfad1e5600d852b1",
+    "maps": {
+      "face": "e1cf3a2ca9a436657697afa78869e2eabd0a76f4974865e2b19fda6f024a76a3",
+      "iris_left": "c8badf4c67b28126fc6e250c556849b484ab321ca555ae0df1cd7cfc842f300c",
+      "iris_right": "552625fccac726976441805c6b2bd642260412304df8ad4b80500e0f813198e6"
+    }
+  }
+}

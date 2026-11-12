@@ -1,0 +1,272 @@
+{
+  "left": {
+    "1": {
+      "L": {
+        "screen_x": 0.7179534416645765,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      },
+      "R": {
+        "screen_x": 0.282046549487859,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      }
+    },
+    "26": {
+      "L": {
+        "screen_x": 0.7092229002155364,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      },
+      "R": {
+        "screen_x": 0.27310321596451104,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      }
+    },
+    "101": {
+      "L": {
+        "screen_x": 0.7092228997498751,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.27310321759432554,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "102": {
+      "L": {
+        "screen_x": 0.7092228997498751,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.27310321759432554,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "103": {
+      "L": {
+        "screen_x": 0.7092228997498751,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.27310321759432554,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "105": {
+      "L": {
+        "screen_x": 0.7092228997498751,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.27310321759432554,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "108": {
+      "L": {
+        "screen_x": 0.7092228997498751,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      },
+      "R": {
+        "screen_x": 0.27310321759432554,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      }
+    }
+  },
+  "right": {
+    "1": {
+      "L": {
+        "screen_x": 0.7179534523747861,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      },
+      "R": {
+        "screen_x": 0.2820465581025928,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      }
+    },
+    "26": {
+      "L": {
+        "screen_x": 0.7268967875279486,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      },
+      "R": {
+        "screen_x": 0.2907770967576653,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      }
+    },
+    "101": {
+      "L": {
+        "screen_x": 0.7268967824056745,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.2907770969904959,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "102": {
+      "L": {
+        "screen_x": 0.7268967824056745,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.2907770969904959,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "103": {
+      "L": {
+        "screen_x": 0.7268967824056745,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.29077709722332656,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "105": {
+      "L": {
+        "screen_x": 0.7268967824056745,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.2907770969904959,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "108": {
+      "L": {
+        "screen_x": 0.7268967824056745,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      },
+      "R": {
+        "screen_x": 0.2907770969904959,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      }
+    }
+  },
+  "generate-motion": {
+    "1": {
+      "L": {
+        "screen_x": 0.7179534416645765,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      },
+      "R": {
+        "screen_x": 0.2820465581025928,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      }
+    },
+    "25": {
+      "L": {
+        "screen_x": 0.7109735035337508,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      },
+      "R": {
+        "screen_x": 0.2749305902980268,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      }
+    },
+    "58": {
+      "L": {
+        "screen_x": 0.7245614780113101,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      },
+      "R": {
+        "screen_x": 0.28853711066767573,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      }
+    },
+    "105": {
+      "L": {
+        "screen_x": 0.7202790467999876,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.2843490287195891,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "106": {
+      "L": {
+        "screen_x": 0.7202790467999876,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.2843490287195891,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "107": {
+      "L": {
+        "screen_x": 0.7202790467999876,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.2843490287195891,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "109": {
+      "L": {
+        "screen_x": 0.7202790467999876,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      },
+      "R": {
+        "screen_x": 0.2843490287195891,
+        "pupil_surface_samples": 128,
+        "visible_samples": 0
+      }
+    },
+    "112": {
+      "L": {
+        "screen_x": 0.7202790467999876,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      },
+      "R": {
+        "screen_x": 0.2843490287195891,
+        "pupil_surface_samples": 128,
+        "visible_samples": 128
+      }
+    }
+  }
+}

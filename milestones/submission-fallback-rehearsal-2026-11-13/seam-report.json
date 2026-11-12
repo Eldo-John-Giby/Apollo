@@ -1,0 +1,26 @@
+{
+  "face": {
+    "introduced_seam_edges": 217,
+    "source_uv_sha256": "1348145f0a5e621a7a066852c0c4307de91ad8615949d5f510469f3f643b2ec8",
+    "target_uv_sha256": "bae05b25aabd1d572aa2b8283ab924ce886a6a768446d2ad37f0e1fd177c0817",
+    "source_samples": 53512,
+    "sample_coverage": 1.0,
+    "color_mae": 0.0020156405810768754
+  },
+  "iris_left": {
+    "introduced_seam_edges": 2,
+    "source_uv_sha256": "3672d47296e696514323c58d4ab8e3ca5d989d57973b110521c177a25da3415d",
+    "target_uv_sha256": "7fbda9cae12ef5ad1e8bfa92461cf565a9ba8d6d3a438db3334655ec8decf5b0",
+    "source_samples": 128,
+    "sample_coverage": 1.0,
+    "color_mae": 0.0007369384692929717
+  },
+  "iris_right": {
+    "introduced_seam_edges": 2,
+    "source_uv_sha256": "5c67f3307fc5a50a86e64f5c916569741f9c4e4ae47c711b9f819579d5d2988b",
+    "target_uv_sha256": "af9f1cafcd46f68dc1c7ab4e306cb9ebedee6a33a41f96404addca00b20cc133",
+    "source_samples": 128,
+    "sample_coverage": 1.0,
+    "color_mae": 0.0007464766604146053
+  }
+}
