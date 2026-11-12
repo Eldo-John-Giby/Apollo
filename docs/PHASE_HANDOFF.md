@@ -1,5 +1,9 @@
 # Visual realism phase handoff
 
+For the final submission phase, use the [12 November evaluation and submission
+audit](PS_AUDIT.md). The preview qualification below applies to the earlier
+calibrated sweep and remains useful as a fallback.
+
 This development phase is closed. Main integrates the competition and realism
 work. Start new task branches from main; read TEAM_SETUP.md in the repository root.
 

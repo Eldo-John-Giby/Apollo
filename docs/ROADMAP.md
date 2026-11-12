@@ -5,6 +5,24 @@ through visible correctness, reliable automation and reproducible evidence.
 This is the current execution roadmap; IMPLEMENTATION_PLAN.md remains the
 original design/reference plan. We are developing locally, not submitting now.
 
+
+## Final evaluation priorities — 12 November 2026
+
+Use the [current submission audit](PS_AUDIT.md) as the final output checklist.
+The roadmap below records the earlier calibrated sweep work.
+
+1. Confirm the GNM target mesh and UV assumptions with the college PoC. Prove one
+   portable skin-and-eye set through a clean target-mesh render before scaling
+   to five variants and their matching stills. Texture photorealism carries 60
+   points and code/UV portability carries 20.
+2. Reuse the gaze math and eyelid controls for Left, Right and Generate Motion.
+   Verify the input modes and a saved Blender timeline on reopen. Preserve the
+   old sweep and metadata until their final role is clarified.
+3. Check the public GitHub package from a clean checkout. The team owns the
+   three short runtime videos, official template deck and form submission.
+   Final submission is 22 November. Prioritize completing the slide 2 outputs
+   before further portrait-only refinements.
+
 ## Score targets and current evidence
 
 The rubric below comes from the supplied slide transcription in

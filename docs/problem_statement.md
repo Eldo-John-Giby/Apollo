@@ -2,6 +2,8 @@
 
 > Source: screenshots of the launch-event PowerPoint, presented 5 November 2026. This document transcribes and organizes visible information; it is **not** the original slide deck. Unreadable or unconfirmed details are identified rather than invented.
 
+> **Final evaluation update (12 November 2026):** See [the current submission audit](PS_AUDIT.md) for the 60/20/20 rubric, GNM/FLAME UV and motion outputs, public GitHub requirement and revised schedule. The launch rubric and technical format below are retained for reference while the team confirms how they carry forward.
+
 ## 1. Event overview
 
 - **Event:** Samsung PRISM-XR Team — XR Hackathon Challenge 2026
@@ -21,10 +23,10 @@
 |---|---|
 | 5 November | Launch; team registration opens |
 | 8 November | Registration closes (registration slide says 11:59 PM) |
-| 18 November | Final submission due by **11:59 PM**; no extension indicated |
-| 23 November | Top 15 teams announced |
-| 27 November | Final demo round / live jury presentation |
-| 2 December | Final results and awards |
+| 22 November | Final submission (cutoff time unspecified in the updated email) |
+| 29 November | Top 12 teams announced |
+| 9 December | Final demo |
+| 12 December | Final results |
 
 *The dates were marked tentative / subject to minor changes on the closing slide.*
 
@@ -36,6 +38,8 @@
 - Final submission link is shared **only with teams that completed registration**.
 
 ### General final submission requirements
+
+The final instructions email requires public GitHub and submission through the [final form](https://forms.gle/86xENrtqhx988hBt8). The list below records the launch instructions. See the [current audit](PS_AUDIT.md) for the updated output checklist.
 
 The general submission slide lists:
 
@@ -167,7 +171,7 @@ A visible example on the metadata slide has this **approximate schema** (illustr
 - Demo: contact sheet or 1–2 minute video of wrapper in action.
 - Open assets mentioned: **MakeHuman / MPFB (CC0), GNM Head Editor, Textured FLAME**. **Check each asset's actual license and suitability** before using; the screenshot does not establish universal license terms for all assets.
 
-### 2.8 Evaluation — 100 points
+### 2.8 Launch evaluation — 100 points
 
 | Category | Weight | Detail |
 |---|---:|---|
