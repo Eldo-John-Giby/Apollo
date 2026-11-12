@@ -1,0 +1,26 @@
+{
+  "face": {
+    "source_uv_sha256": "1348145f0a5e621a7a066852c0c4307de91ad8615949d5f510469f3f643b2ec8",
+    "target_uv_sha256": "968b5582f45dc861500c7222253076fff35552967ea8e9aa022fb035004db310",
+    "source_faces": 53512,
+    "target_faces": 428096,
+    "coverage_overlap": 0.9999795712255605,
+    "color_mae": 0.0004726370389107615
+  },
+  "iris_left": {
+    "source_uv_sha256": "3672d47296e696514323c58d4ab8e3ca5d989d57973b110521c177a25da3415d",
+    "target_uv_sha256": "050da4e5dfd0f6e95f1f728e7db43d4bcba0d29bb39164c3ea264e3dfcc0fcf3",
+    "source_faces": 128,
+    "target_faces": 1024,
+    "coverage_overlap": 0.9999849085457875,
+    "color_mae": 4.214990622131154e-05
+  },
+  "iris_right": {
+    "source_uv_sha256": "5c67f3307fc5a50a86e64f5c916569741f9c4e4ae47c711b9f819579d5d2988b",
+    "target_uv_sha256": "0cc510222ab9c29511960b5e74442ce7f0ca910f629c218ea59fea0d2b291997",
+    "source_faces": 128,
+    "target_faces": 1024,
+    "coverage_overlap": 0.9999836509246031,
+    "color_mae": 4.2098999983863905e-05
+  }
+}
