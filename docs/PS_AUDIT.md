@@ -6,7 +6,9 @@ submission template (`official_ppt_template_supplied_by_judges.pptx`).
 The forwarded evaluation email explicitly directs teams to generate all slide 2
 outputs and describes natural human-like simulation as brownie credit. Slide 2
 also puts realism in the scored rubric. Use this audit for final planning and
-keep the launch specification as historical context.
+keep the launch specification as historical context. See the
+[submission pipeline](SUBMISSION_PIPELINE.md) for development commands and
+qualification steps once the evaluator asset arrives.
 
 ## Current evaluation
 
@@ -24,11 +26,11 @@ for brownie credit.
 
 | Slide 2 output | Apollo evidence and remaining work |
 | --- | --- |
-| 5–10 textured UV map sets covering face and eyes, with 5–10 rendered images using different textures | **Major gap.** Apollo's packed MPFB character and appearance milestones show skin and iris detail on their own mesh. They do not establish 5–10 distinct portable texture variants or direct GNM wrapping. Confirm the canonical mesh and UV layout, then round-trip one licensed face-and-eye set on it and inspect seams before scaling to five distinct sets and corresponding renders. |
+| 5–10 textured UV map sets covering face and eyes, with 5–10 rendered images using different textures | **Major gap.** Apollo's packed MPFB character and appearance milestones show skin and iris detail on their own mesh. Five local palette studies now have matching stills and map receipts. Direct GNM wrapping is still unverified. Confirm the canonical mesh and UV layout, then round-trip one licensed face-and-eye set on it and inspect seams before scaling to five distinct sets and corresponding renders. |
 | Python script to render using the generated textures | **Partial.** Existing Blender automation renders the packed Apollo scene. Verify that a clean checkout can load the target mesh, select each exported set and reproduce its still without the original project scene or local asset paths. |
-| Python script accepting Left, Right and Generate Motion and rendering frames and video | **Partial.** The standalone wrapper supports deterministic binocular gaze, reset, single renders and the old ten-frame sweep. Its CLI currently takes numeric gaze coordinates, without the three expression modes. Eye-expression work has gaze-driven eyelid shapes, which are a starting point for timed motion. |
+| Python script accepting Left, Right and Generate Motion and rendering frames and video | **Partial.** The standalone wrapper supports deterministic binocular gaze, reset, single renders and the old ten-frame sweep. The new submission CLI builds all three named modes and writes PNG frames. Sampled timelines and a two-frame render passed on MPFB. Complete frame runs and target-rig integration are pending. |
 | Three runtime-captured videos, one per input, each at most 15 seconds | **Pending team deliverable.** The historical sweep and general demo do not demonstrate three distinct runs under the new cap. |
-| Blender file with an expression animated in the Timeline | **Pending verification.** Packed still scenes and pose-dependent eyelid shapes do not establish a playable saved timeline. Verify the saved file on reopen and review eye/iris, eyelid and brow coordination. |
+| Blender file with an expression animated in the Timeline | **Partial.** Three MPFB timelines reopened at 24 fps with matching sampled poses. A small gap remains at peak blink. Fit and verify the final expression on the evaluator rig. |
 
 Slide 1 recommends GNM initialization, scripted face shape and expression,
 coordinated closure, UV transfer and distinct left/right iris maps. Slide 2

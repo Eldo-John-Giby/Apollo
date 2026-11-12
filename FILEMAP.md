@@ -38,6 +38,7 @@ preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred
 | `docs/PERFORMANCE.md` | Measured sample-count timing/noise tradeoffs, secondary-runtime provenance and Docker limitations. |
 | `docs/DEVELOPMENT_FREEZE.md` | Chosen freeze quality, rubric evidence, archive reproduction and explicit validation limits. |
 | `docs/PS_AUDIT.md` | Requirement-by-requirement technical coverage and remaining event/submission deliverables against the user's consolidated specification. |
+| `docs/SUBMISSION_PIPELINE.md` | CPU commands, evaluator mesh integration, and qualification handoff for the final outputs. |
 | `docs/UPGRADE_PROGRESS.md`, `docs/VERIFIER_COVERAGE.md` | Upgrade execution gates, measured prototype status and verifier independence/coverage limitations. |
 | `docs/UPGRADE_RUNBOOK.md` | Reproduction commands for upgraded looks, independent/dataset adversaries, controls, Linux qualification, deck/video and archive rehearsals. |
 | `docs/RELEASES.md` | Uniform release/tag names, historical version mapping and promotion policy. |
@@ -88,6 +89,8 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/visibility_audit.py`, `tools/analyze_visibility.py` | Dataset corner/random occlusion masks, independent mask centroids and rendered half-pupil fault detection. |
 | `tools/lighting_adversary.py` | Disposable rendered lighting-loss fault, requiring lighting signature and pupil-pixel rejection. |
 | `tools/dataset_protocol.py`, `tools/generate_dataset.py`, `tools/analyze_dataset.py` | Separate seeded/resumable dataset protocol, Blender generation, independent image checks and coverage artifacts. |
+| `tools/submission_variants.py`, `tools/submission_bake.py`, `tools/submission_textures.py` | Generate MPFB development palettes, bake base color to aligned target UVs, and validate and render texture manifests. |
+| `tools/submission_motion.py` | Build packed 24 fps expression timelines for Left, Right and Generate Motion, with optional PNG frame rendering. |
 | `tools/live_controls.py` | Optional Blender sidebar invoking the public wrapper; never required or automatically enabled in graded scenes. |
 | `tools/ui_rehearsal.py` | Real Blender panel operators: pose-render/API byte parity and official sweep output validation. |
 | `build/upgrade_looks.py` | Distinct iris-region/shading/light candidates and MPFB lid/lash refit; preserves pupil/eye geometry and calibration, requires MPFB for building only. |
