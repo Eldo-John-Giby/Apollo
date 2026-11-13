@@ -94,6 +94,10 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/submission_motion_check.py`, `tools/submission_uv_rehearsal.py` | Validate saved timeline gaze and pupil coverage, and rehearse color transfer onto a changed local UV layout. |
 | `tools/submission_render.py`, `tools/submission_bundle.py` | Resume CPU timeline PNG rendering with frame receipts and verify the fallback ZIP. |
 | `tools/submission_seams.py` | Repack split local UVs and check face/iris color transfer before rebinding on a fresh scene. |
+| `tools/gnm_template.py`, `tools/gnm_import.py` | Verify the pinned Google model and import its original topology and native UV layouts into Blender. |
+| `tools/gnm_skin_trial.py`, `tools/gnm_skin_fill.py`, `tools/gnm_eye_maps.py`, `tools/gnm_texture_trial.py` | First GNM color-transfer trial with projection coverage, native eye tiles and two-layout renders. |
+| `tools/gnm_gaze_trial.py` | Evaluate five native GNM binocular gaze anchors using the upstream NumPy model. |
+| `docs/GNM_INTEGRATION.md` | Pinned GNM setup, trial results and qualification status. |
 | `tools/live_controls.py` | Optional Blender sidebar invoking the public wrapper; never required or automatically enabled in graded scenes. |
 | `tools/ui_rehearsal.py` | Real Blender panel operators: pose-render/API byte parity and official sweep output validation. |
 | `build/upgrade_looks.py` | Distinct iris-region/shading/light candidates and MPFB lid/lash refit; preserves pupil/eye geometry and calibration, requires MPFB for building only. |
