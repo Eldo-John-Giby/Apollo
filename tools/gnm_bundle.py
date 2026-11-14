@@ -184,6 +184,11 @@ def package(args):
                  'apollo_core/submission_timing.py', 'apollo_core/__init__.py',
                  'wrapper/eyes.py'):
         files[name] = ROOT / name
+    if scan_transfer.is_file():
+        for name in ('blink-closure-and-reopening.png', 'final-contact-metrics.json',
+                     'packed-timeline-reopen.json'):
+            relative = f'milestones/gnm-score-development/{name}'
+            files[relative] = ROOT / relative
     manifest = {'target': 'Google GNM Head v3', 'evaluator_match': 'unconfirmed',
                 'modes': modes, 'textures': textures,
                 'side_layout_max_rgb_error': layout_error,
