@@ -112,6 +112,33 @@ def package(args):
                 if eye_receipt['maps'][tile]['sha256'] != entries[tile]['sha256']:
                     raise ValueError(f'{variant}: iris-detail receipt does not match map')
             files[f'textures/{variant}/eye-detail.json'] = eye_detail
+        if scan_transfer.is_file():
+            expected_maps = {tile: entry['sha256'] for tile, entry in entries.items()}
+            expected_maps.update({role: sha256(path.read_bytes())
+                                  for role, path in surface_files(source).items()})
+            recipe = b''.join((ROOT / 'tools' / name).read_bytes()
+                              for name in ('gnm_texture_trial.py', 'gnm_materials.py'))
+            for name, size, samples, layout, lens in (
+                    ('front', 1024, 32, 'udim', 64),
+                    ('side-udim', 640, 8, 'udim', 64),
+                    ('side-legacy', 640, 8, 'legacy', 64),
+                    ('angle-neutral', 640, 8, 'udim', 64),
+                    ('front-oblique', 640, 8, 'udim', 64),
+                    ('eyes', 1024, 32, 'udim', 200)):
+                image = source / f'{name}.png'
+                png(image, (size, size))
+                receipt_path = source / f'{name}.render.json'
+                rendered = read_json(receipt_path)
+                if (rendered['output_sha256'] != sha256(image.read_bytes())
+                        or rendered['scene_sha256'] != sha256(files['model/neutral.blend'].read_bytes())
+                        or rendered['maps'] != expected_maps or rendered['layout'] != layout
+                        or rendered['recipe_sha256'] != sha256(recipe)
+                        or rendered['device'] != 'CPU' or rendered['samples'] != samples
+                        or rendered['resolution'] != [size, size]
+                        or rendered['camera_lens_mm'] != lens
+                        or rendered['blender_build'] != modes['left']['settings']['blender_build']):
+                    raise ValueError(f'{variant}: stale or incompatible {name} render receipt')
+                files[f'evidence/render-receipts/{variant}/{name}.json'] = receipt_path
     for tile in ('1001', '1002', '1004'):
         if len({variant[tile]['sha256'] for variant in textures.values()}) != len(VARIANTS):
             raise ValueError(f'Duplicate texture variants for GNM tile {tile}')

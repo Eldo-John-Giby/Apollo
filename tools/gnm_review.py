@@ -9,7 +9,7 @@ from zipfile import ZipFile
 from PIL import Image, ImageDraw
 
 
-def prepare(motion, out):
+def prepare(motion, out, textures=None):
     out.mkdir(parents=True, exist_ok=False)
     reviewer = out / 'reviewer'
     reviewer.mkdir()
@@ -18,6 +18,32 @@ def prepare(motion, out):
     key = {}
     responses = {'reviewer': '', 'directions': {},
                  'motion': {'smooth': None, 'blink_plausible': None, 'notes': ''}}
+    if textures:
+        variants = ['rose-brown', 'golden-hazel', 'olive-amber', 'neutral-deep', 'cool-grey']
+        random.Random(20261115).shuffle(variants)
+        responses['appearance'] = {}
+        for index, variant in enumerate(variants, 1):
+            case = f'A{index:02d}'
+            board = Image.new('RGB', (1280, 1336), '#1a1c20')
+            labels = ImageDraw.Draw(board)
+            hashes = {}
+            for cell, name in enumerate(('front', 'side-udim', 'front-oblique', 'eyes')):
+                source = textures / variant / f'{name}.png'
+                digest = hashlib.sha256(source.read_bytes()).hexdigest()
+                receipt = json.loads(source.with_suffix('.render.json').read_text())
+                if receipt['output_sha256'] != digest:
+                    raise ValueError(f'Stale appearance review still: {source}')
+                hashes[name] = digest
+                x, y = (cell % 2) * 640, (cell // 2) * 668
+                with Image.open(source) as image:
+                    board.paste(image.convert('RGB').resize((640, 640), Image.Resampling.LANCZOS),
+                                (x, y + 28))
+                labels.text((x + 10, y + 7), f'{case} / {name}', fill='white')
+            board.save(reviewer / f'{case}.png')
+            key[case] = {'variant': variant, 'images': hashes}
+            responses['appearance'][case] = {
+                'skin_natural_1_to_5': None, 'iris_detail_1_to_5': None,
+                'seams_visible': None, 'notes': ''}
     for index, mode in enumerate(modes, 1):
         case = f'C{index:02d}'
         source = motion / mode / 'frames'
@@ -57,6 +83,10 @@ def prepare(motion, out):
         'smoothness, readable fixations, lid contact and blink believability. '
         'Record smooth and blink_plausible as true or false, with notes. '
         'Inspect blink frames 103-113 individually if needed.\n\n'
+        'If A01-A05 are included, inspect all four views in each image. Rate '
+        'skin naturalness and iris detail from 1 to 5, note visible seams and '
+        'record distracting pigment, pore or reflection patterns. These are '
+        'anonymous texture variants.\n\n'
         'Return the text responses. Note any visible eye slit, sharp fold, '
         'uneven contact or distracting highlight during closure.\n',
         encoding='utf-8')
@@ -72,5 +102,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--motion', required=True, type=Path)
     parser.add_argument('--out', required=True, type=Path)
+    parser.add_argument('--textures', type=Path)
     args = parser.parse_args()
-    prepare(args.motion, args.out)
+    prepare(args.motion, args.out, args.textures)

@@ -37,16 +37,20 @@ def generate(out, variant, seed=20261114, size=1024):
         rng = np.random.default_rng(native_seed)
         phase = rng.uniform(-np.pi, np.pi, 10)
         warp = angle + .013 * np.sin(angle * 13 + phase[0]) + .018 * np.sin(r * 13 + angle * 7)
-        fibers = (.43 * np.sin(warp * 179 + 3 * r + phase[1])
-                  + .28 * np.sin(warp * 313 - 7 * r + phase[2])
-                  + .18 * np.sin(warp * 557 + 9 * r + phase[3]))
+        # Multiple angular scales keep broad stromal bundles readable when the
+        # rendered iris is only 20-100 pixels across. Fine strands alone are
+        # removed by texture filtering at the judging camera.
+        fibers = (.32 * np.sin(warp * 31 + 4 * r + phase[1])
+                  + .30 * np.sin(warp * 73 - 7 * r + phase[2])
+                  + .24 * np.sin(warp * 149 + 9 * r + phase[3])
+                  + .14 * np.sin(warp * 317 - 11 * r + phase[6]))
         radial = np.sin(r * 70 + 2 * np.sin(angle * 23 + phase[4]))
         collarette = np.exp(-((r - .28 - .035 * np.sin(angle * 19 + phase[5])) / .075)**2)
         crypt = smooth((noise(xyz, 110, native_seed) - .51) / .21) * collarette
         outer, inner = np.asarray(COLORS[variant], dtype=np.float32)
         center = np.exp(-((r - .18) / .24)**2)
         iris = outer * (1 - center[..., None]) + inner * center[..., None]
-        iris *= (1 + .25 * fibers + .035 * radial - .37 * crypt)[..., None]
+        iris *= (1 + .55 * fibers + .018 * radial - .37 * crypt)[..., None]
         # A feathered, irregular limbal transition and dark pupillary frill.
         limbus = smooth((r - .86 - .009 * np.sin(angle * 37)) / .14)
         iris *= (1 - .55 * limbus)[..., None]
@@ -71,7 +75,7 @@ def generate(out, variant, seed=20261114, size=1024):
         Image.fromarray(np.rint(np.clip(color, 0, 1) * 255).astype(np.uint8)).save(path)
         reports[str(tile)] = {'sha256': digest(path), 'seed': native_seed,
                               'anatomical_side': 'left' if side == 0 else 'right'}
-    report = {'recipe': 'native-iris-fibers-v1', 'variant': variant,
+    report = {'recipe': 'native-iris-fibers-v2', 'variant': variant,
               'license': 'Project-authored procedural maps', 'color_space': 'sRGB',
               'pupil_uv_radius': .04985, 'limbus_uv_radius': .184924,
               'baked_illumination': False, 'maps': reports}

@@ -1,5 +1,7 @@
 """Render a native-layout GNM texture trial from a neutral or animated Blender scene."""
 import argparse
+import hashlib
+import json
 from pathlib import Path
 import sys
 
@@ -8,6 +10,33 @@ from mathutils import Vector
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gnm_materials import bind_surface
+from gnm_run import surface_files
+
+
+def render_receipt(output, args, scene):
+    source = Path(bpy.data.filepath)
+    maps = {str(tile): args.maps / f'color.{tile}.png' for tile in (1001, 1002, 1004)}
+    maps.update(surface_files(args.maps))
+    recipe = b''.join((Path(__file__).parent / name).read_bytes()
+                      for name in ('gnm_texture_trial.py', 'gnm_materials.py'))
+    camera = scene.camera
+    report = {
+        'scene_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
+        'maps': {role: hashlib.sha256(path.read_bytes()).hexdigest() for role, path in maps.items()},
+        'recipe_sha256': hashlib.sha256(recipe).hexdigest(),
+        'blender': bpy.app.version_string, 'blender_build': bpy.app.build_hash.decode(),
+        'device': scene.cycles.device, 'samples': scene.cycles.samples,
+        'resolution': [scene.render.resolution_x, scene.render.resolution_y],
+        'frame': scene.frame_current, 'layout': args.layout,
+        'camera_lens_mm': camera.data.lens,
+        'camera_matrix': [list(row) for row in camera.matrix_world],
+        'angle': args.angle, 'side_light': args.side_light,
+        'output_sha256': hashlib.sha256(output.read_bytes()).hexdigest(),
+    }
+    receipt = output.with_suffix('.render.json')
+    temporary = receipt.with_suffix('.tmp')
+    temporary.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+    temporary.replace(receipt)
 
 
 def aim(obj, position, target):
@@ -119,6 +148,7 @@ def render(args):
         else:
             scene.render.filepath = str(args.out.resolve())
         bpy.ops.render.render(write_still=True)
+        render_receipt(Path(scene.render.filepath), args, scene)
 
 
 if __name__ == '__main__':
