@@ -2,6 +2,7 @@
 from collections import Counter
 
 import numpy as np
+from scipy.optimize import lsq_linear
 
 
 def eyelid_rims(model):
@@ -34,13 +35,27 @@ def fit_blink(model, basis):
         contact = low[1] * (1 - t) + high[1] * t - .0022 * np.sin(np.pi * t)
         desired = np.zeros_like(rim_xyz)
         desired[:, 1] = contact - rim_xyz[:, 1]
-        # Strong vertical constraint with permitted anterior movement around the globe.
-        weight = np.array([.3, 1., .08])
+        # Keep the contact line just anterior to the neutral globe. Free depth
+        # in the first fit allowed sharp folds and locally exposed cornea.
+        eye = model.template_joint_positions[list(model.joint_names).index(f'{side}_eye')]
+        desired[:, 2] = np.maximum(rim_xyz[:, 2], eye[2] + .0148) - rim_xyz[:, 2]
+        weight = np.array([.4, 1., .6])
         constraint = (basis[active][:, rim] * weight).reshape(len(active), -1).T
-        regularizer = .00035 * np.eye(len(active))
-        fit = np.linalg.lstsq(np.vstack((constraint, regularizer)),
-                             np.concatenate(((desired * weight).ravel(),
-                                             np.zeros(len(active)))), rcond=None)[0]
+        # Penalize displacement jumps along adjacent orbital vertices.
+        local = model.vertex_group_mask(f'{side}_orbital_region')
+        edges = {tuple(sorted((int(a), int(b)))) for face in model.quads
+                 for a, b in zip(face, np.roll(face, -1)) if local[a] and local[b]}
+        adjacent = np.array(sorted(edges))
+        smoothness = (basis[active][:, adjacent[:, 0]]
+                      - basis[active][:, adjacent[:, 1]]).reshape(len(active), -1).T
+        regularizer = np.vstack((.15 * smoothness, .00035 * np.eye(len(active))))
+        fit_result = lsq_linear(
+            np.vstack((constraint, regularizer)),
+            np.concatenate(((desired * weight).ravel(), np.zeros(len(regularizer)))),
+            bounds=(-3., 3.), tol=1e-10)
+        if not fit_result.success:
+            raise ValueError(f'{side} eyelid fit did not converge: {fit_result.message}')
+        fit = fit_result.x
         result = np.zeros(model.expression_dim)
         result[active] = fit
         solutions.append(result)

@@ -151,3 +151,17 @@ Run python reassemble-gnm.py in that directory to reconstruct and verify the ZIP
 The uploaded file sizes and digests were checked against the local parts.
 The release remains a technical candidate while evaluator asset matching
 and the deferred human appearance review are outstanding.
+
+
+## Eyelid refinement after rc.3
+
+The current source fits anterior contact depth as well as vertical lid
+closure, penalizes adjacent orbital displacement differences, and constrains
+all eye expression coefficients to the documented -3 to +3 range.
+The bilateral closed-rim vertical spread decreased from about 2.22 mm to
+1.72 mm. The 95th-percentile adjacent orbital displacement jump increased
+slightly, so a flatter contact line does not establish overall surface
+smoothness. Both pupils remain occluded at frames 106 and 107 and visible
+before closure and after reopening. The diagnostic frames and metrics are
+under milestones/gnm-blink-refinement. The published rc.3 archive contains
+the prior fit. Three-mode rerender and archive requalification remain pending.

@@ -1,0 +1,31 @@
+{
+  "rc3": {
+    "left": {
+      "rim_vertical_range_m": 0.002213821667234328,
+      "p95_edge_displacement_jump_m": 0.0009412147423637844,
+      "max_coefficient": 3.0146647175934245
+    },
+    "right": {
+      "rim_vertical_range_m": 0.0022207462896544072,
+      "p95_edge_displacement_jump_m": 0.000935807563368263,
+      "max_coefficient": 3.0146647175934245
+    }
+  },
+  "bounded_fit": {
+    "left": {
+      "rim_vertical_range_m": 0.0017082798181314307,
+      "p95_edge_displacement_jump_m": 0.0009896810201911888,
+      "max_coefficient": 2.9999999999999836
+    },
+    "right": {
+      "rim_vertical_range_m": 0.0017200249121596678,
+      "p95_edge_displacement_jump_m": 0.0009870881841476285,
+      "max_coefficient": 2.9999999999999836
+    }
+  },
+  "limitations": [
+    "Orbital edge displacement p95 slightly increased.",
+    "Peak pupil occlusion passed at frames 106 and 107.",
+    "Three preview frames inspected; full three-mode render qualification pending."
+  ]
+}
