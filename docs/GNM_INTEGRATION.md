@@ -48,3 +48,17 @@ the mask was 333 pixels at 2048 resolution, so this fails the texture
 qualification gate. Fit regional correspondence before scaling to five
 variants. Native blink fit, packed motion, full frame runs, archive and
 publication remain pending.
+
+A projection cage sweep at 1024 resolution improved raw skin coverage to
+99.952% at 35 mm, with a maximum in-mask repair distance of 7.1 pixels.
+The 55 mm trial covered the whole mask, but a wider projection increases
+the risk of sampling the wrong surface near folds. The 35 mm setting is the
+current trial default. Front previews still need stronger facial detail and
+a check for misplaced texture around the lips and lids.
+
+The Left gaze clip now evaluates 192 frame indices through the upstream
+NumPy model and saves a Blender timeline. Evaluated vertices at frames 1,
+23, 26 and 192 matched the upstream arrays within one micrometer in model
+units before save. This trial includes gaze only. Native blink, textured
+timeline rehearsal, five qualified variants and submission packaging remain
+pending.

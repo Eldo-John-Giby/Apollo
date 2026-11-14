@@ -58,7 +58,7 @@ def run(args):
     bpy.context.view_layer.update()
     bpy.context.scene.cycles.samples = 1
     bake(SimpleNamespace(source=source.name, target=target.name, uv='GNM Region',
-                         out=args.out, size=args.size, cage=.009, distance=.035,
+                         out=args.out, size=args.size, cage=args.cage, distance=args.distance,
                          margin_type='EXTEND'))
 
 
@@ -68,4 +68,9 @@ if __name__ == '__main__':
     parser.add_argument('--variant', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--size', type=int, default=2048)
-    run(parser.parse_args(sys.argv[sys.argv.index('--') + 1:]))
+    parser.add_argument('--cage', type=float, default=.035)
+    parser.add_argument('--distance', type=float, default=.115)
+    args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
+    if not 0 < args.cage < args.distance:
+        parser.error('Expected 0 < cage < distance')
+    run(args)

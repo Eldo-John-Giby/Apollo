@@ -8,13 +8,13 @@ Apollo implements synthetic binocular gaze for Samsung PRISM-XR Track 01.
 The protected radial-iris development freeze remains available. The competition
 upgrade adds a qualified warm-iris/lid/lash look, independent geometry audits,
 a complete seeded 256-image dataset, optional controls and evidence media.
-The protected competition-qualified release passes native/Linux V1–V17 and all
+The protected competition-qualified release passes native/Linux V1â€“V17 and all
 applicable secondary checks, with 79 tests on both platforms. The CPU adult-female appearance candidate is integrated into main;
 release qualification remains deferred. Generated temporary
 artifacts belong under out/ and are not listed here.
 
-Flow: character inspection/mapping or fixture → calibrated scene → standalone eye
-wrapper → PNGs/metadata → image validation/contact sheet → V1–V17 → production ZIP.
+Flow: character inspection/mapping or fixture â†’ calibrated scene â†’ standalone eye
+wrapper â†’ PNGs/metadata â†’ image validation/contact sheet â†’ V1â€“V17 â†’ production ZIP.
 
 ## Requirements and research
 
@@ -75,14 +75,14 @@ preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred
 
 `assets/base_character.blend` and its completed mapping are now present.
 Integration requires -Y facing, meter scale, aligned anatomical eyes,
-58–68 mm center spacing, actual stock-eye mesh names, and attribution.
+58â€“68 mm center spacing, actual stock-eye mesh names, and attribution.
 
 ## Verification and artifacts
 
 | File | Responsibility |
 | --- | --- |
 | `tools/sync_core.py` | Embed core math in wrapper or check drift; strips the source future import for embedding. |
-| `tools/validate_metadata.py` | JSON Schema/semantic checks and exactly ten 1024×1024 PNG validation. |
+| `tools/validate_metadata.py` | JSON Schema/semantic checks and exactly ten 1024Ã—1024 PNG validation. |
 | `tools/grader_sim.py` | Image-only ellipse pupil detector, weighted mask centroid, subpixel template-displacement detector. |
 | `tools/reference_geometry.py`, `tools/independent_audit.py` | Independent Rodrigues/projection oracle, deformed mesh measurements and disposable Blender defect injection. |
 | `tools/pixel_oracle.py` | Geometry-guided dark-surface pixel check independent of OpenCV detectors; not a visibility-mask replacement. |
@@ -96,7 +96,8 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/submission_seams.py` | Repack split local UVs and check face/iris color transfer before rebinding on a fresh scene. |
 | `tools/gnm_template.py`, `tools/gnm_import.py` | Verify the pinned Google model and import its original topology and native UV layouts into Blender. |
 | `tools/gnm_skin_trial.py`, `tools/gnm_skin_fill.py`, `tools/gnm_eye_maps.py`, `tools/gnm_texture_trial.py` | First GNM color-transfer trial with projection coverage, native eye tiles and two-layout renders. |
-| `tools/gnm_gaze_trial.py` | Evaluate five native GNM binocular gaze anchors using the upstream NumPy model. |
+| `tools/gnm_gaze_trial.py`, `tools/gnm_timeline_trial.py` | Evaluate native gaze anchors and clip geometry using upstream NumPy, then install and check the Blender timeline. |
+| `apollo_core/submission_timing.py` | Shared deterministic motion timing for the MakeHuman and GNM submission paths. |
 | `docs/GNM_INTEGRATION.md` | Pinned GNM setup, trial results and qualification status. |
 | `tools/live_controls.py` | Optional Blender sidebar invoking the public wrapper; never required or automatically enabled in graded scenes. |
 | `tools/ui_rehearsal.py` | Real Blender panel operators: pose-render/API byte parity and official sweep output validation. |
@@ -123,17 +124,17 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/photorealism_diagnostics.py` | Disposable neutral-light and clay portrait renders without modifying saved scene or graded metadata. |
 | `tools/scene_preflight.py` | Run the existing verifier V1/V2 functions without renders; scene/source-bound early failure report, never full qualification. |
 | `tools/blender_verify.py` | Blender evidence worker with progress checkpoints: calibration/metrics, random evaluated poses, repeated sweeps, direction images, isolated/occluded masks, packed resource audit; hash-guarded mask-only reruns. |
-| `tools/verify.py` | V1–V17 coordinator, pixel/direction/visibility checks, clean-room/secondary subprocesses, evidence-bound JSON/Markdown reports and hash-guarded evidence reuse. |
-| `tools/framing_sweep.py` | 85–135 mm experiments and eye-sphere margin/shift selection; brows/lashes still need visual review. |
-| `tools/benchmark_render.py` | Isolated Configurable 8–128-sample center/up/down or corner timings and pose records; leaves the source scene and qualified settings unchanged. |
-| `tools/contact_sheet.py` | 5×2 annotated sheet, crosshairs, reset rings, direction clocks, fixture label. |
+| `tools/verify.py` | V1â€“V17 coordinator, pixel/direction/visibility checks, clean-room/secondary subprocesses, evidence-bound JSON/Markdown reports and hash-guarded evidence reuse. |
+| `tools/framing_sweep.py` | 85â€“135 mm experiments and eye-sphere margin/shift selection; brows/lashes still need visual review. |
+| `tools/benchmark_render.py` | Isolated Configurable 8â€“128-sample center/up/down or corner timings and pose records; leaves the source scene and qualified settings unchanged. |
+| `tools/contact_sheet.py` | 5Ã—2 annotated sheet, crosshairs, reset rings, direction clocks, fixture label. |
 | `tools/prepare_candidate.py` | Candidate-specific README and fixture attribution; production attribution must already exist. |
 | `tools/demo.py` | Labeled sweep GIF and presentation/recording outline; not a final narrated video. |
 | `tools/build_presentation.mjs`, `tools/build_demo_video.py` | Editable Artifact Tool evidence deck and 105-second actual-artifact demonstration with local synthesized narration. |
 | `requirements-research.txt`, `requirements-media.txt` | Optional measured dataset plots and demo-video authoring dependencies. |
 | `tools/make_bundle.py` | Reject fixtures, stale evidence and incomplete reports; stage ZIP, size/integrity/extraction checks. |
 | `tools/freeze_candidate.py` | Development-only archive using shared qualification gates; per-file manifest, ZIP integrity and extraction checks. |
-| `tools/release_rehearsal.py` | Actual ZIP regeneration from clean config/different CWD; complete and interrupted 255→256 dataset resume reproduction. |
+| `tools/release_rehearsal.py` | Actual ZIP regeneration from clean config/different CWD; complete and interrupted 255â†’256 dataset resume reproduction. |
 | `tools/finish_realism.py` | Wait for existing qualification/checkpoints, gate technical export, verify Git bytes and optionally commit/tag/push; never authors media. |
 | `tools/check_release.py` | Verify release manifests, ZIP integrity and source/payload hashes against staged or committed Git blobs. |
 | `tools/export_upgrade.py` | Gate technical milestones, executable delivery, still-image evidence and complete research-dataset ZIP; excludes videos/decks. |
@@ -147,9 +148,9 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 - `tests/test_realism_visibility.py`: deterministic 113-pose square-boundary coverage.
 - Core is authoritative; regenerate wrapper embedding with `python tasks.py sync` after core edits.
 - Reports bind scene, wrapper, metadata and render hashes. Regenerate/reverify after changing these artifacts.
-- `all` orders tests → sync → scene → sweep → validate → sheet → prepare → demo → verify → optional production bundle.
+- `all` orders tests â†’ sync â†’ scene â†’ sweep â†’ validate â†’ sheet â†’ prepare â†’ demo â†’ verify â†’ optional production bundle.
 - Missing evidence is NOT RUN or FAIL; all seventeen checks are required for production packaging.
-- Calibration defaults: meters, -Y forward, +Z up, anatomical L at +X, camera 40 cm, target 35 cm, bounds ±5 cm, clockwise ten-frame sweep.
+- Calibration defaults: meters, -Y forward, +Z up, anatomical L at +X, camera 40 cm, target 35 cm, bounds Â±5 cm, clockwise ten-frame sweep.
 - Deliberate deviations from original documents: preserve measured production IPD instead of forcing 63 mm; horizontal sensor fit; simplified non-refractive procedural eyes; visual review remains necessary.
 
 Update affected entries when important source files or responsibilities change;
