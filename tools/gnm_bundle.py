@@ -39,6 +39,8 @@ def package(args):
             files[f'textures/{variant}/{name}'] = path
             entries[str(tile)] = {'file': name, 'sha256': sha256(path.read_bytes())}
         textures[variant] = entries
+    png(args.textures / 'contact-sheet.png', (1500, 330))
+    files['stills/contact-sheet.png'] = args.textures / 'contact-sheet.png'
     reference = args.textures / 'rose-brown'
     side_udim = reference / 'side-udim.png'
     side_legacy = reference / 'side-legacy.png'
