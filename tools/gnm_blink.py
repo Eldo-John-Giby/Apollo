@@ -41,6 +41,31 @@ def fit_blink(model, basis):
         desired[:, 2] = np.maximum(rim_xyz[:, 2], eye[2] + .0148) - rim_xyz[:, 2]
         weight = np.array([.4, 1., .6])
         constraint = (basis[active][:, rim] * weight).reshape(len(active), -1).T
+        # Independent targets alone can leave both fitted rims on opposite
+        # sides of the contact line. Couple corresponding upper/lower surface
+        # points explicitly rather than merely covering the pupil at camera.
+        midline = low[1] * (1 - t) + high[1] * t
+        upper = np.flatnonzero(rim_xyz[:, 1] > midline)
+        lower = np.flatnonzero(rim_xyz[:, 1] <= midline)
+        rows = []
+        targets = []
+        for fraction in np.linspace(.12, .88, 25):
+            x = low[0] + fraction * (high[0] - low[0])
+            interpolation = []
+            for group in (upper, lower):
+                order = group[np.argsort(rim_xyz[group, 0])]
+                j = np.clip(np.searchsorted(rim_xyz[order, 0], x), 1, len(order) - 1)
+                a, b = order[j - 1:j + 1]
+                blend = np.clip((x - rim_xyz[a, 0]) / (rim_xyz[b, 0] - rim_xyz[a, 0]), 0, 1)
+                weights = np.zeros(len(rim))
+                weights[a], weights[b] = 1 - blend, blend
+                interpolation.append(weights)
+            pair = interpolation[0] - interpolation[1]
+            # Upper lid is fractionally anterior at contact, with a slight
+            # vertical overlap. Both are achieved only through native basis.
+            for axis, wanted, strength in ((1, -.00010, 4.), (2, .00018, 1.)):
+                rows.append(strength * (basis[active][:, rim, axis] @ pair))
+                targets.append(strength * (wanted - pair @ rim_xyz[:, axis]))
         # Penalize displacement jumps along adjacent orbital vertices.
         local = model.vertex_group_mask(f'{side}_orbital_region')
         edges = {tuple(sorted((int(a), int(b)))) for face in model.quads
@@ -50,8 +75,8 @@ def fit_blink(model, basis):
                       - basis[active][:, adjacent[:, 1]]).reshape(len(active), -1).T
         regularizer = np.vstack((.5 * smoothness, .00035 * np.eye(len(active))))
         fit_result = lsq_linear(
-            np.vstack((constraint, regularizer)),
-            np.concatenate(((desired * weight).ravel(), np.zeros(len(regularizer)))),
+            np.vstack((constraint, rows, regularizer)),
+            np.concatenate(((desired * weight).ravel(), targets, np.zeros(len(regularizer)))),
             bounds=(-3., 3.), tol=1e-10)
         if not fit_result.success:
             raise ValueError(f'{side} eyelid fit did not converge: {fit_result.message}')
