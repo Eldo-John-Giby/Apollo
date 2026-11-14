@@ -107,6 +107,14 @@ def package(args):
         sheet_path = Path(scratch) / 'contact-sheet.png'
         sheet.save(sheet_path)
         files['stills/contact-sheet.png'] = sheet_path
+        for variant in VARIANTS:
+            with Image.open(files[f'stills/{variant}.png']) as still:
+                width, height = still.size
+                region = tuple(round(fraction * extent) for fraction, extent in
+                               zip((.30, .30, .70, .43), (width, height, width, height)))
+                crop = Path(scratch) / f'{variant}-eye-detail.png'
+                still.crop(region).save(crop)
+            files[f'evidence/eye-details/{variant}.png'] = crop
         blink = Image.new('RGB', (1500, 330), '#1a1c20')
         blink_labels = ImageDraw.Draw(blink)
         for index, (frame, label) in enumerate(((93, 'Before'), (105, 'Closing'),
