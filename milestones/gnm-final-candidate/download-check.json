@@ -1,0 +1,10 @@
+{
+  "authenticated_downloads_verified": [
+    "apollo-gnm-v0.3.0-rc.4.zip.part029",
+    "apollo-gnm-v0.3.0-rc.4.zip.sha256",
+    "gnm-release-parts.json",
+    "reassemble-gnm.py",
+    "receipt.json"
+  ],
+  "signed_out_access": "team verification pending"
+}

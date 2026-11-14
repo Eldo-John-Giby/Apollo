@@ -1,8 +1,12 @@
 # Visual realism phase handoff
 
-For the final submission phase, use the [12 November evaluation and submission
-audit](PS_AUDIT.md). The preview qualification below applies to the earlier
-calibrated sweep and remains useful as a fallback.
+For the current submission phase, use the [evaluation and submission
+audit](PS_AUDIT.md) and [GNM runtime quickstart](GNM_QUICKSTART.md). The public
+GNM Head v3 technical package passes clean offline qualification; its evidence
+is under milestones/gnm-final-candidate. Organizer asset matching and the
+deferred teammate visual review remain pending. The preview qualification
+below applies to the earlier calibrated sweep and remains historical fallback
+evidence; the separately released rc.2 MakeHuman package is also preserved.
 
 This development phase is closed. Main integrates the competition and realism
 work. Start new task branches from main; read TEAM_SETUP.md in the repository root.

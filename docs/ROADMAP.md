@@ -1,29 +1,36 @@
 # Apollo development roadmap
 
-Updated 7 November 2026. Objective: maximize the documented 100-point rubric
+Updated 14 November 2026. Objective: maximize the documented 100-point rubric
 through visible correctness, reliable automation and reproducible evidence.
 This is the current execution roadmap; IMPLEMENTATION_PLAN.md remains the
-original design/reference plan. We are developing locally, not submitting now.
+original design/reference plan. Technical qualification now covers public GNM
+Head v3; the team owns the final event submission.
 
 
-## Final evaluation priorities — 12 November 2026
+## Final evaluation priorities — 14 November 2026
 
 Use the [current submission audit](PS_AUDIT.md) as the final output checklist.
 The roadmap below records the earlier calibrated sweep work.
 
-1. Confirm the GNM target mesh and UV assumptions with the college PoC. Prove one
-   portable skin-and-eye set through a clean target-mesh render before scaling
-   to five variants and their matching stills. Texture photorealism carries 60
-   points and code/UV portability carries 20.
-2. Reuse the gaze math and eyelid controls for Left, Right and Generate Motion.
-   Verify the input modes and a saved Blender timeline on reopen. Preserve the
-   old sweep and metadata until their final role is clarified.
-3. Check the public GitHub package from a clean checkout. The team owns the
-   three short runtime videos, official template deck and form submission.
-   Final submission is 22 November. Prioritize completing the slide 2 outputs
-   before further portrait-only refinements.
+1. Five face-and-eye sets, five primary stills, eye crops and matched side-light
+   comparisons now qualify on pinned public Google GNM Head v3. Native and
+   legacy UV layouts pass direct-wrap reproduction. Texture photorealism
+   carries 60 points and code/UV portability carries 20. Confirm the evaluator
+   asset with the PoC; if it differs, repeat the one-set gate before scaling.
+2. Left, Right and Generate Motion each have a packed 192-frame timeline and
+   1024-pixel, 32-sample CPU frames at 24 fps. Native lid follow, brow response
+   and asymmetric blink are included. All three reopen offline with every
+   pose checked against upstream geometry. Preserve the MakeHuman fallback
+   and its sweep/metadata while the organizers clarify their final role.
+3. The 671-file archive passes clean extraction, reproduction, frame recovery,
+   alternate-variant resume and all 84 Python tests. See the
+   [qualification receipt](../milestones/gnm-final-candidate/receipt.json) and
+   [runtime quickstart](GNM_QUICKSTART.md). The team owns blind appearance
+   review, three short runtime videos, the official deck, public GitHub access
+   verification and the form. Final submission is 22 November; cutoff time
+   remains unconfirmed.
 
-## Score targets and current evidence
+## Historical launch rubric and evidence
 
 The rubric below comes from the supplied slide transcription in
 problem_statement.md, section 2.8. No points are claimed as awarded.

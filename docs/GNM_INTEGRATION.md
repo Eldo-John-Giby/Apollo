@@ -237,3 +237,33 @@ receipts record bpy.app.online_access as false, require all file images to be
 packed and reject linked libraries. The archive gate requires these offline
 receipts for all three timelines. See GNM_QUICKSTART.md for runtime-only setup
 and the exact delivered frame settings.
+
+## Refined candidate qualification
+
+The rc.4 technical candidate contains 671 authenticated payload files and
+all 576 full-quality frames. The archive is 725,843,567 bytes with SHA-256
+3195dfcb1e1bf8238df1a193d29507e714d0e31dea35058d3412e9e5b087cc79.
+Clean extraction reproduced five default still/segment comparisons exactly.
+Golden-hazel motion agrees between native and legacy layouts within one RGB
+level, and both cached variant scenes pass every-frame geometry and packed-map
+checks. Default and alternate-variant resume preserve valid frames; recovery
+repairs corrupt and missing frames. All 84 Python tests pass.
+
+All three reopened timelines have no linked libraries or unpacked images,
+with Blender online access disabled. Their neutral frames are pixel-identical.
+The release reassembly helper reconstructs the exact ZIP, preserves an already
+verified ZIP on repeat invocation, and rejects a corrupted part without leaving
+a partial archive. The tagged Python/setup files match the archive; the sole
+byte difference is the standard newline conversion in requirements.txt.
+
+See [the refined candidate receipt](../milestones/gnm-final-candidate/receipt.json)
+and adjacent reproduction, reassembly, source/tag and reopened-scene reports.
+The earlier rc.3 archive and rc.2 MakeHuman fallback remain preserved. This
+qualification establishes the exact public GNM version tested; organizer
+acceptance, final human appearance review and public access verification remain
+team follow-up work.
+
+Published prerelease:
+[Apollo v0.3.0-rc.4 — Refined GNM Candidate](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.4).
+Download apollo-gnm-v0.3.0-rc.4.zip directly, or use the 29-part alternative
+with reassemble-gnm.py. All 34 remote asset sizes and digests were verified.

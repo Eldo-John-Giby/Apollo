@@ -57,3 +57,28 @@ extraction rehearsal reproduced five outputs pixel-for-pixel. Evaluator
 model matching is unconfirmed, and the technical receipt records the
 remaining appearance limitations and deferred human review. Repository
 access is required while Apollo is private.
+
+## Refined GNM candidate
+
+Published prerelease
+[Apollo v0.3.0-rc.4 — Refined GNM Candidate](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.4)
+targets f745a4c4ab3613db325640eead428d2005559ad2.
+
+The primary download is apollo-gnm-v0.3.0-rc.4.zip, 725,843,567 bytes,
+SHA-256 3195dfcb1e1bf8238df1a193d29507e714d0e31dea35058d3412e9e5b087cc79.
+The same ZIP is available as 29 verified parts with a reassembly helper.
+All 34 uploaded assets matched their local sizes and SHA-256 digests.
+
+The archive contains 671 payload files: five native face-and-eye texture sets
+with portable brow detail, five primary stills, matched side-light comparisons,
+eye crops, three packed native-expression timelines and 576 full-quality CPU
+frames. Clean offline rehearsal passed every-frame geometry and packed-map
+checks, default and alternate-variant resume, and corrupt/missing-frame repair.
+Five default image comparisons were exact; the alternate variant's UV layouts
+differed by at most one RGB level. All 84 Python tests pass.
+
+Receipts and publication verification are under milestones/gnm-final-candidate.
+The evaluator asset match and deferred teammate visual review remain pending;
+the release notes retain the known visual limitations. The MakeHuman rc.2 and
+earlier GNM rc.3 downloads remain available. Public access and final event
+submission remain team-owned while the repository is private.

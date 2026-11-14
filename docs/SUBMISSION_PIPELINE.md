@@ -1,9 +1,15 @@
 # Track 01 submission pipeline
 
-Use [the evaluation audit](PS_AUDIT.md) for the official checklist. This
-pipeline currently uses the Apollo MPFB development rig. The evaluator GNM
-mesh and UV layout are pending, so these artifacts cannot establish GNM
-compatibility or final submission readiness.
+Use [the evaluation audit](PS_AUDIT.md) for the official checklist. The current
+GNM technical package is qualified on pinned public Google GNM Head v3. Use
+[the GNM quickstart](GNM_QUICKSTART.md) to run the extracted package and
+[the integration guide](GNM_INTEGRATION.md) to rebuild it. Qualification
+evidence is under milestones/gnm-final-candidate. The exact evaluator asset
+match remains unconfirmed.
+
+The MPFB workflow below is preserved for the released MakeHuman fallback.
+Its checks concern Apollo's MPFB UVs and do not establish compatibility with
+a different GNM mesh or UV layout.
 
 ## Run the development reference
 

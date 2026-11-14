@@ -1,0 +1,38 @@
+{
+  "tag": "apollo-v0.3.0-rc.4",
+  "tag_commit": "f745a4c4ab3613db325640eead428d2005559ad2",
+  "archive_sha256": "3195dfcb1e1bf8238df1a193d29507e714d0e31dea35058d3412e9e5b087cc79",
+  "files_checked": 27,
+  "byte_identical_files": [
+    "apollo_core/__init__.py",
+    "apollo_core/submission_timing.py",
+    "docs/GNM_INTEGRATION.md",
+    "docs/GNM_QUICKSTART.md",
+    "tools/gnm_blink.py",
+    "tools/gnm_bundle.py",
+    "tools/gnm_eye_maps.py",
+    "tools/gnm_gaze_trial.py",
+    "tools/gnm_import.py",
+    "tools/gnm_motion_variant.py",
+    "tools/gnm_rehearse.py",
+    "tools/gnm_run.py",
+    "tools/gnm_skin_detail.py",
+    "tools/gnm_skin_fill.py",
+    "tools/gnm_skin_trial.py",
+    "tools/gnm_template.py",
+    "tools/gnm_texture_trial.py",
+    "tools/gnm_timeline_trial.py",
+    "tools/gnm_verify.py",
+    "tools/submission_bake.py",
+    "tools/submission_bundle.py",
+    "tools/submission_motion.py",
+    "tools/submission_render.py",
+    "tools/submission_textures.py",
+    "tools/submission_variants.py",
+    "wrapper/eyes.py"
+  ],
+  "newline_only_differences": [
+    "requirements.txt"
+  ],
+  "other_differences": []
+}

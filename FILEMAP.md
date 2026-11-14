@@ -1,16 +1,20 @@
 # Repository File Map
 
-Navigation index verified 9 November 2026. Inspect implementation before changing it.
+Navigation index. Inspect implementation before changing it.
 
 ## Status and flow
 
 Apollo implements synthetic binocular gaze for Samsung PRISM-XR Track 01.
+The GNM submission path is qualified on pinned public Head v3: five texture
+sets, three packed timelines, 576 frames and clean offline reproduction.
+Start with `docs/GNM_QUICKSTART.md`; build details are in `docs/GNM_INTEGRATION.md`.
+The evaluator asset match and deferred human review remain pending.
 The protected radial-iris development freeze remains available. The competition
 upgrade adds a qualified warm-iris/lid/lash look, independent geometry audits,
 a complete seeded 256-image dataset, optional controls and evidence media.
 The protected competition-qualified release passes native/Linux V1Ã¢â‚¬â€œV17 and all
 applicable secondary checks, with 79 tests on both platforms. The CPU adult-female appearance candidate is integrated into main;
-release qualification remains deferred. Generated temporary
+qualification of that earlier appearance candidate remains deferred. Generated temporary
 artifacts belong under out/ and are not listed here.
 
 Flow: character inspection/mapping or fixture Ã¢â€ â€™ calibrated scene Ã¢â€ â€™ standalone eye

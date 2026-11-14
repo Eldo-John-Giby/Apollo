@@ -1,6 +1,6 @@
 # Track 01 evaluation and submission audit
 
-Updated 12 November 2026 from the organizer emails supplied by the team,
+Updated 14 November 2026 from the organizer emails supplied by the team,
 the supplied Track 01 evaluation deck (`Evaluation_for_SyntheticEyes.pptx`) and
 submission template (`official_ppt_template_supplied_by_judges.pptx`).
 The forwarded evaluation email explicitly directs teams to generate all slide 2
@@ -26,15 +26,24 @@ for brownie credit.
 
 | Slide 2 output | Apollo evidence and remaining work |
 | --- | --- |
-| 5–10 textured UV map sets covering face and eyes, with 5–10 rendered images using different textures | Five sets on pinned public Google GNM Head v3, each with one 2048-pixel skin map, two 1024-pixel eye maps and a matched 1024-pixel judging still. Fresh-template native and legacy UV renders reproduced exactly from the technical ZIP. Evaluator model match is unconfirmed. |
-| Python script to render using generated textures | tools/gnm_run.py selects the variant and UV layout for fresh-template rendering. A clean extraction reproduced the rose-brown judging still and both layout comparison stills pixel-for-pixel. |
+| 5–10 textured UV map sets covering face and eyes, with 5–10 rendered images using different textures | Five sets on pinned public Google GNM Head v3, each with one 2048-pixel skin map with portable brow detail, two distinct 1024-pixel eye maps and a matched 1024-pixel judging still. All five also have matched three-quarter side-light comparisons and eye crops. Fresh-template native and legacy UV renders reproduced exactly from the technical ZIP. Evaluator model match is unconfirmed. |
+| Python script to render using generated textures | tools/gnm_run.py selects the variant and UV layout for stills and motion. A clean extraction reproduced the rose-brown judging still and both layout comparison stills pixel-for-pixel. Golden-hazel motion agreed between layouts within one RGB level, with cached-scene resume preserving valid frames. |
 | Left, Right and Generate Motion input modes | All three packed GNM timelines have 192 full-quality PNGs at 24 fps and 32 CPU samples. Resume repaired missing and corrupt frames. The extracted CLI reproduced Left hold and transition frames exactly. |
 | Three runtime-captured videos, each at most 15 seconds | Team deliverable outside the current technical-project objective. |
-| Blender Timeline expression | All three packed GNM timelines reopened with all 192 evaluated poses matching upstream geometry within one micrometer, native UVs and packed maps intact. Saved-camera gaze and peak-blink checks passed. Uneven closure creases remain a visual limitation. |
+| Blender Timeline expression | All three packed GNM timelines reopened offline with all 192 evaluated poses matching upstream geometry within one micrometer, native UVs and packed maps intact. They include native lid follow, a subtle brow response and an asymmetric blink. Saved-camera gaze and peak-blink checks passed. A narrow dark contact line at one closed lid remains a visual limitation. |
 
 The technical archive and clean-extraction evidence are recorded in
-[the GNM candidate receipt](../milestones/gnm-technical-candidate/receipt.json).
-The known visual limitations and deferred teammate review are recorded there.
+[the refined GNM candidate receipt](../milestones/gnm-final-candidate/receipt.json).
+The archive contains 671 authenticated payload files and all 576 full-quality
+frames. Clean extraction, offline resource checks, alternate-variant resume,
+corrupt/missing-frame repair and all 84 Python tests pass. The known visual
+limitations and deferred teammate review are recorded in the receipt.
+Use [the GNM quickstart](GNM_QUICKSTART.md) for runtime commands and the exact
+capture inputs. The earlier rc.3 evidence remains preserved under
+milestones/gnm-technical-candidate.
+The refined archive is published as
+[Apollo v0.3.0-rc.4](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.4),
+with a single-ZIP download and verified split-download alternative.
 
 Slide 1 recommends GNM initialization, scripted face shape and expression,
 coordinated closure, UV transfer and distinct left/right iris maps. Slide 2
@@ -62,7 +71,9 @@ date conflicts with that email. The email specifies no cutoff time for
 The team must place the code, resources, documentation, demo, PPT, package and
 README on **public GitHub** and submit its URL through the
 [final submission form](https://forms.gle/86xENrtqhx988hBt8). Public access and
-form submission remain unverified. Confirm any separate general demo requirement
+form submission remain unverified. The repository is currently private; the
+team must make the final GitHub resources public and verify signed-out access.
+Confirm any separate general demo requirement
 with the PoC. The supplied template has nine slides covering team details,
 problem, solution, architecture, track outputs, differentiation, demo/local
 setup, brownie features and closing.
