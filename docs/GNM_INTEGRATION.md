@@ -175,3 +175,14 @@ packed texture, region UV and saved-camera direction/closure checks on
 reopen. The sweep and receipts are under milestones/gnm-blink-refinement.
 A narrow dark contact line remains visible in one lid at peak closure.
 Full rendered requalification uses out/gnm-blink-final.
+
+The extracted runner now accepts --variant and --layout for motion as well
+as stills. For example, use python tools/gnm_run.py left --variant golden-hazel
+--layout legacy --blender <blender.exe> --out <frames-directory>. Non-default
+bindings are packed into a cached timeline under the output directory. The
+cache identity includes the source scene, all three map hashes and UV layout;
+its receipt verifies the saved scene before reuse. The original rig, camera,
+lighting and timeline remain intact. Resume therefore uses the exact saved
+variant scene rather than a newly saved file on each invocation. Archive
+rehearsal checks golden-hazel in both layouts, every-frame native geometry,
+packed maps, identical layout renders and preservation of valid resumed frames.

@@ -1,5 +1,7 @@
 """Render one GNM still or one of the three packed timelines from an extracted bundle."""
 import argparse
+import hashlib
+import json
 from pathlib import Path
 import subprocess
 import sys
@@ -28,9 +30,23 @@ def main():
         flags = ['--maps', str(root / 'textures' / args.variant), '--layout', args.layout,
                  '--out', str(args.out.resolve()), '--size', '1024', '--samples', '32']
     else:
-        if args.variant != 'rose-brown' or args.layout != 'udim':
-            parser.error('The shipped motion scenes use rose-brown and native UDIM coordinates')
         scene = root / 'timelines' / args.mode / 'expression.blend'
+        if args.variant != 'rose-brown' or args.layout != 'udim':
+            maps = root / 'textures' / args.variant
+            identity = {'source_sha256': hashlib.sha256(scene.read_bytes()).hexdigest(),
+                        'layout': args.layout,
+                        'maps': {str(tile): hashlib.sha256(
+                            (maps / f'color.{tile}.png').read_bytes()).hexdigest()
+                                 for tile in (1001, 1002, 1004)}}
+            key = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
+            cache = args.out.resolve() / 'scene'
+            result = subprocess.run([
+                str(args.blender.resolve()), '-b', '--factory-startup', str(scene),
+                '--python-exit-code', '1', '-P', str(root / 'tools/gnm_motion_variant.py'),
+                '--', '--maps', str(maps), '--layout', args.layout, '--out', str(cache)], cwd=root)
+            if result.returncode:
+                return result.returncode
+            scene = cache / f'variant-{key}.blend'
         tool = 'submission_render.py'
         flags = ['--out', str(args.out.resolve()), '--reuse-holds']
         for name in ('first', 'last'):

@@ -76,6 +76,25 @@ def rehearse(archive, blender, out):
         name = f'frame_{frame:04d}.png'
         if (recovery / name).read_bytes() != (delivered / name).read_bytes():
             raise ValueError(f'Recovery mismatch: {name}')
+    # A non-default motion variant must wrap identically in both layouts and
+    # keep the cached packed scene stable across resume invocations.
+    for layout in ('udim', 'legacy'):
+        destination = out / f'reproduction/golden-hazel-{layout}'
+        command = [sys.executable, 'tools/gnm_run.py', 'left', '--blender', str(blender),
+                   '--variant', 'golden-hazel', '--layout', layout, '--out', str(destination),
+                   '--first', '26', '--last', '26']
+        subprocess.run(command, cwd=out, check=True)
+        scene, = destination.joinpath('scene').glob('*.blend')
+        run(str(scene), 'gnm_verify.py', '--maps', 'textures/golden-hazel',
+            '--template', 'model/template.npz', '--clip', 'timelines/left/geometry.npz',
+            '--out', str(destination / 'reopen.json'))
+        frame = destination / 'frame_0026.png'
+        timestamp = frame.stat().st_mtime_ns
+        subprocess.run(command, cwd=out, check=True)
+        if frame.stat().st_mtime_ns != timestamp:
+            raise ValueError(f'{layout}: variant resume rewrote a verified frame')
+    pairs.append(('reproduction/golden-hazel-udim/frame_0026.png',
+                  'reproduction/golden-hazel-legacy/frame_0026.png'))
     report = {}
     for reference, reproduced in pairs:
         difference = int(np.max(np.abs(pixels(out / reference) - pixels(out / reproduced))))
