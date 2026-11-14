@@ -55,3 +55,10 @@ displacement jump at p95 decreased from roughly 0.73 to 0.71 mm.
 This was measured at frame 107 with both blink weights at peak.
 The current Python suite passed all 88 tests. Final render and archive
 qualification are in progress.
+
+The scan candidate's rendered closure sequence shows a narrow opening in
+the delayed lid at frame 106, bilateral contact at frame 107 and staggered
+reopening at frame 110. The camera verifier records zero visible pupil
+vertices in both eyes at frames 106 and 107. A thin contact crease remains
+visible in the close framing. See
+[closure and reopening](../milestones/gnm-score-development/blink-closure-and-reopening.png).
