@@ -1,0 +1,83 @@
+{
+  "scene_sha256": "52d56e826141a7ed864519f80c6199688f4d36ad160e0ff1f1b897ab2227c6ee",
+  "frames_checked": 192,
+  "max_position_error_m": 9.094947017729282e-13,
+  "maps": {
+    "1001": "633e87b516b0e894afc98fafe2d9957b7b1ec3e49f8e354c6fa41aa34ce82b91",
+    "1002": "b562723de991dfa196ee4e93f05acfc7b15f36cca645ba47033120c2eb52b22c",
+    "1004": "039dbbb22e2de0dc51d513099f8ceb19ec41d5dea0fa74677d3e4e8f49d51f11"
+  },
+  "surface_maps": {
+    "roughness": "2d30496d5e74077b62c07f1fe49e192e1c5716c059f4ddfe89da9f2ad724fde1",
+    "height": "40b54cbf975cf4b83741d865e42bdc9b033eca93b32efefa5430159438ec8a9a"
+  },
+  "camera_checks": {
+    "1": {
+      "left": {
+        "visible_pupil_vertices": 46,
+        "image_x": 0.6673657894134521
+      },
+      "right": {
+        "visible_pupil_vertices": 47,
+        "image_x": 0.3326098322868347
+      }
+    },
+    "26": {
+      "left": {
+        "visible_pupil_vertices": 47,
+        "image_x": 0.6764577627182007
+      },
+      "right": {
+        "visible_pupil_vertices": 44,
+        "image_x": 0.3414669334888458
+      }
+    },
+    "99": {
+      "left": {
+        "visible_pupil_vertices": 47,
+        "image_x": 0.6764577627182007
+      },
+      "right": {
+        "visible_pupil_vertices": 44,
+        "image_x": 0.3414669334888458
+      }
+    },
+    "102": {
+      "left": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.6764577627182007
+      },
+      "right": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.3414669334888458
+      }
+    },
+    "103": {
+      "left": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.6764577627182007
+      },
+      "right": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.3414669334888458
+      }
+    },
+    "112": {
+      "left": {
+        "visible_pupil_vertices": 47,
+        "image_x": 0.6764577627182007
+      },
+      "right": {
+        "visible_pupil_vertices": 44,
+        "image_x": 0.3414669334888458
+      }
+    }
+  },
+  "resource_checks": {
+    "linked_libraries": 0,
+    "unpacked_file_images": 0,
+    "absolute_image_paths": 0,
+    "packed_file_images": 5,
+    "blender_online_access": false
+  }
+}
