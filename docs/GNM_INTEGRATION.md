@@ -165,3 +165,13 @@ smoothness. Both pupils remain occluded at frames 106 and 107 and visible
 before closure and after reopening. The diagnostic frames and metrics are
 under milestones/gnm-blink-refinement. The published rc.3 archive contains
 the prior fit. Three-mode rerender and archive requalification remain pending.
+
+A five-value regularization sweep selected 0.5 for the orbital displacement
+penalty. Compared with the rc.3 fit, closed-rim vertical spread falls from
+about 2.22 mm to 1.96 mm and the 95th-percentile neighboring displacement
+jump falls from about 0.94 mm to 0.73 mm. Expression coefficients remain
+within ±3. All three revised packed timelines pass every-frame geometry,
+packed texture, region UV and saved-camera direction/closure checks on
+reopen. The sweep and receipts are under milestones/gnm-blink-refinement.
+A narrow dark contact line remains visible in one lid at peak closure.
+Full rendered requalification uses out/gnm-blink-final.
