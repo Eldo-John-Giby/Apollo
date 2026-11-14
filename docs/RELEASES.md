@@ -37,3 +37,23 @@ checks and exact center-render rebuild evidence do not replace full cross-
 platform release qualification. No new tag or Release object was created for
 this source integration. The published v0.3.0-rc.1 preview and protected v0.2.0
 qualified fallback remain unchanged; v0.3.0 stays reserved until its gates pass.
+
+## GNM technical candidate
+
+Published prerelease apollo-v0.3.0-rc.3 targets
+e16bfd7c39f9ede5c6f820da79074d03516d26fe.
+Display name is Apollo v0.3.0-rc.3 — GNM Technical Candidate.
+
+The release contains the 712,214,016-byte technical archive split into 29
+numbered parts, a SHA-256 file, a reassembly script and the candidate receipt.
+Every uploaded part matched its local size and digest. Download all parts
+and reassemble-gnm.py into one directory, then run python reassemble-gnm.py.
+The assembled archive must have SHA-256
+83a1b5440b104e54a82dfb39d4e3a87e22b300ce8c6ee5017f83e2f0181ccd1a.
+
+The archive includes five GNM face-and-eye texture sets, five matched stills,
+three packed Blender timelines and 576 full-quality CPU frames. The clean
+extraction rehearsal reproduced five outputs pixel-for-pixel. Evaluator
+model matching is unconfirmed, and the technical receipt records the
+remaining appearance limitations and deferred human review. Repository
+access is required while Apollo is private.

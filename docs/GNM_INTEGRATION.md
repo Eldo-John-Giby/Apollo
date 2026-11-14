@@ -143,3 +143,11 @@ for the archive checksum and exact scene hashes. Historical trial failures
 above document the transfer iterations. The current visual limitations are
 small atlas repairs and uneven eyelid closure creases. Evaluator asset
 matching and the deferred teammate visual review remain outstanding.
+
+The verified archive is published as
+[Apollo v0.3.0-rc.3 — GNM Technical Candidate](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.3).
+Download all 29 archive parts and reassemble-gnm.py from the release.
+Run python reassemble-gnm.py in that directory to reconstruct and verify the ZIP.
+The uploaded file sizes and digests were checked against the local parts.
+The release remains a technical candidate while evaluator asset matching
+and the deferred human appearance review are outstanding.

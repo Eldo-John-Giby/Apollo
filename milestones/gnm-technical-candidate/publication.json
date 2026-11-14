@@ -1,0 +1,157 @@
+{
+  "tag": "apollo-v0.3.0-rc.3",
+  "commit": "e16bfd7c39f9ede5c6f820da79074d03516d26fe",
+  "url": "https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.3",
+  "archive_sha256": "83a1b5440b104e54a82dfb39d4e3a87e22b300ce8c6ee5017f83e2f0181ccd1a",
+  "parts": [
+    {
+      "name": "apollo-gnm-technical.zip.part001",
+      "bytes": 25165824,
+      "sha256": "80d4ab0399638d8910ce4b8d138f0b615ad3dd465405dd8aaa0c79e3692bb9d0"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part002",
+      "bytes": 25165824,
+      "sha256": "8c644f897ae9b63dd778935b72771e442bc0184395ffe8597a7d72e352a1af0e"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part003",
+      "bytes": 25165824,
+      "sha256": "d4e34529d8acce729e34e24e04d7a3e5d7332fc26a208ba16341a761487b0502"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part004",
+      "bytes": 25165824,
+      "sha256": "24bf88437a9874428217f485ec76dda025311ddd7b04e9cd070c22eb466cbe4a"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part005",
+      "bytes": 25165824,
+      "sha256": "eca8bb06a039d05bd0a9334a4e7fa0766cd58348bfd6aa7bc5b4522ef2e3deee"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part006",
+      "bytes": 25165824,
+      "sha256": "e2e92eae0e1a3c097d378a928bae8be005ac264ab882b78552fb2868f8f1a2ce"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part007",
+      "bytes": 25165824,
+      "sha256": "623b84a9347f98798bedf53049c27198433383bb3e1128aaac7e5a33b810e4c0"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part008",
+      "bytes": 25165824,
+      "sha256": "21a4c31033b4c7932920c325dcd8cbf9a105668c8ed6afbec95a723ba4f0e739"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part009",
+      "bytes": 25165824,
+      "sha256": "574ca69fef06c0b861c319a68c32d20e2f934286b9758b8eb5f8fe2d61737f0f"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part010",
+      "bytes": 25165824,
+      "sha256": "5568db7362401ca6f14a9a7707d533f522e1366314a610b95d2705d6285da7ee"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part011",
+      "bytes": 25165824,
+      "sha256": "53ad2c6cd5eef3ccc67484c02259fe1c0237c8f4bd6d8c361c83f6ba23711da0"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part012",
+      "bytes": 25165824,
+      "sha256": "8176d13d20579d95e7c95f595d38153a156cc17e75e79b3b877351c52d27ad9d"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part013",
+      "bytes": 25165824,
+      "sha256": "a68bebd640747886a89440bb97bff6bfe2ef4c7231a2647bef0e9a5f6ee5253f"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part014",
+      "bytes": 25165824,
+      "sha256": "5931e19683d7f6d9f348a237bf154b312bbfdf3373bedf1a7216564650957025"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part015",
+      "bytes": 25165824,
+      "sha256": "adffb931163d0b9465de780fdbe6384f80ec28927e33e1bea0ccbf064870448e"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part016",
+      "bytes": 25165824,
+      "sha256": "fed8637fc05f17aab8334646051dc91fe89087a98ac707bae7c0f06e193bfe72"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part017",
+      "bytes": 25165824,
+      "sha256": "fd355e51e7824a44d38c6af8fead68f423daa488b6e37ec6f65de168616e710e"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part018",
+      "bytes": 25165824,
+      "sha256": "d055646e0579646fd2ff754d01db2e854d67e1a4d2e60f12193a9cfd1e1216cc"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part019",
+      "bytes": 25165824,
+      "sha256": "ca1ff357671098d77d4001bbd0f2d698f3c19389b238eed4f4625fd64599c04e"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part020",
+      "bytes": 25165824,
+      "sha256": "21327d736f23ecdcff83354d51e4bb4a8ae2b433aa39db3ec2d0bfe65d936393"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part021",
+      "bytes": 25165824,
+      "sha256": "8c70f2cebde36dafe443c107321f56a8df779b6f8979e907f1144e2b0a65fa30"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part022",
+      "bytes": 25165824,
+      "sha256": "a37e4496aa63d645ef5511d4ce42eaaa567d64f08610dbd71a436bb2e07e62f0"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part023",
+      "bytes": 25165824,
+      "sha256": "e6451c765b73b58b061337cfd67c3e859ae77e9a206013d158063d0b70bd650e"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part024",
+      "bytes": 25165824,
+      "sha256": "d8a77c8b021df5801268b00fcdbd496d485eb2b0f39d46d017aa45f687681722"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part025",
+      "bytes": 25165824,
+      "sha256": "4d9d295731ad6896e76c668cb8c09c86b3d69551a0d58ba2a4e47f1617bb1c3a"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part026",
+      "bytes": 25165824,
+      "sha256": "35110ccf8290c1373d6f4e8d4ce0e68ce29283448409339cc2f739c2da40dbe7"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part027",
+      "bytes": 25165824,
+      "sha256": "a954f868d8ff81f7e6a2c7b3d743fbc61aa451326e3c527c79a57124d2113806"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part028",
+      "bytes": 25165824,
+      "sha256": "513c5c0ae3a6e160c7ddee56585d557618c0b0b82f1641f26651ec202b9bde42"
+    },
+    {
+      "name": "apollo-gnm-technical.zip.part029",
+      "bytes": 7570944,
+      "sha256": "f8f59d32be184fb0a305244e669788caa7fba90c52dfd7c3e913b9de10f1c0bc"
+    }
+  ],
+  "part_digest_verification": "passed",
+  "local_reassembly": "passed",
+  "downloaded_helper_and_checksum": "matched",
+  "visibility": "private"
+}
