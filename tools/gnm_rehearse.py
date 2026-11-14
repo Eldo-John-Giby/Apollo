@@ -43,6 +43,11 @@ def rehearse(archive, blender, out):
     subprocess.run([sys.executable, 'tools/gnm_run.py', 'still', '--blender', str(blender),
                     '--out', 'reproduction/still.png'], cwd=out, check=True)
     pairs = [('stills/rose-brown.png', 'reproduction/still.png')]
+    for layout in ('udim', 'legacy'):
+        reproduced = f'reproduction/side-{layout}.png'
+        run('model/neutral.blend', 'gnm_texture_trial.py', '--maps', 'textures/rose-brown',
+            '--layout', layout, '--out', reproduced, '--angle', '--side-light')
+        pairs.append((f'evidence/rose-brown-side-{layout}.png', reproduced))
     for mode in ('left', 'right', 'generate-motion'):
         root = f'timelines/{mode}'
         run(f'{root}/expression.blend', 'gnm_verify.py', '--maps', 'textures/rose-brown',
