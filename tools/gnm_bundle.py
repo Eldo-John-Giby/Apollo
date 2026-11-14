@@ -60,6 +60,14 @@ def package(args):
         side = source / 'side-udim.png'
         png(side, (640, 640))
         files[f'evidence/side-light/{variant}.png'] = side
+        legacy = source / 'side-legacy.png'
+        if legacy.is_file():
+            png(legacy, (640, 640))
+            with Image.open(side) as native, Image.open(legacy) as alternate:
+                difference = ImageChops.difference(native.convert('RGB'), alternate.convert('RGB'))
+                if max(high for _, high in difference.getextrema()) > 1:
+                    raise ValueError(f'{variant}: native and legacy fresh-wrap renders differ')
+            files[f'evidence/side-light-legacy/{variant}.png'] = legacy
         for name, size in (('angle-neutral', 640), ('front-oblique', 640), ('eyes', 1024)):
             path = source / f'{name}.png'
             if path.exists():
