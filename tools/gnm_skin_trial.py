@@ -1,5 +1,6 @@
 """Prepare a disposable aligned MPFB source and bake a GNM skin map."""
 import argparse
+from math import exp
 from pathlib import Path
 import sys
 from types import SimpleNamespace
@@ -45,7 +46,10 @@ def run(args):
     for vertex in source.data.vertices:
         x, y, z = transform @ vertex.co
         vertex.co = inverse @ Vector((x * .98, y * 1.12 + .002,
-                                      z * (1.16 if z < 0 else 1.03)))
+                                      z * (1.16 if z < 0 else 1.03)
+                                      + args.mouth_lift * exp(-((z + .073) / .032)**2
+                                                              - (x / .055)**2
+                                                              - ((y + .021) / .048)**2)))
     with bpy.data.libraries.load(str(args.gnm.resolve()), link=False) as (incoming, loaded):
         if 'GNM Head' not in incoming.objects:
             raise ValueError('GNM Head object missing from the neutral template')
@@ -68,6 +72,7 @@ if __name__ == '__main__':
     parser.add_argument('--variant', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--size', type=int, default=2048)
+    parser.add_argument('--mouth-lift', type=float, default=0., help='Local source mouth alignment in meters')
     parser.add_argument('--cage', type=float, default=.035)
     parser.add_argument('--distance', type=float, default=.115)
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])

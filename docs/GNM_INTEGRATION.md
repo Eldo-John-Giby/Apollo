@@ -24,7 +24,7 @@ uv pip install --python out/gnm-env/Scripts/python.exe ./out/google-gnm/gnm/shap
 & out/gnm-env/Scripts/python.exe tools/gnm_template.py --model out/gnm_head.npz --out out/template
 & $env:BLENDER_BIN -b --factory-startup --python-exit-code 1 -P tools/gnm_import.py -- --template out/template/template.npz --out out/template/neutral.blend
 python tools/submission_variants.py generate out/variants --polished-reference
-& $env:BLENDER_BIN -b --factory-startup milestones/eye-expression-2026-11-11/scene.blend --python-exit-code 1 -P tools/gnm_skin_trial.py -- --gnm out/template/neutral.blend --variant out/variants/rose-brown/variant.json --out out/raw/color.1001.png
+& $env:BLENDER_BIN -b --factory-startup milestones/eye-expression-2026-11-11/scene.blend --python-exit-code 1 -P tools/gnm_skin_trial.py -- --gnm out/template/neutral.blend --variant out/variants/rose-brown/variant.json --out out/raw/color.1001.png --mouth-lift .014
 New-Item -ItemType Directory out/trial -Force | Out-Null
 python tools/gnm_skin_fill.py --template out/template/template.npz --bake out/raw/color.1001.png --out out/trial/color.1001.png
 python tools/gnm_eye_maps.py --variant out/variants/rose-brown --out out/trial
@@ -84,7 +84,7 @@ and populate all 192 frame numbers. Keep the same flags when resuming.
 Close renders showed both pupils covered at peak blink and visible again
 after reopening. The closure crease is uneven in places, and the viewing
 check does not prove that the lid surface avoids all cornea intersections.
-The 2048-pixel skin bake still needs nearest-texel repair for 0.144% of
+A 14 mm local lift of the disposable MakeHuman mouth source aligned the lip color with the GNM mouth seam in the front preview. This leaves the GNM mesh and both UV layouts unchanged. The 2048-pixel skin bake still needs nearest-texel repair for 0.144% of
 masked texels, with a maximum repair distance of 26.6 pixels.
 
 
