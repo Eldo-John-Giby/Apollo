@@ -93,5 +93,9 @@
     }
   },
   "human_review": "deferred",
-  "assessment": "Agent inspection of judging views and detail crops; not human approval"
+  "assessment": "Agent inspection of judging views and detail crops; not human approval",
+  "render_recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+  "neutral_scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+  "oblique_layout_sheet_sha256": "a8eb9550e0b834d9ae8410681cd9153818ddd28141503edb61711c948e2c10f5",
+  "agent_visual_assessment": "Reviewed all five variants from front and three-quarter under neutral and oblique lighting, plus close eyes and both UV-layout side views. No new visible seam or feature-placement defect at judging scale. Thin blink contact crease and authored iris/skin details remain limitations."
 }
