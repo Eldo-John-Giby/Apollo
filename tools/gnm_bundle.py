@@ -143,6 +143,18 @@ def package(args):
             files[f'assets/gnm-scan/{path.name}'] = path
     transfer = args.textures / 'scan-transfer.json'
     if transfer.exists():
+        receipt = read_json(transfer)
+        scan_source = ROOT / 'assets/gnm-scan'
+        if (receipt['source'] != read_json(scan_source / 'source.json')
+                or receipt['template_sha256'] != sha256((args.template / 'template.npz').read_bytes())):
+            raise ValueError('Scan transfer provenance does not match the build inputs')
+        for name, spec in receipt['source']['files'].items():
+            if sha256((scan_source / name).read_bytes()) != spec['sha256']:
+                raise ValueError(f'Scan source checksum mismatch: {name}')
+        for variant in VARIANTS:
+            detail_receipt = read_json(args.textures / variant / 'color.1001.detail.json')
+            if detail_receipt['source_sha256'] != receipt['output_sha256']:
+                raise ValueError(f'{variant}: skin map was built from a different scan transfer')
         files['evidence/scan-transfer.json'] = transfer
     comparison = args.comparison or args.textures / 'rose-brown-matched.png'
     if args.comparison or comparison.is_file():
