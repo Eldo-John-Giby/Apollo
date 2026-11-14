@@ -16,9 +16,15 @@ are CC0 and credited in assets/photorealism-v2/ATTRIBUTION.md. Retain upstream
 license and notices before redistributing a derived scene.
 
 Install gnm/shape from that source revision into a Python 3.12 environment.
+The texture build uses the project requirements plus SciPy 1.15.3 in the
+host Python environment. The archive includes the MakeHuman source scene
+and attributed source maps needed to repeat the transfer.
 Example commands from the Apollo worktree:
 
 ```powershell
+git clone https://github.com/google/GNM.git out/google-gnm
+git -C out/google-gnm checkout f84cdbdc86a34f55627526f137495f864e687679
+python -m pip install -r requirements.txt scipy==1.15.3
 uv venv --python 3.12 out/gnm-env
 uv pip install --python out/gnm-env/Scripts/python.exe ./out/google-gnm/gnm/shape
 & out/gnm-env/Scripts/python.exe tools/gnm_template.py --model out/gnm_head.npz --out out/template

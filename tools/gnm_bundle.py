@@ -80,6 +80,8 @@ def package(args):
     for path in ROOT.joinpath('tools').glob('gnm_*.py'):
         files[f'tools/{path.name}'] = path
     for name in ('docs/GNM_INTEGRATION.md', 'assets/ATTRIBUTION.md',
+                 'milestones/eye-expression-2026-11-11/scene.blend',
+                 'milestones/eye-expression-2026-11-11/ATTRIBUTION.md',
                  'assets/photorealism-v2/ATTRIBUTION.md',
                  'assets/photorealism-v2/young_lightskinned_female_diffuse3.png',
                  'assets/photorealism-v2/brown_eye.png', 'requirements.txt',
