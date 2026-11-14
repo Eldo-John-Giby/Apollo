@@ -14,6 +14,16 @@ from submission_bundle import ROOT, VARIANTS, add_frames, png, read_json, sha256
 def package(args):
     files = {}
     modes = add_frames(files, args.motion)
+    resume_audit = args.motion / 'resume-audit.json'
+    if read_json(resume_audit) != {
+        'mode': 'left',
+        'scene_sha256': modes['left']['settings']['scene_sha256'],
+        'valid_frame_preserved': 1,
+        'corrupt_frame_repaired': 2,
+        'missing_frame_repaired': 3,
+    }:
+        raise ValueError('Resume test does not match the packaged Left timeline')
+    files['evidence/resume-audit.json'] = resume_audit
     template = args.template / 'template-receipt.json'
     if read_json(template)['model_sha256'] != MODEL_SHA256:
         raise ValueError('Unexpected GNM model receipt')
