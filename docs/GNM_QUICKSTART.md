@@ -53,3 +53,8 @@ the separately released MakeHuman fallback for the alternate target.
 For source acquisition, texture rebuilding and clean-extraction qualification,
 see [GNM integration](GNM_INTEGRATION.md). The technical package's license
 and attribution files must remain with redistributed assets.
+
+The detailed candidate's packed timelines store relative image and output
+paths. Alternate-variant caches preserve packed image bytes and use relative
+filenames as well. The verifier checks both image paths and packed-file paths;
+runtime rendering does not require the author's development directories.

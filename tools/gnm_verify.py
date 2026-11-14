@@ -67,6 +67,12 @@ def verify(template, clip, maps):
     file_images = [image for image in bpy.data.images if image.source in ('FILE', 'TILED')]
     if any(not image.packed_file for image in file_images):
         raise ValueError('Timeline has an unpacked file image')
+    if any(not image.filepath.startswith('//')
+           or any(not packed.filepath.startswith('//') for packed in image.packed_files)
+           for image in file_images):
+        raise ValueError('Timeline retains an absolute image authoring path')
+    if not scene.render.filepath.startswith('//'):
+        raise ValueError('Timeline has an absolute render output path')
     head = scene.objects['GNM Head']
     mesh = head.data
     with np.load(template, allow_pickle=False) as source, np.load(clip, allow_pickle=False) as motion:
@@ -149,6 +155,7 @@ def verify(template, clip, maps):
             'surface_maps': surface,
             'camera_checks': camera_report,
             'resource_checks': {'linked_libraries': 0, 'unpacked_file_images': 0,
+                                'absolute_image_paths': 0,
                                 'packed_file_images': len(file_images),
                                 'blender_online_access': bpy.app.online_access}}
 

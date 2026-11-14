@@ -95,6 +95,13 @@ saved clip poses exactly (maximum coordinate error zero). Its receipt binds
 the model, current gaze/blink/timing source files and all three geometry files.
 The archive gate checks those bindings before including the upstream receipt.
 
+The final portability audit found absolute authoring filenames retained inside
+otherwise packed images. `gnm_portable.py` replaces both image and packed-file
+paths without changing their payloads. All three repaired timelines reopened
+with zero absolute image paths and unchanged 192-frame geometry. The verifier
+now rejects this defect. A new full render set is being generated for the
+repaired scene hashes; earlier scene receipts are not promoted to the delivery.
+
 ## Provisional technical score
 
 I estimate **82–90 out of 100**, conditional on the remaining frame, texture

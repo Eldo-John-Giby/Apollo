@@ -186,6 +186,7 @@ def package(args):
                 or reopened['maps'] != expected or not reopened.get('camera_checks')
                 or reopened.get('resource_checks', {}).get('linked_libraries') != 0
                 or reopened.get('resource_checks', {}).get('unpacked_file_images') != 0
+                or reopened.get('resource_checks', {}).get('absolute_image_paths') != 0
                 or reopened.get('resource_checks', {}).get('blender_online_access') is not False
                 or reopened.get('surface_maps', {}) != expected_surface):
             raise ValueError(f'{mode}: reopened timeline verification mismatch')

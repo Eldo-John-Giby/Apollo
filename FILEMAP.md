@@ -104,6 +104,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_skin_detail.py` | Bake reproducible authored brow fibers into the native skin atlas using surface-to-UV correspondence, with source and output hash receipts. |
 | `tools/gnm_surface_maps.py`, `tools/gnm_eye_detail.py` | Author native-UV skin pigment, physical-scale relief/roughness and distinct bilateral iris/sclera maps with reproducible provenance. |
 | `tools/gnm_materials.py` | Shared portable skin surface-map bindings for still and cached motion scenes. |
+| `tools/gnm_portable.py` | Preserve packed image bytes while replacing authoring filenames with relative paths before timeline delivery and variant caching. |
 | `tools/gnm_scan_transfer.py`, `tools/gnm_generate_textures.py` | Checksum-verified attributed scan registration, emission transfer, measured CC0 fallback and five complete native texture sets. |
 | `assets/gnm-scan/source.json`, `assets/gnm-scan/ATTRIBUTION.md` | Pinned scan asset URLs/checksums, CC-BY-3.0 source license and derivative attribution. |
 | `docs/SCORE_IMPROVEMENT.md` | Current 60/20/20 audit, prioritized implementation and candidate qualification record. |

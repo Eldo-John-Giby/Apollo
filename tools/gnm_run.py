@@ -23,7 +23,7 @@ def variant_identity(scene, maps, layout):
     inputs = {str(tile): Path(maps) / f'color.{tile}.png' for tile in (1001, 1002, 1004)}
     inputs.update(surface_files(maps))
     recipe = b''.join((ROOT / 'tools' / name).read_bytes()
-                      for name in ('gnm_materials.py', 'gnm_motion_variant.py'))
+                      for name in ('gnm_materials.py', 'gnm_motion_variant.py', 'gnm_portable.py'))
     return {'source_sha256': hashlib.sha256(Path(scene).read_bytes()).hexdigest(),
             'layout': layout, 'maps': {role: hashlib.sha256(path.read_bytes()).hexdigest()
                                      for role, path in inputs.items()},

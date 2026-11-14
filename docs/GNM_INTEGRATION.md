@@ -2,6 +2,21 @@
 
 For the scoring improvement candidate, see [scan build and evidence](SCORE_IMPROVEMENT.md).
 The original GNM development checkpoints below document the earlier workflow.
+The current scan source is CC-BY-3.0 with retained attribution; the historical
+CC0 MakeHuman source remains the fallback. See assets/gnm-scan/ATTRIBUTION.md.
+
+Before delivering a newly built timeline, remove authoring filenames from both
+the image and its packed-file metadata, then reopen it with `gnm_verify.py`:
+
+```powershell
+& $blenderPath --offline-mode -b PATH_TO_PACKED_SCENE --python-exit-code 1 -P tools/gnm_portable.py -- --maps out/score-final-textures/rose-brown --map-root //../../textures/rose-brown --out out/portable/expression.blend
+```
+
+The explicit map root above is relative to `timelines/<mode>/expression.blend`
+in the technical archive. The helper preserves packed payload bytes. Current
+verification rejects absolute stored image and render-output paths, including
+absolute paths inside packed-file entries. Variant caches apply this repair
+automatically and include its implementation in their cache identity.
 
 This checkpoint targets Google Head v3 provisionally. The evaluator target is
 unconfirmed. The verified MakeHuman fallback remains available as

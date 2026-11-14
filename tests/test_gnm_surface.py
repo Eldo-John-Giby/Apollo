@@ -45,7 +45,7 @@ def test_surface_maps_are_an_atomic_optional_pair(tmp_path):
 def test_variant_cache_changes_with_relief_and_material_recipe(tmp_path, monkeypatch):
     monkeypatch.setattr(gnm_run, 'ROOT', tmp_path)
     (tmp_path / 'tools').mkdir()
-    for name in ('gnm_materials.py', 'gnm_motion_variant.py'):
+    for name in ('gnm_materials.py', 'gnm_motion_variant.py', 'gnm_portable.py'):
         (tmp_path / 'tools' / name).write_bytes(b'recipe-v1')
     scene = tmp_path / 'scene.blend'
     scene.write_bytes(b'scene')
@@ -58,4 +58,7 @@ def test_variant_cache_changes_with_relief_and_material_recipe(tmp_path, monkeyp
     assert before != changed_map
     (tmp_path / 'tools/gnm_materials.py').write_bytes(b'recipe-v2')
     assert changed_map != gnm_run.variant_identity(scene, tmp_path, 'udim')
+    changed_material = gnm_run.variant_identity(scene, tmp_path, 'udim')
+    (tmp_path / 'tools/gnm_portable.py').write_bytes(b'portable-v2')
+    assert changed_material != gnm_run.variant_identity(scene, tmp_path, 'udim')
     assert gnm_run.variant_identity(scene, tmp_path, 'legacy')['layout'] == 'legacy'

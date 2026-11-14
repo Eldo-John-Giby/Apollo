@@ -10,6 +10,7 @@ import bpy
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gnm_materials import bind_surface, surface_files
 from gnm_run import variant_identity
+from gnm_portable import relative_images
 
 
 def digest(path):
@@ -58,7 +59,9 @@ def prepare(args):
     bind_surface(head, args.maps, args.layout)
     bpy.context.scene['apollo_gnm_variant_inputs'] = json.dumps(identity, sort_keys=True)
     bpy.ops.file.pack_all()
-    bpy.ops.wm.save_as_mainfile(filepath=str(target.resolve()), compress=True)
+    relative_images(args.maps, target)
+    bpy.ops.wm.save_as_mainfile(filepath=str(target.resolve()), compress=True,
+                              relative_remap=False)
     receipt.write_text(json.dumps({'inputs': identity, 'scene_sha256': digest(target)},
                                   indent=2) + '\n', encoding='utf-8')
     print(f'Packed variant timeline: {target}')
