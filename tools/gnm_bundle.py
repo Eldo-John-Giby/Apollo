@@ -57,7 +57,7 @@ def package(args):
         expected = {tile: spec['sha256'] for tile, spec in textures['rose-brown'].items()}
         if (reopened['scene_sha256'] != mode_receipt['settings']['scene_sha256']
                 or reopened['frames_checked'] != 192 or reopened['max_position_error_m'] > 1e-6
-                or reopened['maps'] != expected):
+                or reopened['maps'] != expected or not reopened.get('camera_checks')):
             raise ValueError(f'{mode}: reopened timeline verification mismatch')
         files[f'timelines/{mode}/reopen.json'] = path
         files[f'timelines/{mode}/geometry.npz'] = args.motion / mode / 'geometry.npz'

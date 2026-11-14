@@ -7,6 +7,54 @@ import sys
 
 import bpy
 import numpy as np
+from bpy_extras.object_utils import world_to_camera_view
+from mathutils import Vector
+from mathutils.bvhtree import BVHTree
+
+
+def check_camera(scene, head, source, poses, sequence, mode):
+    """Check the packed scene's actual camera against evaluated pupil geometry."""
+    inverse = head.matrix_world.inverted()
+    camera = inverse @ scene.camera.matrix_world.translation
+    skin = source['quads'][source['tiles'] == 1001].tolist()
+    masks = {side: source['pupils'] & source[f'{side}_eye']
+             for side in ('left', 'right')}
+    if any(not mask.any() for mask in masks.values()):
+        raise ValueError('Template is missing a pupil group')
+    peak = 106 if mode == 'generate-motion' else 102
+    before, after = peak - 3, peak + 10
+    frames = (1, 25, 58, before, peak, peak + 1, after) if mode == 'generate-motion' else (
+        1, 26, before, peak, peak + 1, after)
+    report = {}
+    for frame in frames:
+        vertices = poses[sequence[frame - 1]]
+        tree = BVHTree.FromPolygons(vertices.tolist(), skin)
+        report[frame] = {}
+        for side, mask in masks.items():
+            points = vertices[mask]
+            visible = 0
+            for point in points:
+                ray = Vector(point) - camera
+                visible += tree.ray_cast(camera, ray, ray.length)[0] is None
+            center = head.matrix_world @ Vector(points.mean(axis=0))
+            image_x = world_to_camera_view(scene, scene.camera, center).x
+            report[frame][side] = {'visible_pupil_vertices': visible, 'image_x': image_x}
+    for side in masks:
+        if any(report[f][side]['visible_pupil_vertices'] for f in (peak, peak + 1)):
+            raise ValueError(f'{mode}: {side} pupil exposed at peak closure')
+        if not all(report[f][side]['visible_pupil_vertices'] for f in frames
+                   if f not in (peak, peak + 1)):
+            raise ValueError(f'{mode}: {side} pupil hidden outside the blink')
+        neutral = report[1][side]['image_x']
+        if mode == 'generate-motion':
+            shifts = [(neutral - report[25][side]['image_x']),
+                      (report[58][side]['image_x'] - neutral)]
+        else:
+            sign = -1 if mode == 'left' else 1
+            shifts = [sign * (report[26][side]['image_x'] - neutral)]
+        if min(shifts) <= .005:
+            raise ValueError(f'{mode}: {side} screen direction is wrong or too small')
+    return report
 
 
 def verify(template, clip, maps):
@@ -35,6 +83,10 @@ def verify(template, clip, maps):
         vertices = np.empty(len(mesh.vertices) * 3, dtype=np.float32)
         poses, sequence = motion['poses'], motion['sequence']
         np.testing.assert_array_equal(list(scene['apollo_gnm_pose_sequence']), sequence)
+        polygon_regions = np.empty(len(mesh.polygons), dtype=np.int32)
+        mesh.polygons.foreach_get('material_index', polygon_regions)
+        np.testing.assert_array_equal(polygon_regions + 1001, source['tiles'])
+        camera_report = check_camera(scene, head, source, poses, sequence, str(motion['mode']))
         error = 0.
         for frame, pose in enumerate(sequence, 1):
             scene.frame_set(frame)
@@ -43,7 +95,7 @@ def verify(template, clip, maps):
         if error > 1e-6:
             raise ValueError(f'Reopened timeline deviates from GNM by {error} meters')
     return {'scene_sha256': hashlib.sha256(Path(bpy.data.filepath).read_bytes()).hexdigest(),
-            'frames_checked': len(sequence), 'max_position_error_m': error, 'maps': packed}
+            'frames_checked': len(sequence), 'max_position_error_m': error, 'maps': packed, 'camera_checks': camera_report}
 
 
 if __name__ == '__main__':

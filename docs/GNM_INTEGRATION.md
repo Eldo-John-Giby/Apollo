@@ -113,8 +113,8 @@ generate-motion to select a different packed timeline. Add --first and --last
 for a short sample. For stills, --layout legacy selects the region bindings.
 
 The reopened timeline verifier checks both stored UV arrays, polygon
-connectivity, packed texture bytes and all 192 evaluated poses against the
-geometry generated with the pinned Google model. Build the archive from
+connectivity, region assignments, packed texture bytes and all 192 evaluated poses against the
+geometry generated with the pinned Google model. It also checks bilateral screen direction and pupil occlusion at the saved camera. Build the archive from
 qualified candidate output directories using:
 
 ```powershell
