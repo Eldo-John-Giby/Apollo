@@ -8,7 +8,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 from gnm_template import MODEL_SHA256
-from gnm_blink import fit_blink
+from gnm_blink import fit_blink, fit_lid_follow
 
 
 def evaluator(model_path):
@@ -27,6 +27,7 @@ def evaluator(model_path):
                    for side in ('left', 'right')]
     with np.load(model_path, allow_pickle=False) as data:
         left_blink, right_blink = fit_blink(model, data['expression_basis'])
+        follow = fit_lid_follow(model, data['expression_basis'])
 
     def pose(h, v, blink=0., other_blink=None):
         target = center + np.array([.05 * h, .05 * v, .35])
@@ -38,8 +39,13 @@ def evaluator(model_path):
             direction /= np.linalg.norm(direction)
             rotations[index] = Rotation.align_vectors(direction[None], axis[None])[0].as_rotvec()
         right_weight = blink if other_blink is None else other_blink
-        posed = model(rotations=rotations,
-                      expression=blink * left_blink + right_weight * right_blink)
+        # Suppress the glance response through closure so that the contact
+        # fit retains its qualified peak pose, including the delayed right lid.
+        follow_weight = v * (1 - max(blink, right_weight))
+        expression = blink * left_blink + right_weight * right_blink + follow_weight * follow
+        if np.max(np.abs(expression)) > 3. + 1e-9:
+            raise ValueError('Combined native expression exceeds its supported range')
+        posed = model(rotations=rotations, expression=expression)
         return posed.astype(np.float32), {
             'fixation': target.tolist(),
             'pupil_centers': [posed[mask].mean(0).tolist() for mask in pupil_masks],

@@ -1,0 +1,10 @@
+{
+  "recipe": "gnm-authored-brow-fibers-v2",
+  "seed": 20261114,
+  "source_sha256": "8ef77b6620b555d9696bcaa3630f5230ac7342351f985973a5df5c0076f9b52a",
+  "template_sha256": "5186cd0df8e9f6d5b7477d68173f1f99695894a12deec6d767c321148c597759",
+  "output_sha256": "ee9e19b0c7f52b091aaba351e2db07f1398fea30e34fae078b9fc97ba912857c",
+  "affected_texels": 8815,
+  "max_opacity": 0.9363984630478238,
+  "license": "Project-authored procedural derivative; source license unchanged"
+}

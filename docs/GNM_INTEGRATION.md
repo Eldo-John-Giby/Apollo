@@ -186,3 +186,41 @@ lighting and timeline remain intact. Resume therefore uses the exact saved
 variant scene rather than a newly saved file on each invocation. Archive
 rehearsal checks golden-hazel in both layouts, every-frame native geometry,
 packed maps, identical layout renders and preservation of valid resumed frames.
+
+## Surface and glance candidate after rc.3
+
+The working candidate adds deterministic authored brow fibers directly to
+the native skin color atlas. This detail is portable with the exported map;
+it does not depend on a Blender-only overlay. Source and output hashes and
+the procedural seed are recorded per variant. Generate all five sets with:
+
+```powershell
+python tools/gnm_skin_detail.py --template out/template/template.npz --source out/gnm-aligned --out out/gnm-detailed
+```
+
+Five new 1024-pixel, 32-sample judging stills have been rendered. The new
+rose-brown three-quarter side-light renders differ between native and legacy
+bindings by at most one RGB level. Evidence is under
+milestones/gnm-surface-refinement. These maps supplement the existing CC0
+texture derivatives; retain their original attribution.
+
+The native upward-glance response fits small lid and brow displacements in
+the upstream expression basis. At frame 93 the mean brow elevation is about
+0.21 mm and the maximum surface change is 1.19 mm. Pupil and eye-interior
+vertices are unchanged, as is peak blink geometry. The response fades out
+through closure. Left and Right have no vertical glance and reuse their
+qualified upstream clip geometry. All three rebuilt packed scenes pass the
+every-frame geometry, direction, occlusion, map and UV checks. Reopened
+resource checks require no linked libraries and no unpacked file images;
+a disposable unpacked-image defect was rejected.
+
+Use --eye-crop when packing the motion scenes with gnm_texture_trial.py.
+This retains the qualified 115 mm motion framing. The wider default 64 mm
+still framing fails the existing direction-readability threshold and was
+rejected for motion. The thresholds were retained.
+
+Full frame rendering and clean-archive rehearsal for this working candidate
+remain pending under out/gnm-detailed-motion. The published rc.3 artifact
+and its qualified receipts remain unchanged. The narrow dark contact line
+at one closed lid remains a visual limitation; human appearance review and
+organizer target confirmation are still pending.

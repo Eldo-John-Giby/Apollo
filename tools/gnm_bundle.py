@@ -41,6 +41,11 @@ def package(args):
         if coverage['projection_coverage'] < .995:
             raise ValueError(f'{variant}: insufficient raw skin coverage')
         files[f'textures/{variant}/coverage.json'] = source / 'color.1001.json'
+        detail = source / 'color.1001.detail.json'
+        if detail.exists():
+            if read_json(detail)['output_sha256'] != sha256((source / 'color.1001.png').read_bytes()):
+                raise ValueError(f'{variant}: surface-detail receipt does not match skin map')
+            files[f'textures/{variant}/surface-detail.json'] = detail
         entries = {}
         for tile, size in ((1001, 2048), (1002, 1024), (1004, 1024)):
             name = f'color.{tile}.png'
@@ -73,7 +78,9 @@ def package(args):
         expected = {tile: spec['sha256'] for tile, spec in textures['rose-brown'].items()}
         if (reopened['scene_sha256'] != mode_receipt['settings']['scene_sha256']
                 or reopened['frames_checked'] != 192 or reopened['max_position_error_m'] > 1e-6
-                or reopened['maps'] != expected or not reopened.get('camera_checks')):
+                or reopened['maps'] != expected or not reopened.get('camera_checks')
+                or reopened.get('resource_checks', {}).get('linked_libraries') != 0
+                or reopened.get('resource_checks', {}).get('unpacked_file_images') != 0):
             raise ValueError(f'{mode}: reopened timeline verification mismatch')
         files[f'timelines/{mode}/reopen.json'] = path
         files[f'timelines/{mode}/geometry.npz'] = args.motion / mode / 'geometry.npz'

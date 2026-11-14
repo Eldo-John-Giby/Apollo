@@ -59,6 +59,11 @@ def check_camera(scene, head, source, poses, sequence, mode):
 
 def verify(template, clip, maps):
     scene = bpy.context.scene
+    if bpy.data.libraries:
+        raise ValueError('Timeline depends on an external linked Blender library')
+    file_images = [image for image in bpy.data.images if image.source in ('FILE', 'TILED')]
+    if any(not image.packed_file for image in file_images):
+        raise ValueError('Timeline has an unpacked file image')
     head = scene.objects['GNM Head']
     mesh = head.data
     with np.load(template, allow_pickle=False) as source, np.load(clip, allow_pickle=False) as motion:
@@ -75,7 +80,10 @@ def verify(template, clip, maps):
         packed = {}
         for tile in (1001, 1002, 1004):
             material = mesh.materials[tile - 1001]
-            image = next(n.image for n in material.node_tree.nodes if n.type == 'TEX_IMAGE')
+            color = material.node_tree.nodes.get('Principled BSDF').inputs['Base Color']
+            if len(color.links) != 1 or color.links[0].from_node.type != 'TEX_IMAGE':
+                raise ValueError(f'Unexpected base-color binding in tile {tile}')
+            image = color.links[0].from_node.image
             expected = hashlib.sha256((maps / f'color.{tile}.png').read_bytes()).hexdigest()
             if not image.packed_file or hashlib.sha256(image.packed_file.data).hexdigest() != expected:
                 raise ValueError(f'Incorrect packed texture {tile}')
@@ -95,7 +103,10 @@ def verify(template, clip, maps):
         if error > 1e-6:
             raise ValueError(f'Reopened timeline deviates from GNM by {error} meters')
     return {'scene_sha256': hashlib.sha256(Path(bpy.data.filepath).read_bytes()).hexdigest(),
-            'frames_checked': len(sequence), 'max_position_error_m': error, 'maps': packed, 'camera_checks': camera_report}
+            'frames_checked': len(sequence), 'max_position_error_m': error, 'maps': packed,
+            'camera_checks': camera_report,
+            'resource_checks': {'linked_libraries': 0, 'unpacked_file_images': 0,
+                                'packed_file_images': len(file_images)}}
 
 
 if __name__ == '__main__':

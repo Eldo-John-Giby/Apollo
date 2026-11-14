@@ -1,4 +1,4 @@
-"""Fit bilateral eyelid closure in the public GNM expression basis."""
+"""Fit bilateral closure, vertical lid follow and brow response in native GNM."""
 from collections import Counter
 
 import numpy as np
@@ -60,3 +60,28 @@ def fit_blink(model, basis):
         result[active] = fit
         solutions.append(result)
     return solutions
+
+
+def fit_lid_follow(model, basis):
+    """Fit small vertical lid-follow and brow responses for the upward glance."""
+    positions = model.template_vertex_positions
+    result = np.zeros(model.expression_dim)
+    for side, rim in eyelid_rims(model):
+        active = np.flatnonzero(
+            np.char.startswith(model.expression_names, f'{side}_eye_region_')
+            | np.char.startswith(model.expression_names, f'{side}_brow_region_'))
+        brow = np.flatnonzero(model.vertex_group_mask(f'{side}_brow_region'))
+        selected = np.concatenate((rim, brow))
+        desired = np.zeros((len(selected), 3))
+        y = positions[rim, 1]
+        desired[:len(rim), 1] = .0005 + .001 * (y - y.min()) / np.ptp(y)
+        desired[len(rim):, 1] = .0003
+        constraint = basis[active][:, selected].reshape(len(active), -1).T
+        regularizer = .00075 * np.eye(len(active))
+        fitted = lsq_linear(np.vstack((constraint, regularizer)),
+                            np.concatenate((desired.ravel(), np.zeros(len(active)))),
+                            bounds=(-.75, .75), tol=1e-10)
+        if not fitted.success:
+            raise ValueError(f'{side} lid-follow fit did not converge')
+        result[active] = fitted.x
+    return result

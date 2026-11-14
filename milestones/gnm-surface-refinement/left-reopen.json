@@ -1,0 +1,77 @@
+{
+  "scene_sha256": "9ac4c049825d5d05e4c6bc768e452586561cab4a6086c945cc12eb6616fb4e81",
+  "frames_checked": 192,
+  "max_position_error_m": 9.094947017729282e-13,
+  "maps": {
+    "1001": "e35887c1b2317dcbe34b4538ecbd6a79cfc64624200520f7551d87721028d02f",
+    "1002": "39dda35b8408f3cd781b904bad345a506f6487cc00fb3da050ab8e6991d6a4c1",
+    "1004": "ad58d52a7ebc0517411659a50ac14f6b3195b1a70ff1612693f5061948702e43"
+  },
+  "camera_checks": {
+    "1": {
+      "left": {
+        "visible_pupil_vertices": 46,
+        "image_x": 0.6673657894134521
+      },
+      "right": {
+        "visible_pupil_vertices": 47,
+        "image_x": 0.3326098322868347
+      }
+    },
+    "26": {
+      "left": {
+        "visible_pupil_vertices": 44,
+        "image_x": 0.6585121154785156
+      },
+      "right": {
+        "visible_pupil_vertices": 49,
+        "image_x": 0.3235141336917877
+      }
+    },
+    "99": {
+      "left": {
+        "visible_pupil_vertices": 44,
+        "image_x": 0.6585121154785156
+      },
+      "right": {
+        "visible_pupil_vertices": 49,
+        "image_x": 0.3235141336917877
+      }
+    },
+    "102": {
+      "left": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.6585121154785156
+      },
+      "right": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.3235141336917877
+      }
+    },
+    "103": {
+      "left": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.6585121154785156
+      },
+      "right": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.3235141336917877
+      }
+    },
+    "112": {
+      "left": {
+        "visible_pupil_vertices": 44,
+        "image_x": 0.6585121154785156
+      },
+      "right": {
+        "visible_pupil_vertices": 49,
+        "image_x": 0.3235141336917877
+      }
+    }
+  },
+  "resource_checks": {
+    "linked_libraries": 0,
+    "unpacked_file_images": 0,
+    "packed_file_images": 3
+  }
+}

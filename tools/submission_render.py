@@ -12,8 +12,8 @@ import zlib
 
 import bpy
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from submission_motion import expression
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from apollo_core.submission_timing import expression
 
 
 def digest(path):

@@ -1,0 +1,10 @@
+{
+  "max_pupil_change_m": 0.0,
+  "max_eye_interior_change_m": 0.0,
+  "brow_mean_vertical_change_m": {
+    "left": 0.00021260546054691076,
+    "right": 0.00021261643269099295
+  },
+  "max_surface_change_m": 0.001191258430480957,
+  "peak_blink_change_m": 0.0
+}
