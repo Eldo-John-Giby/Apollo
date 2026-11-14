@@ -124,7 +124,8 @@ def package(args):
     transfer = args.textures / 'scan-transfer.json'
     if transfer.exists():
         files['evidence/scan-transfer.json'] = transfer
-        comparison = ROOT / 'milestones/gnm-score-development/rose-brown-matched.png'
+    comparison = args.comparison
+    if comparison:
         png(comparison, (1280, 1340))
         files['evidence/rose-brown-matched.png'] = comparison
     for name in ('docs/GNM_INTEGRATION.md', 'docs/GNM_QUICKSTART.md', 'docs/SCORE_IMPROVEMENT.md',
@@ -211,4 +212,5 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('motion', 'textures', 'template', 'license', 'out'):
         parser.add_argument(f'--{name}', type=Path, required=True)
+    parser.add_argument('--comparison', type=Path, help='Matched baseline and candidate stills')
     package(parser.parse_args())
