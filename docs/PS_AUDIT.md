@@ -41,8 +41,9 @@ limitations and deferred teammate review are recorded in the receipt.
 Use [the GNM quickstart](GNM_QUICKSTART.md) for runtime commands and the exact
 capture inputs. The earlier rc.3 evidence remains preserved under
 milestones/gnm-technical-candidate.
-The qualified detailed archive is prepared for `apollo-v0.3.0-rc.5`; publication
-is recorded separately in its milestone directory. The published
+The qualified detailed archive is published as [Apollo v0.3.0-rc.5](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.5).
+All seven uploaded assets match their local sizes and SHA-256 digests; see the
+[publication record](../milestones/gnm-score-final-candidate/publication.json). The published
 [Apollo v0.3.0-rc.4](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.4)
 and its verified downloads remain preserved.
 

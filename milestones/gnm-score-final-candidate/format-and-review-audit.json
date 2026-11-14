@@ -1,0 +1,222 @@
+{
+  "textures": {
+    "rose-brown": {
+      "color.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      },
+      "roughness.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 8,
+        "png_color_type": 0
+      },
+      "height.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 16,
+        "png_color_type": 0
+      },
+      "color.1002.png": {
+        "size": [
+          1024,
+          1024
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      },
+      "color.1004.png": {
+        "size": [
+          1024,
+          1024
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      }
+    },
+    "golden-hazel": {
+      "color.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      },
+      "roughness.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 8,
+        "png_color_type": 0
+      },
+      "height.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 16,
+        "png_color_type": 0
+      },
+      "color.1002.png": {
+        "size": [
+          1024,
+          1024
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      },
+      "color.1004.png": {
+        "size": [
+          1024,
+          1024
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      }
+    },
+    "olive-amber": {
+      "color.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      },
+      "roughness.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 8,
+        "png_color_type": 0
+      },
+      "height.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 16,
+        "png_color_type": 0
+      },
+      "color.1002.png": {
+        "size": [
+          1024,
+          1024
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      },
+      "color.1004.png": {
+        "size": [
+          1024,
+          1024
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      }
+    },
+    "neutral-deep": {
+      "color.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      },
+      "roughness.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 8,
+        "png_color_type": 0
+      },
+      "height.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 16,
+        "png_color_type": 0
+      },
+      "color.1002.png": {
+        "size": [
+          1024,
+          1024
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      },
+      "color.1004.png": {
+        "size": [
+          1024,
+          1024
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      }
+    },
+    "cool-grey": {
+      "color.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      },
+      "roughness.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 8,
+        "png_color_type": 0
+      },
+      "height.1001.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bit_depth": 16,
+        "png_color_type": 0
+      },
+      "color.1002.png": {
+        "size": [
+          1024,
+          1024
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      },
+      "color.1004.png": {
+        "size": [
+          1024,
+          1024
+        ],
+        "bit_depth": 8,
+        "png_color_type": 2
+      }
+    }
+  },
+  "review": {
+    "appearance_cases": 5,
+    "direction_cases": 2,
+    "responses": "blank",
+    "assessor_key_in_reviewer_zip": false
+  },
+  "archive": "apollo-gnm-v0.3.0-rc.5.zip",
+  "archive_sha256": "5f4c0e8b849da9f22f6de09b46207d0d95f7a791fc8209b06f3a5706b1a2ed6c"
+}

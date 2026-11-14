@@ -1,0 +1,48 @@
+{
+  "status": "qualified_technical_delivery_complete",
+  "archive_sha256": "5f4c0e8b849da9f22f6de09b46207d0d95f7a791fc8209b06f3a5706b1a2ed6c",
+  "release_url": "https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.5",
+  "producer_commit": "8d8396d131ecc24ac55a2f0a2f0648a7103bff10",
+  "release_tag_commit": "4d61cae63f07582d2c97aa5505b0d41a16a79c8d",
+  "verified_requirements": {
+    "five_distinct_face_and_eye_sets": "format-and-review-audit.json; appearance.json; archive manifest",
+    "front_three_quarter_neutral_oblique_and_detail_review": "appearance.json; appearance-contact-sheet.png; oblique-layout-contact-sheet.png",
+    "matched_published_baseline_comparisons": "comparison.json; five matched image boards; published rc.4 archive checksum",
+    "native_topology_vertex_order_and_both_corner_uvs": "three reopen reports and model fingerprints in receipt.json",
+    "native_controls_and_upstream_numpy_reference": "upstream-geometry.json: 576 poses, zero reference coordinate error",
+    "three_public_modes_192_frames_at_24fps": "receipt.json: 576 verified 1024x1024, 32-sample CPU PNGs",
+    "visual_gaze_blink_extremes_and_return": "motion-anchor-receipt.json; motion-anchors.png; direction-contact-sheet.png",
+    "offline_cpu_packed_relative_resources": "three reopen reports; extracted runtime rehearsal; portable-paths.json",
+    "variant_selection_and_native_legacy_wrapping": "five variant layout checks; golden-hazel motion and cache/resume in clean extraction",
+    "missing_corrupt_and_actual_interruption_recovery": "receipt.json; interruption.json; reproduction.json: valid first frame preserved, 26 recovered",
+    "python_suite": "tests.log: all 88 passed",
+    "versioned_code_assets_maps_stills_timelines_frames_setup_attribution_and_manifest": "779-file technical ZIP; all manifest hashes verified",
+    "exact_committed_producer_sources": "source-audit.json: 52 committed producer files match archive bytes",
+    "verified_publication_and_preserved_baseline": "publication.json: seven matching remote asset digests; rc.4 tag and release preserved",
+    "updated_context_and_protected_artifacts": "docs/SCORE_IMPROVEMENT.md, PS_AUDIT.md, ROADMAP.md, RELEASES.md and FILEMAP.md; README/video/presentation paths untouched"
+  },
+  "accepted_deferred_items": {
+    "human_teammate_review": "explicitly deferred; five appearance and two direction cases have blank responses; local assessor key kept separate",
+    "organizer_asset_compatibility": "unconfirmed; exact supported public GNM Head v3 pin and UV fingerprints recorded",
+    "team_owned_outputs": [
+      "videos",
+      "official presentation",
+      "public-access verification",
+      "competition form"
+    ]
+  },
+  "score_assessment": {
+    "range_out_of_100": [
+      82,
+      90
+    ],
+    "midpoint": 86,
+    "status": "agent visual and engineering estimate; not an organizer grade"
+  },
+  "known_visual_limitations": [
+    "Five palettes share one scanned identity",
+    "Authored iris detail and pigmentation remain distinguishable in close inspection",
+    "A thin crease remains at peak lid contact",
+    "Small attributed fallback and repaired skin regions"
+  ]
+}

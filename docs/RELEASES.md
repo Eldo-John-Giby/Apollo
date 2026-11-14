@@ -85,9 +85,10 @@ submission remain team-owned while the repository is private.
 
 ## Detailed GNM candidate
 
-Qualified prerelease name: `apollo-v0.3.0-rc.5` —
-Apollo v0.3.0-rc.5 — Detailed GNM Candidate. Publication verification is recorded
-separately under `milestones/gnm-score-final-candidate`.
+Published prerelease [Apollo v0.3.0-rc.5 — Detailed GNM Candidate](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.5)
+targets `4d61cae63f07582d2c97aa5505b0d41a16a79c8d`. All seven uploaded assets match their
+local sizes and SHA-256 digests. Publication verification is recorded under
+`milestones/gnm-score-final-candidate/publication.json`.
 
 The technical ZIP is 1,173,058,697 bytes with SHA-256
 `5f4c0e8b849da9f22f6de09b46207d0d95f7a791fc8209b06f3a5706b1a2ed6c`.

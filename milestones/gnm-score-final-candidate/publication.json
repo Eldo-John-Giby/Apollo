@@ -1,0 +1,58 @@
+{
+  "status": "published_prerelease_all_remote_assets_verified",
+  "release_id": 445576961,
+  "tag": "apollo-v0.3.0-rc.5",
+  "name": "Apollo v0.3.0-rc.5 \u2014 Detailed GNM Candidate",
+  "url": "https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.5",
+  "draft": false,
+  "prerelease": true,
+  "tag_commit": "4d61cae63f07582d2c97aa5505b0d41a16a79c8d",
+  "baseline_rc4_tag_preserved": true,
+  "baseline_rc4_release_preserved": true,
+  "repository_private": true,
+  "assets": [
+    {
+      "name": "apollo-gnm-v0.3.0-rc.5.zip",
+      "bytes": 1173058697,
+      "sha256": "5f4c0e8b849da9f22f6de09b46207d0d95f7a791fc8209b06f3a5706b1a2ed6c",
+      "asset_id": 748759547
+    },
+    {
+      "name": "apollo-gnm-v0.3.0-rc.5.zip.sha256",
+      "bytes": 93,
+      "sha256": "7ddce601f970e14471b6ca6bd43fa6d70bb36f5176fc1f2cca1b1c7f1f930e6f",
+      "asset_id": 748716465
+    },
+    {
+      "name": "receipt.json",
+      "bytes": 8388,
+      "sha256": "0e905d2b1d950a591217ab5ddcb0b0274b1989ac1a011677c764924296c1c7b1",
+      "asset_id": 748716464
+    },
+    {
+      "name": "source-audit.json",
+      "bytes": 5670,
+      "sha256": "3e293f3d0a5ed2b66ee0a1e4e4772be350f156997e5462536804862faeb19da3",
+      "asset_id": 748716468
+    },
+    {
+      "name": "apollo-gnm-blind-review.zip",
+      "bytes": 8959418,
+      "sha256": "d17b7214edfd7212c693a259e79f63b3a1000be0adc3f2ffb7917feae3e127c4",
+      "asset_id": 748716467
+    },
+    {
+      "name": "appearance-contact-sheet.png",
+      "bytes": 1465698,
+      "sha256": "8daa93007d6f97982eeda27cee61cd04f4d7351ea1942d0469902e5becd1316f",
+      "asset_id": 748716469
+    },
+    {
+      "name": "rose-brown-matched.png",
+      "bytes": 1040524,
+      "sha256": "06719ef5cf782b36867c46a0a10cc29331d3a02cfcb6c9797938cc25d4b1e4c0",
+      "asset_id": 748716493
+    }
+  ],
+  "published_at": "2026-11-14T21:59:38Z"
+}
