@@ -268,10 +268,11 @@ def package(args):
                 crop = Path(scratch) / f'{variant}-skin-detail.png'
                 still.crop((575, 430, 665, 545)).save(crop)
             files[f'evidence/skin-details/{variant}.png'] = crop
-        blink = Image.new('RGB', (1500, 330), '#1a1c20')
+        blink = Image.new('RGB', (1800, 330), '#1a1c20')
         blink_labels = ImageDraw.Draw(blink)
         for index, (frame, label) in enumerate(((93, 'Before'), (105, 'Closing'),
-                                                  (106, 'Closed'), (110, 'Reopening'),
+                                                  (106, 'Delayed closure'), (107, 'Peak contact'),
+                                                  (110, 'Reopening'),
                                                   (113, 'Open'))):
             name = f'timelines/generate-motion/frames/frame_{frame:04d}.png'
             with Image.open(files[name]) as still:
