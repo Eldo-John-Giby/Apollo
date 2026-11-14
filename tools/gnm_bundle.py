@@ -10,6 +10,25 @@ from PIL import Image, ImageChops, ImageDraw
 from gnm_template import MODEL_SHA256
 from submission_bundle import ROOT, VARIANTS, add_frames, png, read_json, sha256
 from gnm_run import surface_files
+import numpy as np
+
+
+def verify_hold_receipts(directory):
+    """Check every copied frame against the upstream pose sequence and its source."""
+    with np.load(directory / 'geometry.npz', allow_pickle=False) as clip:
+        sequence = clip['sequence']
+    records = read_json(directory / 'frames/render-receipt.json')['frames']
+    if len(sequence) != len(records):
+        raise ValueError(f'{directory.name}: geometry and render receipt lengths differ')
+    for index, pose in enumerate(sequence, 1):
+        record = records[f'frame_{index:04d}.png']
+        source = record['reused_frame']
+        if source is None:
+            continue
+        if (type(source) is not int or not 1 <= source <= len(sequence) or source == index
+                or sequence[source - 1] != pose
+                or records[f'frame_{source:04d}.png']['sha256'] != record['sha256']):
+            raise ValueError(f'{directory.name}: invalid hold reuse for frame {index}')
 
 
 def package(args):
@@ -101,6 +120,7 @@ def package(args):
     files['evidence/rose-brown-side-udim.png'] = side_udim
     files['evidence/rose-brown-side-legacy.png'] = side_legacy
     for mode, mode_receipt in modes.items():
+        verify_hold_receipts(args.motion / mode)
         path = args.motion / mode / 'reopen.json'
         reopened = read_json(path)
         expected = {tile: spec['sha256'] for tile, spec in textures['rose-brown'].items()}
