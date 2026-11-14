@@ -90,6 +90,11 @@ front/side boards and native-resolution eye/skin crop pairs for all five sets.
 The final motion rerender and clean-extraction/archive qualification are still
 in progress. Earlier completed frames do not qualify changed eye maps.
 
+A fresh evaluation with the pinned upstream NumPy model reproduces all 576
+saved clip poses exactly (maximum coordinate error zero). Its receipt binds
+the model, current gaze/blink/timing source files and all three geometry files.
+The archive gate checks those bindings before including the upstream receipt.
+
 ## Provisional technical score
 
 I estimate **82–90 out of 100**, conditional on the remaining frame, texture
