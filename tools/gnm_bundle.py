@@ -230,6 +230,7 @@ def package(args):
             files[f'evidence/comparisons/{name}'] = path
         files['evidence/comparisons/comparison.json'] = comparisons / 'comparison.json'
     for name in ('docs/GNM_INTEGRATION.md', 'docs/GNM_QUICKSTART.md', 'docs/SCORE_IMPROVEMENT.md',
+                 'milestones/gnm-final-candidate/receipt.json',
                  'requirements-gnm-build.txt', 'assets/ATTRIBUTION.md',
                  'milestones/eye-expression-2026-11-11/scene.blend',
                  'milestones/eye-expression-2026-11-11/ATTRIBUTION.md',
