@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 from zipfile import ZipFile
@@ -58,6 +59,23 @@ def rehearse(archive, blender, out):
     for frame in (21, 22):
         name = f'frame_{frame:04d}.png'
         pairs.append((f'timelines/left/frames/{name}', f'reproduction/left/{name}'))
+    # Exercise the shipped resume command against a copy of the delivered receipt.
+    delivered = out / 'timelines/left/frames'
+    recovery = out / 'reproduction/recovery'
+    recovery.mkdir()
+    for name in ('render-receipt.json', 'frame_0001.png'):
+        shutil.copy2(delivered / name, recovery / name)
+    (recovery / 'frame_0002.png').write_bytes(b'corrupt')
+    original_mtime = (recovery / 'frame_0001.png').stat().st_mtime_ns
+    subprocess.run([sys.executable, 'tools/gnm_run.py', 'left', '--blender', str(blender),
+                    '--out', str(recovery), '--first', '1', '--last', '3'],
+                   cwd=out, check=True)
+    if (recovery / 'frame_0001.png').stat().st_mtime_ns != original_mtime:
+        raise ValueError('Resume rewrote a verified frame')
+    for frame in range(1, 4):
+        name = f'frame_{frame:04d}.png'
+        if (recovery / name).read_bytes() != (delivered / name).read_bytes():
+            raise ValueError(f'Recovery mismatch: {name}')
     report = {}
     for reference, reproduced in pairs:
         difference = int(np.max(np.abs(pixels(out / reference) - pixels(out / reproduced))))
