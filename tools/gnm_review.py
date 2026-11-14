@@ -57,8 +57,8 @@ def prepare(motion, out):
         'smoothness, readable fixations, lid contact and blink believability. '
         'Record smooth and blink_plausible as true or false, with notes. '
         'Inspect blink frames 103-113 individually if needed.\n\n'
-        'Return the text responses. The known narrow dark lid contact line '
-        'is documented in the technical release; record whether it is distracting.\n',
+        'Return the text responses. Note any visible eye slit, sharp fold, '
+        'uneven contact or distracting highlight during closure.\n',
         encoding='utf-8')
     (out / 'assessor-key.json').write_text(json.dumps(key, indent=2) + '\n', encoding='utf-8')
     archive = out / 'apollo-gnm-blind-review.zip'
