@@ -1,0 +1,20 @@
+{
+  "stills/rose-brown.png": {
+    "max_rgb_error": 0
+  },
+  "evidence/rose-brown-side-udim.png": {
+    "max_rgb_error": 0
+  },
+  "evidence/rose-brown-side-legacy.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0021.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0022.png": {
+    "max_rgb_error": 0
+  },
+  "reproduction/golden-hazel-udim/frame_0026.png": {
+    "max_rgb_error": 1
+  }
+}

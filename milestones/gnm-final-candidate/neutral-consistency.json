@@ -1,0 +1,17 @@
+{
+  "left": {
+    "frame": 1,
+    "png_sha256": "54a8472f7c78d3ae8d91c47f1b213faf2e9b6f49e03d8c28ba292b47c90619e3",
+    "max_rgb_error_against_left": 0
+  },
+  "right": {
+    "frame": 1,
+    "png_sha256": "9f8169d616d99b0e9a39f19db9b26c30f60722659713dad6d739afacba17c627",
+    "max_rgb_error_against_left": 0
+  },
+  "generate-motion": {
+    "frame": 1,
+    "png_sha256": "b99378f70052f29adad7a418b88df713dfabe9bdc798de2adddf5f000c2b72ed",
+    "max_rgb_error_against_left": 0
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "archive": "apollo-gnm-v0.3.0-rc.4.zip",
+  "archive_bytes": 725843567,
+  "archive_sha256": "3195dfcb1e1bf8238df1a193d29507e714d0e31dea35058d3412e9e5b087cc79",
+  "payload_files": 671,
+  "modes": {
+    "left": {
+      "frame_count": 192,
+      "settings": {
+        "scene_sha256": "9ac4c049825d5d05e4c6bc768e452586561cab4a6086c945cc12eb6616fb4e81",
+        "mode": "left",
+        "blender": "4.5.15 LTS",
+        "blender_build": "5afeabba6097",
+        "resolution": [
+          1024,
+          1024
+        ],
+        "samples": 32,
+        "fps": 24.0,
+        "range": [
+          1,
+          192
+        ],
+        "reuse_holds": true
+      }
+    },
+    "right": {
+      "frame_count": 192,
+      "settings": {
+        "scene_sha256": "a7ca4e321542fbdff6a58460c2b6c016c5f4cf8e75a4c88418d56a2b0325a10e",
+        "mode": "right",
+        "blender": "4.5.15 LTS",
+        "blender_build": "5afeabba6097",
+        "resolution": [
+          1024,
+          1024
+        ],
+        "samples": 32,
+        "fps": 24.0,
+        "range": [
+          1,
+          192
+        ],
+        "reuse_holds": true
+      }
+    },
+    "generate-motion": {
+      "frame_count": 192,
+      "settings": {
+        "scene_sha256": "7dcbff0846e775906cb84def3c49b84eef44b831f2dba14b12b24513b7861f7f",
+        "mode": "generate-motion",
+        "blender": "4.5.15 LTS",
+        "blender_build": "5afeabba6097",
+        "resolution": [
+          1024,
+          1024
+        ],
+        "samples": 32,
+        "fps": 24.0,
+        "range": [
+          1,
+          192
+        ],
+        "reuse_holds": true
+      }
+    }
+  },
+  "reproduction": {
+    "stills/rose-brown.png": {
+      "max_rgb_error": 0
+    },
+    "evidence/rose-brown-side-udim.png": {
+      "max_rgb_error": 0
+    },
+    "evidence/rose-brown-side-legacy.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0021.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0022.png": {
+      "max_rgb_error": 0
+    },
+    "reproduction/golden-hazel-udim/frame_0026.png": {
+      "max_rgb_error": 1
+    }
+  },
+  "status": "render_bundle_rehearsal_and_tests_passed",
+  "target": "Google GNM Head v3",
+  "evaluator_match": "unconfirmed",
+  "archive_source_commit": "6db8ace3768d8be82ad368e5255c40574c6e04d4",
+  "build_archive": "apollo-gnm-final-candidate.zip",
+  "planned_tag": "apollo-v0.3.0-rc.4",
+  "tests_passed": 84,
+  "known_visual_limitations": [
+    "Narrow dark contact line at one closed lid",
+    "Small nearest-texel repairs in projected skin maps"
+  ],
+  "remaining_team_tasks": [
+    "Deferred blind visual review",
+    "Evaluator asset confirmation",
+    "Public GitHub access verification",
+    "Video and presentation deliverables",
+    "Cutoff confirmation and submission form"
+  ],
+  "model": {
+    "source_commit": "f84cdbdc86a34f55627526f137495f864e687679",
+    "model_revision": "c01e90d298d82301f9fd18f54806be751775cb7c",
+    "model_sha256": "61d78bbfb4ad8e0b38495804a4caef3214d3df00f8c3f68761e63b41ce3747eb",
+    "connectivity_sha256": "a19319dbc7adaedaafdd7f7d04e280fdd81b5fa25b1a17a0465689cf3d6039df",
+    "legacy_uv_sha256": "ae60b9b86b382a5beba764d50efa8572641364ff7b3130981ea627820df52ee5",
+    "udim_uv_sha256": "81bd4cb3a99d985281ee4d7989d4b340cb544ccc790f8ade85d6a6ca1ad6968f"
+  },
+  "reopened": {
+    "left": {
+      "scene_sha256": "9ac4c049825d5d05e4c6bc768e452586561cab4a6086c945cc12eb6616fb4e81",
+      "frames_checked": 192,
+      "max_position_error_m": 9.094947017729282e-13,
+      "resource_checks": {
+        "linked_libraries": 0,
+        "unpacked_file_images": 0,
+        "packed_file_images": 3,
+        "blender_online_access": false
+      }
+    },
+    "right": {
+      "scene_sha256": "a7ca4e321542fbdff6a58460c2b6c016c5f4cf8e75a4c88418d56a2b0325a10e",
+      "frames_checked": 192,
+      "max_position_error_m": 9.094947017729282e-13,
+      "resource_checks": {
+        "linked_libraries": 0,
+        "unpacked_file_images": 0,
+        "packed_file_images": 3,
+        "blender_online_access": false
+      }
+    },
+    "generate-motion": {
+      "scene_sha256": "7dcbff0846e775906cb84def3c49b84eef44b831f2dba14b12b24513b7861f7f",
+      "frames_checked": 192,
+      "max_position_error_m": 9.094947017729282e-13,
+      "resource_checks": {
+        "linked_libraries": 0,
+        "unpacked_file_images": 0,
+        "packed_file_images": 3,
+        "blender_online_access": false
+      }
+    }
+  }
+}
