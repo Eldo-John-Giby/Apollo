@@ -63,6 +63,33 @@ vertices in both eyes at frames 106 and 107. A thin contact crease remains
 visible in the close framing. See
 [closure and reopening](../milestones/gnm-score-development/blink-closure-and-reopening.png).
 
+## Final appearance selection (15 November 2026)
+
+The selected eye maps use several fiber scales so iris structure survives the
+judging camera instead of disappearing into fine-frequency blur. Golden-hazel
+uses rounded, irregular surface-space pigment spots in place of angular noise
+cells. These are authored details, not additional scan measurements.
+
+All five variants now have six final views: front, oblique-lit three-quarter
+in both UV layouts, neutral three-quarter, oblique-lit front and close eyes.
+All 30 image receipts match the current maps, neutral template and render
+recipe. Native/legacy side views agree within one RGB level for every variant.
+The agent inspected the selected view sheet and detailed eyes. Human review
+remains deferred; this inspection is not teammate approval.
+
+Generate authenticated comparisons against the preserved published rc.4 ZIP:
+
+```powershell
+python tools/gnm_comparison.py --baseline PATH_TO_RC4_ZIP --candidate out/score-final-textures --out out/score-final-textures/comparisons
+Copy-Item out/score-final-textures/comparisons/rose-brown-matched.png out/score-final-textures/rose-brown-matched.png
+```
+
+The tool verifies the baseline archive against its committed qualification
+receipt and checks candidate map/scene/image receipts before producing matched
+front/side boards and native-resolution eye/skin crop pairs for all five sets.
+The final motion rerender and clean-extraction/archive qualification are still
+in progress. Earlier completed frames do not qualify changed eye maps.
+
 ## Provisional technical score
 
 I estimate **82–90 out of 100**, conditional on the remaining frame, texture
@@ -74,4 +101,4 @@ review is available.
 | --- | ---: | --- |
 | Texture photorealism | 47–51 / 60 | The matched front and side renders show sharper brow, cheek and lip detail. The five palettes share one scan, and synthetic iris and freckle details remain visible as authored features in close views. |
 | Kinematic accuracy | 17–19 / 20 | Direction and native pose checks cover the implemented gaze. The blink reaches full contact with a visible crease, and the delayed lid leaves a narrow opening for one frame. |
-| Code and UV portability | 18–20 / 20 | The rose-brown fresh-wrap test agrees within one RGB level between layouts. Packed geometry and texture checks have passed for the reopened modes tested so far. Clean extraction and the organizer asset match remain open. |
+| Code and UV portability | 18–20 / 20 | All five fresh-wrap tests agree within one RGB level between layouts. Packed geometry and texture checks have passed for the reopened modes tested so far. Clean extraction and the organizer asset match remain open. |
