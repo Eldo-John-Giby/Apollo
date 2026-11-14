@@ -80,6 +80,15 @@ def run(args):
     if args.reuse_holds and (scene.cycles.use_animated_seed or scene.render.use_motion_blur):
         raise ValueError('Hold reuse requires a fixed seed and motion blur disabled')
     all_frames = list(range(scene.frame_start, scene.frame_end + 1))
+    gnm_sequence = scene.get('apollo_gnm_pose_sequence')
+    if gnm_sequence is not None and len(gnm_sequence) != len(all_frames):
+        raise ValueError('GNM pose sequence does not match the saved frame range')
+
+    def pose_key(frame):
+        if gnm_sequence is not None:
+            return gnm_sequence[frame - all_frames[0]]
+        return expression(mode, frame)
+
     first = args.first if args.first is not None else all_frames[0]
     last = args.last if args.last is not None else all_frames[-1]
     if not all_frames[0] <= first <= last <= all_frames[-1]:
@@ -118,7 +127,7 @@ def run(args):
                     and digest(file) == records[name]['sha256']):
                 verified.add(frame)
                 if args.reuse_holds:
-                    holds.setdefault(expression(mode, frame), frame)
+                    holds.setdefault(pose_key(frame), frame)
             else:
                 invalid.append(frame)
         if args.verify_only:
@@ -134,7 +143,7 @@ def run(args):
             if frame in verified:
                 continue
             name = f'frame_{frame:04d}.png'
-            key = expression(mode, frame)
+            key = pose_key(frame)
             original = holds.get(key)
             if original is None:
                 scene.frame_set(frame)

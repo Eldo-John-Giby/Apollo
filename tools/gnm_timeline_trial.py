@@ -60,7 +60,8 @@ def install(clip, out):
         mode = str(data['mode'])
         if mode == 'generate-motion':
             verify_blink(head, poses, sequence)
-        scene['apollo_gnm_trial_mode'] = mode
+        scene['apollo_submission_mode'] = mode
+        scene['apollo_gnm_pose_sequence'] = sequence.tolist()
         scene.frame_start, scene.frame_end = 1, len(sequence)
         scene.render.fps = 24
         curve = head.data.shape_keys.animation_data.action
