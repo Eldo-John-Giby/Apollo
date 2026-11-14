@@ -9,6 +9,7 @@ from PIL import Image, ImageChops, ImageDraw
 
 from gnm_template import MODEL_SHA256
 from submission_bundle import ROOT, VARIANTS, add_frames, png, read_json, sha256
+from gnm_run import surface_files
 
 
 def package(args):
@@ -40,6 +41,11 @@ def package(args):
         side = source / 'side-udim.png'
         png(side, (640, 640))
         files[f'evidence/side-light/{variant}.png'] = side
+        for name, size in (('angle-neutral', 640), ('front-oblique', 640), ('eyes', 1024)):
+            path = source / f'{name}.png'
+            if path.exists():
+                png(path, (size, size))
+                files[f'evidence/{name}/{variant}.png'] = path
         coverage = read_json(source / 'color.1001.json')
         if coverage['projection_coverage'] < .995:
             raise ValueError(f'{variant}: insufficient raw skin coverage')
@@ -50,13 +56,32 @@ def package(args):
                 raise ValueError(f'{variant}: surface-detail receipt does not match skin map')
             files[f'textures/{variant}/surface-detail.json'] = detail
         entries = {}
-        for tile, size in ((1001, 2048), (1002, 1024), (1004, 1024)):
+        for tile, size in ((1001, None), (1002, 1024), (1004, 1024)):
             name = f'color.{tile}.png'
             path = source / name
+            if size is None:
+                with Image.open(path) as image:
+                    size = image.width
+                if size not in (2048, 4096):
+                    raise ValueError('Skin map must be native 2K or authored 4K')
             png(path, (size, size))
             files[f'textures/{variant}/{name}'] = path
             entries[str(tile)] = {'file': name, 'sha256': sha256(path.read_bytes())}
         textures[variant] = entries
+        for role, path in surface_files(source).items():
+            with Image.open(source / 'color.1001.png') as image:
+                dimensions = image.size
+            png(path, dimensions)
+            if read_json(detail)['maps'][path.name] != sha256(path.read_bytes()):
+                raise ValueError(f'{variant}: {role} provenance does not match map')
+            files[f'textures/{variant}/{path.name}'] = path
+        eye_detail = source / 'eye-detail.json'
+        if eye_detail.exists():
+            eye_receipt = read_json(eye_detail)
+            for tile in ('1002', '1004'):
+                if eye_receipt['maps'][tile]['sha256'] != entries[tile]['sha256']:
+                    raise ValueError(f'{variant}: iris-detail receipt does not match map')
+            files[f'textures/{variant}/eye-detail.json'] = eye_detail
     for tile in ('1001', '1002', '1004'):
         if len({variant[tile]['sha256'] for variant in textures.values()}) != len(VARIANTS):
             raise ValueError(f'Duplicate texture variants for GNM tile {tile}')
@@ -79,18 +104,28 @@ def package(args):
         path = args.motion / mode / 'reopen.json'
         reopened = read_json(path)
         expected = {tile: spec['sha256'] for tile, spec in textures['rose-brown'].items()}
+        expected_surface = {role: sha256(path.read_bytes())
+                            for role, path in surface_files(reference).items()}
         if (reopened['scene_sha256'] != mode_receipt['settings']['scene_sha256']
                 or reopened['frames_checked'] != 192 or reopened['max_position_error_m'] > 1e-6
                 or reopened['maps'] != expected or not reopened.get('camera_checks')
                 or reopened.get('resource_checks', {}).get('linked_libraries') != 0
                 or reopened.get('resource_checks', {}).get('unpacked_file_images') != 0
-                or reopened.get('resource_checks', {}).get('blender_online_access') is not False):
+                or reopened.get('resource_checks', {}).get('blender_online_access') is not False
+                or reopened.get('surface_maps', {}) != expected_surface):
             raise ValueError(f'{mode}: reopened timeline verification mismatch')
         files[f'timelines/{mode}/reopen.json'] = path
         files[f'timelines/{mode}/geometry.npz'] = args.motion / mode / 'geometry.npz'
     for path in ROOT.joinpath('tools').glob('gnm_*.py'):
         files[f'tools/{path.name}'] = path
-    for name in ('docs/GNM_INTEGRATION.md', 'docs/GNM_QUICKSTART.md', 'assets/ATTRIBUTION.md',
+    for path in ROOT.joinpath('assets/gnm-scan').glob('*'):
+        if path.is_file():
+            files[f'assets/gnm-scan/{path.name}'] = path
+    transfer = args.textures / 'scan-transfer.json'
+    if transfer.exists():
+        files['evidence/scan-transfer.json'] = transfer
+    for name in ('docs/GNM_INTEGRATION.md', 'docs/GNM_QUICKSTART.md', 'docs/SCORE_IMPROVEMENT.md',
+                 'requirements-gnm-build.txt', 'assets/ATTRIBUTION.md',
                  'milestones/eye-expression-2026-11-11/scene.blend',
                  'milestones/eye-expression-2026-11-11/ATTRIBUTION.md',
                  'assets/photorealism-v2/ATTRIBUTION.md',
@@ -136,6 +171,10 @@ def package(args):
                 crop = Path(scratch) / f'{variant}-eye-detail.png'
                 still.crop(region).save(crop)
             files[f'evidence/eye-details/{variant}.png'] = crop
+            with Image.open(files[f'stills/{variant}.png']) as still:
+                crop = Path(scratch) / f'{variant}-skin-detail.png'
+                still.crop((575, 430, 665, 545)).save(crop)
+            files[f'evidence/skin-details/{variant}.png'] = crop
         blink = Image.new('RGB', (1500, 330), '#1a1c20')
         blink_labels = ImageDraw.Draw(blink)
         for index, (frame, label) in enumerate(((93, 'Before'), (105, 'Closing'),

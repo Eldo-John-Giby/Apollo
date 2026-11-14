@@ -1,5 +1,8 @@
 # Public GNM Head v3 integration
 
+For the scoring improvement candidate, see [scan build and evidence](SCORE_IMPROVEMENT.md).
+The original GNM development checkpoints below document the earlier workflow.
+
 This checkpoint targets Google Head v3 provisionally. The evaluator target is
 unconfirmed. The verified MakeHuman fallback remains available as
 apollo-v0.3.0-rc.2.

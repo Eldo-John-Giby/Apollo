@@ -11,6 +11,25 @@ MODES = ('left', 'right', 'generate-motion')
 VARIANTS = ('rose-brown', 'golden-hazel', 'olive-amber', 'neutral-deep', 'cool-grey')
 
 
+def surface_files(maps):
+    paths = {name: Path(maps) / f'{name}.1001.png' for name in ('roughness', 'height')}
+    present = [p.exists() for p in paths.values()]
+    if any(present) and not all(present):
+        raise ValueError('Skin surface maps require both roughness.1001.png and height.1001.png')
+    return paths if all(present) else {}
+
+
+def variant_identity(scene, maps, layout):
+    inputs = {str(tile): Path(maps) / f'color.{tile}.png' for tile in (1001, 1002, 1004)}
+    inputs.update(surface_files(maps))
+    recipe = b''.join((ROOT / 'tools' / name).read_bytes()
+                      for name in ('gnm_materials.py', 'gnm_motion_variant.py'))
+    return {'source_sha256': hashlib.sha256(Path(scene).read_bytes()).hexdigest(),
+            'layout': layout, 'maps': {role: hashlib.sha256(path.read_bytes()).hexdigest()
+                                     for role, path in inputs.items()},
+            'material_recipe_sha256': hashlib.sha256(recipe).hexdigest()}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('mode', choices=('still', *MODES))
@@ -33,11 +52,7 @@ def main():
         scene = root / 'timelines' / args.mode / 'expression.blend'
         if args.variant != 'rose-brown' or args.layout != 'udim':
             maps = root / 'textures' / args.variant
-            identity = {'source_sha256': hashlib.sha256(scene.read_bytes()).hexdigest(),
-                        'layout': args.layout,
-                        'maps': {str(tile): hashlib.sha256(
-                            (maps / f'color.{tile}.png').read_bytes()).hexdigest()
-                                 for tile in (1001, 1002, 1004)}}
+            identity = variant_identity(scene, maps, args.layout)
             key = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
             cache = args.out.resolve() / 'scene'
             result = subprocess.run([

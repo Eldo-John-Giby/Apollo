@@ -43,10 +43,12 @@ For media capture, use the three included PNG sequences and the 24 fps frame
 rate above. Video creation and the official presentation remain team work.
 
 The tested target is pinned public Google GNM Head v3. Organizer confirmation
-of the evaluator's exact mesh and UVs remains outstanding. The brow detail is
-in the portable skin maps; corneal reflections and pore relief are supplied
-by the scene materials. A narrow dark contact line at one closed lid remains
-a known visual limitation. Keep the separately released MakeHuman fallback.
+of the evaluator's exact mesh and UVs remains outstanding. The scan candidate
+uses sRGB color for tiles 1001, 1002 and 1004. Apply the optional skin roughness
+and 16-bit height images as Non-Color data on tile 1001. Use height as bump
+with a 0.09 mm distance and 0.65 strength. Corneal reflections come from the
+separate native corneal material. See SCORE_IMPROVEMENT.md for evidence and
+the separately released MakeHuman fallback for the alternate target.
 
 For source acquisition, texture rebuilding and clean-extraction qualification,
 see [GNM integration](GNM_INTEGRATION.md). The technical package's license

@@ -101,6 +101,11 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_template.py`, `tools/gnm_import.py` | Verify the pinned Google model and import its original topology and native UV layouts into Blender. |
 | `tools/gnm_skin_trial.py`, `tools/gnm_skin_fill.py`, `tools/gnm_eye_maps.py`, `tools/gnm_texture_trial.py` | First GNM color-transfer trial with projection coverage, native eye tiles and two-layout renders. |
 | `tools/gnm_skin_detail.py` | Bake reproducible authored brow fibers into the native skin atlas using surface-to-UV correspondence, with source and output hash receipts. |
+| `tools/gnm_surface_maps.py`, `tools/gnm_eye_detail.py` | Author native-UV skin pigment, physical-scale relief/roughness and distinct bilateral iris/sclera maps with reproducible provenance. |
+| `tools/gnm_materials.py` | Shared portable skin surface-map bindings for still and cached motion scenes. |
+| `tools/gnm_scan_transfer.py`, `tools/gnm_generate_textures.py` | Checksum-verified attributed scan registration, emission transfer, measured CC0 fallback and five complete native texture sets. |
+| `assets/gnm-scan/source.json`, `assets/gnm-scan/ATTRIBUTION.md` | Pinned scan asset URLs/checksums, CC-BY-3.0 source license and derivative attribution. |
+| `docs/SCORE_IMPROVEMENT.md` | Current 60/20/20 audit, prioritized implementation and candidate qualification record. |
 | `tools/gnm_gaze_trial.py`, `tools/gnm_blink.py`, `tools/gnm_timeline_trial.py` | Evaluate native gaze anchors and clip geometry using upstream NumPy, then install and check the Blender timeline. |
 | `apollo_core/submission_timing.py` | Shared deterministic motion timing for the MakeHuman and GNM submission paths. |
 | `tools/gnm_bundle.py`, `tools/gnm_verify.py`, `tools/gnm_rehearse.py` | Verify reopened GNM timelines and package the technical archive from authenticated frame and texture outputs. |

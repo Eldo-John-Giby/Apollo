@@ -7,6 +7,10 @@ import sys
 
 import bpy
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gnm_materials import bind_surface, surface_files
+from gnm_run import variant_identity
+
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -16,8 +20,8 @@ def prepare(args):
     source = Path(bpy.data.filepath)
     tiles = (1001, 1002, 1004)
     maps = {str(tile): args.maps / f'color.{tile}.png' for tile in tiles}
-    identity = {'source_sha256': digest(source), 'layout': args.layout,
-                'maps': {tile: digest(path) for tile, path in maps.items()}}
+    maps.update(surface_files(args.maps))
+    identity = variant_identity(source, args.maps, args.layout)
     key = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
     args.out.mkdir(parents=True, exist_ok=True)
     target = args.out / f'variant-{key}.blend'
@@ -38,6 +42,7 @@ def prepare(args):
             raise ValueError(f'Unexpected GNM base-color binding in tile {tile}')
         image = color.links[0].from_node
         image.image = bpy.data.images.load(str(maps[str(tile)].resolve()), check_existing=False)
+        image.image.colorspace_settings.name = 'sRGB'
         image.image.pack()
         uv = nodes.new('ShaderNodeUVMap')
         uv.uv_map = 'GNM UDIM' if args.layout == 'udim' else 'GNM Region'
@@ -50,6 +55,7 @@ def prepare(args):
             coordinates = offset.outputs[0]
         links.new(coordinates, image.inputs['Vector'])
         links.new(image.outputs['Color'], shader.inputs['Base Color'])
+    bind_surface(head, args.maps, args.layout)
     bpy.context.scene['apollo_gnm_variant_inputs'] = json.dumps(identity, sort_keys=True)
     bpy.ops.file.pack_all()
     bpy.ops.wm.save_as_mainfile(filepath=str(target.resolve()), compress=True)

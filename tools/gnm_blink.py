@@ -73,7 +73,7 @@ def fit_blink(model, basis):
         adjacent = np.array(sorted(edges))
         smoothness = (basis[active][:, adjacent[:, 0]]
                       - basis[active][:, adjacent[:, 1]]).reshape(len(active), -1).T
-        regularizer = np.vstack((.5 * smoothness, .00035 * np.eye(len(active))))
+        regularizer = np.vstack((1.0 * smoothness, .00035 * np.eye(len(active))))
         fit_result = lsq_linear(
             np.vstack((constraint, rows, regularizer)),
             np.concatenate(((desired * weight).ravel(), targets, np.zeros(len(regularizer)))),

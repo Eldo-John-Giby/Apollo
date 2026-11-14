@@ -6,6 +6,9 @@ import sys
 import bpy
 from mathutils import Vector
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gnm_materials import bind_surface
+
 
 def aim(obj, position, target):
     obj.location = position
@@ -23,6 +26,7 @@ def render(args):
         if tile in (1001, 1002, 1004):
             image = nodes.new('ShaderNodeTexImage')
             image.image = bpy.data.images.load(str((args.maps / f'color.{tile}.png').resolve()))
+            image.image.colorspace_settings.name = 'sRGB'
             uv = nodes.new('ShaderNodeUVMap')
             uv.uv_map = 'GNM UDIM' if args.layout == 'udim' else 'GNM Region'
             if args.layout == 'udim':
@@ -58,6 +62,7 @@ def render(args):
             links.new(mix.outputs[0], nodes.get('Material Output').inputs['Surface'])
         else:
             shader.inputs['Base Color'].default_value = (.30, .12, .10, 1.)
+    bind_surface(head, args.maps, args.layout)
     scene = bpy.context.scene
     camera = bpy.data.objects.new('GNM Camera', bpy.data.cameras.new('GNM Camera'))
     scene.collection.objects.link(camera)
@@ -65,6 +70,10 @@ def render(args):
     camera.data.lens = 115 if args.eye_crop else 64
     if args.eye_crop:
         aim(camera, camera.location.copy(), (0, 0, -.012))
+    if args.lens is not None:
+        camera.data.lens = args.lens
+    if args.target is not None:
+        aim(camera, camera.location.copy(), args.target)
     scene.camera = camera
     for name, position, power, size in [
         ('Key', (.22 if args.side_light else -.13, -.29, .22), 10, .20),
@@ -121,6 +130,8 @@ if __name__ == '__main__':
     parser.add_argument('--save-scene', type=Path)
     parser.add_argument('--save-only', action='store_true')
     parser.add_argument('--eye-crop', action='store_true')
+    parser.add_argument('--lens', type=float, help='Explicit inspection lens; default judging camera is unchanged')
+    parser.add_argument('--target', type=float, nargs=3, help='Explicit inspection aim point in meters')
     parser.add_argument('--angle', action='store_true')
     parser.add_argument('--side-light', action='store_true')
     parser.add_argument('--samples', type=int, default=8)

@@ -9,3 +9,4 @@ delivery/** -text
 
 # Preserve licensed texture-source receipts byte-for-byte on every platform.
 assets/photorealism-v2/** -text
+assets/gnm-scan/LICENSE.txt -text -diff

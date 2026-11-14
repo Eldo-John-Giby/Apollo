@@ -11,6 +11,9 @@ from bpy_extras.object_utils import world_to_camera_view
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gnm_run import surface_files
+
 
 def check_camera(scene, head, source, poses, sequence, mode):
     """Check the packed scene's actual camera against evaluated pupil geometry."""
@@ -85,9 +88,48 @@ def verify(template, clip, maps):
                 raise ValueError(f'Unexpected base-color binding in tile {tile}')
             image = color.links[0].from_node.image
             expected = hashlib.sha256((maps / f'color.{tile}.png').read_bytes()).hexdigest()
-            if not image.packed_file or hashlib.sha256(image.packed_file.data).hexdigest() != expected:
+            if (not image.packed_file or image.colorspace_settings.name != 'sRGB'
+                    or hashlib.sha256(image.packed_file.data).hexdigest() != expected):
                 raise ValueError(f'Incorrect packed texture {tile}')
+            vector = color.links[0].from_node.inputs['Vector']
+            if len(vector.links) != 1:
+                raise ValueError(f'Missing explicit texture UV binding in tile {tile}')
+            coordinate = vector.links[0].from_node
+            if coordinate.type == 'VECT_MATH':
+                if (coordinate.operation != 'SUBTRACT'
+                        or tuple(coordinate.inputs[1].default_value) != (tile - 1001, 0., 0.)
+                        or len(coordinate.inputs[0].links) != 1):
+                    raise ValueError(f'Incorrect UDIM offset for tile {tile}')
+                coordinate = coordinate.inputs[0].links[0].from_node
+                expected_uv = 'GNM UDIM'
+            else:
+                expected_uv = 'GNM Region'
+            if coordinate.type != 'UVMAP' or coordinate.uv_map != expected_uv:
+                raise ValueError(f'Incorrect corner UV layout for tile {tile}')
             packed[str(tile)] = expected
+        surface = {}
+        shader = mesh.materials[0].node_tree.nodes.get('Principled BSDF')
+        for role, path in surface_files(maps).items():
+            socket = shader.inputs['Roughness' if role == 'roughness' else 'Normal']
+            if len(socket.links) != 1:
+                raise ValueError(f'Missing portable skin {role} binding')
+            node = socket.links[0].from_node
+            if role == 'height':
+                if node.type != 'BUMP' or abs(node.inputs['Distance'].default_value - .00009) > 1e-9:
+                    raise ValueError('Incorrect skin relief scale')
+                if len(node.inputs['Height'].links) != 1:
+                    raise ValueError('Missing portable skin height image')
+                node = node.inputs['Height'].links[0].from_node
+            expected = hashlib.sha256(path.read_bytes()).hexdigest()
+            if (node.type != 'TEX_IMAGE' or not node.image or not node.image.packed_file
+                    or node.image.colorspace_settings.name != 'Non-Color'
+                    or hashlib.sha256(node.image.packed_file.data).hexdigest() != expected):
+                raise ValueError(f'Incorrect packed skin {role} map or color space')
+            skin_color = shader.inputs['Base Color'].links[0].from_node
+            if (len(node.inputs['Vector'].links) != 1
+                    or node.inputs['Vector'].links[0].from_socket != skin_color.inputs['Vector'].links[0].from_socket):
+                raise ValueError(f'Incorrect skin {role} UV binding')
+            surface[role] = expected
         vertices = np.empty(len(mesh.vertices) * 3, dtype=np.float32)
         poses, sequence = motion['poses'], motion['sequence']
         np.testing.assert_array_equal(list(scene['apollo_gnm_pose_sequence']), sequence)
@@ -104,6 +146,7 @@ def verify(template, clip, maps):
             raise ValueError(f'Reopened timeline deviates from GNM by {error} meters')
     return {'scene_sha256': hashlib.sha256(Path(bpy.data.filepath).read_bytes()).hexdigest(),
             'frames_checked': len(sequence), 'max_position_error_m': error, 'maps': packed,
+            'surface_maps': surface,
             'camera_checks': camera_report,
             'resource_checks': {'linked_libraries': 0, 'unpacked_file_images': 0,
                                 'packed_file_images': len(file_images),

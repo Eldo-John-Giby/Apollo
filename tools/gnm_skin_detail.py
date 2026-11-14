@@ -50,15 +50,18 @@ def brow_field():
     return base + fibers * (1 - base), bounds
 
 
-def surface_positions(template, size):
+def surface_positions(template, size, fields=()):
     """Interpolate native vertices at atlas texel centers without changing UVs."""
-    positions = np.full((size, size, 3), np.nan, dtype=np.float32)
+    positions = np.full((size, size, 3 + len(fields)), np.nan, dtype=np.float32)
     with np.load(template, allow_pickle=False) as data:
         selected = data['tiles'] == 1001
         faces, uv = data['quads'][selected], data['legacy'][selected]
         vertices = data['vertices']
         eye = np.mean([data['joints'][list(data['joint_names']).index(f'{s}_eye')]
                        for s in ('left', 'right')], axis=0)
+        vertices = vertices - eye
+        if fields:
+            vertices = np.column_stack((vertices, *(data[name].astype(float) for name in fields)))
     for face, coordinates in zip(faces, uv):
         for corners in ((0, 1, 2), (0, 2, 3)):
             indices = list(corners)
@@ -74,7 +77,7 @@ def surface_positions(template, size):
                                  np.arange(low[1], high[1] + 1))
             weight = (np.stack((xx, yy), axis=-1) - triangle[0]) @ np.linalg.inv(matrix).T
             inside = (weight >= -1e-5).all(axis=-1) & (weight.sum(axis=-1) <= 1 + 1e-5)
-            points = vertices[face[indices]] - eye
+            points = vertices[face[indices]]
             interpolated = points[0] + weight[..., :1] * (points[1] - points[0])
             interpolated += weight[..., 1:] * (points[2] - points[0])
             positions[size - 1 - yy[inside], xx[inside]] = interpolated[inside]

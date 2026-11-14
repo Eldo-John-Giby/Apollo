@@ -35,6 +35,19 @@ def skin_only(head):
 def run(args):
     apply_variant(args.variant)
     source = bpy.context.scene.objects['Apollo_Face']
+    if args.direct_albedo:
+        # Transfer the licensed photograph, not the portrait shader's flat tint
+        # or lipstick overlay. This remains an emission bake, with no lighting.
+        for slot in source.material_slots:
+            material = slot.material.copy()
+            nodes, links = material.node_tree.nodes, material.node_tree.links
+            images = [n for n in nodes if n.type == 'TEX_IMAGE' and n.image]
+            if len(images) != 1:
+                raise ValueError('Direct albedo expects one source photograph per material')
+            shader = nodes.get('Principled BSDF')
+            links.new(images[0].outputs['Color'], shader.inputs['Base Color'])
+            slot.link = 'OBJECT'
+            slot.material = material
     # Fit the neutral MPFB proportion to the public GNM head. The mouth
     # and lower face sit lower relative to the eye midpoint on GNM.
     transform = source.matrix_world.copy()
@@ -73,6 +86,8 @@ if __name__ == '__main__':
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--size', type=int, default=2048)
     parser.add_argument('--mouth-lift', type=float, default=0., help='Local source mouth alignment in meters')
+    parser.add_argument('--direct-albedo', action='store_true',
+                        help='Transfer source color without portrait tint or lipstick')
     parser.add_argument('--cage', type=float, default=.035)
     parser.add_argument('--distance', type=float, default=.115)
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
