@@ -128,7 +128,12 @@ def generate(template, source, out, variant, size, fields=None, photographic=Fal
         nose = np.exp(-(xx / .017)**2 - ((yy + .028) / .025)**2) * front
         forehead = np.exp(-(xx / .044)**2 - ((yy - .040) / .027)**2) * front
         grain = .035 * fine + .045 * broad - .032 * pore
-        patch = smooth((noise(xyz, 1350, seed + 53) - .63) / .20)
+        if freckles >= .1:
+            # Dense visible freckles need rounded follicles with irregular
+            # spacing. Thresholded lattice noise leaves angular pigment cells.
+            patch = pores(xyz, seed + 53, spacing=.0024)
+        else:
+            patch = smooth((noise(xyz, 1350, seed + 53) - .63) / .20)
         pigment = patch * freckles * (cheek + .35 * nose)
         c = color[start:stop]
         c *= 1 + grain[:, None] * (1 - l[:, None])
@@ -170,7 +175,8 @@ def generate(template, source, out, variant, size, fields=None, photographic=Fal
         path = out / name
         Image.fromarray(encoded).save(path)
         outputs[name] = digest(path)
-    report = {'recipe': 'native-surface-v1', 'variant': variant, 'seed': seed,
+    report = {'recipe': 'native-surface-v2' if freckles >= .1 else 'native-surface-v1',
+              'variant': variant, 'seed': seed,
               'template_sha256': digest(template), 'source_sha256': digest(source),
               'source_dimensions': list(source_size), 'output_dimensions': [size, size],
               'detail_origin': 'Source photograph plus authored physical-scale synthesis; resizing adds no photographic detail',

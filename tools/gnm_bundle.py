@@ -198,6 +198,20 @@ def package(args):
     if args.comparison or comparison.is_file():
         png(comparison, (1280, 1340))
         files['evidence/rose-brown-matched.png'] = comparison
+    comparisons = args.textures / 'comparisons'
+    if comparisons.is_dir():
+        compared = read_json(comparisons / 'comparison.json')
+        for variant in VARIANTS:
+            for view in ('front', 'side-udim'):
+                expected = compared['variants'][variant][view]['candidate_sha256']
+                if expected != sha256((args.textures / variant / f'{view}.png').read_bytes()):
+                    raise ValueError(f'{variant}: comparison uses stale {view} image')
+        for name, expected in compared['outputs'].items():
+            path = comparisons / name
+            if path.name != name or sha256(path.read_bytes()) != expected:
+                raise ValueError('Comparison evidence checksum mismatch')
+            files[f'evidence/comparisons/{name}'] = path
+        files['evidence/comparisons/comparison.json'] = comparisons / 'comparison.json'
     for name in ('docs/GNM_INTEGRATION.md', 'docs/GNM_QUICKSTART.md', 'docs/SCORE_IMPROVEMENT.md',
                  'requirements-gnm-build.txt', 'assets/ATTRIBUTION.md',
                  'milestones/eye-expression-2026-11-11/scene.blend',
@@ -212,8 +226,7 @@ def package(args):
                  'wrapper/eyes.py'):
         files[name] = ROOT / name
     if scan_transfer.is_file():
-        for name in ('blink-closure-and-reopening.png', 'final-contact-metrics.json',
-                     'packed-timeline-reopen.json'):
+        for name in ('blink-closure-and-reopening.png', 'final-contact-metrics.json'):
             relative = f'milestones/gnm-score-development/{name}'
             files[relative] = ROOT / relative
     manifest = {'target': 'Google GNM Head v3', 'evaluator_match': 'unconfirmed',
