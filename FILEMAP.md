@@ -99,7 +99,8 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/submission_render.py`, `tools/submission_bundle.py` | Resume CPU timeline PNG rendering with frame receipts and verify the fallback ZIP. |
 | `tools/submission_seams.py` | Repack split local UVs and check face/iris color transfer before rebinding on a fresh scene. |
 | `tools/gnm_template.py`, `tools/gnm_import.py` | Verify the pinned Google model and import its original topology and native UV layouts into Blender. |
-| `tools/gnm_skin_trial.py`, `tools/gnm_skin_fill.py`, `tools/gnm_eye_maps.py`, `tools/gnm_texture_trial.py` | First GNM color-transfer trial with projection coverage, native eye tiles and two-layout renders. |
+| `tools/gnm_skin_trial.py`, `tools/gnm_skin_fill.py`, `tools/gnm_eye_maps.py` | GNM color-transfer build with measured projection coverage and native eye tiles. |
+| `tools/gnm_texture_trial.py` | Fresh-template and timeline texture application, CPU inspection renders and scene/map/build-bound still receipts. |
 | `tools/gnm_skin_detail.py` | Bake reproducible authored brow fibers into the native skin atlas using surface-to-UV correspondence, with source and output hash receipts. |
 | `tools/gnm_surface_maps.py`, `tools/gnm_eye_detail.py` | Author native-UV skin pigment, physical-scale relief/roughness and distinct bilateral iris/sclera maps with reproducible provenance. |
 | `tools/gnm_materials.py` | Shared portable skin surface-map bindings for still and cached motion scenes. |
@@ -110,7 +111,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `apollo_core/submission_timing.py` | Shared deterministic motion timing for the MakeHuman and GNM submission paths. |
 | `tools/gnm_bundle.py`, `tools/gnm_verify.py`, `tools/gnm_rehearse.py` | Verify reopened GNM timelines and package the technical archive from authenticated frame and texture outputs. |
 | `tools/gnm_run.py`, `tools/gnm_motion_variant.py` | Run stills or motion with any texture variant and UV layout; pack hash-bound variant timelines for resumable rendering. |
-| `tools/gnm_review.py` | Prepare anonymous, receipt-bound direction comparisons and a separate assessor key for the deferred teammate review. |
+| `tools/gnm_review.py` | Prepare anonymous, receipt-bound direction and five-variant appearance comparisons with a separate assessor key for deferred teammate review. |
 | `docs/GNM_INTEGRATION.md` | Pinned GNM setup, trial results and qualification status. |
 | `docs/GNM_QUICKSTART.md` | Extracted GNM package setup, runtime commands, output locations and capture inputs. |
 | `tools/live_controls.py` | Optional Blender sidebar invoking the public wrapper; never required or automatically enabled in graded scenes. |

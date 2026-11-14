@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import time
 from zipfile import ZipFile
 
 import numpy as np
@@ -42,8 +43,9 @@ def rehearse(archive, blender, out):
                         '--python-exit-code', '1', '-P', f'tools/{tool}', '--',
                         *options], cwd=out, check=True)
 
-    subprocess.run([sys.executable, 'tools/gnm_run.py', 'still', '--blender', str(blender),
-                    '--out', 'reproduction/still.png'], cwd=out, check=True)
+    subprocess.run([sys.executable, str(out / 'tools/gnm_run.py'), 'still',
+                    '--blender', str(blender), '--out', str(out / 'reproduction/still.png')],
+                   cwd=out.parent, check=True)
     pairs = [('stills/rose-brown.png', 'reproduction/still.png')]
     for layout in ('udim', 'legacy'):
         reproduced = f'reproduction/side-{layout}.png'
@@ -90,6 +92,45 @@ def rehearse(archive, blender, out):
         name = f'frame_{frame:04d}.png'
         if (recovery / name).read_bytes() != (delivered / name).read_bytes():
             raise ValueError(f'Recovery mismatch: {name}')
+    # Terminate an owned Blender process during a real transition render,
+    # then use the shipped runner to release/reacquire the lock and resume.
+    interrupted = out / 'reproduction/interrupted'
+    log_path = out / 'reproduction/interrupted.log'
+    command = [str(blender), '--offline-mode', '-b', '--factory-startup',
+               'timelines/left/expression.blend', '--python-exit-code', '1',
+               '-P', 'tools/submission_render.py', '--', '--out', str(interrupted),
+               '--first', '1', '--last', '26', '--reuse-holds']
+    with log_path.open('wb') as log:
+        process = subprocess.Popen(command, cwd=out, stdout=log, stderr=subprocess.STDOUT)
+        try:
+            deadline = time.monotonic() + 300
+            while process.poll() is None and time.monotonic() < deadline:
+                lines = log_path.read_text(encoding='utf-8', errors='replace').splitlines()
+                if any('Fra:22 ' in line and 'Sample 1/32' in line for line in lines):
+                    break
+                time.sleep(.2)
+            else:
+                raise RuntimeError('Could not interrupt the owned transition render')
+            preserved = interrupted / 'frame_0001.png'
+            stamp = preserved.stat().st_mtime_ns
+            preserved_hash = hashlib.sha256(preserved.read_bytes()).hexdigest()
+        finally:
+            if process.poll() is None:
+                process.terminate()
+            process.wait(timeout=30)
+    subprocess.run([sys.executable, 'tools/gnm_run.py', 'left', '--blender', str(blender),
+                    '--out', str(interrupted), '--first', '1', '--last', '26'],
+                   cwd=out, check=True)
+    if (preserved.stat().st_mtime_ns != stamp
+            or hashlib.sha256(preserved.read_bytes()).hexdigest() != preserved_hash):
+        raise ValueError('Interrupted resume rewrote a valid frame')
+    for frame in range(1, 27):
+        name = f'frame_{frame:04d}.png'
+        pairs.append((f'timelines/left/frames/{name}', f'reproduction/interrupted/{name}'))
+    (out / 'reproduction/interruption.json').write_text(json.dumps({
+        'interrupted_frame': 22, 'valid_frame_preserved': True, 'frames_recovered': 26,
+        'scene_sha256': manifest['modes']['left']['settings']['scene_sha256']},
+        indent=2) + '\n', encoding='utf-8')
     # A non-default motion variant must wrap identically in both layouts and
     # keep the cached packed scene stable across resume invocations.
     for layout in ('udim', 'legacy'):
