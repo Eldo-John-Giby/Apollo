@@ -20,6 +20,7 @@ def pixels(path):
 def rehearse(archive, blender, out):
     out.mkdir(parents=True, exist_ok=False)
     out = out.resolve()
+    (out / 'reproduction').mkdir()
     with ZipFile(archive) as bundle:
         manifest = json.loads(bundle.read('manifest.json'))
         expected = manifest['sha256']
@@ -49,6 +50,13 @@ def rehearse(archive, blender, out):
         run('model/neutral.blend', 'gnm_texture_trial.py', '--maps', 'textures/rose-brown',
             '--layout', layout, '--out', reproduced, '--angle', '--side-light')
         pairs.append((f'evidence/rose-brown-side-{layout}.png', reproduced))
+    for variant in manifest.get('side_layout_max_rgb_error_by_variant', {}):
+        if variant == 'rose-brown':
+            continue
+        reproduced = f'reproduction/{variant}-legacy.png'
+        run('model/neutral.blend', 'gnm_texture_trial.py', '--maps', f'textures/{variant}',
+            '--layout', 'legacy', '--out', reproduced, '--angle', '--side-light')
+        pairs.append((f'evidence/side-light-legacy/{variant}.png', reproduced))
     for mode in ('left', 'right', 'generate-motion'):
         root = f'timelines/{mode}'
         run(f'{root}/expression.blend', 'gnm_verify.py', '--maps', 'textures/rose-brown',
@@ -59,6 +67,12 @@ def rehearse(archive, blender, out):
     for frame in (21, 22):
         name = f'frame_{frame:04d}.png'
         pairs.append((f'timelines/left/frames/{name}', f'reproduction/left/{name}'))
+    for mode, frame in (('right', 26), ('generate-motion', 107)):
+        root = f'timelines/{mode}'
+        run(f'{root}/expression.blend', 'submission_render.py',
+            '--out', f'reproduction/{mode}', '--first', str(frame), '--last', str(frame))
+        name = f'frame_{frame:04d}.png'
+        pairs.append((f'{root}/frames/{name}', f'reproduction/{mode}/{name}'))
     # Exercise the shipped resume command against a copy of the delivered receipt.
     delivered = out / 'timelines/left/frames'
     recovery = out / 'reproduction/recovery'
