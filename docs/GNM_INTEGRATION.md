@@ -86,3 +86,26 @@ after reopening. The closure crease is uneven in places, and the viewing
 check does not prove that the lid surface avoids all cornea intersections.
 The 2048-pixel skin bake still needs nearest-texel repair for 0.144% of
 masked texels, with a maximum repair distance of 26.6 pixels.
+
+
+## Verify and reproduce the technical bundle
+
+After extracting the archive, use Blender 4.5.15 LTS from the extracted
+directory. The neutral scene, packed timelines, and color maps work with
+Blender alone. The upstream Python environment is only needed to generate
+geometry from the pinned model.
+
+```powershell
+& $env:BLENDER_BIN -b --factory-startup model/neutral.blend --python-exit-code 1 -P tools/gnm_texture_trial.py -- --maps textures/rose-brown --out reproduced.png --size 1024 --samples 32
+& $env:BLENDER_BIN -b --factory-startup timelines/left/expression.blend --python-exit-code 1 -P tools/gnm_verify.py -- --template model/template.npz --clip timelines/left/geometry.npz --maps textures/rose-brown --out reopened.json
+& $env:BLENDER_BIN -b --factory-startup timelines/left/expression.blend --python-exit-code 1 -P tools/submission_render.py -- --out reproduced-frames --first 21 --last 22
+```
+
+The reopened timeline verifier checks both stored UV arrays, polygon
+connectivity, packed texture bytes and all 192 evaluated poses against the
+geometry generated with the pinned Google model. Build the archive from
+qualified candidate output directories using:
+
+```powershell
+python tools/gnm_bundle.py --motion out/gnm-candidate --textures out/gnm-five --template out/template --license out/google-gnm/LICENSE --out out/apollo-gnm-technical.zip
+```
