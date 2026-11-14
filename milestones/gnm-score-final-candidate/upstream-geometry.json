@@ -1,0 +1,30 @@
+{
+  "model_sha256": "61d78bbfb4ad8e0b38495804a4caef3214d3df00f8c3f68761e63b41ce3747eb",
+  "reference": "Pinned upstream gnm.shape.gnm_numpy.GNM evaluated with current native controls",
+  "tolerance_m": 1e-06,
+  "source_sha256": {
+    "tools/gnm_gaze_trial.py": "8044b8125ce8f116f7bf4cebbd720bda65445b05e7a06bf2dfa7cd834429d85a",
+    "tools/gnm_blink.py": "edf7f00cc277de2f3993bc87e8bb1ef1de7c6f0640c3c8468a31aec9283ab0f9",
+    "apollo_core/submission_timing.py": "b6a4f09e67dcc558ab44a3211ca48d7a67f2456a167281407551e2ce7838f60a"
+  },
+  "modes": {
+    "generate-motion": {
+      "frames_checked": 192,
+      "unique_poses": 39,
+      "max_position_error_m": 0.0,
+      "geometry_sha256": "9cc1ea16c708c273b9eee8b04fafada9ba48051223ede8a6bde1e2e80eddce4d"
+    },
+    "left": {
+      "frames_checked": 192,
+      "unique_poses": 13,
+      "max_position_error_m": 0.0,
+      "geometry_sha256": "2d5afc7683f0d46db4f3f1be2e0edade49fdf8aa90cff7b2b468203f72cdcbfc"
+    },
+    "right": {
+      "frames_checked": 192,
+      "unique_poses": 13,
+      "max_position_error_m": 0.0,
+      "geometry_sha256": "b011767670d10395cb8abdb8188acd0c433f268c9fdb034ebc5a080725d51e11"
+    }
+  }
+}

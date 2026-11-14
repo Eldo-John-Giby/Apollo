@@ -54,6 +54,23 @@ def package(args):
     textures = {}
     layout_errors = {}
     scan_transfer = args.textures / 'scan-transfer.json'
+    if scan_transfer.is_file():
+        upstream_path = args.motion / 'upstream-reference.json'
+        upstream = read_json(upstream_path)
+        source_names = ('tools/gnm_gaze_trial.py', 'tools/gnm_blink.py',
+                        'apollo_core/submission_timing.py')
+        if (upstream['model_sha256'] != MODEL_SHA256
+                or upstream['tolerance_m'] != 1e-6
+                or upstream['source_sha256'] != {
+                    name: sha256((ROOT / name).read_bytes()) for name in source_names}
+                or set(upstream['modes']) != set(modes)):
+            raise ValueError('Upstream reference does not match the current model and controls')
+        for mode, checked in upstream['modes'].items():
+            if (checked['frames_checked'] != 192 or checked['max_position_error_m'] > 1e-6
+                    or checked['geometry_sha256'] != sha256(
+                        (args.motion / mode / 'geometry.npz').read_bytes())):
+                raise ValueError(f'{mode}: upstream geometry reference mismatch')
+        files['evidence/upstream-geometry.json'] = upstream_path
     for variant in VARIANTS:
         source = args.textures / variant
         still = source / 'front.png'
