@@ -5,6 +5,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from zipfile import ZipFile
 
+from PIL import Image, ImageChops
+
 from gnm_template import MODEL_SHA256
 from submission_bundle import ROOT, VARIANTS, add_frames, png, read_json, sha256
 
@@ -37,6 +39,18 @@ def package(args):
             files[f'textures/{variant}/{name}'] = path
             entries[str(tile)] = {'file': name, 'sha256': sha256(path.read_bytes())}
         textures[variant] = entries
+    reference = args.textures / 'rose-brown'
+    side_udim = reference / 'side-udim.png'
+    side_legacy = reference / 'side-legacy.png'
+    with Image.open(side_udim) as udim, Image.open(side_legacy) as legacy:
+        if udim.size != legacy.size:
+            raise ValueError('UV comparison renders have different dimensions')
+        differences = ImageChops.difference(udim.convert('RGB'), legacy.convert('RGB'))
+        layout_error = max(high for _, high in differences.getextrema())
+        if layout_error > 1:
+            raise ValueError(f'UV layouts differ by {layout_error} RGB levels')
+    files['evidence/rose-brown-side-udim.png'] = side_udim
+    files['evidence/rose-brown-side-legacy.png'] = side_legacy
     for mode, mode_receipt in modes.items():
         path = args.motion / mode / 'reopen.json'
         reopened = read_json(path)
@@ -60,7 +74,8 @@ def package(args):
                  'wrapper/eyes.py'):
         files[name] = ROOT / name
     manifest = {'target': 'Google GNM Head v3', 'evaluator_match': 'unconfirmed',
-                'modes': modes, 'textures': textures, 'sha256': {}}
+                'modes': modes, 'textures': textures,
+                'side_layout_max_rgb_error': layout_error, 'sha256': {}}
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with TemporaryDirectory(dir=args.out.parent) as scratch:
         temporary = Path(scratch) / args.out.name
