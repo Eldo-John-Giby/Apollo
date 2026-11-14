@@ -1,0 +1,582 @@
+{
+  "baseline_archive_sha256": "3195dfcb1e1bf8238df1a193d29507e714d0e31dea35058d3412e9e5b087cc79",
+  "variants": {
+    "rose-brown": {
+      "front": {
+        "baseline_sha256": "b0054aec5bc0e0fcbc6a0fc62e947c043c25a34e5f495f8f53fb30b6db3df1bb",
+        "candidate_sha256": "ad38d6acdd8be805e2d6b21961fd8bf1bacd8a2743026d1592bd44bbfee61674",
+        "candidate_render": {
+          "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+          "maps": {
+            "1001": "633e87b516b0e894afc98fafe2d9957b7b1ec3e49f8e354c6fa41aa34ce82b91",
+            "1002": "b562723de991dfa196ee4e93f05acfc7b15f36cca645ba47033120c2eb52b22c",
+            "1004": "039dbbb22e2de0dc51d513099f8ceb19ec41d5dea0fa74677d3e4e8f49d51f11",
+            "roughness": "2d30496d5e74077b62c07f1fe49e192e1c5716c059f4ddfe89da9f2ad724fde1",
+            "height": "40b54cbf975cf4b83741d865e42bdc9b033eca93b32efefa5430159438ec8a9a"
+          },
+          "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+          "blender": "4.5.15 LTS",
+          "blender_build": "5afeabba6097",
+          "device": "CPU",
+          "samples": 32,
+          "resolution": [
+            1024,
+            1024
+          ],
+          "frame": 1,
+          "layout": "udim",
+          "camera_lens_mm": 64.0,
+          "camera_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.10289920121431351,
+              -0.994691789150238,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.994691789150238,
+              0.10289920121431351,
+              0.014999999664723873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "angle": false,
+          "side_light": false,
+          "output_sha256": "ad38d6acdd8be805e2d6b21961fd8bf1bacd8a2743026d1592bd44bbfee61674"
+        }
+      },
+      "side-udim": {
+        "baseline_sha256": "c0c4e7916a59ef80f55bf1f5c8d4f33b321cb01836a1ca1e8dce00d9c20b48cb",
+        "candidate_sha256": "804a0d4afc76b0b4309e011809e48d4cdc64c185ff1d653d6a4b8a325df1e576",
+        "candidate_render": {
+          "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+          "maps": {
+            "1001": "633e87b516b0e894afc98fafe2d9957b7b1ec3e49f8e354c6fa41aa34ce82b91",
+            "1002": "b562723de991dfa196ee4e93f05acfc7b15f36cca645ba47033120c2eb52b22c",
+            "1004": "039dbbb22e2de0dc51d513099f8ceb19ec41d5dea0fa74677d3e4e8f49d51f11",
+            "roughness": "2d30496d5e74077b62c07f1fe49e192e1c5716c059f4ddfe89da9f2ad724fde1",
+            "height": "40b54cbf975cf4b83741d865e42bdc9b033eca93b32efefa5430159438ec8a9a"
+          },
+          "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+          "blender": "4.5.15 LTS",
+          "blender_build": "5afeabba6097",
+          "device": "CPU",
+          "samples": 8,
+          "resolution": [
+            640,
+            640
+          ],
+          "frame": 1,
+          "layout": "udim",
+          "camera_lens_mm": 64.0,
+          "camera_matrix": [
+            [
+              0.9639925956726074,
+              -0.026388412341475487,
+              0.26461654901504517,
+              0.1599999964237213
+            ],
+            [
+              0.26592907309532166,
+              0.09565788507461548,
+              -0.9592347741127014,
+              -0.5799999833106995
+            ],
+            [
+              2.0336333506065785e-08,
+              0.9950644373893738,
+              0.09923093765974045,
+              0.014999999664723873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "angle": true,
+          "side_light": true,
+          "output_sha256": "804a0d4afc76b0b4309e011809e48d4cdc64c185ff1d653d6a4b8a325df1e576"
+        }
+      }
+    },
+    "golden-hazel": {
+      "front": {
+        "baseline_sha256": "b6c45991d70076ee6c412d921deb024b23c3ca99a2b775652a6e0d1f775606bd",
+        "candidate_sha256": "34443ea46ac97e373309bc3c7eed144b77f65a78a0d5c98ce994f1f9bcb01b90",
+        "candidate_render": {
+          "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+          "maps": {
+            "1001": "534cbcc6fb01c0223bef141e5afafbc1551653284e5c8664912681de429cc353",
+            "1002": "84c5647b31a3d644fc2f2b906b7759e647983c1a8c40eebef6fd87bd65912cae",
+            "1004": "6e3b671c1920ef467736b94e1de5e23e7841e03ae326a78310f36c9235673314",
+            "roughness": "60d84d0e7fe6989b1a4e77ed3d82c78edd25c9347b7d5f643486a80b279c244f",
+            "height": "ffebdd31e5ee29682f86fd1a200caa7014dc8a66d9e9a5d9d76644e9fbb794e1"
+          },
+          "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+          "blender": "4.5.15 LTS",
+          "blender_build": "5afeabba6097",
+          "device": "CPU",
+          "samples": 32,
+          "resolution": [
+            1024,
+            1024
+          ],
+          "frame": 1,
+          "layout": "udim",
+          "camera_lens_mm": 64.0,
+          "camera_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.10289920121431351,
+              -0.994691789150238,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.994691789150238,
+              0.10289920121431351,
+              0.014999999664723873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "angle": false,
+          "side_light": false,
+          "output_sha256": "34443ea46ac97e373309bc3c7eed144b77f65a78a0d5c98ce994f1f9bcb01b90"
+        }
+      },
+      "side-udim": {
+        "baseline_sha256": "7a904e3e403449311aa9727550a18936216b11f7eebb5e008fc5e5fb046f0a88",
+        "candidate_sha256": "13e6bb8112777b3a3e17dd9d71e22d03d4025d1f29e5438bfd0491ab04eb5ef8",
+        "candidate_render": {
+          "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+          "maps": {
+            "1001": "534cbcc6fb01c0223bef141e5afafbc1551653284e5c8664912681de429cc353",
+            "1002": "84c5647b31a3d644fc2f2b906b7759e647983c1a8c40eebef6fd87bd65912cae",
+            "1004": "6e3b671c1920ef467736b94e1de5e23e7841e03ae326a78310f36c9235673314",
+            "roughness": "60d84d0e7fe6989b1a4e77ed3d82c78edd25c9347b7d5f643486a80b279c244f",
+            "height": "ffebdd31e5ee29682f86fd1a200caa7014dc8a66d9e9a5d9d76644e9fbb794e1"
+          },
+          "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+          "blender": "4.5.15 LTS",
+          "blender_build": "5afeabba6097",
+          "device": "CPU",
+          "samples": 8,
+          "resolution": [
+            640,
+            640
+          ],
+          "frame": 1,
+          "layout": "udim",
+          "camera_lens_mm": 64.0,
+          "camera_matrix": [
+            [
+              0.9639925956726074,
+              -0.026388412341475487,
+              0.26461654901504517,
+              0.1599999964237213
+            ],
+            [
+              0.26592907309532166,
+              0.09565788507461548,
+              -0.9592347741127014,
+              -0.5799999833106995
+            ],
+            [
+              2.0336333506065785e-08,
+              0.9950644373893738,
+              0.09923093765974045,
+              0.014999999664723873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "angle": true,
+          "side_light": true,
+          "output_sha256": "13e6bb8112777b3a3e17dd9d71e22d03d4025d1f29e5438bfd0491ab04eb5ef8"
+        }
+      }
+    },
+    "olive-amber": {
+      "front": {
+        "baseline_sha256": "73ce070ce0f307e7804ffe4fede2b2a460e285ac39a2e2a58c75f3ce0e2fa621",
+        "candidate_sha256": "1836c5a3e335c6384cde4e2482b3bae19837bad9b1aca45233b1f83a789bc90d",
+        "candidate_render": {
+          "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+          "maps": {
+            "1001": "cf21269a51a6420698c3db28f01fd2e0f74d3a009ec118df050a54756821e444",
+            "1002": "f6013cfb567afdd893e87c27a4c2c1b61db2c4ff28c4a98c0b6b61343acc6d5c",
+            "1004": "b165cddd1f7e825c38136ed2f8ed017e59bdf0b1bb4a846ffa317e35c14a66e5",
+            "roughness": "7f21795761bb2b316a121fd79dde4aff6c29cf194b5d7463381023d37de719e1",
+            "height": "bacd0b5b80b9aaec6b0936a4e2d62bfddf4bc791f812fd83b09783918672690d"
+          },
+          "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+          "blender": "4.5.15 LTS",
+          "blender_build": "5afeabba6097",
+          "device": "CPU",
+          "samples": 32,
+          "resolution": [
+            1024,
+            1024
+          ],
+          "frame": 1,
+          "layout": "udim",
+          "camera_lens_mm": 64.0,
+          "camera_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.10289920121431351,
+              -0.994691789150238,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.994691789150238,
+              0.10289920121431351,
+              0.014999999664723873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "angle": false,
+          "side_light": false,
+          "output_sha256": "1836c5a3e335c6384cde4e2482b3bae19837bad9b1aca45233b1f83a789bc90d"
+        }
+      },
+      "side-udim": {
+        "baseline_sha256": "2ddf2be1ebb251ee34a29ba408a99c4b90ad7e9f0a0f9e0c2668524a6ee1aab4",
+        "candidate_sha256": "d4bb0e523ea5827535e8b90e1412a2e479a6323feec4f03252e9823b147ca30a",
+        "candidate_render": {
+          "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+          "maps": {
+            "1001": "cf21269a51a6420698c3db28f01fd2e0f74d3a009ec118df050a54756821e444",
+            "1002": "f6013cfb567afdd893e87c27a4c2c1b61db2c4ff28c4a98c0b6b61343acc6d5c",
+            "1004": "b165cddd1f7e825c38136ed2f8ed017e59bdf0b1bb4a846ffa317e35c14a66e5",
+            "roughness": "7f21795761bb2b316a121fd79dde4aff6c29cf194b5d7463381023d37de719e1",
+            "height": "bacd0b5b80b9aaec6b0936a4e2d62bfddf4bc791f812fd83b09783918672690d"
+          },
+          "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+          "blender": "4.5.15 LTS",
+          "blender_build": "5afeabba6097",
+          "device": "CPU",
+          "samples": 8,
+          "resolution": [
+            640,
+            640
+          ],
+          "frame": 1,
+          "layout": "udim",
+          "camera_lens_mm": 64.0,
+          "camera_matrix": [
+            [
+              0.9639925956726074,
+              -0.026388412341475487,
+              0.26461654901504517,
+              0.1599999964237213
+            ],
+            [
+              0.26592907309532166,
+              0.09565788507461548,
+              -0.9592347741127014,
+              -0.5799999833106995
+            ],
+            [
+              2.0336333506065785e-08,
+              0.9950644373893738,
+              0.09923093765974045,
+              0.014999999664723873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "angle": true,
+          "side_light": true,
+          "output_sha256": "d4bb0e523ea5827535e8b90e1412a2e479a6323feec4f03252e9823b147ca30a"
+        }
+      }
+    },
+    "neutral-deep": {
+      "front": {
+        "baseline_sha256": "74348bc36b414dbbcb2dec3fd6277b27c79b663beb6deedb925f47b0a58f2fb0",
+        "candidate_sha256": "f99a34149cfccbb703befe84c29d9d97bed0770ac40e4d2a098a269c5b3becdd",
+        "candidate_render": {
+          "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+          "maps": {
+            "1001": "84b34c8c7eddd80c9f13e1ea38cfe71ec86baee746b257465477a177d2769891",
+            "1002": "0dfdb3ba78e7c8e5605b4bf8c72adcec343d45697eb9163716420e6e8d3c7db7",
+            "1004": "972c0b8066e89db7c88d2d11037224a30d4b9a42e388bed91fead147ec290ffc",
+            "roughness": "aca2bf02dac77b56c8d64624b8365f1a6acbae1cee5f4378f47ec8d641b379c8",
+            "height": "d15df308df5cbc93f00c879066114d5c634de0b2c156088c436173ed98a42e4c"
+          },
+          "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+          "blender": "4.5.15 LTS",
+          "blender_build": "5afeabba6097",
+          "device": "CPU",
+          "samples": 32,
+          "resolution": [
+            1024,
+            1024
+          ],
+          "frame": 1,
+          "layout": "udim",
+          "camera_lens_mm": 64.0,
+          "camera_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.10289920121431351,
+              -0.994691789150238,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.994691789150238,
+              0.10289920121431351,
+              0.014999999664723873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "angle": false,
+          "side_light": false,
+          "output_sha256": "f99a34149cfccbb703befe84c29d9d97bed0770ac40e4d2a098a269c5b3becdd"
+        }
+      },
+      "side-udim": {
+        "baseline_sha256": "1f567bb2d7eec4f4775a5c517ee11a73d52044633c468f5c017b5b6e986d0b3b",
+        "candidate_sha256": "0956c03491c7642ab36a3de6ea2e151605548468ca4c849249887ab913191806",
+        "candidate_render": {
+          "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+          "maps": {
+            "1001": "84b34c8c7eddd80c9f13e1ea38cfe71ec86baee746b257465477a177d2769891",
+            "1002": "0dfdb3ba78e7c8e5605b4bf8c72adcec343d45697eb9163716420e6e8d3c7db7",
+            "1004": "972c0b8066e89db7c88d2d11037224a30d4b9a42e388bed91fead147ec290ffc",
+            "roughness": "aca2bf02dac77b56c8d64624b8365f1a6acbae1cee5f4378f47ec8d641b379c8",
+            "height": "d15df308df5cbc93f00c879066114d5c634de0b2c156088c436173ed98a42e4c"
+          },
+          "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+          "blender": "4.5.15 LTS",
+          "blender_build": "5afeabba6097",
+          "device": "CPU",
+          "samples": 8,
+          "resolution": [
+            640,
+            640
+          ],
+          "frame": 1,
+          "layout": "udim",
+          "camera_lens_mm": 64.0,
+          "camera_matrix": [
+            [
+              0.9639925956726074,
+              -0.026388412341475487,
+              0.26461654901504517,
+              0.1599999964237213
+            ],
+            [
+              0.26592907309532166,
+              0.09565788507461548,
+              -0.9592347741127014,
+              -0.5799999833106995
+            ],
+            [
+              2.0336333506065785e-08,
+              0.9950644373893738,
+              0.09923093765974045,
+              0.014999999664723873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "angle": true,
+          "side_light": true,
+          "output_sha256": "0956c03491c7642ab36a3de6ea2e151605548468ca4c849249887ab913191806"
+        }
+      }
+    },
+    "cool-grey": {
+      "front": {
+        "baseline_sha256": "1d46e5a637b6530c8442ead07f3817d671c3124482f508b948eddf0ad351ed56",
+        "candidate_sha256": "bd4ffc7c5b55325cae6698a3f66400648b2d97385a1789c420807c327db979f9",
+        "candidate_render": {
+          "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+          "maps": {
+            "1001": "04f57d1256e6f5239ccd665dcaab09465c2f38fce3988628cc6b36cd3dd8d2b8",
+            "1002": "d0af72515438092a2a677a60a4fa5426b03941d093a6d8dc50ed7a7136816dbd",
+            "1004": "5c62233402ff742353b6f9767cf5dd40e6c5ff4a53b896b155948495f638f657",
+            "roughness": "bdf35e593983075b984f4425de6b091f1b1b61a26396ac72c5ffe4c4b6dee253",
+            "height": "37ef68dff8530be7ab07e2a9d07623a8ea8f947b7bdb90eeeb26a066251fed82"
+          },
+          "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+          "blender": "4.5.15 LTS",
+          "blender_build": "5afeabba6097",
+          "device": "CPU",
+          "samples": 32,
+          "resolution": [
+            1024,
+            1024
+          ],
+          "frame": 1,
+          "layout": "udim",
+          "camera_lens_mm": 64.0,
+          "camera_matrix": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.10289920121431351,
+              -0.994691789150238,
+              -0.5799999833106995
+            ],
+            [
+              0.0,
+              0.994691789150238,
+              0.10289920121431351,
+              0.014999999664723873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "angle": false,
+          "side_light": false,
+          "output_sha256": "bd4ffc7c5b55325cae6698a3f66400648b2d97385a1789c420807c327db979f9"
+        }
+      },
+      "side-udim": {
+        "baseline_sha256": "d035747ab68f2a56931063f59eb82df50515ad780a730fcbe376b43c8cea73bd",
+        "candidate_sha256": "6bdacd503ca3229008c69da051a728810025212fcac7d8b78cca96c97fe0dfe1",
+        "candidate_render": {
+          "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+          "maps": {
+            "1001": "04f57d1256e6f5239ccd665dcaab09465c2f38fce3988628cc6b36cd3dd8d2b8",
+            "1002": "d0af72515438092a2a677a60a4fa5426b03941d093a6d8dc50ed7a7136816dbd",
+            "1004": "5c62233402ff742353b6f9767cf5dd40e6c5ff4a53b896b155948495f638f657",
+            "roughness": "bdf35e593983075b984f4425de6b091f1b1b61a26396ac72c5ffe4c4b6dee253",
+            "height": "37ef68dff8530be7ab07e2a9d07623a8ea8f947b7bdb90eeeb26a066251fed82"
+          },
+          "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+          "blender": "4.5.15 LTS",
+          "blender_build": "5afeabba6097",
+          "device": "CPU",
+          "samples": 8,
+          "resolution": [
+            640,
+            640
+          ],
+          "frame": 1,
+          "layout": "udim",
+          "camera_lens_mm": 64.0,
+          "camera_matrix": [
+            [
+              0.9639925956726074,
+              -0.026388412341475487,
+              0.26461654901504517,
+              0.1599999964237213
+            ],
+            [
+              0.26592907309532166,
+              0.09565788507461548,
+              -0.9592347741127014,
+              -0.5799999833106995
+            ],
+            [
+              2.0336333506065785e-08,
+              0.9950644373893738,
+              0.09923093765974045,
+              0.014999999664723873
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "angle": true,
+          "side_light": true,
+          "output_sha256": "6bdacd503ca3229008c69da051a728810025212fcac7d8b78cca96c97fe0dfe1"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "cool-grey-eyes.png": "adaf8c6b1f3247914f08332234d5fe13d8f6ce5c9c23a2fc5d1c347408840c25",
+    "cool-grey-matched.png": "8592cedb76ebdf723782e4b33245fa18a5f6ffcc226c20b9e66531b84540187c",
+    "cool-grey-skin.png": "3d81a0cebb9af42e31ae0274ce6242e0419b58aa71f66a73e72f7e2715ed45fd",
+    "golden-hazel-eyes.png": "bc71130a795373e037071e52ca33f8f545a18523b711381c1888a421b2a82d23",
+    "golden-hazel-matched.png": "f0f4b0f04c7b525d1a93e535d8821ec04d136a27e0c853a5669b443c0118d024",
+    "golden-hazel-skin.png": "6234817ac32c74a75fe22573e9cb53417d98f9e0d484e2faa450fe3306c618c3",
+    "neutral-deep-eyes.png": "1483de30b449223d9ad5441fbbe6e6174898aa0aadecb411c61e5a891845cb90",
+    "neutral-deep-matched.png": "a8abfdb43379347a541cc91bb14367daeab851c2a4485a78f45079f75540dec8",
+    "neutral-deep-skin.png": "9abcfb4e7b07ff418e8b5d8e9f7fe3351ceb92f9189f31a5cbc79741d9e30980",
+    "olive-amber-eyes.png": "3235146f31262556f87d83830b5edfd416d218d026dc2fddf011368f7653415d",
+    "olive-amber-matched.png": "b622d635bb776c96bb8aab392bb55dbe658f2733dc395cb0578698240c11071f",
+    "olive-amber-skin.png": "f7749b0a42d76552a8edbc3d78916e1e2ef9eab2ffdfdec594bed5284706c7fb",
+    "rose-brown-eyes.png": "b5e4af7794a633fdd2cc102392461ef945efd8e6796a4d93191375c567d7a44a",
+    "rose-brown-matched.png": "06719ef5cf782b36867c46a0a10cc29331d3a02cfcb6c9797938cc25d4b1e4c0",
+    "rose-brown-skin.png": "801b1f1d0ad0a9880613a2bb0b7c789d9975639b8e4fc313a71e54dc1c2e6462"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "status": "passed",
+  "variants": {
+    "rose-brown": {
+      "stills": {
+        "front": "ad38d6acdd8be805e2d6b21961fd8bf1bacd8a2743026d1592bd44bbfee61674",
+        "side-udim": "804a0d4afc76b0b4309e011809e48d4cdc64c185ff1d653d6a4b8a325df1e576",
+        "side-legacy": "ec698e84056e44330cdbe67475cb6013635fb46e39f34d0e00de64236b6e2b99",
+        "angle-neutral": "b2a2d78de28f50f11fecab5cd2799a231ba6d5b3c2086f131238ef31ad7f0ab7",
+        "front-oblique": "f2add289423bd9c54b3dd8618521fb92cc5a35b1eacbb89a6c2b0ce0f976e54b",
+        "eyes": "dd7ac45f70e3184954199660effbcd0bf05a3552b020199bd674912e14dfdd26"
+      },
+      "maps": {
+        "1001": "633e87b516b0e894afc98fafe2d9957b7b1ec3e49f8e354c6fa41aa34ce82b91",
+        "1002": "b562723de991dfa196ee4e93f05acfc7b15f36cca645ba47033120c2eb52b22c",
+        "1004": "039dbbb22e2de0dc51d513099f8ceb19ec41d5dea0fa74677d3e4e8f49d51f11",
+        "roughness": "2d30496d5e74077b62c07f1fe49e192e1c5716c059f4ddfe89da9f2ad724fde1",
+        "height": "40b54cbf975cf4b83741d865e42bdc9b033eca93b32efefa5430159438ec8a9a"
+      },
+      "side_layout_max_rgb_error": 1
+    },
+    "golden-hazel": {
+      "stills": {
+        "front": "34443ea46ac97e373309bc3c7eed144b77f65a78a0d5c98ce994f1f9bcb01b90",
+        "side-udim": "13e6bb8112777b3a3e17dd9d71e22d03d4025d1f29e5438bfd0491ab04eb5ef8",
+        "side-legacy": "613e72a362ae2298a812d21821634ed1d322c6159ca5e156b7c41d77351a61fa",
+        "angle-neutral": "7263efbca2e8e1dab254479e51dc26fd96f8b77ef9ae4fc72499c9916dc7038c",
+        "front-oblique": "649ac1e97e93026294ed3d33129466672a833a065c499b625142886940610de8",
+        "eyes": "f1a40d1b7446bdf5641512e3709b4914de01842d49d858f19958855c265f052b"
+      },
+      "maps": {
+        "1001": "534cbcc6fb01c0223bef141e5afafbc1551653284e5c8664912681de429cc353",
+        "1002": "84c5647b31a3d644fc2f2b906b7759e647983c1a8c40eebef6fd87bd65912cae",
+        "1004": "6e3b671c1920ef467736b94e1de5e23e7841e03ae326a78310f36c9235673314",
+        "roughness": "60d84d0e7fe6989b1a4e77ed3d82c78edd25c9347b7d5f643486a80b279c244f",
+        "height": "ffebdd31e5ee29682f86fd1a200caa7014dc8a66d9e9a5d9d76644e9fbb794e1"
+      },
+      "side_layout_max_rgb_error": 1
+    },
+    "olive-amber": {
+      "stills": {
+        "front": "1836c5a3e335c6384cde4e2482b3bae19837bad9b1aca45233b1f83a789bc90d",
+        "side-udim": "d4bb0e523ea5827535e8b90e1412a2e479a6323feec4f03252e9823b147ca30a",
+        "side-legacy": "318ac7800f2def05ceb0b13ae880e9f700bce2660f70f3d9f9e0849f0dcb3d98",
+        "angle-neutral": "31d6310e4f41e53fcd872030bf58dba4ba4b09a740f9fbdeb155505e713547f7",
+        "front-oblique": "6416bee6c4a2159085ad246dd42575f098bd413c2f886c677c36075feb161671",
+        "eyes": "533aba7763655910dd132eac8bc3f9d55d2ccd3ebfed573282a508d5a9f3dc9c"
+      },
+      "maps": {
+        "1001": "cf21269a51a6420698c3db28f01fd2e0f74d3a009ec118df050a54756821e444",
+        "1002": "f6013cfb567afdd893e87c27a4c2c1b61db2c4ff28c4a98c0b6b61343acc6d5c",
+        "1004": "b165cddd1f7e825c38136ed2f8ed017e59bdf0b1bb4a846ffa317e35c14a66e5",
+        "roughness": "7f21795761bb2b316a121fd79dde4aff6c29cf194b5d7463381023d37de719e1",
+        "height": "bacd0b5b80b9aaec6b0936a4e2d62bfddf4bc791f812fd83b09783918672690d"
+      },
+      "side_layout_max_rgb_error": 1
+    },
+    "neutral-deep": {
+      "stills": {
+        "front": "f99a34149cfccbb703befe84c29d9d97bed0770ac40e4d2a098a269c5b3becdd",
+        "side-udim": "0956c03491c7642ab36a3de6ea2e151605548468ca4c849249887ab913191806",
+        "side-legacy": "feb49119d58417b861e1a644af27a0bd34d3c882ae77752f29424b4358a6c605",
+        "angle-neutral": "50c76544c6a38282dbc8db18c630219b77bd32e909b14918539be891fafb102f",
+        "front-oblique": "b66d7ff4e6dcdd98397eb33492d79179d70c5414feb593eb2abd7811bf078287",
+        "eyes": "3d8b5f57eed86f2ec1079d09bac76970f32f8039703c9cb3ca8ca14fdb3b3dda"
+      },
+      "maps": {
+        "1001": "84b34c8c7eddd80c9f13e1ea38cfe71ec86baee746b257465477a177d2769891",
+        "1002": "0dfdb3ba78e7c8e5605b4bf8c72adcec343d45697eb9163716420e6e8d3c7db7",
+        "1004": "972c0b8066e89db7c88d2d11037224a30d4b9a42e388bed91fead147ec290ffc",
+        "roughness": "aca2bf02dac77b56c8d64624b8365f1a6acbae1cee5f4378f47ec8d641b379c8",
+        "height": "d15df308df5cbc93f00c879066114d5c634de0b2c156088c436173ed98a42e4c"
+      },
+      "side_layout_max_rgb_error": 1
+    },
+    "cool-grey": {
+      "stills": {
+        "front": "bd4ffc7c5b55325cae6698a3f66400648b2d97385a1789c420807c327db979f9",
+        "side-udim": "6bdacd503ca3229008c69da051a728810025212fcac7d8b78cca96c97fe0dfe1",
+        "side-legacy": "7e740752903f4c58740d901e8f5fef7e6fda83b5b42c51e394a8ea6ee1a1097f",
+        "angle-neutral": "1bac65a161471e9d5250649ece0027bca1dfa0d2995bce5a65f4542e8b9b84a3",
+        "front-oblique": "b1028c6ad6bf2943e5ca4606bbf0b4e94e557a93f64628bd1aa5df1b8117d4c1",
+        "eyes": "844b4c30c43eda9722cce84cb48b6a05aa1eaac937e4dbe2e144ef7fd057c2d5"
+      },
+      "maps": {
+        "1001": "04f57d1256e6f5239ccd665dcaab09465c2f38fce3988628cc6b36cd3dd8d2b8",
+        "1002": "d0af72515438092a2a677a60a4fa5426b03941d093a6d8dc50ed7a7136816dbd",
+        "1004": "5c62233402ff742353b6f9767cf5dd40e6c5ff4a53b896b155948495f638f657",
+        "roughness": "bdf35e593983075b984f4425de6b091f1b1b61a26396ac72c5ffe4c4b6dee253",
+        "height": "37ef68dff8530be7ab07e2a9d07623a8ea8f947b7bdb90eeeb26a066251fed82"
+      },
+      "side_layout_max_rgb_error": 1
+    }
+  },
+  "human_review": "deferred",
+  "assessment": "Agent inspection of judging views and detail crops; not human approval"
+}

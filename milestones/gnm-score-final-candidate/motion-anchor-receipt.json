@@ -1,0 +1,20 @@
+{
+  "scene_sha256": "d6c7fc299505d83a7f47426380744c4b0b46a1d6f6264d24354953ffabf76be2",
+  "frames": {
+    "frame_0001.png": "28bb5103ed6e8ec69ccc7b781b0c46c53ed90fbba77b089eb72c18f8ca150d2b",
+    "frame_0025.png": "39c4b7da094eee4b6e7a9f72a2f76cb1c9bba60b000db37ae35611c82b7c7f91",
+    "frame_0058.png": "3bcd7161f67a2c020396cb2cdb287734932b831e2680fd18ba7e878d4f8fb3f4",
+    "frame_0081.png": "62b43f7680d06f7d2b73e6f210c844041decb5c9a375c7efd9fd0ff9e4b6dd99",
+    "frame_0103.png": "125babd9b4b8e0d131da1023a85f79398124ab84037e138ce592aedd6e5e6781",
+    "frame_0105.png": "4b046b6464babbb37af75a2d46cf5ddc3a8ce8d866a50ee15dde452e12b5bfc6",
+    "frame_0106.png": "63bfa48d339565f0c4d239862e0503c608f6047f13aa0be2e77686ba210be741",
+    "frame_0107.png": "82dbed933fd550b3b1fb437b4a3207564ed09c8f32d9b27381bc744ad4511075",
+    "frame_0110.png": "183d27273bbd8773f663be1cf7b9bb12a63eabb5d345fdbe03934541dab63ec2",
+    "frame_0113.png": "125babd9b4b8e0d131da1023a85f79398124ab84037e138ce592aedd6e5e6781",
+    "frame_0129.png": "4dbe3282c381908f4af088320e67dc815d13547aab67d008751c9b0aae7e895d",
+    "frame_0166.png": "28bb5103ed6e8ec69ccc7b781b0c46c53ed90fbba77b089eb72c18f8ca150d2b"
+  },
+  "sheet_sha256": "04f3d32d6f6f9712937328a39a22b0b6a296baf443c75aa97774c0e31ff4fdf3",
+  "assessment": "Agent inspection: coordinated gaze and staggered blink; thin peak-contact crease remains",
+  "human_review": "deferred"
+}
