@@ -82,6 +82,7 @@
   "resource_checks": {
     "linked_libraries": 0,
     "unpacked_file_images": 0,
-    "packed_file_images": 3
+    "packed_file_images": 3,
+    "blender_online_access": false
   }
 }

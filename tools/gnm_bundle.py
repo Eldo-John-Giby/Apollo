@@ -80,13 +80,14 @@ def package(args):
                 or reopened['frames_checked'] != 192 or reopened['max_position_error_m'] > 1e-6
                 or reopened['maps'] != expected or not reopened.get('camera_checks')
                 or reopened.get('resource_checks', {}).get('linked_libraries') != 0
-                or reopened.get('resource_checks', {}).get('unpacked_file_images') != 0):
+                or reopened.get('resource_checks', {}).get('unpacked_file_images') != 0
+                or reopened.get('resource_checks', {}).get('blender_online_access') is not False):
             raise ValueError(f'{mode}: reopened timeline verification mismatch')
         files[f'timelines/{mode}/reopen.json'] = path
         files[f'timelines/{mode}/geometry.npz'] = args.motion / mode / 'geometry.npz'
     for path in ROOT.joinpath('tools').glob('gnm_*.py'):
         files[f'tools/{path.name}'] = path
-    for name in ('docs/GNM_INTEGRATION.md', 'assets/ATTRIBUTION.md',
+    for name in ('docs/GNM_INTEGRATION.md', 'docs/GNM_QUICKSTART.md', 'assets/ATTRIBUTION.md',
                  'milestones/eye-expression-2026-11-11/scene.blend',
                  'milestones/eye-expression-2026-11-11/ATTRIBUTION.md',
                  'assets/photorealism-v2/ATTRIBUTION.md',

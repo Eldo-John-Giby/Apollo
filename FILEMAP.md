@@ -102,6 +102,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_bundle.py`, `tools/gnm_verify.py`, `tools/gnm_rehearse.py` | Verify reopened GNM timelines and package the technical archive from authenticated frame and texture outputs. |
 | `tools/gnm_run.py`, `tools/gnm_motion_variant.py` | Run stills or motion with any texture variant and UV layout; pack hash-bound variant timelines for resumable rendering. |
 | `docs/GNM_INTEGRATION.md` | Pinned GNM setup, trial results and qualification status. |
+| `docs/GNM_QUICKSTART.md` | Extracted GNM package setup, runtime commands, output locations and capture inputs. |
 | `tools/live_controls.py` | Optional Blender sidebar invoking the public wrapper; never required or automatically enabled in graded scenes. |
 | `tools/ui_rehearsal.py` | Real Blender panel operators: pose-render/API byte parity and official sweep output validation. |
 | `build/upgrade_looks.py` | Distinct iris-region/shading/light candidates and MPFB lid/lash refit; preserves pupil/eye geometry and calibration, requires MPFB for building only. |

@@ -219,8 +219,20 @@ This retains the qualified 115 mm motion framing. The wider default 64 mm
 still framing fails the existing direction-readability threshold and was
 rejected for motion. The thresholds were retained.
 
-Full frame rendering and clean-archive rehearsal for this working candidate
-remain pending under out/gnm-detailed-motion. The published rc.3 artifact
+Full frame qualification uses out/gnm-detailed-motion. Build and rehearse the
+candidate with the commands below; the tagged release receipt records the
+completed qualification and archive checksum. The published rc.3 artifact
 and its qualified receipts remain unchanged. The narrow dark contact line
 at one closed lid remains a visual limitation; human appearance review and
 organizer target confirmation are still pending.
+
+```powershell
+python tools/gnm_bundle.py --motion out/gnm-detailed-motion --textures out/gnm-detailed --template out/template --license out/google-gnm/LICENSE --out out/apollo-gnm-final-candidate.zip
+python tools/gnm_rehearse.py --archive out/apollo-gnm-final-candidate.zip --blender $env:BLENDER_BIN --out out/gnm-final-clean-rehearsal
+```
+
+The runner and rehearsal enable Blender's --offline-mode. Reopened resource
+receipts record bpy.app.online_access as false, require all file images to be
+packed and reject linked libraries. The archive gate requires these offline
+receipts for all three timelines. See GNM_QUICKSTART.md for runtime-only setup
+and the exact delivered frame settings.

@@ -106,7 +106,8 @@ def verify(template, clip, maps):
             'frames_checked': len(sequence), 'max_position_error_m': error, 'maps': packed,
             'camera_checks': camera_report,
             'resource_checks': {'linked_libraries': 0, 'unpacked_file_images': 0,
-                                'packed_file_images': len(file_images)}}
+                                'packed_file_images': len(file_images),
+                                'blender_online_access': bpy.app.online_access}}
 
 
 if __name__ == '__main__':

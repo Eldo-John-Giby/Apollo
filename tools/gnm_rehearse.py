@@ -37,7 +37,7 @@ def rehearse(archive, blender, out):
             path.write_bytes(data)
 
     def run(scene, tool, *options):
-        subprocess.run([str(blender), '-b', '--factory-startup', scene,
+        subprocess.run([str(blender), '--offline-mode', '-b', '--factory-startup', scene,
                         '--python-exit-code', '1', '-P', f'tools/{tool}', '--',
                         *options], cwd=out, check=True)
 

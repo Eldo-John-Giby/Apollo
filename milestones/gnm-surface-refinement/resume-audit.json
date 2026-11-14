@@ -1,0 +1,7 @@
+{
+  "mode": "left",
+  "scene_sha256": "9ac4c049825d5d05e4c6bc768e452586561cab4a6086c945cc12eb6616fb4e81",
+  "valid_frame_preserved": 1,
+  "corrupt_frame_repaired": 2,
+  "missing_frame_repaired": 3
+}

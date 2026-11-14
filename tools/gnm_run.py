@@ -41,7 +41,7 @@ def main():
             key = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
             cache = args.out.resolve() / 'scene'
             result = subprocess.run([
-                str(args.blender.resolve()), '-b', '--factory-startup', str(scene),
+                str(args.blender.resolve()), '--offline-mode', '-b', '--factory-startup', str(scene),
                 '--python-exit-code', '1', '-P', str(root / 'tools/gnm_motion_variant.py'),
                 '--', '--maps', str(maps), '--layout', args.layout, '--out', str(cache)], cwd=root)
             if result.returncode:
@@ -55,7 +55,7 @@ def main():
                 flags.extend((f'--{name}', str(value)))
     if not scene.is_file():
         parser.error(f'Expected an extracted GNM technical bundle. Missing {scene}')
-    return subprocess.run([str(args.blender.resolve()), '-b', '--factory-startup', str(scene),
+    return subprocess.run([str(args.blender.resolve()), '--offline-mode', '-b', '--factory-startup', str(scene),
                            '--python-exit-code', '1', '-P', str(root / 'tools' / tool),
                            '--', *flags], cwd=root).returncode
 
