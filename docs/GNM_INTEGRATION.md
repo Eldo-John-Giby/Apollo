@@ -267,3 +267,13 @@ Published prerelease:
 [Apollo v0.3.0-rc.4 — Refined GNM Candidate](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.4).
 Download apollo-gnm-v0.3.0-rc.4.zip directly, or use the 29-part alternative
 with reassemble-gnm.py. All 34 remote asset sizes and digests were verified.
+
+The user deferred the blind teammate review on 14 November until the following
+day. The anonymous packet is ready at
+out/gnm-blind-review/apollo-gnm-blind-review.zip in the development worktree.
+It contains two comparisons at the original judging resolution, a response
+template and playback instructions. Its assessor key is stored separately.
+To prepare the packet again from the extracted timelines, use the current
+source checkout's tools/gnm_review.py with --motion <extracted>/timelines and
+--out <new-review-directory>. Review remains explicitly unperformed; this does
+not change the completed automated qualification or claim human approval.
