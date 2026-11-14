@@ -62,3 +62,11 @@ NumPy model and saves a Blender timeline. Evaluated vertices at frames 1,
 units before save. This trial includes gaze only. Native blink, textured
 timeline rehearsal, five qualified variants and submission packaging remain
 pending.
+
+The Generate Motion trial now fits blink coefficients independently to the
+two GNM eyelid rims. The right eye follows the left by one frame. Camera
+rays found zero visible pupil vertices in either eye at frames 106 and 107
+and found both pupils visible before closure and after reopening. Blender
+matched the upstream pose arrays at seven anchor frames before saving.
+This checks camera occlusion. Rendered lid contact and cornea intersection
+still require inspection.

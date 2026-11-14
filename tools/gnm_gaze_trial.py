@@ -8,6 +8,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 from gnm_template import MODEL_SHA256
+from gnm_blink import fit_blink
 
 
 def evaluator(model_path):
@@ -24,7 +25,10 @@ def evaluator(model_path):
     center = joints[indices].mean(axis=0)
     pupil_masks = [model.vertex_group_mask(f'{side}_eye', '&pupils')
                    for side in ('left', 'right')]
-    def pose(h, v):
+    with np.load(model_path, allow_pickle=False) as data:
+        left_blink, right_blink = fit_blink(model, data['expression_basis'])
+
+    def pose(h, v, blink=0., other_blink=None):
         target = center + np.array([.05 * h, .05 * v, .35])
         rotations = np.zeros((model.num_joints, 3))
         for index, mask in zip(indices, pupil_masks):
@@ -33,7 +37,9 @@ def evaluator(model_path):
             axis /= np.linalg.norm(axis)
             direction /= np.linalg.norm(direction)
             rotations[index] = Rotation.align_vectors(direction[None], axis[None])[0].as_rotvec()
-        posed = model(rotations=rotations)
+        right_weight = blink if other_blink is None else other_blink
+        posed = model(rotations=rotations,
+                      expression=blink * left_blink + right_weight * right_blink)
         return posed.astype(np.float32), {
             'fixation': target.tolist(),
             'pupil_centers': [posed[mask].mean(0).tolist() for mask in pupil_masks],
@@ -67,11 +73,12 @@ def clip(model_path, out, mode):
     lookup = {}
     sequence = []
     for frame in range(1, 193):
-        h, v, _ = expression(mode, frame)
-        key = (h, v)
+        h, v, blink = expression(mode, frame)
+        _, _, delayed = expression(mode, max(1, frame - 1))
+        key = (h, v, blink, delayed if mode == 'generate-motion' else blink)
         if key not in lookup:
             lookup[key] = len(poses)
-            vertices, _ = pose(h, v)
+            vertices, _ = pose(*key)
             poses.append(vertices)
         sequence.append(lookup[key])
     np.savez_compressed(out, poses=poses, sequence=sequence, mode=mode)

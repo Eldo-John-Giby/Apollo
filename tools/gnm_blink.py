@@ -1,0 +1,47 @@
+"""Fit bilateral eyelid closure in the public GNM expression basis."""
+from collections import Counter
+
+import numpy as np
+
+
+def eyelid_rims(model):
+    faces = model.quads
+    exterior = model.vertex_group_mask('skin_exterior')
+    faces = faces[np.all(exterior[faces], axis=1)]
+    counts = Counter(tuple(sorted(edge)) for face in faces
+                     for edge in zip(face, np.roll(face, -1)))
+    boundary = np.array(sorted({i for e, count in counts.items() if count == 1 for i in e}))
+    for side in ('left', 'right'):
+        index = list(model.joint_names).index(f'{side}_eye')
+        pivot = model.template_joint_positions[index]
+        delta = model.template_vertex_positions[boundary] - pivot
+        rim = boundary[(abs(delta[:, 0]) < .019) & (abs(delta[:, 1]) < .012)
+                       & (delta[:, 2] > .005)]
+        if len(rim) < 20:
+            raise ValueError(f'Could not locate the {side} eyelid rim')
+        yield side, rim
+
+
+def fit_blink(model, basis):
+    """Fit a low, slightly curved contact line while suppressing unrelated motion."""
+    positions = model.template_vertex_positions
+    solutions = []
+    for side, rim in eyelid_rims(model):
+        active = np.flatnonzero(np.char.startswith(model.expression_names, f'{side}_eye_region_'))
+        rim_xyz = positions[rim]
+        low, high = rim_xyz[np.argmin(rim_xyz[:, 0])], rim_xyz[np.argmax(rim_xyz[:, 0])]
+        t = (rim_xyz[:, 0] - low[0]) / (high[0] - low[0])
+        contact = low[1] * (1 - t) + high[1] * t - .0022 * np.sin(np.pi * t)
+        desired = np.zeros_like(rim_xyz)
+        desired[:, 1] = contact - rim_xyz[:, 1]
+        # Strong vertical constraint with permitted anterior movement around the globe.
+        weight = np.array([.3, 1., .08])
+        constraint = (basis[active][:, rim] * weight).reshape(len(active), -1).T
+        regularizer = .00035 * np.eye(len(active))
+        fit = np.linalg.lstsq(np.vstack((constraint, regularizer)),
+                             np.concatenate(((desired * weight).ravel(),
+                                             np.zeros(len(active)))), rcond=None)[0]
+        result = np.zeros(model.expression_dim)
+        result[active] = fit
+        solutions.append(result)
+    return solutions

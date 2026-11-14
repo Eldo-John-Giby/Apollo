@@ -5,6 +5,33 @@ import sys
 
 import bpy
 import numpy as np
+from mathutils import Vector
+from mathutils.bvhtree import BVHTree
+
+
+def verify_blink(head, poses, sequence):
+    skin = [list(p.vertices) for p in head.data.polygons if p.material_index == 0]
+    inverse = head.matrix_world.inverted()
+    camera = inverse @ Vector((0, -.58, .015))
+    groups = {name: head.vertex_groups[name].index for name in ('pupils', 'left_eye', 'right_eye')}
+    pupils = {side: [] for side in ('left_eye', 'right_eye')}
+    for vertex in head.data.vertices:
+        memberships = {group.group for group in vertex.groups}
+        if groups['pupils'] in memberships:
+            for side in pupils:
+                if groups[side] in memberships:
+                    pupils[side].append(vertex.index)
+    for frame in (93, 106, 107, 112):
+        vertices = poses[sequence[frame - 1]]
+        tree = BVHTree.FromPolygons(vertices.tolist(), skin)
+        for side, indices in pupils.items():
+            visible = 0
+            for point in vertices[indices]:
+                ray = Vector(point) - camera
+                visible += tree.ray_cast(camera, ray, ray.length)[0] is None
+            if (frame in (106, 107) and visible != 0) or (frame in (93, 112) and visible == 0):
+                raise ValueError(f'{side} failed pupil visibility at frame {frame}: {visible}')
+            print(f'Frame {frame}: {side} {visible}/{len(indices)} visible pupil vertices')
 
 
 def install(clip, out):
@@ -30,14 +57,17 @@ def install(clip, out):
                         key.keyframe_insert('value', frame=frame)
                     key.value = float(active[frame])
                     key.keyframe_insert('value', frame=frame+1)
-        scene['apollo_gnm_trial_mode'] = str(data['mode'])
+        mode = str(data['mode'])
+        if mode == 'generate-motion':
+            verify_blink(head, poses, sequence)
+        scene['apollo_gnm_trial_mode'] = mode
         scene.frame_start, scene.frame_end = 1, len(sequence)
         scene.render.fps = 24
         curve = head.data.shape_keys.animation_data.action
         for channel in curve.fcurves:
             for point in channel.keyframe_points:
                 point.interpolation = 'LINEAR'
-        for frame in (1, 23, 26, 192):
+        for frame in (1, 23, 26, 106, 107, 112, 192):
             scene.frame_set(frame)
             evaluated = head.evaluated_get(bpy.context.evaluated_depsgraph_get())
             vertices = np.empty(poses.shape[1] * 3, dtype=np.float32)
