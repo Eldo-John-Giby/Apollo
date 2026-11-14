@@ -89,6 +89,19 @@ def package(args):
         sheet_path = Path(scratch) / 'contact-sheet.png'
         sheet.save(sheet_path)
         files['stills/contact-sheet.png'] = sheet_path
+        blink = Image.new('RGB', (1500, 330), '#1a1c20')
+        blink_labels = ImageDraw.Draw(blink)
+        for index, (frame, label) in enumerate(((93, 'Before'), (105, 'Closing'),
+                                                  (106, 'Closed'), (110, 'Reopening'),
+                                                  (113, 'Open'))):
+            name = f'timelines/generate-motion/frames/frame_{frame:04d}.png'
+            with Image.open(files[name]) as still:
+                blink.paste(still.convert('RGB').resize((300, 300), Image.Resampling.LANCZOS),
+                            (index * 300, 0))
+            blink_labels.text((index * 300 + 10, 308), f'{label} / frame {frame}', fill='white')
+        blink_path = Path(scratch) / 'blink.png'
+        blink.save(blink_path)
+        files['evidence/blink.png'] = blink_path
         with ZipFile(temporary, 'x') as archive:
             for name, path in sorted(files.items()):
                 data = path.read_bytes()

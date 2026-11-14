@@ -118,5 +118,5 @@ geometry generated with the pinned Google model. It also checks bilateral screen
 qualified candidate output directories using:
 
 ```powershell
-python tools/gnm_bundle.py --motion out/gnm-candidate --textures out/gnm-five --template out/template --license out/google-gnm/LICENSE --out out/apollo-gnm-technical.zip
+python tools/gnm_bundle.py --motion out/gnm-aligned-motion --textures out/gnm-aligned --template out/template --license out/google-gnm/LICENSE --out out/apollo-gnm-technical.zip
 ```
