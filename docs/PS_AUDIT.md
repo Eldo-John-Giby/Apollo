@@ -26,11 +26,15 @@ for brownie credit.
 
 | Slide 2 output | Apollo evidence and remaining work |
 | --- | --- |
-| 5–10 textured UV map sets covering face and eyes, with 5–10 rendered images using different textures | **Major gap.** Apollo's packed MPFB character and appearance milestones show skin and iris detail on their own mesh. Five local texture variants have matched renders and map receipts. Face and iris maps passed a transfer onto subdivided, triangulated MPFB targets with rotated UVs. Direct GNM wrapping is still unverified. Confirm the canonical mesh and UV layout, then round-trip one licensed face-and-eye set on it and inspect seams before scaling to five distinct sets and corresponding renders. |
-| Python script to render using the generated textures | **Partial.** Existing Blender automation renders the packed Apollo scene. Verify that a clean checkout can load the target mesh, select each exported set and reproduce its still without the original project scene or local asset paths. |
-| Python script accepting Left, Right and Generate Motion and rendering frames and video | **Partial.** The standalone wrapper supports deterministic binocular gaze, reset, single renders and the old ten-frame sweep. The new submission CLI builds all three named modes and writes PNG frames. Sampled timelines and a two-frame render passed on MPFB. All three MPFB sequences completed at full quality. The verified local fallback ZIP includes 576 numbered PNGs and three timelines. Evaluator target-rig integration is pending. |
-| Three runtime-captured videos, one per input, each at most 15 seconds | **Pending team deliverable.** The historical sweep and general demo do not demonstrate three distinct runs under the new cap. |
-| Blender file with an expression animated in the Timeline | **Partial.** Three MPFB timelines reopened at 24 fps with matching sampled poses. The revised local blink blocked both pupils at both sampled peak frames in all three modes. Fit and verify the final expression on the evaluator rig. |
+| 5–10 textured UV map sets covering face and eyes, with 5–10 rendered images using different textures | Five sets on pinned public Google GNM Head v3, each with one 2048-pixel skin map, two 1024-pixel eye maps and a matched 1024-pixel judging still. Fresh-template native and legacy UV renders reproduced exactly from the technical ZIP. Evaluator model match is unconfirmed. |
+| Python script to render using generated textures | tools/gnm_run.py selects the variant and UV layout for fresh-template rendering. A clean extraction reproduced the rose-brown judging still and both layout comparison stills pixel-for-pixel. |
+| Left, Right and Generate Motion input modes | All three packed GNM timelines have 192 full-quality PNGs at 24 fps and 32 CPU samples. Resume repaired missing and corrupt frames. The extracted CLI reproduced Left hold and transition frames exactly. |
+| Three runtime-captured videos, each at most 15 seconds | Team deliverable outside the current technical-project objective. |
+| Blender Timeline expression | All three packed GNM timelines reopened with all 192 evaluated poses matching upstream geometry within one micrometer, native UVs and packed maps intact. Saved-camera gaze and peak-blink checks passed. Uneven closure creases remain a visual limitation. |
+
+The technical archive and clean-extraction evidence are recorded in
+[the GNM candidate receipt](../milestones/gnm-technical-candidate/receipt.json).
+The known visual limitations and deferred teammate review are recorded there.
 
 Slide 1 recommends GNM initialization, scripted face shape and expression,
 coordinated closure, UV transfer and distinct left/right iris maps. Slide 2

@@ -126,3 +126,20 @@ qualified candidate output directories using:
 ```powershell
 python tools/gnm_bundle.py --motion out/gnm-aligned-motion --textures out/gnm-aligned --template out/template --license out/google-gnm/LICENSE --out out/apollo-gnm-technical.zip
 ```
+
+
+## Verified technical candidate
+
+The technical ZIP now contains 657 authenticated payload files, including
+five texture sets, five judging stills, three packed timelines and 576
+full-quality PNG frames. Clean extraction reproduced the rose-brown front
+still, both side UV-layout stills and Left frames 21–22 pixel-for-pixel.
+All three reopened timelines passed every-frame geometry comparisons and
+camera direction/closure checks. The extracted resume command repaired the
+deliberately corrupted and missing PNGs while preserving the valid frame.
+
+See the [candidate receipt](../milestones/gnm-technical-candidate/receipt.json)
+for the archive checksum and exact scene hashes. Historical trial failures
+above document the transfer iterations. The current visual limitations are
+small atlas repairs and uneven eyelid closure creases. Evaluator asset
+matching and the deferred teammate visual review remain outstanding.

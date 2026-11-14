@@ -1,0 +1,66 @@
+{
+  "target": "Google GNM Head v3",
+  "evaluator_match": "unconfirmed",
+  "archive": "apollo-gnm-technical.zip",
+  "archive_bytes": 712214016,
+  "archive_sha256": "83a1b5440b104e54a82dfb39d4e3a87e22b300ce8c6ee5017f83e2f0181ccd1a",
+  "payload_files": 657,
+  "modes": {
+    "left": {
+      "frames": 192,
+      "samples": 32,
+      "resolution": [
+        1024,
+        1024
+      ],
+      "fps": 24.0,
+      "geometry_error_m": 0.0,
+      "scene_sha256": "d75f07719591253b7446158b6f74de5bd4560be27a9a0c3645639032185bf76f"
+    },
+    "right": {
+      "frames": 192,
+      "samples": 32,
+      "resolution": [
+        1024,
+        1024
+      ],
+      "fps": 24.0,
+      "geometry_error_m": 0.0,
+      "scene_sha256": "65559976d6645ed47373cb3a577ccdb27e15e08112304babb4a8aac871ebc14d"
+    },
+    "generate-motion": {
+      "frames": 192,
+      "samples": 32,
+      "resolution": [
+        1024,
+        1024
+      ],
+      "fps": 24.0,
+      "geometry_error_m": 7.275957614183426e-12,
+      "scene_sha256": "705d7e66b4bb6b68d581d407ed0c00a165aded29388e0e5fb19c84e7c1897bd4"
+    }
+  },
+  "clean_reproduction": {
+    "stills/rose-brown.png": {
+      "max_rgb_error": 0
+    },
+    "evidence/rose-brown-side-udim.png": {
+      "max_rgb_error": 0
+    },
+    "evidence/rose-brown-side-legacy.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0021.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0022.png": {
+      "max_rgb_error": 0
+    }
+  },
+  "tests_passed": 84,
+  "limitations": [
+    "Raw skin projection requires repair for 0.144% of covered UV texels.",
+    "Native eyelid closure crease has visible unevenness.",
+    "Teammate visual review is deferred."
+  ]
+}

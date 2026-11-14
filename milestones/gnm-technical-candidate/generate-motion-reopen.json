@@ -1,0 +1,82 @@
+{
+  "scene_sha256": "705d7e66b4bb6b68d581d407ed0c00a165aded29388e0e5fb19c84e7c1897bd4",
+  "frames_checked": 192,
+  "max_position_error_m": 7.275957614183426e-12,
+  "maps": {
+    "1001": "6eb323c2134846364d86282d8fb81b62ca8d93611c28f5ca221d0e4dbc73f898",
+    "1002": "39dda35b8408f3cd781b904bad345a506f6487cc00fb3da050ab8e6991d6a4c1",
+    "1004": "ad58d52a7ebc0517411659a50ac14f6b3195b1a70ff1612693f5061948702e43"
+  },
+  "camera_checks": {
+    "1": {
+      "left": {
+        "visible_pupil_vertices": 46,
+        "image_x": 0.6673657894134521
+      },
+      "right": {
+        "visible_pupil_vertices": 47,
+        "image_x": 0.3326098322868347
+      }
+    },
+    "25": {
+      "left": {
+        "visible_pupil_vertices": 43,
+        "image_x": 0.6602893471717834
+      },
+      "right": {
+        "visible_pupil_vertices": 46,
+        "image_x": 0.32537055015563965
+      }
+    },
+    "58": {
+      "left": {
+        "visible_pupil_vertices": 49,
+        "image_x": 0.6740785241127014
+      },
+      "right": {
+        "visible_pupil_vertices": 48,
+        "image_x": 0.33919912576675415
+      }
+    },
+    "103": {
+      "left": {
+        "visible_pupil_vertices": 35,
+        "image_x": 0.6697552800178528
+      },
+      "right": {
+        "visible_pupil_vertices": 35,
+        "image_x": 0.3349209725856781
+      }
+    },
+    "106": {
+      "left": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.6697552800178528
+      },
+      "right": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.3349209725856781
+      }
+    },
+    "107": {
+      "left": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.6697552800178528
+      },
+      "right": {
+        "visible_pupil_vertices": 0,
+        "image_x": 0.3349209725856781
+      }
+    },
+    "116": {
+      "left": {
+        "visible_pupil_vertices": 35,
+        "image_x": 0.6697552800178528
+      },
+      "right": {
+        "visible_pupil_vertices": 35,
+        "image_x": 0.3349209725856781
+      }
+    }
+  }
+}
