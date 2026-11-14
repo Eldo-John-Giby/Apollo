@@ -101,6 +101,17 @@ geometry from the pinned model.
 & $env:BLENDER_BIN -b --factory-startup timelines/left/expression.blend --python-exit-code 1 -P tools/submission_render.py -- --out reproduced-frames --first 21 --last 22
 ```
 
+For day-to-day use, the extracted archive has one command for all four modes:
+
+```powershell
+python tools/gnm_run.py still --blender $env:BLENDER_BIN --variant golden-hazel --out still.png
+python tools/gnm_run.py left --blender $env:BLENDER_BIN --out rendered-left
+```
+
+Use the same motion command to resume. Replace left with right or
+generate-motion to select a different packed timeline. Add --first and --last
+for a short sample. For stills, --layout legacy selects the region bindings.
+
 The reopened timeline verifier checks both stored UV arrays, polygon
 connectivity, packed texture bytes and all 192 evaluated poses against the
 geometry generated with the pinned Google model. Build the archive from
