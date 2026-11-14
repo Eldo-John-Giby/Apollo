@@ -124,8 +124,8 @@ def package(args):
     transfer = args.textures / 'scan-transfer.json'
     if transfer.exists():
         files['evidence/scan-transfer.json'] = transfer
-    comparison = args.comparison
-    if comparison:
+    comparison = args.comparison or args.textures / 'rose-brown-matched.png'
+    if args.comparison or comparison.is_file():
         png(comparison, (1280, 1340))
         files['evidence/rose-brown-matched.png'] = comparison
     for name in ('docs/GNM_INTEGRATION.md', 'docs/GNM_QUICKSTART.md', 'docs/SCORE_IMPROVEMENT.md',
