@@ -49,6 +49,12 @@ def package(args):
             files[f'textures/{variant}/{name}'] = path
             entries[str(tile)] = {'file': name, 'sha256': sha256(path.read_bytes())}
         textures[variant] = entries
+    for tile in ('1001', '1002', '1004'):
+        if len({variant[tile]['sha256'] for variant in textures.values()}) != len(VARIANTS):
+            raise ValueError(f'Duplicate texture variants for GNM tile {tile}')
+    if len({sha256(files[f'stills/{variant}.png'].read_bytes())
+            for variant in VARIANTS}) != len(VARIANTS):
+        raise ValueError('Duplicate GNM judging stills')
     reference = args.textures / 'rose-brown'
     side_udim = reference / 'side-udim.png'
     side_legacy = reference / 'side-legacy.png'
