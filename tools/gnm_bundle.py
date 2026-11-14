@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from zipfile import ZipFile
 
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageDraw
 
 from gnm_template import MODEL_SHA256
 from submission_bundle import ROOT, VARIANTS, add_frames, png, read_json, sha256
@@ -39,8 +39,6 @@ def package(args):
             files[f'textures/{variant}/{name}'] = path
             entries[str(tile)] = {'file': name, 'sha256': sha256(path.read_bytes())}
         textures[variant] = entries
-    png(args.textures / 'contact-sheet.png', (1500, 330))
-    files['stills/contact-sheet.png'] = args.textures / 'contact-sheet.png'
     reference = args.textures / 'rose-brown'
     side_udim = reference / 'side-udim.png'
     side_legacy = reference / 'side-legacy.png'
@@ -81,6 +79,16 @@ def package(args):
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with TemporaryDirectory(dir=args.out.parent) as scratch:
         temporary = Path(scratch) / args.out.name
+        sheet = Image.new('RGB', (300 * len(VARIANTS), 330), '#1a1c20')
+        labels = ImageDraw.Draw(sheet)
+        for index, variant in enumerate(VARIANTS):
+            with Image.open(files[f'stills/{variant}.png']) as still:
+                sheet.paste(still.convert('RGB').resize((300, 300), Image.Resampling.LANCZOS),
+                            (index * 300, 0))
+            labels.text((index * 300 + 10, 308), variant, fill='white')
+        sheet_path = Path(scratch) / 'contact-sheet.png'
+        sheet.save(sheet_path)
+        files['stills/contact-sheet.png'] = sheet_path
         with ZipFile(temporary, 'x') as archive:
             for name, path in sorted(files.items()):
                 data = path.read_bytes()
