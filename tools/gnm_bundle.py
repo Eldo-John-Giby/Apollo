@@ -37,6 +37,9 @@ def package(args):
         still = source / 'front.png'
         png(still, (1024, 1024))
         files[f'stills/{variant}.png'] = still
+        side = source / 'side-udim.png'
+        png(side, (640, 640))
+        files[f'evidence/side-light/{variant}.png'] = side
         coverage = read_json(source / 'color.1001.json')
         if coverage['projection_coverage'] < .995:
             raise ValueError(f'{variant}: insufficient raw skin coverage')
@@ -115,6 +118,16 @@ def package(args):
         sheet_path = Path(scratch) / 'contact-sheet.png'
         sheet.save(sheet_path)
         files['stills/contact-sheet.png'] = sheet_path
+        side_sheet = Image.new('RGB', (300 * len(VARIANTS), 330), '#1a1c20')
+        side_labels = ImageDraw.Draw(side_sheet)
+        for index, variant in enumerate(VARIANTS):
+            with Image.open(files[f'evidence/side-light/{variant}.png']) as still:
+                side_sheet.paste(still.convert('RGB').resize((300, 300), Image.Resampling.LANCZOS),
+                                 (index * 300, 0))
+            side_labels.text((index * 300 + 10, 308), variant, fill='white')
+        side_sheet_path = Path(scratch) / 'side-light-contact-sheet.png'
+        side_sheet.save(side_sheet_path)
+        files['evidence/side-light/contact-sheet.png'] = side_sheet_path
         for variant in VARIANTS:
             with Image.open(files[f'stills/{variant}.png']) as still:
                 width, height = still.size

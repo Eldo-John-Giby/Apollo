@@ -198,9 +198,10 @@ the procedural seed are recorded per variant. Generate all five sets with:
 python tools/gnm_skin_detail.py --template out/template/template.npz --source out/gnm-aligned --out out/gnm-detailed
 ```
 
-Five new 1024-pixel, 32-sample judging stills have been rendered. The new
-rose-brown three-quarter side-light renders differ between native and legacy
-bindings by at most one RGB level. Evidence is under
+Five new 1024-pixel, 32-sample judging stills have been rendered. All five
+variants also have matched 640-pixel, 8-sample three-quarter side-light
+comparisons and a labeled side-light contact sheet. The rose-brown side-light
+renders differ between native and legacy bindings by at most one RGB level. Evidence is under
 milestones/gnm-surface-refinement. These maps supplement the existing CC0
 texture derivatives; retain their original attribution.
 
