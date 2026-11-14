@@ -1,18 +1,18 @@
 # Apollo development roadmap
 
-Updated 14 November 2026. Objective: maximize the documented 100-point rubric
+Updated 15 November 2026. Objective: maximize the documented 100-point rubric
 through visible correctness, reliable automation and reproducible evidence.
 This is the current execution roadmap; IMPLEMENTATION_PLAN.md remains the
 original design/reference plan. Technical qualification now covers public GNM
 Head v3; the team owns the final event submission.
 
 
-## Final evaluation priorities — 14 November 2026
+## Final evaluation priorities — 15 November 2026
 
 Use the [current submission audit](PS_AUDIT.md) as the final output checklist.
 The roadmap below records the earlier calibrated sweep work.
 
-1. Five face-and-eye sets, five primary stills, eye crops and matched side-light
+1. Five scan-derived 4K face-and-eye sets, five primary stills, eye crops and matched side-light
    comparisons now qualify on pinned public Google GNM Head v3. Native and
    legacy UV layouts pass direct-wrap reproduction. Texture photorealism
    carries 60 points and code/UV portability carries 20. Confirm the evaluator
@@ -22,9 +22,11 @@ The roadmap below records the earlier calibrated sweep work.
    and asymmetric blink are included. All three reopen offline with every
    pose checked against upstream geometry. Preserve the MakeHuman fallback
    and its sweep/metadata while the organizers clarify their final role.
-3. The 671-file archive passes clean extraction, reproduction, frame recovery,
-   alternate-variant resume and all 84 Python tests. See the
-   [qualification receipt](../milestones/gnm-final-candidate/receipt.json) and
+3. The 779-file detailed archive passes clean extraction, reproduction, frame recovery,
+   real interruption, alternate-variant resume and all 88 Python tests. All
+   packed image paths are relative; the fresh upstream reference matches all
+   576 clip poses exactly. See the
+   [qualification receipt](../milestones/gnm-score-final-candidate/receipt.json) and
    [runtime quickstart](GNM_QUICKSTART.md). The team owns blind appearance
    review, three short runtime videos, the official deck, public GitHub access
    verification and the form. Final submission is 22 November; cutoff time

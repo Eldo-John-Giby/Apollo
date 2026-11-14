@@ -1,0 +1,110 @@
+{
+  "stills/rose-brown.png": {
+    "max_rgb_error": 0
+  },
+  "evidence/rose-brown-side-udim.png": {
+    "max_rgb_error": 0
+  },
+  "evidence/rose-brown-side-legacy.png": {
+    "max_rgb_error": 0
+  },
+  "evidence/side-light-legacy/golden-hazel.png": {
+    "max_rgb_error": 0
+  },
+  "evidence/side-light-legacy/olive-amber.png": {
+    "max_rgb_error": 0
+  },
+  "evidence/side-light-legacy/neutral-deep.png": {
+    "max_rgb_error": 0
+  },
+  "evidence/side-light-legacy/cool-grey.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0021.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0022.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/right/frames/frame_0026.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/generate-motion/frames/frame_0107.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0001.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0002.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0003.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0004.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0005.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0006.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0007.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0008.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0009.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0010.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0011.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0012.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0013.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0014.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0015.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0016.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0017.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0018.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0019.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0020.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0023.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0024.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0025.png": {
+    "max_rgb_error": 0
+  },
+  "timelines/left/frames/frame_0026.png": {
+    "max_rgb_error": 0
+  },
+  "reproduction/golden-hazel-udim/frame_0026.png": {
+    "max_rgb_error": 1
+  }
+}

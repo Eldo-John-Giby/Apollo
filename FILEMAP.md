@@ -7,6 +7,9 @@ Navigation index. Inspect implementation before changing it.
 Apollo implements synthetic binocular gaze for Samsung PRISM-XR Track 01.
 The GNM submission path is qualified on pinned public Head v3: five texture
 sets, three packed timelines, 576 frames and clean offline reproduction.
+The detailed candidate adds 4K scan-derived skin, portable surface maps,
+improved native lid contact and qualified interruption recovery. Its exact
+receipt is under `milestones/gnm-score-final-candidate`.
 Start with `docs/GNM_QUICKSTART.md`; build details are in `docs/GNM_INTEGRATION.md`.
 The evaluator asset match and deferred human review remain pending.
 The protected radial-iris development freeze remains available. The competition

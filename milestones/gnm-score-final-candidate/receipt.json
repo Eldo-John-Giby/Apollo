@@ -1,0 +1,274 @@
+{
+  "status": "render_bundle_rehearsal_and_tests_passed",
+  "archive": "apollo-gnm-v0.3.0-rc.5.zip",
+  "archive_bytes": 1173058697,
+  "archive_sha256": "5f4c0e8b849da9f22f6de09b46207d0d95f7a791fc8209b06f3a5706b1a2ed6c",
+  "archive_source_commit": "8d8396d131ecc24ac55a2f0a2f0648a7103bff10",
+  "payload_files": 779,
+  "modes": {
+    "left": {
+      "frame_count": 192,
+      "settings": {
+        "scene_sha256": "60cc63822e1d12b4209ca6402498fce11955e3aa4bd9df55215e023706744949",
+        "mode": "left",
+        "blender": "4.5.15 LTS",
+        "blender_build": "5afeabba6097",
+        "resolution": [
+          1024,
+          1024
+        ],
+        "samples": 32,
+        "fps": 24.0,
+        "range": [
+          1,
+          192
+        ],
+        "reuse_holds": true
+      }
+    },
+    "right": {
+      "frame_count": 192,
+      "settings": {
+        "scene_sha256": "52d56e826141a7ed864519f80c6199688f4d36ad160e0ff1f1b897ab2227c6ee",
+        "mode": "right",
+        "blender": "4.5.15 LTS",
+        "blender_build": "5afeabba6097",
+        "resolution": [
+          1024,
+          1024
+        ],
+        "samples": 32,
+        "fps": 24.0,
+        "range": [
+          1,
+          192
+        ],
+        "reuse_holds": true
+      }
+    },
+    "generate-motion": {
+      "frame_count": 192,
+      "settings": {
+        "scene_sha256": "63ad8c5f73b9cc698ac54260572b1b0ef8bc1a569e30c1ce100b9e4588f0521c",
+        "mode": "generate-motion",
+        "blender": "4.5.15 LTS",
+        "blender_build": "5afeabba6097",
+        "resolution": [
+          1024,
+          1024
+        ],
+        "samples": 32,
+        "fps": 24.0,
+        "range": [
+          1,
+          192
+        ],
+        "reuse_holds": true
+      }
+    }
+  },
+  "side_layout_max_rgb_error_by_variant": {
+    "rose-brown": 1,
+    "golden-hazel": 1,
+    "olive-amber": 1,
+    "neutral-deep": 1,
+    "cool-grey": 1
+  },
+  "reproduction": {
+    "stills/rose-brown.png": {
+      "max_rgb_error": 0
+    },
+    "evidence/rose-brown-side-udim.png": {
+      "max_rgb_error": 0
+    },
+    "evidence/rose-brown-side-legacy.png": {
+      "max_rgb_error": 0
+    },
+    "evidence/side-light-legacy/golden-hazel.png": {
+      "max_rgb_error": 0
+    },
+    "evidence/side-light-legacy/olive-amber.png": {
+      "max_rgb_error": 0
+    },
+    "evidence/side-light-legacy/neutral-deep.png": {
+      "max_rgb_error": 0
+    },
+    "evidence/side-light-legacy/cool-grey.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0021.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0022.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/right/frames/frame_0026.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/generate-motion/frames/frame_0107.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0001.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0002.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0003.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0004.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0005.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0006.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0007.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0008.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0009.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0010.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0011.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0012.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0013.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0014.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0015.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0016.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0017.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0018.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0019.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0020.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0023.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0024.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0025.png": {
+      "max_rgb_error": 0
+    },
+    "timelines/left/frames/frame_0026.png": {
+      "max_rgb_error": 0
+    },
+    "reproduction/golden-hazel-udim/frame_0026.png": {
+      "max_rgb_error": 1
+    }
+  },
+  "interruption": {
+    "interrupted_frame": 22,
+    "valid_frame_preserved": true,
+    "frames_recovered": 26,
+    "scene_sha256": "60cc63822e1d12b4209ca6402498fce11955e3aa4bd9df55215e023706744949"
+  },
+  "test_report_sha256": "6a3a68e25411911d558bba8de2ac478c4c953b16ce1c9070151b22ae4c483c28",
+  "model": {
+    "source_commit": "f84cdbdc86a34f55627526f137495f864e687679",
+    "model_revision": "c01e90d298d82301f9fd18f54806be751775cb7c",
+    "model_sha256": "61d78bbfb4ad8e0b38495804a4caef3214d3df00f8c3f68761e63b41ce3747eb",
+    "model_url": "https://huggingface.co/google/gnm-v3/resolve/c01e90d298d82301f9fd18f54806be751775cb7c/v3_0/gnm_head.npz",
+    "vertices": 17821,
+    "quads": 17662,
+    "connectivity_sha256": "a19319dbc7adaedaafdd7f7d04e280fdd81b5fa25b1a17a0465689cf3d6039df",
+    "legacy_uv_sha256": "ae60b9b86b382a5beba764d50efa8572641364ff7b3130981ea627820df52ee5",
+    "udim_uv_sha256": "81bd4cb3a99d985281ee4d7989d4b340cb544ccc790f8ade85d6a6ca1ad6968f",
+    "joints": {
+      "neck": [
+        -7.672088395338506e-05,
+        0.13382373750209808,
+        -0.006858790293335915
+      ],
+      "head": [
+        -3.772063064388931e-05,
+        0.2099265307188034,
+        0.017556261271238327
+      ],
+      "left_eye": [
+        0.030839037150144577,
+        0.30316492915153503,
+        0.09888789802789688
+      ],
+      "right_eye": [
+        -0.030866222456097603,
+        0.3031134307384491,
+        0.09897840023040771
+      ]
+    },
+    "regions": {
+      "1001": {
+        "quads": 12410,
+        "legacy_uv_sha256": "54d953d8b6a254824df836c54ed6e4eea43a226e3b7b031900be9a5fdbd9d26d",
+        "udim_uv_sha256": "54d953d8b6a254824df836c54ed6e4eea43a226e3b7b031900be9a5fdbd9d26d"
+      },
+      "1002": {
+        "quads": 372,
+        "legacy_uv_sha256": "d18261f3c863205f3e70d3b420958ec4efc403319349d5a5267aa755fec4f6b5",
+        "udim_uv_sha256": "f5ccad343122036590734afbe000e420a6e1c66d5422ec5f10e4cff06c11d66b"
+      },
+      "1003": {
+        "quads": 384,
+        "legacy_uv_sha256": "6527e87a524f2eceb84fa9ae1302c89e68e8ca4e7a538f9f1b1b2919aba6db11",
+        "udim_uv_sha256": "42c5231f2204e722197ce85a3a1d8f385539c3f89ce459cb3a055474f1b41d6f"
+      },
+      "1004": {
+        "quads": 372,
+        "legacy_uv_sha256": "f8facaa40f79c77e114be5e973759f8dece5137de442ff3f10094cb92cc990cf",
+        "udim_uv_sha256": "0983c270ba36e5f7c11bef86c4e9d7822496ccbb9d78aa8c7a7eed4d3918bed7"
+      },
+      "1005": {
+        "quads": 384,
+        "legacy_uv_sha256": "336e1bd205d9045a3720969bde75c1727dcfe4280055e3f15f12337c8e90ad9e",
+        "udim_uv_sha256": "9e078196a8fbdc6f13337fc5145a9ab374c556c316691d28d5dbdfb6a1aedc28"
+      },
+      "1006": {
+        "quads": 2828,
+        "legacy_uv_sha256": "7127e79bdcc43b57686151ed078d8886eaa53f119d89d6aa09a12ee3cb52c89b",
+        "udim_uv_sha256": "cce142812058f06f798e6d6514edf5204c1c3e6e80102b8fcd7859aac88e9fa8"
+      },
+      "1007": {
+        "quads": 912,
+        "legacy_uv_sha256": "b471c625a7b55feb688b041c41fbf2198149fe22831f4775f225311bcb4835a3",
+        "udim_uv_sha256": "f2ca61ce265818e4046cbf17cba0276c975950e07a5fd39c221273fa3bb88c59"
+      }
+    }
+  },
+  "review_status": "deferred by user",
+  "review_packet_sha256": "d17b7214edfd7212c693a259e79f63b3a1000be0adc3f2ffb7917feae3e127c4",
+  "evaluator_match": "unconfirmed",
+  "target": "Pinned public Google GNM Head v3",
+  "known_visual_limitations": [
+    "Five palettes share one scanned identity",
+    "Authored iris detail and pigmentation remain distinguishable in close inspection",
+    "A thin crease remains at peak lid contact",
+    "Small attributed fallback and repaired skin regions"
+  ]
+}

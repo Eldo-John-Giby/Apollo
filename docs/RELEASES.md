@@ -82,3 +82,25 @@ The evaluator asset match and deferred teammate visual review remain pending;
 the release notes retain the known visual limitations. The MakeHuman rc.2 and
 earlier GNM rc.3 downloads remain available. Public access and final event
 submission remain team-owned while the repository is private.
+
+## Detailed GNM candidate
+
+Qualified prerelease name: `apollo-v0.3.0-rc.5` —
+Apollo v0.3.0-rc.5 — Detailed GNM Candidate. Publication verification is recorded
+separately under `milestones/gnm-score-final-candidate`.
+
+The technical ZIP is 1,173,058,697 bytes with SHA-256
+`5f4c0e8b849da9f22f6de09b46207d0d95f7a791fc8209b06f3a5706b1a2ed6c`.
+Its producer source is `8d8396d131ecc24ac55a2f0a2f0648a7103bff10`;
+the release tag identifies the handoff with its final qualification evidence.
+All 779 payload hashes and 52 committed producer files were verified.
+
+The five variants use attributed 4K head-scan skin, portable roughness/16-bit
+height and independently authored bilateral iris detail. Native lid-rim
+coupling reduces full-closure gap from 1.24 mm to approximately 0.20 mm.
+All 576 CPU frames, 88 tests, both UV layouts, packed relative resources,
+clean-extraction reproduction and real interrupted-render recovery pass.
+The anonymous teammate packet is prepared with blank responses. Exact
+organizer compatibility and human approval remain unconfirmed. One scan
+identity, authored detail, a thin closure crease and small repaired atlas
+regions remain documented limitations. Earlier releases remain preserved.

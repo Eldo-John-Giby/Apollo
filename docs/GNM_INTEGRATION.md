@@ -1,6 +1,9 @@
 # Public GNM Head v3 integration
 
 For the scoring improvement candidate, see [scan build and evidence](SCORE_IMPROVEMENT.md).
+The detailed rc.5 archive is technically qualified; exact artifact hashes,
+clean-extraction reproduction and remaining limitations are in the
+[candidate receipt](../milestones/gnm-score-final-candidate/receipt.json).
 The original GNM development checkpoints below document the earlier workflow.
 The current scan source is CC-BY-3.0 with retained attribution; the historical
 CC0 MakeHuman source remains the fallback. See assets/gnm-scan/ATTRIBUTION.md.

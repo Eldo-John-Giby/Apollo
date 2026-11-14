@@ -1,6 +1,6 @@
 {
   "status": "relative_paths_and_fresh_anchor_renders_passed",
-  "full_frame_qualification": "pending",
+  "full_frame_qualification": "passed; exact delivered archive is bound by receipt.json",
   "helper_sha256": "009d101a2c7530287ef9bc96794d9ccdffc4e2d8d138377b6c432d8f79ce9aa9",
   "modes": {
     "generate-motion": {

@@ -102,10 +102,35 @@ with zero absolute image paths and unchanged 192-frame geometry. The verifier
 now rejects this defect. A new full render set is being generated for the
 repaired scene hashes; earlier scene receipts are not promoted to the delivery.
 
+## Qualified detailed candidate — 15 November 2026
+
+The rc.5 technical ZIP passes full qualification. Its
+[receipt](../milestones/gnm-score-final-candidate/receipt.json) records
+779 payload files, 576 verified 1024-pixel/32-sample CPU frames and 88 passing
+Python tests. The archive is 1,173,058,697 bytes with SHA-256
+`5f4c0e8b849da9f22f6de09b46207d0d95f7a791fc8209b06f3a5706b1a2ed6c`.
+Its producer source commit is `8d8396d131ecc24ac55a2f0a2f0648a7103bff10`;
+all payload hashes and 52 committed source/asset files match that revision.
+
+Clean extraction reproduced the judging still, both rose-brown layouts,
+the other four legacy-layout stills, three motion anchors and the interrupted
+Left segment pixel-for-pixel. The alternate golden-hazel motion layouts agree
+within one RGB level. Missing/corrupt-frame repair and a real termination at
+frame 22 recovered the sequence through frame 26 without rewriting its valid
+first frame. All three packed timelines reopen offline with zero absolute
+image paths and every native pose within the unchanged one-micrometer limit.
+
+The refreshed motion sheet covers left/right holds, upward/downward extremes,
+closure, reopening and return to center. All 192 corrected Generate Motion
+images match the earlier selected appearance with zero RGB error. Anonymous
+direction and appearance review packets are prepared; responses remain blank.
+The pending statements above describe earlier build checkpoints. The final
+receipt and source audit identify the exact qualified archive.
+
 ## Provisional technical score
 
-I estimate **82–90 out of 100**, conditional on the remaining frame, texture
-and archive checks passing and the evaluator accepting the pinned GNM layout.
+I estimate **82–90 out of 100**, conditional on the evaluator accepting the
+pinned GNM layout and its visual assessment of the delivered candidate.
 This is an engineering and visual estimate. No organizer grade or teammate
 review is available.
 
@@ -113,4 +138,4 @@ review is available.
 | --- | ---: | --- |
 | Texture photorealism | 47–51 / 60 | The matched front and side renders show sharper brow, cheek and lip detail. The five palettes share one scan, and synthetic iris and freckle details remain visible as authored features in close views. |
 | Kinematic accuracy | 17–19 / 20 | Direction and native pose checks cover the implemented gaze. The blink reaches full contact with a visible crease, and the delayed lid leaves a narrow opening for one frame. |
-| Code and UV portability | 18–20 / 20 | All five fresh-wrap tests agree within one RGB level between layouts. Packed geometry and texture checks have passed for the reopened modes tested so far. Clean extraction and the organizer asset match remain open. |
+| Code and UV portability | 18–20 / 20 | All five fresh-wrap tests agree within one RGB level between layouts. All three packed timelines, clean extraction, recovery and source-byte checks pass. The organizer asset match remains unconfirmed. |

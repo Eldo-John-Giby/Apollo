@@ -1,20 +1,20 @@
 {
-  "scene_sha256": "d6c7fc299505d83a7f47426380744c4b0b46a1d6f6264d24354953ffabf76be2",
+  "scene_sha256": "63ad8c5f73b9cc698ac54260572b1b0ef8bc1a569e30c1ce100b9e4588f0521c",
   "frames": {
-    "frame_0001.png": "28bb5103ed6e8ec69ccc7b781b0c46c53ed90fbba77b089eb72c18f8ca150d2b",
-    "frame_0025.png": "39c4b7da094eee4b6e7a9f72a2f76cb1c9bba60b000db37ae35611c82b7c7f91",
-    "frame_0058.png": "3bcd7161f67a2c020396cb2cdb287734932b831e2680fd18ba7e878d4f8fb3f4",
-    "frame_0081.png": "62b43f7680d06f7d2b73e6f210c844041decb5c9a375c7efd9fd0ff9e4b6dd99",
-    "frame_0103.png": "125babd9b4b8e0d131da1023a85f79398124ab84037e138ce592aedd6e5e6781",
-    "frame_0105.png": "4b046b6464babbb37af75a2d46cf5ddc3a8ce8d866a50ee15dde452e12b5bfc6",
-    "frame_0106.png": "63bfa48d339565f0c4d239862e0503c608f6047f13aa0be2e77686ba210be741",
-    "frame_0107.png": "82dbed933fd550b3b1fb437b4a3207564ed09c8f32d9b27381bc744ad4511075",
-    "frame_0110.png": "183d27273bbd8773f663be1cf7b9bb12a63eabb5d345fdbe03934541dab63ec2",
-    "frame_0113.png": "125babd9b4b8e0d131da1023a85f79398124ab84037e138ce592aedd6e5e6781",
-    "frame_0129.png": "4dbe3282c381908f4af088320e67dc815d13547aab67d008751c9b0aae7e895d",
-    "frame_0166.png": "28bb5103ed6e8ec69ccc7b781b0c46c53ed90fbba77b089eb72c18f8ca150d2b"
+    "frame_0001.png": "d85d08310275a0fd9c26669e2c222c7b6a9bf12a01b4bd9ebedcfc944404a3ad",
+    "frame_0025.png": "82a7b4ebb131c3adecda62a339e7154c144b96a3605dfa39af30af5f90ce22c9",
+    "frame_0058.png": "e1d90f6a039f8273f39f0f53ee45f06bded051542aa3d29678bbaf598dd7bb64",
+    "frame_0093.png": "e858b8182fdfb8ed3ea4afb259fb506c55f9cda0e5aee1886ed1217d1844567c",
+    "frame_0103.png": "45f3369d99b6b451612341440bb1ab9d1451fe148cccf64a6a5b1cd8bc23cbdf",
+    "frame_0105.png": "e25315a64ec7b5d4b53d061f12569169cd781a505f63476dabf18bfe729a9cad",
+    "frame_0106.png": "1d4c9ecd93953941ae7eabad4e2d641d98f0f5186e9163acbcdfb35a3f6245de",
+    "frame_0107.png": "4078a67908842983d6a60228e568ae332d8e679e3f3b405f19569108cbe155d9",
+    "frame_0110.png": "a1e4133f05dfe9f5aa44ccbca761118ac2cf0f0906ac548f41df1d44847f8b9e",
+    "frame_0113.png": "45f3369d99b6b451612341440bb1ab9d1451fe148cccf64a6a5b1cd8bc23cbdf",
+    "frame_0130.png": "f33ed1bb2210f9a3b6762994a7e33aec72f03e153b12875f85b24f64eb7ea70f",
+    "frame_0166.png": "d85d08310275a0fd9c26669e2c222c7b6a9bf12a01b4bd9ebedcfc944404a3ad"
   },
-  "sheet_sha256": "04f3d32d6f6f9712937328a39a22b0b6a296baf443c75aa97774c0e31ff4fdf3",
-  "assessment": "Agent inspection: coordinated gaze and staggered blink; thin peak-contact crease remains",
+  "sheet_sha256": "63e67251dc792e66936679e5f3b772d3ecdea1926cfc5c9233a95bbe465f9482",
+  "agent_visual_assessment": "Inspected fresh corrected-scene frames for horizontal gaze, upward and downward extremes, delayed closure, bilateral peak contact, staggered reopening and return to center. Thin lid-contact crease remains; no newly observed mapping or reflection defect.",
   "human_review": "deferred"
 }

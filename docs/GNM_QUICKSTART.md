@@ -30,7 +30,7 @@ cool-grey. Both still and motion commands accept `--variant` and
 | Included output | Location and settings |
 | --- | --- |
 | Five judging stills and a labeled contact sheet | `stills/` |
-| Five face-and-eye color sets | `textures/<variant>/`, skin 1001, anatomical left eye interior 1002, anatomical right eye interior 1004 |
+| Five face-and-eye color sets | `textures/<variant>/`, 4K skin 1001, 1K anatomical left eye interior 1002, 1K anatomical right eye interior 1004; optional 4K roughness and 16-bit height for the detailed candidate |
 | Three packed, playable timelines | `timelines/<mode>/expression.blend`, frames 1–192 at 24 fps |
 | Three complete numbered PNG sequences | `timelines/<mode>/frames/`, 1024 × 1024, 32 Cycles CPU samples, 8 seconds per sequence |
 | Eye details, UV-layout comparisons and blink sheet | `evidence/` |

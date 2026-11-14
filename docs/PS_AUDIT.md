@@ -1,6 +1,6 @@
 # Track 01 evaluation and submission audit
 
-Updated 14 November 2026 from the organizer emails supplied by the team,
+Updated 15 November 2026 from the organizer emails supplied by the team,
 the supplied Track 01 evaluation deck (`Evaluation_for_SyntheticEyes.pptx`) and
 submission template (`official_ppt_template_supplied_by_judges.pptx`).
 The forwarded evaluation email explicitly directs teams to generate all slide 2
@@ -26,24 +26,25 @@ for brownie credit.
 
 | Slide 2 output | Apollo evidence and remaining work |
 | --- | --- |
-| 5–10 textured UV map sets covering face and eyes, with 5–10 rendered images using different textures | Five sets on pinned public Google GNM Head v3, each with one 2048-pixel skin map with portable brow detail, two distinct 1024-pixel eye maps and a matched 1024-pixel judging still. All five also have matched three-quarter side-light comparisons and eye crops. Fresh-template native and legacy UV renders reproduced exactly from the technical ZIP. Evaluator model match is unconfirmed. |
+| 5–10 textured UV map sets covering face and eyes, with 5–10 rendered images using different textures | Five sets on pinned public Google GNM Head v3, each with 4096-pixel scan-derived skin color, roughness and 16-bit height, two distinct 1024-pixel eye maps and a matched 1024-pixel judging still. All five have neutral/oblique front and three-quarter views, close eyes and authenticated rc.4 comparisons. Both UV layouts agree within one RGB level; clean-extraction still reproduction is exact. Evaluator model match is unconfirmed. |
 | Python script to render using generated textures | tools/gnm_run.py selects the variant and UV layout for stills and motion. A clean extraction reproduced the rose-brown judging still and both layout comparison stills pixel-for-pixel. Golden-hazel motion agreed between layouts within one RGB level, with cached-scene resume preserving valid frames. |
-| Left, Right and Generate Motion input modes | All three packed GNM timelines have 192 full-quality PNGs at 24 fps and 32 CPU samples. Resume repaired missing and corrupt frames. The extracted CLI reproduced Left hold and transition frames exactly. |
+| Left, Right and Generate Motion input modes | All three packed GNM timelines have 192 full-quality PNGs at 24 fps and 32 CPU samples. Resume repaired missing and corrupt frames. A real interrupted render resumed through frame 26, preserving the valid first frame. Extracted CLI outputs and the recovered segment reproduce exactly. |
 | Three runtime-captured videos, each at most 15 seconds | Team deliverable outside the current technical-project objective. |
-| Blender Timeline expression | All three packed GNM timelines reopened offline with all 192 evaluated poses matching upstream geometry within one micrometer, native UVs and packed maps intact. They include native lid follow, a subtle brow response and an asymmetric blink. Saved-camera gaze and peak-blink checks passed. A narrow dark contact line at one closed lid remains a visual limitation. |
+| Blender Timeline expression | All three packed timelines reopen offline with every evaluated pose within one micrometer of the reference clip, original topology/UVs and packed maps intact, and zero absolute image paths. Fresh upstream NumPy evaluation matches all 576 saved poses exactly. Native lid follow, brow response and asymmetric blink remain. Full-closure gap decreased from 1.24 mm to approximately 0.20 mm; a thin contact crease remains. |
 
 The technical archive and clean-extraction evidence are recorded in
-[the refined GNM candidate receipt](../milestones/gnm-final-candidate/receipt.json).
-The archive contains 671 authenticated payload files and all 576 full-quality
+[the detailed GNM candidate receipt](../milestones/gnm-score-final-candidate/receipt.json).
+The archive contains 779 authenticated payload files and all 576 full-quality
 frames. Clean extraction, offline resource checks, alternate-variant resume,
-corrupt/missing-frame repair and all 84 Python tests pass. The known visual
+corrupt/missing-frame repair, real interruption recovery and all 88 Python tests pass. The known visual
 limitations and deferred teammate review are recorded in the receipt.
 Use [the GNM quickstart](GNM_QUICKSTART.md) for runtime commands and the exact
 capture inputs. The earlier rc.3 evidence remains preserved under
 milestones/gnm-technical-candidate.
-The refined archive is published as
-[Apollo v0.3.0-rc.4](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.4),
-with a single-ZIP download and verified split-download alternative.
+The qualified detailed archive is prepared for `apollo-v0.3.0-rc.5`; publication
+is recorded separately in its milestone directory. The published
+[Apollo v0.3.0-rc.4](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0-rc.4)
+and its verified downloads remain preserved.
 
 Slide 1 recommends GNM initialization, scripted face shape and expression,
 coordinated closure, UV transfer and distinct left/right iris maps. Slide 2
