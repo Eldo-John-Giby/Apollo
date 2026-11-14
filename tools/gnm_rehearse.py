@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import sys
 from zipfile import ZipFile
 
 import numpy as np
@@ -39,8 +40,8 @@ def rehearse(archive, blender, out):
                         '--python-exit-code', '1', '-P', f'tools/{tool}', '--',
                         *options], cwd=out, check=True)
 
-    run('model/neutral.blend', 'gnm_texture_trial.py', '--maps', 'textures/rose-brown',
-        '--out', 'reproduction/still.png', '--size', '1024', '--samples', '32')
+    subprocess.run([sys.executable, 'tools/gnm_run.py', 'still', '--blender', str(blender),
+                    '--out', 'reproduction/still.png'], cwd=out, check=True)
     pairs = [('stills/rose-brown.png', 'reproduction/still.png')]
     for mode in ('left', 'right', 'generate-motion'):
         root = f'timelines/{mode}'
