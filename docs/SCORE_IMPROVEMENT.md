@@ -62,3 +62,16 @@ reopening at frame 110. The camera verifier records zero visible pupil
 vertices in both eyes at frames 106 and 107. A thin contact crease remains
 visible in the close framing. See
 [closure and reopening](../milestones/gnm-score-development/blink-closure-and-reopening.png).
+
+## Provisional technical score
+
+I estimate **82–90 out of 100**, conditional on the remaining frame, texture
+and archive checks passing and the evaluator accepting the pinned GNM layout.
+This is an engineering and visual estimate. No organizer grade or teammate
+review is available.
+
+| Rubric | Estimated points | Basis and remaining risk |
+| --- | ---: | --- |
+| Texture photorealism | 47–51 / 60 | The matched front and side renders show sharper brow, cheek and lip detail. The five palettes share one scan, and synthetic iris and freckle details remain visible as authored features in close views. |
+| Kinematic accuracy | 17–19 / 20 | Direction and native pose checks cover the implemented gaze. The blink reaches full contact with a visible crease, and the delayed lid leaves a narrow opening for one frame. |
+| Code and UV portability | 18–20 / 20 | The rose-brown fresh-wrap test agrees within one RGB level between layouts. Packed geometry and texture checks have passed for the reopened modes tested so far. Clean extraction and the organizer asset match remain open. |
