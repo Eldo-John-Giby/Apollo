@@ -52,6 +52,8 @@ def package(args):
     files['model/neutral.blend'] = args.template / 'neutral.blend'
     files['licenses/Google-GNM-LICENSE.txt'] = args.license
     textures = {}
+    layout_errors = {}
+    scan_transfer = args.textures / 'scan-transfer.json'
     for variant in VARIANTS:
         source = args.textures / variant
         still = source / 'front.png'
@@ -61,11 +63,12 @@ def package(args):
         png(side, (640, 640))
         files[f'evidence/side-light/{variant}.png'] = side
         legacy = source / 'side-legacy.png'
-        if legacy.is_file():
+        if legacy.is_file() or scan_transfer.is_file():
             png(legacy, (640, 640))
             with Image.open(side) as native, Image.open(legacy) as alternate:
                 difference = ImageChops.difference(native.convert('RGB'), alternate.convert('RGB'))
-                if max(high for _, high in difference.getextrema()) > 1:
+                layout_errors[variant] = max(high for _, high in difference.getextrema())
+                if layout_errors[variant] > 1:
                     raise ValueError(f'{variant}: native and legacy fresh-wrap renders differ')
             files[f'evidence/side-light-legacy/{variant}.png'] = legacy
         for name, size in (('angle-neutral', 640), ('front-oblique', 640), ('eyes', 1024)):
@@ -149,7 +152,7 @@ def package(args):
     for path in ROOT.joinpath('assets/gnm-scan').glob('*'):
         if path.is_file():
             files[f'assets/gnm-scan/{path.name}'] = path
-    transfer = args.textures / 'scan-transfer.json'
+    transfer = scan_transfer
     if transfer.exists():
         receipt = read_json(transfer)
         scan_source = ROOT / 'assets/gnm-scan'
@@ -183,7 +186,8 @@ def package(args):
         files[name] = ROOT / name
     manifest = {'target': 'Google GNM Head v3', 'evaluator_match': 'unconfirmed',
                 'modes': modes, 'textures': textures,
-                'side_layout_max_rgb_error': layout_error, 'sha256': {}}
+                'side_layout_max_rgb_error': layout_error,
+                'side_layout_max_rgb_error_by_variant': layout_errors, 'sha256': {}}
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with TemporaryDirectory(dir=args.out.parent) as scratch:
         temporary = Path(scratch) / args.out.name
