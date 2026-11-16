@@ -110,6 +110,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_natural_maps.py`, `tools/gnm_natural_trial.py` | Experimental owner-review skin/brow/iris maps and optional short-hair preview; isolated from the qualified runtime and not visually accepted. |
 | `tools/gnm_portrait_maps.py`, `tools/gnm_portrait_refine.py` | Isolated still-portrait complexion maps, reversible anatomy keys, fitted brow/lash fibers, swept scalp groom and matched/neutral multi-angle reviews; not a motion-qualified replacement. |
 | `tools/gnm_portrait_check.py`, `docs/GNM_PORTRAIT_REFINEMENT.md` | Reopened source/candidate geometry, UV, packed-resource and groom checks; portrait evidence, reproduction and qualification limits. |
+| `tools/gnm_peak_maps.py`, `tools/gnm_peak_realism.py`, `docs/GNM_PEAK_REALISM.md` | Further portrait trials: linear scan relief, 16-bit pores, ocular optics, fitted lid/tear anatomy, vellus and strand variation; micro-skin diagnostics and review status. |
 | `tools/gnm_gaze_readability.py` | Evaluate native horizontal-target amplitude alternatives for review without changing production timing or face geometry. |
 | `docs/GNM_NATURALNESS_REVIEW.md` | Owner/teammate feedback, prototype state, known failures and handoff for the next appearance workflow. |
 | `tools/gnm_portable.py` | Preserve packed image bytes while replacing authoring filenames with relative paths before timeline delivery and variant caching. |
