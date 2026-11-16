@@ -1,0 +1,16 @@
+{
+  "samples_per_axis": 768,
+  "skin_material_only": true,
+  "layers": {
+    "GNM UDIM": {
+      "occupied_samples": 510331,
+      "multiple_coverage_samples": 0,
+      "triangles_outside_skin_tile": 0
+    },
+    "GNM Region": {
+      "occupied_samples": 510331,
+      "multiple_coverage_samples": 0,
+      "triangles_outside_skin_tile": 0
+    }
+  }
+}

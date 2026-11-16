@@ -1,0 +1,76 @@
+{
+  "blender": "4.5.15 LTS",
+  "vertices": 17821,
+  "polygons": 17662,
+  "quads": 17662,
+  "pupil_spacing_mm": 61.75083366834235,
+  "eye_group_width_mm": [
+    29.195504263043404,
+    29.195450246334076
+  ],
+  "uv": {
+    "GNM UDIM": {
+      "skin_density_uv_per_meter": [
+        1.6471904040830623,
+        2.0542966793508977,
+        2.5916430702033133
+      ],
+      "split_skin_edges": 142
+    },
+    "GNM Region": {
+      "skin_density_uv_per_meter": [
+        1.6471904040830623,
+        2.0542966793508977,
+        2.5916430702033133
+      ],
+      "split_skin_edges": 142
+    }
+  },
+  "units": 1.0,
+  "shape_keys": [
+    "Basis",
+    "Portrait | cheek jaw nose refinement",
+    "Portrait | subtle living asymmetry",
+    "Peak | fitted orbital anatomy",
+    "Portrait | relaxed asymmetric expression",
+    "Portrait | jaw definition"
+  ],
+  "shape_key_drivers": 0,
+  "armatures": [],
+  "lights": [
+    "Key",
+    "Fill",
+    "Rim"
+  ],
+  "cameras": [
+    "GNM Camera",
+    "Portrait | neutral 85mm"
+  ],
+  "modifiers": {},
+  "head_materials": [
+    "GNM 1001",
+    "GNM 1002",
+    "Peak | cornea 2",
+    "GNM 1004",
+    "Peak | cornea 4",
+    "GNM 1006",
+    "GNM 1007"
+  ],
+  "hair_objects": [
+    "Portrait | swept chestnut hair",
+    "Portrait | fitted directional brows",
+    "Portrait | subtle upper lashes",
+    "Peak | facial vellus",
+    "Peak | fine lower lashes",
+    "Peak | tapered nape hair",
+    "Peak | front hairline fibers",
+    "Peak | crown and temple flyaways",
+    "Peak | short beard stubble",
+    "Peak | denser beard stubble",
+    "Portrait | fuller brow fibers"
+  ],
+  "visible_additions": [
+    "Peak | inner canthus -1",
+    "Peak | inner canthus 1"
+  ]
+}

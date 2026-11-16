@@ -1,0 +1,116 @@
+{
+  "method": "Skin raycasts from manually picked front image landmarks, millimeter estimates",
+  "landmarks_px": {
+    "hairline": [
+      350,
+      151
+    ],
+    "brow": [
+      290,
+      266
+    ],
+    "nose_base": [
+      350,
+      396
+    ],
+    "chin": [
+      350,
+      534
+    ],
+    "inner_left": [
+      311,
+      307
+    ],
+    "inner_right": [
+      386,
+      307
+    ],
+    "outer_left": [
+      260,
+      306
+    ],
+    "outer_right": [
+      438,
+      306
+    ],
+    "alar_left": [
+      320,
+      391
+    ],
+    "alar_right": [
+      379,
+      391
+    ],
+    "mouth_left": [
+      299,
+      449
+    ],
+    "mouth_right": [
+      400,
+      449
+    ],
+    "ear_top_left": [
+      194,
+      298
+    ],
+    "ear_top_right": [
+      505,
+      299
+    ],
+    "ear_bottom_left": [
+      213,
+      405
+    ],
+    "ear_bottom_right": [
+      487,
+      405
+    ],
+    "head_left": [
+      205,
+      303
+    ],
+    "head_right": [
+      492,
+      303
+    ]
+  },
+  "measurements_mm": {
+    "hairline to brow": 56.1,
+    "brow to nose_base": 60.9,
+    "nose_base to chin": 68.7,
+    "inner_left to inner_right": 36.7,
+    "outer_left to inner_left": 25.2,
+    "outer_right to inner_right": 25.7,
+    "alar_left to alar_right": 28.2,
+    "mouth_left to mouth_right": 49.2,
+    "head_left to head_right": 154.0,
+    "ear_top_left to brow": 19.0,
+    "ear_bottom_left to nose_base": 15.3
+  },
+  "poles_within_6mm": {
+    "inner_left": {
+      "vertices": 214,
+      "valence_5_plus": 4
+    },
+    "inner_right": {
+      "vertices": 190,
+      "valence_5_plus": 4
+    },
+    "outer_left": {
+      "vertices": 139,
+      "valence_5_plus": 1
+    },
+    "outer_right": {
+      "vertices": 141,
+      "valence_5_plus": 1
+    },
+    "mouth_left": {
+      "vertices": 103,
+      "valence_5_plus": 0
+    },
+    "mouth_right": {
+      "vertices": 99,
+      "valence_5_plus": 0
+    }
+  }
+}
