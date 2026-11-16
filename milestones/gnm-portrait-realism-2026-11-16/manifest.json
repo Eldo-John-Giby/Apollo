@@ -1,0 +1,33 @@
+{
+  "status": "reviewed still-portrait checkpoint",
+  "files": {
+    "eye-detail.png": "90b96101f9bd60a6ade4b3b80490f460ec256bdefb81e07d19ddca18194ccfc1",
+    "front.png": "f9621fe73c0d1f71ec2857645cbf49749fbaaf9529963ad0d6b20f16112fd0dc",
+    "portrait.blend": "4c0d0981ba272030e855cc4191d301bb54c49b4676c7ecbbc8bd44cd85b7a468",
+    "reopened-check.json": "34e5b06f1ec26393afaba5800ccacd16a138d7740ffe81ce7757ae8f0bc2ec3b"
+  },
+  "side_view_source_sha256": "49edc70c891caf0fe4d900e168d0e8fdd79cf32f9accec50c9ff3d948f4a5484",
+  "iris_source": "assets/gnm-eye-photo/ATTRIBUTION.md",
+  "reproduction_receipts": {
+    "groom": {
+      "source_sha256": "9a23f1904db3665fa38885980bca96ba610954285bd88efd012da14b3c1b46eb",
+      "recipe_sha256": "2c0ff65e3214d237d63932e4b1dde7ca9806bfa394799c88e749cd0de8c70256",
+      "scene_sha256": "49edc70c891caf0fe4d900e168d0e8fdd79cf32f9accec50c9ff3d948f4a5484",
+      "removed_ear_strands": 0,
+      "fade_removed_strands": 4798,
+      "shortened_strands": 9431,
+      "nape_strands": 16000,
+      "color_sha256": "61529bd1e509f4a9bba5dec96c660e792b96c616070ae09bf0ea87a2a866abeb",
+      "status": "unqualified static groom refinement"
+    },
+    "iris": {
+      "source_sha256": "49edc70c891caf0fe4d900e168d0e8fdd79cf32f9accec50c9ff3d948f4a5484",
+      "recipe_sha256": "ba889ba4feb495f5ab205b5f8fa4c8102c98e439aae263097d3d438fe987a726",
+      "scene_sha256": "4c0d0981ba272030e855cc4191d301bb54c49b4676c7ecbbc8bd44cd85b7a468",
+      "maps_sha256": "a8eff5e274bacf5a6778a8990d64440804054f23d36a0023af483a7bae77fc29",
+      "added_lower_lashes": 0,
+      "upper_lash_length_gain": 1.6,
+      "status": "unqualified photographic-iris portrait trial"
+    }
+  }
+}
