@@ -140,6 +140,12 @@ matched renders show a softer boundary in the affected sections. A dark band
 remains where the short fibers transition into the dense groom. The reopened
 geometry, texture and groom checks passed.
 
+The upper-lash study in `out/peak-lash-silhouette-v2` reshapes the existing
+fibers into a variable outward fan with a stronger curl and tapered tips.
+Matched eye crops show a slightly clearer fringe along the upper lids.
+Individual lashes are still faint. Reopened attachment and native
+eye-geometry checks passed.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these
