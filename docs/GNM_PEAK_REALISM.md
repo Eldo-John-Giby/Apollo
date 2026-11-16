@@ -104,6 +104,12 @@ existing groom. The matched front render shows small silhouette changes
 while the mid and lower face pixels match the previous render. The current
 trial is saved under `out/peak-flyaways`.
 
+Matched three-quarter renders under `out/peak-stubble` compare no added
+stubble with 1,598 and 3,196 surface-fitted strands. The strands alone
+barely changed the image at portrait size. The balanced variant in
+`out/peak-stubble-balance` also lightens the existing beard pigment via a
+local mask. It softens the dark cheek patch and passed the reopened checks.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these
