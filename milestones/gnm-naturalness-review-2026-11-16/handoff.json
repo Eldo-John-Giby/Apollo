@@ -1,0 +1,20 @@
+{
+  "status": "stopped_at_owner_request; experimental_preview_not_accepted",
+  "date": "2026-11-16",
+  "published_rc5": "preserved unchanged",
+  "production_controls": "unchanged",
+  "numeric_human_ratings": "not provided",
+  "known_failures": [
+    "Hair renders too light and stiff",
+    "Brow replacement too faint; residual scanned fibers remain",
+    "Skin still fair in rendered lighting",
+    "Eye close-up/oblique review not completed"
+  ],
+  "next_workflow": "Owner intends to use skills; do not launch more work until instructed",
+  "files": {
+    "experimental-front.png": "7f7805fa299b8f822e1e7eb07b0bd54c5087e0ff103eea9fedff21816e78bdc2",
+    "experimental-front.render.json": "1280837f48a908c624cf2a8af9ef55509ffc00af1eb4d1f842927189165b3378",
+    "map-trial.json": "e89b075f0409da439065740260a0e38641f95809555ff424536dfd1ca40059fe",
+    "unrendered-gaze-alternatives.json": "729f022d6210063e8a1f2122f9b15b5eae7e13bfba1aa513d373dcd43de6b946"
+  }
+}

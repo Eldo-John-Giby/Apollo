@@ -1,0 +1,67 @@
+{
+  "scene_sha256": "08be171bbeb88434c21c02925d4f6060415cf96af03fb136affc36ce99db2af4",
+  "maps": {
+    "1001": "bdf8e1020dfcb69a0223f78cafb8c7b9b5efaf88f7de6ac7a0b7b706e9aefcde",
+    "1002": "c3bb0160feca5660f196f04ecd533d309dd0863872cd708139f7d828f881a0cb",
+    "1004": "ceb5bc2012ff0aa25b326c37289b16f4b6ef849ec8b89c1d910880a6eb5d3808",
+    "roughness": "5a9f2a5b972594ab906c179f699840c601ac46593df622c60e6fa3f272713469",
+    "height": "37ef68dff8530be7ab07e2a9d07623a8ea8f947b7bdb90eeeb26a066251fed82"
+  },
+  "recipe_sha256": "a0d523db1b704386f8cdc445537cfac398b94bba56025eb128daf4cf5a6db716",
+  "blender": "4.5.15 LTS",
+  "blender_build": "5afeabba6097",
+  "device": "CPU",
+  "samples": 32,
+  "resolution": [
+    1024,
+    1024
+  ],
+  "frame": 1,
+  "layout": "udim",
+  "camera_lens_mm": 64.0,
+  "camera_matrix": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.10289920121431351,
+      -0.994691789150238,
+      -0.5799999833106995
+    ],
+    [
+      0.0,
+      0.994691789150238,
+      0.10289920121431351,
+      0.014999999664723873
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "angle": false,
+  "side_light": false,
+  "output_sha256": "7f7805fa299b8f822e1e7eb07b0bd54c5087e0ff103eea9fedff21816e78bdc2",
+  "status": "unqualified_appearance_trial",
+  "experimental_recipe_sha256": "c8dfc078eac7e12aff7928de27ec45657f67050659a3b716d70b0ca3b1419fa1",
+  "hair_strands": 50000,
+  "groom_preserves_head_positions": true,
+  "native_pose": "neutral template",
+  "pupils_px": {
+    "left": [
+      611.329833984375,
+      372.3497314453125
+    ],
+    "right": [
+      412.6048583984375,
+      372.5323486328125
+    ]
+  },
+  "feedback_case": "A01"
+}

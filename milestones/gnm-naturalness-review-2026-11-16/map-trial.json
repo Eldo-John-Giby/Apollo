@@ -1,0 +1,36 @@
+{
+  "status": "unqualified_appearance_trial",
+  "feedback_case": "A01",
+  "source": "rc.5 cool-grey maps",
+  "template_sha256": "5186cd0df8e9f6d5b7477d68173f1f99695894a12deec6d767c321148c597759",
+  "recipe_sha256": "0833c6320ab63d41892049d115131f074b9dae9652d77f7a15e272eddb93d7cc",
+  "source_maps": {
+    "color.1001.png": "04f57d1256e6f5239ccd665dcaab09465c2f38fce3988628cc6b36cd3dd8d2b8",
+    "color.1002.png": "d0af72515438092a2a677a60a4fa5426b03941d093a6d8dc50ed7a7136816dbd",
+    "color.1004.png": "5c62233402ff742353b6f9767cf5dd40e6c5ff4a53b896b155948495f638f657",
+    "height.1001.png": "37ef68dff8530be7ab07e2a9d07623a8ea8f947b7bdb90eeeb26a066251fed82",
+    "roughness.1001.png": "bdf35e593983075b984f4425de6b091f1b1b61a26396ac72c5ffe4c4b6dee253"
+  },
+  "stock_eye_source_sha256": "4659691c7295ad6206c78b003e5fd0e5f91dcd53032fa914a229bb48cabe424b",
+  "eye_source_license": "Existing MakeHuman CC0 stock atlas; no new photographic resolution claimed",
+  "skin_license": "Existing CC-BY-3.0 scan derivative with CC0 fallback; original attribution remains applicable",
+  "skin_gain": [
+    0.82,
+    0.79,
+    0.75
+  ],
+  "head_topology_and_uvs": "unchanged",
+  "changes": [
+    "remove long scanned brow fibers; author shorter directional brows",
+    "reduce pale gain and glossy skin response",
+    "replace periodic iris weave with restrained bilinear stock detail",
+    "portable scalp root pigment; separate optional rendered hair strands"
+  ],
+  "maps": {
+    "color.1001.png": "bdf8e1020dfcb69a0223f78cafb8c7b9b5efaf88f7de6ac7a0b7b706e9aefcde",
+    "color.1002.png": "c3bb0160feca5660f196f04ecd533d309dd0863872cd708139f7d828f881a0cb",
+    "color.1004.png": "ceb5bc2012ff0aa25b326c37289b16f4b6ef849ec8b89c1d910880a6eb5d3808",
+    "height.1001.png": "37ef68dff8530be7ab07e2a9d07623a8ea8f947b7bdb90eeeb26a066251fed82",
+    "roughness.1001.png": "5a9f2a5b972594ab906c179f699840c601ac46593df622c60e6fa3f272713469"
+  }
+}
