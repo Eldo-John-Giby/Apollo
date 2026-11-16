@@ -118,6 +118,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_crown_study.py` | Test a shorter side-parted crown, varying strand absorption and an irregular tapered hairline; render matched views of the fuller-brow portrait. |
 | `tools/gnm_lash_study.py` | Compare upper-lash splay and silhouette in matched eye crops and a full front portrait. |
 | `tools/gnm_ocular_study.py` | Test inner-corner sclera color and softer corneal reflections using matched eye crops. |
+| `tools/gnm_complexion_study.py` | Test localized cheek and lower-lid complexion, skin mottling and regional roughness in the isolated portrait. |
 | `tools/gnm_eye_finish.py`, `assets/gnm-eye-photo/source.json`, `assets/gnm-eye-photo/ATTRIBUTION.md` | CC0 photographic iris-sector reconstruction, source provenance and fitted lash/lower-waterline refinement trials. |
 | `tools/gnm_gaze_readability.py` | Evaluate native horizontal-target amplitude alternatives for review without changing production timing or face geometry. |
 | `docs/GNM_NATURALNESS_REVIEW.md` | Owner/teammate feedback, prototype state, known failures and handoff for the next appearance workflow. |

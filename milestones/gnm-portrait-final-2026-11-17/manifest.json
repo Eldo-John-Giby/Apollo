@@ -1,0 +1,12 @@
+{
+  "status": "editable still-portrait handoff",
+  "blender": "4.5.15 LTS",
+  "recipe": "tools/gnm_complexion_study.py",
+  "files": {
+    "portrait.blend": "7eb784994d3f62e738b15895954015981f91078d01e05e6d0d816e162dcc9d82",
+    "front.png": "cd2a13a59dd026afe052ce2194bce657b22664a274f9eabe07f3cb584b4bc867",
+    "three-quarter.png": "674cc29d0821234fd8e15f6511c7d914e48072b5e514949aa6026f79018a85e9",
+    "face-detail.png": "567d498fea56a14c7b0aec491d78b38bcc909f801ea8f41a7f00ea437534c551",
+    "reopened-check.json": "6b0bce73706a51b448debd0960419f75afed0c62514fc839850cbc98a89e5fac"
+  }
+}
