@@ -73,6 +73,12 @@ lashes and lower-lid pigment. Compare the close-up with the prior procedural
 iris and check for angular smearing, a hard iris border and conspicuous lash
 clumps.
 
+The first photographic close-up showed a concentric band. The revised atlas
+combines photographic variation with the earlier radial structure and
+preserves the earlier pupil radius. An iris-only update reuses the existing
+framing details for a direct comparison. The revised temple taper softens
+the horizontal band in the three-quarter view.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these

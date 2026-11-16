@@ -73,6 +73,18 @@ def groom(a):
     faces=np.array([f.vertices[:] for f in head.data.polygons if f.material_index==0])
     ear_face=ears[faces].max(1)>.4;tree=skin_tree(head,co)
     scalp=scene.objects['Portrait | swept chestnut hair'];data=scalp.data
+    if a.scalp_source:
+        with bpy.data.libraries.load(str(a.scalp_source.resolve()),link=False) as (src,dst):
+            dst.objects=[scalp.name]
+        original=dst.objects[0]
+        if original is None:
+            raise ValueError('Scalp source has no matching swept groom')
+        scalp.data=original.data
+        bpy.data.objects.remove(original,do_unlink=True)
+        data=scalp.data
+        nape=scene.objects.get('Peak | tapered nape hair')
+        if nape:
+            bpy.data.objects.remove(nape,do_unlink=True)
     pos=np.empty(len(data.points)*3,dtype=np.float32);data.attributes['position'].data.foreach_get('vector',pos);pos=pos.reshape(-1,12,3)
     radii=np.empty(len(data.points),dtype=np.float32);data.attributes['radius'].data.foreach_get('value',radii);radii=radii.reshape(-1,12)
     ear_keep=np.array([not ear_face[tree.find_nearest(Vector(p[0]))[2]] for p in pos])
@@ -126,18 +138,26 @@ def groom(a):
             row[j]=np.array(loc)+np.array(nor)*(.000030+(.00015+.00035*blend[i])*np.sin(np.pi*t[j]))
     radius=rng.uniform(.000016,.000028,len(p))[:,None]*(1-.95*t)[None,:]
     strands('Peak | tapered nape hair',head,points,radius,scalp.data.materials[0])
-    # Bind by the base-color socket, independent of packed authoring filenames.
-    nt=head.data.materials[0].node_tree;p=next(n for n in nt.nodes if n.type=='BSDF_PRINCIPLED')
-    tex=p.inputs['Base Color'].links[0].from_node
-    assert tex.type=='TEX_IMAGE'
+    # The base atlas can feed either the skin shader or the waterline tint.
+    nt=head.data.materials[0].node_tree
+    textures=[
+        node for node in nt.nodes
+        if node.type=='TEX_IMAGE' and node.image
+        and node.image.filepath.replace('\\','/').rsplit('/',1)[-1]=='color.1001.png'
+    ]
+    if len(textures)!=1:
+        raise ValueError('Expected one native skin color atlas')
+    tex=textures[0]
     path=a.maps/'color.1001.png';image=bpy.data.images.load(str(path.resolve()),check_existing=False)
     image.colorspace_settings.name='sRGB';image.pack();tex.image=image
     assert bytes(image.packed_file.data)==path.read_bytes()
     bpy.ops.object.select_all(action='DESELECT');head.select_set(True);bpy.context.view_layer.objects.active=head
     bpy.ops.file.pack_all();bpy.ops.wm.save_as_mainfile(filepath=str((a.out/'portrait.blend').resolve()),compress=True)
-    camera=scene.camera;aim(camera,(.82,-.035,.02),(0,0,-.025));camera.data.lens=85
-    render(scene,a.out,'profile',900,48)
-    aim(camera,(.40,-.72,.03),(0,0,-.025));render(scene,a.out,'three-quarter',1000,48)
+    camera=scene.camera;camera.data.lens=85
+    aim(camera,(.40,-.72,.03),(0,0,-.025))
+    render(scene,a.out,'three-quarter',a.size,a.samples)
+    aim(camera,(.90,-.035,.02),(0,.045,-.025))
+    render(scene,a.out,'profile',a.size,a.samples)
     if not a.side_views_only:
         aim(camera,(0,-.82,.03),(0,0,-.025));render(scene,a.out,'front',1000,48)
     report={'source_sha256':sha(source),'recipe_sha256':recipe,'scene_sha256':sha(a.out/'portrait.blend'),'removed_ear_strands':removed,'fade_removed_strands':fade_removed,'shortened_strands':len(selected),'nape_strands':len(roots),'color_sha256':sha(path),'status':'unqualified static groom refinement'}
@@ -149,5 +169,8 @@ if __name__=='__main__':
     p.add_argument('--maps',type=Path,required=True);p.add_argument('--template',type=Path,required=True)
     p.add_argument('--uncapped',type=Path);p.add_argument('--out',type=Path,required=True)
     p.add_argument('--side-views-only',action='store_true')
+    p.add_argument('--scalp-source',type=Path)
+    p.add_argument('--size',type=int,default=1000)
+    p.add_argument('--samples',type=int,default=48)
     a=p.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else None)
     maps(a) if a.maps_only else groom(a)
