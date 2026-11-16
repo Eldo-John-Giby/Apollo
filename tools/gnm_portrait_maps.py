@@ -13,6 +13,26 @@ from gnm_skin_detail import surface_positions
 from gnm_surface_maps import smooth, noise
 
 
+def read_data_image(path):
+    """Normalize data PNGs by stored precision, not by their current maximum."""
+    with Image.open(path) as image:
+        values=np.asarray(image)
+        if values.dtype==np.uint8:
+            divisor=255.
+        elif values.dtype==np.uint16 or image.mode.startswith('I;16'):
+            divisor=65535.
+        elif image.mode=='I' and values.min()>=0 and values.max()<=65535:
+            divisor=65535.
+        elif image.mode=='F':
+            divisor=1.
+        else:
+            raise ValueError(f'Unsupported data-image precision: {image.mode}, {values.dtype}')
+        result=values.astype(np.float32)/divisor
+    if not np.isfinite(result).all() or result.min()<0 or result.max()>1:
+        raise ValueError('Data image must encode finite values in 0..1')
+    return result
+
+
 def build(template, source, out):
     out.mkdir(parents=True, exist_ok=True)
     size = 4096
@@ -35,8 +55,8 @@ def build(template, source, out):
     color[chosen] = color[chosen]*(1-weight[:, None])+replacement*weight[:, None]
     # Warm medium complexion; retain the scan's broad variation and fine pigment.
     color *= np.array((.87, .83, .79), dtype=np.float32)
-    rough = np.asarray(Image.open(source/'roughness.1001.png'), dtype=np.float32)[valid]/255
-    height = np.asarray(Image.open(source/'height.1001.png'), dtype=np.float32)[valid]/255
+    rough = read_data_image(source/'roughness.1001.png')[valid]
+    height = read_data_image(source/'height.1001.png')[valid]
     for start in range(0, len(p), 150000):
         sl = slice(start, start+150000)
         xyz=p[sl]; xx, yy, zz=xyz.T
@@ -64,7 +84,9 @@ def build(template, source, out):
     for name,values in [('color.1001.png',color),('roughness.1001.png',rough),('height.1001.png',height)]:
         atlas=np.zeros((size,size)+values.shape[1:],dtype=np.float32)
         atlas[valid]=values; atlas=atlas[tuple(nearest)]
-        Image.fromarray(np.rint(np.clip(atlas,0,1)*255).astype(np.uint8)).save(out/name)
+        precision=65535 if name.startswith('height') else 255
+        dtype=np.uint16 if precision==65535 else np.uint8
+        Image.fromarray(np.rint(np.clip(atlas,0,1)*precision).astype(dtype)).save(out/name)
     iris_maps(source,out)
     report={'status':'isolated portrait appearance candidate','source_sha256':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in source.glob('*.png')},'template_sha256':hashlib.sha256(template.read_bytes()).hexdigest(),'recipe_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'outputs':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.png')},'license':'Existing CC-BY-3.0 scan derivative with CC0 fallback; existing attribution applies. Added detail is authored synthesis.'}
     (out/'maps.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
