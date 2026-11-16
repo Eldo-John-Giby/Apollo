@@ -39,6 +39,13 @@ The finished preview is `out/naturalness-review-v2/front.png` with its
 front camera/lighting. Maps and recipes are in that directory. A copy of the
 preview and trial receipts is preserved in the matching review milestone.
 
+Editable working copy: `out/naturalness-review-v2/current-work.blend`.
+It was saved from the same experiment without appearance changes and reopened
+successfully: 50,000 hair strands, five packed maps, and unchanged native head
+positions, topology and both UV layouts. Use this file for the next skills
+workflow; `expression.blend` is the earlier qualified rc.5 face. The working
+copy remains an unaccepted appearance trial.
+
 ## Known failures in this preview
 
 The rendered hair is too light and stiff. The brow replacement is too faint
