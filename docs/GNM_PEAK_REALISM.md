@@ -146,6 +146,12 @@ Matched eye crops show a slightly clearer fringe along the upper lids.
 Individual lashes are still faint. Reopened attachment and native
 eye-geometry checks passed.
 
+The ocular material study in `out/peak-ocular-study` adds a warm gradient
+at the inner corners, reduces the underlying eye surface specular response
+and slightly broadens corneal reflections. The matched crop shows a small
+change at the corners and around the glints. Native eye geometry, UVs and
+packed textures passed the reopened checks.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these
