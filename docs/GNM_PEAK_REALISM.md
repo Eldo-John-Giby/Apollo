@@ -89,6 +89,14 @@ renders and scene are under `out/peak-skin-balance`. The remaining cues are
 the uniform forehead and the rigid neutral expression. A first-impression
 human review of the combined portrait has been requested.
 
+The relaxed asymmetric mouth and cheek pose is saved under
+`out/peak-expression`. Its three-quarter renders use the same geometry
+under neutral and directional light. The reopened checks passed. Two
+localized forehead studies changed pigment and roughness under matched
+front lighting. The low-strength study barely changed visible pixels,
+while the stronger study produced a blotchy patch near the temple.
+Neither forehead study was added to the reviewed portrait.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these
