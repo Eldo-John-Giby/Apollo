@@ -79,6 +79,16 @@ preserves the earlier pupil radius. An iris-only update reuses the existing
 framing details for a direct comparison. The revised temple taper softens
 the horizontal band in the three-quarter view.
 
+The reviewed combined portrait is saved in
+`milestones/gnm-portrait-realism-2026-11-16`. Its front and eye crop
+come from the same packed scene. A subsequent lighting and skin study used
+a 190 mm disk key with less specular contribution from the fill. Under that
+same lighting, reducing skin subsurface weight from 0.65 to 0.46 and raising
+the roughness range reduced broad glare on the nose and cheeks. The study
+renders and scene are under `out/peak-skin-balance`. The remaining cues are
+the uniform forehead and the rigid neutral expression. A first-impression
+human review of the combined portrait has been requested.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these
