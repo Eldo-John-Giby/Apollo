@@ -178,14 +178,14 @@ def fuller_brows(scene, head, tree):
     t = np.linspace(0, 1, 6)
     points, radii = [], []
     for side in (-1, 1):
-        for u in rng.beta(1.35, 2.0, 800):
+        for u in rng.beta(1.28, 1.65, 1120):
             x = side * (.014 + .040*u)
             center_y = .316639 + .004*np.sin(np.pi*u) - .002*u*u
-            spread = (.0022 - .00165*u*u)
-            y = center_y + rng.uniform(-1, 1)*spread - .00033
+            spread = .00315 - .00245*u*u
+            y = center_y + rng.triangular(-1, 0, 1)*spread*1.35 + .00022*(1-u)
             length = rng.uniform(.0017, .0034)*(1-.25*u)
             dx = side * (.40+.60*u)*length
-            dy = (.75-.94*u)*length
+            dy = (.70-.93*u)*length
             row = []
             for step in t:
                 ray = Vector((x+dx*step, y+dy*step, .3))
@@ -195,7 +195,7 @@ def fuller_brows(scene, head, tree):
                 row.append(np.asarray(hit+normal*(.00004+.00020*np.sin(.85*np.pi*step))))
             if len(row) == len(t):
                 points.append(row)
-                radii.append(rng.uniform(.000019, .000032)*(1-.94*t)**.7)
+                radii.append(rng.uniform(.000021, .000035)*(1-.94*t)**.7)
     material = scene.objects['Portrait | fitted directional brows'].data.materials[0]
     return strands('Portrait | fuller brow fibers', head, np.array(points), np.array(radii), material)
 
