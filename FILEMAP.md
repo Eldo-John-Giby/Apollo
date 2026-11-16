@@ -114,6 +114,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_groom_finish.py` | Restore uncapped ear complexion and blend scalp pigment and short fibers at the nape and front hairline. |
 | `tools/gnm_expression_still.py` | Test an asymmetric mouth and cheek pose on the packed portrait and fit facial vellus to that pose. |
 | `tools/gnm_stubble_still.py` | Compare two densities of surface-fitted cheek and chin stubble under the same portrait lighting. |
+| `tools/gnm_feedback_still.py` | Apply portrait review notes with a defined jaw, matte skin, lip and lid creases, fuller brows, visible lashes and a lower, less uniform groom. |
 | `tools/gnm_eye_finish.py`, `assets/gnm-eye-photo/source.json`, `assets/gnm-eye-photo/ATTRIBUTION.md` | CC0 photographic iris-sector reconstruction, source provenance and fitted lash/lower-waterline refinement trials. |
 | `tools/gnm_gaze_readability.py` | Evaluate native horizontal-target amplitude alternatives for review without changing production timing or face geometry. |
 | `docs/GNM_NATURALNESS_REVIEW.md` | Owner/teammate feedback, prototype state, known failures and handoff for the next appearance workflow. |

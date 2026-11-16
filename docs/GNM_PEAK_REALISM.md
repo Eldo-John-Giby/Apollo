@@ -115,6 +115,19 @@ matched eye crops in `out/peak-lash-curl` test a slightly stronger outward
 curl. The change is visible mainly at the eyelid edge. The rectangular
 fill reflection remains conspicuous in the iris at close range.
 
+The owner identified glossy skin, missing lip and eye creases, a synthetic
+groom, faint lashes, a soft jaw and thin brows. The feedback study starts
+from the round fill portrait. It lowers skin specular response, adds
+lip fissures and periocular relief, reshapes the upper lashes, adds brow
+fibers and tests a more defined jaw and lower crown.
+
+The front, three-quarter and oblique close-up renders are under
+`out/peak-feedback-v2`. The jaw shape key keeps the native eye geometry
+fixed and the groom was refitted over the revised jaw. Reopened geometry,
+packed texture and root checks passed. The lips and lashes read in the
+close-up and the lashes remain faint at portrait size. The crown still
+reads as a largely uniform sweep.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these
