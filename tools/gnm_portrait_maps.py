@@ -24,8 +24,8 @@ def build(template, source, out):
     color = np.asarray(Image.open(source/'color.1001.png').convert('RGB'), dtype=np.float32)[valid]/255
     front = smooth((z+.005)/.015)
     # Remove misplaced photographed fibers throughout the orbital region.
-    repair = (smooth((abs(x)-.009)/.005)*smooth((.068-abs(x))/.008)
-              *smooth((y+.007)/.006)*smooth((.033-y)/.008)*front)
+    repair = (smooth((.068-abs(x))/.008)
+              *smooth((y+.014)/.008)*smooth((.033-y)/.008)*front)
     donors = (y>.035)&(y<.055)&(abs(x)<.070)&(z>.003)
     chosen = repair>.002
     tree = cKDTree(p[donors])
@@ -88,6 +88,8 @@ def iris_maps(source,out):
         rgb*=1+(fibers*iris)[:,:,None]
         flecks=(.5+.5*np.sin(theta*37+phase))**8*collar*iris*.09
         rgb=rgb*(1-flecks[:,:,None])+np.array((.36,.28,.15))*flecks[:,:,None]
+        sclera=smooth((radius-.189)/.015)
+        rgb*=1-sclera[:,:,None]*np.array((.085,.095,.10))
         Image.fromarray(np.rint(np.clip(rgb,0,1)*255).astype(np.uint8)).save(out/f'color.{tile}.png')
 
 

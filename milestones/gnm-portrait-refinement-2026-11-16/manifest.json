@@ -1,0 +1,19 @@
+{
+  "status": "reviewed static portrait candidate",
+  "files": {
+    "build.json": "418ca727688a9abae03c25dce7ec5171d9ffd9ebb4c72985b4de0aeba114d3da",
+    "eye-skin-detail.png": "e44465a9a766531813f0d03c4056c7b1ea8ea47d352219ada855097508c7bf89",
+    "front-matched-final.png": "af27392914b6f2c53eb7dc40d534887391ef09785a8d051c3f7d53fefed2a929",
+    "map-receipt.json": "9e5c1a8fdc753961f34eff6aa1115d30cf4b115de6e039c4952d0b9b3bf2ea59",
+    "matched-comparison.jpg": "2d89405703872cd613eef0dcf5c0de5d97fb6e60c7608aa7edb115d3848fd8a9",
+    "multi-angle-review.jpg": "2af7242ef4a4267fb8bf1d04fba8c5a288f4764a0188f62c731d358a5c0dfbac",
+    "neutral-front.png": "e287abbf945e1810ba8e9131327b61cec4e69fbd139d95b2a85fd17b58094178",
+    "neutral-profile.png": "ee374e950b8c61b47f1fa9da233a5d251b4ea5e5de17c3b0dd7921280947958d",
+    "neutral-three-quarter.png": "de5449bffda12299f83cdbfc0d8b287614e7d33952fb6f0308eb42eb4180f1a0",
+    "portrait.blend": "73b244acea7c0956af16e6fa7e02459545c1f23e17dc113100cc08b0fbfabea5",
+    "reopened-check.json": "642a9abd1b0e3f027c1692b10d782c14617bcc12b27e3160641cf2bd2e352ff4",
+    "SKIN_ATTRIBUTION.md": "6416208bd0b314b34627d66ae8277c148b41c081628f4c382cc477d06859af96",
+    "SKIN_LICENSE.txt": "19640b8bbcc488694b24798a8fb7de9e111007bcaef8512ff830a4270c9bc927",
+    "source-front.png": "7f7805fa299b8f822e1e7eb07b0bd54c5087e0ff103eea9fedff21816e78bdc2"
+  }
+}

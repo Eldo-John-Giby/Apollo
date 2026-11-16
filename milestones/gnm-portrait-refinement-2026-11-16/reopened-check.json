@@ -1,0 +1,79 @@
+{
+  "source_sha256": "c4daf292d1e5b6dc99777b10ae1fd16bd56b1b8489c1b1fc79668f359f472784",
+  "scene_sha256": "73b244acea7c0956af16e6fa7e02459545c1f23e17dc113100cc08b0fbfabea5",
+  "blender": "4.5.15 LTS",
+  "vertices": 17821,
+  "quads": 17662,
+  "source_basis_exact": true,
+  "native_topology_exact": true,
+  "both_uv_layouts_exact": true,
+  "native_eye_vertices_exact": true,
+  "packed_images": 5,
+  "groom": {
+    "Portrait | swept chestnut hair": {
+      "strands": 48000,
+      "points": 576000,
+      "max_root_offset_mm": 0.08005717245396227,
+      "radius_um": [
+        2.6265518044965575,
+        36.999965232098475
+      ]
+    },
+    "Portrait | fitted directional brows": {
+      "strands": 1900,
+      "points": 11400,
+      "max_root_offset_mm": 0.05002908073947765,
+      "radius_um": [
+        3.211011517123552,
+        38.970934838289395
+      ]
+    },
+    "Portrait | subtle upper lashes": {
+      "strands": 144,
+      "points": 864,
+      "max_root_offset_mm": 3.071953003086492e-05,
+      "radius_um": [
+        0.7200000027296483,
+        18.000000636675395
+      ]
+    }
+  },
+  "baseline_render_gate": {
+    "profile": "render",
+    "eps": 4.9e-05,
+    "tol": 0.000977,
+    "gap": 0.004887,
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "per_object": {
+      "GNM Head.001": {
+        "tris": 35324,
+        "parts": 8,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    "skipped": []
+  },
+  "candidate_render_gate": {
+    "profile": "render",
+    "eps": 4.9e-05,
+    "tol": 0.000977,
+    "gap": 0.004887,
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "per_object": {
+      "GNM Head": {
+        "tris": 35324,
+        "parts": 8,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    "skipped": []
+  },
+  "new_render_gate_errors": [],
+  "qualification": "Still portrait only. Motion, engine export and organizer evaluation not tested."
+}

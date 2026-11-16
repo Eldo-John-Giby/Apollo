@@ -274,13 +274,13 @@ def finish_existing(a,scene,head):
     scene.render.resolution_percentage=100;scene.cycles.samples=96
     bpy.ops.file.pack_all()
     bpy.ops.wm.save_as_mainfile(filepath=str((a.out/'portrait.blend').resolve()))
-    render(scene,a.out,'neutral-front',1400,96)
+    render(scene,a.out,'neutral-front',1400,64)
     aim(neutral,(.40,-.72,.03),(0,0,-.025))
-    render(scene,a.out,'neutral-three-quarter',1400,96)
+    render(scene,a.out,'neutral-three-quarter',1400,64)
     aim(neutral,(.82,-.035,.02),(0,0,-.025))
     render(scene,a.out,'neutral-profile',1024,64)
     aim(neutral,(0,-.55,.018),(0,0,-.010));neutral.data.lens=115
-    render(scene,a.out,'eye-skin-detail',1200,96)
+    render(scene,a.out,'eye-skin-detail',1200,64)
     print('RESULT '+json.dumps({'status':'finished neutral reviews','scene':str(a.out/'portrait.blend'),'scene_sha256':digest(a.out/'portrait.blend')}),flush=True)
 
 

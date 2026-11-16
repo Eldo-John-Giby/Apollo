@@ -1,0 +1,20 @@
+{
+  "status": "isolated portrait appearance candidate",
+  "source_sha256": {
+    "color.1001.png": "bdf8e1020dfcb69a0223f78cafb8c7b9b5efaf88f7de6ac7a0b7b706e9aefcde",
+    "color.1002.png": "c3bb0160feca5660f196f04ecd533d309dd0863872cd708139f7d828f881a0cb",
+    "color.1004.png": "ceb5bc2012ff0aa25b326c37289b16f4b6ef849ec8b89c1d910880a6eb5d3808",
+    "height.1001.png": "37ef68dff8530be7ab07e2a9d07623a8ea8f947b7bdb90eeeb26a066251fed82",
+    "roughness.1001.png": "5a9f2a5b972594ab906c179f699840c601ac46593df622c60e6fa3f272713469"
+  },
+  "template_sha256": "5186cd0df8e9f6d5b7477d68173f1f99695894a12deec6d767c321148c597759",
+  "recipe_sha256": "a3d4565368ba94337486fe5e9c49b113541c6b970fc030636a96c6d5c4931dd3",
+  "outputs": {
+    "color.1001.png": "2351c37984c7db9745065970967d93f7d8694104207eb4673832b45d8e628c6f",
+    "color.1002.png": "e89a52c5cf474bee331ae2b6b09ca346ce6a76865218460b8f8fa01331d64a67",
+    "color.1004.png": "c42eb778d19a28458e041ce4be9f3d071250bfeb218501814c201c97734deb9c",
+    "height.1001.png": "fdbf78fae13b9c50df80cb574f7504438c3471fa498f3f2ae5b44b1492b9ff63",
+    "roughness.1001.png": "f2d98a9e0ff5bc77b411c37ce1ecb484d5d0b905f459d149717c2bfc15827a4e"
+  },
+  "license": "Existing CC-BY-3.0 scan derivative with CC0 fallback; existing attribution applies. Added detail is authored synthesis."
+}
