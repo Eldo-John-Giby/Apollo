@@ -29,12 +29,25 @@ def scalp_coverage(p):
     return old*(1-posterior)+fade*posterior,old,posterior
 
 
+def soften_front_coverage(p,density,region):
+    x,y,z=p.T
+    front=smooth((z+.018)/.031)
+    side=smooth((abs(x)-.047)/.035)
+    edge=.070-.055*side
+    offset=.0012*np.sin(95*x+.8)+.00065*np.sin(410*x-.6)
+    tapered=smooth((y-edge-offset+.001)/.014)
+    local=front*smooth((.079-abs(x))/.015)
+    local*=smooth((y-edge+.008)/.006)*smooth((edge+.026-y)/.007)
+    return density*(1-local)+tapered*local,np.maximum(region,local)
+
+
 def maps(a):
     import shutil
     from PIL import Image
     from scipy.ndimage import distance_transform_edt
     from gnm_skin_detail import surface_positions
     from gnm_surface_maps import noise
+    recipe=sha(__file__)
     a.out.mkdir(parents=True,exist_ok=True)
     for f in a.maps.glob('*.png'):shutil.copy2(f,a.out/f.name)
     fields=surface_positions(a.template,4096,('ears',))
@@ -45,7 +58,10 @@ def maps(a):
     bare*=np.array((.82*.87,.79*.83,.75*.79))
     region=smooth((-.015-z)/.055)*smooth((.065-y)/.020)
     region=np.maximum(region,ear)
-    density=scalp_coverage(p)[0]*(1-ear)
+    density=scalp_coverage(p)[0]
+    if a.front_taper:
+        density,region=soften_front_coverage(p,density,region)
+    density*=1-ear
     root=np.empty_like(bare)
     for start in range(0,len(p),160000):
         sl=slice(start,start+160000);grain=noise(p[sl],4500,1611)
@@ -55,8 +71,41 @@ def maps(a):
     nearest=distance_transform_edt(~valid,return_distances=False,return_indices=True)
     current=current[tuple(nearest)]
     Image.fromarray(np.rint(np.clip(current,0,1)*255).astype(np.uint8)).save(a.out/'color.1001.png')
-    (a.out/'groom-map.json').write_text(json.dumps({'uncapped_source_sha256':sha(a.uncapped),'template_sha256':sha(a.template),'prior_color_sha256':sha(a.maps/'color.1001.png'),'output_sha256':sha(a.out/'color.1001.png'),'recipe_sha256':sha(__file__),'changes':['exclude native ears from scalp pigment','soften posterior density transition using uncapped source complexion']},indent=2)+'\n')
+    changes=['exclude native ears from scalp pigment','soften posterior density transition using uncapped source complexion']
+    if a.front_taper:
+        changes.append('feather the frontal hairline pigment')
+    (a.out/'groom-map.json').write_text(json.dumps({'uncapped_source_sha256':sha(a.uncapped),'template_sha256':sha(a.template),'prior_color_sha256':sha(a.maps/'color.1001.png'),'output_sha256':sha(a.out/'color.1001.png'),'recipe_sha256':recipe,'changes':changes},indent=2)+'\n')
     print('RESULT '+str(a.out),flush=True)
+
+
+def front_strands(head, tree, material):
+    from mathutils import Vector
+    from gnm_portrait_refine import strands
+
+    rng=np.random.default_rng(84127)
+    points=[]
+    radii=[]
+    t=np.linspace(0,1,7)
+    x_values=rng.uniform(-.068,.068,2100)
+    for x in x_values:
+        edge=.373139-.055*smooth((abs(x)-.047)/.035)
+        edge+=.0012*np.sin(95*x+.8)+.00065*np.sin(410*x-.6)
+        y=edge+rng.normal(.0005,.0018)
+        root,normal,_,_=tree.ray_cast(Vector((x,y,.30)),Vector((0,0,-1)))
+        if root is None or root.z<.075 or normal.z<.40:
+            continue
+        length=rng.uniform(.0014,.0048)
+        drift=rng.normal(.42,.19)
+        row=[]
+        for v in t:
+            hit,n,_,_=tree.ray_cast(Vector((x+drift*length*v,y+length*v,.30)),Vector((0,0,-1)))
+            if hit is None:
+                break
+            row.append(np.asarray(hit+n*(.000018+.00026*v**1.6)))
+        if len(row)==len(t):
+            points.append(row)
+            radii.append(rng.uniform(.000010,.000022)*(1-.96*t))
+    return strands('Peak | front hairline fibers',head,np.array(points),np.array(radii),material)
 
 
 def groom(a):
@@ -138,6 +187,9 @@ def groom(a):
             row[j]=np.array(loc)+np.array(nor)*(.000030+(.00015+.00035*blend[i])*np.sin(np.pi*t[j]))
     radius=rng.uniform(.000016,.000028,len(p))[:,None]*(1-.95*t)[None,:]
     strands('Peak | tapered nape hair',head,points,radius,scalp.data.materials[0])
+    frontal_count=0
+    if a.front_taper:
+        frontal_count=len(front_strands(head,tree,scalp.data.materials[0]).data.curves)
     # The base atlas can feed either the skin shader or the waterline tint.
     nt=head.data.materials[0].node_tree
     textures=[
@@ -154,13 +206,14 @@ def groom(a):
     bpy.ops.object.select_all(action='DESELECT');head.select_set(True);bpy.context.view_layer.objects.active=head
     bpy.ops.file.pack_all();bpy.ops.wm.save_as_mainfile(filepath=str((a.out/'portrait.blend').resolve()),compress=True)
     camera=scene.camera;camera.data.lens=85
+    if not a.side_views_only:
+        aim(camera,(0,-.82,.03),(0,0,-.025))
+        render(scene,a.out,'front',a.size,a.samples)
     aim(camera,(.40,-.72,.03),(0,0,-.025))
     render(scene,a.out,'three-quarter',a.size,a.samples)
     aim(camera,(.90,-.035,.02),(0,.045,-.025))
     render(scene,a.out,'profile',a.size,a.samples)
-    if not a.side_views_only:
-        aim(camera,(0,-.82,.03),(0,0,-.025));render(scene,a.out,'front',1000,48)
-    report={'source_sha256':sha(source),'recipe_sha256':recipe,'scene_sha256':sha(a.out/'portrait.blend'),'removed_ear_strands':removed,'fade_removed_strands':fade_removed,'shortened_strands':len(selected),'nape_strands':len(roots),'color_sha256':sha(path),'status':'unqualified static groom refinement'}
+    report={'source_sha256':sha(source),'recipe_sha256':recipe,'scene_sha256':sha(a.out/'portrait.blend'),'removed_ear_strands':removed,'fade_removed_strands':fade_removed,'shortened_strands':len(selected),'nape_strands':len(roots),'front_hairline_strands':frontal_count,'color_sha256':sha(path),'status':'unqualified static groom refinement'}
     (a.out/'build.json').write_text(json.dumps(report,indent=2)+'\n');print('RESULT '+json.dumps(report),flush=True)
 
 
@@ -169,6 +222,7 @@ if __name__=='__main__':
     p.add_argument('--maps',type=Path,required=True);p.add_argument('--template',type=Path,required=True)
     p.add_argument('--uncapped',type=Path);p.add_argument('--out',type=Path,required=True)
     p.add_argument('--side-views-only',action='store_true')
+    p.add_argument('--front-taper',action='store_true')
     p.add_argument('--scalp-source',type=Path)
     p.add_argument('--size',type=int,default=1000)
     p.add_argument('--samples',type=int,default=48)

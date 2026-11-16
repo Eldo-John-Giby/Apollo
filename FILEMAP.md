@@ -111,7 +111,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_portrait_maps.py`, `tools/gnm_portrait_refine.py` | Isolated still-portrait complexion maps, reversible anatomy keys, fitted brow/lash fibers, swept scalp groom and matched/neutral multi-angle reviews; not a motion-qualified replacement. |
 | `tools/gnm_portrait_check.py`, `docs/GNM_PORTRAIT_REFINEMENT.md` | Reopened source/candidate geometry, UV, packed-resource and groom checks; portrait evidence, reproduction and qualification limits. |
 | `tools/gnm_peak_maps.py`, `tools/gnm_peak_realism.py`, `docs/GNM_PEAK_REALISM.md` | Further portrait trials: linear scan relief, 16-bit pores, ocular optics, fitted lid/tear anatomy, vellus and strand variation; micro-skin diagnostics and review status. |
-| `tools/gnm_groom_finish.py` | Restore uncapped ear complexion, build a posterior pigment fade, exclude ear strands and blend short nape fibers into the portrait groom. |
+| `tools/gnm_groom_finish.py` | Restore uncapped ear complexion and blend scalp pigment and short fibers at the nape and front hairline. |
 | `tools/gnm_expression_still.py` | Test an asymmetric mouth and cheek pose on the packed portrait and fit facial vellus to that pose. |
 | `tools/gnm_eye_finish.py`, `assets/gnm-eye-photo/source.json`, `assets/gnm-eye-photo/ATTRIBUTION.md` | CC0 photographic iris-sector reconstruction, source provenance and fitted lash/lower-waterline refinement trials. |
 | `tools/gnm_gaze_readability.py` | Evaluate native horizontal-target amplitude alternatives for review without changing production timing or face geometry. |
