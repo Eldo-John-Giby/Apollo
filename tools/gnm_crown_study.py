@@ -56,16 +56,60 @@ def restyle(head, scalp):
     links.new(tone.outputs['Color'], shader.inputs['Absorption Coefficient'])
 
 
+def feather_hairline(head, grooms):
+    evaluated = head.evaluated_get(bpy.context.evaluated_depsgraph_get())
+    tree = skin_tree(head, np.array([vertex.co[:] for vertex in evaluated.data.vertices]))
+    rng = np.random.default_rng(43085)
+    for groom, points_per_strand in grooms:
+        attributes = groom.data.attributes
+        positions = np.empty((len(groom.data.points), 3), dtype=np.float32)
+        radii = np.empty(len(positions), dtype=np.float32)
+        attributes['position'].data.foreach_get('vector', positions.ravel())
+        attributes['radius'].data.foreach_get('value', radii)
+        curves = positions.reshape(-1, points_per_strand, 3)
+        strand_radii = radii.reshape(-1, points_per_strand)
+        x, y, z = curves[:, 0].T
+        side = smooth((abs(x)-.047)/.035)
+        front = smooth((z-.079)/.025)
+        edge = .373139-.055*side
+        distance = y-edge
+        influence = front*np.exp(-(distance/.012)**2)
+        # Broad asymmetry at the temples, with small irregular groups in between.
+        offset = .0027*np.sin(93*x+.85)+.0012*np.sin(390*x-.4)
+        offset += .00055*np.sin(970*x+.7) + rng.normal(0,.0013,len(curves))
+        taper = np.linspace(1,.14,points_per_strand)
+        for i in np.flatnonzero(influence > .10):
+            delta = influence[i]*offset[i]
+            for j, point in enumerate(curves[i]):
+                current = Vector(point)
+                surface, normal, _, _ = tree.find_nearest(current)
+                height = max(.00002, (current-surface).dot(normal))
+                surface, normal, _, _ = tree.find_nearest(
+                    surface+Vector((0, delta*taper[j], 0)))
+                point[:] = surface+normal*height
+            feather = influence[i]*(1-smooth((distance[i]+.002)/.011))
+            strand_radii[i] *= 1-.37*feather
+        attributes['position'].data.foreach_set('vector', positions.ravel())
+        attributes['radius'].data.foreach_set('value', radii)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', type=Path, required=True)
-    out = parser.parse_args(sys.argv[sys.argv.index('--')+1:]).out.resolve()
+    parser.add_argument('--hairline-only', action='store_true')
+    args = parser.parse_args(sys.argv[sys.argv.index('--')+1:])
+    out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=True)
     path = out/'portrait.blend'
     if path.exists():
         raise FileExistsError(path)
     scene = bpy.context.scene
-    restyle(scene.objects['GNM Head'], scene.objects['Portrait | swept chestnut hair'])
+    head = scene.objects['GNM Head']
+    scalp = scene.objects['Portrait | swept chestnut hair']
+    if args.hairline_only:
+        feather_hairline(head, ((scalp, 12), (scene.objects['Peak | front hairline fibers'], 7)))
+    else:
+        restyle(head, scalp)
     bpy.ops.wm.save_as_mainfile(filepath=str(path), compress=True)
     render(scene, out, 'three-quarter', 850, 32)
     aim(scene.camera, (0, -.82, .03), (0, 0, -.025))

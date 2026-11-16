@@ -134,6 +134,12 @@ absorption across strands and keeps the curved roots fitted to the scalp.
 The three-quarter view shows more separation between locks. The frontal
 hairline still needs more variation. The reopened still-portrait checks passed.
 
+The hairline study in `out/peak-hairline-study` varies the placement and
+radius of the existing edge fibers across the forehead and temples. The
+matched renders show a softer boundary in the affected sections. A dark band
+remains where the short fibers transition into the dense groom. The reopened
+geometry, texture and groom checks passed.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these
