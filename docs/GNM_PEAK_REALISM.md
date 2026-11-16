@@ -97,6 +97,13 @@ front lighting. The low-strength study barely changed visible pixels,
 while the stronger study produced a blotchy patch near the temple.
 Neither forehead study was added to the reviewed portrait.
 
+The subsequent groom trial feathers the frontal scalp pigment and fits
+short fibers to the front edge. The crown uses unequal clump heights and
+spacing, followed by a sparse layer of tapered flyaways rooted in the
+existing groom. The matched front render shows small silhouette changes
+while the mid and lower face pixels match the previous render. The current
+trial is saved under `out/peak-flyaways`.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these

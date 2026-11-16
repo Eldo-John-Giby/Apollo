@@ -135,6 +135,33 @@ def vary_crown(data, tree):
     data.attributes['position'].data.foreach_set('vector', positions)
 
 
+def add_flyaways(head, scalp):
+    """Lift a small sample of existing roots into tapered silhouette hairs."""
+    from gnm_portrait_refine import strands
+
+    data = scalp.data
+    positions = np.empty(len(data.points) * 3, dtype=np.float32)
+    data.attributes['position'].data.foreach_get('vector', positions)
+    rows = positions.reshape(-1, 12, 3)
+    x, y, z = rows[:, 0].T
+    crown = (y > .365) & (np.abs(x) < .063) & (z > .049)
+    temple = (y > .339) & (y < .370) & (np.abs(x) > .048) & (z > .076)
+    rng = np.random.default_rng(85382)
+    candidates = np.flatnonzero(crown | temple)
+    indices = rng.choice(candidates, min(len(candidates), 190), replace=False)
+    points = rows[indices].copy()
+    t = np.linspace(0, 1, points.shape[1])
+    arc = np.sin(np.pi * t) ** 1.25
+    envelope = .78 * arc + .22 * t ** 2
+    sign = np.sign(x[indices])
+    length = rng.uniform(.0018, .006, len(indices))
+    points[:, :, 0] += (sign * length * .35)[:, None] * envelope
+    points[:, :, 1] += (length * .83)[:, None] * envelope
+    points[:, :, 2] += rng.uniform(-.0015, .0023, len(indices))[:, None] * arc
+    radii = rng.uniform(.000010, .000019, len(indices))[:, None] * (1 - .97 * t)
+    return strands('Peak | crown and temple flyaways', head, points, radii, data.materials[0])
+
+
 def groom(a):
     import bpy
     from mathutils import Vector
@@ -219,6 +246,7 @@ def groom(a):
         frontal_count=len(front_strands(head,tree,scalp.data.materials[0]).data.curves)
     if a.vary_crown:
         vary_crown(scalp.data,tree)
+    flyaway_count=len(add_flyaways(head,scalp).data.curves) if a.flyaways else 0
     # The base atlas can feed either the skin shader or the waterline tint.
     nt=head.data.materials[0].node_tree
     textures=[
@@ -243,6 +271,7 @@ def groom(a):
     aim(camera,(.90,-.035,.02),(0,.045,-.025))
     render(scene,a.out,'profile',a.size,a.samples)
     report={'source_sha256':sha(source),'recipe_sha256':recipe,'scene_sha256':sha(a.out/'portrait.blend'),'removed_ear_strands':removed,'fade_removed_strands':fade_removed,'shortened_strands':len(selected),'nape_strands':len(roots),'front_hairline_strands':frontal_count,'color_sha256':sha(path),'status':'unqualified static groom refinement'}
+    report['flyaway_strands']=flyaway_count
     (a.out/'build.json').write_text(json.dumps(report,indent=2)+'\n');print('RESULT '+json.dumps(report),flush=True)
 
 
@@ -253,6 +282,7 @@ if __name__=='__main__':
     p.add_argument('--side-views-only',action='store_true')
     p.add_argument('--front-taper',action='store_true')
     p.add_argument('--vary-crown',action='store_true')
+    p.add_argument('--flyaways',action='store_true')
     p.add_argument('--scalp-source',type=Path)
     p.add_argument('--size',type=int,default=1000)
     p.add_argument('--samples',type=int,default=48)
