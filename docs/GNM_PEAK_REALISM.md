@@ -54,6 +54,25 @@ the atlas texel density. V5 tests that layer and the repaired vellus; it is
 not accepted merely because it exists in the code. It needs a macro review
 and a reopened attachment check before promotion.
 
+V5 passed the reopened geometry, packed texture and attachment checks. The
+bound 16-bit height map had a normalized standard deviation of 0.0202 and
+the projected vellus roots were within 0.009 mm of the evaluated surface.
+The macro render shows fine relief on the nose and vertical lip striations.
+
+The next groom trial restored native ear colour from the uncapped complexion
+atlas and faded the original scalp density into short posterior strands. A
+hard change in strand direction remained visible near the temple. The groom
+recipe now blends the original lifted strand shape continuously into the
+shorter, flatter strands. Review this change in profile and three-quarter
+views before choosing it.
+
+The eye trial uses the grey-blue photographic iris source documented in
+`assets/gnm-eye-photo/ATTRIBUTION.md`. The transfer reconstructs occluded
+sectors from unobstructed parts of the source and uses additional fitted
+lashes and lower-lid pigment. Compare the close-up with the prior procedural
+iris and check for angular smearing, a hard iris border and conspicuous lash
+clumps.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these
