@@ -193,7 +193,14 @@ def materials(head,maps):
             node.inputs['Strength'].default_value=.35 if 'physical' in node.name else .10
             node.inputs['Distance'].default_value=.00008 if 'physical' in node.name else .000025
     for ix in [1,3]:
-        shader=next(n for n in head.data.materials[ix].node_tree.nodes if n.type=='BSDF_PRINCIPLED')
+        eye_nodes=head.data.materials[ix].node_tree.nodes
+        shader=next(n for n in eye_nodes if n.type=='BSDF_PRINCIPLED')
+        path=maps/f'color.{1001+ix}.png'
+        if path.is_file():
+            for node in eye_nodes:
+                if node.type=='TEX_IMAGE':
+                    image=bpy.data.images.load(str(path.resolve()),check_existing=False)
+                    image.colorspace_settings.name='sRGB';image.pack();node.image=image
         shader.inputs['Roughness'].default_value=.38
         shader.inputs['Specular IOR Level'].default_value=.12
     for ix in [2,4]:
@@ -215,6 +222,10 @@ def main(a):
     if source==a.out.resolve()/'portrait.blend':raise ValueError('Build from original scene')
     a.out.mkdir(parents=True,exist_ok=True)
     scene=bpy.context.scene;head=scene.objects['GNM Head']
+    if a.finish_existing:
+        materials(head,a.maps)
+        finish_existing(a,scene,head)
+        return
     source_uv={uv.name:np.array([v.uv[:] for v in uv.data]) for uv in head.data.uv_layers}
     original,co,sculpt_report=sculpt(head)
     groom_report=groom(head,co,skin_tree(head,co))
@@ -238,7 +249,15 @@ def main(a):
     render(scene,a.out,'three-quarter',a.size,a.samples)
     aim(cam,(.58,-.035,.005),(0,0,-.035));cam.data.lens=64
     render(scene,a.out,'profile',a.size,a.samples)
-    # A separate neutral studio setup judges structure without the hot source rim.
+    finish_existing(a,scene,head)
+    report['scene_sha256']=digest(a.out/'portrait.blend')
+    (a.out/'build.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+    print('RESULT '+json.dumps(report),flush=True)
+
+
+def finish_existing(a,scene,head):
+    """Resume final reviews from a saved anatomy/groom checkpoint."""
+    scene.camera=scene.objects['GNM Camera']
     for light in [o for o in scene.objects if o.type=='LIGHT']:
         if light.name=='Key':
             aim(light,(-.25,-.32,.17),(0,0,-.015));light.data.energy=7;light.data.size=.24
@@ -249,23 +268,25 @@ def main(a):
         light.data.color=(1,1,1)
     scene.view_settings.exposure=-.2
     neutral=bpy.data.objects.new('Portrait | neutral 85mm',bpy.data.cameras.new('Portrait | neutral 85mm'))
-    scene.collection.objects.link(neutral);neutral.data.lens=85
-    scene.camera=neutral
+    scene.collection.objects.link(neutral);neutral.data.lens=85;scene.camera=neutral
     aim(neutral,(0,-.82,.03),(0,0,-.025))
-    scene.render.resolution_x=scene.render.resolution_y=1400;scene.cycles.samples=96
+    scene.render.resolution_x=scene.render.resolution_y=1400
+    scene.render.resolution_percentage=100;scene.cycles.samples=96
+    bpy.ops.file.pack_all()
     bpy.ops.wm.save_as_mainfile(filepath=str((a.out/'portrait.blend').resolve()))
     render(scene,a.out,'neutral-front',1400,96)
     aim(neutral,(.40,-.72,.03),(0,0,-.025))
     render(scene,a.out,'neutral-three-quarter',1400,96)
+    aim(neutral,(.82,-.035,.02),(0,0,-.025))
+    render(scene,a.out,'neutral-profile',1024,64)
     aim(neutral,(0,-.55,.018),(0,0,-.010));neutral.data.lens=115
     render(scene,a.out,'eye-skin-detail',1200,96)
-    report['scene_sha256']=digest(a.out/'portrait.blend')
-    (a.out/'build.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
-    print('RESULT '+json.dumps(report),flush=True)
+    print('RESULT '+json.dumps({'status':'finished neutral reviews','scene':str(a.out/'portrait.blend'),'scene_sha256':digest(a.out/'portrait.blend')}),flush=True)
 
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--maps',type=Path,required=True);p.add_argument('--out',type=Path,required=True)
     p.add_argument('--size',type=int,default=768);p.add_argument('--samples',type=int,default=32)
+    p.add_argument('--finish-existing',action='store_true')
     main(p.parse_args(sys.argv[sys.argv.index('--')+1:]))

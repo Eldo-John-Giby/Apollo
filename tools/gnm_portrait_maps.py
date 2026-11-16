@@ -65,9 +65,30 @@ def build(template, source, out):
         atlas=np.zeros((size,size)+values.shape[1:],dtype=np.float32)
         atlas[valid]=values; atlas=atlas[tuple(nearest)]
         Image.fromarray(np.rint(np.clip(atlas,0,1)*255).astype(np.uint8)).save(out/name)
+    iris_maps(source,out)
     report={'status':'isolated portrait appearance candidate','source_sha256':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in source.glob('*.png')},'template_sha256':hashlib.sha256(template.read_bytes()).hexdigest(),'recipe_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'outputs':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.png')},'license':'Existing CC-BY-3.0 scan derivative with CC0 fallback; existing attribution applies. Added detail is authored synthesis.'}
     (out/'maps.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({'status':'maps saved','out':str(out)}))
+
+
+def iris_maps(source,out):
+    # Restrained bilateral iris crypts and a soft limbal boundary, not a bright
+    # radial graphic. Native pupil extent and image layout remain unchanged.
+    for tile,phase in [(1002,.37),(1004,1.13)]:
+        rgb=np.asarray(Image.open(source/f'color.{tile}.png').convert('RGB'),dtype=np.float32)/255
+        n=rgb.shape[0];xx,yy=np.meshgrid((np.arange(n)+.5)/n-.5,(np.arange(n)+.5)/n-.5)
+        radius=np.sqrt(xx*xx+yy*yy);r=np.clip((radius-.049)/(.1849-.049),0,1)
+        theta=np.arctan2(yy,xx)
+        fibers=(.040*np.sin(theta*173+phase+1.4*np.sin(r*17+theta*7))
+                +.025*np.sin(theta*281-phase+r*4)+.018*np.sin(theta*93+np.sin(r*32)))
+        iris=smooth((radius-.050)/.004)*smooth((.1845-radius)/.004)
+        collar=np.exp(-((r-.20)/.13)**2)
+        # Source pigment keeps its own broad color; only delicate relief-like
+        # albedo breakup and warm inner flecks are added.
+        rgb*=1+(fibers*iris)[:,:,None]
+        flecks=(.5+.5*np.sin(theta*37+phase))**8*collar*iris*.09
+        rgb=rgb*(1-flecks[:,:,None])+np.array((.36,.28,.15))*flecks[:,:,None]
+        Image.fromarray(np.rint(np.clip(rgb,0,1)*255).astype(np.uint8)).save(out/f'color.{tile}.png')
 
 
 if __name__=='__main__':
