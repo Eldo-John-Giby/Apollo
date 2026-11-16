@@ -127,6 +127,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `assets/gnm-scan/source.json`, `assets/gnm-scan/ATTRIBUTION.md` | Pinned scan asset URLs/checksums, CC-BY-3.0 source license and derivative attribution. |
 | `docs/SCORE_IMPROVEMENT.md` | Current 60/20/20 audit, prioritized implementation and candidate qualification record. |
 | `tools/gnm_gaze_trial.py`, `tools/gnm_blink.py`, `tools/gnm_timeline_trial.py` | Evaluate native gaze anchors and clip geometry using upstream NumPy, then install and check the Blender timeline. |
+| `tools/gnm_blink_polish.py` | Build an isolated blink appearance review with matched animated upper lashes, slightly wider open lids, and localized matte skin. |
 | `apollo_core/submission_timing.py` | Shared deterministic motion timing for the MakeHuman and GNM submission paths. |
 | `tools/gnm_bundle.py`, `tools/gnm_verify.py`, `tools/gnm_rehearse.py` | Verify reopened GNM timelines and package the technical archive from authenticated frame and texture outputs. |
 | `tools/gnm_run.py`, `tools/gnm_motion_variant.py` | Run stills or motion with any texture variant and UV layout; pack hash-bound variant timelines for resumable rendering. |
