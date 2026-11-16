@@ -128,6 +128,12 @@ packed texture and root checks passed. The lips and lashes read in the
 close-up and the lashes remain faint at portrait size. The crown still
 reads as a largely uniform sweep.
 
+The crown study in `out/peak-crown-study` starts from the thicker-brow
+portrait and shortens and redirects the upper scalp fibers. It varies
+absorption across strands and keeps the curved roots fitted to the scalp.
+The three-quarter view shows more separation between locks. The frontal
+hairline still needs more variation. The reopened still-portrait checks passed.
+
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
 human approval is inferred. Keep the maximum-realism goal active while these
