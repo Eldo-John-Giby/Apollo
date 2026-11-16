@@ -109,6 +109,11 @@ stubble with 1,598 and 3,196 surface-fitted strands. The strands alone
 barely changed the image at portrait size. The balanced variant in
 `out/peak-stubble-balance` also lightens the existing beard pigment via a
 local mask. It softens the dark cheek patch and passed the reopened checks.
+Its profile and oblique detail views show the beard pigment following the
+jaw. Individual upper lashes remain faint in the oblique crop. The
+matched eye crops in `out/peak-lash-curl` test a slightly stronger outward
+curl. The change is visible mainly at the eyelid edge. The rectangular
+fill reflection remains conspicuous in the iris at close range.
 
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
