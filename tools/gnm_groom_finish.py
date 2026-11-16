@@ -108,6 +108,33 @@ def front_strands(head, tree, material):
     return strands('Peak | front hairline fibers',head,np.array(points),np.array(radii),material)
 
 
+def vary_crown(data, tree):
+    """Replace the periodic crown lift with unequal clump spacing and height."""
+    from mathutils import Vector
+
+    positions = np.empty(len(data.points) * 3, dtype=np.float32)
+    data.attributes['position'].data.foreach_get('vector', positions)
+    rows = positions.reshape(-1, 12, 3)
+    root_x, root_y, root_z = (rows[:, 0].astype(float) - (0, .303139, .098933)).T
+    mix = .87 * smooth((root_y - .045) / .045)
+    phase = 660 * root_x + 220 * root_z
+    phase += 2.1 * np.sin(53 * root_x + 1.5) + 1.05 * np.sin(110 * root_z - 1.1)
+    original = .78 + .22 * np.sin(900 * root_x + 270 * root_z)
+    varied = .78 + .12 * np.sin(phase) + .07 * np.sin(1.6 * phase + .9)
+    varied += .035 * np.sin(270 * root_x - 180 * root_z)
+    lift_change = mix * (varied / original - 1)
+    for index in np.flatnonzero(mix > .02):
+        for point in rows[index, 1:]:
+            point_vector = Vector(point)
+            hit, normal, _, _ = tree.find_nearest(point_vector)
+            if hit is None:
+                continue
+            lift = (point_vector - hit).dot(normal)
+            if lift > .00012:
+                point += np.asarray(normal) * lift * lift_change[index]
+    data.attributes['position'].data.foreach_set('vector', positions)
+
+
 def groom(a):
     import bpy
     from mathutils import Vector
@@ -190,6 +217,8 @@ def groom(a):
     frontal_count=0
     if a.front_taper:
         frontal_count=len(front_strands(head,tree,scalp.data.materials[0]).data.curves)
+    if a.vary_crown:
+        vary_crown(scalp.data,tree)
     # The base atlas can feed either the skin shader or the waterline tint.
     nt=head.data.materials[0].node_tree
     textures=[
@@ -223,6 +252,7 @@ if __name__=='__main__':
     p.add_argument('--uncapped',type=Path);p.add_argument('--out',type=Path,required=True)
     p.add_argument('--side-views-only',action='store_true')
     p.add_argument('--front-taper',action='store_true')
+    p.add_argument('--vary-crown',action='store_true')
     p.add_argument('--scalp-source',type=Path)
     p.add_argument('--size',type=int,default=1000)
     p.add_argument('--samples',type=int,default=48)
