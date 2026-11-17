@@ -85,3 +85,11 @@ Scores are visual assessments in the brief's checklist order.
 1. Get a rigged copy of this same haired portrait, or authorize a separate rig build so the gaze and eyelid-follow checks can run on this model.
 2. Break up the continuous frontal sweep with a sparser, more irregular first row of scalp fibers and blend the residual key highlight.
 3. Use registered skin scans with more variation at the forehead and ears, and retouch the cheek mark and redness on the atlas. The current mesh can support those improvements.
+
+## Temple, lid and material review, version 12
+
+The update starts from v08. Changed the front-to-side junction at both temples by moving nearby root and tip positions along the scalp, tapering the dense row and adding finer transition strands. The temple band uses a local lateral center of 53 mm and a width of 16 mm, with up to 7.2 mm of vertical root shift before weighting. Core hair and temple tufts remain editable curves.
+
+Added `Aperture balance | image right` with up to 0.43 mm upper lift and 0.15 mm lower drop in the unweighted field. Seven head-on ray samples near the center of each opening measured approximately 8.53 versus 8.01 mm before and 8.53 versus 8.54 mm after, in image-left to image-right order. The tear meniscus has a separate 0.10 mm lid-follow key. Native eye geometry remains exact.
+
+Copied the cornea materials and reduced the glass contribution by mixing in 39% refraction at the same IOR. Glass roughness 0.036, refraction roughness 0.026. Added ear cartilage color and relief on a copied skin material. Local ear roughness blends toward 0.81 and specular toward 0.12. The ear bump distance is 0.000082 m. The renders are 850-pixel review stills under the existing lights.
