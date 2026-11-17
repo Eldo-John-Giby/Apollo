@@ -122,6 +122,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_realism_overhaul.py` | Build versioned geometry, skin, eye, hair and light passes on the packed haired portrait, with fixed-camera and beauty renders. |
 | `tools/gnm_realism_compositor.py` | Install the beauty compositor on the editable portrait and preview it on the saved render. |
 | `tools/gnm_portrait_review.py` | Refine front hair density, right eye aperture, corneal reflections and ear texture on the packaged v08 portrait. |
+| `tools/gnm_upper_face_review.py`, `tools/gnm_sclera_vessels.py` | Refine forehead complexion, scleral capillaries and tear-corner tissue on v12, with a packed vessel mask and review crop. |
 | `tools/gnm_eye_finish.py`, `assets/gnm-eye-photo/source.json`, `assets/gnm-eye-photo/ATTRIBUTION.md` | CC0 photographic iris-sector reconstruction, source provenance and fitted lash/lower-waterline refinement trials. |
 | `tools/gnm_gaze_readability.py` | Evaluate native horizontal-target amplitude alternatives for review without changing production timing or face geometry. |
 | `docs/GNM_NATURALNESS_REVIEW.md` | Owner/teammate feedback, prototype state, known failures and handoff for the next appearance workflow. |

@@ -93,3 +93,11 @@ The update starts from v08. Changed the front-to-side junction at both temples b
 Added `Aperture balance | image right` with up to 0.43 mm upper lift and 0.15 mm lower drop in the unweighted field. Seven head-on ray samples near the center of each opening measured approximately 8.53 versus 8.01 mm before and 8.53 versus 8.54 mm after, in image-left to image-right order. The tear meniscus has a separate 0.10 mm lid-follow key. Native eye geometry remains exact.
 
 Copied the cornea materials and reduced the glass contribution by mixing in 39% refraction at the same IOR. Glass roughness 0.036, refraction roughness 0.026. Added ear cartilage color and relief on a copied skin material. Local ear roughness blends toward 0.81 and specular toward 0.12. The ear bump distance is 0.000082 m. The renders are 850-pixel review stills under the existing lights.
+
+## Forehead and inner-eye review, version 13
+
+Added a forehead mask that fades through the brow and temples. It layers broad complexion variation, fine pore pigment and local bump on a duplicate skin shader. The new pore spacing uses scale 1780 and a bump distance of 0.000090 m at up to 0.58 strength.
+
+Added a packed rose capillary mask projected across both eyes. The native radial UV gate excludes the iris and limbus. Raised the refraction blend to 65% and the glass roughness to 0.042. In the matched crop the large rectangular reflections are weaker. Fine vessels remain subtle at portrait scale.
+
+The existing inner-corner tissue has a reversible `Fitted tear corner fold` shape key and an updated warm, low-gloss surface. The lower tear meniscus and native eye geometry remain in place. Reopening confirmed that the new mask is packed and the native eyes and UV layouts remain exact.
