@@ -101,3 +101,7 @@ Added a forehead mask that fades through the brow and temples. It layers broad c
 Added a packed rose capillary mask projected across both eyes. The native radial UV gate excludes the iris and limbus. Raised the refraction blend to 65% and the glass roughness to 0.042. In the matched crop the large rectangular reflections are weaker. Fine vessels remain subtle at portrait scale.
 
 The existing inner-corner tissue has a reversible `Fitted tear corner fold` shape key and an updated warm, low-gloss surface. The lower tear meniscus and native eye geometry remain in place. Reopening confirmed that the new mask is packed and the native eyes and UV layouts remain exact.
+
+## Scleral vessel visibility, version 14
+
+Kept the v13 eye geometry, tear corners and lighting. The packed vessel mask now widens selected primary branches from 3 to 6 texture pixels and increases their opacity by 72%. Fine branches remain narrower. The matched crop shows more distinct pink branching near the corners, especially on the whites toward the outside of the eyes.

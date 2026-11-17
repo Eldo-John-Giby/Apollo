@@ -10,6 +10,7 @@ size=(1536,512)
 rng=np.random.default_rng(624)
 mask=Image.new('L',size)
 draw=ImageDraw.Draw(mask)
+strong='--readable' in sys.argv
 
 
 def pixel(x,y):
@@ -28,12 +29,16 @@ for sign in (-1,1):
             xs=start_x+(end_x-start_x)*ts
             ys=y0+(y1-y0)*ts+.00038*np.sin(ts*7+phase)*np.sin(np.pi*ts)
             opacity=rng.uniform(60,138)
+            primary=strong and j%3==0
+            if strong:
+                opacity*=1.72 if primary else 1.19
             for i in range(len(ts)-1):
                 draw.line((pixel(sign*xs[i],ys[i]),pixel(sign*xs[i+1],ys[i+1])),
-                          fill=int(opacity*(1-.64*ts[i])),width=3 if i<25 else 2)
+                          fill=int(opacity*(1-.64*ts[i])),
+                          width=(6 if i<28 else 4) if primary else (3 if i<25 else 2))
             i=int(rng.integers(16,35))
             bend=rng.choice([-1,1])*rng.uniform(.001,.0024)
             branch=[pixel(sign*(xs[i]+(end_x-xs[i])*.72*t),ys[i]+bend*t+.00020*np.sin(t*6))
                     for t in np.linspace(0,1,16)]
-            draw.line(branch,fill=int(opacity*.48),width=2)
+            draw.line(branch,fill=int(opacity*.55),width=3 if primary else 2)
 mask.filter(ImageFilter.GaussianBlur(.70)).save(folder/'sclera-vessels.png')

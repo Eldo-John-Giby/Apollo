@@ -163,19 +163,33 @@ def main():
     scene=bpy.context.scene
     head=scene.objects['GNM Head']
     root=Path(bpy.data.filepath).resolve().parent
-    out=root/'realism_pass'/'13_review'
-    version=root/'portrait_v13.blend'
+    stronger='--readable-vessels' in sys.argv
+    review='14_review' if stronger else '13_review'
+    out=root/'realism_pass'/review
+    version=root/('portrait_v14.blend' if stronger else 'portrait_v13.blend')
     if version.exists():
         raise FileExistsError(version)
-    vessels(head,out/'sclera-vessels.png')
-    forehead(head)
-    inner_corners(scene)
-    scene.render.filepath='//realism_pass/13_review/final.png'
+    if stronger:
+        image=bpy.data.images.load(str((out/'sclera-vessels.png').resolve()),check_existing=False)
+        image.colorspace_settings.name='Non-Color'
+        image.pack()
+        for slot in (1,3):
+            material=head.data.materials[slot].copy()
+            material.name=f'eye_v14 scleral vessels {slot}'
+            head.data.materials[slot]=material
+            nodes=material.node_tree.nodes
+            next(n for n in nodes if n.label=='Packed branching capillaries').image=image
+            pigment=next(n for n in nodes if n.label=='Faint rose capillary branches')
+            pigment.inputs[2].default_value=(.68,.22,.20,1)
+    else:
+        vessels(head,out/'sclera-vessels.png')
+        forehead(head)
+        inner_corners(scene)
+    scene.render.filepath=f'//realism_pass/{review}/final.png'
     bpy.ops.wm.save_as_mainfile(filepath=str(version),compress=True)
     scene.use_nodes=False
     scene.cycles.time_limit=0
     scene.cycles.adaptive_threshold=.04
-    render(scene,out,'final',900,48)
     scene.render.use_border=True
     scene.render.use_crop_to_border=True
     scene.render.border_min_x=.27
@@ -183,6 +197,8 @@ def main():
     scene.render.border_min_y=.53
     scene.render.border_max_y=.86
     render(scene,out,'upper-face',1560,64)
+    scene.render.use_border=False
+    render(scene,out,'final',900,48)
 
 if __name__=='__main__':
     main()
