@@ -163,10 +163,12 @@ def main():
     scene=bpy.context.scene
     head=scene.objects['GNM Head']
     root=Path(bpy.data.filepath).resolve().parent
-    stronger='--readable-vessels' in sys.argv
-    review='14_review' if stronger else '13_review'
+    portrait_scale='--portrait-scale-vessels' in sys.argv
+    stronger=portrait_scale or '--readable-vessels' in sys.argv
+    number=15 if portrait_scale else 14 if stronger else 13
+    review=f'{number}_review'
     out=root/'realism_pass'/review
-    version=root/('portrait_v14.blend' if stronger else 'portrait_v13.blend')
+    version=root/f'portrait_v{number}.blend'
     if version.exists():
         raise FileExistsError(version)
     if stronger:
@@ -175,12 +177,12 @@ def main():
         image.pack()
         for slot in (1,3):
             material=head.data.materials[slot].copy()
-            material.name=f'eye_v14 scleral vessels {slot}'
+            material.name=f'eye_v{number} scleral vessels {slot}'
             head.data.materials[slot]=material
             nodes=material.node_tree.nodes
             next(n for n in nodes if n.label=='Packed branching capillaries').image=image
             pigment=next(n for n in nodes if n.label=='Faint rose capillary branches')
-            pigment.inputs[2].default_value=(.68,.22,.20,1)
+            pigment.inputs[2].default_value=(.64,.10,.11,1) if portrait_scale else (.68,.22,.20,1)
     else:
         vessels(head,out/'sclera-vessels.png')
         forehead(head)
@@ -190,6 +192,8 @@ def main():
     scene.use_nodes=False
     scene.cycles.time_limit=0
     scene.cycles.adaptive_threshold=.04
+    if portrait_scale:
+        render(scene,out,'final',900,48)
     scene.render.use_border=True
     scene.render.use_crop_to_border=True
     scene.render.border_min_x=.27
@@ -197,8 +201,9 @@ def main():
     scene.render.border_min_y=.53
     scene.render.border_max_y=.86
     render(scene,out,'upper-face',1560,64)
-    scene.render.use_border=False
-    render(scene,out,'final',900,48)
+    if not portrait_scale:
+        scene.render.use_border=False
+        render(scene,out,'final',900,48)
 
 if __name__=='__main__':
     main()

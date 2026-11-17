@@ -10,7 +10,8 @@ size=(1536,512)
 rng=np.random.default_rng(624)
 mask=Image.new('L',size)
 draw=ImageDraw.Draw(mask)
-strong='--readable' in sys.argv
+portrait='--portrait-scale' in sys.argv
+strong='--readable' in sys.argv or portrait
 
 
 def pixel(x,y):
@@ -41,4 +42,20 @@ for sign in (-1,1):
             branch=[pixel(sign*(xs[i]+(end_x-xs[i])*.72*t),ys[i]+bend*t+.00020*np.sin(t*6))
                     for t in np.linspace(0,1,16)]
             draw.line(branch,fill=int(opacity*.55),width=3 if primary else 2)
+
+if portrait:
+    for sign in (-1,1):
+        offset=.00045*sign
+        # Place the strongest tapered branches in the exposed wedges.
+        for points,width,color in (
+            ([(.047,.2994),(.044,.2996),(.042,.3007),(.0405,.3011),(.038,.3008)],9,226),
+            ([(.042,.3007),(.0411,.3020),(.0395,.3031),(.0386,.3033)],6,187),
+            ([(.046,.3047),(.0437,.3044),(.0417,.3053),(.0395,.3054)],7,198),
+            ([(.016,.3000),(.019,.3002),(.0206,.3013),(.0238,.3016),(.0254,.3023)],8,215),
+            ([(.0206,.3013),(.0220,.2998),(.0245,.2993)],5,171),
+        ):
+            locations=[pixel(sign*x,y+offset) for x,y in points]
+            for i,(a,b) in enumerate(zip(locations,locations[1:])):
+                fade=1-i/len(points)*.6
+                draw.line((a,b),fill=int(color*fade),width=max(2,round(width*fade)))
 mask.filter(ImageFilter.GaussianBlur(.70)).save(folder/'sclera-vessels.png')
