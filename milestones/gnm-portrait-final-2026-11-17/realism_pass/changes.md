@@ -15,3 +15,73 @@
 - AgX, Medium High Contrast, exposure 0, gamma 1. Cycles total/diffuse/glossy/transmission/volume bounces 12/4/4/8/0. Reflective and refractive caustics off. Indirect clamp 10. 64 samples, adaptive threshold 0.05, OpenImageDenoise. Portraits at 700 × 700 and crops at the native 1400-pixel frame scale. Cycles did not report a CUDA or OptiX device, so these previews used CPU.
 - Embedded `realism_helpers.py` as a Blender text block. No geometry or material changes were made in this phase.
 - Baseline reviewed in front, both three-quarter views, and the eye, mouth and hairline crops. Baseline scores in checklist order: 3, 2, 3, 3, 3, 2, 3, 2, 3, 2. Dense scalp coverage and a bright reflection create a pronounced light-dark split. Upper lashes are hard to see, cheek color reads blotchy, and ear and forehead surfaces read too smooth.
+
+## Geometry, version 02
+
+Eleven separate 0 to 1 shape keys are active at 1. The sculpt fields apply to skin vertices only. Existing keys are kept. The direction and position values below are in the mesh's local coordinates.
+
+| Shape key | Edit at value 1 |
+| --- | --- |
+| `face_width` | Up to 7.5% jaw narrowing and 2.6% cheek narrowing, spatially blended |
+| `forehead_height` | Up to 4.5 mm downward with 1.4 mm frontal-bone and 1 mm flattening fields |
+| `jaw_chin` | 1.2 mm jaw-angle field and up to 1.5 mm chin projection |
+| `cheekbones` | Up to 1.2 mm lift, 2.5 mm projection and 1.6 mm hollow |
+| `nose` | Up to 0.8 mm alar widening per side, 0.42 mm lift and 1.1 mm dorsum offset |
+| `lips` | 0.7 mm corner lift and up to 1.4 mm lower-vermilion projection |
+| `eyelids` | Up to 0.58 mm upper-lid lift, 0.32 mm upper margin and 0.53 mm lower fullness |
+| `ears` | Up to 1.1 mm rim width, 1.15 mm fold field and 1.2 mm lobe projection |
+| `neck` | Up to 1.3 mm lateral muscle projection and 1.25 mm throat projection |
+| `asymmetry` | Up to 0.6 mm signed shifts on orbital, ear, lip, nose and cheek fields |
+| `resting_expression` | 0.28 mm upper and 0.45 mm lower lip separation fields with a 0.48 mm corner lift |
+
+Added a charcoal neckline over the bust. Cloth roughness 0.79, sheen 0.18, bump 0.00012 m with noise scale 195, detail 2 and strength 0.2. Final color (0.013, 0.017, 0.023), specular 0.22. Welded the collar after the geometry review showed faceting. Curve roots follow the deformed skin at checkpoint values.
+
+## Skin, version 03
+
+Edited a duplicate skin material named `skin_v2`. Retained the packed registered relief and lip microstructure. The existing registered scan relief entered upstream through `tools/gnm_peak_maps.py` and remains in the active packed `height.1001.png` lineage. The complexion masks in this phase are procedural. Random Walk Skin uses weight 0.24, scale 0.0022 m, radius (1, 0.25, 0.10), IOR 1.4, sheen weight 0.08 and sheen roughness 0.51. The forehead and ears blend toward roughness 0.70 and specular 0.20, with 0.000052 m bump. The forehead crease field uses 0.000049 m bump. Cheek, temple and beard masks multiply the underlying color toward (0.85, 1.01, 1.03), (1.01, 0.99, 0.94) and (0.84, 0.91, 1.0). The original cheek mark remains visible.
+
+## Eyes, version 04
+
+Duplicated four existing materials as `eye_v2_1` through `eye_v2_4`. Retained the photographic iris texture, existing warm inner corners and tear geometry. Cornea IOR 1.376, roughness 0.024. Eye substrate specular 0.045. Kept all native eye vertices exact. The new matched grooms use 118 upper and 46 lower hairs per eye. Root radii vary by strand and taper to the tips. The final pass increased upper radius 17%. Dark brown lash shader color (0.027, 0.013, 0.008), roughness 0.58, specular 0.14. Original lash objects are preserved and hidden.
+
+## Hair, version 05
+
+Copied the existing scalp material to `Scalp_v2 brunette`. Huang Principled Hair with seeded strand variation, melanin 0.64 to 0.82, redness 0.33, roughness 0.42, radial roughness 0.41, IOR 1.55, coat 0.03 where exposed. The hairline keeps its prior feathered strands and fitted nape. The neutral-light image still shows a bright strip where the key catches the sweep.
+
+## Lighting and final, versions 06 and 07
+
+Organized original lights under `LIGHTS_EVAL`. Separate `LIGHTS_BEAUTY` uses three area lights, all aimed at (0, 0, -0.02) m.
+
+| Light | Position, m | Size, m | Final watts | RGB |
+| --- | --- | --- | --- | --- |
+| Key | (-0.62, -0.63, 0.48) | 0.67 by 0.58 | 43 | (1, 0.94, 0.87) |
+| Fill | (0.60, -0.36, 0.08) | 0.78 by 0.67 | 9 | (0.87, 0.93, 1) |
+| Rim | (0.28, 0.43, 0.42) | 0.68 disk | 9 | (0.86, 0.93, 1) |
+
+Beauty camera at (0.108, -0.78, 0.015) m aims at (0, 0, -0.036) m, at 85 mm, f/5.6 and 0.78 m focus distance, with 2 degrees of roll. The final camera-ray background interpolates (0.034, 0.042, 0.054) to (0.10, 0.109, 0.121), using world-direction Z from -0.19 to 0.21. The existing ambient world remains active on non-camera rays. The final denoiser uses RGB, albedo and normal. The final CPU run has a 1024-sample ceiling and a 540-second sampling cap. Final bounces are 10 total, 3 diffuse, 3 glossy, 8 transmission and 0 volume.
+
+## Pending rig gate
+
+The supplied version has no rotatable eye rig. Native eye geometry, vertices and UVs passed the reopened checks. The ±30° horizontal and ±20° vertical gaze tests require the user's rigged file. No pivots, bones, constraints or drivers were created or edited.
+
+## Compositor and review, version 08
+
+The editable compositor uses Fog Glow threshold 1.6, smoothness 0.25, strength 0.06 and size 0.22, lens dispersion 0.002, a blurred elliptical vignette at 0.07 and fine noise mixed at 0.02. The published composite uses the rendered PNG as its input. The saved scene uses Render Layers. Localized sharpening and an HDRI were omitted. The rectangular key and existing ambient world provide the reflections.
+
+The 1400 × 1400 beauty render took 558 seconds including saving, then Blender took about 20 seconds to make the display composite. Cycles reached 125 samples before the time cap. The 1024 value is the ceiling. The backup and original remain byte-identical. The final scene passed the reopened checks for native topology, Basis, UVs, native eye vertices, packed relief and root attachment.
+
+Scores are visual assessments in the brief's checklist order.
+
+| Checkpoint | Pores | Redness | Lighting | Eyes | Lips | Hairline | Asymmetry | Ear, nose, neck | Proportions | Overall |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Geometry | 3 | 2 | 3 | 3 | 4 | 2 | 3 | 2 | 4 | 2 |
+| Skin | 3 | 3 | 3 | 3 | 4 | 2 | 3 | 3 | 4 | 3 |
+| Eyes | 3 | 3 | 3 | 4 | 4 | 2 | 4 | 3 | 4 | 3 |
+| Hair | 3 | 3 | 3 | 4 | 4 | 3 | 4 | 3 | 4 | 3 |
+| Beauty and composite | 4 | 3 | 4 | 4 | 4 | 3 | 4 | 3 | 4 | 3 |
+
+### Highest-value follow-up
+
+1. Get a rigged copy of this same haired portrait, or authorize a separate rig build so the gaze and eyelid-follow checks can run on this model.
+2. Break up the continuous frontal sweep with a sparser, more irregular first row of scalp fibers and blend the residual key highlight.
+3. Use registered skin scans with more variation at the forehead and ears, and retouch the cheek mark and redness on the atlas. The current mesh can support those improvements.

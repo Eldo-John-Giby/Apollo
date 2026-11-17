@@ -1,0 +1,6 @@
+{
+  "seconds": 558.0,
+  "sample_ceiling": 1024,
+  "noise_threshold": 0.01,
+  "time_limit": 540
+}

@@ -1,0 +1,23 @@
+{
+  "backup_sha256": "f97389c231b23644490df8e6a8ccacdeaef132746873a4b9aa1e575b67dfabd9",
+  "rig_rotation_gate": "Pending, no armature in the current haired portrait",
+  "files": {
+    "realism_pass/00_baseline_contact_sheet.png": "e317fecf2c957039288e0a02ae1939609c656ac7908f768c0a0c273eaec2643c",
+    "realism_pass/01_geometry.png": "340808b5add4d67bf84e933eaf32083e5efac8a4c4adba1c6cd9232e66b3f45e",
+    "realism_pass/02_skin.png": "49fd779dedfb7d4c64b76a6dd74b859a073ae9113aa5d61b8b80f5bc40d62a50",
+    "realism_pass/03_eyes.png": "015de3a21b9148808254705137f213114c01e70242074017411d4b9782ef900f",
+    "realism_pass/04_hair.png": "d4c7a8d834fd77f1f89ea5f6fca4f39485e89e75109702fda8c9206ec46d4ba3",
+    "realism_pass/05_eval.png": "b4861fa7bcb9d174fa893f2c912f68396d06794f16a82efbb58bfd03d763fcc2",
+    "realism_pass/06_beauty_review.png": "22f6c6d5b47e72a1d117e6afeea2a0e9e935a181c93d0d8f2949423cf48a8794",
+    "realism_pass/baseline_vs_overhaul.png": "a26750b3ae5e5f1eaadb9bb1531e0b15b7c496fc0a59913a93ba1226db6ea0b5",
+    "realism_pass/final.png": "bb65c55a9f0bef8fcfc572e62763877563e1fdb5074bce4b60d8a9abf7e84af7",
+    "realism_pass/final_cheek.png": "500f8a58ec59ddca37fba93fafcfacbd06dfbf0f524ebece77da81f9caefb716",
+    "realism_pass/final_composited.png": "0d980c5426080354e05a445f548cdaedbf41f12b34e272b7bcdd2993b1ff8105",
+    "realism_pass/final_contact_sheet.png": "486778cd4240f7136089413014ea00b04a0d1659a734aa750be923de7f1974df",
+    "realism_pass/final_eyes.png": "4365d47b383b83a2a87e06dfac0c247fbcf664eb3cd06facf889a92d65a88352",
+    "realism_pass/final_hairline.png": "761fc54511f10e2d3626a379f03e7ca024205204e4ed391efc2dc7db58ad07d3",
+    "realism_pass/final_mouth.png": "135240f864a407ad0452daa52f2ae6b34ae159a5310a3353d7bde4b1b1957c56",
+    "portrait_v08.blend": "13004e5b58f787c95bf8d9b197458378132a652be2fe12962e2d47698429fd43",
+    "realism_pass/reopened-check.json": "d098e0599735e72590f72cd54baea1d37d7f86fedde6e9fcb6f5ab94b173913e"
+  }
+}
