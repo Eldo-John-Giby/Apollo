@@ -173,3 +173,40 @@ An offline all-integer-frame audit is running. The source audit at
 `out/v22-audit-current/audit.json` adds a path-independent shader recipe signature
 and exact packed-image hashes; reopening must match both. All 92 Python tests
 passed again. These are development checks, not final release acceptance.
+
+The dense scene subsequently passed the offline 192-integer-frame audit at
+`out/v22-integrated-dense/generate-motion/integer-check.json`. Maximum native
+error was `3.64e-12` m; derived error was `1.82e-12` m; native eye error was zero.
+The head shader signature and all nine packed texture payloads match v22. The
+maximum root-to-skin distance was 0.1771 mm, and the upper-lash orientation step
+stayed below 28.43 degrees per frame. Geometry-based camera checks passed closure
+and reopening. These checks cover integer samples only; dense intermediate
+playback checks and rendered collision/image checks are still required.
+
+`out/v22-main-character-review` is rendering the full approved character's
+portrait and motion-camera views at neutral, closed blink and reopening. Its
+neutral portrait has been inspected and retains v22's selected face and groom.
+This review does not change the selected scene or confer user acceptance.
+
+The six portrait/motion-camera neutral, closure and reopening stills have now
+rendered. The neutral and closed portrait images were inspected; the earlier
+upright lash defect is absent and the full character is retained. The still
+receipt binds source scene, shader identity, cameras, settings and image hashes.
+
+The existing general-purpose image detector selected nostrils in this new
+framing. `gnm_v22_image_check.py` therefore uses fixed eye regions of the frontal
+motion image, without geometry or projected pupil predictions, and confirms
+dark candidates against the neutral pupil/iris image patch. A 0.8 normalized
+correlation is an internal detector threshold, not an organizer rule. The closure
+image contained a dark lash clump (correlation 0.541), which is recorded and
+rejected as a pupil; reopened iris matches were 0.877 and 0.962. Actual neutral,
+closure and reopening checks pass in `out/v22-main-character-review/pupil-blink.json`.
+Three adversarial tests verify nostril rejection, shifted pupil tracking, closed
+lash lines and rejection of deliberately exposed unilateral pupils. Horizontal
+direction images of this dense scene are not yet rendered or checked.
+
+An offline 383-sample integer/half-frame audit is running against the same
+dense scene, with explicit 0.25 mm root-distance and 30 degrees/frame orientation
+rate limits. This is additional evidence; it must not be described as passed
+until its final report says so. The 32-substep native interpolation receipt does
+not by itself prove derived-character playback between integer frames.

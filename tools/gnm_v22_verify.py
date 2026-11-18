@@ -67,7 +67,9 @@ def main(args):
         actual = np.array([tuple(p.uv) for p in head.data.uv_layers[name].data], dtype=np.float32)
         np.testing.assert_array_equal(actual.ravel(), template[key].astype(np.float32).ravel())
     frames = [float(f) for f in args.frames.split(',')] if args.frames else (
-        list(map(float,range(1,193))) if args.integer_frames else sample_frames.tolist())
+        list(map(float,range(1,193))) if args.integer_frames else sample_frames[::args.sample_stride].tolist())
+    if not frames or any(frame not in sample_frames for frame in frames):
+        raise ValueError('Requested frames must be authenticated native sample times')
     lookup = dict(zip(sample_frames,sample_sequence))
     attached = [o for o in scene.objects if o.get('apollo_surface_attached')]
     anchors = {}
@@ -102,7 +104,7 @@ def main(args):
     report = dict(scene_sha256=sha(bpy.data.filepath), geometry_sha256=sha(args.geometry),
                   template_sha256=sha(args.template), frames=frames, native_max_error_m=0.,
                   derived_max_error_m=0., eye_max_error_m=0., attachments={}, resources=resources,
-                  root_offsets_m={}, orientation_step_degrees={})
+                  root_offsets_m={}, orientation_step_degrees={},orientation_rate_degrees_per_frame={})
     report['texture_identity']=texture_identity
     report['verifier_sha256']=sha(__file__)
     report['status']='running'
@@ -162,6 +164,8 @@ def main(args):
                     rotation = np.einsum('nji,njk->nik',previous_frames[obj.name],current_frames)
                     angle = float(np.degrees(np.arccos(np.clip((np.trace(rotation,axis1=1,axis2=2)-1)/2,-1,1))).max())
                     report['orientation_step_degrees'][obj.name] = max(angle,report['orientation_step_degrees'].get(obj.name,0.))
+                    report['orientation_rate_degrees_per_frame'][obj.name] = max(angle/(frame-previous_number),
+                        report['orientation_rate_degrees_per_frame'].get(obj.name,0.))
                 previous_frames[obj.name] = current_frames
         previous_number = frame
         report['frames_checked']+=1
@@ -175,6 +179,17 @@ def main(args):
         args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
         raise
     report['qualification'] = 'Geometry/resource checks only; image checks, collisions and visual acceptance remain separate.'
+    report['limits']=dict(root_distance_m=.00025,orientation_rate_degrees_per_frame=30)
+    errors=[]
+    for name,distance in report['root_offsets_m'].items():
+        if distance>.00025:errors.append(f'{name}: detached root {distance} m')
+    for name,rate in report['orientation_rate_degrees_per_frame'].items():
+        if rate>30:errors.append(f'{name}: orientation change {rate} degrees/frame')
+    report['errors']=errors
+    if errors:
+        report['status']='failed_attachment_limits'
+        args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+        raise ValueError('; '.join(errors))
     report['status']='passed_geometry_and_resources'
     args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     if args.render:
@@ -191,6 +206,7 @@ if __name__=='__main__':
         parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--frames')
     parser.add_argument('--integer-frames',action='store_true')
+    parser.add_argument('--sample-stride',type=int,choices=(1,2,4,8,16,32),default=1)
     parser.add_argument('--render',action='store_true')
     parser.add_argument('--render-frames',default='1,25,58,106,107,112')
     parser.add_argument('--source-audit',type=Path)
