@@ -310,3 +310,25 @@ Docker Desktop was started hidden, but its engine query did not return; that
 read-only query was stopped. No distributions were deleted or converted, and no
 Windows restart was performed. Windows rendering continues. Historical Linux
 results are not evidence for this candidate, and the Linux gate remains pending.
+
+The 128-sample original-shader reference is complete. The 64-versus-128 crop
+comparison also misses the unchanged limits in eyes, lips and hair, so neither
+32 nor 64 is accepted as a delivery setting on this evidence. These references
+remain useful for appearance comparison. Final sample selection must also be
+tested on the portable appearance actually delivered; the convergence worker
+can now bind and independently validate an explicit PBR set while retaining the
+full v22 geometry and groom.
+
+Rendered vertical checks completed in `out/v22-vertical-review/image-check.json`:
+upward pupil shifts are -4.23/-5.27 px and downward shifts +3.31/+3.43 px at
+640 px image width. The up/down stills were inspected. All four cardinal image
+checks, closure and reopening now pass on this development scene; this is not
+the 3–5-person blind accuracy gate.
+
+`gnm_v22_materials.validate` checks active map payloads, color spaces, UV offsets,
+tangent normal strength, selected constant shader inputs/modes and the complete
+corneal recipe. An actual Blender test accepted the twelve-map prototype and
+rejected four injected defects: sRGB normals, wrong normal UVs, altered skin IOR
+and altered corneal roughness. The selected source scene was unchanged. The
+test report is `out/v22-pbr-graph-check.json`. A fresh complete 4K/2K master bake
+is next; the baker's recipe files must remain fixed throughout that job.

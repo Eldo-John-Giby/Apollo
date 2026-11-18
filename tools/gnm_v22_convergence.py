@@ -21,6 +21,11 @@ def main(a):
     audit=json.loads(a.audit.read_text(encoding='utf-8'))
     if audit['source_sha256']!=SELECTED or appearance_signature(scene.objects['GNM Head'])!=audit['appearance_signature']:
         raise ValueError('Selected full-character appearance changed')
+    portable=None
+    if a.maps:
+        from gnm_v22_materials import bind,validate
+        bind(scene.objects['GNM Head'],a.maps,'udim',full_character=True)
+        portable=validate(scene.objects['GNM Head'],a.maps,'udim',full_character=True,require_packed=False)
     a.out.mkdir(parents=True)
     scene.camera=scene.objects['GNM Camera']
     scene.frame_set(a.frame)
@@ -37,6 +42,7 @@ def main(a):
                 motion_blur=False,camera_matrix=[list(r) for r in scene.camera.matrix_world],
                 camera_lens=scene.camera.data.lens,view_transform=scene.view_settings.view_transform,
                 exposure=scene.view_settings.exposure,profiles={},complete=False)
+    if portable:report['portable_materials']=portable
     for samples in a.samples:
         start=time.monotonic()
         name=f'samples-{samples:03d}'
@@ -55,6 +61,7 @@ if __name__=='__main__':
     p.add_argument('--out',type=Path,required=True);p.add_argument('--audit',type=Path,required=True)
     p.add_argument('--samples',type=int,nargs='+',default=[32,64])
     p.add_argument('--size',type=int,default=1024);p.add_argument('--frame',type=int,default=1)
+    p.add_argument('--maps',type=Path)
     a=p.parse_args(sys.argv[sys.argv.index('--')+1:])
     if any(n not in (16,24,32,48,64,96,128) for n in a.samples):p.error('Unsupported sample count')
     main(a)
