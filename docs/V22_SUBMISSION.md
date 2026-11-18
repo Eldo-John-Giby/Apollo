@@ -430,3 +430,22 @@ the existing master bake still occupies the single headless Blender slot. Its
 creation time and command were revalidated, with CPU time continuing to rise.
 The normal maps have not yet been written. WSL currently reports no running
 distribution, so the earlier Linux qualification limitation remains unresolved.
+
+### Selected appearance provenance inventory
+
+`assets/v22-provenance.json` binds all nine selected packed image payloads to
+the immutable scene hash, with dimensions and color spaces but no authoring
+machine paths. It distinguishes the Infinite Scan CC-BY-3.0 skin/relief
+derivatives, documented MakeHuman CC0 fallback, CC0 photographic iris sectors
+and authored pigment, relief and masks. It retains the iris source's approximate
+440-pixel photographed region; a 2K delivery atlas does not imply 2K photographic
+detail. Native GNM geometry and the intentional identity/groom modifications
+are recorded separately.
+
+All four pinned scan-source files, including the original license text, and
+the original iris photograph match their existing source-receipt hashes. The
+eight referenced attribution/source records also match committed Git bytes,
+so those recorded hashes do not depend on a Windows line-ending conversion.
+The final archive must retain the cited license/attribution documents and bind
+this inventory to its exact baked maps. That archive linkage remains pending;
+this inventory does not qualify unfinished textures or an unbuilt package.

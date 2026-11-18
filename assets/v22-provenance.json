@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "selected_scene": "milestones/gnm-portrait-final-2026-11-17/portrait_v22.blend",
+  "selected_sha256": "f648bbaff98edbb3254a386047a4909aa8bb20ba7e79c949985b0b43f8833cfd",
+  "packed_images": [
+    {
+      "name": "color.1001.png.001",
+      "sha256": "d6dadee2560cb9dd9e51839bc9458ac49bab5e27dd3828ce1d58e1a3999aaa19",
+      "size": [
+        4096,
+        4096
+      ],
+      "colorspace": "sRGB",
+      "provenance_group": "skin"
+    },
+    {
+      "name": "color.1002.png",
+      "sha256": "5b4fc5a6d7c5c959eb2b0f095378f087bdc061a608bacfb9f214073499797096",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "sRGB",
+      "provenance_group": "eyes"
+    },
+    {
+      "name": "color.1004.png",
+      "sha256": "daa72abca869ba01da5c88be329026cec25e6fdb3a7e33e2ad65bde6dc939aca",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "sRGB",
+      "provenance_group": "eyes"
+    },
+    {
+      "name": "height.1001.png.001",
+      "sha256": "77c574758c051bc2fdb7ed45dd0a7186ce1537d0102ca60d9721f483416f6bae",
+      "size": [
+        4096,
+        4096
+      ],
+      "colorspace": "Non-Color",
+      "provenance_group": "skin"
+    },
+    {
+      "name": "iris-height.1002.png.001",
+      "sha256": "f074c261bfb45258f70176ef4728966feee04466ee1d57b99db028095fb08297",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "Non-Color",
+      "provenance_group": "eyes"
+    },
+    {
+      "name": "iris-height.1004.png.001",
+      "sha256": "15a48ae303041ad2fcaa447b8b8e7592ae5645a06b07ab3bac97dd08b3c38ee5",
+      "size": [
+        2048,
+        2048
+      ],
+      "colorspace": "Non-Color",
+      "provenance_group": "eyes"
+    },
+    {
+      "name": "lip-mask.1001.png",
+      "sha256": "6313939a989be285cd1a37b558fdd37a26ef706784ea8f6e32a0f08e009e610f",
+      "size": [
+        4096,
+        4096
+      ],
+      "colorspace": "Non-Color",
+      "provenance_group": "authored_masks"
+    },
+    {
+      "name": "roughness.1001.png",
+      "sha256": "f2d98a9e0ff5bc77b411c37ce1ecb484d5d0b905f459d149717c2bfc15827a4e",
+      "size": [
+        4096,
+        4096
+      ],
+      "colorspace": "Non-Color",
+      "provenance_group": "skin"
+    },
+    {
+      "name": "sclera-vessels.png",
+      "sha256": "d2f5207304af01d732a75e7465ce3cd774ae2e263679fd1ee299535f8cce42bd",
+      "size": [
+        1536,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "provenance_group": "authored_masks"
+    }
+  ],
+  "source_records": {
+    "assets/gnm-scan/source.json": "1f4d2d34a25232963460856cbf0aca5a4cbc5695c19a361c76390e46eb3808c3",
+    "assets/gnm-scan/LICENSE.txt": "19640b8bbcc488694b24798a8fb7de9e111007bcaef8512ff830a4270c9bc927",
+    "assets/gnm-scan/ATTRIBUTION.md": "6416208bd0b314b34627d66ae8277c148b41c081628f4c382cc477d06859af96",
+    "assets/gnm-eye-photo/source.json": "14d8fcd2d1658e66460caf4ce4cc7c9621900781204ff2a3183e17bf1195a250",
+    "assets/gnm-eye-photo/ATTRIBUTION.md": "34a4bf0e6041fbd30ae8a56803a0b31af39764a61a45a77483cfa69d61969717",
+    "assets/ATTRIBUTION.md": "ef1042133335b08c2dacdebd52617da3925381313815a9a76d8f043cea658467",
+    "assets/photorealism-v2/ATTRIBUTION.md": "25daa36f864a303e0bd6e6f68ccfa00ee66b52769c8ab880fb91d9d473739d96",
+    "milestones/gnm-portrait-refinement-2026-11-16/map-receipt.json": "9e5c1a8fdc753961f34eff6aa1115d30cf4b115de6e039c4952d0b9b3bf2ea59"
+  },
+  "provenance_groups": {
+    "skin": {
+      "components": [
+        "Infinite Scan CC-BY-3.0 photograph and relief derivative",
+        "MakeHuman CC0 fallback regions",
+        "Authored pigment, roughness and microdetail"
+      ],
+      "records": [
+        "assets/gnm-scan/source.json",
+        "assets/gnm-scan/ATTRIBUTION.md",
+        "assets/gnm-scan/LICENSE.txt",
+        "assets/ATTRIBUTION.md",
+        "assets/photorealism-v2/ATTRIBUTION.md"
+      ]
+    },
+    "eyes": {
+      "components": [
+        "Kookaaa CC0-1.0 photographic iris sectors",
+        "Authored radial structure, pigmentation, relief and scleral detail"
+      ],
+      "records": [
+        "assets/gnm-eye-photo/source.json",
+        "assets/gnm-eye-photo/ATTRIBUTION.md"
+      ],
+      "photographic_iris_region_approx_pixels": 440
+    },
+    "authored_masks": {
+      "components": [
+        "Native-surface lip mask",
+        "Authored scleral-vessel mask"
+      ],
+      "recipes": [
+        "tools/gnm_peak_maps.py",
+        "tools/gnm_sclera_vessels.py"
+      ]
+    }
+  },
+  "geometry": {
+    "model": "Pinned public GNM Head v3",
+    "model_sha256": "61d78bbfb4ad8e0b38495804a4caef3214d3df00f8c3f68761e63b41ce3747eb",
+    "license": "Apache-2.0",
+    "source_record": "docs/GNM_INTEGRATION.md",
+    "modifications": "Documented v22 identity layer and authored groom; native topology, vertex ordering and both UV layouts retained."
+  },
+  "delivery": {
+    "include": [
+      "Google-GNM-LICENSE.txt",
+      "Infinite Scan source record, attribution and unchanged license text",
+      "Photographic iris source record and attribution",
+      "MakeHuman fallback attribution",
+      "This packed-image provenance record",
+      "Final baked-map manifest and recipe hashes"
+    ],
+    "detail_statement": "4K skin and 2K eye map dimensions describe the delivery encoding. Authored detail and reconstructed iris sectors do not increase the native photographic resolution.",
+    "status": "Source provenance inventory; final baked-map and delivery-archive linkage pending."
+  }
+}
