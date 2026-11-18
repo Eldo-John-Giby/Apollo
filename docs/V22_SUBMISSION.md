@@ -332,3 +332,11 @@ rejected four injected defects: sRGB normals, wrong normal UVs, altered skin IOR
 and altered corneal roughness. The selected source scene was unchanged. The
 test report is `out/v22-pbr-graph-check.json`. A fresh complete 4K/2K master bake
 is next; the baker's recipe files must remain fixed throughout that job.
+
+The fresh master bake has started in `out/v22-master-4k` using the recipe files
+from checkpoint `025a03c`. It is still a live process and is not a completed
+texture set. Do not restart it merely because a bake stage has no new log lines;
+check the actual Blender process and tool handle first. The continuation
+snapshot is `out/v22-master-4k-job.json`, and its recorded PID is only a hint
+until the process creation time and command are revalidated. All 103 Python
+tests passed after the vertical-image and incomplete-bake guard additions.
