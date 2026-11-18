@@ -128,6 +128,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_ear_lash_review.py` | Refine ear bowl/fold relief and lower lash visibility on the studio portrait, with eye and ear review stills. |
 | `tools/gnm_lid_alignment_review.py` | Raycast the exposed ocular boundaries to align lash roots and fit each medial tear corner independently. |
 | `tools/gnm_brow_lip_review.py` | Balance the image-left brow groom and add reversible lip projection, reviewed from front and three-quarter views. |
+| `tools/gnm_upper_lip_review.py` | Add independently adjustable upper-lip projection with matched portrait reviews. |
 | `tools/gnm_eye_finish.py`, `assets/gnm-eye-photo/source.json`, `assets/gnm-eye-photo/ATTRIBUTION.md` | CC0 photographic iris-sector reconstruction, source provenance and fitted lash/lower-waterline refinement trials. |
 | `tools/gnm_gaze_readability.py` | Evaluate native horizontal-target amplitude alternatives for review without changing production timing or face geometry. |
 | `docs/GNM_NATURALNESS_REVIEW.md` | Owner/teammate feedback, prototype state, known failures and handoff for the next appearance workflow. |
