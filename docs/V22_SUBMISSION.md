@@ -33,10 +33,10 @@ reviewers own visual acceptance; the team owns submission actions.
 
 | Requirement | Owner | Acceptance | Evidence | State |
 | --- | --- | --- | --- | --- |
-| Preserve selected identity | Engineering | Hash check before every derived build; no source writes | selection receipt; `out/v22-audit/audit.json` | Source hash verified; audit running |
+| Preserve selected identity | Engineering | Hash check before every derived build; no source writes | selection receipt; `out/v22-audit/audit.json` | PASS for completed experimental derivations; ongoing build guard |
 | Isolate integration | Engineering | Separate clean worktree; unrelated edits retained | branch above | PASS |
 | Reproducible identity layer | Engineering | Native topology/order/UV unchanged; neutral matches selected evaluated surface | `out/v22-audit/identity.npz`; integration receipt | Pending |
-| Appearance inventory | Engineering | Geometry, keys, shader dependencies, textures and visible attachments inventoried | `out/v22-audit/audit.json` | Running |
+| Appearance inventory | Engineering | Geometry, keys, shader dependencies, textures and visible attachments inventoried | `out/v22-audit/audit.json` | PASS |
 | Reference views | Engineering | Source-bound front/profile/three-quarter/eye stills inspected | `out/v22-audit/*.png` and hashes | Running |
 | Native motion reference | Engineering | Pinned upstream evaluation; exact reference checks retained | native clips and reference verification | Pending |
 | Deformed identity | Engineering | Local surface transport; native eyes unaffected; neutral exact | derived motion checks | Pending |
@@ -75,3 +75,53 @@ authenticate v22 and record its derivation.
 No visual, motion, texture portability, clean-machine or release gate has passed
 for this integrated candidate yet. Historical rc.5 qualification and still-only
 v22 checks remain separate evidence.
+
+### Initial integration evidence (19 November)
+
+- All 92 Python tests passed, including two new numerical regressions. These do
+  not replace the Blender and visual checks.
+- `out/v22-audit` inventories the selected scene: 17,821 vertices, the exact
+  native basis, both original UV layouts, nine packed texture images, a keyed
+  appearance layer, static curves and keyed tear-corner meshes. Skin is 4K;
+  both irises are 2K. There are additional procedural color/specular/normal
+  dependencies, so the packed image files alone do not reproduce the look.
+- Source-derived reference views were rendered and inspected. The first
+  `front.png` used the saved angled beauty camera; it must be relabeled
+  `saved-camera.png` and a true frontal view generated before reference freeze.
+- The native 35 cm binocular fixation shifts the neutral pupils about 1.15 mm
+  relative to the selected still. The non-eye neutral surface remains exact.
+  Keep the selected still separate; inspect the intentional motion convergence.
+- Trial 3 reopens with native/derived errors below `1e-12` m and exactly native
+  eye vertices at seven stress frames. Sixteen groom/tear objects use packed
+  Geometry Nodes anchors; no Python handler or authoring add-on is required.
+  Pupil occlusion/reopening and the unchanged 0.005 screen-direction threshold
+  pass using the rc.5 frontal motion camera prescription (115 mm, 0.58 m).
+- These checks do **not** accept Trial 3: its closed-eye still showed upright
+  lashes. Rim orientation measurements subsequently found a nearly 128-degree
+  change. A tip correction and stable proximal orientation patches are being
+  tested, while retaining the original roots and neutral strand shapes.
+- Trial 4 measures groom roots within 0.177 mm of the skin through frames
+  103–112, but its initial orientation issue still requires the proximal-patch
+  fix and a new visual review. These partial results are not all-frame gates.
+- A four-substep native clip failed the additional continuous interpolation
+  comparison (43.3 micrometres maximum position error between packed samples).
+  A denser evaluation is in progress; the 1 micrometre threshold is unchanged.
+
+Next: inspect the corrected blink, qualify integer and intermediate frames,
+finish authenticated frontal references, and test the UV bake on a fresh native
+target. Texture variants, human review, clean-machine qualification, packaging
+and release remain pending.
+
+Trial 5 retains the roots while choosing the nearest proximal orientation patch
+with a maximum sampled step below 30 degrees. Upper strands also have an explicit
+70-degree, root-preserving blink articulation, with the native one-frame right
+lid delay. The closed-eye render was inspected and no longer has the upright
+spikes. Reopened checks through frames 103–112 pass, including the unchanged
+camera gate. This remains a coarse visual trial, not final motion acceptance.
+
+The 32-substep native reference has 6,113 sample times and 1,186 unique poses.
+Direct upstream evaluations at interval midpoints differ from packed linear
+interpolation by at most `7.450580596923828e-7` m, passing the unchanged `1e-6` m
+threshold. Receipt: `out/v22-native-dense-32/generate-motion.json`. The integrated
+dense scene is not yet built or qualified. The builder authenticates the receipt
+and rejects dense clips that failed this gate.
