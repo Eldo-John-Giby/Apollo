@@ -10,12 +10,25 @@ size=(1536,512)
 rng=np.random.default_rng(624)
 mask=Image.new('L',size)
 draw=ImageDraw.Draw(mask)
-portrait='--portrait-scale' in sys.argv
+natural='--natural' in sys.argv
+portrait='--portrait-scale' in sys.argv or natural
 strong='--readable' in sys.argv or portrait
 
 
 def pixel(x,y):
     return ((x+.055)/.110*size[0],(1-(y-.284)/.037)*size[1])
+
+
+def curved_path(points, rng):
+    knots=np.array(points,dtype=float)
+    knots[:,1]+=rng.uniform(-.00032,.00032,len(knots))
+    padded=np.vstack((knots[0],knots,knots[-1]))
+    result=[]
+    for a,b,c,d in zip(padded,padded[1:],padded[2:],padded[3:]):
+        for t in np.linspace(0,1,15,endpoint=False):
+            result.append(.5*((2*b)+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+
+                              (-a+3*b-3*c+d)*t*t*t))
+    return result+[knots[-1]]
 
 
 for sign in (-1,1):
@@ -54,8 +67,15 @@ if portrait:
             ([(.016,.3000),(.019,.3002),(.0206,.3013),(.0238,.3016),(.0254,.3023)],8,215),
             ([(.0206,.3013),(.0220,.2998),(.0245,.2993)],5,171),
         ):
-            locations=[pixel(sign*x,y+offset) for x,y in points]
+            path=curved_path(points,rng) if natural else points
+            locations=[pixel(sign*x,y+offset) for x,y in path]
             for i,(a,b) in enumerate(zip(locations,locations[1:])):
-                fade=1-i/len(points)*.6
-                draw.line((a,b),fill=int(color*fade),width=max(2,round(width*fade)))
-mask.filter(ImageFilter.GaussianBlur(.70)).save(folder/'sclera-vessels.png')
+                t=i/len(locations)
+                if natural:
+                    fade=(1-t*.67)*(.91+.09*np.cos(t*13+sign))
+                    thickness=max(1,round(width*(1-t*.81)))
+                else:
+                    fade=1-t*.6
+                    thickness=max(2,round(width*fade))
+                draw.line((a,b),fill=int(color*fade),width=thickness)
+mask.filter(ImageFilter.GaussianBlur(.9 if natural else .70)).save(folder/'sclera-vessels.png')

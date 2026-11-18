@@ -105,3 +105,9 @@ The existing inner-corner tissue has a reversible `Fitted tear corner fold` shap
 ## Scleral vessel visibility, version 14
 
 Kept the v13 eye geometry, tear corners and lighting. The packed vessel mask now widens selected primary branches from 3 to 6 texture pixels and increases their opacity by 72%. Fine branches remain narrower. The matched crop shows more distinct pink branching near the corners, especially on the whites toward the outside of the eyes.
+
+## Natural vessel refinement, version 16
+
+Continued from v15 on the same haired portrait. The strongest scleral paths now use curved interpolation with local variation, progressively thinner tips, uneven pigment density and a warmer rose color. The visibility mask remains packed. Only copied eye materials change in this pass.
+
+The saved scene reopened without new render gate errors. Native eye geometry and UV layouts remain preserved. This is a still portrait check and does not validate gaze animation.

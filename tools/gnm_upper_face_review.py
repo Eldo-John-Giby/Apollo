@@ -163,9 +163,10 @@ def main():
     scene=bpy.context.scene
     head=scene.objects['GNM Head']
     root=Path(bpy.data.filepath).resolve().parent
-    portrait_scale='--portrait-scale-vessels' in sys.argv
+    natural='--natural-vessels' in sys.argv
+    portrait_scale=natural or '--portrait-scale-vessels' in sys.argv
     stronger=portrait_scale or '--readable-vessels' in sys.argv
-    number=15 if portrait_scale else 14 if stronger else 13
+    number=16 if natural else 15 if portrait_scale else 14 if stronger else 13
     review=f'{number}_review'
     out=root/'realism_pass'/review
     version=root/f'portrait_v{number}.blend'
@@ -183,6 +184,8 @@ def main():
             next(n for n in nodes if n.label=='Packed branching capillaries').image=image
             pigment=next(n for n in nodes if n.label=='Faint rose capillary branches')
             pigment.inputs[2].default_value=(.64,.10,.11,1) if portrait_scale else (.68,.22,.20,1)
+            if natural:
+                pigment.inputs[2].default_value=(.61,.16,.15,1)
     else:
         vessels(head,out/'sclera-vessels.png')
         forehead(head)
