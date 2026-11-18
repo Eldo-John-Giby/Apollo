@@ -416,3 +416,17 @@ but cannot improve candidate medians. Its result covers the independent-review
 gate only; the user's integrated-identity approval and technical qualification
 remain separate. Actual final-packet preparation and collected feedback remain
 pending while final appearance renders are unqualified.
+
+### Fresh-wrap comparison controls
+
+The matched comparison tool now validates active maps and corneal shader graphs
+after binding both the full character and fresh native target. It supports
+`--angle` and `--oblique` while retaining the selected lighting as the default.
+Comparisons fix CPU, seed, adaptive sampling, depth of field and motion blur,
+and record camera, lights, exposure, target/template hashes and binding checks.
+Source, map manifest, payloads and recipe files are checked again after renders.
+The script compiles, but this changed Blender path has **not yet been executed**:
+the existing master bake still occupies the single headless Blender slot. Its
+creation time and command were revalidated, with CPU time continuing to rise.
+The normal maps have not yet been written. WSL currently reports no running
+distribution, so the earlier Linux qualification limitation remains unresolved.
