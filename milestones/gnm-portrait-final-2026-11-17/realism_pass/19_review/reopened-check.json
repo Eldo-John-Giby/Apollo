@@ -1,0 +1,236 @@
+{
+  "source_sha256": "c4daf292d1e5b6dc99777b10ae1fd16bd56b1b8489c1b1fc79668f359f472784",
+  "scene_sha256": "412e7208929dade8d98f21f0b00a3e401f2b2539e7463ba891803bdfdc51cd65",
+  "blender": "4.5.15 LTS",
+  "vertices": 17821,
+  "quads": 17662,
+  "source_basis_exact": true,
+  "native_topology_exact": true,
+  "both_uv_layouts_exact": true,
+  "native_eye_vertices_exact": true,
+  "packed_images": 9,
+  "height_maps": [
+    {
+      "image": "height.1001.png.001",
+      "min": 0.2654459476470947,
+      "max": 0.6185396909713745,
+      "std": 0.02023918367922306,
+      "png_bits": 16
+    }
+  ],
+  "groom": {
+    "Portrait | swept chestnut hair": {
+      "strands": 43202,
+      "points": 518424,
+      "max_root_offset_mm": 0.09270723967347294,
+      "radius_um": [
+        0.771417376199679,
+        36.999841540819034
+      ]
+    },
+    "Portrait | fitted directional brows": {
+      "strands": 1900,
+      "points": 11400,
+      "max_root_offset_mm": 0.13702930300496519,
+      "radius_um": [
+        3.211011517123552,
+        38.970934838289395
+      ]
+    },
+    "Portrait | subtle upper lashes": {
+      "strands": 144,
+      "points": 864,
+      "max_root_offset_mm": 0.0432607666880358,
+      "radius_um": [
+        2.102033931805636,
+        55.96585469902493
+      ]
+    },
+    "Peak | facial vellus": {
+      "strands": 10000,
+      "points": 40000,
+      "max_root_offset_mm": 0.01203562624141341,
+      "radius_um": [
+        0.18000207546720048,
+        5.9998646975145675
+      ]
+    },
+    "Peak | fine lower lashes": {
+      "strands": 52,
+      "points": 260,
+      "max_root_offset_mm": 0.07931552681839094,
+      "radius_um": [
+        0.5018669071432669,
+        15.978954252204858
+      ]
+    },
+    "Peak | tapered nape hair": {
+      "strands": 16000,
+      "points": 128000,
+      "max_root_offset_mm": 0.039801681850804016,
+      "radius_um": [
+        0.8000044999789679,
+        27.999511075904593
+      ]
+    },
+    "Peak | front hairline fibers": {
+      "strands": 1591,
+      "points": 11137,
+      "max_root_offset_mm": 0.029565071599790826,
+      "radius_um": [
+        0.25534711767249973,
+        21.923522581346333
+      ]
+    },
+    "Peak | crown and temple flyaways": {
+      "strands": 190,
+      "points": 2280,
+      "max_root_offset_mm": 0.08756764873396605,
+      "radius_um": [
+        0.3019638654677692,
+        18.903248928836547
+      ]
+    },
+    "Peak | short beard stubble": {
+      "strands": 1598,
+      "points": 6392,
+      "max_root_offset_mm": 0.01202604289574083,
+      "radius_um": [
+        1.5601773384332773,
+        23.999955374165438
+      ]
+    },
+    "Peak | denser beard stubble": {
+      "strands": 1598,
+      "points": 6392,
+      "max_root_offset_mm": 0.012026237527607009,
+      "radius_um": [
+        1.5610822856615414,
+        23.999964469112456
+      ]
+    },
+    "Portrait | fuller brow fibers": {
+      "strands": 2240,
+      "points": 13440,
+      "max_root_offset_mm": 0.17796157044358552,
+      "radius_um": [
+        2.930568598458194,
+        34.99560261843726
+      ]
+    },
+    "Realism upper lashes": {
+      "strands": 236,
+      "points": 2124,
+      "max_root_offset_mm": 0.025095690943999216,
+      "radius_um": [
+        2.143917527064332,
+        140.92607307247818
+      ]
+    },
+    "Realism lower lashes": {
+      "strands": 92,
+      "points": 828,
+      "max_root_offset_mm": 0.08004336268641055,
+      "radius_um": [
+        1.231967871717643,
+        74.45955270668492
+      ]
+    },
+    "Portrait | irregular hairline transition": {
+      "strands": 1750,
+      "points": 12250,
+      "max_root_offset_mm": 0.024043942175921984,
+      "radius_um": [
+        0.21025623198056564,
+        15.993551642168313
+      ]
+    },
+    "Natural v17 upper lashes": {
+      "strands": 340,
+      "points": 3060,
+      "max_root_offset_mm": 0.02525246236473322,
+      "radius_um": [
+        0.7215768391688471,
+        85.8143248478882
+      ]
+    },
+    "Natural v17 lower lashes": {
+      "strands": 164,
+      "points": 1476,
+      "max_root_offset_mm": 0.08178618008969352,
+      "radius_um": [
+        0.5794510116174934,
+        60.98960875533521
+      ]
+    },
+    "Natural v19 lower lid margin lashes": {
+      "strands": 124,
+      "points": 1116,
+      "max_root_offset_mm": 0.01803306986403186,
+      "radius_um": [
+        0.2696571925753233,
+        43.8886163465213
+      ]
+    }
+  },
+  "baseline_render_gate": {
+    "profile": "render",
+    "eps": 4.9e-05,
+    "tol": 0.000977,
+    "gap": 0.004887,
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "per_object": {
+      "GNM Head.001": {
+        "tris": 35324,
+        "parts": 8,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    "skipped": []
+  },
+  "candidate_render_gate": {
+    "profile": "render",
+    "eps": 4.9e-05,
+    "tol": 0.00098,
+    "gap": 0.0049,
+    "pass": true,
+    "errors": [],
+    "warnings": [
+      "Portrait crew neckline: not touching, 0.00119 from the nearest part"
+    ],
+    "per_object": {
+      "GNM Head": {
+        "tris": 35324,
+        "parts": 8,
+        "errors": [],
+        "warnings": []
+      },
+      "Peak | inner canthus -1": {
+        "tris": 528,
+        "parts": 1,
+        "errors": [],
+        "warnings": []
+      },
+      "Peak | inner canthus 1": {
+        "tris": 528,
+        "parts": 1,
+        "errors": [],
+        "warnings": []
+      },
+      "Portrait crew neckline": {
+        "tris": 3350,
+        "parts": 1,
+        "errors": [],
+        "warnings": [
+          "Portrait crew neckline: not touching, 0.00119 from the nearest part"
+        ]
+      }
+    },
+    "skipped": []
+  },
+  "new_render_gate_errors": [],
+  "qualification": "Still portrait only. Motion, engine export and organizer evaluation not tested."
+}
