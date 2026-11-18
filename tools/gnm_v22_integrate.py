@@ -14,6 +14,11 @@ from gnm_v22_audit import SELECTED, coords, sha
 from gnm_surface_attachments import bind
 from gnm_template import MODEL_SHA256
 
+ROOT=Path(__file__).resolve().parents[1]
+RECIPE_FILES=('tools/gnm_v22_integrate.py','tools/gnm_surface_attachments.py',
+              'apollo_core/identity.py','apollo_core/submission_timing.py')
+RECIPE_HASHES={name:sha(ROOT/name) for name in RECIPE_FILES}
+
 
 def install_keys(obj, poses, sequence, times):
     obj.shape_key_clear()
@@ -28,6 +33,8 @@ def install_keys(obj, poses, sequence, times):
                 if frame and active[frame] != active[frame-1]:
                     key.value = float(active[frame-1]); key.keyframe_insert('value', frame=float(times[frame-1]))
                 key.value = float(active[frame]); key.keyframe_insert('value', frame=float(times[frame]))
+        if i%64==0:
+            print(f'KEYS {obj.name}: {i+1}/{len(poses)}',flush=True)
     for curve in obj.data.shape_keys.animation_data.action.fcurves:
         for point in curve.keyframe_points:
             point.interpolation = 'LINEAR'
@@ -75,7 +82,13 @@ def main(args):
     if mode == 'generate-motion' and not np.array_equal(native[sequence[0]], native[sequence[-1]]):
         raise ValueError('Native clip must reset exactly')
     np.testing.assert_array_equal(native[sequence[0]][skin], basis[skin])
-    derived = np.stack([transport_identity(basis, pose, delta, faces, eyes) for pose in native])
+    transported=[]
+    for index,pose in enumerate(native):
+        transported.append(transport_identity(basis,pose,delta,faces,eyes))
+        if index%64==0:
+            print(f'IDENTITY {index+1}/{len(native)}',flush=True)
+    derived=np.stack(transported)
+    del transported
     np.testing.assert_array_equal(derived[sequence[0]][skin], neutral[skin])
     np.testing.assert_array_equal(derived[:, eyes], native[:, eyes])
     # Remove only objects hidden in the selected render, in this derived file.
@@ -142,10 +155,9 @@ def main(args):
                   native_continuity=continuity,
                   neutral_native_eye_shift_m=float(np.max(np.linalg.norm(native[sequence[0]][eyes]-basis[eyes], axis=1))),
                   qualification='Experimental integration; reopening, motion and visual gates pending.')
-    root=Path(__file__).resolve().parents[1]
-    report['recipes']={name:sha(root/name) for name in ('tools/gnm_v22_integrate.py',
-                      'tools/gnm_surface_attachments.py','apollo_core/identity.py',
-                      'apollo_core/submission_timing.py')}
+    report['recipes']=RECIPE_HASHES
+    if any(sha(ROOT/name)!=digest for name,digest in RECIPE_HASHES.items()):
+        raise ValueError('Build recipes changed during execution; candidate is not reproducible')
     if sha(source) != SELECTED:
         raise ValueError('Selected source changed')
     args.out.with_suffix('.json').write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')

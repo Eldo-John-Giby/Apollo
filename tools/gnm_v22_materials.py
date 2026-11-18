@@ -50,16 +50,16 @@ def load_manifest(maps):
     receipt=json.loads((maps/'manifest.json').read_text(encoding='utf-8'))
     if receipt['source_sha256']!=SELECTED:
         raise ValueError('Texture set is not derived from the approved v22')
-    for tile in TILES:
-        for role in ROLES:
-            name=f'{role}.{tile}.png'
-            digest=hashlib.sha256((maps/name).read_bytes()).hexdigest()
-            if receipt['maps'][name]['sha256']!=digest:
-                raise ValueError('Texture checksum mismatch '+name)
+    required={f'{role}.{tile}.png' for tile in TILES for role in ROLES}
+    if not required.issubset(receipt['maps']):raise ValueError('Incomplete PBR manifest')
+    for name,entry in receipt['maps'].items():
+        if Path(name).name!=name:raise ValueError('Invalid map filename')
+        digest=hashlib.sha256((maps/name).read_bytes()).hexdigest()
+        if entry['sha256']!=digest:raise ValueError('Texture checksum mismatch '+name)
     return receipt
 
 
-def bind(head,maps,layout='udim'):
+def bind(head,maps,layout='udim',full_character=False):
     if layout not in ('udim','legacy'):
         raise ValueError('Unsupported native UV layout')
     maps=Path(maps); receipt=load_manifest(maps)
@@ -85,7 +85,10 @@ def bind(head,maps,layout='udim'):
             links.new(coordinates,offset.inputs[0]);coordinates=offset.outputs['Vector']
         for role in ROLES:
             node=nodes.new('ShaderNodeTexImage');node.name=f'Apollo {role} {tile}'
-            node.image=bpy.data.images.load(str((maps/f'{role}.{tile}.png').resolve()),check_existing=False)
+            filename=f'{role}.{tile}.png'
+            if tile==1001 and not full_character and role in receipt.get('texture_only',{}):
+                filename=receipt['texture_only'][role]
+            node.image=bpy.data.images.load(str((maps/filename).resolve()),check_existing=False)
             node.image.colorspace_settings.name='sRGB' if role=='color' else 'Non-Color'
             links.new(coordinates,node.inputs['Vector'])
             if role=='normal':

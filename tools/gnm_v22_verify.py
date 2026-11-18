@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from apollo_core.identity import triangle_frames
 from apollo_core.submission_timing import expression
-from gnm_v22_audit import SELECTED, coords, sha
+from gnm_v22_audit import SELECTED, coords, sha, appearance_signature
 from gnm_verify import check_camera
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree
@@ -50,6 +50,8 @@ def main(args):
         expected={i['name']:i['sha256'] for i in audit['images'] if i['packed']}
         if payloads!=expected:
             raise ValueError('Reopened texture payloads differ from selected source')
+        if appearance_signature(head)!=audit['appearance_signature']:
+            raise ValueError('Full-character shaders differ from selected v22')
         texture_identity='exact selected packed bytes'
     if not scene.render.filepath.startswith('//'):
         raise ValueError('Author render path')
@@ -64,7 +66,8 @@ def main(args):
     for name,key in [('GNM UDIM','udim'),('GNM Region','legacy')]:
         actual = np.array([tuple(p.uv) for p in head.data.uv_layers[name].data], dtype=np.float32)
         np.testing.assert_array_equal(actual.ravel(), template[key].astype(np.float32).ravel())
-    frames = [float(f) for f in args.frames.split(',')] if args.frames else sample_frames.tolist()
+    frames = [float(f) for f in args.frames.split(',')] if args.frames else (
+        list(map(float,range(1,193))) if args.integer_frames else sample_frames.tolist())
     lookup = dict(zip(sample_frames,sample_sequence))
     attached = [o for o in scene.objects if o.get('apollo_surface_attached')]
     anchors = {}
@@ -102,6 +105,8 @@ def main(args):
                   root_offsets_m={}, orientation_step_degrees={})
     report['texture_identity']=texture_identity
     report['verifier_sha256']=sha(__file__)
+    report['status']='running'
+    report['frames_checked']=0
     skin_faces = [list(f.vertices) for f in head.data.polygons if f.material_index==0]
     previous_frames = {}
     previous_number = None
@@ -159,6 +164,9 @@ def main(args):
                     report['orientation_step_degrees'][obj.name] = max(angle,report['orientation_step_degrees'].get(obj.name,0.))
                 previous_frames[obj.name] = current_frames
         previous_number = frame
+        report['frames_checked']+=1
+        if report['frames_checked']%16==0:
+            args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
         print(f'CHECKED {frame}',flush=True)
     try:
         report['camera_checks'] = check_camera(scene, head, template, derived, sequence, mode)
@@ -167,6 +175,7 @@ def main(args):
         args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
         raise
     report['qualification'] = 'Geometry/resource checks only; image checks, collisions and visual acceptance remain separate.'
+    report['status']='passed_geometry_and_resources'
     args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     if args.render:
         from gnm_portrait_refine import render
@@ -181,6 +190,7 @@ if __name__=='__main__':
     for name in ('geometry','template','out'):
         parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--frames')
+    parser.add_argument('--integer-frames',action='store_true')
     parser.add_argument('--render',action='store_true')
     parser.add_argument('--render-frames',default='1,25,58,106,107,112')
     parser.add_argument('--source-audit',type=Path)

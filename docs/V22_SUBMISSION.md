@@ -7,6 +7,10 @@ authoritative target. No organizer grade is predicted.
 
 ## Inputs and boundaries
 
+- The final hero is the approved v22 character, including its selected facial
+  identity and groom. The user reconfirmed this after seeing the plain-target
+  portability test. That unenhanced target is a separate evaluator compatibility
+  output and must never be presented as the replacement final character.
 - Selected scene: `milestones/gnm-portrait-final-2026-11-17/portrait_v22.blend`.
 - SHA-256: `f648bbaff98edbb3254a386047a4909aa8bb20ba7e79c949985b0b43f8833cfd`.
 - Selection receipt: `final-selection.json` in that directory. v23 is rejected.
@@ -151,3 +155,21 @@ channel pixels in covered regions and 95th-percentile unit-length error below
 seam continuity. Five prototype variant sets are also generated, with the default
 maps copied byte-for-byte; palette review and final-resolution generation remain
 pending.
+
+### Resumed motion qualification
+
+Work was paused at the user's request after the plain-target test caused
+confusion. The active 4K normal bake was stopped, leaving an incomplete map set
+that must not be packaged. The original v22 copies were rehashed and still
+matched the selection receipt. On resume, motion of the full approved character
+is the immediate priority. The prototype overlay files remain isolated work;
+they are not selected appearance changes.
+
+The dense Generate Motion trial is saved at
+`out/v22-integrated-dense/generate-motion/expression.blend`. It contains the
+selected full-character materials, 16 surface-attached groom/tear objects,
+ordinary packed shape-key animation and a separate native-motion reference.
+An offline all-integer-frame audit is running. The source audit at
+`out/v22-audit-current/audit.json` adds a path-independent shader recipe signature
+and exact packed-image hashes; reopening must match both. All 92 Python tests
+passed again. These are development checks, not final release acceptance.

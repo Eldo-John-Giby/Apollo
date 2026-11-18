@@ -23,6 +23,15 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def verify_selected(expected):
+    root=Path(__file__).resolve().parents[1]/'milestones/gnm-portrait-final-2026-11-17'
+    selection=json.loads((root/'final-selection.json').read_text(encoding='utf-8'))
+    selected=root/selection['scene']
+    if selection['sha256'][selection['scene']]!=expected or sha(selected)!=expected:
+        raise ValueError('Selected identity checksum mismatch')
+    return selected
+
+
 def read(path):
     image=cv2.imread(str(path),cv2.IMREAD_UNCHANGED)
     if image is None or image.dtype!=np.uint16 or image.ndim!=3:
@@ -48,13 +57,7 @@ def write(path,rgb):
 def build(a):
     if a.out.exists():raise FileExistsError(a.out)
     master=json.loads((a.master/'manifest.json').read_text(encoding='utf-8'))
-    root=Path(__file__).resolve().parents[1]
-    selection_root=root/'milestones/gnm-portrait-final-2026-11-17'
-    selection=json.loads((selection_root/'final-selection.json').read_text(encoding='utf-8'))
-    selected=selection_root/selection['scene']
-    expected=selection['sha256'][selection['scene']]
-    if sha(selected)!=expected or master['source_sha256']!=expected:
-        raise ValueError('Selected identity or master provenance mismatch')
+    expected=master['source_sha256'];selected=verify_selected(expected)
     required={f'{role}.{tile}.png' for role in ('color','roughness','specular','normal') for tile in (1001,1002,1004)}
     if not required.issubset(master['maps']):raise ValueError('Incomplete master texture set')
     for name,entry in master['maps'].items():
@@ -83,7 +86,7 @@ def build(a):
             result=source.copy();colors=linear(source[covered])
             # Coherent spatial fields cross UV seams and cover ears and neck.
             x,y,z=positions.T
-            anterior=np.clip((z-.050)/.035,0,1)
+            anterior=np.clip((z+.005)/.015,0,1)
             cheek=np.exp(-((np.abs(x)-.040)/.025)**2-((y+.025)/.035)**2)*anterior
             ear=np.exp(-((np.abs(x)-.073)/.014)**2-((y+.025)/.045)**2)
             regional=1+.055*np.sin(x*57+y*19+z*31)+.08*cheek-.045*ear
@@ -108,7 +111,13 @@ def build(a):
                 recolored=np.clip(eye*desired/np.maximum(mean,.0001),0,1)
                 eye=eye*(1-mask[:,:,None])+recolored*mask[:,:,None]
                 write(target/f'color.{tile}.png',encode(eye))
-        for name,entry in receipt['maps'].items():entry['sha256']=sha(target/name)
+            if 'texture_only' in receipt:
+                from gnm_v22_texture_only import flatten
+                flatten(target,receipt['texture_only'])
+        for name,entry in receipt['maps'].items():
+            entry['sha256']=sha(target/name)
+            if variant!='rose-brown' and name.startswith('color.'):
+                entry.pop('min',None);entry.pop('max',None)
         if variant=='rose-brown':
             assert all(receipt['maps'][n]['sha256']==master['maps'][n]['sha256'] for n in master['maps'])
             receipt['pigmentation']='Unchanged approved v22; existing CLI identifier retained.'

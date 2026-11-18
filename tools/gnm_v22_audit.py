@@ -21,6 +21,47 @@ def coords(items):
     return result.reshape(-1, 3)
 
 
+def value_json(value):
+    if value is None or isinstance(value,(str,int,float,bool)):
+        return value
+    if isinstance(value,bpy.types.ID):
+        return dict(id=value.name,type=type(value).__name__)
+    try:
+        return [float(v) for v in value]
+    except (TypeError,ValueError):
+        return str(value)
+
+
+def appearance_signature(head):
+    """Path-independent shader/texture recipe for the selected full character."""
+    materials=[]
+    for mat in head.data.materials:
+        if not mat.use_nodes:
+            materials.append(dict(name=mat.name,color=list(mat.diffuse_color)))
+            continue
+        nodes=list(mat.node_tree.nodes)
+        entries=[]
+        for node in nodes:
+            entry=dict(type=node.bl_idname,
+                       inputs=[value_json(s.default_value) if hasattr(s,'default_value') else None
+                               for s in node.inputs],
+                       properties={name:value_json(getattr(node,name)) for name in
+                                   ('subsurface_method','distribution','uv_map','projection','extension',
+                                    'space','object','operation','blend_type','data_type','interpolation')
+                                   if hasattr(node,name)})
+            if node.type=='TEX_IMAGE' and node.image:
+                image=node.image
+                entry['image']=dict(colorspace=image.colorspace_settings.name,
+                    sha256=hashlib.sha256(bytes(image.packed_file.data)).hexdigest() if image.packed_file else None)
+            if hasattr(node,'color_ramp'):
+                entry['ramp']=[(p.position,list(p.color)) for p in node.color_ramp.elements]
+            entries.append(entry)
+        materials.append(dict(nodes=entries,links=[(nodes.index(l.from_node),list(l.from_node.outputs).index(l.from_socket),
+            nodes.index(l.to_node),list(l.to_node.inputs).index(l.to_socket)) for l in mat.node_tree.links]))
+    serialized=json.dumps(materials,sort_keys=True,separators=(',',':'))
+    return hashlib.sha256(serialized.encode()).hexdigest()
+
+
 def main(args):
     source = Path(bpy.data.filepath)
     if sha(source) != SELECTED:
@@ -53,7 +94,9 @@ def main(args):
         if obj.type == 'LIGHT':
             entry.update(energy=obj.data.energy, color=list(obj.data.color), light_type=obj.data.type)
         if obj.type == 'CAMERA':
-            entry.update(lens=obj.data.lens)
+            entry.update(lens=obj.data.lens,sensor_width=obj.data.sensor_width,
+                         sensor_fit=obj.data.sensor_fit,shift=[obj.data.shift_x,obj.data.shift_y],
+                         depth_of_field=obj.data.dof.use_dof)
         objects.append(entry)
     materials = []
     for mat in bpy.data.materials:
@@ -66,11 +109,16 @@ def main(args):
                 entry['image'] = node.image.name
             if node.type == 'UVMAP':
                 entry['uv_map'] = node.uv_map
-            entry['inputs'] = {socket.name: str(socket.default_value)
+            entry['inputs'] = {socket.name: value_json(socket.default_value)
                                for socket in node.inputs if hasattr(socket, 'default_value') and not socket.is_linked}
+            entry['properties']={name:value_json(getattr(node,name)) for name in
+                                 ('subsurface_method','distribution','uv_map','projection','extension','space','object')
+                                 if hasattr(node,name)}
             nodes.append(entry)
         materials.append(dict(name=mat.name, nodes=nodes,
-                              links=[(l.from_node.name, l.from_socket.name, l.to_node.name, l.to_socket.name)
+                              links=[(l.from_node.name, list(l.from_node.outputs).index(l.from_socket),
+                                      l.from_socket.name, l.to_node.name,
+                                      list(l.to_node.inputs).index(l.to_socket),l.to_socket.name)
                                      for l in mat.node_tree.links]))
     images = []
     for image in bpy.data.images:
@@ -86,6 +134,10 @@ def main(args):
                   keys=[dict(name=k.name, value=k.value, mute=k.mute, relative=k.relative_key.name)
                         for k in head.data.shape_keys.key_blocks],
                   uv_layouts=[u.name for u in head.data.uv_layers],
+                  head_material_slots=[m.name for m in head.data.materials],
+                  appearance_signature=appearance_signature(head),
+                  polygon_material_counts={str(i):sum(f.material_index==i for f in head.data.polygons)
+                                           for i in range(len(head.data.materials))},
                   objects=objects, materials=materials, images=images,
                   camera=scene.camera.name, engine=scene.render.engine,
                   samples=scene.cycles.samples, exposure=scene.view_settings.exposure,

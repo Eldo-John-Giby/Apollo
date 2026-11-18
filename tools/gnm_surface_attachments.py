@@ -93,13 +93,13 @@ def attachment_group(head, mode, times):
 
 
 def bind(head, neutral, objects, mode, times, poses, sequence):
-    triangles = []
-    for face in head.data.polygons:
-        if face.material_index != 0:
-            continue
-        ids = list(face.vertices)
-        triangles.extend((ids[0], ids[i], ids[i+1]) for i in range(1, len(ids)-1))
-    triangles = np.asarray(triangles, dtype=np.int32)
+    # Use Blender's evaluated triangulation of the selected surface, rather
+    # than an arbitrary quad diagonal that can put roots off nonplanar lids.
+    evaluated=head.evaluated_get(bpy.context.evaluated_depsgraph_get())
+    mesh=evaluated.to_mesh();mesh.calc_loop_triangles()
+    triangles=np.asarray([tuple(t.vertices) for t in mesh.loop_triangles
+                          if mesh.polygons[t.polygon_index].material_index==0],dtype=np.int32)
+    evaluated.to_mesh_clear()
     tree = BVHTree.FromPolygons(neutral.tolist(), triangles.tolist(), all_triangles=True)
     group = attachment_group(head, mode, times)
     report = {}
@@ -134,17 +134,19 @@ def bind(head, neutral, objects, mode, times, poses, sequence):
             for distance in (0,.001,.002,.003,.004,.006):
                 probes=points[roots]+np.array((0,distance,0))
                 candidate=triangles[[tree.find_nearest(Vector(p))[2] for p in probes]]
-                previous=None; previous_index=None; worst=np.zeros(len(roots))
-                for index in sequence:
+                previous=None; previous_index=None; previous_time=None; worst=np.zeros(len(roots))
+                for index,time in zip(sequence,times):
                     if index==previous_index:
+                        previous_time=time
                         continue
                     current=triangle_frames(poses[index],candidate)
                     if previous is not None:
                         relative=np.einsum('nji,njk->nik',previous,current)
                         angle=np.degrees(np.arccos(np.clip((np.trace(relative,axis1=1,axis2=2)-1)/2,-1,1)))
-                        worst=np.maximum(worst,angle)
+                        worst=np.maximum(worst,angle/(time-previous_time))
                     previous=current
                     previous_index=index
+                    previous_time=time
                 improve=(~chosen)&(worst<best)
                 orientation_ids[improve]=candidate[improve]
                 selected_distance[improve]=distance
@@ -152,7 +154,7 @@ def bind(head, neutral, objects, mode, times, poses, sequence):
                 chosen|=worst<30
             if not chosen.all():
                 raise ValueError('No stable proximal orientation patch for every upper lash')
-            orientation_report=dict(max_step_degrees=float(best.max()),
+            orientation_report=dict(max_rate_degrees_per_frame=float(best.max()),
                                     max_patch_search_offset_m=float(selected_distance.max()))
         frames = triangle_frames(neutral, orientation_ids)
         ids = np.repeat(ids, lengths, axis=0)

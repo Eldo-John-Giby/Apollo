@@ -24,7 +24,7 @@ def main(a):
     scene.camera=scene.objects['Portrait | neutral 85mm']
     aim(scene.camera,(0,-.82,.03),(0,0,-.025));scene.camera.data.lens=85
     render(scene,a.out,'source-full',a.size,a.samples)
-    receipt=bind(head,a.maps,a.layout)
+    receipt=bind(head,a.maps,a.layout,full_character=True)
     render(scene,a.out,'baked-full',a.size,a.samples)
     if a.target:
         with bpy.data.libraries.load(str(a.target.resolve()),link=False) as (src,dst):
