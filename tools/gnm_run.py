@@ -54,7 +54,8 @@ def main():
         if not scene.is_file():scene=root/'model/neutral.blend'
         tool = 'gnm_texture_trial.py'
         flags = ['--maps', str(root / 'textures' / args.variant), '--layout', args.layout,
-                 '--out', str(args.out.resolve()), '--size', '1024', '--samples', '32']
+                 '--out', str(args.out.resolve()), '--size', '1024']
+        flags.extend(['--scene-samples'] if scene.name=='character.blend' else ['--samples','32'])
     else:
         scene = root / 'timelines' / args.mode / 'expression.blend'
         if args.variant != 'rose-brown' or args.layout != 'udim':

@@ -109,3 +109,9 @@ def test_existing_still_command_selects_full_character_when_supplied(tmp_path,mo
     assert gnm_run.main()==0
     expected=model/('character.blend' if full_character else 'neutral.blend')
     assert str(expected) in calls[0]
+    if full_character:
+        assert '--scene-samples' in calls[0]
+        assert '--samples' not in calls[0]
+    else:
+        assert calls[0][calls[0].index('--samples')+1]=='32'
+        assert '--scene-samples' not in calls[0]

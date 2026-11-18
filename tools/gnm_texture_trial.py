@@ -139,7 +139,10 @@ def render(args):
         scene.world.color = (.07, .07, .07)
     scene.render.engine = 'CYCLES'
     scene.cycles.device = 'CPU'
-    scene.cycles.samples = args.samples
+    if getattr(args,'scene_samples',False):
+        if not full_character:raise ValueError('Saved sample profile requires the full v22 character')
+    else:
+        scene.cycles.samples = args.samples
     scene.cycles.use_denoising = True
     if not full_character:
         scene.view_settings.view_transform = 'AgX'
@@ -186,7 +189,10 @@ if __name__ == '__main__':
     parser.add_argument('--target', type=float, nargs=3, help='Explicit inspection aim point in meters')
     parser.add_argument('--angle', action='store_true')
     parser.add_argument('--side-light', action='store_true')
-    parser.add_argument('--samples', type=int, default=8)
+    sample_source=parser.add_mutually_exclusive_group()
+    sample_source.add_argument('--samples', type=int, default=8)
+    sample_source.add_argument('--scene-samples', action='store_true',
+                               help='Retain the saved full-character sample count')
     parser.add_argument('--size', type=int, default=640)
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     if args.save_only and not args.save_scene:

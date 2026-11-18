@@ -449,3 +449,20 @@ so those recorded hashes do not depend on a Windows line-ending conversion.
 The final archive must retain the cited license/attribution documents and bind
 this inventory to its exact baked maps. That archive linkage remains pending;
 this inventory does not qualify unfinished textures or an unbuilt package.
+
+### Preserve the selected sample count in runtime stills
+
+The full-character `still` path previously forced 32 samples regardless of the
+saved candidate preset. It now requests the saved scene sample count through
+the internal Blender tool's `--scene-samples` option. The public CLI is unchanged;
+legacy neutral-template archives retain their 32-sample still behavior and
+explicit authoring sample overrides remain available. Existing authoring callers
+without the new internal option retain their behavior.
+
+Nine targeted PBR/CLI tests pass, including full-character selection with saved
+samples and the legacy fallback with explicit 32 samples. The Python files
+compile. Actual Blender execution of the new internal option remains pending
+while the existing normal bake is live. Experimental integrated scenes still
+inherit 1024 samples; final packaging must apply the measured delivery preset
+before using this path. No sample count is qualified by this code change.
+The full suite before this change passed 118 tests.
