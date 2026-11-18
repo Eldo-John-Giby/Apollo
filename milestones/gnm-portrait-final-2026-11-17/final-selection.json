@@ -1,0 +1,15 @@
+{
+  "status": "user-selected final appearance",
+  "selected_on": "2026-11-18",
+  "scene": "portrait_v22.blend",
+  "front": "realism_pass/22_review/final.png",
+  "three_quarter": "realism_pass/22_review/three-quarter.png",
+  "policy": "Use v22 for subsequent work. Keep this selected file unchanged; create a separate version for any explicitly requested edits. v23 is rejected and retained only as history.",
+  "scope": "Final appearance selection. Motion and engine export are not qualified by this selection.",
+  "sha256": {
+    "portrait_v22.blend": "f648bbaff98edbb3254a386047a4909aa8bb20ba7e79c949985b0b43f8833cfd",
+    "realism_pass/22_review/final.png": "c51feb77a2de4a5ad5fa4f738492ed640986346f7ad093109c71fc072a688c42",
+    "realism_pass/22_review/three-quarter.png": "7b23bd8ba3437faecc25e3397dda0598de073bbc309dfa9adaea02134ae6b0bf",
+    "realism_pass/22_review/reopened-check.json": "e51dde157767b3247c44de2bfa4e1c563cd4118c42ac1d5ad437ea554a0ab5a4"
+  }
+}

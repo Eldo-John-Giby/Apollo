@@ -152,12 +152,20 @@ and slightly broadens corneal reflections. The matched crop shows a small
 change at the corners and around the glints. Native eye geometry, UVs and
 packed textures passed the reopened checks.
 
-The final still-portrait handoff is in
+The user-selected final appearance as of 18 November 2026 is
+`milestones/gnm-portrait-final-2026-11-17/portrait_v22.blend`.
+Use v22 for subsequent work. Preserve this selected file and create a separate
+version for any explicitly requested edits. The user rejected v23; retain it
+only as history. `final-selection.json` in the same folder records the selected
+scene, matching front and three-quarter images, and SHA-256 hashes.
+
+The original still-portrait handoff is in
 `milestones/gnm-portrait-final-2026-11-17`. It adds localized cheek and nasal
 color, a muted lower-lid undertone and lower roughness on the forehead and
 nose. The editable Blender scene packs its active textures. The folder
 includes front and three-quarter PNGs, a face crop, the reopened checks and
-file hashes. Open `portrait.blend` in Blender for further live editing.
+file hashes. Its `portrait.blend` and root-level PNGs are historical;
+open `portrait_v22.blend` and use `realism_pass/22_review` for the selected result.
 
 The groom is static. Motion deformation, engine export and organizer scoring
 are outside these still-appearance checks. No numerical realism score or
