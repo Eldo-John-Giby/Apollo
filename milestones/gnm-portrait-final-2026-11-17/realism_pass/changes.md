@@ -111,3 +111,9 @@ Kept the v13 eye geometry, tear corners and lighting. The packed vessel mask now
 Continued from v15 on the same haired portrait. The strongest scleral paths now use curved interpolation with local variation, progressively thinner tips, uneven pigment density and a warmer rose color. The visibility mask remains packed. Only copied eye materials change in this pass.
 
 The saved scene reopened without new render gate errors. Native eye geometry and UV layouts remain preserved. This is a still portrait check and does not validate gaze animation.
+
+## Softer jaw, lashes and anatomical depth, versions 17 and 18
+
+Version 17 reduces the existing jaw definition key to 0.30 and jaw/chin key to 0.35. It refits the facial fibers, replaces the visible groom with 170 upper and 82 lower tapered lashes per eye, and enlarges the existing tear-corner tissue slightly on a new reversible key. Existing groom objects remain hidden and preserved.
+
+Version 18 adds four independent skin-only depth keys for the orbital crease, cheek transition, nose/cheek groove and philtrum/lip relief. Maximum unmasked field magnitudes range from approximately 0.4 to 0.9 mm. Native eye vertices are excluded. Jaw softening and the v17 lashes remain in place. Review images include matched front and eye crops plus a three-quarter angle.
