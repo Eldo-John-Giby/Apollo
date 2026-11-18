@@ -368,3 +368,51 @@ The full Python suite subsequently passed: **107 tests**. The immutable v22
 source still hashes to the recorded selection checksum. The existing bake
 session `55117` and process creation time were revalidated after those checks;
 normal baking remains live, so the master is still incomplete.
+
+### Independent human review scorer
+
+`tools/gnm_v22_review_gate.py` scores explicit returned responses; it does not
+generate or invent reviewer feedback. Eleven targeted tests cover incomplete
+answers, duplicate reviewers, wrong packets, a non-blind first pass, too few
+reviewers, missing variant coverage, low category medians, repeated severe
+defects and opposite-direction confusion. The full 107-test suite result above
+predates these eleven new tests; no larger full-suite count is claimed here.
+
+The frozen assessor key has `candidate_sha256`, a `directions` object mapping
+anonymous case IDs to `left`/`right`/`up`/`down`, and an `appearance` object.
+Every candidate appearance case has `candidate: true`, its existing `variant`
+identifier and `output: "full"` or `"texture_only"`. All ten combinations are
+required. Reference cases have `candidate: false` and `reference: "rc5"` or
+`"v22"`; both references are required. Keep this mapping out of reviewer packets.
+The candidate digest must identify the frozen artifact manifest actually shown
+to reviewers, and the eventual packet builder must authenticate the image and
+playback assets against that manifest. The scorer alone cannot establish that
+asset provenance or that reviewers are independent.
+
+Generate a blank packet-bound response form with:
+
+```powershell
+python tools/gnm_v22_review_gate.py --key out/review/assessor-key.json --template --out out/review/responses.json
+```
+
+Returned forms must contain a distinct reviewer identifier, explicit
+`independent_first_pass: true`, all cardinal answers (or `unclear`), integer
+ratings from 1 to 5 for every category and case, and an explicit
+`severe_defects` list. Categories are `skin`, `eyes`, `lips`, `ears`,
+`brows_lashes`, `overall_realism` and `motion_naturalness`. A defect entry has
+`case`, `code` and explanatory `notes`; the tool lists the accepted codes.
+Only reviewers can fill in these fields. An empty list means they explicitly
+reported no severe defects; the generated template starts with null.
+
+```powershell
+python tools/gnm_v22_review_gate.py --key out/review/assessor-key.json --responses out/review/person-a.json out/review/person-b.json out/review/person-c.json --out out/review/scored.json
+```
+
+The scorer requires 3–5 distinct completed responses, at least 95% aggregate
+cardinal accuracy, median ratings of at least 4 for every candidate case and
+category, and no severe defect category identified by two reviewers. Repeated
+opposite-direction answers also fail the gate. Reference ratings are reported
+but cannot improve candidate medians. Its result covers the independent-review
+gate only; the user's integrated-identity approval and technical qualification
+remain separate. Actual final-packet preparation and collected feedback remain
+pending while final appearance renders are unqualified.

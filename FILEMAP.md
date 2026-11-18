@@ -153,6 +153,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_bundle.py`, `tools/gnm_verify.py`, `tools/gnm_rehearse.py` | Verify reopened GNM timelines and package the technical archive from authenticated frame and texture outputs. |
 | `tools/gnm_run.py`, `tools/gnm_motion_variant.py` | Prefer the full character for stills when supplied, retain legacy archives, and pack hash-bound variant timelines with complete PBR recipe identities for resumable rendering. |
 | `tools/gnm_review.py` | Prepare anonymous, receipt-bound direction and five-variant appearance comparisons with a separate assessor key for deferred teammate review. |
+| `tools/gnm_v22_review_gate.py`, `tests/test_v22_review_gate.py` | Score complete packet-bound independent human ratings across five full/texture-only variants, four gaze directions and rc.5/v22 references; keep user identity approval separate. |
 | `tools/gnm_comparison.py` | Authenticate the published baseline archive and candidate still receipts, then create matched front/side panels and native eye/skin crops for every variant. |
 | `docs/GNM_INTEGRATION.md` | Pinned GNM setup, trial results and qualification status. |
 | `docs/GNM_QUICKSTART.md` | Extracted GNM package setup, runtime commands, output locations and capture inputs. |
