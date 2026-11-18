@@ -46,7 +46,8 @@ def main(a):
     report=dict(recipe_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 images={},neutral=neutral,checks={},minimum_reference_correlation=.8,
                 qualification='Image checks for fixed motion framing only; human direction review is separate.')
-    inputs={'neutral':a.neutral,'left':a.left,'right':a.right,'closed':a.closed,'reopened':a.reopened}
+    inputs={'neutral':a.neutral,**{role:getattr(a,role,None) for role in
+             ('left','right','up','down','closed','reopened')}}
     errors=[]
     for role,path in inputs.items():
         if path is None:continue
@@ -74,6 +75,12 @@ def main(a):
                 report['checks'][role].setdefault('horizontal_shift_px',{})[side]=displacement
                 if displacement*(-1 if role=='left' else 1)<1:
                     errors.append(f'{side}: {role} displacement is wrong or below one pixel')
+            elif role in ('up','down'):
+                displacement=point[1]-neutral[side][1]
+                report['checks'][role].setdefault('vertical_shift_px',{})[side]=displacement
+                report['checks'][role].setdefault('horizontal_shift_px',{})[side]=point[0]-neutral[side][0]
+                if displacement*(-1 if role=='up' else 1)<1:
+                    errors.append(f'{side}: {role} displacement is wrong or below one pixel')
     report['errors']=errors;report['passed']=not errors
     a.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print('RESULT '+json.dumps(report),flush=True)
@@ -83,6 +90,6 @@ def main(a):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--neutral',type=Path,required=True)
-    for role in ('left','right','closed','reopened'):p.add_argument('--'+role,type=Path)
+    for role in ('left','right','up','down','closed','reopened'):p.add_argument('--'+role,type=Path)
     p.add_argument('--out',type=Path,required=True)
     main(p.parse_args())

@@ -21,6 +21,7 @@ def is_pbr(maps):
 def load_manifest(maps):
     maps=Path(maps)
     receipt=json.loads((maps/'manifest.json').read_text(encoding='utf-8'))
+    if receipt.get('complete') is False:raise ValueError('PBR bake has not completed its final source checks')
     required={f'{role}.{tile}.png' for role in ROLES for tile in TILES}
     if not required.issubset(receipt['maps']):raise ValueError('Incomplete PBR manifest')
     for name,entry in receipt['maps'].items():

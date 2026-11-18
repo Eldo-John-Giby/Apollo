@@ -11,6 +11,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gnm_v22_audit import SELECTED, sha
 from gnm_v22_materials import cornea_recipes
 
+ROOT=Path(__file__).resolve().parents[1]
+RECIPE_FILES=('tools/gnm_v22_bake.py','tools/gnm_v22_materials.py',
+              'tools/gnm_v22_audit.py','tools/gnm_pbr_manifest.py')
+RECIPE_HASHES={name:sha(ROOT/name) for name in RECIPE_FILES}
+
 
 def main(args):
     source = Path(bpy.data.filepath)
@@ -47,6 +52,7 @@ def main(args):
     export.view_settings.gamma = 1
     manifest = dict(source_sha256=SELECTED, blender=bpy.app.version_string,
                     recipe_sha256=sha(__file__), samples=args.samples,
+                    recipes=RECIPE_HASHES,complete=False,
                     uv_layout='GNM Region (equivalent UDIM offsets retained in target)',
                     margin_px=args.size//128, maps={}, material_defaults={},material_settings={},
                     corneas=cornea_recipes(head),
@@ -138,6 +144,12 @@ def main(args):
         (args.out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     if sha(source) != SELECTED:
         raise ValueError('Selected source changed')
+    if any(sha(ROOT/name)!=digest for name,digest in RECIPE_HASHES.items()):
+        raise ValueError('Bake recipes changed during execution')
+    manifest['complete']=all(f'{role}.{tile}.png' in manifest['maps']
+                             for role in ('color','roughness','specular','normal')
+                             for tile in (1001,1002,1004))
+    (args.out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     print('RESULT '+json.dumps(dict(manifest=str(args.out/'manifest.json'),source_unchanged=True)),flush=True)
 
 

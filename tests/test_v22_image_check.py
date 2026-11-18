@@ -12,7 +12,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 from gnm_v22_image_check import pupils,main
 
 
-def fixture(path,shift=0,closed=False):
+def fixture(path,shift=0,closed=False,vertical=0):
     canvas=np.full((640,640),190,dtype=np.uint8)
     # Larger nose/brow components are deliberately more tempting than pupils.
     for x in (282,362):cv2.ellipse(canvas,(x,440),(13,7),0,0,360,8,-1)
@@ -21,8 +21,8 @@ def fixture(path,shift=0,closed=False):
         if closed:
             cv2.line(canvas,(x-25,280),(x+25,280),12,3)
         else:
-            cv2.ellipse(canvas,(x+shift,280),(10,11),0,0,360,12,-1)
-            cv2.circle(canvas,(x+shift-3,276),2,240,-1)
+            cv2.ellipse(canvas,(x+shift,280+vertical),(10,11),0,0,360,12,-1)
+            cv2.circle(canvas,(x+shift-3,276+vertical),2,240,-1)
     assert cv2.imwrite(str(path),canvas)
 
 
@@ -55,3 +55,14 @@ def test_blink_gate_rejects_a_pupil_exposed_in_only_one_closed_eye(tmp_path):
     with pytest.raises(ValueError,match='pupil candidate remains'):
         main(args)
     assert not json.loads(args.out.read_text())['passed']
+
+
+def test_vertical_direction_gate_rejects_reversed_motion(tmp_path):
+    neutral,up,down=(tmp_path/name for name in ('neutral.png','up.png','down.png'))
+    fixture(neutral);fixture(up,vertical=-5);fixture(down,vertical=5)
+    args=SimpleNamespace(neutral=neutral,up=up,down=down,out=tmp_path/'vertical.json')
+    main(args)
+    assert json.loads(args.out.read_text())['passed']
+    args.up=down
+    with pytest.raises(ValueError,match='up displacement'):
+        main(args)

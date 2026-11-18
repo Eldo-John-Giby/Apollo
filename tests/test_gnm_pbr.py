@@ -47,6 +47,13 @@ def test_missing_skin_normal_does_not_fall_back_to_legacy_height_mode(tmp_path):
         gnm_run.surface_files(tmp_path)
 
 
+def test_unfinished_bake_is_rejected_even_after_all_map_files_exist(tmp_path):
+    receipt=setup_maps(tmp_path);receipt['complete']=False
+    (tmp_path/'manifest.json').write_text(json.dumps(receipt))
+    with pytest.raises(ValueError,match='final source checks'):
+        load_manifest(tmp_path)
+
+
 def test_variant_cache_covers_cornea_recipe_and_shader_code(tmp_path,monkeypatch):
     receipt=setup_maps(tmp_path)
     monkeypatch.setattr(gnm_run,'ROOT',tmp_path)

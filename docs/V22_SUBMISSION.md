@@ -270,3 +270,43 @@ complete PNG sequences; prepare and collect independent review; freeze/rebuild,
 reproduce and package the accepted result. No new release or submission has
 been created. README/quickstart updates must describe the finally verified
 package, not these development staging directories.
+
+### Whole-character preservation and render convergence
+
+`out/v22-integrated-dense/generate-motion/whole-character-check.json` now compares
+all 18 visible geometry components directly with a fresh append of immutable
+v22. Material recipes, additional hair/material modes, transforms and groom
+radii match. Maximum neutral point error is `5.96e-8` m; native eyes are excluded
+from this neutral identity comparison because their intentional shared fixation
+is separately checked against the upstream motion reference. The checker leaves
+both files unchanged. This is technical identity evidence; user acceptance is
+still pending.
+
+The 1024 px fixed-seed, nonadaptive 32/64-sample comparison is complete in
+`out/v22-convergence-32-64`. Source scene, camera, exposure, denoising and lighting
+are held constant. The predeclared internal stability limits are mean absolute
+RGB difference <=1, 95th percentile <=3 and high-frequency detail ratio within
+0.90–1.10. These are render-convergence criteria, not organizer scoring rules.
+At 32 versus 64 samples, skin passes (mean 0.46, p95 1); eyes (1.40, 6), lips
+(1.68, 5) and hair (1.34, 5) fail. The native crop sheet was inspected. No delivery
+sample count is selected from this failed comparison. A 128-sample reference is
+rendering, after which the existing 64-sample image can be reused only if the
+worker, source and complete render policy match exactly.
+
+The image checker now supports vertical gaze as well as horizontal gaze. An
+adversarial test rejects reversed vertical labels; the vertical images of the
+candidate still need rendering and inspection before that check can pass.
+
+The interrupted 4K set has nine valid, source-bound maps but no normal maps.
+It remains incomplete. The baker now captures all recipe hashes and writes a
+completion marker only after its final source/recipe guards pass. Runtime
+validation rejects a new bake marked incomplete even if all map files happen
+to exist. A fresh complete 4K/2K set will be generated with this provenance.
+
+Linux qualification is not available yet: Ubuntu startup failed twice with
+`Wsl/Service/CreateInstance/CreateVm/ERROR_TIMEOUT`, including after a successful
+idle `wsl --shutdown`. The running-distribution list was empty before recovery.
+Docker Desktop was started hidden, but its engine query did not return; that
+read-only query was stopped. No distributions were deleted or converted, and no
+Windows restart was performed. Windows rendering continues. Historical Linux
+results are not evidence for this candidate, and the Linux gate remains pending.
