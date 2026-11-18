@@ -9,6 +9,7 @@ import cv2
 import numpy as np
 
 from gnm_v22_variants import read,write,linear,encode,sha,verify_selected
+from gnm_pbr_manifest import load_manifest
 
 
 def flatten(directory,recipe):
@@ -34,13 +35,11 @@ def flatten(directory,recipe):
 
 def main(a):
     if a.out.exists():raise FileExistsError(a.out)
-    master=json.loads((a.master/'manifest.json').read_text(encoding='utf-8'))
+    master=load_manifest(a.master)
     selected=verify_selected(master['source_sha256'])
     projection=json.loads(a.overlay.with_suffix('.json').read_text(encoding='utf-8'))
     if projection['source_sha256']!=master['source_sha256'] or sha(a.overlay)!=projection['overlay_sha256']:
         raise ValueError('Overlay and source identity do not match')
-    for name,entry in master['maps'].items():
-        if sha(a.master/name)!=entry['sha256']:raise ValueError('Corrupt master '+name)
     a.out.mkdir(parents=True)
     for name in master['maps']:shutil.copy2(a.master/name,a.out/name)
     recipe=dict(overlay='groom-overlay.1001.png',color='texture-only-color.1001.png',

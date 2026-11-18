@@ -111,6 +111,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_v22_clip.py`, `tools/gnm_v22_bake.py` | Evaluate pinned native motion at intermediate samples and measure interpolation error; bake the selected v22 shader channels to lighting-independent native UV maps. |
 | `tools/gnm_v22_materials.py`, `tools/gnm_v22_wrap_trial.py`, `tools/gnm_v22_variants.py` | Bind complete v22 PBR sets and corneal recipes, compare fresh native wrapping against the full character, and derive tissue-aware pigmentation sets while preserving default map bytes. |
 | `tools/gnm_pbr_manifest.py`, `tests/test_gnm_pbr.py` | Blender-independent complete PBR map validation, cache provenance and full-character versus legacy still-command regressions. |
+| `tools/gnm_v22_texture_check.py`, `tests/test_v22_texture_check.py` | Independently decode PBR PNG dimensions, 16-bit precision and tangent normal vectors; reject malformed data without treating map integrity as visual acceptance. |
 | `tools/gnm_v22_groom_projection.py`, `tools/gnm_v22_groom_overlay.py`, `tools/gnm_v22_texture_only.py` | Isolated, unqualified pigment-projection experiments for the separate texture-only target; retain the full character's original maps. |
 | `tools/gnm_skin_trial.py`, `tools/gnm_skin_fill.py`, `tools/gnm_eye_maps.py` | GNM color-transfer build with measured projection coverage and native eye tiles. |
 | `tools/gnm_texture_trial.py` | Fresh-template and timeline texture application, CPU inspection renders and scene/map/build-bound still receipts. |

@@ -340,3 +340,31 @@ check the actual Blender process and tool handle first. The continuation
 snapshot is `out/v22-master-4k-job.json`, and its recorded PID is only a hint
 until the process creation time and command are revalidated. All 103 Python
 tests passed after the vertical-image and incomplete-bake guard additions.
+
+### Master bake continuation and derivative input guards
+
+The live master process was revalidated by its creation time and exact command.
+Nine maps have been written: 4096-square skin and 2048-square eyes for color,
+roughness and specular. The normal bake is still active; `complete` remains
+false, so this is not a qualified master. Preserve this process and its frozen
+bake recipes until it terminates.
+
+Both the pigmentation-variant builder and the separate texture-only overlay
+builder now use the same strict complete-manifest validator as runtime binding.
+They reject unfinished masters before creating output directories, including
+the interval after every map exists but before final source checks finish.
+
+`gnm_v22_texture_check.py` independently decodes the delivered PNGs and checks
+their actual RGB precision, dimensions, declared color spaces and tangent-normal
+vectors. All twelve low-resolution prototype maps passed this inspection in
+`out/v22-bake-prototype-6/decoded-map-check.json`; this does not qualify the
+unfinished 4K master or prove appearance. Eleven targeted tests passed,
+including actual low-bit-depth PNGs, wrong dimensions, inverted/short normals
+and unfinished derivative inputs. The convergence renderer now permits
+256/512/1024 samples if the unchanged convergence limits require higher
+references; no delivery sample count has been selected.
+
+The full Python suite subsequently passed: **107 tests**. The immutable v22
+source still hashes to the recorded selection checksum. The existing bake
+session `55117` and process creation time were revalidated after those checks;
+normal baking remains live, so the master is still incomplete.

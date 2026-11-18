@@ -63,5 +63,5 @@ if __name__=='__main__':
     p.add_argument('--size',type=int,default=1024);p.add_argument('--frame',type=int,default=1)
     p.add_argument('--maps',type=Path)
     a=p.parse_args(sys.argv[sys.argv.index('--')+1:])
-    if any(n not in (16,24,32,48,64,96,128) for n in a.samples):p.error('Unsupported sample count')
+    if any(n not in (16,24,32,48,64,96,128,256,512,1024) for n in a.samples):p.error('Unsupported sample count')
     main(a)

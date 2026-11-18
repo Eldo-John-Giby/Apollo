@@ -12,6 +12,7 @@ from scipy.ndimage import distance_transform_edt
 
 from gnm_skin_detail import surface_positions
 from gnm_run import VARIANTS
+from gnm_pbr_manifest import load_manifest
 
 PIGMENT={'golden-hazel':(.16,.07,.010),'olive-amber':(.34,.19,-.004),
          'neutral-deep':(2.1,1.4,.025),'cool-grey':(-.035,-.012,.018)}
@@ -56,12 +57,8 @@ def write(path,rgb):
 
 def build(a):
     if a.out.exists():raise FileExistsError(a.out)
-    master=json.loads((a.master/'manifest.json').read_text(encoding='utf-8'))
+    master=load_manifest(a.master)
     expected=master['source_sha256'];selected=verify_selected(expected)
-    required={f'{role}.{tile}.png' for role in ('color','roughness','specular','normal') for tile in (1001,1002,1004)}
-    if not required.issubset(master['maps']):raise ValueError('Incomplete master texture set')
-    for name,entry in master['maps'].items():
-        if sha(a.master/name)!=entry['sha256']:raise ValueError('Corrupt master '+name)
     source=read(a.master/'color.1001.png');size=source.shape[0]
     if source.shape[1]!=size:raise ValueError('Skin atlas must be square')
     fields=surface_positions(a.template,size,('upper_lip','lower_lip'))

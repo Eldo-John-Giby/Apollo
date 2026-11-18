@@ -54,6 +54,21 @@ def test_unfinished_bake_is_rejected_even_after_all_map_files_exist(tmp_path):
         load_manifest(tmp_path)
 
 
+@pytest.mark.parametrize('builder',['variants','texture_only'])
+def test_derivatives_reject_unfinished_master_before_creating_outputs(tmp_path,builder):
+    import gnm_v22_variants
+    import gnm_v22_texture_only
+    master=tmp_path/'master';master.mkdir()
+    receipt=setup_maps(master);receipt['complete']=False
+    (master/'manifest.json').write_text(json.dumps(receipt))
+    out=tmp_path/'derived'
+    args=SimpleNamespace(master=master,out=out)
+    build=gnm_v22_variants.build if builder=='variants' else gnm_v22_texture_only.main
+    with pytest.raises(ValueError,match='final source checks'):
+        build(args)
+    assert not out.exists()
+
+
 def test_variant_cache_covers_cornea_recipe_and_shader_code(tmp_path,monkeypatch):
     receipt=setup_maps(tmp_path)
     monkeypatch.setattr(gnm_run,'ROOT',tmp_path)
