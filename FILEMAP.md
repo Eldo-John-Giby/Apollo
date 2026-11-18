@@ -102,6 +102,9 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/submission_render.py`, `tools/submission_bundle.py` | Resume CPU timeline PNG rendering with frame receipts and verify the fallback ZIP. |
 | `tools/submission_seams.py` | Repack split local UVs and check face/iris color transfer before rebinding on a fresh scene. |
 | `tools/gnm_template.py`, `tools/gnm_import.py` | Verify the pinned Google model and import its original topology and native UV layouts into Blender. |
+| `tools/gnm_v22_audit.py`, `docs/V22_SUBMISSION.md` | Authenticate immutable v22, inventory its appearance and extract the evaluated identity/reference stills; track the final integration requirements and evidence gates. |
+| `apollo_core/identity.py`, `tests/test_identity.py` | Surface-local identity rotation and triangle anchor math, with rigid-motion, neutral-reset and protected-eye regressions. |
+| `tools/gnm_v22_integrate.py`, `tools/gnm_surface_attachments.py`, `tools/gnm_v22_verify.py` | Experimental v22 motion derivation, packed surface-local groom/tear anchors, and separate reopened native/derived geometry checks. |
 | `tools/gnm_skin_trial.py`, `tools/gnm_skin_fill.py`, `tools/gnm_eye_maps.py` | GNM color-transfer build with measured projection coverage and native eye tiles. |
 | `tools/gnm_texture_trial.py` | Fresh-template and timeline texture application, CPU inspection renders and scene/map/build-bound still receipts. |
 | `tools/gnm_skin_detail.py` | Bake reproducible authored brow fibers into the native skin atlas using surface-to-UV correspondence, with source and output hash receipts. |
