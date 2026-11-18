@@ -125,3 +125,29 @@ interpolation by at most `7.450580596923828e-7` m, passing the unchanged `1e-6` 
 threshold. Receipt: `out/v22-native-dense-32/generate-motion.json`. The integrated
 dense scene is not yet built or qualified. The builder authenticates the receipt
 and rejects dense clips that failed this gate.
+
+The authenticated frontal reference is now `out/v22-audit/front.png`; the original
+angled camera image is `saved-camera.png`. Profile, three-quarter and eye-detail
+images are also recorded in the regenerated audit. All have been inspected.
+
+The low-resolution bake/wrapping prototype now produces twelve 16-bit maps:
+base color, roughness, specular and tangent normal for skin and both eyes. Its
+manifest also preserves the selected subsurface method and corneal shader
+recipe. Empty eye maps and opaque default target corneas were caught and fixed
+before further qualification. Material slots must be replaced in place: clearing
+the slot list silently resets polygon regions. The bake now asserts region
+preservation before every channel pass.
+
+`out/v22-wrap-prototype-4` contains matched source/full-baked/fresh-native stills.
+The full prototype looks close at this resolution; fresh-target eyes now display
+with the selected corneal recipe. The unenhanced target retains its native eye
+openings and has no groom or appearance geometry. Its faint portable brows and
+flat scalp remain visual limitations to address or explicitly review. No
+texture-only realism gate has passed. A 4K skin / 2K eye bake is running.
+
+Normal serialization was checked independently through OpenCV: no inverted blue
+channel pixels in covered regions and 95th-percentile unit-length error below
+`3.6e-5` on the prototype. This does not establish final-resolution quality or
+seam continuity. Five prototype variant sets are also generated, with the default
+maps copied byte-for-byte; palette review and final-resolution generation remain
+pending.
