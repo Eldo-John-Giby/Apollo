@@ -12,6 +12,8 @@ VARIANTS = ('rose-brown', 'golden-hazel', 'olive-amber', 'neutral-deep', 'cool-g
 
 
 def surface_files(maps):
+    from gnm_pbr_manifest import is_pbr, files
+    if is_pbr(maps):return files(maps)
     paths = {name: Path(maps) / f'{name}.1001.png' for name in ('roughness', 'height')}
     present = [p.exists() for p in paths.values()]
     if any(present) and not all(present):
@@ -22,8 +24,10 @@ def surface_files(maps):
 def variant_identity(scene, maps, layout):
     inputs = {str(tile): Path(maps) / f'color.{tile}.png' for tile in (1001, 1002, 1004)}
     inputs.update(surface_files(maps))
-    recipe = b''.join((ROOT / 'tools' / name).read_bytes()
-                      for name in ('gnm_materials.py', 'gnm_motion_variant.py', 'gnm_portable.py'))
+    recipes=['gnm_materials.py','gnm_motion_variant.py','gnm_portable.py']
+    from gnm_pbr_manifest import is_pbr
+    if is_pbr(maps):recipes.extend(('gnm_v22_materials.py','gnm_pbr_manifest.py','gnm_v22_audit.py'))
+    recipe = b''.join((ROOT / 'tools' / name).read_bytes() for name in recipes)
     return {'source_sha256': hashlib.sha256(Path(scene).read_bytes()).hexdigest(),
             'layout': layout, 'maps': {role: hashlib.sha256(path.read_bytes()).hexdigest()
                                      for role, path in inputs.items()},
@@ -44,7 +48,10 @@ def main():
     if args.mode == 'still':
         if args.first is not None or args.last is not None:
             parser.error('Frame limits apply only to motion')
-        scene = root / 'model/neutral.blend'
+        # New submissions provide the full approved character. Retain the
+        # neutral-template fallback for existing technical archives.
+        scene = root / 'model/character.blend'
+        if not scene.is_file():scene=root/'model/neutral.blend'
         tool = 'gnm_texture_trial.py'
         flags = ['--maps', str(root / 'textures' / args.variant), '--layout', args.layout,
                  '--out', str(args.out.resolve()), '--size', '1024', '--samples', '32']

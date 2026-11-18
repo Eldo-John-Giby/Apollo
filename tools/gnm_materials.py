@@ -4,6 +4,11 @@ from gnm_run import surface_files
 
 
 def bind_surface(head, maps, layout):
+    from gnm_pbr_manifest import is_pbr
+    if is_pbr(maps):
+        from gnm_v22_materials import bind
+        bind(head,maps,layout,full_character=bool(bpy.context.scene.get('apollo_identity_source_sha256')))
+        return
     paths = surface_files(maps)
     if not paths:
         return

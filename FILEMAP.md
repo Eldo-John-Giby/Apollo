@@ -109,6 +109,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_v22_image_check.py`, `tests/test_v22_image_check.py` | Fixed motion-framing image-only pupil/direction checks with neutral iris-pattern confirmation; test nostril distractors and unilateral pupil exposure during closure. |
 | `tools/gnm_v22_clip.py`, `tools/gnm_v22_bake.py` | Evaluate pinned native motion at intermediate samples and measure interpolation error; bake the selected v22 shader channels to lighting-independent native UV maps. |
 | `tools/gnm_v22_materials.py`, `tools/gnm_v22_wrap_trial.py`, `tools/gnm_v22_variants.py` | Bind complete v22 PBR sets and corneal recipes, compare fresh native wrapping against the full character, and derive tissue-aware pigmentation sets while preserving default map bytes. |
+| `tools/gnm_pbr_manifest.py`, `tests/test_gnm_pbr.py` | Blender-independent complete PBR map validation, cache provenance and full-character versus legacy still-command regressions. |
 | `tools/gnm_v22_groom_projection.py`, `tools/gnm_v22_groom_overlay.py`, `tools/gnm_v22_texture_only.py` | Isolated, unqualified pigment-projection experiments for the separate texture-only target; retain the full character's original maps. |
 | `tools/gnm_skin_trial.py`, `tools/gnm_skin_fill.py`, `tools/gnm_eye_maps.py` | GNM color-transfer build with measured projection coverage and native eye tiles. |
 | `tools/gnm_texture_trial.py` | Fresh-template and timeline texture application, CPU inspection renders and scene/map/build-bound still receipts. |
@@ -148,7 +149,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_blink_polish.py` | Build an isolated blink appearance review with matched animated upper lashes, slightly wider open lids, and localized matte skin. |
 | `apollo_core/submission_timing.py` | Shared deterministic motion timing for the MakeHuman and GNM submission paths. |
 | `tools/gnm_bundle.py`, `tools/gnm_verify.py`, `tools/gnm_rehearse.py` | Verify reopened GNM timelines and package the technical archive from authenticated frame and texture outputs. |
-| `tools/gnm_run.py`, `tools/gnm_motion_variant.py` | Run stills or motion with any texture variant and UV layout; pack hash-bound variant timelines for resumable rendering. |
+| `tools/gnm_run.py`, `tools/gnm_motion_variant.py` | Prefer the full character for stills when supplied, retain legacy archives, and pack hash-bound variant timelines with complete PBR recipe identities for resumable rendering. |
 | `tools/gnm_review.py` | Prepare anonymous, receipt-bound direction and five-variant appearance comparisons with a separate assessor key for deferred teammate review. |
 | `tools/gnm_comparison.py` | Authenticate the published baseline archive and candidate still receipts, then create matched front/side panels and native eye/skin crops for every variant. |
 | `docs/GNM_INTEGRATION.md` | Pinned GNM setup, trial results and qualification status. |

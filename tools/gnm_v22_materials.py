@@ -1,10 +1,9 @@
 """Strict UV-only binding for complete authenticated v22 PBR texture sets."""
-import hashlib
-import json
 from pathlib import Path
 
 import bpy
 from gnm_v22_audit import SELECTED
+from gnm_pbr_manifest import load_manifest as checked_manifest
 
 ROLES=('color','roughness','specular','normal')
 TILES=(1001,1002,1004)
@@ -47,15 +46,9 @@ def bind_corneas(head,recipes):
 
 def load_manifest(maps):
     maps=Path(maps)
-    receipt=json.loads((maps/'manifest.json').read_text(encoding='utf-8'))
+    receipt=checked_manifest(maps)
     if receipt['source_sha256']!=SELECTED:
         raise ValueError('Texture set is not derived from the approved v22')
-    required={f'{role}.{tile}.png' for tile in TILES for role in ROLES}
-    if not required.issubset(receipt['maps']):raise ValueError('Incomplete PBR manifest')
-    for name,entry in receipt['maps'].items():
-        if Path(name).name!=name:raise ValueError('Invalid map filename')
-        digest=hashlib.sha256((maps/name).read_bytes()).hexdigest()
-        if entry['sha256']!=digest:raise ValueError('Texture checksum mismatch '+name)
     return receipt
 
 

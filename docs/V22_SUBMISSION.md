@@ -210,3 +210,63 @@ dense scene, with explicit 0.25 mm root-distance and 30 degrees/frame orientatio
 rate limits. This is additional evidence; it must not be described as passed
 until its final report says so. The 32-substep native interpolation receipt does
 not by itself prove derived-character playback between integer frames.
+
+The integer/half-frame audit completed successfully:
+`out/v22-integrated-dense/generate-motion/half-frame-check.json` checks 383
+sample times across the full clip, including closure/reopening and reset.
+Maximum native error is `3.64e-12` m, derived error `1.82e-12` m, eye error zero,
+root distance 0.1771 mm and orientation rate 28.99 degrees/frame. The final report
+has no attachment-limit errors. This is stronger playback evidence than the
+integer-only report, but does not replace independent visual review, all required
+PNG sequences, cross-platform qualification or the final frozen rebuild.
+
+Both dedicated Left and Right dense timelines have also been built and reopened
+offline. Each passes 383 integer/half-frame samples with native eyes unchanged,
+selected head shaders and texture payloads intact, maximum root distance
+0.1771 mm and maximum orientation rate 28.65 degrees/frame. Their evidence is
+under `out/v22-integrated-dense/{left,right}/half-frame-check.json`. The original
+v22 file remains byte-identical. These are experimental full-character scenes;
+they are not promoted release assets.
+
+The rendered Generate Motion direction check in
+`out/v22-main-direction-review/image-check.json` passes both binocular directions:
+left shifts are -4.57/-4.80 px, right shifts +4.32/+2.62 px at 640 px image width.
+All neutral, closure, reopening and direction stills have been inspected and
+collated in `out/v22-main-character-review/full-character-sheet.png`. This is a
+labeled development sheet, not the blind independent review packet. The user
+has been asked to judge whether this integrated full character retains v22;
+no response or acceptance has yet been recorded.
+
+The runtime now recognizes complete manifest-bound PBR sets, including both eye
+normal/specular maps and the corneal recipe. Corrupt/incomplete maps fail before
+rendering; cache identities include all map bytes, manifests and binder code.
+`still` prefers `model/character.blend` when provided, retaining the neutral-model
+fallback for existing archives. No public command flag or variant identifier
+changed. The full-character PBR still path preserves v22 lighting and uses its
+frontal 85 mm judging framing; texture-only targets retain their separate rig.
+
+All 101 Python tests passed, including complete-set corruption, missing skin
+normal, cache-recipe changes and full-character/legacy CLI selection tests.
+A development-only standalone trial in `out/v22 runtime trial` contains copied
+runner files, packed full-character scenes and low-resolution prototype PBR
+sets. Running its existing `still` command from outside the repository produced
+a 1024 px image with a source/map-bound receipt, proving full-character selection
+and paths-with-spaces operation. The generic lighting initially over-brightened
+the hair, so a second render is checking preservation of v22's lighting. This
+trial is not a release archive, final-resolution map set or clean-machine
+qualification. Cached PBR motion rendering still needs an actual runtime test.
+
+The second standalone still completed and was inspected. It uses the full
+character, the selected lighting and a frontal 85 mm camera, at 1024 px and 32
+samples. The scene hash in `renders/v22-lighting.render.json` matches the staged
+full-character file. Its material maps are still low-resolution prototypes, so
+the softened detail must not be treated as the final visual result. The focused
+PBR/legacy/image regression set passed all 13 checks after this lighting change.
+
+Next engineering work: choose render samples through convergence evidence;
+finish the interrupted 4K/2K texture set and qualify all five variants in both
+UV layouts; run an actual alternate-variant cached-motion render; produce the
+complete PNG sequences; prepare and collect independent review; freeze/rebuild,
+reproduce and package the accepted result. No new release or submission has
+been created. README/quickstart updates must describe the finally verified
+package, not these development staging directories.

@@ -34,7 +34,8 @@ def prepare(args):
         print(f'Verified cached variant timeline: {target}')
         return
     head = bpy.context.scene.objects['GNM Head']
-    for tile in tiles:
+    from gnm_pbr_manifest import is_pbr
+    for tile in (() if is_pbr(args.maps) else tiles):
         material = head.data.materials[tile - 1001]
         nodes, links = material.node_tree.nodes, material.node_tree.links
         shader = nodes.get('Principled BSDF')

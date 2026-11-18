@@ -19,6 +19,10 @@ def render_receipt(output, args, scene):
     maps.update(surface_files(args.maps))
     recipe = b''.join((Path(__file__).parent / name).read_bytes()
                       for name in ('gnm_texture_trial.py', 'gnm_materials.py'))
+    from gnm_pbr_manifest import is_pbr
+    if is_pbr(args.maps):
+        recipe+=b''.join((Path(__file__).parent/name).read_bytes() for name in
+                         ('gnm_v22_materials.py','gnm_pbr_manifest.py','gnm_v22_audit.py'))
     camera = scene.camera
     report = {
         'scene_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
@@ -46,7 +50,9 @@ def aim(obj, position, target):
 
 def render(args):
     head = bpy.context.scene.objects['GNM Head']
-    for tile in range(1001, 1008):
+    from gnm_pbr_manifest import is_pbr
+    pbr=is_pbr(args.maps)
+    for tile in (() if pbr else range(1001, 1008)):
         material = head.data.materials[tile - 1001]
         material.use_nodes = True
         nodes = material.node_tree.nodes
@@ -93,35 +99,51 @@ def render(args):
             shader.inputs['Base Color'].default_value = (.30, .12, .10, 1.)
     bind_surface(head, args.maps, args.layout)
     scene = bpy.context.scene
+    full_character=pbr and bool(scene.get('apollo_identity_source_sha256'))
+    if pbr and not full_character:
+        # The new character carries studio lights. This tool uses a separate,
+        # fixed judging rig, so inherited lights must not add a second exposure.
+        for light in [obj for obj in scene.objects if obj.type=='LIGHT']:
+            light.hide_render=True
     camera = bpy.data.objects.new('GNM Camera', bpy.data.cameras.new('GNM Camera'))
     scene.collection.objects.link(camera)
-    aim(camera, (.16 if args.angle else 0, -.58, .015), (0, 0, -.045))
-    camera.data.lens = 115 if args.eye_crop else 64
+    if full_character:
+        aim(camera,(.4 if args.angle else 0,-.82,.03),(0,0,-.025))
+        camera.data.lens=85
+    else:
+        aim(camera, (.16 if args.angle else 0, -.58, .015), (0, 0, -.045))
+        camera.data.lens=64
     if args.eye_crop:
-        aim(camera, camera.location.copy(), (0, 0, -.012))
+        camera.data.lens=115
+        aim(camera,(0,-.55,.018) if full_character else camera.location.copy(), (0,0,-.010) if full_character else (0,0,-.012))
     if args.lens is not None:
         camera.data.lens = args.lens
     if args.target is not None:
         aim(camera, camera.location.copy(), args.target)
     scene.camera = camera
-    for name, position, power, size in [
+    judging_lights=[
         ('Key', (.22 if args.side_light else -.13, -.29, .22), 10, .20),
         ('Fill', (.20, -.33, .04), 4, .24),
         ('Rim', (-.14, .10, .18), 8, .16),
-    ]:
+    ]
+    for name, position, power, size in (() if full_character else judging_lights):
         lamp = bpy.data.lights.new(name, 'AREA')
         lamp.energy, lamp.size = power, size
         light = bpy.data.objects.new(name, lamp)
         scene.collection.objects.link(light)
         aim(light, position, (0, 0, -.035))
-    scene.world = bpy.data.worlds.new('GNM World')
-    scene.world.color = (.07, .07, .07)
+    if full_character and args.side_light:
+        aim(scene.objects['Beauty key'],(.22,-.29,.22),(0,0,-.035))
+    if not full_character:
+        scene.world = bpy.data.worlds.new('GNM World')
+        scene.world.color = (.07, .07, .07)
     scene.render.engine = 'CYCLES'
     scene.cycles.device = 'CPU'
     scene.cycles.samples = args.samples
     scene.cycles.use_denoising = True
-    scene.view_settings.view_transform = 'AgX'
-    scene.view_settings.exposure = -.85
+    if not full_character:
+        scene.view_settings.view_transform = 'AgX'
+        scene.view_settings.exposure = -.85
     scene.render.resolution_x = scene.render.resolution_y = args.size
     scene.render.resolution_percentage = 100
     scene.render.image_settings.file_format = 'PNG'
