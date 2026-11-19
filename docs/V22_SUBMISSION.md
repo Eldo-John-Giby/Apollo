@@ -833,3 +833,20 @@ one, p95 zero, and nineteen changed pixels at 768px. Evidence is
 visually inspected and retains the restored scalp/brows. The other twenty-eight
 matrix cases remain pending at this checkpoint; no broad five-set UV pass is
 claimed from the single pair.
+
+The default's three front/angle/oblique pairs subsequently completed: maximum
+absolute RGB difference one in each pair, p95 zero, with 19/28/30 changed pixels
+respectively. See `out/v22-native-default-completed-view-checks.json`. Its angle
+UDIM image was inspected; no flat scalp cap or obvious gross wrapping break is
+visible at this development scale. Other variants are now rendering.
+
+Source `fb731e9` passes **133 tests on clean offline Linux** in the same pinned
+qualification image, with code-only extraction into a path containing spaces
+and execution from `/tmp`. Evidence: `out/v22-linux-code-fb731e9.log`.
+
+Execution session `9771` waits on the verified matrix-controller process handle
+(PID 15804, creation UTC 2026-11-19 12:27:19.7662813). Only a successful completed
+matrix gate permits the next single Blender experiment: frame 112 at 512/1024
+samples, followed by its independent convergence analysis. This reopened-lid,
+upward-gaze pose has not yet rendered and supplies no acceptance evidence yet.
+Its frozen source scene, repaired maps, worker and judging policy are unchanged.
