@@ -5,13 +5,16 @@ Navigation index. Inspect implementation before changing it.
 ## Status and flow
 
 Apollo implements synthetic binocular gaze for Samsung PRISM-XR Track 01.
-The GNM submission path is qualified on pinned public Head v3: five texture
-sets, three packed timelines, 576 frames and clean offline reproduction.
-The detailed candidate adds 4K scan-derived skin, portable surface maps,
-improved native lid contact and qualified interruption recovery. Its exact
-receipt is under `milestones/gnm-score-final-candidate`.
-Start with `docs/GNM_QUICKSTART.md`; build details are in `docs/GNM_INTEGRATION.md`.
-The evaluator asset match and deferred human review remain pending.
+The active v22 integration retains the approved face and groom, five 4K/2K PBR
+sets and three packed timelines. Start with `docs/V22_QUICKSTART.md`; current
+evidence and incomplete gates are in `docs/V22_SUBMISSION.md`. Independent
+review, final frozen regeneration and final release qualification remain pending.
+The earlier GNM fallback is qualified on pinned public Head v3: five texture
+sets, three timelines, 576 frames and clean offline reproduction. Its detailed
+scan/lid/recovery receipt is under `milestones/gnm-score-final-candidate`;
+`docs/GNM_QUICKSTART.md` describes that earlier release. Historical results
+do not qualify v22. Build details are in `docs/GNM_INTEGRATION.md`.
+The organizer supplied no evaluator asset; that compatibility remains untested.
 The protected radial-iris development freeze remains available. The competition
 upgrade adds a qualified warm-iris/lid/lash look, independent geometry audits,
 a complete seeded 256-image dataset, optional controls and evidence media.
