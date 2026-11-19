@@ -466,3 +466,44 @@ while the existing normal bake is live. Experimental integrated scenes still
 inherit 1024 samples; final packaging must apply the measured delivery preset
 before using this path. No sample count is qualified by this code change.
 The full suite before this change passed 118 tests.
+
+### Completed master, isolated normal artifact and Docker recovery
+
+The 4K/2K master bake completed with exit code 0 and final source/recipe checks.
+All twelve maps exist in `out/v22-master-4k`; preserve this raw bake unchanged.
+The queued follow-up correctly stopped at independent map validation because
+the skin normal atlas contained sixteen negative tangent-Z pixels. Both eye
+normals passed. The skin normal p95 unit-length error was approximately
+0.0000341, with the sixteen inverted pixels confined to four bilateral
+mouth-corner faces (4724, 4726, 10720 and 10722).
+
+An isolated 256-square crop retained the original shader, its source UV reads
+and native geometry while uniformly scaling the target UVs to inspect the left
+mouth corner. The full shader reproduced eight inverted pixels; disconnecting
+its bump stack produced zero, with minimum tangent Z approximately 0.981.
+Reports are `out/v22-master-normal-diagnosis.json` and
+`out/v22-normal-crop/report.json`. This identifies a source-shading artifact
+in that tested crop, rather than a transfer-only error. The immutable scene
+was not saved or changed.
+
+`gnm_v22_normal_repair.py` derives a separate copy using a 5x5 valid-neighbor
+component median and unit normalization only at negative tangent-Z texels.
+It rejects more than 64 affected pixels or an affected fraction over 0.00001;
+these limits bound the permitted repair, not the independent validation gate.
+The repaired copy in `out/v22-master-4k-repaired` changes exactly sixteen skin
+normal pixels (approximately 0.0000954% of the atlas). Every other encoded
+pixel and all eleven other map files are unchanged. The manifest records every
+before/after pixel and both source hashes. Two targeted tests pass. All twelve
+repaired maps pass the unchanged independent encoding/normal check; this does
+not confer visual acceptance. Matched full-character and fresh-target stills
+are now rendering in `out/v22-master-wrap-repaired-udim`.
+
+After the user opened Docker Desktop, its Linux engine became responsive.
+The existing Apollo base image was extended with the documented SciPy 1.15.3
+build dependency, preserving NumPy 1.26.4 and OpenCV 4.5.5. A committed source-code
+archive of `f13a3c0` was extracted inside the container under a path containing
+spaces. All **118 tests passed** from a different working directory with
+networking disabled. The log is `out/v22-linux-code-f13a3c0.log`. This qualifies
+that source-code test run only: it excludes the two new normal-repair tests,
+Blender runtime checks and the final delivery archive. Final clean-package
+Windows/Linux reproduction remains pending.
