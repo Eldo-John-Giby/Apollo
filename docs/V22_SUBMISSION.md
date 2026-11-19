@@ -872,3 +872,28 @@ for each saved file. Four 1024px/512-sample cardinal stills follow on the saved
 Generate Motion candidate. Every Blender subprocess is serial and its exit is
 checked. No queued stage is counted as completed evidence. Final visual
 acceptance, frozen regeneration and release gates remain outstanding.
+
+### Development runtime staging
+
+`gnm_v22_stage.py` stages the explicit runtime Python dependency closure, five
+complete sets, three packed scenes, the default character and fresh native
+template. It requires current scene-bound preparation, all 383 integer/half-frame
+checks, the current verifier recipes, eighteen-component appearance evidence and
+matching map manifests/selected identities. Every copied payload is rehashed.
+Its manifest labels the output as a development rehearsal, excluding any claim
+about final sequences, licenses, human approval or release completeness.
+
+The queued prepare driver now uses the default set containing native-only extras,
+after checking that every full-character map still matches the convergence master.
+Thus full-character and texture-only runtime bindings share one manifest without
+changing the active full-character maps. Targeted tests reject altered scenes and
+narrow motion evidence, and launch the copied public CLI with isolated Python path
+handling from outside its project. The complete Windows suite passes **135 tests**
+(`out/v22-runtime-stage-tests.xml`). Actual Blender runtime rehearsals are pending.
+
+Session `60776` waits on the verified review controller (PID 23852, creation UTC
+2026-11-19 12:37:53.3309469). After completed packed checks/cardinal renders, it
+runs the independent four-direction/closure/reopening image gate and stages only
+on success, into `out/v22 runtime rehearsal`. A failure stops without counting
+the stage as complete. The new stage directory does not replace prior trials or
+the qualified fallback.
