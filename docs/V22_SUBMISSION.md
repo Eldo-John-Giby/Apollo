@@ -850,3 +850,25 @@ matrix gate permits the next single Blender experiment: frame 112 at 512/1024
 samples, followed by its independent convergence analysis. This reopened-lid,
 upward-gaze pose has not yet rendered and supplies no acceptance evidence yet.
 Its frozen source scene, repaired maps, worker and judging policy are unchanged.
+
+### Packed PBR review preparation queue
+
+The still-review worker now supports `--maps` and `--layout`: authenticated
+original-shader inputs receive the explicit full-character PBR binding; saved
+PBR inputs must already validate their packed bindings. The worker applies the
+shared judging policy, strips variable/private PNG metadata before hashing and
+records source, audit, map, recipe and Blender-build identities. Inputs/recipes
+are rechecked after rendering. The source scene is never saved. Syntax checks
+and the existing **133-test** Windows suite pass; actual new Blender execution
+is queued and must pass before claiming this worker qualified.
+
+Session `61748` waits on the exact reopened-experiment controller handle (PID
+16260, creation UTC 2026-11-19 12:32:53.3739879). After that controller exits,
+`out/v22_prepare_review_driver.py` requires successful matrix evidence and
+512-sample passes for neutral, closure and reopening before packing all three
+development timelines under `out/v22-review-pbr-512`. It runs reopened checks at
+all 383 integer/half-frame times and whole-character neutral appearance checks
+for each saved file. Four 1024px/512-sample cardinal stills follow on the saved
+Generate Motion candidate. Every Blender subprocess is serial and its exit is
+checked. No queued stage is counted as completed evidence. Final visual
+acceptance, frozen regeneration and release gates remain outstanding.
