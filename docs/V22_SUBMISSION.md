@@ -1065,3 +1065,19 @@ setting is not a claim that every variant/view has independently passed final
 detail convergence. The controller scripts pass syntax compilation. This work
 prepares actual appearance inputs for the blinded review packet without
 inferring ratings, selecting the revised palette, or approving the final release.
+
+### Completed reopening convergence
+
+The recovered frame-112 experiment completed successfully. All four 512-sample
+crops pass against 1024 samples under the unchanged limits: mean absolute RGB
+errors for eyes/lips/skin/hair are approximately 0.783/0.946/0.316/0.877, with p95
+3/3/1/3 and detail ratios 0.998/1.001/0.987/0.971. The comparison sheet was
+inspected without obvious added smearing at the lower count. Evidence:
+`out/v22-convergence-pbr-reopened-112-analysis`.
+
+`out/v22-three-pose-render-profile.json` binds the three completed analysis files
+and their authenticated source receipts for frames 1, 107 and 112. It records
+512 as a development judging profile and explicitly does not mark a final
+delivery preset or qualify untested variants/poses. The prepare controller
+advanced to the corrected neutral-deep view/layout renders; no additional
+Blender process was launched in parallel. Identity approval remains pending.
