@@ -53,7 +53,7 @@ reviewers own visual acceptance; the team owns submission actions.
 | Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | `out/v22-three-pose-render-profile.json` and its analyses | PARTIAL: 512 passes default neutral, closure and reopened/upward pose; other variants/views/frozen build pending |
 | Three motion modes (20) | Engineering | Left/right/generate-motion; 192 frames each at 24 fps; viewer-screen convention | `out/v22-review-pbr-512/*/expression.blend` | PARTIAL: three packed timelines checked; final 576 numbered PNGs pending |
 | Kinematic checks (20) | Engineering | Binocular fixation, eye integrity, closure/reopening, smooth lids/expressions | three saved-scene half-frame checks; native interpolation receipts | PARTIAL: geometry/attachment checks pass at 383 times per mode; rendered full-motion and human gates pending |
-| Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | `out/v22-pbr-512-direction-and-blink-check.json`; preview checks | PARTIAL: full-detail Generate Motion cardinal/closure/reopening pass; Left timing-preview one-eye diagnostic fails; full-detail Left follow-up queued |
+| Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | `out/v22-pbr-512-direction-and-blink-check.json`; Left full-detail direction check; preview checks | PARTIAL: full-detail Generate Motion cardinal/closure/reopening and Left extreme direction pass; Left full-detail closure/reopening pending; original preview failure retained |
 | Exact reset | Engineering | Deterministic neutral reset and same-build reproduction | geometry/pixel/hash comparisons | Pending |
 | Offline playback (20) | Engineering | Reopened packed scenes without paths, MCP, MPFB or GNM authoring environment | three reopened PNG playback checks; clean Windows/Linux runtime reports | PARTIAL: all three development playback scenes reopened; clean offline development archive renders pass both platforms; final archive pending |
 | Stable CLI (20) | Engineering | still/left/right/generate-motion; variant/layout/output/frame options retained | source tests, extracted stills and runtime rehearsals | PARTIAL: contract retained; default Generate Motion and all five stills exercised; complete final-mode qualification pending |
@@ -1627,3 +1627,13 @@ Clean offline Linux source extraction at `084bc58` also passes all 166 tests
 the receipt-verified frame 26 and then runs the unchanged image oracle against
 its own full-detail neutral. This partial early check excludes closure/reopening
 and does not replace the full follow-up report. Frame 26 is still rendering.
+
+The early Left full-detail direction check subsequently passed:
+`out/v22-left-full-detail-followup/direction-only-image-check.json`. At 1024px/
+512 samples, both pupils move screen-left by 5.9908 and 7.2536 pixels; neutral-
+reference iris correlations are 0.8784 and 0.8287. The existing 0.8 threshold
+and checker recipe are unchanged. The completed extreme render was visually
+inspected. This is a pass for the neutral/extreme pair only: frame 103 closure
+is now rendering, reopening remains pending, and human direction/naturalness
+acceptance remains separate. The original 512px timing-preview failure is kept
+as evidence of its limited diagnostic reliability; it has not been relabeled.
