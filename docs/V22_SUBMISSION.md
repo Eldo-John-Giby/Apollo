@@ -1048,3 +1048,20 @@ checks pass, alongside the packed scene and image gates. This does not select
 the palette as visually accepted or freeze it for final delivery. Attribution
 is being regenerated against the assembled trial manifests rather than reusing
 the prior neutral-deep hash. Owner identity approval remains pending.
+
+### Five-set appearance render queue
+
+The prepare driver now continues after the clean Windows runtime rehearsal with
+`out/v22_render_review_appearance.py`. It invokes the public `still` command
+from the extracted development runtime for each full-character variant, keeping
+the saved 512-sample preset. Each result must be 1024px, bound to the extracted
+character scene, and match its image receipt. Five native-only 1024px/512-sample
+front renders follow serially using the corresponding extracted texture sets,
+fresh native target and pinned template. Both output types retain source-bound
+receipts under `out/v22-five-set-appearance-review`.
+
+These ten stills are queued, not completed. Their fixed development sample
+setting is not a claim that every variant/view has independently passed final
+detail convergence. The controller scripts pass syntax compilation. This work
+prepares actual appearance inputs for the blinded review packet without
+inferring ratings, selecting the revised palette, or approving the final release.
