@@ -1012,3 +1012,21 @@ does not replace full 576-frame rendering/recovery, alternate-cache checks or
 final Windows/Linux archive qualification. The recovered frame-112 renderer is
 confirmed live as PID 17212 (creation UTC 2026-11-19 13:42:46.4742995), with
 advancing sample output; no second Blender process was launched.
+
+### Baked reopening visibility and owner identity review
+
+The recovered 512-sample frame 112 completed. Independent image checks detect
+both pupils after reopening and neither at peak frame-107 closure; neutral iris
+template correlations after reopening are approximately 0.848 and 0.940, above
+the unchanged 0.8 threshold. The reopened image was also visually inspected.
+Evidence: `out/v22-pbr-512-closure-reopening-image-check.json`. The 1024 reference
+continues, so this visibility pass does not yet establish reopening convergence.
+
+`out/v22-owner-identity-review` contains a hash-bound comparison of the exact
+approved v22 portrait and the integrated neutral/closed/reopened PBR images.
+The approved reference checksum matches `final-selection.json`. Lighting and
+framing differ between the original portrait and motion judging camera; this
+sheet is for identity review, not pixel equivalence. The user was asked whether
+the integrated face and groom retain the approved identity. Approval remains
+unset pending their explicit reply. This is separate from independent blind
+review and final submission acceptance.
