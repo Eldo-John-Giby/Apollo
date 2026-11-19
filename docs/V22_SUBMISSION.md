@@ -1157,3 +1157,21 @@ ten full/native variant cases, the two references, four cardinal cases and three
 packed motion scenes. The planned output is `out/v22-independent-review-packet`.
 Response fields remain blank, and the answer key is kept outside its reviewer
 ZIP. Syntax compilation passes. Packet creation and human review remain pending.
+
+### Alternate-cache rehearsal coverage added
+
+The release-checklist audit identified that the queued runtime checks covered
+the default variant but not a new alternate motion cache. After its Linux run
+returns and the container has exited, the not-yet-started Linux controller now
+invokes `out/v22_alternate_cache_rehearsal.py` serially on Windows. It uses the
+extracted public CLI for olive-amber/legacy Generate Motion frames 1–3, then
+requires cache reuse without rewriting the cached scene or valid images. It
+temporarily changes the cache receipt's scene hash, requires rejection, restores
+the original receipt bytes in a finally block, and checks that the source scene
+and all valid frames are unchanged. This avoids relying solely on a unit test
+or the older development cache.
+
+Both helper scripts pass syntax compilation. The actual alternate-cache run is
+pending behind the existing review/Windows/Linux sequence. Its scope is three
+held frames; final alternate blink/gaze samples and final release validation
+remain outstanding. No second Blender process was started during this audit.
