@@ -766,3 +766,23 @@ render or changed input stops the matrix without counting remaining cases.
 New wrap receipts identify the actual Blender version/build. The matrix checker
 requires the same build and judging conditions across both layouts and all five
 variants. The queued matrix is not yet evidence of completed rendering.
+
+The baked PBR 512-sample frame-107 closure now passes the independent image-only
+gate against the matching neutral image: both pupils are detected in neutral
+and neither remains detectable at closure. Evidence:
+`out/v22-pbr-512-closure-image-check.json`. This covers this closure frame only;
+reopening, directional poses and full final sequences remain separate gates.
+
+Committed source `1fe7428` passes **131 tests on Linux** with networking disabled,
+two CPUs and 3 GiB, clean extraction to `/tmp/clean path/Apollo`, and execution
+from `/tmp`. See `out/v22-linux-code-1fe7428.log` and its hash-bound JSON receipt.
+The 378,611-byte archive includes the code and test dependencies listed in that
+receipt. A full historical source-asset archive was first attempted, but stopped
+explicitly after observed slow bind-mount extraction; it has no qualification
+result. Its log remains `out/v22-linux-full-source-extraction-attempt.log`.
+Neither source test substitutes for final Windows/Linux delivery-archive tests.
+
+Integer pose sequences currently contain 13 unique poses for Left, 13 for Right,
+and 39 for Generate Motion. This supports planning exact hold reuse while still
+delivering all 576 numbered PNGs; none of those final sequence renders is counted
+as complete from this metadata alone.
