@@ -1110,3 +1110,20 @@ and its eighteen-component whole-character neutral appearance check.
 `appearance-check.json` records the separate neutral comparison. Right-scene
 preparation has started. These results validate the saved development PBR Left
 timeline; they do not qualify unrendered full sequences or other modes yet.
+
+The saved Right PBR timeline also passed all 383 integer/half-frame geometry,
+attachment and resource checks and its eighteen-component neutral appearance
+check (`out/v22-review-pbr-512/right`). Generate Motion preparation has started.
+
+An actual partial Linux ZIP rehearsal is queued in session `44176`, waiting on
+the verified live review controller PID 15840, whose command runs
+`out/v22_prepare_review_driver.py`. After the Windows sequence exits, the watcher
+requires its successful clean-archive rehearsal report, then invokes
+`out/v22_linux_runtime_rehearsal.py`. The Linux script uses the immutable local
+qualification-image ID with networking disabled, four CPUs and 6 GiB. Only the
+development ZIP and an evidence output directory are mounted; it extracts to
+`/tmp/clean path/Apollo`, rechecks all manifest payloads, and invokes the extracted
+public CLI from `/tmp` for three held frames. It checks output receipt hashes
+and records the image/archive identities. Syntax compilation passes, but this
+rehearsal has not executed yet. Full sequence, alternate variant, cross-platform
+image comparison and final archive qualification remain separate requirements.
