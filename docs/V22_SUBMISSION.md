@@ -1345,3 +1345,19 @@ three held frames on the development archive, not the final full delivery.
 The controller advanced to full/native appearance renders, then will produce
 timing previews and the blind packet; Linux runtime and alternate-cache checks
 follow serially. Those later stages are not yet passed.
+
+### Appearance review progress after pause/resume
+
+On resuming the goal, the appearance controller and its Blender child were
+confirmed live. Rose-brown and golden-hazel completed both full-character and
+fresh native front renders at 1024px/512 samples. Their receipts were checked
+against the extracted runtime character hash, current per-variant map-manifest
+hashes, actual image hashes and identical pinned Blender build `5afeabba6097`.
+The partial evidence summary is `out/v22-completed-appearance-pairs.json`.
+Both full-character images were inspected and retain the approved face/groom.
+This is development inspection, not independent visual acceptance.
+
+Olive-amber's full render completed and its native render is now running. The
+remaining pairs, PNG timing previews, blind packet, Linux runtime and alternate
+cache rehearsal remain pending. Background jobs were inspected rather than
+restarted on resume; no completed render was discarded.
