@@ -1385,3 +1385,17 @@ preserving the complete archive scope. Only the evidence output directory is
 bind-mounted. Container command exit status is checked explicitly, and a finally
 block removes only this named rehearsal container. Syntax compilation passes;
 the actual Linux runtime run remains queued, not qualified.
+
+Neutral-deep's native render completed and was inspected. The fourth full/native
+pair passed the exact runtime-map, character, image/settings and build audit;
+`out/v22-completed-appearance-pairs.json` now lists four pairs. Cool-grey's full
+render is currently live. The corrected deep palette remains a review candidate,
+not independently accepted for final frozen delivery.
+
+The not-yet-started motion-preview controller now first invokes
+`out/v22_appearance_contact_sheets.py` after all ten judging images complete.
+It requires the source receipt image hashes and 1024px dimensions, then creates
+separate five-variant full/native overview sheets and native-pixel eye, skin,
+lip and ear crops, with a source/output hash receipt. Overview resizing is
+explicit; crop files retain source pixel scale. Syntax compilation passes;
+the sheets/crops have not been generated yet and imply no review approval.
