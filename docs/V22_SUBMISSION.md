@@ -1220,3 +1220,20 @@ batch receipt: the still worker writes that receipt after all requested frames
 finish and its source/recipe rechecks pass. The renderer has moved on to frame
 58. Right/down checks, the remaining requested up image, blind direction
 readability and full-sequence qualification remain pending.
+
+### PNG timing preview preparation
+
+A separate motion-only PNG preview is prepared to avoid depending on dense-groom
+viewport speed for timing review. `out/v22_prepare_motion_preview.py` derives a
+new scene from each checked 512-sample development timeline, requires its
+192-frame/24-fps timing, and changes only sampling/resolution to 32 samples and
+512px plus a relative output path. The original scene hash must remain unchanged.
+`out/v22_render_motion_previews.py` renders and verifies all 192 PNGs per mode
+with exact hold reuse, preserving per-frame receipts. It creates no encoded
+video or presentation, and its images are explicitly excluded from skin/eye
+appearance ratings and final 1024px delivery qualification.
+
+The appearance controller, which has not started yet, now queues these previews
+after its ten full/native stills and before packet assembly. Both new preview
+helpers pass syntax compilation; actual preview rendering and playback packaging
+remain pending. The live 512-sample cardinal batch was left unchanged.
