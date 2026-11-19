@@ -1081,3 +1081,25 @@ and their authenticated source receipts for frames 1, 107 and 112. It records
 delivery preset or qualify untested variants/poses. The prepare controller
 advanced to the corrected neutral-deep view/layout renders; no additional
 Blender process was launched in parallel. Identity approval remains pending.
+
+### Corrected five-set wrap gate completed
+
+All six corrected neutral-deep renders completed. Front, angle and oblique
+layout pairs each differ by at most one RGB level (p95 zero), with 27/29/35
+changed pixels respectively. Angle and oblique images were inspected: the
+earlier orange cast is reduced. These development-scale views still do not
+establish final-detail quality or human acceptance.
+
+`out/v22-corrected-five-wrap-evidence` consolidates the four unchanged variants'
+original receipts/images with the corrected neutral-deep receipts/images.
+The full matrix checker passed all thirty cases against
+`out/v22-variants-native-skin-v2`, rechecking current manifest/image/recipe hashes,
+target/template identity, Blender build and matching judging conditions. Its
+`layout-check.json` is the corrected five-set development UV evidence. The
+original matrix is retained separately and is not relabeled.
+
+The saved Left PBR timeline was prepared at 512 samples with geometry/UV
+preservation assertions passing. Its reopened integer/half-frame verification
+is currently running; no completed Left motion pass is claimed yet. The right
+and Generate Motion checks, cardinal stills and runtime rehearsals follow
+serially under the same live controller.
