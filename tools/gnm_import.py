@@ -8,6 +8,9 @@ import bpy
 import numpy as np
 from mathutils import Matrix, Vector
 
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from gnm_portable import clear_file_browser_paths
+
 
 def import_template(template, out):
     if out.exists():
@@ -47,6 +50,7 @@ def import_template(template, out):
         obj['gnm_joints_local'] = json.dumps(joints)
         bpy.context.scene.unit_settings.system = 'METRIC'
     out.parent.mkdir(parents=True, exist_ok=True)
+    clear_file_browser_paths()
     bpy.ops.wm.save_as_mainfile(filepath=str(out.resolve()), compress=True)
 
 

@@ -11,6 +11,23 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gnm_run import surface_files
 
 
+def clear_file_browser_paths():
+    """Remove saved UI browsing locations without touching asset paths or data."""
+    cleaned=0
+    for screen in bpy.data.screens:
+        for area in screen.areas:
+            for space in area.spaces:
+                if space.type!='FILE_BROWSER':continue
+                params=space.params
+                if params is None:continue
+                params.directory=b'//'
+                params.filename=''
+                if bytes(params.directory)!=b'//' or params.filename:
+                    raise ValueError('File browser path cleanup did not persist')
+                cleaned+=1
+    return cleaned
+
+
 def relative_images(maps, destination, map_root=None):
     maps = Path(maps)
     if map_root is None:
@@ -40,6 +57,7 @@ def relative_images(maps, destination, map_root=None):
         image.packed_files[0].filepath = path
         if bytes(image.packed_file.data) != original:
             raise ValueError(f'Changing an image path changed its payload: {image.name}')
+    clear_file_browser_paths()
 
 
 def main():

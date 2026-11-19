@@ -156,7 +156,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_eye_finish.py`, `assets/gnm-eye-photo/source.json`, `assets/gnm-eye-photo/ATTRIBUTION.md` | CC0 photographic iris-sector reconstruction, source provenance and fitted lash/lower-waterline refinement trials. |
 | `tools/gnm_gaze_readability.py` | Evaluate native horizontal-target amplitude alternatives for review without changing production timing or face geometry. |
 | `docs/GNM_NATURALNESS_REVIEW.md` | Owner/teammate feedback, prototype state, known failures and handoff for the next appearance workflow. |
-| `tools/gnm_portable.py` | Preserve packed image bytes while replacing authoring filenames with relative paths before timeline delivery and variant caching. |
+| `tools/gnm_portable.py`, `tests/test_gnm_ui_paths.py` | Preserve packed image bytes while replacing authoring filenames with relative paths; clear saved file-browser UI directories before derived timeline/cache saves. Native import uses the same UI cleanup. |
 | `tools/gnm_scan_transfer.py`, `tools/gnm_generate_textures.py` | Checksum-verified attributed scan registration, emission transfer, measured CC0 fallback and five complete native texture sets. |
 | `assets/gnm-scan/source.json`, `assets/gnm-scan/ATTRIBUTION.md` | Pinned scan asset URLs/checksums, CC-BY-3.0 source license and derivative attribution. |
 | `assets/v22-provenance.json` | Approved v22 packed-image hashes, component provenance, source-record hashes and required delivery attribution; separates photographed and authored detail. |

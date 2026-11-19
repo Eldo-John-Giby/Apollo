@@ -1539,3 +1539,28 @@ scene-hash receipt was rejected and restored. Source scene bytes remained
 unchanged. The serial Left full-detail follow-up is now confirmed live,
 rendering its neutral frame at 1024px/512 samples; angle and further recovery
 jobs are waiting on their actual live prerequisites.
+
+### Binary hygiene follow-up: saved file-browser location
+
+The decompressed ASCII marker scan in
+`out/v22-development-archive/blend-path-marker-scan.json` found one personal-path
+marker per unique Blender payload. A direct SDNA/block inspection locates the
+same value in `FileSelectParams.dir`, at offset 96 of that UI structure. It is
+a saved file-browser directory, not an image/library/runtime dependency. The
+development archive remains unchanged; its text hygiene pass did not cover
+this binary UI field. The final binary hygiene requirement is not yet passed.
+
+`gnm_portable.clear_file_browser_paths()` now resets saved browser directories
+and filenames before future prepared-timeline/cache saves; native import calls
+the same helper. It edits no scene or texture data. Sixteen targeted UI/PBR/cache
+tests pass, including empty/no-active UI handling. Native Blender 4.5.15 save/
+reopen validation is queued, not claimed complete: generated workers will save
+derived native/full-character copies, compare mesh/material/packed-image
+snapshots and verify reopened UI params. Raw v22 and current evidence are
+preserved. The waiting angle coordinator was intentionally replaced to insert
+this new prerequisite before its render batch; the active Left render was not
+restarted. Additional recovery still waits on the live angle coordinator.
+
+All 156 Windows source tests pass after the UI-only cleanup change
+(`out/v22-ui-cleanup-source-tests.xml`). This test result does not claim that
+the queued native save/reopen probes have run or that old scenes were sanitized.
