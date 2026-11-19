@@ -1314,3 +1314,34 @@ through this recovery and was not restarted. The queued PNG playback helpers
 also now explicitly require a Standard/None display transform, zero exposure and
 unit gamma to avoid adding another filmic transform to rendered PNGs; actual
 playback round-trip execution remains pending.
+
+### Cardinal gate, Linux source retry and partial Windows archive pass
+
+All four 1024px/512-sample cardinal images completed. The final still-worker
+receipt was checked against the current packed Generate Motion scene, each
+worker/PNG-policy hash and every rendered image. The combined image oracle in
+`out/v22-pbr-512-direction-and-blink-check.json` passes left/right/up/down,
+peak closure and reopening. Downward pupil shifts are approximately 6.80/5.83
+pixels, with iris correlations 0.815/0.914. The down image was visually inspected.
+This does not replace independent human direction/readability review.
+
+After the authorized restart, Docker engine 28.3.2 responded. The clean offline
+source test for `49652af` was retried successfully: **136 tests pass**, logged in
+`out/v22-linux-code-49652af-retry.log`. The failed first attempt remains retained.
+
+The development runtime staged successfully. Its original Windows archive
+rehearsal process later stopped during the first frame without a pass receipt;
+process inventory and its missing execution handle confirmed it was no longer
+live. Recovery session `38969` verified the existing ZIP manifest, rehashed all
+archive/extracted payloads, and resumed without recreating the checked scenes.
+The recovery helper now supports this existing authenticated extraction.
+
+`out/v22 clean archive rehearsal/rehearsal.json` now records a completed partial
+Windows pass: three held frames rendered from outside the extracted project
+in space-containing paths, exact corrupt/missing-frame repair, valid frame-1
+hash/mtime preservation, stale-receipt rejection and invalid-range rejection.
+The saved receipt is linked to the runtime manifest and ZIP hash. This covers
+three held frames on the development archive, not the final full delivery.
+The controller advanced to full/native appearance renders, then will produce
+timing previews and the blind packet; Linux runtime and alternate-cache checks
+follow serially. Those later stages are not yet passed.
