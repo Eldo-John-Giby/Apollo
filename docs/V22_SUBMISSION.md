@@ -905,3 +905,38 @@ The first four native variants completed all three UV pairs: twelve pair checks
 pass with maximum RGB difference one; see
 `out/v22-native-completed-pairs-check.json`. Cool-grey remains in progress, and
 the final matrix-wide authentication gate has not yet run.
+
+### Completed native matrix and neutral-deep color trial
+
+All thirty native fresh-wrap renders completed, and the matrix-wide checker
+passed all fifteen variant/view UV pairs with maximum absolute RGB difference
+one. It authenticated current maps, targets, workers, image payloads, Blender
+build and shared judging conditions. Evidence:
+`out/v22-native-five-wrap-matrix/layout-check.json`. This proves the stated
+development wrapping/layout scope, not final image-detail or human acceptance.
+Frame-112 convergence began serially after the matrix process exited.
+
+The five-way front/detail sheet in `out/v22-native-front-review` was inspected.
+It exposed excessive orange saturation in neutral-deep. That variant remains
+visually unaccepted despite its successful technical UV checks. The original
+sets and all default v22 maps are preserved.
+
+An isolated neutral-deep pigment trial uses broader, less channel-separated
+darkening: authored attenuation coefficients `(0.98,1.0,1.08)` replace the prior
+deep-palette `(0.54,0.94,1.35)`. Other palettes retain their coefficients. The
+authoring CLI can select `--variants neutral-deep` for an isolated output; its
+default still builds all five. `out/v22-neutral-deep-pigment-v2` changes only
+skin base color, preserving all eleven other map files. The covered-atlas median
+red/blue ratio falls from approximately 5.75 to 2.32; this measures color change,
+not realism. Hash/statistical evidence is
+`out/v22-neutral-deep-pigment-v2-check.json`.
+
+The separate native restoration trial is being generated under
+`out/v22-neutral-deep-native-v2`. A matched 768px/32-sample front preview is added
+to the queued review-preparation driver after frame-112 convergence and before
+packing. It must be visually inspected before choosing or regenerating revised
+five-set delivery inputs. No corrected render or acceptance is claimed yet.
+
+The Windows suite remains **135 passing tests** after the isolated palette and
+authoring-selection changes (`out/v22-neutral-deep-trial-tests.xml`). These
+source checks do not substitute for the queued corrected-color Blender preview.

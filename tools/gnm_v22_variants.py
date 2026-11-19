@@ -18,6 +18,7 @@ PIGMENT={'golden-hazel':(.16,.07,.010),'olive-amber':(.34,.19,-.004),
          'neutral-deep':(2.1,1.4,.025),'cool-grey':(-.035,-.012,.018)}
 IRIS={'golden-hazel':(.30,.25,.105),'olive-amber':(.40,.24,.070),
       'neutral-deep':(.19,.095,.045),'cool-grey':(.25,.31,.33)}
+ABSORPTION={'neutral-deep':(.98,1.,1.08)}
 
 
 def sha(path):
@@ -71,7 +72,7 @@ def build(a):
     covered=valid|padding
     flat=fields[covered];positions=flat[:,:3];lip=np.clip(flat[:,3:].max(axis=1),0,1)
     a.out.mkdir(parents=True)
-    for variant in VARIANTS:
+    for variant in getattr(a,'variants',VARIANTS):
         target=a.out/variant;target.mkdir()
         for name in master['maps']:shutil.copy2(a.master/name,target/name)
         receipt=copy.deepcopy(master)
@@ -90,7 +91,9 @@ def build(a):
             ear=np.exp(-((np.abs(x)-.073)/.014)**2-((y+.025)/.045)**2)
             regional=1+.055*np.sin(x*57+y*19+z*31)+.08*cheek-.045*ear
             delta=skin_delta*regional*(1-lip)+lip_delta*lip
-            absorption=np.array((.54,.94,1.35),dtype=np.float32)
+            # The deep palette needs broad darkening rather than the large
+            # blue/green suppression that made its first preview orange.
+            absorption=np.array(ABSORPTION.get(variant,(.54,.94,1.35)),dtype=np.float32)
             colors*=np.exp(-delta[:,None]*absorption)
             # Hemoglobin-rich tissue changes separately from melanin, avoiding
             # a global RGB tint over lips, cartilage and thin periocular skin.
@@ -128,4 +131,6 @@ def build(a):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('master','template','out'):p.add_argument('--'+name,type=Path,required=True)
+    p.add_argument('--variants',choices=VARIANTS,nargs='+',default=VARIANTS,
+                   help='Build selected isolated authoring trials; default remains all five')
     build(p.parse_args())
