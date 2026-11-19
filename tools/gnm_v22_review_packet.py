@@ -34,6 +34,13 @@ def validate(spec):
     if {e.get('mode') for e in motion if e['candidate']}!=set(MODES):
         raise ValueError('Need all three packed motion modes')
     if any(e.get('mode') not in MODES for e in motion):raise ValueError('Unknown motion mode')
+    for entry in motion:
+        if 'preview' in entry:
+            preview=entry['preview']
+            if preview.get('fps')!=24 or len(preview.get('frames',[]))!=192:
+                raise ValueError('Motion preview requires 192 frames at 24 fps')
+            if any(Path(frame['file']).name!=f'frame_{i:04d}.png' for i,frame in enumerate(preview['frames'],1)):
+                raise ValueError('Motion preview frame ordering differs')
     if set(e['expected'] for e in directions)!=set(DIRECTIONS):
         raise ValueError('Need all four cardinal directions')
     if any(not e.get('images') for e in appearance):raise ValueError('Appearance images required')
@@ -66,6 +73,11 @@ def main(a):
             else:
                 path=authenticated(root,entry['scene'],'.blend')
                 inputs.append((path,entry['scene']['sha256']));payload=[path]
+                if 'preview' in entry:
+                    preview=entry['preview']
+                    payload.extend(image(frame) for frame in preview['frames'])
+                    playback=authenticated(root,preview['playback'],'.blend')
+                    inputs.append((playback,preview['playback']['sha256']));payload.append(playback)
             prepared[group].append((entry,payload))
     # Bind the reviewed candidate to the complete explicit list, including
     # scenes, views and references; this is not a submission acceptance receipt.
@@ -81,6 +93,15 @@ def main(a):
             if group=='motion':
                 output=reviewer/f'{case}.blend';shutil.copyfile(paths[0],output)
                 key[group][case]={k:entry[k] for k in ('candidate','mode')}
+                if 'preview' in entry:
+                    folder=reviewer/f'{case}-preview';(folder/'frames').mkdir(parents=True)
+                    playback=folder/'playback.blend';shutil.copyfile(paths[-1],playback)
+                    key['packet_files'][playback.relative_to(reviewer).as_posix()]=sha(playback)
+                    for frame,path in enumerate(paths[1:-1],1):
+                        target=folder/'frames'/f'frame_{frame:04d}.png'
+                        shutil.copyfile(path,target);canonicalize(target)
+                        key['packet_files'][target.relative_to(reviewer).as_posix()]=sha(target)
+                    key[group][case]['preview_fps']=24
             else:
                 output=reviewer/f'{case}.png';board(paths,output,case)
                 for view,path in enumerate(paths,1):
@@ -100,7 +121,10 @@ def main(a):
         'at 24 fps. Rate motion naturalness from 1 to 5 and inspect blink, reopening, '
         'gaze holds, lash roots and tear corners. Packed scene internals may reveal '
         'the mode; do not inspect names or custom properties before the first pass. '
-        'Live viewport playback is for motion review, not final skin/eye rendering.\n\n'
+        'When supplied, open Mxx-preview/playback.blend for the 192-image sequence '
+        'at 24 fps. These 512px/32-sample previews are for motion timing only; '
+        'use A images for skin/eye appearance ratings. Preview playback avoids '
+        'recalculating the character groom.\n\n'
         'Record severe defects with case, category and notes; use [] only if none. '
         'Complete the independent-first-pass attestation explicitly. Missing ratings '
         'and blank defect reviews cannot pass. Return responses.json.\n',encoding='utf-8')
@@ -111,7 +135,8 @@ def main(a):
         raise ValueError('Review sources changed during packaging')
     archive=a.out/'apollo-v22-independent-review.zip'
     with ZipFile(archive,'x',compression=ZIP_DEFLATED) as package:
-        for path in sorted(reviewer.iterdir()):package.write(path,path.name)
+        for path in sorted(reviewer.rglob('*')):
+            if path.is_file():package.write(path,path.relative_to(reviewer).as_posix())
     receipt=dict(candidate_sha256=candidate_hash,key_sha256=sha(key_path),archive_sha256=sha(archive),
                  source_spec_sha256=spec_hash,recipe_sha256=sha(__file__),seed=a.seed,
                  qualification='Hashed randomized review packet only; no human ratings, identity approval or release qualification inferred.')

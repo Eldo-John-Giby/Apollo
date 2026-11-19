@@ -1237,3 +1237,21 @@ The appearance controller, which has not started yet, now queues these previews
 after its ten full/native stills and before packet assembly. Both new preview
 helpers pass syntax compilation; actual preview rendering and playback packaging
 remain pending. The live 512-sample cardinal batch was left unchanged.
+
+### Anonymous PNG playback packaging
+
+The packet builder now accepts an optional motion `preview` with `fps: 24`, a
+hashed `playback` scene and exactly 192 ordered hashed PNG records. It validates
+these before creating the output, then copies them to anonymous
+`Mxx-preview/frames` directories alongside `playback.blend`. Nested payloads are
+included in both the reviewer ZIP and assessor checksum inventory. Instructions
+separate 512px/32-sample timing review from full-detail appearance ratings.
+The image-sequence scene is generated from factory startup, with relative frame
+paths; no video encoding is involved. Actual playback generation/reopening is
+still pending and must be checked in Blender.
+
+An end-to-end packaging regression covers all 192 frame payloads and playback
+file inclusion, rejects incomplete/reversed sequences, and rejects a changed
+frame before creating the packet directory. The complete Windows suite passes
+**136 tests** (`out/v22-review-sequence-tests.xml`). These fixture tests validate
+packaging behavior, not actual motion playback or human acceptance.

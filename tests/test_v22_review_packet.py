@@ -45,3 +45,29 @@ def test_missing_scope_and_changed_payload_cannot_make_packet(tmp_path):
     entry=spec['appearance'][0]['images'][0]
     (tmp_path/entry['file']).write_bytes(b'changed')
     with pytest.raises(ValueError,match='changed review input'):authenticated(tmp_path,entry,'.png')
+
+
+def test_preview_sequences_are_complete_ordered_and_included_under_case_names(tmp_path):
+    spec=fixture(tmp_path);frames=[]
+    for frame in range(1,193):
+        path=tmp_path/f'frame_{frame:04d}.png';Image.new('RGB',(8,8),'gray').save(path)
+        frames.append(dict(file=path.name,sha256=sha(path)))
+    spec['motion'][0]['preview']=dict(fps=24,frames=frames,playback=spec['motion'][0]['scene'])
+    missing=copy.deepcopy(spec);missing['motion'][0]['preview']['frames'].pop()
+    with pytest.raises(ValueError,match='192 frames'):validate(missing)
+    swapped=copy.deepcopy(spec);swapped['motion'][0]['preview']['frames'].reverse()
+    with pytest.raises(ValueError,match='ordering'):validate(swapped)
+    source=tmp_path/'spec.json';source.write_text(json.dumps(spec))
+    out=tmp_path/'packet';main(SimpleNamespace(spec=source,out=out,seed=17))
+    key=json.loads((out/'assessor-key.json').read_text())
+    with ZipFile(out/'apollo-v22-independent-review.zip') as archive:
+        previews=[n for n in archive.namelist() if '-preview/frames/' in n]
+        assert len(previews)==192
+        assert any(n.endswith('-preview/playback.blend') for n in archive.namelist())
+        for name,digest in key['packet_files'].items():
+            import hashlib
+            assert hashlib.sha256(archive.read(name)).hexdigest()==digest
+    (tmp_path/'frame_0100.png').write_bytes(b'changed')
+    with pytest.raises(ValueError,match='changed review input'):
+        main(SimpleNamespace(spec=source,out=tmp_path/'rejected',seed=17))
+    assert not (tmp_path/'rejected').exists()
