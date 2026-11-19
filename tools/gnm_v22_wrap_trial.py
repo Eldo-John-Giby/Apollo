@@ -85,6 +85,7 @@ def main(a):
                 adaptive_sampling=False,depth_of_field=False,motion_blur=False,dither_intensity=0,
                 judging_policy=policy,
                 samples=a.samples,size=a.size,
+                blender=bpy.app.version_string,blender_build=bpy.app.build_hash.decode(),
                 images={p.name:sha(p) for p in a.out.glob('*.png')},
                 qualification='Visual wrapping experiment only; no release or review acceptance implied.')
     if sha(source)!=SELECTED:

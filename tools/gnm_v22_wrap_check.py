@@ -15,7 +15,8 @@ IMAGE='fresh-texture-only.png'
 COMPARABLE=('source_sha256','maps_manifest_sha256','target_sha256','template_sha256',
             'recipe_sha256','angle','oblique','fresh_only','lights','device','camera_matrix',
             'camera_lens_mm','view_transform','exposure','seed','adaptive_sampling',
-            'depth_of_field','motion_blur','dither_intensity','judging_policy','samples','size')
+            'depth_of_field','motion_blur','dither_intensity','judging_policy','samples','size',
+            'blender','blender_build')
 
 
 def case(folder,expected):
@@ -54,7 +55,7 @@ def main(a):
         'gnm_v22_materials.py','gnm_pbr_manifest.py','gnm_v22_render_policy.py',
         'gnm_v22_audit.py','gnm_portrait_refine.py')}
     recipes['png.py']=sha(root/'apollo_core/png.py')
-    target=sha(a.target);template=sha(a.template);results={};sources={}
+    target=sha(a.target);template=sha(a.template);results={};sources={};view_settings={}
     for variant in VARIANTS:
         maps=a.maps/variant;manifest=load_manifest(maps)
         selected=verify_selected(manifest['source_sha256'])
@@ -77,6 +78,10 @@ def main(a):
                     raise ValueError('Fresh wrap used different map payloads')
                 pair.append((receipt,pixels));cases[layout]=sha(folder/'comparison.json')
             results[f'{variant}/{view}']=dict(receipts=cases,**compare(*pair))
+            settings={key:pair[0][0][key] for key in COMPARABLE if key!='maps_manifest_sha256'}
+            if view in view_settings and settings!=view_settings[view]:
+                raise ValueError('Judging conditions differ across variants')
+            view_settings[view]=settings
         load_manifest(maps)
         if sha(maps/'manifest.json')!=manifest_hash or sha(selected)!=manifest['source_sha256']:
             raise ValueError('Wrap inputs changed during checking')

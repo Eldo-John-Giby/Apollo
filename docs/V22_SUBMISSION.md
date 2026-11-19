@@ -753,3 +753,16 @@ covered at closure. Lash clusters remain visible on closed lids and need review
 alongside reopening, rather than assuming image quality from geometry checks.
 The matching 1024-sample reference is still rendering; no new motion-wide sample
 preset or convergence pass is claimed.
+
+The thirty-render native matrix is queued in execution session `66927`, waiting
+on the original blink process handle (PID 12012, creation UTC
+2026-11-19 11:25:04.941785). The serial controller
+`out/v22_native_matrix_driver.py` checks both completed reference hashes before
+starting, rejects any competing Blender process, freezes input/worker hashes
+and records each case under `out/v22-native-five-wrap-matrix`. It uses 768px,
+32-sample development comparisons, not a final detail-qualified preset. A failed
+render or changed input stops the matrix without counting remaining cases.
+
+New wrap receipts identify the actual Blender version/build. The matrix checker
+requires the same build and judging conditions across both layouts and all five
+variants. The queued matrix is not yet evidence of completed rendering.
