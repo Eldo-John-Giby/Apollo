@@ -993,3 +993,22 @@ packed checks and cardinal renders. Queued results remain pending.
 All ten source records in the updated provenance inventory were independently
 rehash-checked against committed Git blobs, including exact upstream license
 bytes. The working tree was clean before this recovery documentation change.
+
+### Actual runtime recovery rehearsal queued
+
+The queued prepare driver now invokes
+`out/v22_windows_runtime_rehearsal.py` after successful staging. It builds a
+development ZIP from the runtime manifest, checks each source payload, extracts
+into a path containing spaces, and rehashes every extracted file. It invokes the
+copied public CLI from a separate outside-project CWD, rendering frames 1–3 with
+the saved 512-sample preset. It then corrupts frame 2 and removes frame 3, resumes,
+and requires exact restored hashes plus unchanged frame-1 modification time.
+Negative invocations must reject a changed sample receipt and frame range
+193–194 without altering valid images. Each subprocess exit is checked.
+
+Both controller scripts pass syntax compilation. This is prepared, pending
+execution, and covers three held frames on the development runtime only. It
+does not replace full 576-frame rendering/recovery, alternate-cache checks or
+final Windows/Linux archive qualification. The recovered frame-112 renderer is
+confirmed live as PID 17212 (creation UTC 2026-11-19 13:42:46.4742995), with
+advancing sample output; no second Blender process was launched.
