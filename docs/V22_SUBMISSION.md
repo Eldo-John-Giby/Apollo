@@ -1103,3 +1103,10 @@ preservation assertions passing. Its reopened integer/half-frame verification
 is currently running; no completed Left motion pass is claimed yet. The right
 and Generate Motion checks, cardinal stills and runtime rehearsals follow
 serially under the same live controller.
+
+The Left saved PBR scene subsequently passed all 383 integer/half-frame checks
+and its eighteen-component whole-character neutral appearance check.
+`out/v22-review-pbr-512/left/half-frame-check.json` reports no errors, and
+`appearance-check.json` records the separate neutral comparison. Right-scene
+preparation has started. These results validate the saved development PBR Left
+timeline; they do not qualify unrendered full sequences or other modes yet.
