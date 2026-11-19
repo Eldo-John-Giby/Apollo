@@ -1593,3 +1593,30 @@ The complete 158-test suite also passes in clean offline Linux extraction at
 `59c6e30`: `out/v22-linux-source-59c6e30-retry/result.json` and `tests.xml`.
 The stronger cleanup has source-test coverage on both platforms; native saved
 buffer inspection and final sanitized archive qualification remain pending.
+
+### Five-set front still sample/detail coverage queued
+
+The current 512-sample evidence does not yet qualify every variant/output/view.
+`tools/gnm_v22_still_convergence.py` now compares authenticated full/native front
+judging pairs at native pixel scale, using the existing mean/p95/detail-ratio
+limits. It requires identical source, map, worker, build and camera/policy
+receipts except the sample count and output image identity; altered images,
+changed targets/cameras and angle/oblique views are rejected. Eye, skin, lip
+and ear crops are measured for both outputs, with an additional hair crop for
+the full character. Crops are explicitly front-camera-specific. Measurements
+do not grant independent appearance acceptance or broader motion convergence.
+
+Generated `out/v22_judging_still_references.py` waits on the existing mode-
+recovery job, then serially renders ten 1024-sample references against the
+completed 512-sample full/native fronts, prioritizing the deep/cool variants.
+No reference has rendered yet. Its waiting coordinator was deliberately
+replaced to load the final checker only when prerequisites finish; no active
+Blender render was interrupted. This is development quality qualification,
+not post-acceptance frozen regeneration or final PNG delivery. Higher-quality
+references are not assumed stable before the measurements and visual checks.
+
+All 166 Windows source tests pass with the new still checker
+(`out/v22-still-convergence-source-tests.xml`). The eight additional tests
+exercise matching full/native pairs, receipt/image tampering, source/camera
+mismatch, incorrect sample order, non-front views and an actual above-limit
+pixel change. They validate the checker, not the unrendered reference pairs.
