@@ -1495,3 +1495,16 @@ to packaged relative image paths and records the original report SHA-256. Image
 hashes and numerical results are retained; the raw report is unchanged. The
 generated public evidence snapshot is explicitly scoped to development, retains
 all pending gates, and excludes private review keys and responses.
+
+The full Windows source suite subsequently passed 154 tests
+(`out/v22-bundle-source-tests-final.xml`). Development archive assembly completed:
+`out/v22-development-archive/apollo-v22-unqualified-development.zip`,
+2,702,298,567 bytes, 203 hashed payloads, SHA-256
+`8d7cfc139f78bf5c21888382fd288c8b53b8eb9b534aef038674cf574200e0c1`.
+Its manifest explicitly records `release_ready=false` and source `5ab5f19`.
+Clean extraction, bundled-verifier execution and hygiene inspection of this
+new archive remain pending. This is a development checkpoint, not the final
+post-acceptance archive. The builder's unit-test API now also accepts explicit
+source identity so isolated code ZIP tests need no Git metadata; the CLI still
+records the actual checkout identity. Eighteen targeted cases pass after that
+small portability adjustment.

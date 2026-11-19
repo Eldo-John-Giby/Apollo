@@ -41,7 +41,7 @@ def fixture(tmp_path):
 def test_archive_roundtrip_and_corruption_are_checked(tmp_path):
     runtime,licenses=fixture(tmp_path)
     archive=tmp_path/'bundle.zip'
-    result=bundle.build(runtime,licenses,{},archive)
+    result=bundle.build(runtime,licenses,{},archive,source_revision='a'*40,source_dirty=False)
     assert result['release_ready'] is False
     extracted=tmp_path/'clean path'
     with zipfile.ZipFile(archive) as package:package.extractall(extracted)

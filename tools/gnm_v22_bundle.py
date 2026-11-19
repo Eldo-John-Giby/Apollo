@@ -61,14 +61,18 @@ def collect(runtime, attribution, extras):
     return files, expected, staged
 
 
-def build(runtime, attribution, extras, out):
+def build(runtime, attribution, extras, out, source_revision=None, source_dirty=None):
     out = Path(out)
     if out.exists():
         raise FileExistsError(out)
     files, hashes, staged = collect(Path(runtime), Path(attribution), extras)
-    revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    dirty = bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=normal'],
-                                        cwd=ROOT, text=True).strip())
+    revision = source_revision if source_revision is not None else subprocess.check_output(
+        ['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    dirty = source_dirty if source_dirty is not None else bool(subprocess.check_output(
+        ['git', 'status', '--porcelain', '--untracked-files=normal'], cwd=ROOT, text=True).strip())
+    if (not isinstance(revision, str) or len(revision) != 40
+            or any(c not in '0123456789abcdef' for c in revision) or type(dirty) is not bool):
+        raise ValueError('Invalid source revision identity')
     manifest = dict(schema=1, status='unqualified_v22_development_bundle',
         release_ready=False, source_revision=revision, source_dirty=dirty,
         selected_sha256=staged['selected_sha256'],
