@@ -897,3 +897,11 @@ runs the independent four-direction/closure/reopening image gate and stages only
 on success, into `out/v22 runtime rehearsal`. A failure stops without counting
 the stage as complete. The new stage directory does not replace prior trials or
 the qualified fallback.
+
+Source `1a73e00` subsequently passes **135 tests on clean offline Linux** under
+the same pinned image, resource limits, space-containing extraction path and
+outside-project CWD. Evidence: `out/v22-linux-code-1a73e00.log`.
+The first four native variants completed all three UV pairs: twelve pair checks
+pass with maximum RGB difference one; see
+`out/v22-native-completed-pairs-check.json`. Cool-grey remains in progress, and
+the final matrix-wide authentication gate has not yet run.
