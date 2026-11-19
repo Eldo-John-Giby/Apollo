@@ -1030,3 +1030,21 @@ sheet is for identity review, not pixel equivalence. The user was asked whether
 the integrated face and groom retain the approved identity. Approval remains
 unset pending their explicit reply. This is separate from independent blind
 review and final submission acceptance.
+
+### Corrected five-set development assembly
+
+`out/v22-variants-native-skin-v2` is a separate completed trial assembly. Its
+rose-brown, golden-hazel, olive-amber and cool-grey sets are byte-identical to
+their original native sets, including manifests. Only neutral-deep is drawn
+from the isolated corrected/restored trial. Every copied map and manifest was
+rehashed against its source, all fifteen-map manifests were validated, and all
+source manifests were rechecked after copying. Evidence: its `assembly.json`.
+Original map directories remain preserved.
+
+The pending prepare driver now validates all five assembled sets and explicitly
+checks that the default manifest is unchanged. It stages this corrected trial
+only after the queued six corrected-color renders and their three layout-pair
+checks pass, alongside the packed scene and image gates. This does not select
+the palette as visually accepted or freeze it for final delivery. Attribution
+is being regenerated against the assembled trial manifests rather than reusing
+the prior neutral-deep hash. Owner identity approval remains pending.
