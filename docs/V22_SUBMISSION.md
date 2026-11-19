@@ -379,7 +379,8 @@ defects and opposite-direction confusion. The full 107-test suite result above
 predates these eleven new tests; no larger full-suite count is claimed here.
 
 The frozen assessor key has `candidate_sha256`, a `directions` object mapping
-anonymous case IDs to `left`/`right`/`up`/`down`, and an `appearance` object.
+anonymous case IDs to `left`/`right`/`up`/`down`, an `appearance` object and a
+separate `motion` object.
 Every candidate appearance case has `candidate: true`, its existing `variant`
 identifier and `output: "full"` or `"texture_only"`. All ten combinations are
 required. Reference cases have `candidate: false` and `reference: "rc5"` or
@@ -399,7 +400,12 @@ Returned forms must contain a distinct reviewer identifier, explicit
 `independent_first_pass: true`, all cardinal answers (or `unclear`), integer
 ratings from 1 to 5 for every category and case, and an explicit
 `severe_defects` list. Categories are `skin`, `eyes`, `lips`, `ears`,
-`brows_lashes`, `overall_realism` and `motion_naturalness`. A defect entry has
+`brows_lashes` and `overall_realism`. Each motion case has its own integer
+`motion_naturalness` rating, based on actual packed playback. The key's motion
+cases have `candidate: true` and a `mode` of `left`, `right` or
+`generate-motion`; all three candidate modes are required. Static reference
+portraits and texture-only stills do not require invented motion ratings.
+A defect entry has
 `case`, `code` and explanatory `notes`; the tool lists the accepted codes.
 Only reviewers can fill in these fields. An empty list means they explicitly
 reported no severe defects; the generated template starts with null.
@@ -416,6 +422,11 @@ but cannot improve candidate medians. Its result covers the independent-review
 gate only; the user's integrated-identity approval and technical qualification
 remain separate. Actual final-packet preparation and collected feedback remain
 pending while final appearance renders are unqualified.
+
+The separate motion form and gate passed twelve targeted tests. Missing mode
+coverage, blank motion scores, low motion medians and repeated severe defects
+reported on actual motion cases fail the gate. No human responses have been
+collected or inferred by these tests.
 
 ### Fresh-wrap comparison controls
 

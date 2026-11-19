@@ -5,7 +5,7 @@ import sys
 import pytest
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
-from gnm_v22_review_gate import CATEGORIES,VARIANTS,score,response_template
+from gnm_v22_review_gate import CATEGORIES,VARIANTS,MODES,score,response_template
 
 
 def reviews():
@@ -14,10 +14,12 @@ def reviews():
                     ((variant,output) for variant in VARIANTS for output in ('full','texture_only')),1)}
     appearance.update(R1=dict(candidate=False,reference='rc5'),R2=dict(candidate=False,reference='v22'))
     key=dict(candidate_sha256='a'*64,directions=dict(C1='left',C2='right',C3='up',C4='down'),
-             appearance=appearance)
+             appearance=appearance,
+             motion={f'M{i}':dict(candidate=True,mode=mode) for i,mode in enumerate(MODES,1)})
     responses=[dict(reviewer=str(index),key_sha256='key',independent_first_pass=True,
                     directions=copy.deepcopy(key['directions']),
                     appearance={case:dict.fromkeys(CATEGORIES,4) for case in key['appearance']},
+                    motion={case:dict(motion_naturalness=4) for case in key['motion']},
                     severe_defects=[]) for index in range(3)]
     return key,responses
 
@@ -78,3 +80,24 @@ def test_response_template_does_not_default_to_approval_or_no_defects():
     assert template['independent_first_pass'] is None
     assert all(value is None for value in template['directions'].values())
     assert all(value is None for case in template['appearance'].values() for value in case.values())
+    assert all(case['motion_naturalness'] is None for case in template['motion'].values())
+    assert 'motion_naturalness' not in template['appearance']['R2']
+
+
+def test_three_modes_need_explicit_motion_reviews_and_low_ratings_fail():
+    key,responses=reviews()
+    key['motion'].pop('M3')
+    with pytest.raises(ValueError,match='all three'):
+        score(key,responses,'key')
+    key,responses=reviews()
+    responses[0]['motion']['M1']['motion_naturalness']=None
+    with pytest.raises(ValueError,match='Every motion rating'):
+        score(key,responses,'key')
+    key,responses=reviews()
+    for response in responses[:2]:
+        response['motion']['M2']['motion_naturalness']=3
+        response['severe_defects']=[dict(case='M2',code='blink',notes='Visible blink defect')]
+    report=score(key,responses,'key')
+    assert not report['independent_review_gate_passed']
+    assert report['motion_medians']['M2']==3
+    assert 'blink' in report['shared_severe_defects']
