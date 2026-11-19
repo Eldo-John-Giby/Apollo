@@ -1588,3 +1588,8 @@ buffers, including trailing bytes. This is stronger than checking only the
 visible RNA strings, but it is not yet a pass. The Left full-detail neutral
 render completed and was visually inspected; frame 26 is now rendering. Original
 preview diagnostic failure remains unchanged pending this full-detail check.
+
+The complete 158-test suite also passes in clean offline Linux extraction at
+`59c6e30`: `out/v22-linux-source-59c6e30-retry/result.json` and `tests.xml`.
+The stronger cleanup has source-test coverage on both platforms; native saved
+buffer inspection and final sanitized archive qualification remain pending.
