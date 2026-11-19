@@ -966,3 +966,30 @@ The complete Windows source suite remains **135 passing tests** in
 `out/v22-attribution-tests.xml`. This establishes retained source documentation
 and development manifest linkage; the final frozen maps and release archive
 still require a regenerated attribution bundle and archive-inclusion check.
+
+### Interrupted job recovery and corrected-color preview
+
+The original frame-112 process and all waiting controllers were confirmed absent
+from the process inventory; their execution handles were unavailable. The log
+ends at 497/512 and no completed render receipt exists. This attempt is not
+qualified. Its directory/log are preserved with the `-interrupted` suffix.
+The frozen worker, judging policy and raw source scene hashes were checked
+against the preceding experiment before restarting the unfinished run.
+
+Recovery session `14560` first rendered the isolated neutral-deep v2 front
+preview in `out/v22-neutral-deep-v2-review`. The image was inspected: its color
+is more balanced brown, with the earlier excessive orange reduced. This is a
+development assessment, not human acceptance or final-detail qualification.
+The original five-set matrix remains valid for its original inputs; it does not
+qualify the revised palette. Six corrected-palette view/layout renders are now
+part of the queued prepare driver, followed by pair comparisons.
+
+The recovery then restarted frame 112 with the same frozen inputs and will run
+its analysis and review-preparation driver serially. The old waiting sessions
+`9771`, `61748` and `60776` are no longer live. Their image gate and runtime-stage
+continuation are now performed directly by the prepare driver after successful
+packed checks and cardinal renders. Queued results remain pending.
+
+All ten source records in the updated provenance inventory were independently
+rehash-checked against committed Git blobs, including exact upstream license
+bytes. The working tree was clean before this recovery documentation change.
