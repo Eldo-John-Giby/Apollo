@@ -102,7 +102,9 @@
     "assets/gnm-eye-photo/ATTRIBUTION.md": "34a4bf0e6041fbd30ae8a56803a0b31af39764a61a45a77483cfa69d61969717",
     "assets/ATTRIBUTION.md": "ef1042133335b08c2dacdebd52617da3925381313815a9a76d8f043cea658467",
     "assets/photorealism-v2/ATTRIBUTION.md": "25daa36f864a303e0bd6e6f68ccfa00ee66b52769c8ab880fb91d9d473739d96",
-    "milestones/gnm-portrait-refinement-2026-11-16/map-receipt.json": "9e5c1a8fdc753961f34eff6aa1115d30cf4b115de6e039c4952d0b9b3bf2ea59"
+    "milestones/gnm-portrait-refinement-2026-11-16/map-receipt.json": "9e5c1a8fdc753961f34eff6aa1115d30cf4b115de6e039c4952d0b9b3bf2ea59",
+    "assets/gnm/LICENSE.txt": "ba12fffb7f905c67daa3e0d9656e8638d3a0d0eee70862ec17da7db429be19f0",
+    "assets/gnm/source.json": "8f91e1ad911fc039c03b6eb228f964c30142c69659828b40a224222147a85163"
   },
   "provenance_groups": {
     "skin": {
@@ -145,8 +147,9 @@
     "model": "Pinned public GNM Head v3",
     "model_sha256": "61d78bbfb4ad8e0b38495804a4caef3214d3df00f8c3f68761e63b41ce3747eb",
     "license": "Apache-2.0",
-    "source_record": "docs/GNM_INTEGRATION.md",
-    "modifications": "Documented v22 identity layer and authored groom; native topology, vertex ordering and both UV layouts retained."
+    "source_record": "assets/gnm/source.json",
+    "modifications": "Documented v22 identity layer and authored groom; native topology, vertex ordering and both UV layouts retained.",
+    "license_record": "assets/gnm/LICENSE.txt"
   },
   "delivery": {
     "include": [

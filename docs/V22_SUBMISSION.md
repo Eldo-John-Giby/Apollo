@@ -940,3 +940,29 @@ five-set delivery inputs. No corrected render or acceptance is claimed yet.
 The Windows suite remains **135 passing tests** after the isolated palette and
 authoring-selection changes (`out/v22-neutral-deep-trial-tests.xml`). These
 source checks do not substitute for the queued corrected-color Blender preview.
+
+### Retained source licenses and texture linkage
+
+The pinned local Google GNM checkout was independently confirmed at Git revision
+`f84cdbdc86a34f55627526f137495f864e687679`, with a clean tracked LICENSE file.
+The existing qualified-package copy matches its checked-out bytes. Git's license
+blob differs only in LF versus Windows CRLF; `assets/gnm/LICENSE.txt` now retains
+the exact upstream Git blob, SHA-256
+`ba12fffb7f905c67daa3e0d9656e8638d3a0d0eee70862ec17da7db429be19f0`.
+Git attributes preserve those bytes. `assets/gnm/source.json` records source/model
+revisions, checksums and modifications. The v22 inventory now pins both records;
+the prior eight source-record hashes are unchanged.
+
+`gnm_v22_attribution.py` collects all pinned source records, retains upstream
+license/notices, and writes component attribution with explicit photographic
+resolution limits and five texture-manifest hashes. The actual development
+bundle is `out/v22-attribution-development-v2`; its previous first output is
+superseded because source JSON line endings were normalized before the final
+development collection. No map or scene was changed by this work.
+
+Independent checks rehashed every collected file, resolved the generated local
+links, confirmed exact GNM license bytes and rechecked all five manifest hashes.
+The complete Windows source suite remains **135 passing tests** in
+`out/v22-attribution-tests.xml`. This establishes retained source documentation
+and development manifest linkage; the final frozen maps and release archive
+still require a regenerated attribution bundle and archive-inclusion check.

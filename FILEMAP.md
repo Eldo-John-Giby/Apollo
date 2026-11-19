@@ -154,6 +154,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_scan_transfer.py`, `tools/gnm_generate_textures.py` | Checksum-verified attributed scan registration, emission transfer, measured CC0 fallback and five complete native texture sets. |
 | `assets/gnm-scan/source.json`, `assets/gnm-scan/ATTRIBUTION.md` | Pinned scan asset URLs/checksums, CC-BY-3.0 source license and derivative attribution. |
 | `assets/v22-provenance.json` | Approved v22 packed-image hashes, component provenance, source-record hashes and required delivery attribution; separates photographed and authored detail. |
+| `assets/gnm/source.json`, `assets/gnm/LICENSE.txt`, `tools/gnm_v22_attribution.py` | Exact pinned upstream GNM license/notices and source identities; collect retained component attribution and bind it to five current texture manifests. |
 | `docs/SCORE_IMPROVEMENT.md` | Current 60/20/20 audit, prioritized implementation and candidate qualification record. |
 | `tools/gnm_gaze_trial.py`, `tools/gnm_blink.py`, `tools/gnm_timeline_trial.py` | Evaluate native gaze anchors and clip geometry using upstream NumPy, then install and check the Blender timeline. |
 | `tools/gnm_blink_polish.py` | Build an isolated blink appearance review with matched animated upper lashes, slightly wider open lids, and localized matte skin. |
