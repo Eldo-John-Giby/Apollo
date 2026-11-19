@@ -1255,3 +1255,11 @@ file inclusion, rejects incomplete/reversed sequences, and rejects a changed
 frame before creating the packet directory. The complete Windows suite passes
 **136 tests** (`out/v22-review-sequence-tests.xml`). These fixture tests validate
 packaging behavior, not actual motion playback or human acceptance.
+
+The clean offline Linux source attempt for `49652af` could not start because
+the Docker Desktop Linux engine pipe was absent. Its log is
+`out/v22-linux-code-49652af.log`; it contains no test pass. Docker Desktop was
+launched hidden and its backend startup processes were confirmed, but engine
+readiness is still pending. The existing Windows Blender cardinal process
+remains live and was not restarted. Prior Linux source-test passes retain their
+original commit scope; they do not qualify the new packet sequence code.
