@@ -1127,3 +1127,28 @@ public CLI from `/tmp` for three held frames. It checks output receipt hashes
 and records the image/archive identities. Syntax compilation passes, but this
 rehearsal has not executed yet. Full sequence, alternate variant, cross-platform
 image comparison and final archive qualification remain separate requirements.
+
+### Three saved PBR timelines checked and review references authenticated
+
+Generate Motion passed all 383 integer/half-frame checks: maximum native error
+approximately `3.64e-12 m`, derived error `1.82e-12 m`, eye error zero, twenty-one
+packed image resources and no attachment-limit errors. Its whole-character
+neutral check also passed for eighteen visible components. All three newly
+packed development PBR timelines now have these completed saved-scene checks.
+The controller advanced to four 1024px/512-sample cardinal review renders.
+This does not establish completion of their final 576-frame PNG delivery.
+
+The rc.5 reference ZIP was rehashed against its committed candidate receipt:
+`5f4c0e8b849da9f22f6de09b46207d0d95f7a791fc8209b06f3a5706b1a2ed6c`.
+The rose-brown judging image was read from that authenticated ZIP and matched
+its embedded render receipt. The selected v22 reference image also matched
+`final-selection.json`. Both are retained in `out/v22-review-references` with
+their provenance record. Their camera/light/sample differences are disclosed;
+they are visual references, not a matched pixel-improvement experiment.
+
+After the remaining appearance renders, their controller now writes an explicit
+hash-bound review specification and invokes the repository packet builder for
+ten full/native variant cases, the two references, four cardinal cases and three
+packed motion scenes. The planned output is `out/v22-independent-review-packet`.
+Response fields remain blank, and the answer key is kept outside its reviewer
+ZIP. Syntax compilation passes. Packet creation and human review remain pending.
