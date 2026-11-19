@@ -1296,3 +1296,21 @@ to 192 frames. A separate Blender reopen worker requires one IMAGE strip, exactl
 agreement with every source PNG render-receipt hash. The preview controller runs
 this worker after each save. Syntax compilation passes; actual playback creation,
 round-trip checks and visual timing review have not run yet.
+
+### Upward cardinal image and authorized backend recovery
+
+Frame 93 completed and was inspected. Both pupils pass the upward-direction
+image check: vertical shifts approximately -5.74/-7.45 pixels with iris-pattern
+correlations 0.903/0.949. All three completed cardinal images pass together in
+`out/v22-pbr-512-three-cardinal-check.json`. Frame 130 is now rendering. The final
+batch receipt, downward check and independent human readability remain pending.
+
+The user explicitly authorized restarting Docker and shutting down WSL,
+including the disclosed impact on other sessions/containers. Docker Desktop
+backend processes were stopped, `wsl --shutdown` returned exit code zero, and
+Docker Desktop was relaunched hidden. Bounded engine probes still report startup
+pending, so no Linux pass is claimed. Windows Blender PID 744 continued rendering
+through this recovery and was not restarted. The queued PNG playback helpers
+also now explicitly require a Standard/None display transform, zero exposure and
+unit gamma to avoid adding another filmic transform to rendered PNGs; actual
+playback round-trip execution remains pending.
