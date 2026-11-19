@@ -786,3 +786,50 @@ Integer pose sequences currently contain 13 unique poses for Left, 13 for Right,
 and 39 for Generate Motion. This supports planning exact hold reuse while still
 delivering all 576 numbered PNGs; none of those final sequence renders is counted
 as complete from this metadata alone.
+
+### Blink convergence and review packet construction
+
+Frame 107 completed at both 512 and 1024 samples. The unchanged thresholds pass
+for 512: eye/lip/skin/hair mean absolute RGB errors are approximately
+0.809/0.947/0.341/0.869, with p95 values 3/3/1/3 and detail ratios within
+0.977–1.001. The comparison sheet was inspected without obvious additional
+smearing at 512. Evidence is under
+`out/v22-convergence-pbr-blink-107-analysis`. This adds peak closure to the
+neutral-frame evidence; extreme gaze and reopening still require checks.
+
+The thirty-case fresh-wrap controller started after the original process exited
+successfully. The first front/default/UDIM case completed. Matrix completion,
+layout agreement and visual acceptance remain pending.
+
+`tools/gnm_v22_review_packet.py` now builds randomized review packets from an
+explicit JSON source specification. Appearance entries carry `candidate`,
+`variant`/`output` or `reference`, and an `images` list of `{file,sha256}`.
+Direction entries carry `expected`, `neutral` and `judgment` image records.
+Motion entries carry `candidate`, `mode` and a `scene` record. Paths resolve
+relative to the specification. All five full/native pairs, rc.5/v22 references,
+four cardinal directions and three motion modes are mandatory. The complete
+source specification is hashed into the candidate identity.
+
+The reviewer ZIP includes anonymous sheets, metadata-free full-resolution views,
+anonymously named packed-scene copies and blank scorer-compatible responses.
+The assessor key stays outside the ZIP. Instructions disclose that Blender
+internals can reveal a mode, request independent first-pass review and do not
+present viewport shading as rendered appearance evidence. Input hashes are
+rechecked after construction. The packet builder authenticates selected input
+bytes; it does not itself qualify Blender playback or invent human approval.
+No actual new candidate review packet or responses have yet been produced.
+
+The packet builder's end-to-end packaging test confirms the assessor key is
+excluded from the reviewer ZIP, the response fields remain unset, full-size
+anonymous image copies and all three scene slots are included, and every shipped
+payload matches the assessor hashes. Changed payloads and missing variant scope
+are rejected. The complete Windows suite passes **133 tests** in
+`out/v22-review-packet-tests.xml`; this packaging fixture does not establish
+real-scene playback or supply any human ratings.
+
+The actual new default front pair completed with maximum absolute RGB difference
+one, p95 zero, and nineteen changed pixels at 768px. Evidence is
+`out/v22-native-default-front-layout-check.json`. The UDIM front image was
+visually inspected and retains the restored scalp/brows. The other twenty-eight
+matrix cases remain pending at this checkpoint; no broad five-set UV pass is
+claimed from the single pair.
