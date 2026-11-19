@@ -655,3 +655,22 @@ not update the earlier Linux unit-suite count or qualify the new rendering
 hooks without an actual subsequent Blender render. The pure metadata helper
 was also checked against real source-control PNGs: stripping metadata in memory
 gave byte-identical results while leaving the original files untouched.
+
+### Texture-only scalp restoration trial
+
+The flat native scalp comes from underpainting intended to sit beneath the
+separate v22 groom. The historical groom receipt identifies the uncapped input
+atlas with SHA-256 `04f57d1256e6f5239ccd665dcaab09465c2f38fce3988628cc6b36cd3dd8d2b8`;
+the retained rc.5 cool-grey atlas matches those exact bytes. The brow rasterizer
+now supports `--brows-only`, generating a separate 4K overlay with 27,807 covered
+texels rather than projecting scalp strands onto the bare native mesh.
+
+A development restoration in `out/v22-native-bare-scalp-trial` uses that verified
+uncapped photographic scalp, calibrated to the current forehead in linear RGB.
+Its world-space scalp coverage excludes native ears and restores approximately
+3.72 million scalp/padding texels. The twelve full-character maps are unchanged.
+The experimental recipe and exact inputs are recorded by
+`out/v22_restore_native_scalp.py` and the trial manifest. It is not yet rendered
+or visually accepted: the single Blender slot remains occupied by the live
+1024-sample reference. Do not use this trial as the master for the existing
+variant generator; its scalp restoration is not yet part of that authoring path.

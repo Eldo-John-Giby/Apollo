@@ -17,6 +17,10 @@ def main(a):
     with np.load(a.projection,allow_pickle=False) as data:
         segments,radius,brow=data['segments'],data['radii'],data['brow']
         strand_ids=data['strand_ids']
+    if a.brows_only:
+        segments,radius,strand_ids=segments[brow],radius[brow],strand_ids[brow]
+        brow=brow[brow]
+    if not len(segments):raise ValueError('No selected groom segments')
     size=a.size
     colors=np.zeros((size,size,3),dtype=np.float32)
     alpha=np.zeros((size,size),dtype=np.float32)
@@ -48,6 +52,7 @@ def main(a):
     if not cv2.imwrite(str(a.out),encoded):raise OSError(a.out)
     report=dict(source_sha256=receipt['source_sha256'],projection_sha256=receipt['projection_sha256'],
                 overlay_sha256=sha(a.out),recipe_sha256=sha(__file__),size=size,
+                brows_only=a.brows_only,
                 covered_pixels=int((alpha>.01).sum()),
                 qualification='Authored pigment only; full character materials remain separate. Review scalp/brow projection and UV seams before use.')
     a.out.with_suffix('.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
@@ -59,4 +64,5 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--projection',type=Path,required=True);p.add_argument('--out',type=Path,required=True)
     p.add_argument('--size',type=int,default=4096)
+    p.add_argument('--brows-only',action='store_true')
     main(p.parse_args())
