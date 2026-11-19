@@ -1564,3 +1564,9 @@ restarted. Additional recovery still waits on the live angle coordinator.
 All 156 Windows source tests pass after the UI-only cleanup change
 (`out/v22-ui-cleanup-source-tests.xml`). This test result does not claim that
 the queued native save/reopen probes have run or that old scenes were sanitized.
+
+Fresh clean offline Linux source extraction at `092f9c3` also passes the updated
+suite: `out/v22-linux-source-092f9c3-retry/result.json` and `tests.xml` bind the
+source ZIP, pinned container image and successful exit. Native Blender probes
+remain queued behind the still-running full-detail Left renders; this source
+test pass does not substitute for those save/reopen checks.
