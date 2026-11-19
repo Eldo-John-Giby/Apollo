@@ -10,6 +10,7 @@ import bpy
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from gnm_v22_audit import SELECTED,sha,appearance_signature
 from gnm_portrait_refine import render
+from gnm_v22_render_policy import apply as judging_policy
 
 
 def main(a):
@@ -29,17 +30,14 @@ def main(a):
     a.out.mkdir(parents=True)
     scene.camera=scene.objects['GNM Camera']
     scene.frame_set(a.frame)
-    scene.cycles.device='CPU'
-    scene.cycles.use_adaptive_sampling=False
-    scene.cycles.time_limit=0
-    scene.cycles.use_animated_seed=False
-    scene.cycles.seed=20261119
-    scene.render.use_motion_blur=False
+    policy=judging_policy(scene)
     report=dict(scene_sha256=source_hash,selected_sha256=SELECTED,recipe_sha256=sha(__file__),
                 appearance_signature=audit['appearance_signature'],frame=a.frame,size=a.size,
                 blender=bpy.app.version_string,device='CPU',adaptive_sampling=False,
                 animated_seed=False,seed=20261119,denoising=True,time_limit=0,
-                motion_blur=False,camera_matrix=[list(r) for r in scene.camera.matrix_world],
+                motion_blur=False,dither_intensity=0,judging_policy=policy,
+                judging_policy_sha256=sha(Path(__file__).with_name('gnm_v22_render_policy.py')),
+                camera_matrix=[list(r) for r in scene.camera.matrix_world],
                 camera_lens=scene.camera.data.lens,view_transform=scene.view_settings.view_transform,
                 exposure=scene.view_settings.exposure,profiles={},complete=False)
     if portable:report['portable_materials']=portable

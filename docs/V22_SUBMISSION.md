@@ -507,3 +507,59 @@ networking disabled. The log is `out/v22-linux-code-f13a3c0.log`. This qualifies
 that source-code test run only: it excludes the two new normal-repair tests,
 Blender runtime checks and the final delivery archive. Final clean-package
 Windows/Linux reproduction remains pending.
+
+The full current source checkpoint `4e67d64`, including the isolated repair,
+subsequently passed **120 tests on Windows and Linux**. Windows emitted
+`out/v22-code-4e67d64-windows.xml`; Linux again used a clean source archive,
+a path containing spaces, a different working directory and no network, with
+log `out/v22-linux-code-4e67d64.log`. This is source-code validation rather than
+the final delivery-archive rehearsal.
+
+The right mouth-corner control also reproduced inverted shader normals (seven
+in its cropped bake) and zero with bump shading disconnected. Both sides were
+tested without modifying source geometry or saving the selected scene. The
+right report is `out/v22-normal-crop-right/report.json`.
+
+The first 768-pixel full-character shader-conversion comparison completed and
+was visually inspected. It retains the v22 face and groom. Descriptive native
+crop mean RGB differences against its matched source were approximately
+0.36 (eyes), 0.27 (skin), 0.65 (lips) and 0.56 (hair), with p95 at most two.
+The comparison and graph-binding receipts are in
+`out/v22-master-wrap-repaired-udim`. The fresh native result still has faint
+brows and a flat scalp pigment region, so the separate texture-only visual
+gate remains open. These observations do not replace independent acceptance.
+
+### Judging determinism and five full-resolution sets
+
+Repeating the source render in the initial layout comparisons varied by up to
+three RGB levels. Disabling output dithering alone did not remove this
+variation. Inspection identified the selected portrait's legacy `NOISE`
+compositor texture, mixed at 0.02 by `Mix.001`, as another randomness source.
+`gnm_v22_render_policy.py` now explicitly bypasses that grain branch for judging
+while retaining the remaining portrait compositor, materials and geometry.
+It also centralizes fixed CPU sampling, seed, denoising and disabled adaptive
+sampling, depth/motion blur and dithering. The immutable studio scene is unchanged.
+New matched comparisons are in progress under `out/v22-master-wrap-judging-*`;
+pixel-repeatability is not yet claimed.
+
+The bake export scene now disables output dithering for future builds and
+records that choice. Existing raw/repaired masters are preserved with their
+original recipe hashes. They must not be relabeled as outputs of the changed
+baker; the required final freeze/regeneration remains pending.
+
+All five full-resolution pigmentation derivatives were generated in
+`out/v22-variants-4k-base`. Their original CLI identifiers are retained, and
+the default copies the repaired master's map bytes exactly. Independent
+decoded checks are running for all five; fresh wrapping, oblique-light
+comparisons and visual acceptance are still required.
+
+The grain-controlled judging comparisons completed with source images exactly
+pixel-identical across independent loads. Default full-character layout images
+differ at only 27 pixels, by at most one RGB level; the fresh native target
+differs at 33 pixels, also by at most one level. All p95 differences are zero.
+Receipts and image hashes are checked by
+`out/v22-master-wrap-judging-layout-check.json`. This proves the tested default
+set's fixed-light layout comparison, not all five sets or oblique views.
+All five full-resolution sets have now passed decoded encoding/normal checks;
+`out/v22-variants-4k-base/validation.json` also confirms byte-identical default
+maps relative to the repaired master.

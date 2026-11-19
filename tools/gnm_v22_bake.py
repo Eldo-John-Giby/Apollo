@@ -50,9 +50,10 @@ def main(args):
     export.view_settings.look = 'None'
     export.view_settings.exposure = 0
     export.view_settings.gamma = 1
+    export.render.dither_intensity = 0
     manifest = dict(source_sha256=SELECTED, blender=bpy.app.version_string,
                     recipe_sha256=sha(__file__), samples=args.samples,
-                    recipes=RECIPE_HASHES,complete=False,
+                    recipes=RECIPE_HASHES,complete=False,export_dither_intensity=0,
                     uv_layout='GNM Region (equivalent UDIM offsets retained in target)',
                     margin_px=args.size//128, maps={}, material_defaults={},material_settings={},
                     corneas=cornea_recipes(head),

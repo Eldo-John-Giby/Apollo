@@ -11,6 +11,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 from gnm_v22_audit import SELECTED,coords,sha
 from gnm_v22_materials import bind,validate,load_manifest
 from gnm_portrait_refine import aim,render
+from gnm_v22_render_policy import apply as judging_policy
 
 
 def main(a):
@@ -23,6 +24,7 @@ def main(a):
     manifest_hash=sha(a.maps/'manifest.json')
     recipe_files=[Path(__file__),Path(__file__).with_name('gnm_v22_materials.py'),
                   Path(__file__).with_name('gnm_pbr_manifest.py'),
+                  Path(__file__).with_name('gnm_v22_render_policy.py'),
                   Path(__file__).with_name('gnm_v22_audit.py'),
                   Path(__file__).with_name('gnm_portrait_refine.py')]
     recipes={path.name:sha(path) for path in recipe_files}
@@ -32,11 +34,7 @@ def main(a):
     scene=bpy.context.scene;head=scene.objects['GNM Head']
     scene.camera=scene.objects['Portrait | neutral 85mm']
     aim(scene.camera,(.4 if a.angle else 0,-.82,.03),(0,0,-.025));scene.camera.data.lens=85
-    scene.camera.data.dof.use_dof=False
-    scene.render.engine='CYCLES'
-    scene.cycles.device='CPU';scene.cycles.seed=20261119
-    scene.cycles.use_animated_seed=False;scene.cycles.use_adaptive_sampling=False
-    scene.cycles.time_limit=0;scene.render.use_motion_blur=False
+    policy=judging_policy(scene)
     if a.oblique:
         aim(scene.objects['Beauty key'],(.22,-.29,.22),(0,0,-.035))
     bpy.context.view_layer.update()
@@ -78,7 +76,8 @@ def main(a):
                 camera_matrix=[list(row) for row in scene.camera.matrix_world],
                 camera_lens_mm=scene.camera.data.lens,view_transform=scene.view_settings.view_transform,
                 exposure=scene.view_settings.exposure,seed=scene.cycles.seed,
-                adaptive_sampling=False,depth_of_field=False,motion_blur=False,
+                adaptive_sampling=False,depth_of_field=False,motion_blur=False,dither_intensity=0,
+                judging_policy=policy,
                 samples=a.samples,size=a.size,
                 images={p.name:sha(p) for p in a.out.glob('*.png')},
                 qualification='Visual wrapping experiment only; no release or review acceptance implied.')
