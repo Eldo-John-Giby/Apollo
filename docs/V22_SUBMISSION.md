@@ -1422,3 +1422,28 @@ motion previews, checking existing preview scene/source hashes and letting the
 renderer retain valid PNGs. It then queues Linux runtime and alternate-cache
 checks. Packet assembly remains pending after the remaining previews; the
 earlier appearance controller exited before writing its final review packet.
+
+### Independent review packet ready; runtime rehearsal live
+
+All three timing previews now contain 192 verified PNGs and passed reopened
+relative-path playback checks. The blinded packet is available at
+`out/v22-independent-review-packet/apollo-v22-independent-review.zip`.
+Its separate `integrity-check.json` verifies 618 payloads, 576 preview frames,
+12 appearance cases, four cardinal cases and three motion cases. ZIP SHA-256:
+`9902410c57c552a19fd9cbd853f806d78c8f3b1c0a5050e78d645cc44ee303e9`.
+Only the public ZIP is intended for reviewers; `assessor-key.json` stays private.
+Actual independent responses received: zero. Identity approval remains separate.
+
+The previews use 512px/32 samples for timing, while appearance/cardinal images
+use 1024px/512 samples. The ancillary Right preview pupil diagnostic passes.
+Left's screen-right iris correlation is 0.7508, below the unchanged 0.8
+threshold, so `out/v22-left-timing-preview-image-check.json` remains failed.
+Both pupils are visible on inspection, but this does not override the failed
+diagnostic. A full-detail Left-mode extreme/reopening follow-up remains pending;
+the passing Generate Motion cardinal check does not cover its larger amplitude.
+
+The network-disabled Linux clean-archive rehearsal container is confirmed live
+and rendering its first frame with the pinned runtime. No Linux runtime pass
+or alternate-cache pass is claimed yet. Final frozen regeneration, 576
+final-quality delivery PNGs, independent acceptance and final release/archive
+qualification remain incomplete.
