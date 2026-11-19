@@ -1205,3 +1205,18 @@ the integration history; integration was 119 commits ahead of submission and
 touching other worktrees or branch pointers. Final reconciliation must recheck
 remote state after qualification, then identify the exact released commit to
 the team; the preflight is not a merge, release or submission handoff.
+
+### First packed-candidate cardinal image checked
+
+The 1024px/512-sample frame-26 image completed from the saved PBR Generate
+Motion scene. The independent image oracle detects screen-left pupil shifts
+of approximately 9.09 and 6.16 pixels, with neutral iris-pattern correlations
+0.914 and 0.835, above the unchanged 0.8 threshold. Closure and reopening remain
+passing in the same invocation. Evidence:
+`out/v22-pbr-512-left-blink-reopening-check.json`. The rendered image was inspected.
+
+This is a completed-image pixel check, not yet the final source-bound four-image
+batch receipt: the still worker writes that receipt after all requested frames
+finish and its source/recipe rechecks pass. The renderer has moved on to frame
+58. Right/down checks, the remaining requested up image, blind direction
+readability and full-sequence qualification remain pending.
