@@ -58,6 +58,8 @@ def write(path,rgb):
 def build(a):
     if a.out.exists():raise FileExistsError(a.out)
     master=load_manifest(a.master)
+    if 'scalp_restoration' in master:
+        raise ValueError('Generate pigmentation from the full-character master before restoring the native scalp')
     expected=master['source_sha256'];selected=verify_selected(expected)
     source=read(a.master/'color.1001.png');size=source.shape[0]
     if source.shape[1]!=size:raise ValueError('Skin atlas must be square')

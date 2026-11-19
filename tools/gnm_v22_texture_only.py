@@ -40,6 +40,8 @@ def main(a):
     projection=json.loads(a.overlay.with_suffix('.json').read_text(encoding='utf-8'))
     if projection['source_sha256']!=master['source_sha256'] or sha(a.overlay)!=projection['overlay_sha256']:
         raise ValueError('Overlay and source identity do not match')
+    if getattr(a,'uncapped',None) and projection.get('brows_only') is not True:
+        raise ValueError('Bare-scalp restoration requires a brow-only overlay')
     a.out.mkdir(parents=True)
     for name in master['maps']:shutil.copy2(a.master/name,a.out/name)
     recipe=dict(overlay='groom-overlay.1001.png',color='texture-only-color.1001.png',
@@ -47,6 +49,9 @@ def main(a):
     shutil.copy2(a.overlay,a.out/recipe['overlay'])
     flatten(a.out,recipe)
     receipt=copy.deepcopy(master)
+    if getattr(a,'uncapped',None):
+        from gnm_v22_scalp import restore
+        receipt['scalp_restoration']=restore(a.out,a.template,a.uncapped)
     receipt.update(texture_only=recipe,texture_only_recipe_sha256=sha(__file__),
                    overlay_projection=projection,
                    qualification='Unreviewed texture-only groom projection; full-character base maps are unchanged.')
@@ -59,10 +64,14 @@ def main(a):
             raise ValueError('Full-character map changed '+name)
     (a.out/'manifest.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
     if sha(selected)!=master['source_sha256']:raise ValueError('Selected identity changed')
+    load_manifest(a.out)
     print('RESULT '+json.dumps(dict(manifest=str(a.out/'manifest.json'),full_maps_unchanged=True)),flush=True)
 
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('master','overlay','out'):p.add_argument('--'+name,type=Path,required=True)
-    main(p.parse_args())
+    p.add_argument('--uncapped',type=Path);p.add_argument('--template',type=Path)
+    a=p.parse_args()
+    if (a.uncapped is None)!=(a.template is None):p.error('--uncapped and --template are required together')
+    main(a)

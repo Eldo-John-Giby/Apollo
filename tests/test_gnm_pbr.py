@@ -69,6 +69,14 @@ def test_derivatives_reject_unfinished_master_before_creating_outputs(tmp_path,b
     assert not out.exists()
 
 
+def test_pigmentation_rejects_restored_native_master_instead_of_losing_scalp_recipe(tmp_path):
+    import gnm_v22_variants
+    receipt=setup_maps(tmp_path);receipt['scalp_restoration']={'source':'verified donor'}
+    (tmp_path/'manifest.json').write_text(json.dumps(receipt))
+    with pytest.raises(ValueError,match='before restoring'):
+        gnm_v22_variants.build(SimpleNamespace(master=tmp_path,out=tmp_path/'variants'))
+
+
 def test_variant_cache_covers_cornea_recipe_and_shader_code(tmp_path,monkeypatch):
     receipt=setup_maps(tmp_path)
     monkeypatch.setattr(gnm_run,'ROOT',tmp_path)

@@ -14,12 +14,12 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def check_map(path, size, role):
+def check_map(path, size, role, channels=3):
     header=path.read_bytes()[:29]
-    if header[:8]!=b'\x89PNG\r\n\x1a\n' or header[24]!=16 or header[25]!=2:
-        raise ValueError('Expected 16-bit RGB PNG: '+path.name)
+    if header[:8]!=b'\x89PNG\r\n\x1a\n' or header[24]!=16 or header[25]!=(6 if channels==4 else 2):
+        raise ValueError('Expected 16-bit '+('RGBA' if channels==4 else 'RGB')+' PNG: '+path.name)
     image=cv2.imread(str(path),cv2.IMREAD_UNCHANGED)
-    if image is None or image.dtype!=np.uint16 or image.shape!=(size,size,3):
+    if image is None or image.dtype!=np.uint16 or image.shape!=(size,size,channels):
         raise ValueError('Incorrect decoded map dimensions or precision: '+path.name)
     result=dict(size=[size,size],bit_depth=16,min=int(image.min()),max=int(image.max()))
     if role=='normal':
@@ -54,6 +54,12 @@ def main(a):
             if entry['size']!=[size,size] or entry['colorspace']!=('sRGB' if role=='color' else 'Non-Color'):
                 raise ValueError('Incorrect manifest map dimensions or color space: '+name)
             report['maps'][name]=dict(sha256=entry['sha256'],**check_map(a.maps/name,size,role))
+    for role,name in receipt.get('texture_only',{}).items():
+        entry=receipt['maps'][name]
+        if entry['colorspace']!=('Non-Color' if role=='roughness' else 'sRGB'):
+            raise ValueError('Incorrect texture-only color space: '+name)
+        report['maps'][name]=dict(sha256=entry['sha256'],
+                                **check_map(a.maps/name,a.skin_size,role,4 if role=='overlay' else 3))
     # Recheck payloads after decoding so concurrent changes cannot qualify.
     load_manifest(a.maps)
     if sha(a.maps/'manifest.json')!=master_hash or sha(selected)!=expected:

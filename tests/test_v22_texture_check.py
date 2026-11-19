@@ -9,6 +9,16 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 from gnm_v22_texture_check import check_map
 
 
+def test_overlay_requires_actual_16_bit_alpha_channel(tmp_path):
+    path=tmp_path/'overlay.png'
+    image=np.full((8,8,4),32000,dtype=np.uint16)
+    cv2.imwrite(str(path),image)
+    assert check_map(path,8,'overlay',4)['bit_depth']==16
+    cv2.imwrite(str(path),image[:,:,:3])
+    with pytest.raises(ValueError,match='RGBA'):
+        check_map(path,8,'overlay',4)
+
+
 def test_decoder_rejects_actual_low_precision_and_wrong_dimensions(tmp_path):
     path=tmp_path/'color.png'
     cv2.imwrite(str(path),np.full((8,8,3),128,dtype=np.uint8))

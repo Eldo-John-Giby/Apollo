@@ -694,3 +694,27 @@ The clean Linux source archive at `03447c9` passed all **125 tests**, including
 the PNG policy, with networking disabled and execution outside its extraction
 directory. See `out/v22-linux-code-03447c9.log`. The current comparison-tool
 metadata hook was subsequently verified by the queued Blender render.
+
+### Reproducible native scalp authoring
+
+The prototype is now implemented in `tools/gnm_v22_scalp.py` and exposed by
+`gnm_v22_texture_only.py --uncapped <verified atlas> --template <pinned template>`.
+Both inputs are required together, and restoration requires a brow-only overlay.
+The atlas has the historical pinned hash above. Template and recipe dependencies
+are checked before and after processing. Each variant calibrates the licensed
+uncapped scalp to its own forehead in linear RGB; only the separate native color
+map is restored. Full-character maps remain byte-identical to their input set.
+
+Pigmentation must be generated before native restoration. The variant generator
+rejects a restored native master rather than silently discarding its restoration.
+The targeted calibration and manifest/variant suite passes 12 tests. Five-set
+authoring is running under `out/v22-variants-native-skin`; its visual/layout
+qualification remains pending. The frame-107 convergence experiment continues
+with its frozen worker and repaired master, independently of this host authoring.
+
+The independent texture decoder now also checks the three optional native maps:
+4K 16-bit RGBA brow overlay, 4K 16-bit RGB restored color and roughness, and their
+declared color spaces. Its malformed-alpha regression passes. The complete
+Windows suite passes **129 tests**, recorded in
+`out/v22-scalp-and-encoding-tests.xml`. This is source-level evidence; it does
+not count as fresh-target visual acceptance or final archive qualification.
