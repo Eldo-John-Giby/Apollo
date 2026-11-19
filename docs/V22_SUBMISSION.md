@@ -1570,3 +1570,21 @@ suite: `out/v22-linux-source-092f9c3-retry/result.json` and `tests.xml` bind the
 source ZIP, pinned container image and successful exit. Native Blender probes
 remain queued behind the still-running full-detail Left renders; this source
 test pass does not substitute for those save/reopen checks.
+
+The UI cleanup now scrubs the full RNA-reported fixed buffers before writing
+the final anonymous directory and empty filename. Inspection of Blender's
+[4.5 RNA setter generator](https://raw.githubusercontent.com/blender/blender/blender-v4.5-release/source/blender/makesrna/intern/makesrna.cc)
+and [string-copy implementation](https://raw.githubusercontent.com/blender/blender/blender-v4.5-release/source/blender/blenlib/intern/string.cc)
+shows that a short assignment alone leaves bytes beyond the new terminator.
+A regression model reproduces that residual-byte behavior and requires the
+entire buffers to contain only anonymous filler/terminators after cleanup;
+unknown capacities are rejected. All 158 Windows source tests pass
+(`out/v22-ui-buffer-source-tests.xml`). Native validation is still pending.
+
+Generated `out/v22_check_ui_probe_buffers.py` is waiting on the actual native
+save/reopen probes. It independently reads typed SDNA `FileSelectParams`
+directory/filename arrays from the resulting copies and checks the complete
+buffers, including trailing bytes. This is stronger than checking only the
+visible RNA strings, but it is not yet a pass. The Left full-detail neutral
+render completed and was visually inspected; frame 26 is now rendering. Original
+preview diagnostic failure remains unchanged pending this full-detail check.

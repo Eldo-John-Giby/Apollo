@@ -20,6 +20,13 @@ def clear_file_browser_paths():
                 if space.type!='FILE_BROWSER':continue
                 params=space.params
                 if params is None:continue
+                # RNA's fixed char-array setter terminates the new value but
+                # does not clear its tail. Scrub each full buffer first.
+                for name,fill in [('directory',b'/'),('filename','_')]:
+                    maximum=params.bl_rna.properties[name].length_max
+                    if not 3<=maximum<=65536:
+                        raise ValueError('Unknown file-browser string buffer size')
+                    setattr(params,name,fill*(maximum-1))
                 params.directory=b'//'
                 params.filename=''
                 if bytes(params.directory)!=b'//' or params.filename:
