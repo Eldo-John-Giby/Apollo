@@ -1370,3 +1370,18 @@ maps. It requires the saved character hash, output image hashes, 1024px/512
 settings and pinned Blender build. The refreshed partial summary reports three
 completed authenticated pairs. This audit does not count absent variants or
 award human acceptance. Neutral-deep's corrected full-character render is live.
+
+Neutral-deep's corrected full-character 1024px/512-sample render subsequently
+completed and was inspected. The previous excessive orange cast is reduced;
+face and groom remain present. Its native counterpart is currently rendering,
+so the fourth completed pair is not yet counted. Independent review remains
+required before selecting this trial for final frozen regeneration.
+
+The pending Linux runtime helper now creates a uniquely named, network-disabled
+container and copies the complete development ZIP into it with `docker cp`.
+Before extraction the container verifies the archive against the streamed host
+SHA-256. This avoids slow random ZIP reads over the Windows bind mount while
+preserving the complete archive scope. Only the evidence output directory is
+bind-mounted. Container command exit status is checked explicitly, and a finally
+block removes only this named rehearsal container. Syntax compilation passes;
+the actual Linux runtime run remains queued, not qualified.
