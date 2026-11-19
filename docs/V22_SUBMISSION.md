@@ -1277,3 +1277,22 @@ Human direction readability and full-sequence validation remain separate gates.
 The previously pending documentation push through `86e6ec5` completed
 successfully. Docker readiness queries remain pending; the Windows renderer
 continues independently and has not been restarted.
+
+### Reviewer availability and playback round-trip preparation
+
+The user confirmed they can arrange 3–5 independent reviewers when the blinded
+packet is ready. This establishes reviewer availability, not completed reviews
+or ratings. Packet delivery and returned responses remain pending.
+
+The Docker backend logs report repeated engine ping timeouts. A bounded
+`wsl --list --running` query also timed out after twenty seconds. No system or
+Docker restart was performed, and the Windows cardinal render remains live.
+Linux source/runtime checks remain pending; earlier passes retain their original
+commit/artifact scope.
+
+The queued PNG playback authoring helper now sets the strip's duration explicitly
+to 192 frames. A separate Blender reopen worker requires one IMAGE strip, exactly
+192 ordered elements, range 1–192 at 24 fps, relative `//frames/` paths and exact
+agreement with every source PNG render-receipt hash. The preview controller runs
+this worker after each save. Syntax compilation passes; actual playback creation,
+round-trip checks and visual timing review have not run yet.
