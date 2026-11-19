@@ -2,6 +2,14 @@
 
 # Apollo
 
+**v22 submission candidate:** five portable texture variants and three packed
+192-frame gaze timelines derived from the approved v22 face and groom.
+[v22 setup and first render](docs/V22_QUICKSTART.md) ·
+[Requirements and current evidence](docs/V22_SUBMISSION.md).
+The integrated identity is approved; independent visual review and final release
+qualification remain pending. The earlier qualified pipelines below remain
+available as separate baselines.
+
 **Synthetic binocular gaze with pupil labels you can verify against the render.**
 
 Samsung PRISM-XR · Track 01 · Synthetic Eye Movement & Virtual Camera Rendering

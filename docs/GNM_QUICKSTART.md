@@ -1,5 +1,9 @@
 # GNM technical submission quickstart
 
+For the v22-derived full character and 4K/2K PBR sets, use
+[v22 candidate setup](V22_QUICKSTART.md). The instructions below describe the
+earlier GNM release; its 1K eye and 32-sample settings do not describe v22.
+
 Use the tested Blender **4.5.15 LTS** build. The packed scenes render with
 Cycles CPU; no GPU, MPFB add-on or Google model installation is needed for
 runtime. Python 3.10 or newer launches the bundled runner.
