@@ -1361,3 +1361,12 @@ Olive-amber's full render completed and its native render is now running. The
 remaining pairs, PNG timing previews, blind packet, Linux runtime and alternate
 cache rehearsal remain pending. Background jobs were inspected rather than
 restarted on resume; no completed render was discarded.
+
+Olive-amber's completed full/native pair was subsequently inspected and passed
+the same receipt checks. `out/v22_check_completed_appearance.py` now additionally
+compares every map input recorded by each completed full render with the actual
+extracted runtime map files, including the PBR manifest and optional native
+maps. It requires the saved character hash, output image hashes, 1024px/512
+settings and pinned Blender build. The refreshed partial summary reports three
+completed authenticated pairs. This audit does not count absent variants or
+award human acceptance. Neutral-deep's corrected full-character render is live.
