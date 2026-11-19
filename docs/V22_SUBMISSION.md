@@ -30,7 +30,8 @@ authoritative target. No organizer grade is predicted.
 
 ## Requirements to evidence
 
-All locations below are planned unless explicitly marked PASS. Generated audit
+PASS applies only to the scope stated in its row. PARTIAL means the cited
+development evidence exists but the full requirement is not achieved. Generated audit
 and release results live under `out/`; they are not source files in FILEMAP.
 Engineering owns implementation and automated evidence. The user and independent
 reviewers own visual acceptance; the team owns submission actions.
@@ -39,29 +40,29 @@ reviewers own visual acceptance; the team owns submission actions.
 | --- | --- | --- | --- | --- |
 | Preserve selected identity | Engineering | Hash check before every derived build; no source writes | selection receipt; `out/v22-audit/audit.json` | PASS for completed experimental derivations; ongoing build guard |
 | Isolate integration | Engineering | Separate clean worktree; unrelated edits retained | branch above | PASS |
-| Reproducible identity layer | Engineering | Native topology/order/UV unchanged; neutral matches selected evaluated surface | `out/v22-audit/identity.npz`; integration receipt | Pending |
+| Reproducible identity layer | Engineering | Native topology/order/UV unchanged; neutral matches selected evaluated surface | `out/v22-integrated-dense/*/expression.json`; `out/v22-review-pbr-512/*/appearance-check.json` | PASS for current development derivation; final frozen rebuild pending |
 | Appearance inventory | Engineering | Geometry, keys, shader dependencies, textures and visible attachments inventoried | `out/v22-audit/audit.json` | PASS |
-| Reference views | Engineering | Source-bound front/profile/three-quarter/eye stills inspected | `out/v22-audit/*.png` and hashes | Running |
-| Native motion reference | Engineering | Pinned upstream evaluation; exact reference checks retained | native clips and reference verification | Pending |
-| Deformed identity | Engineering | Local surface transport; native eyes unaffected; neutral exact | derived motion checks | Pending |
-| Attached groom/tears | Engineering | Roots and local orientation follow motion; no severe intersections | attachment manifest, all-frame and transition checks, crops | Pending |
-| Five complete texture variants (60) | Engineering | Existing identifiers; coherent skin/lips/ears/eyes; base color, roughness, detail | texture manifests, source licenses and hashes | Pending |
-| UV portability (20) | Engineering | Automatic fresh-target wrapping of five variants in both layouts; seams/color spaces/dilation checked | fresh wrapping receipts and comparisons | Pending |
+| Reference views | Engineering | Source-bound front/profile/three-quarter/eye stills inspected | selected source hashes; `out/v22-owner-identity-review`; reference records | PARTIAL: approved references authenticated; final matched view set pending |
+| Native motion reference | Engineering | Pinned upstream evaluation; exact reference checks retained | `out/v22-native-dense-32`; saved PBR half-frame checks | PASS for development native evaluation and three saved scenes; final rebuild pending |
+| Deformed identity | Engineering | Local surface transport; native eyes unaffected; neutral exact | `out/v22-review-pbr-512/*/half-frame-check.json` and appearance checks | PASS for three development scenes, 383 times each, native eye error zero |
+| Attached groom/tears | Engineering | Roots and local orientation follow motion; no severe intersections | same half-frame checks; blink/reopening images | PARTIAL: numerical limits pass; independent collision/motion review pending |
+| Five complete texture variants (60) | Engineering | Existing identifiers; coherent skin/lips/ears/eyes; base color, roughness, detail | `out/v22-variants-native-skin-v2/assembly.json`; source manifests and decoder reports | PARTIAL: five 4K/2K sets authored; corrected deep palette and final detail/human acceptance pending |
+| UV portability (20) | Engineering | Automatic fresh-target wrapping of five variants in both layouts; seams/color spaces/dilation checked | `out/v22-corrected-five-wrap-evidence/layout-check.json` | PARTIAL: thirty current fresh-wrap cases pass layout agreement; final seam/detail acceptance pending |
 | Texture-only result (60) | Engineering/reviewers | Convincing neutral and oblique-light appearance on fresh native target | judging stills and blinded review | Pending |
 | Full v22 result (60) | Engineering/user | Identity retained with groom and geometry; sharp, consistent comparison settings | hero, details, contact sheets | Pending |
-| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | sample comparisons and selected presets | Pending |
-| Three motion modes (20) | Engineering | Left/right/generate-motion; 192 frames each at 24 fps; viewer-screen convention | packed timelines and 576 numbered PNGs | Pending |
-| Kinematic checks (20) | Engineering | Binocular fixation, eye integrity, closure/reopening, smooth lids/expressions | all-frame checks and intermediate transition samples | Pending |
-| Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | image oracle reports | Pending |
+| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | `out/v22-three-pose-render-profile.json` and its analyses | PARTIAL: 512 passes default neutral, closure and reopened/upward pose; other variants/views/frozen build pending |
+| Three motion modes (20) | Engineering | Left/right/generate-motion; 192 frames each at 24 fps; viewer-screen convention | `out/v22-review-pbr-512/*/expression.blend` | PARTIAL: three packed timelines checked; final 576 numbered PNGs pending |
+| Kinematic checks (20) | Engineering | Binocular fixation, eye integrity, closure/reopening, smooth lids/expressions | three saved-scene half-frame checks; native interpolation receipts | PARTIAL: geometry/attachment checks pass at 383 times per mode; rendered full-motion and human gates pending |
+| Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | `out/v22-pbr-512-upward-reopening-check.json`; cardinal render queue | PARTIAL: upward gaze, closure and reopening pass; three other cardinal images pending |
 | Exact reset | Engineering | Deterministic neutral reset and same-build reproduction | geometry/pixel/hash comparisons | Pending |
-| Offline playback (20) | Engineering | Reopened packed scenes without paths, MCP, MPFB or GNM authoring environment | offline audit and clean extraction receipts | Pending |
+| Offline playback (20) | Engineering | Reopened packed scenes without paths, MCP, MPFB or GNM authoring environment | saved-scene resource checks; clean runtime rehearsal queue | PARTIAL: twenty-one packed images per current scene checked; clean runtime execution pending |
 | Stable CLI (20) | Engineering | still/left/right/generate-motion; variant/layout/output/frame options retained | CLI tests and clean runs | Pending |
 | Recovery (20) | Engineering | Resume, missing/corrupt repair, stale-cache rejection, invalid-input rejection | recovery tests on candidate | Pending |
 | Cross-platform reproduction (20) | Engineering | Clean Windows/Linux extraction; spaces and different CWD; pinned Blender | reproducibility reports; platform tolerance stated separately | Pending |
 | Independent review | User + 3–5 reviewers | >=95% cardinal accuracy; median >=4/5 each category; no severe defect shared by two reviewers | randomized blind sheets, responses, separate key | Pending |
 | Final identity approval | User | Explicit approval of integrated hero as retaining v22 | review decision | Pending |
 | Freeze and full qualification | Engineering | Regenerate final deliverables after acceptance; bind source/scenes/maps/frames/tests | final manifest and all applicable tests | Pending |
-| Package hygiene | Engineering | No credentials, personal paths, unlicensed or development artifacts | archive scan and licenses | Pending |
+| Package hygiene | Engineering | No credentials, personal paths, unlicensed or development artifacts | `out/v22-attribution-corrected-trial`; source/PNG policies; final archive scan | PARTIAL: pinned source notices and manifest linkage collected; final archive scan/inclusion pending |
 | Judge documentation | Engineering | Verified setup, modes/variants, playback, evidence, compatibility, limitations | README, quickstart, submission audit | Pending |
 | Release | Engineering | Checkpoint commits; push; uniform version/tag; promotion only after gates pass | release commit/assets/checksums | Pending |
 | Submission handoff | Engineering/team | Exact repository/release/hashes/matrix and remaining checklist | handoff report | Pending |
@@ -70,17 +71,21 @@ reviewers own visual acceptance; the team owns submission actions.
 
 ## Current execution
 
-The integration starts by extracting the evaluated selected identity, without
-removing or reinterpreting its shape keys. Native motion and derived appearance
-will have separate measurements. The existing installer rejection must remain
-the default for arbitrary keyed scenes; any integration path must explicitly
-authenticate v22 and record its derivation.
+The current development candidate retains immutable v22 and separates native
+motion from the transported identity layer. All three packed PBR timelines have
+passed 383 integer/half-frame checks and eighteen-component neutral appearance
+checks. The corrected five-set native matrix passes thirty fresh-wrap cases.
+Default render convergence is verified at neutral, closure and reopening.
 
-No visual, motion, texture portability, clean-machine or release gate has passed
-for this integrated candidate yet. Historical rc.5 qualification and still-only
-v22 checks remain separate evidence.
+The controller is rendering four cardinal images, then runs the independent
+image gate, development runtime staging, Windows archive/recovery rehearsal and
+five full/native judging pairs. A separate watcher schedules offline Linux
+runtime execution after the Windows controller exits. Queued work is not a pass.
+Owner identity approval and the 3–5-person blind review remain pending. No final
+freeze, complete PNG delivery, release qualification or submission handoff is
+claimed. Historical rc.5 results remain separate from this candidate.
 
-### Initial integration evidence (19 November)
+### Historical initial integration evidence (19 November)
 
 - All 92 Python tests passed, including two new numerical regressions. These do
   not replace the Blender and visual checks.
