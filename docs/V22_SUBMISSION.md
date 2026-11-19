@@ -718,3 +718,38 @@ declared color spaces. Its malformed-alpha regression passes. The complete
 Windows suite passes **129 tests**, recorded in
 `out/v22-scalp-and-encoding-tests.xml`. This is source-level evidence; it does
 not count as fresh-target visual acceptance or final archive qualification.
+
+### Five-set fresh-wrap matrix gate
+
+`gnm_v22_wrap_check.py` requires thirty actual fresh-target trials, arranged as
+`<source>/<variant>/<udim|legacy>/<front|angle|oblique>/comparison.json`.
+Front and angle use neutral judging light; oblique uses the front camera with
+directional light. Both layouts must have identical camera, lights, sampling,
+render policy and source recipes. The gate checks current map and image hashes,
+fresh native bindings and source/template identities, then requires at most one
+RGB level difference between layouts. It rejects missing/stale cases and changed
+comparison conditions; it does not award visual acceptance. Targeted adversaries
+cover changed lighting, image payloads, case labels and excessive pixel error.
+
+The default and golden-hazel native sets have passed the expanded decoder with
+all fifteen maps. The remaining authoring/checks and thirty-render matrix are
+still pending; the Blender slot remains occupied by frame-107 convergence.
+
+All five native sets subsequently completed. Each passed the expanded independent
+decoder (fifteen maps per set), recorded in `out/v22-native-{default,golden,olive,
+deep,cool}-decoded-check.json`. A second cross-set manifest/payload check confirms
+all sixty full-character map files remain unchanged; see
+`out/v22-native-five-set-summary.json`. The scripted default restoration is
+byte-identical to the previously inspected prototype color map. These results
+do not qualify unrendered variants or replace human review.
+
+The complete Windows suite passed **131 tests** with the new matrix gate
+(`out/v22-wrap-matrix-tests.xml`). Testing against an older real receipt exposed
+missing comparison fields; the checker now rejects these explicitly, with a
+targeted regression, rather than accepting incomplete historical evidence.
+
+Frame 107 at 512 samples completed and was visually inspected. Both irises are
+covered at closure. Lash clusters remain visible on closed lids and need review
+alongside reopening, rather than assuming image quality from geometry checks.
+The matching 1024-sample reference is still rendering; no new motion-wide sample
+preset or convergence pass is claimed.

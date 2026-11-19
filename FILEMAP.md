@@ -118,6 +118,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_v22_normal_repair.py`, `tests/test_v22_normal_repair.py` | Derive an audited copy repairing only isolated inverted tangent-normal texels; preserve raw maps and reject widespread damage. |
 | `tools/gnm_v22_groom_projection.py`, `tools/gnm_v22_groom_overlay.py`, `tools/gnm_v22_texture_only.py` | Isolated, unqualified pigment-projection experiments for the separate texture-only target; retain the full character's original maps. |
 | `tools/gnm_v22_scalp.py`, `tests/test_v22_scalp.py` | Restore the verified uncapped photographic scalp in separate native texture maps, calibrated per variant with source/recipe hashes; preserve full-character maps. |
+| `tools/gnm_v22_wrap_check.py`, `tests/test_v22_wrap_check.py` | Authenticate five native texture variants in front, angle and oblique trials on both UV layouts; compare actual pixels only under matching render conditions. |
 | `tools/gnm_skin_trial.py`, `tools/gnm_skin_fill.py`, `tools/gnm_eye_maps.py` | GNM color-transfer build with measured projection coverage and native eye tiles. |
 | `tools/gnm_texture_trial.py` | Fresh-template and timeline texture application, CPU inspection renders and scene/map/build-bound still receipts. |
 | `tools/gnm_skin_detail.py` | Bake reproducible authored brow fibers into the native skin atlas using surface-to-UV correspondence, with source and output hash receipts. |
