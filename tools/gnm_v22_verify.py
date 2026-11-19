@@ -48,11 +48,19 @@ def main(args):
         if audit['source_sha256']!=SELECTED:
             raise ValueError('Wrong source audit')
         expected={i['name']:i['sha256'] for i in audit['images'] if i['packed']}
-        if payloads!=expected:
+        different=(any(payloads.get(name)!=digest for name,digest in expected.items())
+                   if args.maps else payloads!=expected)
+        if different:
             raise ValueError('Reopened texture payloads differ from selected source')
-        if appearance_signature(head)!=audit['appearance_signature']:
+        if not args.maps and appearance_signature(head)!=audit['appearance_signature']:
             raise ValueError('Full-character shaders differ from selected v22')
-        texture_identity='exact selected packed bytes'
+        texture_identity='exact selected packed bytes retained with explicit PBR conversion' if args.maps else 'exact selected packed bytes'
+    portable_binding=None
+    if args.maps:
+        from gnm_v22_materials import validate
+        portable_binding=validate(head,args.maps,args.layout,full_character=True,require_packed=True)
+        if args.source_audit and set(payloads.values())!=set(expected.values())|set(portable_binding['active_maps'].values()):
+            raise ValueError('Unexpected packed image payload outside selected source and validated PBR maps')
     if not scene.render.filepath.startswith('//'):
         raise ValueError('Author render path')
     with np.load(args.geometry, allow_pickle=False) as data:
@@ -106,6 +114,7 @@ def main(args):
                   derived_max_error_m=0., eye_max_error_m=0., attachments={}, resources=resources,
                   root_offsets_m={}, orientation_step_degrees={},orientation_rate_degrees_per_frame={})
     report['texture_identity']=texture_identity
+    if portable_binding:report['portable_binding']=portable_binding
     report['verifier_sha256']=sha(__file__)
     report['status']='running'
     report['frames_checked']=0
@@ -210,4 +219,6 @@ if __name__=='__main__':
     parser.add_argument('--render',action='store_true')
     parser.add_argument('--render-frames',default='1,25,58,106,107,112')
     parser.add_argument('--source-audit',type=Path)
+    parser.add_argument('--maps',type=Path,help='Verify a documented packed PBR conversion instead of the original head shader')
+    parser.add_argument('--layout',choices=('udim','legacy'),default='udim')
     main(parser.parse_args(sys.argv[sys.argv.index('--')+1:]))

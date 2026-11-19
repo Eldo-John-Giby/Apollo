@@ -42,10 +42,12 @@ def main(a):
                           energy=obj.data.energy,color=list(obj.data.color),
                           size=getattr(obj.data,'size',None),hidden=obj.hide_render)
               for obj in scene.objects if obj.type=='LIGHT'}
-    render(scene,a.out,'source-full',a.size,a.samples)
-    bind(head,a.maps,a.layout,full_character=True)
-    full_binding=validate(head,a.maps,a.layout,full_character=True,require_packed=False)
-    render(scene,a.out,'baked-full',a.size,a.samples)
+    full_binding=None
+    if not a.fresh_only:
+        render(scene,a.out,'source-full',a.size,a.samples)
+        bind(head,a.maps,a.layout,full_character=True)
+        full_binding=validate(head,a.maps,a.layout,full_character=True,require_packed=False)
+        render(scene,a.out,'baked-full',a.size,a.samples)
     fresh_binding=None
     if a.target:
         with bpy.data.libraries.load(str(a.target.resolve()),link=False) as (src,dst):
@@ -72,7 +74,7 @@ def main(a):
                 target_sha256=target_hash,layout=a.layout,
                 recipe_sha256=recipes,full_binding=full_binding,fresh_binding=fresh_binding,
                 template_sha256=template_hash,
-                angle=a.angle,oblique=a.oblique,lights=lighting,device=scene.cycles.device,
+                angle=a.angle,oblique=a.oblique,fresh_only=a.fresh_only,lights=lighting,device=scene.cycles.device,
                 camera_matrix=[list(row) for row in scene.camera.matrix_world],
                 camera_lens_mm=scene.camera.data.lens,view_transform=scene.view_settings.view_transform,
                 exposure=scene.view_settings.exposure,seed=scene.cycles.seed,
@@ -99,6 +101,8 @@ if __name__=='__main__':
     p.add_argument('--target',type=Path);p.add_argument('--template',type=Path)
     p.add_argument('--size',type=int,default=768);p.add_argument('--samples',type=int,default=32)
     p.add_argument('--oblique',action='store_true');p.add_argument('--angle',action='store_true')
+    p.add_argument('--fresh-only',action='store_true',help='Render only the separate native texture-only target')
     a=p.parse_args(sys.argv[sys.argv.index('--')+1:])
     if a.target and not a.template:p.error('--target requires --template for native geometry validation')
+    if a.fresh_only and not a.target:p.error('--fresh-only requires --target')
     main(a)

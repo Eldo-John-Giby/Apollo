@@ -35,6 +35,9 @@ def prepare(args):
         return
     head = bpy.context.scene.objects['GNM Head']
     from gnm_pbr_manifest import is_pbr
+    previous_materials=[mat for mat in head.data.materials if mat and mat.name.startswith('Apollo v22 |')]
+    previous_images={node.image for mat in previous_materials if mat.use_nodes
+                     for node in mat.node_tree.nodes if node.type=='TEX_IMAGE' and node.image}
     for tile in (() if is_pbr(args.maps) else tiles):
         material = head.data.materials[tile - 1001]
         nodes, links = material.node_tree.nodes, material.node_tree.links
@@ -58,8 +61,18 @@ def prepare(args):
         links.new(coordinates, image.inputs['Vector'])
         links.new(image.outputs['Color'], shader.inputs['Base Color'])
     bind_surface(head, args.maps, args.layout)
+    # Retire only replaced, unused PBR bindings. Keep the selected portrait's
+    # original packed resources and every material still used by another object.
+    for material in previous_materials:
+        if material.users==0:bpy.data.materials.remove(material)
+    for image in previous_images:
+        if image.users==0:bpy.data.images.remove(image)
+    if is_pbr(args.maps) and bpy.context.scene.get('apollo_identity_source_sha256'):
+        bpy.context.scene['apollo_v22_maps_manifest_sha256']=digest(args.maps/'manifest.json')
     bpy.context.scene['apollo_gnm_variant_inputs'] = json.dumps(identity, sort_keys=True)
-    bpy.ops.file.pack_all()
+    bpy.data.use_autopack=False
+    for image in bpy.data.images:
+        if image.source in ('FILE','TILED') and not image.packed_file:image.pack()
     relative_images(args.maps, target)
     bpy.ops.wm.save_as_mainfile(filepath=str(target.resolve()), compress=True,
                               relative_remap=False)

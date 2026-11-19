@@ -39,6 +39,10 @@ def main(a):
     if a.out.exists():raise FileExistsError(a.out)
     scene.frame_set(1)
     targets={o.name:o for o in scene.objects if not o.hide_render and o.type in ('MESH','CURVE','CURVES')}
+    portable_binding=None
+    if a.maps:
+        from gnm_v22_materials import validate
+        portable_binding=validate(targets['GNM Head'],a.maps,a.layout,full_character=True,require_packed=True)
     with bpy.data.libraries.load(str(a.source.resolve()),link=False) as (src,dst):
         names=list(src.objects);dst.objects=names.copy()
     originals=dict(zip(names,dst.objects))
@@ -53,13 +57,16 @@ def main(a):
     report=dict(scene_sha256=candidate_hash,selected_sha256=SELECTED,recipe_sha256=sha(__file__),
                 objects={},native_eye_shift_is_intentional=True,passed=True,
                 qualification='Whole-character neutral geometry/material comparison only; motion and visual review remain separate.')
+    if portable_binding:report['portable_binding']=portable_binding
     for name,original in expected.items():
         target=targets[name]
         np.testing.assert_array_equal(np.asarray(target.matrix_world),np.asarray(original.matrix_world))
-        if extra_material_settings(target)!=extra_material_settings(original):
+        converted=name=='GNM Head' and portable_binding is not None
+        if not converted and extra_material_settings(target)!=extra_material_settings(original):
             raise ValueError('Material mode changed: '+name)
         source_signature=appearance_signature(original)
-        if appearance_signature(target)!=source_signature:
+        target_signature=appearance_signature(target)
+        if not converted and target_signature!=source_signature:
             raise ValueError('Material recipe changed: '+name)
         source_points,source_radius=geometry(original)
         target_points,target_radius=geometry(target)
@@ -72,7 +79,9 @@ def main(a):
         if error>1e-6:raise ValueError(f'Neutral identity changed: {name}: {error} m')
         if source_radius is not None:np.testing.assert_array_equal(source_radius,target_radius)
         report['objects'][name]=dict(vertices_or_curve_points=len(source_points),max_neutral_error_m=error,
-                                    material_signature=source_signature,radii_exact=source_radius is not None)
+                                    material_signature=target_signature,source_material_signature=source_signature,
+                                    material_comparison='validated_pbr_conversion' if converted else 'exact_selected_recipe',
+                                    radii_exact=source_radius is not None)
     if sha(candidate)!=candidate_hash or sha(a.source)!=SELECTED:raise ValueError('Scene file changed during audit')
     a.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print('RESULT '+json.dumps(dict(report=str(a.out),components=len(report['objects']),source_unchanged=True)),flush=True)
@@ -81,4 +90,6 @@ def main(a):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--source',type=Path,required=True);p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--maps',type=Path,help='Validate the intentional PBR head conversion while retaining exact groom checks')
+    p.add_argument('--layout',choices=('udim','legacy'),default='udim')
     main(p.parse_args(sys.argv[sys.argv.index('--')+1:]))

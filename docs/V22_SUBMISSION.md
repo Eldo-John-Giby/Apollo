@@ -574,3 +574,51 @@ set's fixed-light layout comparison, not all five sets or oblique views.
 All five full-resolution sets have now passed decoded encoding/normal checks;
 `out/v22-variants-4k-base/validation.json` also confirms byte-identical default
 maps relative to the repaired master.
+
+### Packed PBR development timelines and portability preflight
+
+The four-profile neutral convergence run completed through 256 samples. Against
+that reference, 128 still exceeds the unchanged eye/lip/hair limits (mean RGB
+errors approximately 1.02/1.24/1.08 and p95 four); 32 and 64 also fail. Skin
+passes. The comparison sheets were visually inspected, but no delivery sample
+count is selected. Reports are in `out/v22-convergence-pbr-judging-analysis`.
+A separate 512-sample reference is now rendering with the identical source,
+maps, worker and judging policy, for a strict combined comparison later.
+
+`gnm_v22_prepare.py` checks the source integration scene/geometry receipts,
+selected appearance audit and complete PBR manifest, applies the explicit
+judging preset, packs images and asserts unchanged head geometry, polygon
+regions and both UV layouts. It records all recipe/input hashes. The trial's
+256 samples are a development setting, **not a selected delivery preset**.
+The reopened verifier and whole-character checker now accept the intentional
+PBR head conversion through independent shader/payload validation while
+retaining native/derived geometry checks and exact groom checks.
+
+The first cache test exposed Blender dropping the replaced portrait's unused
+image datablocks on a later save. Original selected images now have explicit
+retention; alternate caches retire only replaced, unused PBR materials/images
+and update their active manifest stamp. The failed v2 alternate cache remains
+unqualified. The v3 development scene retains all nine original payloads plus
+twelve active PBR images across repeated saves.
+
+`out/v22-packed-pbr-trial-v3/whole-character-check.json` passes all eighteen
+visible components, with maximum neutral deviation approximately 0.06 microns.
+The olive-amber alternate in the legacy UV layout passes reopened native,
+derived, attachment, eye and packed-resource checks at frames 1, 107 and 112;
+it retains 21 images, and a second cache invocation verifies the same artifact.
+These are targeted checks, not all-frame qualification or a rendered alternate
+motion acceptance. The old material path remains available for legacy archives.
+
+Docker's installed Blender was directly verified as 4.5.15 LTS, build
+`5afeabba6097`. The v3 default packed scene passes the same three-frame reopened
+checks in a network-disabled Linux container without the authoring v22 scene
+or authoring output directories mounted. Only the scene, maps, reference data,
+checker code and evidence destination were supplied. The report is
+`out/v22-packed-pbr-trial-v3/linux/reopened-check.json`. This is a development
+portability preflight; final clean delivery-archive reproduction is still pending.
+
+The separate native-target groom projection/rasterization completed. Its trial
+in `out/v22-native-groom-review` improves brow definition but still shows an
+unconvincingly flat scalp region, so it is **not visually accepted**. All twelve
+full-character map files remain unchanged by that separate trial. Further
+texture-only scalp refinement is needed before five-set visual qualification.
