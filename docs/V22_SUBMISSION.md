@@ -1263,3 +1263,17 @@ launched hidden and its backend startup processes were confirmed, but engine
 readiness is still pending. The existing Windows Blender cardinal process
 remains live and was not restarted. Prior Linux source-test passes retain their
 original commit scope; they do not qualify the new packet sequence code.
+
+### Both horizontal cardinal images checked
+
+Frame 58 completed and was visually inspected. The independent image oracle
+finds rightward pupil shifts of approximately 9.22 and 6.40 pixels, with iris
+pattern correlations 0.874 and 0.841. Together with frame 26, both horizontal
+directions, closure and reopening pass the unchanged pixel checks in
+`out/v22-pbr-512-horizontal-blink-check.json`. The batch's final source/recipe
+receipt remains pending until all four frames finish. Frame 93 is now rendering.
+Human direction readability and full-sequence validation remain separate gates.
+
+The previously pending documentation push through `86e6ec5` completed
+successfully. Docker readiness queries remain pending; the Windows renderer
+continues independently and has not been restarted.
