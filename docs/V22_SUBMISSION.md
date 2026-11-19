@@ -60,7 +60,7 @@ reviewers own visual acceptance; the team owns submission actions.
 | Recovery (20) | Engineering | Resume, missing/corrupt repair, stale-cache rejection, invalid-input rejection | recovery tests on candidate | Pending |
 | Cross-platform reproduction (20) | Engineering | Clean Windows/Linux extraction; spaces and different CWD; pinned Blender | reproducibility reports; platform tolerance stated separately | Pending |
 | Independent review | User + 3–5 reviewers | >=95% cardinal accuracy; median >=4/5 each category; no severe defect shared by two reviewers | randomized blind sheets, responses, separate key | Pending |
-| Final identity approval | User | Explicit approval of integrated hero as retaining v22 | review decision | Pending |
+| Final identity approval | User | Explicit approval of integrated hero as retaining v22 | `out/v22-owner-identity-review/identity-approval.json` | PASS for the reviewed integrated face and groom; final release gates remain separate |
 | Freeze and full qualification | Engineering | Regenerate final deliverables after acceptance; bind source/scenes/maps/frames/tests | final manifest and all applicable tests | Pending |
 | Package hygiene | Engineering | No credentials, personal paths, unlicensed or development artifacts | `out/v22-attribution-corrected-trial`; source/PNG policies; final archive scan | PARTIAL: pinned source notices and manifest linkage collected; final archive scan/inclusion pending |
 | Judge documentation | Engineering | Verified setup, modes/variants, playback, evidence, compatibility, limitations | README, quickstart, submission audit | Pending |
@@ -81,7 +81,7 @@ The controller is rendering four cardinal images, then runs the independent
 image gate, development runtime staging, Windows archive/recovery rehearsal and
 five full/native judging pairs. A separate watcher schedules offline Linux
 runtime execution after the Windows controller exits. Queued work is not a pass.
-Owner identity approval and the 3–5-person blind review remain pending. No final
+Owner identity approval has been received; the 3–5-person blind review remains pending. No final
 freeze, complete PNG delivery, release qualification or submission handoff is
 claimed. Historical rc.5 results remain separate from this candidate.
 
@@ -1175,3 +1175,21 @@ Both helper scripts pass syntax compilation. The actual alternate-cache run is
 pending behind the existing review/Windows/Linux sequence. Its scope is three
 held frames; final alternate blink/gaze samples and final release validation
 remain outstanding. No second Blender process was started during this audit.
+
+### Corrected-set encoding coverage and explicit identity approval
+
+The corrected neutral-deep native set independently passed all fifteen map
+encoding checks, including restored color, roughness and the 16-bit RGBA brow
+overlay. `out/v22-corrected-five-set-encoding.json` links this report and the four
+unchanged sets' decoder reports to their exact current manifests/payload hashes.
+All seventy-five corrected trial map files have decoder evidence. This covers
+data integrity, precision, dimensions and normals, not final visual acceptance.
+
+The user explicitly answered the comparison question: **“Yes, keep this v22
+identity.”** The owner face/groom identity gate is therefore passed for the
+reviewed character. `out/v22-owner-identity-review/identity-approval.json` records
+the response and binds it to the original review manifest, comparison sheet and
+four authenticated source images; those hashes were rechecked before recording.
+The approved v22 source remains unchanged. Independent visual/motion ratings,
+final frozen regeneration, full PNG sequences and archive qualification remain
+outstanding and are not implied by this identity approval.
