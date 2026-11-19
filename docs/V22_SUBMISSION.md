@@ -1399,3 +1399,26 @@ separate five-variant full/native overview sheets and native-pixel eye, skin,
 lip and ear crops, with a source/output hash receipt. Overview resizing is
 explicit; crop files retain source pixel scale. Syntax compilation passes;
 the sheets/crops have not been generated yet and imply no review approval.
+
+### All ten appearance renders completed; playback recovery
+
+All five full/native 1024px/512-sample front pairs completed and passed the
+exact image/runtime-map/build audit. `out/v22-completed-appearance-pairs.json`
+now records five pairs. Both five-variant overview sheets and native-pixel
+detail crops were generated in `out/v22-five-set-contact-sheets`, with hashed
+source/output records. The full-character overview was inspected. These are
+review inputs, not independent human acceptance.
+
+The Left motion preview rendered and verified all 192 PNGs. Its playback save
+failed because the headless Blender area still exposed `SpaceView3D` immediately
+after changing the area's type. The helper now looks for an actual sequencer
+space before assigning preview mode. The corrected playback saved and reopened
+successfully: `out/v22-motion-review-previews/left/playback-check.json` confirms
+192 ordered hashed frames at 24 fps, relative paths and the required display
+settings. This structural pass does not replace visual timing review.
+
+The stopped controller was not restarted wholesale. Session `28745` resumes
+motion previews, checking existing preview scene/source hashes and letting the
+renderer retain valid PNGs. It then queues Linux runtime and alternate-cache
+checks. Packet assembly remains pending after the remaining previews; the
+earlier appearance controller exited before writing its final review packet.
