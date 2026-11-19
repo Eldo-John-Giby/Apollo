@@ -57,7 +57,7 @@ reviewers own visual acceptance; the team owns submission actions.
 | Exact reset | Engineering | Deterministic neutral reset and same-build reproduction | geometry/pixel/hash comparisons | Pending |
 | Offline playback (20) | Engineering | Reopened packed scenes without paths, MCP, MPFB or GNM authoring environment | three reopened PNG playback checks; clean Windows/Linux runtime reports | PARTIAL: all three development playback scenes reopened; clean offline development archive renders pass both platforms; final archive pending |
 | Stable CLI (20) | Engineering | still/left/right/generate-motion; variant/layout/output/frame options retained | source tests, extracted stills and runtime rehearsals | PARTIAL: contract retained; default Generate Motion and all five stills exercised; complete final-mode qualification pending |
-| Recovery (20) | Engineering | Resume, missing/corrupt repair, stale-cache rejection, invalid-input rejection | `out/v22 clean archive rehearsal/rehearsal.json`; alternate cache rehearsal | PARTIAL: default corrupt/missing repair, stale receipt and invalid range rejection pass; alternate cache run live; final archive pending |
+| Recovery (20) | Engineering | Resume, missing/corrupt repair, stale-cache rejection, invalid-input rejection | `out/v22 clean archive rehearsal/rehearsal.json`; alternate cache rehearsal | PARTIAL: default repair/stale/invalid-range checks pass; olive-amber legacy cache reuse and stale-cache rejection pass; final archive pending |
 | Cross-platform reproduction (20) | Engineering | Clean Windows/Linux extraction; spaces and different CWD; pinned Blender | both clean runtime reports; `out/v22-cross-platform-image-comparison.json` | PARTIAL: three held frames pass runtime on both; RGB max 5/255, mean 0.0096/255; no broader tolerance or final sequence pass claimed |
 | Independent review | User + 3–5 reviewers | >=95% cardinal accuracy; median >=4/5 each category; no severe defect shared by two reviewers | authenticated randomized ZIP and separate private key | READY FOR REVIEW: packet integrity passes; zero actual response files received |
 | Final identity approval | User | Explicit approval of integrated hero as retaining v22 | `out/v22-owner-identity-review/identity-approval.json` | PASS for the reviewed integrated face and groom; final release gates remain separate |
@@ -81,8 +81,9 @@ All four full-detail cardinal images and five full/native front pairs are
 complete. The blinded packet contains 576 lower-cost timing PNGs and twelve
 appearance cases. Default clean development runtime rendering passes on Windows
 and Linux; final archive qualification remains separate. The alternate-cache
-rehearsal is live, followed by the full-detail Left diagnostic and twenty
-angle/oblique full/native qualification stills. Queued work is not a pass.
+rehearsal passes. The full-detail Left diagnostic is rendering, followed by
+twenty angle/oblique full/native qualification stills and additional mode
+recovery checks. Queued work is not a pass.
 Owner identity approval has been received; the 3–5-person blind review remains pending. No final
 freeze, complete PNG delivery, release qualification or submission handoff is
 claimed. Historical rc.5 results remain separate from this candidate.
@@ -1530,3 +1531,11 @@ access/form handoff. Generated `out/v22_remaining_mode_recovery.py` waits for th
 angle job and then exercises three held frames, corrupt/missing repair, stale
 receipts and invalid ranges for Left and Right; it also compares a fresh Left
 neutral with the full-detail follow-up. These additional checks remain queued.
+
+The olive-amber/legacy alternate-cache rehearsal subsequently passed:
+`out/v22 alternate cache rehearsal/rehearsal.json`. All three held frames and
+the cached scene retained their hashes/mtimes on reuse; the deliberately stale
+scene-hash receipt was rejected and restored. Source scene bytes remained
+unchanged. The serial Left full-detail follow-up is now confirmed live,
+rendering its neutral frame at 1024px/512 samples; angle and further recovery
+jobs are waiting on their actual live prerequisites.
