@@ -9,6 +9,8 @@ import bpy
 from mathutils import Vector
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from apollo_core.png import canonicalize
 from gnm_materials import bind_surface
 from gnm_run import surface_files
 
@@ -19,6 +21,7 @@ def render_receipt(output, args, scene):
     maps.update(surface_files(args.maps))
     recipe = b''.join((Path(__file__).parent / name).read_bytes()
                       for name in ('gnm_texture_trial.py', 'gnm_materials.py'))
+    recipe+=(Path(__file__).resolve().parents[1]/'apollo_core/png.py').read_bytes()
     from gnm_pbr_manifest import is_pbr
     if is_pbr(args.maps):
         recipe+=b''.join((Path(__file__).parent/name).read_bytes() for name in
@@ -173,6 +176,7 @@ def render(args):
         else:
             scene.render.filepath = str(args.out.resolve())
         bpy.ops.render.render(write_still=True)
+        canonicalize(Path(scene.render.filepath))
         render_receipt(Path(scene.render.filepath), args, scene)
 
 

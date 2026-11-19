@@ -14,6 +14,7 @@ import bpy
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from apollo_core.submission_timing import expression
+from apollo_core.png import canonicalize
 
 
 def digest(path):
@@ -96,6 +97,8 @@ def run(args):
     resolution = (scene.render.resolution_x * scene.render.resolution_percentage // 100,
                   scene.render.resolution_y * scene.render.resolution_percentage // 100)
     identity = {'scene_sha256': digest(source), 'mode': mode,
+                'renderer_sha256': digest(Path(__file__)),
+                'png_policy_sha256': digest(Path(__file__).resolve().parents[1]/'apollo_core/png.py'),
                 'blender': bpy.app.version_string, 'blender_build': bpy.app.build_hash.decode(),
                 'resolution': list(resolution), 'samples': scene.cycles.samples,
                 'fps': scene.render.fps / scene.render.fps_base,
@@ -150,6 +153,7 @@ def run(args):
                 scene.render.filepath = str(temp)
                 if bpy.ops.render.render(write_still=True) != {'FINISHED'}:
                     raise RuntimeError(f'Render failed for frame {frame}')
+                canonicalize(temp)
             else:
                 shutil.copyfile(out / f'frame_{original:04d}.png', temp)
             if not valid_png(temp, resolution):

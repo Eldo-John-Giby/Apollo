@@ -62,6 +62,7 @@ preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred
 | `wrapper/eyes.py` | Standalone Blender API/CLI; embedded NumPy core; absolute pose, evaluated geometry/projection checks, atomic metadata output. |
 | `apollo_core/core.py` | Finite inputs/config, fixation, shortest-arc rotation, camera projection, exact pupil conic, sweep and annotations. |
 | `apollo_core/metadata.py` | Structural/semantic protocol checks and optional analytic checks against a supplied calibration. |
+| `apollo_core/png.py`, `tests/test_png_metadata.py` | Validate PNG chunk checksums and remove variable/private metadata without decoding pixels or altering color-management/image-data chunks; preserve 16-bit texture precision. |
 | `metadata.schema.json` | Ten-frame JSON Schema; mathematical consistency is enforced by Python validation. |
 | `check_core.py` | Direct reference assertion runner; normal task tests use pytest. |
 | `pyproject.toml`, `requirements.txt` | Pytest configuration and pinned Python tool dependencies. |

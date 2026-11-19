@@ -622,3 +622,36 @@ in `out/v22-native-groom-review` improves brow definition but still shows an
 unconvincingly flat scalp region, so it is **not visually accepted**. All twelve
 full-character map files remain unchanged by that separate trial. Further
 texture-only scalp refinement is needed before five-set visual qualification.
+
+### PNG metadata and higher-sample control
+
+Inspection found source filenames, dates and render timings embedded in rendered
+PNG metadata. Pixel-identical source comparisons were therefore not byte-identical.
+`apollo_core/png.py` removes PNG text, EXIF and time chunks after validating their
+checksums, while preserving compressed image data and color-management chunks.
+Four targeted tests pass, including actual 16-bit RGB channels, corrupt-input
+rejection and preservation of PNG image-data bytes. Applying it in memory to
+the independently rendered source controls produces byte-identical PNG data;
+the existing experimental images and their receipts were not modified.
+
+New still/frame outputs and future bake exports now use this policy before
+hashing. Frame receipts include renderer and PNG-policy hashes, so old receipt
+directories are rejected rather than mixing output policies. Both technical
+bundle builders include the new pure-Python helper. The active convergence
+worker and its original rendering helper remain unchanged until its experiment
+finishes; final judging output integration will use the same metadata policy.
+
+The 512-sample reference completed. Relative to it, 256 samples pass eyes and
+skin but still fail lips (mean RGB approximately 1.125) and hair (p95 four).
+The analysis is `out/v22-convergence-pbr-to-512/analysis.json`; no count is
+selected. A repeated 32-sample control in one process gave identical pixels
+and identical canonicalized PNG bytes, with lens jitter explicitly false.
+This rules out an additional repeatability error in the tested setup.
+A 1024-sample reference is now running with the identical worker and policy.
+
+After the metadata policy changes, the complete Windows Python suite passed
+**125 tests**, with JUnit evidence in `out/v22-png-policy-tests.xml`. This does
+not update the earlier Linux unit-suite count or qualify the new rendering
+hooks without an actual subsequent Blender render. The pure metadata helper
+was also checked against real source-control PNGs: stripping metadata in memory
+gave byte-identical results while leaving the original files untouched.

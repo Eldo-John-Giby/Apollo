@@ -106,6 +106,7 @@ def package(motion, textures, seams, output):
         'assets/photorealism-v2/brown_eye.png', 'requirements.txt',
         'docs/SUBMISSION_PIPELINE.md', 'wrapper/eyes.py',
         'apollo_core/submission_timing.py',
+        'apollo_core/png.py',
         'tools/submission_motion.py', 'tools/submission_motion_check.py',
         'tools/submission_render.py', 'tools/submission_variants.py',
         'tools/submission_textures.py', 'tools/submission_uv_rehearsal.py',

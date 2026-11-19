@@ -8,12 +8,14 @@ import bpy
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from apollo_core.png import canonicalize
 from gnm_v22_audit import SELECTED, sha
 from gnm_v22_materials import cornea_recipes
 
 ROOT=Path(__file__).resolve().parents[1]
 RECIPE_FILES=('tools/gnm_v22_bake.py','tools/gnm_v22_materials.py',
-              'tools/gnm_v22_audit.py','tools/gnm_pbr_manifest.py')
+              'tools/gnm_v22_audit.py','tools/gnm_pbr_manifest.py','apollo_core/png.py')
 RECIPE_HASHES={name:sha(ROOT/name) for name in RECIPE_FILES}
 
 
@@ -130,6 +132,7 @@ def main(args):
             output = args.out/f'{role}.{tile}.png'
             export.view_settings.view_transform = 'Standard' if role=='color' else 'Raw'
             image.save_render(str(output.resolve()),scene=export)
+            canonicalize(output)
             if output.read_bytes()[24] != 16:
                 raise ValueError('Bake lost 16-bit precision')
             values = np.empty(len(image.pixels),dtype=np.float32)

@@ -135,6 +135,7 @@ def package(args):
                                   for role, path in surface_files(source).items()})
             recipe = b''.join((ROOT / 'tools' / name).read_bytes()
                               for name in ('gnm_texture_trial.py', 'gnm_materials.py'))
+            recipe+=(ROOT/'apollo_core/png.py').read_bytes()
             for name, size, samples, layout, lens in (
                     ('front', 1024, 32, 'udim', 64),
                     ('side-udim', 640, 8, 'udim', 64),
@@ -241,7 +242,7 @@ def package(args):
                  'tools/submission_render.py', 'tools/submission_bundle.py',
                  'tools/submission_motion.py', 'tools/submission_textures.py',
                  'tools/submission_bake.py', 'tools/submission_variants.py',
-                 'apollo_core/submission_timing.py', 'apollo_core/__init__.py',
+                 'apollo_core/submission_timing.py', 'apollo_core/__init__.py', 'apollo_core/png.py',
                  'wrapper/eyes.py'):
         files[name] = ROOT / name
     if scan_transfer.is_file():
