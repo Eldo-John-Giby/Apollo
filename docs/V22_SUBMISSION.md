@@ -1508,3 +1508,25 @@ post-acceptance archive. The builder's unit-test API now also accepts explicit
 source identity so isolated code ZIP tests need no Git metadata; the CLI still
 records the actual checkout identity. Eighteen targeted cases pass after that
 small portability adjustment.
+
+The new development archive passed clean extraction and its bundled standalone
+verifier in isolated Python: all 203 payloads match, with no extra files.
+`out/v22-development-archive/check.json` records no personal absolute paths,
+credential-token patterns or private-key patterns in packaged text, and no
+excluded private/development filenames. This text scan does not claim a separate
+binary-format audit; packed Blender resource paths retain their source-bound
+checks. The archive remains explicitly unqualified.
+
+Fresh offline Linux source tests at `fdfdde9` pass all 154 cases in 45.83 seconds:
+`out/v22-linux-source-fdfdde9-retry/result.json` and `tests.xml`. The first
+code-only ZIP accidentally omitted the metadata schema and baseline build
+dependencies: thirteen tests failed with missing source files. That attempt is
+retained, and the corrected retry includes the prior tested source closure plus
+the new files. No application or test expectation was changed to obtain the pass.
+
+`docs/V22_RELEASE_CHECKLIST.md` now preserves the acceptance-before-freeze order,
+complete final rebuild/archive scope, exact release naming and team-owned public
+access/form handoff. Generated `out/v22_remaining_mode_recovery.py` waits for the
+angle job and then exercises three held frames, corrupt/missing repair, stale
+receipts and invalid ranges for Left and Right; it also compares a fresh Left
+neutral with the full-detail follow-up. These additional checks remain queued.

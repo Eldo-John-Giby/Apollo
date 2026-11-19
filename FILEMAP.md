@@ -105,6 +105,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/gnm_template.py`, `tools/gnm_import.py` | Verify the pinned Google model and import its original topology and native UV layouts into Blender. |
 | `tools/gnm_v22_audit.py`, `docs/V22_SUBMISSION.md` | Authenticate immutable v22, inventory its appearance and extract the evaluated identity/reference stills; track the final integration requirements and evidence gates. |
 | `docs/V22_QUICKSTART.md` | v22 runtime setup, modes/variants, packed playback, map conventions and the boundary between development checks and final qualification. |
+| `docs/V22_RELEASE_CHECKLIST.md` | Uncompleted acceptance, frozen rebuild, final archive qualification and team submission handoff gates; preserves ownership and scope. |
 | `apollo_core/identity.py`, `tests/test_identity.py` | Surface-local identity rotation and triangle anchor math, with rigid-motion, neutral-reset and protected-eye regressions. |
 | `tools/gnm_v22_integrate.py`, `tools/gnm_surface_attachments.py`, `tools/gnm_v22_verify.py` | Experimental v22 motion derivation, packed surface-local groom/tear anchors, and separate reopened native/derived geometry checks. |
 | `tools/gnm_v22_prepare.py` | Pack authenticated PBR maps and an explicit judging sample preset into a receipt-bound timeline; retain original image provenance and assert geometry/UV preservation. |
