@@ -1620,3 +1620,10 @@ All 166 Windows source tests pass with the new still checker
 exercise matching full/native pairs, receipt/image tampering, source/camera
 mismatch, incorrect sample order, non-front views and an actual above-limit
 pixel change. They validate the checker, not the unrendered reference pairs.
+
+Clean offline Linux source extraction at `084bc58` also passes all 166 tests
+(`out/v22-linux-source-084bc58-retry/result.json` and `tests.xml`). The generated
+`out/v22_left_early_direction_check.py` watches the actual live Left render for
+the receipt-verified frame 26 and then runs the unchanged image oracle against
+its own full-detail neutral. This partial early check excludes closure/reopening
+and does not replace the full follow-up report. Frame 26 is still rendering.
