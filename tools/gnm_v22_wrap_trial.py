@@ -8,6 +8,8 @@ import bpy
 import numpy as np
 
 sys.path.insert(0,str(Path(__file__).resolve().parent))
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from apollo_core.png import canonicalize
 from gnm_v22_audit import SELECTED,coords,sha
 from gnm_v22_materials import bind,validate,load_manifest
 from gnm_portrait_refine import aim,render
@@ -23,6 +25,7 @@ def main(a):
     load_manifest(a.maps)
     manifest_hash=sha(a.maps/'manifest.json')
     recipe_files=[Path(__file__),Path(__file__).with_name('gnm_v22_materials.py'),
+                  Path(__file__).resolve().parents[1]/'apollo_core/png.py',
                   Path(__file__).with_name('gnm_pbr_manifest.py'),
                   Path(__file__).with_name('gnm_v22_render_policy.py'),
                   Path(__file__).with_name('gnm_v22_audit.py'),
@@ -70,6 +73,7 @@ def main(a):
         bind(fresh,a.maps,a.layout)
         fresh_binding=validate(fresh,a.maps,a.layout,full_character=False,require_packed=False)
         render(scene,a.out,'fresh-texture-only',a.size,a.samples)
+    for path in a.out.glob('*.png'):canonicalize(path)
     report=dict(source_sha256=SELECTED,maps_manifest_sha256=manifest_hash,
                 target_sha256=target_hash,layout=a.layout,
                 recipe_sha256=recipes,full_binding=full_binding,fresh_binding=fresh_binding,

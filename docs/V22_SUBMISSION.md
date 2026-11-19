@@ -674,3 +674,23 @@ The experimental recipe and exact inputs are recorded by
 or visually accepted: the single Blender slot remains occupied by the live
 1024-sample reference. Do not use this trial as the master for the existing
 variant generator; its scalp restoration is not yet part of that authoring path.
+
+The 1024-sample reference and queued scalp preview completed. Against 1024,
+**512 is the lowest tested setting passing all four neutral crops**: eye/lip/
+skin/hair mean RGB errors are approximately 0.80/0.95/0.32/0.89, all p95 values
+at most three, with retained detail ratios within 0.9–1.1. The comparison sheet
+was visually inspected without visible denoising smearing. The source-bound
+development selection is `out/v22-neutral-render-profile.json`; it qualifies
+frame 1 only, not a final delivery preset or untested poses/variants.
+
+The restored scalp preview was rendered and inspected in
+`out/v22-native-bare-scalp-review`. It removes the flat painted-cap effect and
+retains brow definition; independent human acceptance and all five native sets
+remain pending. The full v22 character is unchanged. The comparison tool now
+canonicalizes its PNGs before hashing, and the actual rendered preview contains
+no authoring paths or timing metadata (only display-density information).
+
+The clean Linux source archive at `03447c9` passed all **125 tests**, including
+the PNG policy, with networking disabled and execution outside its extraction
+directory. See `out/v22-linux-code-03447c9.log`. The current comparison-tool
+metadata hook was subsequently verified by the queued Blender render.
