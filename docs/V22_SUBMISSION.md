@@ -1193,3 +1193,15 @@ four authenticated source images; those hashes were rechecked before recording.
 The approved v22 source remains unchanged. Independent visual/motion ratings,
 final frozen regeneration, full PNG sequences and archive qualification remain
 outstanding and are not implied by this identity approval.
+
+### Branch handoff preflight
+
+A successful fresh `git fetch origin` confirmed that the submission branch at
+`49450ee` and main at `5b85e82` are ancestors of the integration branch. At
+integration checkpoint `b72a8be`, neither remote branch had a commit missing from
+the integration history; integration was 119 commits ahead of submission and
+150 ahead of main. Exact full commit IDs/counts are retained in
+`out/v22-branch-reconciliation-preflight.json`. This checks ancestry without
+touching other worktrees or branch pointers. Final reconciliation must recheck
+remote state after qualification, then identify the exact released commit to
+the team; the preflight is not a merge, release or submission handoff.
