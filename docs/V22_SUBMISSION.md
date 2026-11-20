@@ -1751,3 +1751,9 @@ front variants now have a passing measured candidate (512 samples for four,
 The report is in `out/v22-front-sample-references-2048/neutral-deep/native/sample-analysis`.
 Full-character hair convergence remains unresolved; remaining references continue.
 
+The deep native 1024-vs-2048 crop comparison sheet was inspected after its
+numerical pass. Eyes, skin, lips and ear retain comparable structure; this
+inspection does not replace the independent appearance ratings. The release
+checklist now records the already-completed Left full-detail diagnostic
+separately from the queued Right diagnostic and complete-playback acceptance.
+
