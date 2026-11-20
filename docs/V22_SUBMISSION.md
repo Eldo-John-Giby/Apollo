@@ -48,21 +48,21 @@ reviewers own visual acceptance; the team owns submission actions.
 | Attached groom/tears | Engineering | Roots and local orientation follow motion; no severe intersections | same half-frame checks; blink/reopening images | PARTIAL: numerical limits pass; independent collision/motion review pending |
 | Five complete texture variants (60) | Engineering | Existing identifiers; coherent skin/lips/ears/eyes; base color, roughness, detail | `out/v22-variants-native-skin-v2/assembly.json`; source manifests and decoder reports | PARTIAL: five 4K/2K sets authored; corrected deep palette and final detail/human acceptance pending |
 | UV portability (20) | Engineering | Automatic fresh-target wrapping of five variants in both layouts; seams/color spaces/dilation checked | `out/v22-corrected-five-wrap-evidence/layout-check.json` | PARTIAL: thirty current fresh-wrap cases pass layout agreement; final seam/detail acceptance pending |
-| Texture-only result (60) | Engineering/reviewers | Convincing neutral and oblique-light appearance on fresh native target | ten full/native judging stills; thirty-case wrapping matrix; blinded packet | PARTIAL: all five full-detail front pairs complete; final multi-angle/detail and independent acceptance pending |
-| Full v22 result (60) | Engineering/user | Identity retained with groom and geometry; sharp, consistent comparison settings | ten judging stills; contact sheets; owner approval | PARTIAL: integrated identity approved; five front images and detail crops complete; final frozen multi-angle set pending |
-| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | `out/v22-three-pose-render-profile.json` and its analyses | PARTIAL: 512 passes default neutral, closure and reopened/upward pose; other variants/views/frozen build pending |
+| Texture-only result (60) | Engineering/reviewers | Convincing neutral and oblique-light appearance on fresh native target | ten full/native fronts; twenty angle/oblique images; wrapping matrix; blinded packet | PARTIAL: all five native front/angle/oblique sets complete; deep-native sample/detail gap and independent acceptance pending |
+| Full v22 result (60) | Engineering/user | Identity retained with groom and geometry; sharp, consistent comparison settings | fronts, angles/oblique, contact sheets; owner approval | PARTIAL: integrated identity approved; five full front/angle/oblique sets complete; hair convergence and final frozen qualification pending |
+| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | motion profile; `out/v22-five-set-front-sample-references`; higher-reference job | PARTIAL: default motion 512 passes three poses; front 512 passes four native variants, fails all full hair and deep-native skin; 1024-vs-2048 references rendering |
 | Three motion modes (20) | Engineering | Left/right/generate-motion; 192 frames each at 24 fps; viewer-screen convention | `out/v22-review-pbr-512/*/expression.blend` | PARTIAL: three packed timelines checked; final 576 numbered PNGs pending |
 | Kinematic checks (20) | Engineering | Binocular fixation, eye integrity, closure/reopening, smooth lids/expressions | three saved-scene half-frame checks; native interpolation receipts | PARTIAL: geometry/attachment checks pass at 383 times per mode; rendered full-motion and human gates pending |
-| Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | `out/v22-pbr-512-direction-and-blink-check.json`; Left full-detail direction check; preview checks | PARTIAL: full-detail Generate Motion cardinal/closure/reopening and Left extreme direction pass; Left full-detail closure/reopening pending; original preview failure retained |
-| Exact reset | Engineering | Deterministic neutral reset and same-build reproduction | geometry/pixel/hash comparisons | Pending |
+| Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | Generate Motion gate; `out/v22-left-full-detail-followup/followup.json`; preview checks | PARTIAL: full-detail Generate Motion cardinal/closure/reopening and standalone Left direction/closure/reopening pass; full-detail standalone Right queued; original preview failure retained |
+| Exact reset | Engineering | Deterministic neutral reset and same-build reproduction | mode recovery; pose sequences; complete-inventory verifier | PARTIAL: fresh Left neutral byte-identical; repeated held frames verified; complete final PNG reset inventory pending |
 | Offline playback (20) | Engineering | Reopened packed scenes without paths, MCP, MPFB or GNM authoring environment | three reopened PNG playback checks; clean Windows/Linux runtime reports | PARTIAL: all three development playback scenes reopened; clean offline development archive renders pass both platforms; final archive pending |
 | Stable CLI (20) | Engineering | still/left/right/generate-motion; variant/layout/output/frame options retained | source tests, extracted stills and runtime rehearsals | PARTIAL: contract retained; default Generate Motion and all five stills exercised; complete final-mode qualification pending |
-| Recovery (20) | Engineering | Resume, missing/corrupt repair, stale-cache rejection, invalid-input rejection | `out/v22 clean archive rehearsal/rehearsal.json`; alternate cache rehearsal | PARTIAL: default repair/stale/invalid-range checks pass; olive-amber legacy cache reuse and stale-cache rejection pass; final archive pending |
+| Recovery (20) | Engineering | Resume, missing/corrupt repair, stale-cache rejection, invalid-input rejection | Windows clean archive, other-mode recovery and alternate cache reports | PARTIAL: all three modes pass three-held-frame repair/stale/invalid-range checks; olive-amber legacy cache reuse/rejection passes; final archive pending |
 | Cross-platform reproduction (20) | Engineering | Clean Windows/Linux extraction; spaces and different CWD; pinned Blender | both clean runtime reports; `out/v22-cross-platform-image-comparison.json` | PARTIAL: three held frames pass runtime on both; RGB max 5/255, mean 0.0096/255; no broader tolerance or final sequence pass claimed |
 | Independent review | User + 3–5 reviewers | >=95% cardinal accuracy; median >=4/5 each category; no severe defect shared by two reviewers | authenticated randomized ZIP and separate private key | READY FOR REVIEW: packet integrity passes; zero actual response files received |
 | Final identity approval | User | Explicit approval of integrated hero as retaining v22 | `out/v22-owner-identity-review/identity-approval.json` | PASS for the reviewed integrated face and groom; final release gates remain separate |
 | Freeze and full qualification | Engineering | Regenerate final deliverables after acceptance; bind source/scenes/maps/frames/tests | final manifest and all applicable tests | Pending |
-| Package hygiene | Engineering | No credentials, personal paths, unlicensed or development artifacts | `out/v22-attribution-corrected-trial`; source/PNG policies; final archive scan | PARTIAL: pinned source notices and manifest linkage collected; final archive scan/inclusion pending |
+| Package hygiene | Engineering | No credentials, personal paths, unlicensed or development artifacts | pinned attribution; development text/binary scans; reopened UI probes | PARTIAL: attribution/text checks pass; original binary UI path identified and cleanup proven on native/character copies; final sanitized archive pending |
 | Judge documentation | Engineering | Verified setup, modes/variants, playback, evidence, compatibility, limitations | README; `docs/V22_QUICKSTART.md`; submission audit | PARTIAL: v22 setup and scope corrected; final release locations and frozen evidence pending |
 | Release | Engineering | Checkpoint commits; push; uniform version/tag; promotion only after gates pass | release commit/assets/checksums | Pending |
 | Submission handoff | Engineering/team | Exact repository/release/hashes/matrix and remaining checklist | handoff report | Pending |
@@ -80,10 +80,12 @@ Default render convergence is verified at neutral, closure and reopening.
 All four full-detail cardinal images and five full/native front pairs are
 complete. The blinded packet contains 576 lower-cost timing PNGs and twelve
 appearance cases. Default clean development runtime rendering passes on Windows
-and Linux; final archive qualification remains separate. The alternate-cache
-rehearsal passes. The full-detail Left diagnostic is rendering, followed by
-twenty angle/oblique full/native qualification stills and additional mode
-recovery checks. Queued work is not a pass.
+and Linux; final archive qualification remains separate. Alternate-cache and
+additional Left/Right recovery rehearsals pass. The full-detail Left image gate,
+twenty angle/oblique stills and native/character UI-cleanup probes are complete.
+The ten front sample comparisons found six failing 512-sample cases, so higher
+references are rendering; the standalone Right full-detail pixel gate follows.
+Queued work is not a pass.
 Owner identity approval has been received; the 3–5-person blind review remains pending. No final
 freeze, complete PNG delivery, release qualification or submission handoff is
 claimed. Historical rc.5 results remain separate from this candidate.
@@ -1669,3 +1671,50 @@ headers were inspected as well: Left/Right each contain 385 poses over 17,821
 vertices; Generate Motion contains 1,186. The inventory reads just their headers
 and the 192-index sequences, avoiding full tensor allocation. This development
 test pass is not a complete delivery-inventory or final release pass.
+
+### Completed overnight technical checks and remaining sample gap
+
+All 175 tests pass in clean offline Linux source extraction at `2e1c777`
+(`out/v22-linux-source-2e1c777-retry/tests.xml` and `result.json`).
+
+The standalone Left full-detail image gate passes neutral, extreme, peak closure
+and reopening: `out/v22-left-full-detail-followup/followup.json`. Neither pupil
+is detected at closure; both reappear with the existing >=0.8 iris-correlation
+requirement. The closure image was inspected. No detector tolerance or identity
+was changed. The earlier low-cost preview failure remains preserved.
+
+Both native and full-character UI-cleanup copies passed Blender 4.5.15 save/
+reopen with matching mesh/material/packed-image snapshots and unchanged source
+files. `out/v22-ui-cleanup-native-probes/serialized-buffer-check.json` also passes
+typed SDNA inspection of the entire 1090-byte directory and 256-byte filename
+arrays, including their tails. This proves the cleanup on those copies; original
+development scenes/ZIPs are unchanged and are not retroactively sanitized.
+
+All twenty 1024px/512-sample full/native angle/oblique images completed.
+`out/v22-angle-output-audit/audit.json` independently rechecks their source,
+maps, current worker recipes, build/settings and image hashes. Four five-variant
+overview sheets were inspected. These remain development visual evidence;
+independent acceptance, view-specific convergence and frozen qualification remain.
+
+`out/v22-other-mode-recovery/recovery.json` passes Left and Right three-held-
+frame repair, valid-frame preservation, stale-receipt and invalid-range rejection.
+Left's fresh neutral PNG matches the prior independent render byte-for-byte
+(`6fed64f64b6004b7bf0118b38fcaba183ba5edd1ecaeec9efdb2707a51470933`).
+Together with the earlier Generate Motion rehearsal, all three development modes
+have these scoped checks. Final all-frame/archive recovery is still separate.
+
+Ten 512-vs-1024 front still comparisons completed. Four native variants pass.
+All five full-character hair crops fail the unchanged mean <=1/p95 <=3 RGB
+limits (mean approximately 1.20–1.26, p95 4); deep full/native skin detail ratios
+also fail (approximately 0.876/0.808, minimum 0.90). The default full and deep
+native comparison sheets were inspected. These failures are retained and the
+512 front profile is not declared sufficient. Generated
+`out/v22_higher_judging_references.py` is rendering six 2048-sample references
+to test the corresponding 1024-sample candidates, starting with the default
+full character. This does not invalidate the separately tested 512-sample
+close-up motion framing or qualify untested views.
+
+Generated `out/v22_right_full_detail_followup.py` waits on that live higher-
+reference job, then checks the standalone Right extreme/closure/reopening at
+1024px/512 samples. It seeds only previously receipt-verified neutral held frames
+to avoid rerendering them. These Right outputs are pending, not accepted.
