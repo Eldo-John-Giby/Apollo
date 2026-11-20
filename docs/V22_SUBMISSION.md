@@ -1956,3 +1956,26 @@ evidence of CUDA execution, convergence, image acceptance or final archive
 qualification. An actual account-authorized Kaggle run and local validation of
 its downloaded images/receipts remain necessary before adopting GPU outputs.
 No upload, account change or cloud execution was performed.
+
+The fixed-candidate archive base preflight now authenticates 238 proposed
+payload files (2,706,812,961 bytes before frames). This includes the current
+12-file runtime closure, cleaned native target, pinned template, three checked
+scenes, five complete map sets, matching retained licenses, 108 reused judging
+assets and selected public provenance/evidence. The report is
+`out/v22-fixed-technical-candidate/archive-preflight/base-inputs.json`.
+The direct inventory avoids staging another multi-GB copy. Its bounded text
+scan found zero recorded personal-path markers; this is not a complete
+credential or final ZIP hygiene scan. The adjacent `PRIVATE-input-locations.json`
+is local assembly bookkeeping and must never enter a release archive.
+Complete PNGs, finalized package documentation/status and clean extracted
+Windows/Linux tests remain pending; no archive or release is claimed ready.
+
+Agent inspection of four retained full/native angle/oblique overview sheets
+covered all five variants, with additional default-eye and deep-skin crops.
+`judging-agent-inspection.json` binds those eight actual images. Framing and
+variant tissue/eye color remain consistent; the full character retains groom
+and the native target intentionally demonstrates texture-only wrapping.
+No obvious atlas discontinuity appeared at overview scale. Skin crops remain
+soft and these resized/512-sample sheets do not establish native-pixel detail
+or independent photorealism acceptance. Actual reviewer ratings and complete
+motion inspection remain separate gates. No new renders or sheets were made.
