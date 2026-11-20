@@ -50,7 +50,7 @@ reviewers own visual acceptance; the team owns submission actions.
 | UV portability (20) | Engineering | Automatic fresh-target wrapping of five variants in both layouts; seams/color spaces/dilation checked | `out/v22-corrected-five-wrap-evidence/layout-check.json` | PARTIAL: thirty current fresh-wrap cases pass layout agreement; final seam/detail acceptance pending |
 | Texture-only result (60) | Engineering/reviewers | Convincing neutral and oblique-light appearance on fresh native target | ten full/native fronts; twenty angle/oblique images; wrapping matrix; blinded packet | PARTIAL: all five native front/angle/oblique sets complete; deep-native sample/detail gap and independent acceptance pending |
 | Full v22 result (60) | Engineering/user | Identity retained with groom and geometry; sharp, consistent comparison settings | fronts, angles/oblique, contact sheets; owner approval | PARTIAL: integrated identity approved; five full front/angle/oblique sets complete; hair convergence and final frozen qualification pending |
-| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | motion profile; front 1024/2048 reports; default 4096 reference | PARTIAL: default motion 512 passes three poses; all native fronts have passing candidates (four at 512, deep at 1024); default full front passes all regions at 2048; other full variants at 2048 remain under measurement |
+| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | motion profile; front 1024/2048 reports; 4096 references | PARTIAL: default motion 512 passes three poses; all native fronts have passing candidates (four at 512, deep at 1024); default and deep full fronts pass all regions at 2048; three other full variants remain under measurement |
 | Three motion modes (20) | Engineering | Left/right/generate-motion; 192 frames each at 24 fps; viewer-screen convention | `out/v22-review-pbr-512/*/expression.blend` | PARTIAL: three packed timelines checked; final 576 numbered PNGs pending |
 | Kinematic checks (20) | Engineering | Binocular fixation, eye integrity, closure/reopening, smooth lids/expressions | three saved-scene half-frame checks; native interpolation receipts | PARTIAL: geometry/attachment checks pass at 383 times per mode; rendered full-motion and human gates pending |
 | Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | Generate Motion gate; `out/v22-{left,right}-full-detail-followup/followup.json`; preview checks | PARTIAL: full-detail Generate Motion cardinal/closure/reopening and both standalone Left/Right direction/closure/reopening pass; original preview failure retained; final rebuilt frames pending |
@@ -1816,4 +1816,15 @@ the standalone verifier. A subsequent removal command was rejected by
 automatic approval review as "blocked by policy"; no extraction files were
 removed. Keep that directory and the original archive, and recheck capacity
 before final packaging. No alternative deletion method was attempted.
+
+The neutral-deep full-front 2048-vs-4096 comparison passed all five regions.
+Its analysis hash was verified and the native-pixel comparison sheet inspected.
+Hair mean RGB is 0.9511634426689094, p95 3, detail ratio 0.9597031847189664;
+skin detail ratio is 1.0112397870406984. The unchanged limits therefore accept
+this development front workload at 2048 samples. Evidence:
+`out/v22-remaining-front-references-4096/neutral-deep/sample-analysis/analysis.json`,
+SHA-256 `46862ae785c3a5f1cab42b3c11a82dcd9dde4ba9e87fe391f08ed28c838083eb`.
+Two of five full fronts now have passing measured candidates; cool-grey is
+rendering next, followed by olive-amber and golden-hazel. This remains a front
+sample measurement, without all-view, human-review or final frozen qualification.
 
