@@ -1770,3 +1770,13 @@ A capacity observation at `out/v22-capacity-observation.json` records roughly
 Recheck capacity before final rebuild, archive creation and clean extraction;
 the observation does not establish that all final stages fit simultaneously.
 
+Generated coordinator `out/v22_remaining_hair_references_4096.py` is queued
+behind the default 2048-vs-4096 result. It verifies that report's analysis hash
+and proceeds only if the default 2048 candidate passes; otherwise it records
+a stop for diagnosis. It then measures the remaining full-front variants that
+failed at 1024, one Blender process at a time, against 4096-sample references.
+Prior reports and renders are retained, receipts are compared by the existing
+strict checker, and less than 1 GiB free stops further rendering. This is a
+queued measurement, not a qualified preset or completed output. Other views,
+motion and independent visual acceptance remain separate gates.
+
