@@ -1889,3 +1889,15 @@ started, with Right and Generate Motion following serially. The internal
 input-freeze record contains authoring input locations and must receive a
 public path mapping before any release archive includes its provenance.
 
+The public input provenance derivation is complete at
+`out/v22-fixed-technical-candidate/input-provenance-public.json`. It preserves
+all 93 input dependency hashes under path-free identifiers and binds the
+private freeze by SHA-256; it also retains the source commit, Python recipe
+hashes and selected render profiles. The public record hashes to
+`45cc1e39a720da4d3c32dac36d2a7b5010e71ba06d4b5254ef067285d37bfaa5`.
+`input-provenance-derivation.json` verifies the one-to-one hash preservation and
+absence of local-path markers. Dependency identities are explicitly separate
+from the final archive inventory: external authoring inputs are not falsely
+described as packaged runtime files. Keep the original private freeze out of
+the public archive. This provenance step makes no release-readiness claim.
+
