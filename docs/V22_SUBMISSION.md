@@ -1872,3 +1872,20 @@ Windows/Linux archive qualification, independent responses and release
 promotion remain required. A review-driven change requires rebuilding and
 rechecking affected outputs; none of these selected inputs is silently final.
 
+The fixed technical build has completed all three new packed scenes. Each
+reopened geometry/resource report passes at 383 integer/half-frame times with
+zero errors, and each whole-character appearance report passes all eighteen
+components. Scene hashes are Left
+`afb2c2926b891ba18277a4fd52d8d6a93e8600c61c89f6741ac22a34d6f67c9b`,
+Right `c39c35111f2a80f66746e47c535bc7676e5d96263a6ca0e5b94d301e392ead1c`,
+and Generate Motion `1624eb5745558f53117ae644dd4ca0dedb0e0fa96500246e85961dcc1bf70aca`.
+Reports are under `out/v22-fixed-technical-candidate/timelines/<mode>`.
+The bounded-memory decompressed marker scan now finds zero personal-path
+markers in all three actual scene payloads; its complete report is
+`out/v22-fixed-technical-candidate/blend-path-marker-scan.json`. This resolves
+the known file-browser path issue for these scene hashes, without substituting
+for final archive hygiene. Full 192-frame production-size Left rendering has
+started, with Right and Generate Motion following serially. The internal
+input-freeze record contains authoring input locations and must receive a
+public path mapping before any release archive includes its provenance.
+

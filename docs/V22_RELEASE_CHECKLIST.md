@@ -40,9 +40,12 @@ evidence and require the corresponding rebuild/checks.
   scalp/brow maps and attribution linkage, to their existing dimension,
   16-bit detail, color-space, normal, seam and dilation evidence. Rebuild only
   changed or invalid inputs; verify the actual files included in the archive.
-- [ ] Rebuild all three packed timelines from those exact inputs; check native
+- [x] Rebuild all three packed timelines from those exact inputs; check native
   topology/order/UVs, zero eye corrections, all frames and transition samples,
   groom anchors, local orientations and neutral appearance preservation.
+  Fixed candidate evidence: `out/v22-fixed-technical-candidate/timelines`,
+  383 sample times and eighteen appearance components per mode; no errors.
+  Independent motion acceptance remains separate.
 - [ ] Render all 576 final-quality PNGs at the selected converged preset and
   verify every receipt/hash, ordered range and Generate Motion's exact neutral
   reset with `tools/gnm_v22_delivery_frames.py`. Left/Right retain their ending
