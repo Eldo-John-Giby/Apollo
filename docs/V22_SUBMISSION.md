@@ -50,7 +50,7 @@ reviewers own visual acceptance; the team owns submission actions.
 | UV portability (20) | Engineering | Automatic fresh-target wrapping of five variants in both layouts; seams/color spaces/dilation checked | `out/v22-corrected-five-wrap-evidence/layout-check.json` | PARTIAL: thirty current fresh-wrap cases pass layout agreement; final seam/detail acceptance pending |
 | Texture-only result (60) | Engineering/reviewers | Convincing neutral and oblique-light appearance on fresh native target | ten full/native fronts; twenty angle/oblique images; wrapping matrix; blinded packet | PARTIAL: all five native front/angle/oblique sets complete; deep-native sample/detail gap and independent acceptance pending |
 | Full v22 result (60) | Engineering/user | Identity retained with groom and geometry; sharp, consistent comparison settings | fronts, angles/oblique, contact sheets; owner approval | PARTIAL: integrated identity approved; five full front/angle/oblique sets complete; hair convergence and final frozen qualification pending |
-| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | motion profile; front 1024/2048 reports; default 4096 reference | PARTIAL: default motion 512 passes three poses; all native fronts have passing candidates (four at 512, deep at 1024); all five full fronts still fail hair at 1024; default 2048-vs-4096 rendering |
+| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | motion profile; front 1024/2048 reports; default 4096 reference | PARTIAL: default motion 512 passes three poses; all native fronts have passing candidates (four at 512, deep at 1024); default full front passes all regions at 2048; other full variants at 2048 remain under measurement |
 | Three motion modes (20) | Engineering | Left/right/generate-motion; 192 frames each at 24 fps; viewer-screen convention | `out/v22-review-pbr-512/*/expression.blend` | PARTIAL: three packed timelines checked; final 576 numbered PNGs pending |
 | Kinematic checks (20) | Engineering | Binocular fixation, eye integrity, closure/reopening, smooth lids/expressions | three saved-scene half-frame checks; native interpolation receipts | PARTIAL: geometry/attachment checks pass at 383 times per mode; rendered full-motion and human gates pending |
 | Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | Generate Motion gate; `out/v22-{left,right}-full-detail-followup/followup.json`; preview checks | PARTIAL: full-detail Generate Motion cardinal/closure/reopening and both standalone Left/Right direction/closure/reopening pass; original preview failure retained; final rebuilt frames pending |
@@ -85,7 +85,7 @@ additional Left/Right recovery rehearsals pass. Both full-detail Left/Right imag
 twenty angle/oblique stills and native/character UI-cleanup probes are complete.
 The higher front-reference batch is complete: deep native passes at 1024,
 while hair rejects all five full fronts at 1024. The default 2048-vs-4096
-reference is rendering; remaining full variants are conditionally queued.
+comparison now passes all regions; remaining full variants are rendering serially.
 Queued work is not a pass.
 Owner identity approval has been received; the 3–5-person blind review remains pending. No final
 freeze, complete PNG delivery, release qualification or submission handoff is
@@ -1797,4 +1797,23 @@ extreme image. The extreme and closure images were inspected. Evidence:
 `b631c9d6a2c806e6d48f510c729f75531593f728cd05a545c37b9e8438bf25d0`.
 Both dedicated direction diagnostics now pass; complete final playback,
 independent ratings and frozen regeneration remain separate requirements.
+
+The default full-front 2048-vs-4096 measurement passed all five regions and
+its comparison sheet was inspected. Hair now meets the unchanged limits:
+mean RGB 0.8960798056256425, p95 3, detail ratio 0.965385194554782. Eyes, skin,
+lips and ear also pass. Evidence: `out/v22-default-front-reference-4096/result.json`;
+analysis SHA-256 `cd0c70227d326ef51a315bdec8901082419596d880975d9f9dce1ae2d3f71338`.
+This selects a measured 2048 candidate for this default full-front workload
+only. It does not qualify other variants/views, change the 512 motion profile,
+freeze final inputs or replace independent acceptance. The waiting coordinator
+advanced to neutral-deep's 4096 reference; three further full variants follow.
+
+Both dedicated direction evidence sets were independently reauthenticated
+against their current scenes, receipts and actual PNG bytes in
+`out/v22-direction-evidence-current-audit.json` (four Left entries, six Right).
+An unused development extraction was also reverified: 203 payload files pass
+the standalone verifier. A subsequent removal command was rejected by
+automatic approval review as "blocked by policy"; no extraction files were
+removed. Keep that directory and the original archive, and recheck capacity
+before final packaging. No alternative deletion method was attempted.
 
