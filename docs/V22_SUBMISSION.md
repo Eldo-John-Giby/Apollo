@@ -1979,3 +1979,23 @@ No obvious atlas discontinuity appeared at overview scale. Skin crops remain
 soft and these resized/512-sample sheets do not establish native-pixel detail
 or independent photorealism acceptance. Actual reviewer ratings and complete
 motion inspection remain separate gates. No new renders or sheets were made.
+
+A direct technical-candidate assembler is prepared at
+`out/v22_assemble_fixed_candidate.py`. It requires the completed fixed driver
+state and matching delivery-inventory hash, reruns the full 576-frame verifier,
+checks frozen tracked Python hashes, authenticates every preflight input and
+streams a new ZIP without a redundant staging copy. It preserves separate
+pending independent-acceptance/clean-archive statuses and always leaves
+`release_ready` false. It rejects an existing destination and insufficient
+space, hashes each streamed payload and checks ZIP integrity. This assembler
+has not yet produced a complete archive: the real incomplete candidate was
+rejected as expected before any ZIP write; the recorded check is
+`archive-preflight/assembler-incomplete-check.json`.
+
+Left frame 100 is saved (SHA-256
+`b4c88784cc94da8023cc9ae4bb962d175b7a7ac43da0532df74e8673f2d0ff1a`)
+and was visually inspected at 1024 pixels. It shows the expected partial
+blink with retained iris structure, brows and upper/lower lashes; this one
+image does not establish full closure, complete motion acceptance or a
+release gate. The existing owned renderer continued into frame 101 without
+restart. No tracked Python recipe or fixed scene was changed.
