@@ -1743,3 +1743,11 @@ failed: mean absolute RGB 1.100593402485749, p95 4, detail ratio
 Its report is under `out/v22-front-sample-references-2048/neutral-deep/full/sample-analysis`.
 The deep native-target reference is now rendering in the same serial job.
 
+The deep native 1024-vs-2048 front comparison subsequently passed all four
+regions: skin detail ratio 0.9412077459824904, mean RGB 0.8384345608161964,
+p95 2; eyes, lips and ear also meet the unchanged limits. Thus all five native
+front variants now have a passing measured candidate (512 samples for four,
+1024 for deep), with visual inspection and frozen qualification still separate.
+The report is in `out/v22-front-sample-references-2048/neutral-deep/native/sample-analysis`.
+Full-character hair convergence remains unresolved; remaining references continue.
+
