@@ -2030,3 +2030,16 @@ the proposed archive input mapping. The direct assembler now requires current,
 clean base-scan evidence and includes the report plus the positive-check result.
 This does not prove absence of all credential formats and does not cover future
 frame receipts or final ZIP additions; complete archive hygiene remains open.
+
+The fixed Left closure checkpoint is now authenticated. Fresh frame 102 and
+its identical-pose hold at frame 103 both hash to
+`cf323bb15c852b6762511506b330d5505e427ff1241e3f5ce809b66b0e67ebcf`,
+exactly matching the previous passing full-detail closure diagnostic's frame
+103. The current scene hash and current/prior frame receipts were checked;
+the prior image-check report itself was authenticated and records no pupil
+in either eye at closure. The new binding is
+`out/v22-fixed-technical-candidate/same-platform-left-closure-regression.json`.
+The actual image was visually inspected with both eyes covered. The renderer
+continued into reopening frame 104 without restart. This reuses an unchanged
+pixel result, not a relabeled historical scene receipt. Reopening, the complete
+576-frame inventory and independent motion acceptance remain pending.
