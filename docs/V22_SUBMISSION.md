@@ -1718,3 +1718,13 @@ Generated `out/v22_right_full_detail_followup.py` waits on that live higher-
 reference job, then checks the standalone Right extreme/closure/reopening at
 1024px/512 samples. It seeds only previously receipt-verified neutral held frames
 to avoid rerendering them. These Right outputs are pending, not accepted.
+
+### First higher-sample result
+
+The rose-brown full front 1024-vs-2048 comparison completed. Eyes, skin, lips
+and ear pass; hair still fails the unchanged limits: mean absolute RGB
+1.0471918512288572, p95 4, detail ratio 0.97197163313687. The result is retained
+in out/v22-front-sample-references-2048/rose-brown/full/sample-analysis/analysis.json.
+Neither the 1024 front profile nor the 2048 reference is declared converged.
+The remaining five higher-reference cases continue in the live serial job.
+
