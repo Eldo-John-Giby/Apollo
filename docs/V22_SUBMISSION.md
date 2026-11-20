@@ -49,7 +49,7 @@ reviewers own visual acceptance; the team owns submission actions.
 | Five complete texture variants (60) | Engineering | Existing identifiers; coherent skin/lips/ears/eyes; base color, roughness, detail | `out/v22-variants-native-skin-v2/assembly.json`; source manifests and decoder reports | PARTIAL: five 4K/2K sets authored; corrected deep palette and final detail/human acceptance pending |
 | UV portability (20) | Engineering | Automatic fresh-target wrapping of five variants in both layouts; seams/color spaces/dilation checked | `out/v22-corrected-five-wrap-evidence/layout-check.json` | PARTIAL: thirty current fresh-wrap cases pass layout agreement; final seam/detail acceptance pending |
 | Texture-only result (60) | Engineering/reviewers | Convincing neutral and oblique-light appearance on fresh native target | ten full/native fronts; twenty angle/oblique images; wrapping matrix; blinded packet | PARTIAL: all five native front/angle/oblique sets complete; deep-native sample/detail gap and independent acceptance pending |
-| Full v22 result (60) | Engineering/user | Identity retained with groom and geometry; sharp, consistent comparison settings | fronts, angles/oblique, contact sheets; owner approval | PARTIAL: integrated identity approved; five full front/angle/oblique sets complete; hair convergence and final frozen qualification pending |
+| Full v22 result (60) | Engineering/user | Identity retained with groom and geometry; sharp, consistent comparison settings | fixed candidate judging collection; original receipts; owner approval | PARTIAL: identity approved; five full/native front and studio sets authenticated and reused; remaining sample optimization waived; independent acceptance and final archive qualification pending |
 | Render convergence | Engineering | Samples preserving eye/lip/skin/hair detail; remaining optimization explicitly waived by user | motion profile; front measurements; stopped-by-owner record | PARTIAL: motion 512 passes three poses; full front 2048 passes default/deep/cool, native fronts pass four at 512 and deep at 1024; user selected conservative 2048 full/1024 native profiles and stopped olive/golden experiments without inferring measured convergence |
 | Three motion modes (20) | Engineering | Left/right/generate-motion; 192 frames each at 24 fps; viewer-screen convention | `out/v22-review-pbr-512/*/expression.blend` | PARTIAL: three packed timelines checked; final 576 numbered PNGs pending |
 | Kinematic checks (20) | Engineering | Binocular fixation, eye integrity, closure/reopening, smooth lids/expressions | three saved-scene half-frame checks; native interpolation receipts | PARTIAL: geometry/attachment checks pass at 383 times per mode; rendered full-motion and human gates pending |
@@ -1900,4 +1900,27 @@ absence of local-path markers. Dependency identities are explicitly separate
 from the final archive inventory: external authoring inputs are not falsely
 described as packaged runtime files. Keep the original private freeze out of
 the public archive. This provenance step makes no release-readiness claim.
+
+The user-approved reuse collection is complete in
+`out/v22-fixed-technical-candidate/judging`: thirty authenticated images
+(five full fronts at 2048, five native fronts at 1024, and twenty existing
+full/native angle/oblique views at their recorded 512 samples), plus the
+existing overview/detail sheets. All 108 collected files retain their exact
+bytes and original receipts; no stills or sheets were rerendered. The collection
+report `judging-assets.json` hashes to
+`d9527f57a8047ec4ecd80fc4bbda88cf868ffb7e20a1b9e6e8942f68c3b8de07`.
+The preparation comparison confirms identical native source, integration,
+geometry, map, render-policy and appearance-retention fields. Only the scene
+file hash and recognized file-browser cleanup recipe differ. Original still
+source hashes remain intact rather than being rebound to the new scene hash.
+The retained native-target cleanup probe and current map manifest hashes bind
+the texture-only evidence. Existing 512-sample overviews keep that provenance;
+they are not relabeled as crops from the higher-sample primary fronts.
+
+The fixed Left sequence has reached 99 saved frames. New neutral and extreme
+Left images are byte-identical to the earlier passing diagnostic images;
+`same-platform-left-gaze-regression.json` records the two exact comparisons
+and prior image-check hash. This supports reusing those pixel results without
+rerunning an unchanged-input image test. New closure/reopening images,
+complete sequence inventory and final archive checks remain pending.
 
