@@ -4,7 +4,14 @@ This checklist preserves the agreed final scope. It is not a release approval.
 Use the evidence matrix in [V22_SUBMISSION.md](V22_SUBMISSION.md) for current
 results. The original portrait and rc.5 fallback remain unchanged.
 
-## Acceptance before final freeze
+## Acceptance before release
+
+The user explicitly accepted the faster workflow on 21 November: stop further
+sample experiments, reuse verified unchanged inputs and exact repeated poses,
+avoid redundant testing and extra polish. A fixed technical candidate may be
+built while independent review is pending; release still requires that review
+and the complete package checks. Changes prompted by review invalidate affected
+evidence and require the corresponding rebuild/checks.
 
 - [x] Owner explicitly approved the integrated v22 face and groom.
 - [ ] Receive 3–5 independent response files for the authenticated blinded packet.
@@ -26,11 +33,13 @@ results. The original portrait and rc.5 fallback remain unchanged.
 
 - [ ] Record exact source revision, immutable portrait, pinned GNM/template,
   map recipes, pigment choices, render policy and Blender build in one manifest.
-- [ ] Regenerate the baked master with the current canonical PNG policy;
-  preserve raw outputs and any separately audited normal repair.
-- [ ] Regenerate all five complete 4K skin/2K eye sets, including native-only
-  scalp/brow maps and attribution linkage. Verify dimensions, 16-bit detail,
-  color spaces, normals, seams and dilation.
+- [ ] Bind the existing independently validated master, isolated normal repair
+  and original bake recipes to the fixed inputs. Reuse their verified bytes;
+  do not describe them as a fresh bake with the newer serialization recipe.
+- [ ] Bind all five complete 4K skin/2K eye sets, including native-only
+  scalp/brow maps and attribution linkage, to their existing dimension,
+  16-bit detail, color-space, normal, seam and dilation evidence. Rebuild only
+  changed or invalid inputs; verify the actual files included in the archive.
 - [ ] Rebuild all three packed timelines from those exact inputs; check native
   topology/order/UVs, zero eye corrections, all frames and transition samples,
   groom anchors, local orientations and neutral appearance preservation.

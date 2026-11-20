@@ -50,7 +50,7 @@ reviewers own visual acceptance; the team owns submission actions.
 | UV portability (20) | Engineering | Automatic fresh-target wrapping of five variants in both layouts; seams/color spaces/dilation checked | `out/v22-corrected-five-wrap-evidence/layout-check.json` | PARTIAL: thirty current fresh-wrap cases pass layout agreement; final seam/detail acceptance pending |
 | Texture-only result (60) | Engineering/reviewers | Convincing neutral and oblique-light appearance on fresh native target | ten full/native fronts; twenty angle/oblique images; wrapping matrix; blinded packet | PARTIAL: all five native front/angle/oblique sets complete; deep-native sample/detail gap and independent acceptance pending |
 | Full v22 result (60) | Engineering/user | Identity retained with groom and geometry; sharp, consistent comparison settings | fronts, angles/oblique, contact sheets; owner approval | PARTIAL: integrated identity approved; five full front/angle/oblique sets complete; hair convergence and final frozen qualification pending |
-| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | motion profile; front 1024/2048 reports; 4096 references | PARTIAL: default motion 512 passes three poses; all native fronts have passing candidates (four at 512, deep at 1024); default, deep and cool full fronts pass all regions at 2048; olive and golden remain under measurement |
+| Render convergence | Engineering | Samples preserving eye/lip/skin/hair detail; remaining optimization explicitly waived by user | motion profile; front measurements; stopped-by-owner record | PARTIAL: motion 512 passes three poses; full front 2048 passes default/deep/cool, native fronts pass four at 512 and deep at 1024; user selected conservative 2048 full/1024 native profiles and stopped olive/golden experiments without inferring measured convergence |
 | Three motion modes (20) | Engineering | Left/right/generate-motion; 192 frames each at 24 fps; viewer-screen convention | `out/v22-review-pbr-512/*/expression.blend` | PARTIAL: three packed timelines checked; final 576 numbered PNGs pending |
 | Kinematic checks (20) | Engineering | Binocular fixation, eye integrity, closure/reopening, smooth lids/expressions | three saved-scene half-frame checks; native interpolation receipts | PARTIAL: geometry/attachment checks pass at 383 times per mode; rendered full-motion and human gates pending |
 | Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | Generate Motion gate; `out/v22-{left,right}-full-detail-followup/followup.json`; preview checks | PARTIAL: full-detail Generate Motion cardinal/closure/reopening and both standalone Left/Right direction/closure/reopening pass; original preview failure retained; final rebuilt frames pending |
@@ -85,7 +85,11 @@ additional Left/Right recovery rehearsals pass. Both full-detail Left/Right imag
 twenty angle/oblique stills and native/character UI-cleanup probes are complete.
 The higher front-reference batch is complete: deep native passes at 1024,
 while hair rejects all five full fronts at 1024. The default 2048-vs-4096
-comparison now passes all regions; remaining full variants are rendering serially.
+comparison now passes all regions, as do deep and cool. The user subsequently
+stopped further sample experiments and accepted conservative settings plus reuse
+of verified unchanged inputs. The fixed technical build is now running in
+`out/v22-fixed-technical-candidate`, with new packed scenes, reopened checks and
+all 576 production-size PNGs at the measured 512-sample motion profile.
 Queued work is not a pass.
 Owner identity approval has been received; the 3–5-person blind review remains pending. No final
 freeze, complete PNG delivery, release qualification or submission handoff is
@@ -1837,4 +1841,34 @@ SHA-256 `3bb479ab4afec12afad0cd3e268eb4033fa09cd323c647e330158f85012ce4fe`.
 Three of five full-front candidates now pass at 2048 samples. Olive-amber is
 actively rendering its reference; golden-hazel follows. Existing failed lower
 sample reports remain preserved, and no final or independent acceptance is inferred.
+
+### User-approved faster execution (21 November)
+
+The user asked what could be skipped and explicitly said "do it" to stopping
+further sample-count experiments, reusing verified unchanged outputs, avoiding
+redundant tests and omitting extra comparison sheets/cosmetic polish. The
+controller and its actual olive-amber render were identified by command line
+and stopped; completed measurements were preserved. The partial original
+progress report remains unchanged, with the stop recorded separately in
+`out/v22-remaining-front-references-4096/stopped-by-owner.json`.
+
+The selected conservative still profiles are 2048 samples for the full front
+and 1024 for native fronts. Full-front convergence is measured on default,
+deep and cool; olive/golden remain unmeasured at 2048. This distinction is
+explicit, and independent appearance acceptance still covers all five sets.
+The motion profile remains the separately measured 512 samples at 1024 pixels.
+
+The fixed technical candidate builds before review completes and remains
+unqualified until all release gates pass. Its generated coordinator is
+`out/v22_fixed_technical_candidate.py`; `input-freeze.json` records exact map,
+geometry, portrait, source-revision and Python recipe hashes. It reuses the
+existing 75 validated texture maps and their original bake/repair evidence,
+rather than rebaking solely for newer PNG serialization. Each new scene gets
+current preparation, 383-time geometry/resource and eighteen-component
+appearance checks, including the current UI-path cleanup. The production
+renderer then writes all 192 frames per mode, reusing exact repeated poses
+with receipts, followed by the complete 576-frame inventory. Final clean
+Windows/Linux archive qualification, independent responses and release
+promotion remain required. A review-driven change requires rebuilding and
+rechecking affected outputs; none of these selected inputs is silently final.
 
