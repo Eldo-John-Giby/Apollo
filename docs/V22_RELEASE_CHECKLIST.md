@@ -14,9 +14,11 @@ results. The original portrait and rc.5 fallback remain unchanged.
 - [x] Resolve the technical Left-mode full-detail pupil diagnostic; the
   source-bound `out/v22-left-full-detail-followup/followup.json` passes neutral,
   extreme gaze, closure and reopening at 1024 pixels / 512 samples.
-- [ ] Complete the equivalent Right-mode full-detail check and inspect lid
-  contact, lashes, tears and the complete motion modes. The Left diagnostic
-  does not establish acceptance of complete playback or the final rebuild.
+- [x] Complete the equivalent Right-mode full-detail check; its source-bound
+  `out/v22-right-full-detail-followup/followup.json` passes at the same settings.
+- [ ] Inspect lid contact, lashes, tears and the complete motion modes. The
+  direction diagnostics do not establish acceptance of complete playback or
+  the final rebuild.
 - [ ] Inspect full/native angle, oblique and native-pixel detail evidence for
   all five sets. Numerical UV agreement does not prove convincing appearance.
 

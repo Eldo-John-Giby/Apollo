@@ -50,10 +50,10 @@ reviewers own visual acceptance; the team owns submission actions.
 | UV portability (20) | Engineering | Automatic fresh-target wrapping of five variants in both layouts; seams/color spaces/dilation checked | `out/v22-corrected-five-wrap-evidence/layout-check.json` | PARTIAL: thirty current fresh-wrap cases pass layout agreement; final seam/detail acceptance pending |
 | Texture-only result (60) | Engineering/reviewers | Convincing neutral and oblique-light appearance on fresh native target | ten full/native fronts; twenty angle/oblique images; wrapping matrix; blinded packet | PARTIAL: all five native front/angle/oblique sets complete; deep-native sample/detail gap and independent acceptance pending |
 | Full v22 result (60) | Engineering/user | Identity retained with groom and geometry; sharp, consistent comparison settings | fronts, angles/oblique, contact sheets; owner approval | PARTIAL: integrated identity approved; five full front/angle/oblique sets complete; hair convergence and final frozen qualification pending |
-| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | motion profile; `out/v22-five-set-front-sample-references`; higher-reference job | PARTIAL: default motion 512 passes three poses; front 512 passes four native variants, fails all full hair and deep-native skin; 1024-vs-2048 references rendering |
+| Render convergence | Engineering | Lowest samples preserving eye/lip/skin/hair detail | motion profile; front 1024/2048 reports; default 4096 reference | PARTIAL: default motion 512 passes three poses; all native fronts have passing candidates (four at 512, deep at 1024); all five full fronts still fail hair at 1024; default 2048-vs-4096 rendering |
 | Three motion modes (20) | Engineering | Left/right/generate-motion; 192 frames each at 24 fps; viewer-screen convention | `out/v22-review-pbr-512/*/expression.blend` | PARTIAL: three packed timelines checked; final 576 numbered PNGs pending |
 | Kinematic checks (20) | Engineering | Binocular fixation, eye integrity, closure/reopening, smooth lids/expressions | three saved-scene half-frame checks; native interpolation receipts | PARTIAL: geometry/attachment checks pass at 383 times per mode; rendered full-motion and human gates pending |
-| Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | Generate Motion gate; `out/v22-left-full-detail-followup/followup.json`; preview checks | PARTIAL: full-detail Generate Motion cardinal/closure/reopening and standalone Left direction/closure/reopening pass; full-detail standalone Right queued; original preview failure retained |
+| Image checks (20) | Engineering | Independent pupil/direction checks; peak occlusion and restored visibility | Generate Motion gate; `out/v22-{left,right}-full-detail-followup/followup.json`; preview checks | PARTIAL: full-detail Generate Motion cardinal/closure/reopening and both standalone Left/Right direction/closure/reopening pass; original preview failure retained; final rebuilt frames pending |
 | Exact reset | Engineering | Deterministic neutral reset and same-build reproduction | mode recovery; pose sequences; complete-inventory verifier | PARTIAL: fresh Left neutral byte-identical; repeated held frames verified; complete final PNG reset inventory pending |
 | Offline playback (20) | Engineering | Reopened packed scenes without paths, MCP, MPFB or GNM authoring environment | three reopened PNG playback checks; clean Windows/Linux runtime reports | PARTIAL: all three development playback scenes reopened; clean offline development archive renders pass both platforms; final archive pending |
 | Stable CLI (20) | Engineering | still/left/right/generate-motion; variant/layout/output/frame options retained | source tests, extracted stills and runtime rehearsals | PARTIAL: contract retained; default Generate Motion and all five stills exercised; complete final-mode qualification pending |
@@ -81,10 +81,11 @@ All four full-detail cardinal images and five full/native front pairs are
 complete. The blinded packet contains 576 lower-cost timing PNGs and twelve
 appearance cases. Default clean development runtime rendering passes on Windows
 and Linux; final archive qualification remains separate. Alternate-cache and
-additional Left/Right recovery rehearsals pass. The full-detail Left image gate,
+additional Left/Right recovery rehearsals pass. Both full-detail Left/Right image gates,
 twenty angle/oblique stills and native/character UI-cleanup probes are complete.
-The ten front sample comparisons found six failing 512-sample cases, so higher
-references are rendering; the standalone Right full-detail pixel gate follows.
+The higher front-reference batch is complete: deep native passes at 1024,
+while hair rejects all five full fronts at 1024. The default 2048-vs-4096
+reference is rendering; remaining full variants are conditionally queued.
 Queued work is not a pass.
 Owner identity approval has been received; the 3–5-person blind review remains pending. No final
 freeze, complete PNG delivery, release qualification or submission handoff is
@@ -1779,4 +1780,21 @@ Prior reports and renders are retained, receipts are compared by the existing
 strict checker, and less than 1 GiB free stops further rendering. This is a
 queued measurement, not a qualified preset or completed output. Other views,
 motion and independent visual acceptance remain separate gates.
+
+The six-case 2048-reference batch completed. Olive-amber and golden-hazel
+comparison sheets were inspected and their report hashes verified. Both pass
+eyes, skin, lips and ear; hair still fails (olive mean RGB 1.0580366320904588,
+golden 1.0531305485468647; both p95 4). All five full fronts therefore fail at
+1024 samples solely on hair. No 2048 front is declared converged before its
+higher-reference comparison.
+
+The standalone Right full-detail gate also completed and its source-bound
+report/receipt hashes were verified. Both irises move right by 10.9403 and
+6.4077 pixels, with correlations 0.894004 and 0.818275 above the unchanged 0.8
+minimum. Peak closure exposes neither pupil; reopening restores the exact held
+extreme image. The extreme and closure images were inspected. Evidence:
+`out/v22-right-full-detail-followup/followup.json`, image-check SHA-256
+`b631c9d6a2c806e6d48f510c729f75531593f728cd05a545c37b9e8438bf25d0`.
+Both dedicated direction diagnostics now pass; complete final playback,
+independent ratings and frozen regeneration remain separate requirements.
 
