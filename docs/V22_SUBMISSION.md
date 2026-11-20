@@ -1736,3 +1736,10 @@ not rendered or converged; other variants/views remain separate. Existing
 reference renders and failed results are preserved, and no second Blender
 process is launched while the current job is active.
 
+The deep full-character 1024-vs-2048 comparison also completed. Skin detail
+now passes (ratio 0.9778283751331677), as do eyes, lips and ear. Hair remains
+failed: mean absolute RGB 1.100593402485749, p95 4, detail ratio
+0.9695259772286299. The whole still is therefore not declared converged.
+Its report is under `out/v22-front-sample-references-2048/neutral-deep/full/sample-analysis`.
+The deep native-target reference is now rendering in the same serial job.
+
