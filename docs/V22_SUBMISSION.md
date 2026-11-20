@@ -2043,3 +2043,20 @@ The actual image was visually inspected with both eyes covered. The renderer
 continued into reopening frame 104 without restart. This reuses an unchanged
 pixel result, not a relabeled historical scene receipt. Reopening, the complete
 576-frame inventory and independent motion acceptance remain pending.
+
+The fixed Left delivery sequence is complete: 192 canonical 1024px/512-sample
+PNGs, thirteen freshly rendered unique poses and 179 exact held-pose copies.
+`left-complete-checkpoint.json` checks all file hashes, PNG structure/dimensions,
+receipt/source identities and pose-sequence reuse. Its render receipt hashes to
+`aa9451b44135555c3a2854f383b8c7b471ab7a31e03dde87980203d3690b19ce`.
+The current neutral, Left gaze, closure and reopened images are byte-identical
+to all four authenticated inputs of the earlier passing image diagnostic;
+reopening is now covered as well as closure. The renderer has moved on to the
+Right sequence in its next owned Blender process.
+
+All thirteen unique Left images were visually inspected at native resolution,
+including gaze interpolation and closing/reopening intermediates. They retain
+the selected face/groom; both eyes close and reopen to the direction hold.
+Discrete still inspection does not prove natural playback or satisfy the
+independent review gate. Right, Generate Motion, combined 576-frame inventory,
+clean final archive qualification and independent acceptance remain pending.
