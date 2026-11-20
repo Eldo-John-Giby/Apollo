@@ -1924,3 +1924,35 @@ and prior image-check hash. This supports reusing those pixel results without
 rerunning an unchanged-input image test. New closure/reopening images,
 complete sequence inventory and final archive checks remain pending.
 
+
+### Optional Kaggle GPU handoff — 21 November 2026
+
+The CPU fixed-candidate driver remains live and its tracked Python recipes are
+unchanged. Kaggle is an optional acceleration route; no GPU result or speedup
+has yet been measured. No Kaggle credentials or connected tool were available.
+The official service documents an MCP endpoint at https://www.kaggle.com/mcp.
+
+`out/v22-kaggle-handoff/apollo-v22-kaggle-input.zip` contains the three exact
+fixed-candidate packed scenes, the minimal PNG/timing dependencies, retained
+component licenses, a file-hash manifest and a separate experimental CUDA
+renderer. Archive size: 971,518,743 bytes; SHA-256:
+`fcd05e8085899d229ed6cb718d82289a42a5d587109f63a1952d64707c5998cb`.
+All 20 payload files were reread from the ZIP and authenticated. The three
+scene hashes match the fixed CPU candidate; no scene was modified or saved.
+
+The adjacent `apollo-v22-kaggle.ipynb` is prepared for a private Kaggle notebook
+with GPU and Internet enabled and the ZIP attached through a private dataset.
+It verifies inputs and the official Linux Blender 4.5.15 download checksum,
+then benchmarks one 1024px/512-sample Left neutral frame. Full rendering is
+explicitly disabled by default pending that benchmark and output inspection.
+The experimental worker requires build `5afeabba6097`, selects CUDA devices,
+disables CPU selection, rejects missing CUDA devices and records GPU/backend/
+device identities in its own receipts. Outputs use separate GPU directories;
+they cannot be substituted into the CPU inventory or claimed as CPU results.
+
+The generated builder is `out/prepare_kaggle_handoff.py`. Python compilation,
+notebook-cell compilation, ZIP integrity and file hashes passed. This is not
+evidence of CUDA execution, convergence, image acceptance or final archive
+qualification. An actual account-authorized Kaggle run and local validation of
+its downloaded images/receipts remain necessary before adopting GPU outputs.
+No upload, account change or cloud execution was performed.
