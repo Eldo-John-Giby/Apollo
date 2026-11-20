@@ -29,7 +29,9 @@ results. The original portrait and rc.5 fallback remain unchanged.
   topology/order/UVs, zero eye corrections, all frames and transition samples,
   groom anchors, local orientations and neutral appearance preservation.
 - [ ] Render all 576 final-quality PNGs at the selected converged preset and
-  verify every receipt/hash, ordered range and exact neutral reset.
+  verify every receipt/hash, ordered range and Generate Motion's exact neutral
+  reset with `tools/gnm_v22_delivery_frames.py`. Left/Right retain their ending
+  direction holds; repeated-pose determinism is checked in every mode.
 - [ ] Verify five-set fresh wrapping on both layouts; retain front, angle,
   oblique and eye/skin/ear/lip details plus a labeled contact sheet.
 - [ ] Exercise representative alternate-variant motion, cache verification,

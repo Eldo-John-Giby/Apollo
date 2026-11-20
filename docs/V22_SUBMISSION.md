@@ -1637,3 +1637,35 @@ inspected. This is a pass for the neutral/extreme pair only: frame 103 closure
 is now rendering, reopening remains pending, and human direction/naturalness
 acceptance remains separate. The original 512px timing-preview failure is kept
 as evidence of its limited diagnostic reliability; it has not been relabeled.
+
+### Complete default PNG inventory verifier prepared
+
+`tools/gnm_v22_delivery_frames.py` now verifies exactly 192 recorded/present
+1024px PNGs per default mode, matching scene/geometry/preparation hashes, selected
+sample/build/render-policy receipts, canonical metadata-free PNGs and actual
+decoding. Reuse references must point to the same authenticated pose ID and
+same image bytes; every repeated pose must be byte-identical. It reads dense
+pose-array headers without loading the full tensors. It is a file/receipt/hold
+inventory, not a replacement for native geometry/resource or visual gates.
+
+The real control implementation and pose NPZs confirm that Left/Right end in
+their direction holds (`sequence` IDs 0 to 160), while Generate Motion returns
+to neutral (0 to 0). The verifier enforces return-to-neutral for Generate Motion
+and preserves the existing Left/Right contract. It does not alter animation to
+fit the check. The release checklist now states that scope explicitly.
+
+The real partial Left output was copied into a separate preflight directory
+and correctly rejected as incomplete: `out/v22-delivery-partial-preflight/preflight.json`
+records two completed frames and the 192-frame requirement. This is rejection
+evidence, not a 576-frame pass. The immutable source, live render and current
+review packet were not modified. Nine targeted inventory cases cover completeness,
+tampering, stale settings, private PNG metadata, wrong-pose reuse, geometry
+changes, Generate Motion reset and isolated CLI import. No final frame inventory
+exists yet; final frozen rendering remains after visual acceptance.
+
+The final inventory implementation passes all 175 Windows source tests
+(`out/v22-delivery-inventory-final-source-tests.xml`). Actual dense pose-array
+headers were inspected as well: Left/Right each contain 385 poses over 17,821
+vertices; Generate Motion contains 1,186. The inventory reads just their headers
+and the 192-index sequences, avoiding full tensor allocation. This development
+test pass is not a complete delivery-inventory or final release pass.
