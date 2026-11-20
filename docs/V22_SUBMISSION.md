@@ -1728,3 +1728,11 @@ in out/v22-front-sample-references-2048/rose-brown/full/sample-analysis/analysis
 Neither the 1024 front profile nor the 2048 reference is declared converged.
 The remaining five higher-reference cases continue in the live serial job.
 
+The default 1024-vs-2048 comparison sheet was inspected. Generated
+`out/v22_default_hair_reference_4096.py` now waits on the actual live Right
+follow-up coordinator, then renders one 4096-sample default full front and
+compares the existing 2048 candidate with the unchanged limits. It is queued,
+not rendered or converged; other variants/views remain separate. Existing
+reference renders and failed results are preserved, and no second Blender
+process is launched while the current job is active.
+
