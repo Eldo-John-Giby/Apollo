@@ -1757,3 +1757,16 @@ inspection does not replace the independent appearance ratings. The release
 checklist now records the already-completed Left full-detail diagnostic
 separately from the queued Right diagnostic and complete-playback acceptance.
 
+The cool-grey full front 1024-vs-2048 measurement completed and its native-pixel
+comparison sheet was inspected. Eyes, skin, lips and ear pass. Hair still fails:
+mean absolute RGB 1.0442855807868423, p95 4, detail ratio 0.9722276981772878.
+The unchanged limits therefore reject the whole 1024-sample front profile.
+Evidence: `out/v22-front-sample-references-2048/cool-grey/full/sample-analysis`;
+analysis SHA-256 `6961432579ccd6dd252b8f0255c5e8caea97237d379cf382810f1a4e4ace6cb2`.
+The serial controller advanced to olive-amber; no final still preset is frozen.
+
+A capacity observation at `out/v22-capacity-observation.json` records roughly
+11 GiB free on the only mounted data volume. Existing evidence is preserved.
+Recheck capacity before final rebuild, archive creation and clean extraction;
+the observation does not establish that all final stages fit simultaneously.
+
