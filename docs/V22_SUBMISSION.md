@@ -1999,3 +1999,21 @@ blink with retained iris structure, brows and upper/lower lashes; this one
 image does not establish full closure, complete motion acceptance or a
 release gate. The existing owned renderer continued into frame 101 without
 restart. No tracked Python recipe or fixed scene was changed.
+
+The retained visual inspection now covers all forty native-pixel front crops
+(five variants, full/native targets, eyes/skin/lips/ear) plus the four angle and
+oblique overview sheets. `judging-agent-inspection.json` records all 44 image
+hashes. The crop receipt explicitly identifies native-pixel crops from the
+original 512-sample fronts; only the overview sheets are downscaled. These
+crops are not relabeled as extracts of the later higher-sample primary fronts.
+Iris structure and lip microfolds remain visible across variants; skin detail
+is soft, particularly in deep-variant shading. Front ear crops show a narrow
+outer-ear view and do not independently prove inner-bowl appearance. No broad
+photorealism acceptance or complete seam audit is claimed from these images.
+Independent human ratings and complete motion acceptance remain pending.
+
+The Kaggle notebook now accepts either a ZIP input or Kaggle's unpacked dataset
+layout. Its local syntax/archive checks still pass with the same input archive
+hash. Windows Computer Use could not confidently identify the browser URL and
+stopped under its safety policy, so no browser authentication, upload or GPU
+session was attempted. The CPU fixed-candidate render continues separately.
