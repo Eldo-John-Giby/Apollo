@@ -2017,3 +2017,16 @@ layout. Its local syntax/archive checks still pass with the same input archive
 hash. Windows Computer Use could not confidently identify the browser URL and
 stopped under its safety policy, so no browser authentication, upload or GPU
 session was attempted. The CPU fixed-candidate render continues separately.
+
+The proposed 238-file archive base passed a bounded-memory known-credential
+pattern scan, including decompressed Blender payloads. The report is
+`archive-preflight/base-credential-pattern-scan.json`; it binds every scanned
+file hash and the exact preflight inventory. Rules cover classic/fine-grained
+GitHub tokens, OpenAI project keys, AWS access-key identifiers and private-key
+armor. No matched contents are printed. A separate synthetic positive check
+verified detection, including a token spanning the 4 MiB read boundary.
+No real secret was used in that check; its fixture is explicitly excluded from
+the proposed archive input mapping. The direct assembler now requires current,
+clean base-scan evidence and includes the report plus the positive-check result.
+This does not prove absence of all credential formats and does not cover future
+frame receipts or final ZIP additions; complete archive hygiene remains open.
