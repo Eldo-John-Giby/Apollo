@@ -2082,3 +2082,15 @@ passing diagnostic and the completed Left neutral byte-for-byte. The binding
 is `same-platform-right-neutral-regression.json`; the driver has saved its
 first 21 held frames and continues into the gaze transition. Right's remaining
 images and the complete Generate Motion sequence are not counted complete.
+
+The fixed Right sequence has reached 99 saved frames, with blink rendering now
+under way. Its fresh neutral and full Right-gaze images are byte-identical to
+the two authenticated inputs of the earlier passing Right image diagnostic.
+The neutral hashes to
+`6fed64f64b6004b7bf0118b38fcaba183ba5edd1ecaeec9efdb2707a51470933`;
+Right gaze hashes to
+`75fa9ca7a86127372c825ad9a7a6ef53a110a2542413479d9cf6afa9a56613c8`.
+`same-platform-right-gaze-regression.json` binds the current scene and receipt
+to the prior check hash. The actual gaze image was visually inspected at native
+resolution. No extra diagnostic render or relaxed image threshold was used.
+Current Right closure/reopening and complete sequence inventory remain pending.
