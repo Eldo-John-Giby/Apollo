@@ -2060,3 +2060,25 @@ the selected face/groom; both eyes close and reopen to the direction hold.
 Discrete still inspection does not prove natural playback or satisfy the
 independent review gate. Right, Generate Motion, combined 576-frame inventory,
 clean final archive qualification and independent acceptance remain pending.
+
+Current source reuse is now authenticated against the actual successful offline
+Linux test archive at revision `2e1c77738bb68332d4f66bcaffa4bacb10677743`.
+All 184 archived Python files match current bytes, all 193 frozen tracked Python
+files remain unchanged, and all non-Python archive inputs also match. No tracked
+Python change exists between that revision and the current checkout. Both
+retained platform XML records show 175 tests, zero failures/errors/skips.
+`unchanged-tested-python-proof.json` binds these checks and source/archive
+hashes. The Linux result explicitly binds the tested source ZIP; the Windows
+XML itself has no embedded source manifest, which the proof states rather than
+inventing one. No unchanged-source test suite was rerun.
+
+Public test records under `public-tests/` remove only the machine-hostname
+attribute, preserve all test cases/counts/results, and retain original/public
+hashes in `derivation.json`. They are derived evidence, not new executions.
+Clean final runtime/archive qualification remains separate.
+
+Right's first fresh neutral image also matches its authenticated previous
+passing diagnostic and the completed Left neutral byte-for-byte. The binding
+is `same-platform-right-neutral-regression.json`; the driver has saved its
+first 21 held frames and continues into the gaze transition. Right's remaining
+images and the complete Generate Motion sequence are not counted complete.
