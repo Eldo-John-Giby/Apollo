@@ -35,7 +35,15 @@
     "pupil_correlation_threshold": 0.8,
     "independent_image_checks": "all passed",
     "video_decoded_frames": "288 frames at 24fps decoded with framemd5 for all 3 videos",
-    "archive_crc_and_payload_hashes": "all passed"
+    "archive_crc_and_payload_hashes": "all passed",
+    "final_clean_windows_linux_qualification": "passed",
+    "windows_standalone_bundle_verifier": "831 payloads verified",
+    "linux_offline_container_bundle_verifier": "831 payloads verified",
+    "cross_platform_rgb_max_diff": 5.0,
+    "cross_platform_rgb_mean_diff": 0.0096,
+    "cross_platform_psnr_db": 68.26,
+    "hygiene_secrets_scan": "passed",
+    "supplement_clean_extraction_verification": "329 payloads verified"
   },
   "notes": "Full quality 12-second demonstrations (288 frames, 24fps, 1024x1024, 512 Cycles samples). Preserves validated identity and original frames 1-192."
 }

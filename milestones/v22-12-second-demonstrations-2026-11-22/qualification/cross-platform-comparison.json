@@ -1,0 +1,42 @@
+{
+  "status": "measured_cross_platform_submission_image_difference",
+  "frames": {
+    "frame_0001.png": {
+      "windows_sha256": "9416d1d19ed63d151350efc57b57ce151b0d7bcf2ff0155475619e2d42a961ee",
+      "linux_sha256": "bd80b27e7cbdc2434c2cfa84b3131a12eb60f1d57e2a700c9e738cd5352b895e",
+      "byte_identical": false,
+      "rgb_max": 5.0,
+      "rgb_mean": 0.009595870971679688,
+      "rgb_p95": 0.0,
+      "rgb_p99": 0.0,
+      "changed_pixels": 26769,
+      "total_pixels": 1048576,
+      "psnr_db": 68.26
+    },
+    "frame_0002.png": {
+      "windows_sha256": "9416d1d19ed63d151350efc57b57ce151b0d7bcf2ff0155475619e2d42a961ee",
+      "linux_sha256": "bd80b27e7cbdc2434c2cfa84b3131a12eb60f1d57e2a700c9e738cd5352b895e",
+      "byte_identical": false,
+      "rgb_max": 5.0,
+      "rgb_mean": 0.009595870971679688,
+      "rgb_p95": 0.0,
+      "rgb_p99": 0.0,
+      "changed_pixels": 26769,
+      "total_pixels": 1048576,
+      "psnr_db": 68.26
+    },
+    "frame_0003.png": {
+      "windows_sha256": "9416d1d19ed63d151350efc57b57ce151b0d7bcf2ff0155475619e2d42a961ee",
+      "linux_sha256": "bd80b27e7cbdc2434c2cfa84b3131a12eb60f1d57e2a700c9e738cd5352b895e",
+      "byte_identical": false,
+      "rgb_max": 5.0,
+      "rgb_mean": 0.009595870971679688,
+      "rgb_p95": 0.0,
+      "rgb_p99": 0.0,
+      "changed_pixels": 26769,
+      "total_pixels": 1048576,
+      "psnr_db": 68.26
+    }
+  },
+  "qualification": "Exact cross-platform comparison of clean-extracted submission archive rendered on Windows and Linux CPU. Floating-point Cycles noise rounding differences quantified."
+}

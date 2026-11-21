@@ -1,0 +1,16 @@
+{
+  "status": "passed_windows_clean_submission_archive_qualification",
+  "archive_sha256": "887f187b92cc80c9ac359d00ab539fbeb34b8327359e24bc873d9e47f5f0de96",
+  "extracted_path": "C:\\Users\\eldoj\\AppData\\Local\\Temp\\apollo clean submission 52327aad\\Apollo Extracted",
+  "files_verified": 831,
+  "frames": {
+    "frame_0001.png": "9416d1d19ed63d151350efc57b57ce151b0d7bcf2ff0155475619e2d42a961ee",
+    "frame_0002.png": "9416d1d19ed63d151350efc57b57ce151b0d7bcf2ff0155475619e2d42a961ee",
+    "frame_0003.png": "9416d1d19ed63d151350efc57b57ce151b0d7bcf2ff0155475619e2d42a961ee"
+  },
+  "valid_frame_preserved": true,
+  "corrupt_and_missing_repaired": true,
+  "stale_receipt_rejected": true,
+  "invalid_range_rejected": true,
+  "qualification": "Clean Windows extraction outside project with spaces; standalone verifier and runtime pass."
+}

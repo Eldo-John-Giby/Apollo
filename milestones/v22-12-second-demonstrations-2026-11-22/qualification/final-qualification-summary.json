@@ -1,0 +1,61 @@
+{
+  "status": "verified_final_clean_windows_linux_submission_qualification",
+  "release_ready": false,
+  "submission_archive": {
+    "filename": "apollo-v22-submission.zip",
+    "bytes": 3396422662,
+    "sha256": "887f187b92cc80c9ac359d00ab539fbeb34b8327359e24bc873d9e47f5f0de96",
+    "files_in_zip": 832,
+    "manifest_entries": 831,
+    "zip_crc": "passed"
+  },
+  "supplement_archive": {
+    "status": "passed_supplement_clean_extraction_verification",
+    "filename": "apollo-v22-12-second-demonstrations.zip",
+    "bytes": 1319405760,
+    "sha256": "ad76db004e99cc743b07c0bc335481c6d596757fd1a29396f65654835ac5277b",
+    "payloads_verified": 329
+  },
+  "windows_qualification": "passed_windows_clean_submission_archive_qualification",
+  "linux_qualification": "passed_linux_clean_submission_archive_qualification",
+  "cross_platform_comparison": {
+    "frame_0001.png": {
+      "windows_sha256": "9416d1d19ed63d151350efc57b57ce151b0d7bcf2ff0155475619e2d42a961ee",
+      "linux_sha256": "bd80b27e7cbdc2434c2cfa84b3131a12eb60f1d57e2a700c9e738cd5352b895e",
+      "byte_identical": false,
+      "rgb_max": 5.0,
+      "rgb_mean": 0.009595870971679688,
+      "rgb_p95": 0.0,
+      "rgb_p99": 0.0,
+      "changed_pixels": 26769,
+      "total_pixels": 1048576,
+      "psnr_db": 68.26
+    },
+    "frame_0002.png": {
+      "windows_sha256": "9416d1d19ed63d151350efc57b57ce151b0d7bcf2ff0155475619e2d42a961ee",
+      "linux_sha256": "bd80b27e7cbdc2434c2cfa84b3131a12eb60f1d57e2a700c9e738cd5352b895e",
+      "byte_identical": false,
+      "rgb_max": 5.0,
+      "rgb_mean": 0.009595870971679688,
+      "rgb_p95": 0.0,
+      "rgb_p99": 0.0,
+      "changed_pixels": 26769,
+      "total_pixels": 1048576,
+      "psnr_db": 68.26
+    },
+    "frame_0003.png": {
+      "windows_sha256": "9416d1d19ed63d151350efc57b57ce151b0d7bcf2ff0155475619e2d42a961ee",
+      "linux_sha256": "bd80b27e7cbdc2434c2cfa84b3131a12eb60f1d57e2a700c9e738cd5352b895e",
+      "byte_identical": false,
+      "rgb_max": 5.0,
+      "rgb_mean": 0.009595870971679688,
+      "rgb_p95": 0.0,
+      "rgb_p99": 0.0,
+      "changed_pixels": 26769,
+      "total_pixels": 1048576,
+      "psnr_db": 68.26
+    }
+  },
+  "hygiene_scan": "passed_hygiene_check",
+  "qualification": "Exact submission archive (apollo-v22-submission.zip) and 12s supplement archive passed clean extraction, standalone file verifier, Windows & Linux runtime reproduction, repair/rejection negative tests, cross-platform image comparison, and hygiene scan. Independent human evaluation remains separate."
+}

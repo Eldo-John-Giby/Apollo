@@ -1,0 +1,42 @@
+{
+  "status": "passed_linux_clean_submission_archive_qualification",
+  "archive_sha256": "887f187b92cc80c9ac359d00ab539fbeb34b8327359e24bc873d9e47f5f0de96",
+  "files_verified": 831,
+  "receipt_frames": 3,
+  "receipt": {
+    "run": {
+      "scene_sha256": "1624eb5745558f53117ae644dd4ca0dedb0e0fa96500246e85961dcc1bf70aca",
+      "mode": "generate-motion",
+      "renderer_sha256": "645c4b0eb565051ab35235067e99e051abbfbeaf91c4ef8995cc9cbd1c3e3b54",
+      "png_policy_sha256": "2ac564732b9290eb5f75726469ffa60bdb21cd51b9afefe5a22697809a477638",
+      "blender": "4.5.15 LTS",
+      "blender_build": "5afeabba6097",
+      "resolution": [
+        1024,
+        1024
+      ],
+      "samples": 512,
+      "fps": 24.0,
+      "range": [
+        1,
+        192
+      ],
+      "reuse_holds": true
+    },
+    "frames": {
+      "frame_0001.png": {
+        "sha256": "bd80b27e7cbdc2434c2cfa84b3131a12eb60f1d57e2a700c9e738cd5352b895e",
+        "reused_frame": null
+      },
+      "frame_0002.png": {
+        "sha256": "bd80b27e7cbdc2434c2cfa84b3131a12eb60f1d57e2a700c9e738cd5352b895e",
+        "reused_frame": 1
+      },
+      "frame_0003.png": {
+        "sha256": "bd80b27e7cbdc2434c2cfa84b3131a12eb60f1d57e2a700c9e738cd5352b895e",
+        "reused_frame": 1
+      }
+    }
+  },
+  "qualification": "Clean Linux extraction in container outside project with spaces; standalone verifier and runtime pass."
+}
