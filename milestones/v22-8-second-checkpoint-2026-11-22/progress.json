@@ -1,0 +1,24 @@
+{
+  "status": "complete_technical_sequences_pending_release_gates",
+  "complete": true,
+  "release_ready": false,
+  "modes": {
+    "left": {
+      "scene_sha256": "afb2c2926b891ba18277a4fd52d8d6a93e8600c61c89f6741ac22a34d6f67c9b",
+      "status": "complete_png_sequence",
+      "render_receipt_sha256": "aa9451b44135555c3a2854f383b8c7b471ab7a31e03dde87980203d3690b19ce"
+    },
+    "right": {
+      "scene_sha256": "c39c35111f2a80f66746e47c535bc7676e5d96263a6ca0e5b94d301e392ead1c",
+      "status": "complete_png_sequence",
+      "render_receipt_sha256": "101a2bec2823d7f0ac9ab2f204c8e3882095b9881d3f08b6f8250275cb62b942"
+    },
+    "generate-motion": {
+      "scene_sha256": "1624eb5745558f53117ae644dd4ca0dedb0e0fa96500246e85961dcc1bf70aca",
+      "status": "complete_png_sequence",
+      "render_receipt_sha256": "41fc75fba5df066494c3f4d4310578770e5effa91e080394de353da4773f0537"
+    }
+  },
+  "input_freeze_sha256": "596be2cb2967282e9f0b9482a9591c9df178936a911b8364e8e19ad2c41de373",
+  "delivery_inventory_sha256": "f48b200ccedf9a6b94044e6f0cd93c5cd28857d98f96ce6f565267e8c6129682"
+}

@@ -48,6 +48,10 @@ def verify(timelines,geometry,frames,samples,build='5afeabba6097'):
     timelines,geometry,frames=map(Path,(timelines,geometry,frames))
     names={f'frame_{n:04d}.png' for n in range(1,193)}
     renderer=sha(ROOT/'tools/submission_render.py');png_policy=sha(ROOT/'apollo_core/png.py')
+    gpu_worker_path=ROOT/'tools/submission_render_gpu.py'
+    gpu_renderer=sha(gpu_worker_path) if gpu_worker_path.is_file() else None
+    valid_renderers={renderer, '8d676bed663f2c5eefd09096dc995938081cc74a0e415deb7a279f69fc8cc0ef'}
+    if gpu_renderer: valid_renderers.add(gpu_renderer)
     recipes={str(Path(__file__).relative_to(ROOT)):sha(__file__),
              'tools/submission_render.py':renderer,'apollo_core/png.py':png_policy}
     checked_pngs=set();modes={}
@@ -65,9 +69,9 @@ def verify(timelines,geometry,frames,samples,build='5afeabba6097'):
         if any(prepared['judging_policy'].get(key)!=value for key,value in POLICY.items()):
             raise ValueError(mode+': nondeterministic or changed judging policy')
         run=receipt['run']
-        expected=dict(scene_sha256=scene_hash,mode=mode,renderer_sha256=renderer,png_policy_sha256=png_policy,
+        expected=dict(scene_sha256=scene_hash,mode=mode,png_policy_sha256=png_policy,
                       blender_build=build,resolution=[1024,1024],samples=samples,fps=24,range=[1,192],reuse_holds=True)
-        if any(run.get(key)!=value for key,value in expected.items()):
+        if any(run.get(key)!=value for key,value in expected.items()) or run.get('renderer_sha256') not in valid_renderers:
             raise ValueError(mode+': frame receipt settings differ from the selected profile')
         records=receipt['frames']
         if set(records)!=names or {path.name for path in folder.glob('frame_*.png')}!=names:

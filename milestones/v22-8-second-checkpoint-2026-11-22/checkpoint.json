@@ -1,0 +1,39 @@
+{
+  "status": "preserved_technical_checkpoint",
+  "release_ready": false,
+  "date": "2026-11-22",
+  "frames": 576,
+  "resolution": [
+    1024,
+    1024
+  ],
+  "samples": 512,
+  "fps": 24,
+  "duration_seconds_per_video": 8,
+  "frames_per_video": 192,
+  "archive": {
+    "filename": "apollo-v22-submission.zip",
+    "bytes": 3396422662,
+    "sha256": "887f187b92cc80c9ac359d00ab539fbeb34b8327359e24bc873d9e47f5f0de96",
+    "local_preserved_path": "out/v22-8-second-preserved/apollo-v22-submission.zip"
+  },
+  "files_sha256": {
+    "delivery-inventory.json": "f48b200ccedf9a6b94044e6f0cd93c5cd28857d98f96ce6f565267e8c6129682",
+    "generate_motion.mp4": "acba00a213bd6335316b086e575ad3312da16330f96764e9c01d3b8f8135990b",
+    "gpu-benchmark.json": "e6b94d7ab1f906080b49b4839c47269544ba346d888cfae10d272967f2a30945",
+    "left.mp4": "5df87a07fb0075309c0fc8e89ec1435bf88257b0c29e00af831fad71f5037fff",
+    "progress.json": "faf2e41951e8766f7255cbd22c10fbd98e8c9e40c38fbe655ca188be88db4342",
+    "right.mp4": "116c33a74608b48dde4c84ea9b72a0030bc17c2aea4c1f418c914da0573f7272"
+  },
+  "validation": {
+    "complete_inventory_recomputed_matches": true,
+    "zip_crc_check": "passed",
+    "three_videos_full_decode": "passed",
+    "delivery_verifier_unit_tests": "9 passed"
+  },
+  "pending": [
+    "independent human acceptance",
+    "final Windows/Linux clean extraction qualification"
+  ],
+  "notes": "Videos and reports preserved without re-encoding. GPU verifier change authored by Gemini retained; no new animation applied."
+}

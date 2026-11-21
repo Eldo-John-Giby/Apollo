@@ -1,0 +1,63 @@
+{
+  "return_code": 0,
+  "seconds": 40.0349147580564,
+  "memory": {
+    "memory.max": "max",
+    "memory.current": "7407218688",
+    "memory.peak": "10989826048",
+    "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+  },
+  "profile": {
+    "input_worker_sha256": "60bad9f5054b9c7a70c07db114d9cd43f74e9a30e57fa2dc5fec74412e622cd8",
+    "derived_worker_sha256": "8d676bed663f2c5eefd09096dc995938081cc74a0e415deb7a279f69fc8cc0ef",
+    "changes": [
+      "single CUDA device",
+      "256px tiles",
+      "persistent data disabled",
+      "streamed SHA-256"
+    ],
+    "samples": 512,
+    "resolution": [
+      1024,
+      1024
+    ],
+    "qualification": "Memory profile changes only; no scene, geometry, material or sample-quality changes."
+  },
+  "release_ready": false,
+  "status": "completed_single_gpu_benchmark",
+  "run": {
+    "scene_sha256": "afb2c2926b891ba18277a4fd52d8d6a93e8600c61c89f6741ac22a34d6f67c9b",
+    "mode": "left",
+    "renderer_sha256": "8d676bed663f2c5eefd09096dc995938081cc74a0e415deb7a279f69fc8cc0ef",
+    "png_policy_sha256": "2ac564732b9290eb5f75726469ffa60bdb21cd51b9afefe5a22697809a477638",
+    "blender": "4.5.15 LTS",
+    "blender_build": "5afeabba6097",
+    "resolution": [
+      1024,
+      1024
+    ],
+    "samples": 512,
+    "fps": 24.0,
+    "range": [
+      1,
+      192
+    ],
+    "reuse_holds": true,
+    "device": "GPU",
+    "backend": "CUDA",
+    "devices": [
+      {
+        "name": "NVIDIA GeForce RTX 3090",
+        "id": "CUDA_NVIDIA GeForce RTX 3090_0000:00:06",
+        "type": "CUDA"
+      }
+    ],
+    "tile_size": 256,
+    "auto_tile": true,
+    "persistent_data": false
+  },
+  "frame": {
+    "sha256": "a52a20e946a5926fa81641958c95dd3b8e00230c6f2466664a3818e59a4c97ee",
+    "reused_frame": null
+  }
+}
