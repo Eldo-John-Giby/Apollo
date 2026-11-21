@@ -1,0 +1,506 @@
+{
+  "run": {
+    "scene_sha256": "e272c44f504e48e80ebdbc4bb365a4faea538950928edd3de1e6ac637e120cd7",
+    "worker_sha256": "75a914ba92c3d585d0948555a7e95ad2c12ddc49df69c18d632d408fb8825287",
+    "mode": "right",
+    "range": [
+      193,
+      288
+    ],
+    "resolution": [
+      1024,
+      1024
+    ],
+    "samples": 512,
+    "fps": 24,
+    "device": "GPU",
+    "backend": "CUDA",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "blender": "4.5.15 LTS",
+    "build": "5afeabba6097",
+    "persistent_data": true,
+    "tile_size": 256
+  },
+  "frames": {
+    "frame_0193.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": null,
+      "seconds": 25.237030554097146
+    },
+    "frame_0194.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03396339598111808
+    },
+    "frame_0195.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.033671570010483265
+    },
+    "frame_0196.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03366801096126437
+    },
+    "frame_0197.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03369697090238333
+    },
+    "frame_0198.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03378459997475147
+    },
+    "frame_0199.png": {
+      "sha256": "3ad49147842a69e63050322ad629f55134b29dd0c7e42e6c142db99352eecc3a",
+      "reused_frame": null,
+      "seconds": 22.331074779154733
+    },
+    "frame_0200.png": {
+      "sha256": "d918ddc432506c95df8fd3e19fd9bea0acca08a7244e1292e64be6b487b84230",
+      "reused_frame": null,
+      "seconds": 22.32263089204207
+    },
+    "frame_0201.png": {
+      "sha256": "a8ab9ce292d6eb2dcea960ea8932d410a5bd695c53fea0a3ebd7880eebcd89fa",
+      "reused_frame": null,
+      "seconds": 22.50202057720162
+    },
+    "frame_0202.png": {
+      "sha256": "d35a75c2a0052af469a87e00de80568098f89bd17926792710f8507c307fbe4d",
+      "reused_frame": null,
+      "seconds": 22.381105327047408
+    },
+    "frame_0203.png": {
+      "sha256": "caaf25d4a53393e62ed02dc2caa997c31cb4cd59a8120306afe486d6e8a7d794",
+      "reused_frame": null,
+      "seconds": 22.373637170065194
+    },
+    "frame_0204.png": {
+      "sha256": "639e0d34208ffdd77176fcf423f646b579fc22902f5e87c12f776d03b5f92e18",
+      "reused_frame": null,
+      "seconds": 22.315810966072604
+    },
+    "frame_0205.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": null,
+      "seconds": 22.325963685987517
+    },
+    "frame_0206.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.0339845041744411
+    },
+    "frame_0207.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.03405570285394788
+    },
+    "frame_0208.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.033999257953837514
+    },
+    "frame_0209.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.03431439679116011
+    },
+    "frame_0210.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.0340791551861912
+    },
+    "frame_0211.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.033980634063482285
+    },
+    "frame_0212.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.03404933586716652
+    },
+    "frame_0213.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.03398583084344864
+    },
+    "frame_0214.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.034043289022520185
+    },
+    "frame_0215.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.03410904994234443
+    },
+    "frame_0216.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.034067667089402676
+    },
+    "frame_0217.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.03423662111163139
+    },
+    "frame_0218.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.03401178494095802
+    },
+    "frame_0219.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.03441348695196211
+    },
+    "frame_0220.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.0340405791066587
+    },
+    "frame_0221.png": {
+      "sha256": "b8a0b00c6c05e80295f0f2c55b3b47727cedec1ea79e1982fe649348e13ef7db",
+      "reused_frame": 205,
+      "seconds": 0.033867063000798225
+    },
+    "frame_0222.png": {
+      "sha256": "af4d06120bb16fe6b6dc4f4f0bd9395617a5445177b33b6928d763b1441eafa4",
+      "reused_frame": null,
+      "seconds": 22.37562946905382
+    },
+    "frame_0223.png": {
+      "sha256": "235d2fe6d019a41a64a42d47efab412e01c14d80deadc7451f46ff0b55ed82fc",
+      "reused_frame": null,
+      "seconds": 22.553510814206675
+    },
+    "frame_0224.png": {
+      "sha256": "f917feff3fae933d48d55f0cab8e190d4bd44c55de4dff73edc8baf48907fdad",
+      "reused_frame": null,
+      "seconds": 22.40950315608643
+    },
+    "frame_0225.png": {
+      "sha256": "611f4775932123afc1011387f0a1780c0fa10a1b48276d6b0ca6378642fc54d4",
+      "reused_frame": null,
+      "seconds": 22.477146535879
+    },
+    "frame_0226.png": {
+      "sha256": "62a3a8bcb365b0b5bf771ade1a9c5d21f22e911191faaae4e3f28a36761623c1",
+      "reused_frame": null,
+      "seconds": 22.455447788815945
+    },
+    "frame_0227.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03362936805933714
+    },
+    "frame_0228.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03341212193481624
+    },
+    "frame_0229.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.033314570086076856
+    },
+    "frame_0230.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03341495105996728
+    },
+    "frame_0231.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03359321318566799
+    },
+    "frame_0232.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.0333770508877933
+    },
+    "frame_0233.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.0333189619705081
+    },
+    "frame_0234.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.033290097024291754
+    },
+    "frame_0235.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03341678809374571
+    },
+    "frame_0236.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03333302913233638
+    },
+    "frame_0237.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03346097283065319
+    },
+    "frame_0238.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03342749993316829
+    },
+    "frame_0239.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.0333399148657918
+    },
+    "frame_0240.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03335880511440337
+    },
+    "frame_0241.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.033357382053509355
+    },
+    "frame_0242.png": {
+      "sha256": "4552c26700c1b567ff46c2ff00754334dc98f74ef7e634ed4d5b9572ce5c3546",
+      "reused_frame": null,
+      "seconds": 22.5249471119605
+    },
+    "frame_0243.png": {
+      "sha256": "a169302665481d7a86c412c1384a0c065c6ec34553f83d36201d3e1e6f7c4dac",
+      "reused_frame": null,
+      "seconds": 22.532347651897
+    },
+    "frame_0244.png": {
+      "sha256": "873c674677402a1a7a8139e601496de6e5cb59926e93dd9ac198927babc15b26",
+      "reused_frame": null,
+      "seconds": 22.459647352108732
+    },
+    "frame_0245.png": {
+      "sha256": "873c674677402a1a7a8139e601496de6e5cb59926e93dd9ac198927babc15b26",
+      "reused_frame": 244,
+      "seconds": 0.03362563392147422
+    },
+    "frame_0246.png": {
+      "sha256": "db88751c243365a4b2847ff7c50c47d3d18acbb9232a8127ad0738c67c9e9472",
+      "reused_frame": null,
+      "seconds": 22.437234444078058
+    },
+    "frame_0247.png": {
+      "sha256": "00a275dbb26a5340de049d2aaeb3f19bb6483f4af55ddad2c6cb73c1dc4cf52e",
+      "reused_frame": null,
+      "seconds": 22.429453740129247
+    },
+    "frame_0248.png": {
+      "sha256": "f6c4a205788c48a5134b2450fa20b9dc68cb4e50a6b0ac41adb4b10395b7dc3b",
+      "reused_frame": null,
+      "seconds": 22.398914442164823
+    },
+    "frame_0249.png": {
+      "sha256": "d70f779f75d2b1b1d3de8a70c8762ff56a73a31e99a49e17b11d0184227ef8b2",
+      "reused_frame": null,
+      "seconds": 22.47071268898435
+    },
+    "frame_0250.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03471454908140004
+    },
+    "frame_0251.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03418885380961001
+    },
+    "frame_0252.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034073170041665435
+    },
+    "frame_0253.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03436450590379536
+    },
+    "frame_0254.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03410069993697107
+    },
+    "frame_0255.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.0342155781108886
+    },
+    "frame_0256.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034071244997903705
+    },
+    "frame_0257.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03403072617948055
+    },
+    "frame_0258.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03429108904674649
+    },
+    "frame_0259.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034548966912552714
+    },
+    "frame_0260.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03419271903112531
+    },
+    "frame_0261.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034295421093702316
+    },
+    "frame_0262.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034133536042645574
+    },
+    "frame_0263.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034324222011491656
+    },
+    "frame_0264.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03416222706437111
+    },
+    "frame_0265.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.0341734210960567
+    },
+    "frame_0266.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03433573292568326
+    },
+    "frame_0267.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03419215697795153
+    },
+    "frame_0268.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034028982976451516
+    },
+    "frame_0269.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03404880897141993
+    },
+    "frame_0270.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034162890864536166
+    },
+    "frame_0271.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03421367099508643
+    },
+    "frame_0272.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03405328397639096
+    },
+    "frame_0273.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03406782587990165
+    },
+    "frame_0274.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034368054009974
+    },
+    "frame_0275.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03418588102795184
+    },
+    "frame_0276.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03422893909737468
+    },
+    "frame_0277.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03419395489618182
+    },
+    "frame_0278.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03429376007989049
+    },
+    "frame_0279.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03415284282527864
+    },
+    "frame_0280.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034150971099734306
+    },
+    "frame_0281.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.034081204095855355
+    },
+    "frame_0282.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03388873999938369
+    },
+    "frame_0283.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03400035295635462
+    },
+    "frame_0284.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03432825696654618
+    },
+    "frame_0285.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03402490704320371
+    },
+    "frame_0286.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03416668809950352
+    },
+    "frame_0287.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.03398149600252509
+    },
+    "frame_0288.png": {
+      "sha256": "4f280363aa925461ec37f105bb90a5e783c6f7b607b33dbfdde1b34d399cfd3e",
+      "reused_frame": 193,
+      "seconds": 0.033917468041181564
+    }
+  }
+}

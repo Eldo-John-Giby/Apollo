@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "bytes": 1319405760,
+  "sha256": "ad76db004e99cc743b07c0bc335481c6d596757fd1a29396f65654835ac5277b",
+  "files": 329,
+  "all_payload_hashes_verified": true,
+  "archive_crc_verified": true,
+  "release_ready": false
+}

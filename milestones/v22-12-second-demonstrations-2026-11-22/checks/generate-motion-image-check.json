@@ -1,0 +1,240 @@
+{
+  "recipe_sha256": "85fcb597d1ff6435c11dbd0917c244ca85c9bbba03b42a409fe93dd550502dbf",
+  "images": {
+    "neutral": {
+      "path": "out\\v22-fixed-technical-candidate\\frames\\generate-motion\\frame_0001.png",
+      "sha256": "978de5c10e03f3b3a79214b660b2ded58c1917b298d947a87a670087ee04ab81"
+    },
+    "left": {
+      "path": "out\\v22-12-second\\frames\\generate-motion\\frame_0274.png",
+      "sha256": "4c36b70a80bed1bd494dae23aca6966eaa1a299a72f266c38434960983d31667"
+    },
+    "right": {
+      "path": "out\\v22-12-second\\frames\\generate-motion\\frame_0252.png",
+      "sha256": "b0a8b5d2deee615b276f7cce89b691af2e4517b502d50ae4cb95fdfa73dbbe1f"
+    },
+    "up": {
+      "path": "out\\v22-12-second\\frames\\generate-motion\\frame_0230.png",
+      "sha256": "3fd21644e67b9df4c00902f05b11843a86c9f0a1b54f76dfee51b61902c70dd1"
+    },
+    "down": {
+      "path": "out\\v22-12-second\\frames\\generate-motion\\frame_0205.png",
+      "sha256": "18cc9abfbb2b80123919105f50f6e9400e824eb2de6b469c446e614f5ba26c20"
+    },
+    "closed": {
+      "path": "out\\v22-12-second\\frames\\generate-motion\\frame_0235.png",
+      "sha256": "a41b16e75e33435f5a8010885d65221e98d1644d38e61e2beb989872d5d2694a"
+    },
+    "reopened": {
+      "path": "out\\v22-12-second\\frames\\generate-motion\\frame_0242.png",
+      "sha256": "3fd21644e67b9df4c00902f05b11843a86c9f0a1b54f76dfee51b61902c70dd1"
+    }
+  },
+  "neutral": {
+    "screen-left": [
+      336.10902404785156,
+      441.5394172668457
+    ],
+    "screen-right": [
+      684.1183090209961,
+      437.45412826538086
+    ]
+  },
+  "checks": {
+    "neutral": {
+      "pupils": {
+        "screen-left": [
+          336.10902404785156,
+          441.5394172668457
+        ],
+        "screen-right": [
+          684.1183090209961,
+          437.45412826538086
+        ]
+      },
+      "dark_candidates": {
+        "screen-left": [
+          336.10902404785156,
+          441.5394172668457
+        ],
+        "screen-right": [
+          684.1183090209961,
+          437.45412826538086
+        ]
+      },
+      "reference_correlation": {
+        "screen-left": 1.0,
+        "screen-right": 0.9999998211860657
+      }
+    },
+    "left": {
+      "pupils": {
+        "screen-left": [
+          327.0282440185547,
+          439.0842590332031
+        ],
+        "screen-right": [
+          678.5915451049805,
+          433.7066841125488
+        ]
+      },
+      "dark_candidates": {
+        "screen-left": [
+          327.0282440185547,
+          439.0842590332031
+        ],
+        "screen-right": [
+          678.5915451049805,
+          433.7066841125488
+        ]
+      },
+      "reference_correlation": {
+        "screen-left": 0.9147542715072632,
+        "screen-right": 0.8289331793785095
+      },
+      "horizontal_shift_px": {
+        "screen-left": -9.080780029296875,
+        "screen-right": -5.526763916015625
+      }
+    },
+    "right": {
+      "pupils": {
+        "screen-left": [
+          345.3417663574219,
+          444.4523620605469
+        ],
+        "screen-right": [
+          688.7520294189453,
+          439.9580993652344
+        ]
+      },
+      "dark_candidates": {
+        "screen-left": [
+          345.3417663574219,
+          444.4523620605469
+        ],
+        "screen-right": [
+          688.7520294189453,
+          439.9580993652344
+        ]
+      },
+      "reference_correlation": {
+        "screen-left": 0.8586029410362244,
+        "screen-right": 0.856714129447937
+      },
+      "horizontal_shift_px": {
+        "screen-left": 9.232742309570312,
+        "screen-right": 4.633720397949219
+      }
+    },
+    "up": {
+      "pupils": {
+        "screen-left": [
+          341.96363830566406,
+          435.83412170410156
+        ],
+        "screen-right": [
+          686.5979385375977,
+          429.97909927368164
+        ]
+      },
+      "dark_candidates": {
+        "screen-left": [
+          341.96363830566406,
+          435.83412170410156
+        ],
+        "screen-right": [
+          686.5979385375977,
+          429.97909927368164
+        ]
+      },
+      "reference_correlation": {
+        "screen-left": 0.9024127721786499,
+        "screen-right": 0.9498418569564819
+      },
+      "vertical_shift_px": {
+        "screen-left": -5.705295562744141,
+        "screen-right": -7.475028991699219
+      },
+      "horizontal_shift_px": {
+        "screen-left": 5.8546142578125,
+        "screen-right": 2.4796295166015625
+      }
+    },
+    "down": {
+      "pupils": {
+        "screen-left": [
+          336.2196350097656,
+          448.46461486816406
+        ],
+        "screen-right": [
+          681.5445327758789,
+          443.3385467529297
+        ]
+      },
+      "dark_candidates": {
+        "screen-left": [
+          336.2196350097656,
+          448.46461486816406
+        ],
+        "screen-right": [
+          681.5445327758789,
+          443.3385467529297
+        ]
+      },
+      "reference_correlation": {
+        "screen-left": 0.8102906942367554,
+        "screen-right": 0.9131187200546265
+      },
+      "vertical_shift_px": {
+        "screen-left": 6.925197601318359,
+        "screen-right": 5.884418487548828
+      },
+      "horizontal_shift_px": {
+        "screen-left": 0.1106109619140625,
+        "screen-right": -2.5737762451171875
+      }
+    },
+    "closed": {
+      "pupils": {
+        "screen-left": null,
+        "screen-right": null
+      },
+      "dark_candidates": {
+        "screen-left": null,
+        "screen-right": null
+      },
+      "reference_correlation": {}
+    },
+    "reopened": {
+      "pupils": {
+        "screen-left": [
+          341.96363830566406,
+          435.83412170410156
+        ],
+        "screen-right": [
+          686.5979385375977,
+          429.97909927368164
+        ]
+      },
+      "dark_candidates": {
+        "screen-left": [
+          341.96363830566406,
+          435.83412170410156
+        ],
+        "screen-right": [
+          686.5979385375977,
+          429.97909927368164
+        ]
+      },
+      "reference_correlation": {
+        "screen-left": 0.9024127721786499,
+        "screen-right": 0.9498418569564819
+      }
+    }
+  },
+  "minimum_reference_correlation": 0.8,
+  "qualification": "Image checks for fixed motion framing only; human direction review is separate.",
+  "errors": [],
+  "passed": true
+}

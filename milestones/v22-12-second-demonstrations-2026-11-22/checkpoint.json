@@ -1,0 +1,41 @@
+{
+  "status": "verified_12_second_demonstration_checkpoint",
+  "release_ready": false,
+  "date": "2026-11-22",
+  "total_frames_across_three_modes": 864,
+  "frames_per_video": 288,
+  "duration_seconds_per_video": 12,
+  "fps": 24,
+  "resolution": [
+    1024,
+    1024
+  ],
+  "samples": 512,
+  "archive": {
+    "filename": "apollo-v22-12-second-demonstrations.zip",
+    "bytes": 1319405760,
+    "sha256": "ad76db004e99cc743b07c0bc335481c6d596757fd1a29396f65654835ac5277b",
+    "files": 329
+  },
+  "base_archive": {
+    "filename": "apollo-v22-submission.zip",
+    "bytes": 3396422662,
+    "sha256": "887f187b92cc80c9ac359d00ab539fbeb34b8327359e24bc873d9e47f5f0de96"
+  },
+  "videos": {
+    "left.mp4": "e619811dacbcdf8a7b3625324523ae16dafa7e4d0a42e53a276bea91eec32870",
+    "right.mp4": "4e3864bce5fa77a76abd73cbf28ebdd6da76a2280795f9dc3855dfe5cdfebc08",
+    "generate_motion.mp4": "d555ff8efa32977fcb1cc95cdf4f909f8ed7628d8bc598e3be7f68d416e65feb"
+  },
+  "checks": {
+    "reopened_scene_channels_max_error": 0.0,
+    "geometry_and_uv_unchanged": true,
+    "packed_textures_unchanged": true,
+    "shaders_unchanged": true,
+    "pupil_correlation_threshold": 0.8,
+    "independent_image_checks": "all passed",
+    "video_decoded_frames": "288 frames at 24fps decoded with framemd5 for all 3 videos",
+    "archive_crc_and_payload_hashes": "all passed"
+  },
+  "notes": "Full quality 12-second demonstrations (288 frames, 24fps, 1024x1024, 512 Cycles samples). Preserves validated identity and original frames 1-192."
+}

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "mode": "generate-motion",
+  "scene_sha256": "c184490ab94df7e5a104ac14b22582c9175b3c84b85f3a5ab6269e4418f46208",
+  "original_scene_sha256": "1624eb5745558f53117ae644dd4ca0dedb0e0fa96500246e85961dcc1bf70aca",
+  "checked_times": 861,
+  "animated_channels": 2374,
+  "maximum_channel_error": 0.0,
+  "geometry_uv_unchanged": true,
+  "packed_textures_unchanged": true,
+  "shaders_unchanged": true,
+  "recipe_sha256": "6d7576c6bc421744365f999c135ffe2843f8592fc83e2d0894df37b5185a88a7",
+  "qualification": "Fresh-process scene/channel/asset comparison. Human motion review remains separate."
+}

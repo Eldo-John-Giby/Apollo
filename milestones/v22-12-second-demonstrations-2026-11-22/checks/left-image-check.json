@@ -1,0 +1,130 @@
+{
+  "recipe_sha256": "85fcb597d1ff6435c11dbd0917c244ca85c9bbba03b42a409fe93dd550502dbf",
+  "images": {
+    "neutral": {
+      "path": "out\\v22-fixed-technical-candidate\\frames\\left\\frame_0001.png",
+      "sha256": "6fed64f64b6004b7bf0118b38fcaba183ba5edd1ecaeec9efdb2707a51470933"
+    },
+    "left": {
+      "path": "out\\v22-12-second\\frames\\left\\frame_0288.png",
+      "sha256": "3947a7105255898b7f7c9e24678dd1088a465680b5775b65144ffceedf592644"
+    },
+    "closed": {
+      "path": "out\\v22-12-second\\frames\\left\\frame_0245.png",
+      "sha256": "56856c0699585ac1465a8a6ad4f2c0910e7d498b6c0d5c75392d2f95d371611c"
+    },
+    "reopened": {
+      "path": "out\\v22-12-second\\frames\\left\\frame_0250.png",
+      "sha256": "3947a7105255898b7f7c9e24678dd1088a465680b5775b65144ffceedf592644"
+    }
+  },
+  "neutral": {
+    "screen-left": [
+      336.1152038574219,
+      441.5772895812988
+    ],
+    "screen-right": [
+      684.1270141601562,
+      437.4919319152832
+    ]
+  },
+  "checks": {
+    "neutral": {
+      "pupils": {
+        "screen-left": [
+          336.1152038574219,
+          441.5772895812988
+        ],
+        "screen-right": [
+          684.1270141601562,
+          437.4919319152832
+        ]
+      },
+      "dark_candidates": {
+        "screen-left": [
+          336.1152038574219,
+          441.5772895812988
+        ],
+        "screen-right": [
+          684.1270141601562,
+          437.4919319152832
+        ]
+      },
+      "reference_correlation": {
+        "screen-left": 0.9999998807907104,
+        "screen-right": 1.0
+      }
+    },
+    "left": {
+      "pupils": {
+        "screen-left": [
+          330.1262741088867,
+          440.3799247741699
+        ],
+        "screen-right": [
+          676.8733749389648,
+          435.29983139038086
+        ]
+      },
+      "dark_candidates": {
+        "screen-left": [
+          330.1262741088867,
+          440.3799247741699
+        ],
+        "screen-right": [
+          676.8733749389648,
+          435.29983139038086
+        ]
+      },
+      "reference_correlation": {
+        "screen-left": 0.8781899809837341,
+        "screen-right": 0.8285972476005554
+      },
+      "horizontal_shift_px": {
+        "screen-left": -5.988929748535156,
+        "screen-right": -7.253639221191406
+      }
+    },
+    "closed": {
+      "pupils": {
+        "screen-left": null,
+        "screen-right": null
+      },
+      "dark_candidates": {
+        "screen-left": null,
+        "screen-right": null
+      },
+      "reference_correlation": {}
+    },
+    "reopened": {
+      "pupils": {
+        "screen-left": [
+          330.1262741088867,
+          440.3799247741699
+        ],
+        "screen-right": [
+          676.8733749389648,
+          435.29983139038086
+        ]
+      },
+      "dark_candidates": {
+        "screen-left": [
+          330.1262741088867,
+          440.3799247741699
+        ],
+        "screen-right": [
+          676.8733749389648,
+          435.29983139038086
+        ]
+      },
+      "reference_correlation": {
+        "screen-left": 0.8781899809837341,
+        "screen-right": 0.8285972476005554
+      }
+    }
+  },
+  "minimum_reference_correlation": 0.8,
+  "qualification": "Image checks for fixed motion framing only; human direction review is separate.",
+  "errors": [],
+  "passed": true
+}
