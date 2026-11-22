@@ -1,6 +1,7 @@
 """Author the 120-second v22 product demo from authenticated release media.
 
-No generated imagery, speech, music, or timing changes to the three mode clips.
+Actual released imagery, authored scientific schematics and human-narration timing.
+No synthetic speech, stock imagery or retiming of the rendered motion excerpts.
 Requires Pillow, NumPy, imageio-ffmpeg and the released submission ZIP.
 """
 from __future__ import annotations
@@ -11,8 +12,6 @@ import io
 import json
 import re
 import subprocess
-import sys
-import time
 import zipfile
 from pathlib import Path
 
@@ -26,51 +25,24 @@ BG, FG, MUTED, ACCENT = '#F3F0E9', '#19212B', '#616B76', '#2449C6'
 THEME = 'Ivory editorial: warm paper, charcoal, cobalt, Bahnschrift headings'
 VARIANTS = ['rose-brown', 'golden-hazel', 'olive-amber', 'neutral-deep', 'cool-grey']
 CHAPTERS = [
-    (6, 'APOLLO', 'Meet Apollo. Controlled synthetic gaze for expressive virtual humans, developed by Team AICA for Samsung PRISM-XR.'),
-    (12, 'Left', 'The Left mode coordinates both eyes in the viewer\'s screen direction. Watch the initial fixation, eyelid closure and reopening, followed by refixation and a second look.'),
-    (12, 'Right', 'The Right mode mirrors that directional task. These are actual released renders, shown at their original playback speed. Packed Blender timelines preserve the complete motion for inspection.'),
-    (12, 'Generate Motion', 'Generate Motion combines horizontal and vertical gaze with blinking and a return to neutral. Each demonstration runs for twelve seconds at twenty-four frames per second.'),
-    (12, 'Material diversity', 'Five complete material variants combine four-K skin maps with separate two-K maps for each eye. Physically based surface properties accompany the color data, with explicit binding and provenance.'),
-    (14, 'Native portability', 'A separate wrapping pathway applies the materials directly to the unchanged native target. Five variants, two UV layouts and three views form a thirty-case portability matrix, separate from the hero character.'),
-    (20, 'Working software', 'The extracted package runs offline. Here, the standalone verifier checks the actual delivery and authenticates eight hundred thirty-one payload files. Blender then opens the packed Generate Motion timeline: one hundred ninety-two frames at twenty-four frames per second. The command-line interface selects each mode, material variant and UV layout.'),
-    (12, 'Verification', 'The retained source records contain one hundred seventy-five passing tests per platform. The exact archive passed clean Windows and Linux runtime checks, with authenticated payloads, recovery behavior and invalid-input rejection.'),
-    (12, 'Samsung XR', 'For Samsung XR research, Apollo provides controlled stimuli for virtual instruction, embodied assistance and avatar evaluation. These are proposed applications. Device integration and independent human review remain next steps.'),
-    (8, 'Release', 'Apollo version zero point three. Expressive virtual humans, with engineering you can inspect and reproduce. Explore the complete release and its evidence.'),
+    (6, 'APOLLO', 'Meet Apollo. Expressive virtual humans, with facial appearance and eye movement engineered together for Samsung XR research.'),
+    (12, 'Coordinated behavior', 'Apollo combines binocular gaze, eyelid closure and refixation in a controllable facial performance. The selected identity remains recognizable as the eyes move, close and reopen.'),
+    (12, 'Analytical fixation', 'Alongside native GNM animation, our analytical research module solves each eye toward one shared fixation target. A calibrated camera connects physical pupil geometry to inspectable image coordinates.'),
+    (14, 'Identity transport', 'We build on Google GNM motion and transport the selected identity through local surface rotations. The method preserves facial offsets while protected eye components retain their native coordinates. Appearance follows expression without redefining the ocular reference.'),
+    (12, 'Material construction', 'Detailed appearance comes from separate material channels: color, roughness, specular response and surface normals. Four-K skin and distinct two-K eye maps support controlled shading, backed by attributed source assets.'),
+    (10, 'Surface attachments', 'Hair, brows, lashes and tear-region details need to follow the face. Surface-triangle anchors and local frames carry these attachments with the deforming geometry.'),
+    (10, 'Controlled variation', 'Five material palettes share the same character geometry. This separates changes in appearance from changes in anatomy, supporting consistent comparisons under matched framing.'),
+    (12, 'Native portability', 'Apollo also applies textures directly to the unchanged native target. Five palettes, two UV layouts and three views create thirty portability cases, separate from the full character presentation.'),
+    (8, 'Independent evidence', 'Native-motion comparisons, appearance-component checks and image diagnostics support the visual result. Source-bound records make those checks traceable to the delivered artifacts.'),
+    (14, 'Samsung XR relevance', 'For Samsung XR, controlled gaze can support virtual instructors, embodied assistants and avatar evaluation. Apollo provides reproducible facial stimuli for that research, with device integration as the next step. These are proposed applications, rather than deployed headset features.'),
+    (10, 'APOLLO', 'Apollo brings detailed materials, identity-preserving motion and native-target portability into one inspectable system. A precise foundation for expressive virtual humans and Samsung XR research.'),
 ]
+VIDEO_SCENES = {0: ('generate_motion.mp4', 0.0), 1: ('left.mp4', 0.0), 3: ('right.mp4', 0.0), 5: ('generate_motion.mp4', 2.0)}
 assert sum(c[0] for c in CHAPTERS) == 120
 
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
-
-
-def capture_execution(archive, work, blender):
-    """Capture genuine CLI results once, before any graphical treatment."""
-    work.mkdir(parents=True, exist_ok=True)
-    if (work/'actual-execution.json').exists():
-        return
-    runtime = work/'runtime'
-    runtime.mkdir(exist_ok=True)
-    with zipfile.ZipFile(archive) as package:
-        for info in package.infolist():
-            if not (runtime/info.filename).resolve().is_relative_to(runtime.resolve()):
-                raise ValueError('Unsafe archive path')
-            package.extract(info, runtime)
-    started = time.monotonic()
-    result = subprocess.run([sys.executable, 'tools/gnm_bundle_verify.py', '--reject-extra'], cwd=runtime, check=True, capture_output=True, text=True)
-    verifier = json.loads(result.stdout)
-    assert verifier['files'] == 831
-    (work/'actual-verifier-output.txt').write_text(result.stdout, encoding='utf-8')
-    probe = work/'inspect_timeline.py'
-    probe.write_text('import bpy,json\ns=bpy.context.scene\nprint("APOLLO_TIMELINE "+json.dumps({"first_frame":s.frame_start,"last_frame":s.frame_end,"fps":s.render.fps/s.render.fps_base,"engine":s.render.engine,"packed_images":sum(1 for i in bpy.data.images if i.packed_file or len(i.packed_files)>0)}))\n', encoding='utf-8')
-    command = [str(blender), '--offline-mode', '-b', '--factory-startup', str((runtime/'timelines/generate-motion/expression.blend').resolve()), '--python-exit-code', '1', '-P', str(probe.resolve())]
-    loaded = subprocess.run(command, check=True, capture_output=True, text=True)
-    (work/'actual-blender-output.txt').write_text(loaded.stdout+'\n'+loaded.stderr, encoding='utf-8')
-    line = next(x for x in loaded.stdout.splitlines() if x.startswith('APOLLO_TIMELINE '))
-    timeline = json.loads(line.split(' ', 1)[1])
-    assert (timeline['first_frame'], timeline['last_frame'], timeline['fps']) == (1, 192, 24)
-    evidence = {'commands': ['python tools/gnm_bundle_verify.py --reject-extra', 'blender --offline-mode -b timelines/generate-motion/expression.blend --python inspect_timeline.py'], 'verifier': verifier, 'timeline': timeline, 'elapsed_seconds': round(time.monotonic()-started, 3), 'verifier_stdout_sha256': sha(result.stdout.encode()), 'blender_stdout_sha256': sha(loaded.stdout.encode())}
-    (work/'actual-execution.json').write_text(json.dumps(evidence, indent=2), encoding='utf-8')
 
 
 class Edit:
@@ -89,6 +61,10 @@ class Edit:
                 'front': 'judging/full/rose-brown/front/full.png',
                 'oblique': 'judging/full/rose-brown/oblique/image.png',
                 'native': 'judging/native/rose-brown/front/fresh-texture-only.png',
+                'eyes': 'judging/overviews-and-details/full-rose-brown-eyes.png',
+                'color': 'textures/rose-brown/color.1001.png',
+                'roughness': 'textures/rose-brown/roughness.1001.png',
+                'normal': 'textures/rose-brown/normal.1001.png',
             }
             selection.update({v: f'judging/full/{v}/front/full.png' for v in VARIANTS})
             for key, name in selection.items():
@@ -97,12 +73,11 @@ class Edit:
                 self.images[key] = Image.open(io.BytesIO(data)).convert('RGB')
                 self.provenance[name] = sha(data)
         delivery = json.loads((ROOT/'milestones/v22-12-second-demonstrations-2026-11-22/delivery.json').read_text())
-        publication = json.loads((ROOT/'out/stable-v0.3.0/publication.json').read_text()) if (ROOT/'out/stable-v0.3.0/publication.json').exists() else None
         self.video_paths = [ROOT/'videos'/name for name in ['left.mp4', 'right.mp4', 'generate_motion.mp4']]
         for p in self.video_paths:
             digest = sha(p.read_bytes())
-            if publication:
-                assert digest == publication['verified_assets'][p.name]['sha256'], p.name
+            mode = 'generate-motion' if p.stem == 'generate_motion' else p.stem
+            assert digest == delivery['modes'][mode]['video']['sha256'], p.name
             reader = imageio_ffmpeg.read_frames(str(p))
             metadata = next(reader)
             reader.close()
@@ -110,10 +85,6 @@ class Edit:
             self.provenance[p.relative_to(ROOT).as_posix()] = digest
         assert delivery['duration_seconds'] == 12 and delivery['frames_per_mode'] == 288
         self.stills = {}
-        self.execution = json.loads((self.work/'actual-execution.json').read_text())
-        assert self.execution['verifier']['manifest_sha256'] == sha(manifest_bytes)
-        assert self.execution['verifier']['files'] == 831
-        assert self.execution['timeline']['last_frame'] == 192
 
     def font(self, size, bold=False, mono=False):
         key = (size, bold, mono)
@@ -130,7 +101,7 @@ class Edit:
         self.text(image, 'APOLLO', (96, 54), 26, FG, True)
         self.text(image, 'AICA / SAMSUNG PRISM-XR', (1364, 58), 21, MUTED)
         ImageDraw.Draw(image).line((96, 111, 1824, 111), fill='#D3D0C9', width=1)
-        if index not in [0, 9]:
+        if index not in [0, 10]:
             self.text(image, f'{index:02d}  /  {CHAPTERS[index][1].upper()}', (96, 143), 23, ACCENT, True)
         return image
 
@@ -148,102 +119,148 @@ class Edit:
         if index in self.stills:
             return self.stills[index].copy()
         c = self.shell(index)
-        d = ImageDraw.Draw(c)
         if index == 0:
-            self.text(c, 'APOLLO', (96, 260), 142, FG, True)
-            self.text(c, 'Expression, precisely controlled.', (103, 463), 45, FG)
+            self.text(c, 'APOLLO', (96, 262), 138, FG, True)
+            self.text(c, 'Expression, engineered.', (103, 463), 47, FG)
             self.text(c, 'Synthetic gaze for Samsung XR research', (105, 575), 29, ACCENT)
-            self.text(c, 'TEAM AICA   /   v0.3.0', (105, 870), 24, MUTED)
-        elif index in [1, 2, 3]:
-            titles = {1: 'Coordinated\nbinocular gaze.', 2: 'Controlled\nrefixation.', 3: 'Expression\nin motion.'}
-            descriptions = {1: 'Shared direction.\nEyelid closure. Reopening.', 2: 'A second look.\nA blink. A return to center.', 3: 'Horizontal and vertical gaze.\nBlink. Reset.'}
-            self.text(c, titles[index], (96, 285), 80, FG, True, 6)
-            self.text(c, descriptions[index], (103, 553), 34, MUTED)
-            self.text(c, '24 fps  /  Original playback speed', (103, 833), 25, ACCENT)
-            self.text(c, 'Actual released render sequence', (103, 887), 23, MUTED)
+            self.text(c, 'TEAM AICA / v0.3.0', (105, 875), 25, MUTED)
+        elif index == 1:
+            self.text(c, 'Control the eyes.\nPreserve the person.', (96, 282), 75, FG, True, 7)
+            self.text(c, 'Binocular gaze. Blink. Refixation.', (103, 550), 33, MUTED)
+            self.text(c, 'Actual released motion / 24 fps', (103, 857), 25, ACCENT)
+        elif index == 2:
+            self.text(c, 'One target. Two independent gaze rays.', (96, 216), 63, FG, True)
+            self.text(c, 'Analytical research module / separate from native GNM animation', (103, 315), 29, ACCENT)
+        elif index == 3:
+            self.text(c, 'Motion inherited.\nIdentity preserved.', (96, 260), 76, FG, True, 8)
+            self.text(c, 'Native Google GNM poses\nLocal rotation of identity offsets\nProtected eye coordinates', (103, 505), 32, MUTED, spacing=23)
+            self.text(c, 'Surface-local identity transport', (103, 897), 26, ACCENT)
         elif index == 4:
-            self.text(c, 'Five material identities.', (96, 215), 73, FG, True)
-            self.text(c, 'Matched framing. Distinct skin and iris palettes.', (101, 321), 32, MUTED)
-            for i, name in enumerate(VARIANTS):
-                x = 100 + i*350
-                self.picture(c, name, (x, 419, 320, 320))
-                self.text(c, name, (x, 766), 26, FG)
-            for x, value, label in [(100, '4K', 'Skin maps'), (665, '2K', 'Separate maps per eye'), (1230, 'PBR', 'Explicit surface properties')]:
-                self.text(c, value, (x, 861), 62, ACCENT, True)
-                self.text(c, label, (x+155, 891), 25, MUTED)
-        elif index == 6:
-            self.text(c, 'Extract. Verify. Inspect.', (96, 217), 73, FG, True)
-            self.text(c, 'Actual command output, edited for presentation', (102, 327), 28, MUTED)
-            self.text(c, 'Standalone verification', (102, 447), 32, ACCENT, True)
-            self.text(c, 'Packed Blender timeline', (1110, 447), 32, ACCENT, True)
-            self.text(c, 'Offline runtime / No authoring add-ons required', (102, 916), 30, MUTED)
+            self.text(c, 'Material detail,\nlayer by layer.', (96, 252), 78, FG, True, 8)
+            self.text(c, '4K skin / distinct 2K eye maps', (103, 493), 31, ACCENT)
+            self.text(c, 'Color, roughness, specular response\nand tangent-space normals.', (103, 566), 30, MUTED)
+            self.text(c, 'Actual material maps and rendered detail', (103, 921), 24, MUTED)
+            for x, key, label in [(830, 'color', 'BASE COLOR'), (1168, 'roughness', 'ROUGHNESS'), (1506, 'normal', 'NORMAL')]:
+                self.picture(c, key, (x, 374, 300, 300))
+                self.text(c, label, (x, 697), 22, ACCENT, True)
+            self.picture(c, 'eyes', (830, 779, 976, 250))
         elif index == 5:
-            self.text(c, 'The target stays native.', (96, 210), 73, FG, True)
-            self.picture(c, 'front', (205, 352, 570, 570))
-            self.picture(c, 'native', (1135, 352, 570, 570))
-            self.text(c, 'V22 appearance', (205, 944), 29, FG, True)
-            self.text(c, 'Unchanged GNM target', (1135, 944), 29, FG, True)
-            self.text(c, '5 variants / 2 UV layouts / 3 views', (102, 308), 31, ACCENT)
+            self.text(c, 'The details\nfollow the face.', (96, 266), 77, FG, True, 8)
+            self.text(c, 'Surface-triangle anchors\nDeformation-aware local frames', (103, 510), 31, MUTED, spacing=19)
+            self.text(c, 'Hair, brows, lashes and tear details', (103, 869), 26, ACCENT)
+        elif index == 6:
+            self.text(c, 'One geometry. Five material palettes.', (96, 214), 65, FG, True)
+            self.text(c, 'Controlled variation under matched framing', (103, 319), 32, MUTED)
+            for i, name in enumerate(VARIANTS):
+                x = 100+i*350
+                self.picture(c, name, (x, 423, 320, 320))
+                self.text(c, name, (x, 770), 26, FG)
+            self.text(c, 'Appearance changes. The underlying character stays consistent.', (103, 905), 33, ACCENT)
         elif index == 7:
-            self.text(c, 'Verified beyond the render.', (96, 217), 72, FG, True)
-            for x, value, label in [(100, '175', 'Passing source tests per platform'), (720, '831', 'Verified base archive payloads'), (1340, '329', 'Verified supplement payloads')]:
-                self.text(c, value, (x, 416), 121, ACCENT, True)
-                self.text(c, label, (x, 597), 27, MUTED)
-            self.text(c, 'Windows + Linux', (102, 773), 43, FG, True)
-            self.text(c, 'Offline extraction. Verified-frame preservation. Missing-frame repair.', (102, 851), 30, MUTED)
-            self.text(c, 'Cross-platform image comparison: three held neutral frames.', (102, 934), 24, MUTED)
+            self.text(c, 'The target stays native.', (96, 211), 74, FG, True)
+            self.text(c, '5 palettes / 2 UV layouts / 3 views', (103, 316), 32, ACCENT)
+            self.picture(c, 'front', (205, 361, 565, 565))
+            self.picture(c, 'native', (1135, 361, 565, 565))
+            self.text(c, 'Full v22 identity and groom', (205, 945), 28, FG, True)
+            self.text(c, 'Texture-only native GNM target', (1135, 945), 28, FG, True)
         elif index == 8:
-            self.text(c, 'Samsung XR research applications', (96, 211), 67, FG, True)
-            self.text(c, 'Proposed uses for controlled synthetic gaze', (102, 319), 31, ACCENT)
-            for y, title, desc in [(458, 'Virtual instruction', 'Repeatable attention cues for training scenarios'), (614, 'Embodied assistance', 'Controlled visual attention for spatial explanations'), (770, 'Avatar evaluation', 'Compare appearance and gaze under known inputs')]:
-                self.text(c, title, (104, y), 40, FG, True)
-                self.text(c, desc, (730, y+9), 29, MUTED)
-            self.text(c, 'Device integration and independent human review remain future work.', (104, 948), 24, MUTED)
+            self.text(c, 'The engineering is inspectable.', (96, 217), 71, FG, True)
+            for x, value, caption in [(100, '383', 'Integer and half-frame samples\nper base motion mode'), (720, '18', 'Appearance components\nchecked per mode'), (1340, '175', 'Passing source tests\nper platform')]:
+                self.text(c, value, (x, 432), 120, ACCENT, True)
+                self.text(c, caption, (x, 611), 28, MUTED, spacing=14)
+            self.text(c, 'Native reference comparisons. Image diagnostics. Source-bound evidence.', (103, 869), 30, FG)
+            self.text(c, 'Independent human review remains outstanding.', (103, 947), 24, MUTED)
         elif index == 9:
-            self.text(c, 'APOLLO', (96, 266), 127, FG, True)
-            self.text(c, 'Expressive virtual humans.\nInspectable engineering.', (103, 465), 44, FG)
-            self.text(c, 'Stable v0.3.0  /  Team AICA', (104, 693), 30, ACCENT)
-            self.text(c, 'github.com/Eldo-John-Giby/Apollo', (104, 856), 27, MUTED)
+            self.text(c, 'A research foundation for Samsung XR', (96, 216), 64, FG, True)
+            self.text(c, 'Proposed applications for controlled visual attention', (103, 319), 30, ACCENT)
+            for y, title, desc in [(460, 'Virtual instructors', 'Repeatable attention and expression in training'), (615, 'Embodied assistants', 'Visual cues that accompany spatial explanations'), (770, 'Avatar evaluation', 'Controlled inputs for appearance and gaze studies')]:
+                self.text(c, title, (104, y), 40, FG, True)
+                self.text(c, desc, (735, y+10), 29, MUTED)
+            self.text(c, 'Device integration and evaluation remain future work.', (104, 948), 24, MUTED)
+        elif index == 10:
+            self.text(c, 'APOLLO', (96, 267), 127, FG, True)
+            self.text(c, 'Expressive humans.\nControlled by design.', (103, 467), 47, FG)
+            self.text(c, 'Appearance, motion and native compatibility', (104, 691), 29, ACCENT)
+            self.text(c, 'Team AICA / Samsung PRISM-XR', (104, 858), 27, MUTED)
         self.stills[index] = c.copy()
         return c
+
+    def fixation(self, canvas, t):
+        import math
+        d = ImageDraw.Draw(canvas)
+        target = (1310, 605-155*math.sin(2*math.pi*t/6))
+        d.line((1310, 390, 1310, 810), fill='#C8C3B9', width=3)
+        d.line((1310, 445, 1310, 765), fill='#C87927', width=5)
+        self.text(canvas, 'Fixation plane', (1190, 357), 26, MUTED)
+        self.text(canvas, '+5 cm', (1340, 426), 23, '#A55A15')
+        self.text(canvas, '-5 cm', (1340, 744), 23, '#A55A15')
+        for name, eye, color in [('L', (235, 500), '#3A8682'), ('R', (235, 710), '#C87927')]:
+            d.line((eye[0], eye[1], target[0], target[1]), fill=color, width=3)
+            d.ellipse((eye[0]-44, eye[1]-44, eye[0]+44, eye[1]+44), fill='#FFFFFF', outline=FG, width=2)
+            ray = np.array(target)-np.array(eye);ray = ray/np.linalg.norm(ray)*20
+            pupil = (eye[0]+ray[0], eye[1]+ray[1])
+            d.ellipse((pupil[0]-10, pupil[1]-10, pupil[0]+10, pupil[1]+10), fill=ACCENT)
+            self.text(canvas, name, (148, eye[1]-21), 30, FG, True)
+        d.ellipse((target[0]-12, target[1]-12, target[0]+12, target[1]+12), fill='#C87927')
+        d.ellipse((230, 600, 240, 610), fill=FG)
+        self.text(canvas, 'M', (150, 584), 24, MUTED)
+        d.polygon([(1610, 576), (1555, 605), (1610, 634), (1610, 620), (1690, 620), (1690, 590), (1610, 590)], fill=ACCENT)
+        self.text(canvas, 'Camera locked', (1535, 673), 24, MUTED)
+        for y, x2, label in [(875, 1310, '35 cm fixation distance'), (952, 1595, '40 cm render camera')]:
+            d.line((235, y, x2, y), fill=MUTED, width=2)
+            for x in [235, x2]: d.line((x, y-9, x, y+9), fill=MUTED, width=2)
+            self.text(canvas, label, (650, y-44), 25, FG)
+        self.text(canvas, 'Plan-view schematic / not to scale', (1400, 983), 20, MUTED)
 
     def frame(self, index, n, video=None):
         duration = CHAPTERS[index][0]
         t, progress = n/FPS, n/(duration*FPS-1)
         c = self.base(index)
-        if index == 0:
-            self.picture(c, 'angle', (980, 132, 850, 850), progress, .035)
-        elif index in [1, 2, 3] and video is not None:
+        if index in VIDEO_SCENES and video is not None:
             c.paste(video, (1010, 131))
+        if index == 2:
+            self.fixation(c, t)
+        elif index == 3:
+            d = ImageDraw.Draw(c)
+            for x, label in [(105, 'Native pose'), (395, 'Local rotation'), (685, 'V22 identity')]:
+                self.text(c, label, (x, 765), 24, ACCENT, True)
+            for x in [320, 610]:
+                amount = min(1, max(0, (t-.5)/1.5))
+                d.line((x, 783, x+int(52*amount), 783), fill=ACCENT, width=2)
+        elif index == 5:
+            # Diagram of local attachment frames, separate from actual render.
+            d = ImageDraw.Draw(c)
+            offset = 9*np.sin(t*2)
+            vertices = [(150, 731+offset), (355, 681-offset), (510, 760+offset)]
+            d.polygon(vertices, fill='#E3E0D9', outline=MUTED)
+            anchor = tuple(np.mean(vertices, axis=0))
+            tangent = np.array(vertices[1])-np.array(vertices[0])
+            tangent = tangent/np.linalg.norm(tangent)
+            normal = np.array([tangent[1], -tangent[0]])
+            d.ellipse((anchor[0]-6, anchor[1]-6, anchor[0]+6, anchor[1]+6), fill=ACCENT)
+            d.line([anchor, tuple(np.array(anchor)+normal*59)], fill=ACCENT, width=3)
+            d.line([anchor, tuple(np.array(anchor)+tangent*70)], fill='#3A8682', width=3)
+            self.text(c, 'Attachment-frame schematic', (525, 713), 20, MUTED)
         elif index == 6:
-            command = 'python tools/gnm_bundle_verify.py\n--reject-extra'
-            ImageDraw.Draw(c).multiline_text((104, 528), command, font=self.font(31, mono=True), fill=FG, spacing=18)
-            if t >= 3:
-                self.text(c, self.execution['verifier']['status'], (104, 681), 29, ACCENT)
-                self.text(c, f"{self.execution['verifier']['files']} payload files authenticated", (104, 745), 28, MUTED)
-            if t >= 7:
-                self.text(c, 'Frames 1-192 at 24 fps', (1110, 531), 34, FG, True)
-                self.text(c, 'Cycles / packed image resources', (1110, 597), 27, MUTED)
-            if t >= 11:
-                self.picture(c, 'front', (1170, 665, 210, 210))
-                self.text(c, 'Released output', (1422, 752), 27, ACCENT)
-        elif index == 9:
-            self.picture(c, 'oblique', (1015, 153, 810, 810), progress, .025)
-        # Restrained entry on authored graphics. The original demonstration clips
-        # run uninterrupted, without fading or retiming their evidence frames.
-        if index not in [1, 2, 3]:
-            alpha = min(1, max(0, t/.32))
-            if alpha < 1: c = Image.blend(Image.new('RGB', (W, H), BG), c, alpha)
-        elapsed = sum(x[0] for x in CHAPTERS[:index]) + t
+            d = ImageDraw.Draw(c);active = min(4, int(progress*5));x = 100+active*350
+            d.line((x, 825, x+320, 825), fill=ACCENT, width=4)
+        elif index == 10:
+            self.picture(c, 'angle', (1015, 153, 810, 810), progress, .035)
+        if index not in VIDEO_SCENES:
+            alpha = min(1, max(0, t/.26))
+            if alpha < 1:c = Image.blend(Image.new('RGB', (W, H), BG), c, alpha)
+        elapsed = sum(x[0] for x in CHAPTERS[:index])+t
         d = ImageDraw.Draw(c)
         d.line((96, 1034, 1824, 1034), fill='#D3D0C9', width=2)
         d.line((96, 1034, 96+int(1728*elapsed/120), 1034), fill=ACCENT, width=2)
-        if index == 9 and t > duration-.45:
+        if index == 10 and t > duration-.45:
             c = Image.blend(c, Image.new('RGB', (W, H), BG), (t-(duration-.45))/.45)
         return c
 
     def video_frame(self, index, seconds):
-        path = self.video_paths[index-1]
+        file, start = VIDEO_SCENES[index]
+        path = ROOT/'videos'/file
+        seconds = min(11.95, seconds+start)
         r = subprocess.run([self.exe, '-v', 'error', '-ss', str(seconds), '-i', str(path), '-vf', 'scale=820:820', '-frames:v', '1', '-f', 'rawvideo', '-pix_fmt', 'rgb24', 'pipe:1'], check=True, capture_output=True)
         return Image.frombytes('RGB', (820, 820), r.stdout)
 
@@ -252,7 +269,7 @@ class Edit:
         folder.mkdir(exist_ok=True)
         for i, (duration, _, _) in enumerate(CHAPTERS):
             second = min(duration-1, 2)
-            image = self.frame(i, second*FPS, self.video_frame(i, second) if i in [1, 2, 3] else None)
+            image = self.frame(i, second*FPS, self.video_frame(i, second) if i in VIDEO_SCENES else None)
             image.save(folder/f'{i:02d}.png')
         sheet = Image.new('RGB', (1440, 4*300), '#dce0e5')
         for i in range(len(CHAPTERS)):
@@ -272,11 +289,15 @@ class Edit:
             with (self.work/f'chapter-{i:02d}.log').open('w') as log:
                 writer = subprocess.Popen(command, stdin=subprocess.PIPE, stderr=log)
                 try:
-                    if i in [1, 2, 3]:
-                        reader = imageio_ffmpeg.read_frames(str(self.video_paths[i-1]), pix_fmt='rgb24', output_params=['-vf', 'scale=820:820'])
+                    if i in VIDEO_SCENES:
+                        file, start = VIDEO_SCENES[i]
+                        reader = imageio_ffmpeg.read_frames(str(ROOT/'videos'/file), input_params=['-ss', str(start)], pix_fmt='rgb24', output_params=['-vf', 'scale=820:820'])
                         next(reader)
                     for n in range(duration*FPS):
-                        video = Image.frombytes('RGB', (820, 820), next(reader)) if reader else None
+                        if reader:
+                            try: video = Image.frombytes('RGB', (820, 820), next(reader))
+                            except StopIteration: pass  # Editorial hold after the original 12-second source.
+                        else: video = None
                         writer.stdin.write(self.frame(i, n, video).tobytes())
                 finally:
                     writer.stdin.close()
@@ -291,16 +312,16 @@ class Edit:
         assert frames == 120*FPS
         assert 'Audio:' not in result.stderr
         (self.work/'decode.log').write_text(result.stderr, encoding='utf-8')
-        return {'theme': THEME, 'duration_seconds': 120, 'decoded_frames': frames, 'width': W, 'height': H, 'fps': FPS, 'audio': 'None. Silent narration-ready master.', 'sha256': sha(target.read_bytes()), 'bytes': target.stat().st_size, 'sources': self.provenance, 'actual_execution': self.execution, 'editing': 'Authored typography, restrained still-image push-ins, frame-exact original-speed mode playback. Actual CLI results shown as edited excerpts.', 'scope': 'Edited product demonstration using actual Blender output. No real-time render-speed or deployed-device claim.', 'chapters': [{'start_seconds': sum(c[0] for c in CHAPTERS[:i]), 'duration_seconds': c[0], 'title': c[1]} for i, c in enumerate(CHAPTERS)]}
+        return {'theme': THEME, 'duration_seconds': 120, 'decoded_frames': frames, 'width': W, 'height': H, 'fps': FPS, 'audio': 'None. Silent narration-ready master.', 'sha256': sha(target.read_bytes()), 'bytes': target.stat().st_size, 'sources': self.provenance, 'purpose': 'Product showcase: mechanisms, differentiation and Samsung XR research relevance', 'editing': 'Authored technical schematics, animated fixation rays, native identity and attachment explanations, actual rendered footage at original speed. Right-mode editorial ending hold: two seconds.', 'scope': 'Edited product demonstration using actual Blender output. No real-time render-speed or deployed-device claim.', 'chapters': [{'start_seconds': sum(c[0] for c in CHAPTERS[:i]), 'duration_seconds': c[0], 'title': c[1]} for i, c in enumerate(CHAPTERS)]}
 
 
 def write_script(path):
-    lines = ['# Apollo two-minute demo: voice-over guide', '', 'Record one continuous human voice-over, using the ranges below as cues. The master is deliberately silent. The pace is approximately 145 words per minute, with room for natural pauses. Mode clips run at their original 24 fps. Proposed Samsung applications are identified explicitly.', '', 'Pronunciation: Apollo = uh-POL-oh; GNM = G-N-M; UV = U-V; PBR = P-B-R.', '']
+    lines = ['# Apollo two-minute demo: voice-over guide', '', 'Record one continuous human voice-over, using the ranges below as cues. The master is deliberately silent. The pace is approximately 145 words per minute, with room for natural pauses. Recorded footage runs at its original 24 fps. This script replaces the earlier walkthrough narration. Proposed Samsung applications are identified explicitly.', '', 'Pronunciation: Apollo = uh-POL-oh; GNM = G-N-M; UV = U-V; PBR = P-B-R.', '']
     for i, (seconds, title, words) in enumerate(CHAPTERS):
         start = sum(c[0] for c in CHAPTERS[:i])
         clock = lambda n: f'{n//60:02}:{n%60:02}'
         lines.extend([f'## {clock(start)}–{clock(start+seconds)} · {title}', '', words, ''])
-    lines.extend(['## Handoff', '', 'Master: `videos/apollo-demo-2min.mp4` (1920×1080, 24 fps, 120 seconds, H.264). Add the voice-over in your editor, preserve the 120-second timeline, and export H.264 at the same frame rate. Do not stretch the three mode clips. A restrained licensed music bed can be added beneath the human voice if desired.', '', 'Engineering boundary: source test records cover 175 passing tests per platform. The clean Windows/Linux runtime comparison covers three held neutral frames. Independent human review and organizer-model matching remain outstanding. The video demonstrates offline synthesis, rather than measured headset deployment or real-time rendering.', ''])
+    lines.extend(['## Handoff', '', 'Master: `VITVellore_AICA_Demo.mp4` (1920×1080, 24 fps, 120 seconds, H.264). Add the voice-over in your editor, preserve the 120-second timeline, and export H.264 at the same frame rate. Do not stretch the rendered motion excerpts. The analytical fixation diagram explains the separate research module, rather than the native GNM animation controller. A restrained licensed music bed can be added beneath the human voice if desired.', '', 'Engineering boundary: source test records cover 175 passing tests per platform. The clean Windows/Linux runtime comparison covers three held neutral frames. Independent human review and organizer-model matching remain outstanding. The video demonstrates offline synthesis, rather than measured headset deployment or real-time rendering.', ''])
     path.write_text('\n'.join(lines), encoding='utf-8')
 
 
@@ -308,11 +329,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--submission-archive', type=Path, required=True)
     parser.add_argument('--work', type=Path, default=ROOT/'out/submission-demo-2min')
-    parser.add_argument('--out', type=Path, default=ROOT/'videos/apollo-demo-2min.mp4')
+    parser.add_argument('--out', type=Path, default=ROOT/'VITVellore_AICA_Demo.mp4')
     parser.add_argument('--preview-only', action='store_true')
-    parser.add_argument('--blender', type=Path, default=Path('C:/Program Files/Blender Foundation/Blender 4.5/blender.exe'))
     args = parser.parse_args()
-    capture_execution(args.submission_archive, args.work, args.blender)
     edit = Edit(args.submission_archive, args.work)
     edit.preview()
     if not args.preview_only:

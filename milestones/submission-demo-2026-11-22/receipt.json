@@ -6,13 +6,17 @@
   "height": 1080,
   "fps": 24,
   "audio": "None. Silent narration-ready master.",
-  "sha256": "d14eb499d535a674e6f85ed5ec80a86444c4ea82895160b57038ebdeac40c679",
-  "bytes": 3707562,
+  "sha256": "d428ffcf09d061fa9e4aaadf2e194e1f644c2f8c56adc664bb920b4211d0de50",
+  "bytes": 4073191,
   "sources": {
     "judging/full/rose-brown/angle/image.png": "18640aa7a9972c9597ea79b001a9b495d28581ae402bed1021e5fb686e0eaea4",
     "judging/full/rose-brown/front/full.png": "b329a70acd7164855c07aecd166765ebfc7f46e3449283cbcd959444b79eef63",
     "judging/full/rose-brown/oblique/image.png": "819f4ca3a98fc7bbe3123e4f7e91221cd877ec30576741e017592d97ccb5c13a",
     "judging/native/rose-brown/front/fresh-texture-only.png": "07246441d1260905081bacd9c7f162f6cb15f9ec6cb4418e46a035774a20f9f0",
+    "judging/overviews-and-details/full-rose-brown-eyes.png": "c8a10451cf22441d6d04929ea6614a0f855a5723221883c00a37f16773076564",
+    "textures/rose-brown/color.1001.png": "2a7c24124f323bc43f0ec0cfad775580123026382e82dcefc6aa20d6f428148f",
+    "textures/rose-brown/roughness.1001.png": "60f768caf1e7bc4e0ef82f36823c49d79c55ed9605f7ba4fbc4eed58de9eed2b",
+    "textures/rose-brown/normal.1001.png": "8baa7bdb7e8c50bf0afd8dea0e2af83eb119689bde14aa6fbe7420adbfa64294",
     "judging/full/golden-hazel/front/full.png": "af4b63e46fa1dae59052a4abdaefdf85afa46e50f0c99e5aab6ccec9ecfa83f4",
     "judging/full/olive-amber/front/full.png": "fb365a2be128a9a92acdf7fe5a649449bc83bcc5e64e92f28084248d8acd2df9",
     "judging/full/neutral-deep/front/full.png": "30b68b5062f4648cd97de033036140374144a614cb9b022dd9be40a5499a342d",
@@ -21,30 +25,8 @@
     "videos/right.mp4": "4e3864bce5fa77a76abd73cbf28ebdd6da76a2280795f9dc3855dfe5cdfebc08",
     "videos/generate_motion.mp4": "d555ff8efa32977fcb1cc95cdf4f909f8ed7628d8bc598e3be7f68d416e65feb"
   },
-  "actual_execution": {
-    "commands": [
-      "python tools/gnm_bundle_verify.py --reject-extra",
-      "blender --offline-mode -b timelines/generate-motion/expression.blend --python inspect_timeline.py"
-    ],
-    "verifier": {
-      "status": "passed_bundle_file_integrity",
-      "files": 831,
-      "manifest_sha256": "e0604db7a625449aa55b2c3c228c6cdb5e3016791eb9d9e9b419006e3651db9a",
-      "qualification": "576 default CPU PNGs inventoried. Independent acceptance, final clean Windows/Linux archive qualification and release promotion remain pending.",
-      "release_ready": false
-    },
-    "timeline": {
-      "first_frame": 1,
-      "last_frame": 192,
-      "fps": 24.0,
-      "engine": "CYCLES",
-      "packed_images": 21
-    },
-    "elapsed_seconds": 16.813,
-    "verifier_stdout_sha256": "449633a986843e2ac95657f62a0b4521b3240e70a23c5191e2be8314eee3e10d",
-    "blender_stdout_sha256": "9057116d68e067042d8d98a79e16d2ec3468ec6c8fc50e9c062b31ad49e8d0cd"
-  },
-  "editing": "Authored typography, restrained still-image push-ins, frame-exact original-speed mode playback. Actual CLI results shown as edited excerpts.",
+  "purpose": "Product showcase: mechanisms, differentiation and Samsung XR research relevance",
+  "editing": "Authored technical schematics, animated fixation rays, native identity and attachment explanations, actual rendered footage at original speed. Right-mode editorial ending hold: two seconds.",
   "scope": "Edited product demonstration using actual Blender output. No real-time render-speed or deployed-device claim.",
   "chapters": [
     {
@@ -55,124 +37,117 @@
     {
       "start_seconds": 6,
       "duration_seconds": 12,
-      "title": "Left"
+      "title": "Coordinated behavior"
     },
     {
       "start_seconds": 18,
       "duration_seconds": 12,
-      "title": "Right"
+      "title": "Analytical fixation"
     },
     {
       "start_seconds": 30,
-      "duration_seconds": 12,
-      "title": "Generate Motion"
-    },
-    {
-      "start_seconds": 42,
-      "duration_seconds": 12,
-      "title": "Material diversity"
-    },
-    {
-      "start_seconds": 54,
       "duration_seconds": 14,
+      "title": "Identity transport"
+    },
+    {
+      "start_seconds": 44,
+      "duration_seconds": 12,
+      "title": "Material construction"
+    },
+    {
+      "start_seconds": 56,
+      "duration_seconds": 10,
+      "title": "Surface attachments"
+    },
+    {
+      "start_seconds": 66,
+      "duration_seconds": 10,
+      "title": "Controlled variation"
+    },
+    {
+      "start_seconds": 76,
+      "duration_seconds": 12,
       "title": "Native portability"
     },
     {
-      "start_seconds": 68,
-      "duration_seconds": 20,
-      "title": "Working software"
-    },
-    {
       "start_seconds": 88,
-      "duration_seconds": 12,
-      "title": "Verification"
-    },
-    {
-      "start_seconds": 100,
-      "duration_seconds": 12,
-      "title": "Samsung XR"
-    },
-    {
-      "start_seconds": 112,
       "duration_seconds": 8,
-      "title": "Release"
+      "title": "Independent evidence"
+    },
+    {
+      "start_seconds": 96,
+      "duration_seconds": 14,
+      "title": "Samsung XR relevance"
+    },
+    {
+      "start_seconds": 110,
+      "duration_seconds": 10,
+      "title": "APOLLO"
     }
   ],
-  "builder_sha256": "422f8fa38e5d3401aaa04a628952e0a3d79fec62354a0dcb524ee12aec533eb7",
-  "motion_comparison": [
-    {
-      "mode": "left.mp4",
-      "source_seconds": 0.5,
-      "master_seconds": 6.5,
-      "psnr_db": 42.709,
-      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
-    },
-    {
-      "mode": "left.mp4",
-      "source_seconds": 4.25,
-      "master_seconds": 10.25,
-      "psnr_db": 42.068,
-      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
-    },
-    {
-      "mode": "left.mp4",
-      "source_seconds": 10.25,
-      "master_seconds": 16.25,
-      "psnr_db": 42.092,
-      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
-    },
-    {
-      "mode": "right.mp4",
-      "source_seconds": 0.5,
-      "master_seconds": 18.5,
-      "psnr_db": 42.714,
-      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
-    },
-    {
-      "mode": "right.mp4",
-      "source_seconds": 4.25,
-      "master_seconds": 22.25,
-      "psnr_db": 42.051,
-      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
-    },
-    {
-      "mode": "right.mp4",
-      "source_seconds": 10.25,
-      "master_seconds": 28.25,
-      "psnr_db": 42.143,
-      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
-    },
-    {
-      "mode": "generate_motion.mp4",
-      "source_seconds": 0.5,
-      "master_seconds": 30.5,
-      "psnr_db": 42.685,
-      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
-    },
-    {
-      "mode": "generate_motion.mp4",
-      "source_seconds": 4.25,
-      "master_seconds": 34.25,
-      "psnr_db": 42.472,
-      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
-    },
-    {
-      "mode": "generate_motion.mp4",
-      "source_seconds": 10.25,
-      "master_seconds": 40.25,
-      "psnr_db": 42.471,
-      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
-    }
-  ],
+  "builder_sha256": "fbcc3278ae4d865dcde69437914e023b0cd67bc56c890ab333636cac34009170",
   "actual_metadata": {
     "codec": "h264",
-    "pix_fmt": "yuv420p(tv, bt709/unknown/unknown, progressive)",
     "fps": 24.0,
+    "duration": 120.0,
     "source_size": [
       1920,
       1080
-    ],
-    "duration": 120.0
+    ]
   },
-  "timing_unchanged_from_previous_master": true
+  "motion_comparison": [
+    {
+      "source": "generate_motion.mp4",
+      "source_seconds": 1.0,
+      "master_seconds": 1.0,
+      "psnr_db": 42.581
+    },
+    {
+      "source": "generate_motion.mp4",
+      "source_seconds": 4.25,
+      "master_seconds": 4.25,
+      "psnr_db": 42.481
+    },
+    {
+      "source": "left.mp4",
+      "source_seconds": 1.0,
+      "master_seconds": 7.0,
+      "psnr_db": 42.696
+    },
+    {
+      "source": "left.mp4",
+      "source_seconds": 4.25,
+      "master_seconds": 10.25,
+      "psnr_db": 42.051
+    },
+    {
+      "source": "right.mp4",
+      "source_seconds": 1.0,
+      "master_seconds": 31.0,
+      "psnr_db": 42.678
+    },
+    {
+      "source": "right.mp4",
+      "source_seconds": 4.25,
+      "master_seconds": 34.25,
+      "psnr_db": 42.056
+    },
+    {
+      "source": "generate_motion.mp4",
+      "source_seconds": 3.0,
+      "master_seconds": 57.0,
+      "psnr_db": 42.578
+    },
+    {
+      "source": "generate_motion.mp4",
+      "source_seconds": 6.25,
+      "master_seconds": 60.25,
+      "psnr_db": 42.586
+    }
+  ],
+  "animated_schematics": [
+    "Moving shared fixation target and independent eye rays",
+    "Surface-triangle anchor with deforming local frame"
+  ],
+  "claim_boundary": "Analytical 35 cm / 40 cm gaze schematic is explicitly the separate research module. Native GNM expressions are a distinct controller. No comparative competitor ranking or deployed-headset result is asserted."
 }

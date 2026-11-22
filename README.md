@@ -3,6 +3,22 @@
 
 **Developed by AICA for Samsung PRISM-XR · Track 01**
 
+## Submission deliverables
+
+| Deliverable | Open or download |
+| --- | --- |
+| **Two-minute product showcase** | [Watch the demo](VITVellore_AICA_Demo.mp4) |
+| **Official presentation** | [VITVellore_AICA.pptx](VITVellore_AICA.pptx) |
+| **AI disclosure form** | [AI disclosure form](LangAI3.0_AI_Disclosure.docx) |
+| **Executable product** | [Apollo v0.3.0 release and downloads](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0) |
+| **Three runtime demonstrations** | [Left](videos/left.mp4) · [Right](videos/right.mp4) · [Generate Motion](videos/generate_motion.mp4) |
+
+The three judging documents/media files sit at the repository root. The executable
+product lives in **GitHub Releases**: five texture sets, packed Blender scenes,
+Python rendering code and authenticated PNG sequences. Download all four base ZIP
+parts and the reassembly helper, plus the separate twelve-second demonstration
+supplement. [Package setup](docs/V22_QUICKSTART.md) · [Submission requirements](docs/PS_AUDIT.md)
+
 [![Stable release](https://img.shields.io/badge/release-v0.3.0-243b53)](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0)
 [![Blender](https://img.shields.io/badge/Blender-4.5.15_LTS-e87d0d)](docs/V22_QUICKSTART.md)
 [![Platform verification](https://img.shields.io/badge/verified-Windows_%2B_Linux-247a64)](milestones/v22-12-second-demonstrations-2026-11-22/qualification/final-qualification-summary.json)
@@ -23,8 +39,8 @@
 | **2. Submission at a glance** | 60/20/20 rubric alignment: 5 variants, 3 motion modes, 24 fps runtime demos | [Jump to section](#submission-at-a-glance) |
 | **3. Appearance and material diversity** | 5 photorealistic palettes, 4K PBR skin, dual irises, judging stills | [Jump to section](#appearance-and-material-diversity) |
 | **4. Motion and expression** | Left, Right, Generate Motion, eyelid follow, brow dynamics, asymmetric blinks | [Jump to section](#motion-and-expression) |
-| **5. Native-target portability** | Google GNM and FLAME UV layouts (`udim` and `legacy`), seam-free wrapping | [Jump to section](#native-target-portability) |
-| **6. Verification and reproducibility** | Clean Windows & Linux runtime qualification, 68.26 dB PSNR, 182 tests | [Jump to section](#verification-and-reproducibility) |
+| **5. Native-target portability** | Pinned GNM Head v3 with tested `udim` and `legacy` layouts | [Jump to section](#native-target-portability) |
+| **6. Verification and reproducibility** | Clean Windows & Linux runtime qualification, scoped image comparison, 175 passing source tests per platform | [Jump to section](#verification-and-reproducibility) |
 | **7. Reproduce the results** | Step-by-step judge runbook: Python reassembly and CLI rendering commands | [Jump to section](#reproduce-the-results) |
 | **8. Research foundations** | Analytical 3D spherical rotation, Rodrigues formula, conic pupil projection | [Jump to section](#research-foundations) |
 | **9. Scope, provenance and attribution** | CC0 & open asset licenses, model provenance, and attribution records | [Jump to section](#scope-provenance-and-attribution) |

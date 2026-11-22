@@ -35,7 +35,7 @@ preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred
 
 | File | Responsibility |
 | --- | --- |
-| `INDEX.md` | Root quick-navigation index of submission materials, deliverables, runbooks, and qualification reports. |
+| `docs/INDEX.md` | Detailed quick-navigation index of submission materials, deliverables, runbooks, and qualification reports. |
 | `TEAM_SETUP.md` | Teammate onboarding, pinned tools, packed-scene workflow, MPFB assets, daily checks, collaboration and release boundaries. |
 | `AGENTS.md` | Navigation, standing no-video/no-presentation rule, release naming and checkpoint commits. |
 | `docs/problem_statement.md` | Screenshot-transcribed requirements, rubric, deliverables, unresolved organizer questions. |
@@ -47,7 +47,7 @@ preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred
 | `docs/Synthetic Gaze Reconnaissance Plan.docx` | Component research report; independently verify reuse/license claims. |
 | `docs/Synthetic Gaze Literature Discovery.docx` | Literature report; independently verify cited claims. |
 | `LangAI3.0_AI_Disclosure.docx`, `docs/LangAI3.0_AI_Disclosure.docx` | Official competition AI usage disclosure form for Apollo (Samsung PRISM-XR Hackathon). |
-| `Apollo_SamsungXR_Presentation.pptx`, `official_ppt_template_supplied_by_judges.pptx` | Competition presentation deck and judge-supplied presentation template. |
+| `docs/archive/Apollo_SamsungXR_Presentation.pptx`, `docs/official_ppt_template_supplied_by_judges.pptx` | Competition presentation deck and judge-supplied presentation template. |
 | `docs/Module 6 Congestion Control.ppt` | Unrelated/undetermined presentation, not used by the pipeline. |
 | `docs/RUNBOOK.md` | Operator setup, fixture workflow, character handoff, framing, verification, Docker and submission steps. |
 | `docs/PERFORMANCE.md` | Measured sample-count timing/noise tradeoffs, secondary-runtime provenance and Docker limitations. |
@@ -214,7 +214,7 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/prepare_candidate.py` | Candidate-specific README and fixture attribution; production attribution must already exist. |
 | `tools/demo.py` | Labeled sweep GIF and presentation/recording outline; not a final narrated video. |
 | `tools/build_presentation.mjs`, `tools/build_demo_video.py` | Editable Artifact Tool evidence deck and 105-second actual-artifact demonstration with local synthesized narration. |
-| `tools/build_submission_demo.py` | Author the current 120-second v22 demo, authenticate release footage, capture real CLI/timeline results, and export the silent master and timed human voice-over guide. |
+| `tools/build_submission_demo.py` | Author the current 120-second v22 demo, authenticate release footage, animate scientific mechanisms, and export the root-level product showcase and timed human voice-over guide. |
 | `requirements-research.txt`, `requirements-media.txt` | Optional measured dataset plots and demo-video authoring dependencies. |
 | `tools/make_bundle.py` | Reject fixtures, stale evidence and incomplete reports; stage ZIP, size/integrity/extraction checks. |
 | `tools/freeze_candidate.py` | Development-only archive using shared qualification gates; per-file manifest, ZIP integrity and extraction checks. |
