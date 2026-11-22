@@ -6,8 +6,8 @@
   "height": 1080,
   "fps": 24,
   "audio": "None. Silent narration-ready master.",
-  "sha256": "d428ffcf09d061fa9e4aaadf2e194e1f644c2f8c56adc664bb920b4211d0de50",
-  "bytes": 4073191,
+  "sha256": "5de867a8bb3014c56c6752631ee651772ad7612337c8130e5262fddc1b924a35",
+  "bytes": 4363917,
   "sources": {
     "judging/full/rose-brown/angle/image.png": "18640aa7a9972c9597ea79b001a9b495d28581ae402bed1021e5fb686e0eaea4",
     "judging/full/rose-brown/front/full.png": "b329a70acd7164855c07aecd166765ebfc7f46e3449283cbcd959444b79eef63",
@@ -23,10 +23,12 @@
     "judging/full/cool-grey/front/full.png": "e911e9266abeb6d2d14faedc51bd669b31b460ea0703f993c36cdd1ab254bb3c",
     "videos/left.mp4": "e619811dacbcdf8a7b3625324523ae16dafa7e4d0a42e53a276bea91eec32870",
     "videos/right.mp4": "4e3864bce5fa77a76abd73cbf28ebdd6da76a2280795f9dc3855dfe5cdfebc08",
-    "videos/generate_motion.mp4": "d555ff8efa32977fcb1cc95cdf4f909f8ed7628d8bc598e3be7f68d416e65feb"
+    "videos/generate_motion.mp4": "d555ff8efa32977fcb1cc95cdf4f909f8ed7628d8bc598e3be7f68d416e65feb",
+    "docs/images/apollo-cinematic-eye.png": "7b7d7fcc6ffc38e2df920daa55731bd3f57a4a9d52bf2986bbaf1f6714ea8b92",
+    "docs/images/apollo-eye-detail-hd.png": "17c87e2aa153521e3cdde0ed08f42cdc8febc01bc8556618478913b20e8e0ec5"
   },
   "purpose": "Product showcase: mechanisms, differentiation and Samsung XR research relevance",
-  "editing": "Authored technical schematics, animated fixation rays, native identity and attachment explanations, actual rendered footage at original speed. Right-mode editorial ending hold: two seconds.",
+  "editing": "Cinematic source-render opening; synchronized source-image eye crops and independently detected pupil coordinates; animated fixation and attachment schematics; original-speed motion. Two-second Right ending hold.",
   "scope": "Edited product demonstration using actual Blender output. No real-time render-speed or deployed-device claim.",
   "chapters": [
     {
@@ -85,69 +87,5 @@
       "title": "APOLLO"
     }
   ],
-  "builder_sha256": "fbcc3278ae4d865dcde69437914e023b0cd67bc56c890ab333636cac34009170",
-  "actual_metadata": {
-    "codec": "h264",
-    "fps": 24.0,
-    "duration": 120.0,
-    "source_size": [
-      1920,
-      1080
-    ]
-  },
-  "motion_comparison": [
-    {
-      "source": "generate_motion.mp4",
-      "source_seconds": 1.0,
-      "master_seconds": 1.0,
-      "psnr_db": 42.581
-    },
-    {
-      "source": "generate_motion.mp4",
-      "source_seconds": 4.25,
-      "master_seconds": 4.25,
-      "psnr_db": 42.481
-    },
-    {
-      "source": "left.mp4",
-      "source_seconds": 1.0,
-      "master_seconds": 7.0,
-      "psnr_db": 42.696
-    },
-    {
-      "source": "left.mp4",
-      "source_seconds": 4.25,
-      "master_seconds": 10.25,
-      "psnr_db": 42.051
-    },
-    {
-      "source": "right.mp4",
-      "source_seconds": 1.0,
-      "master_seconds": 31.0,
-      "psnr_db": 42.678
-    },
-    {
-      "source": "right.mp4",
-      "source_seconds": 4.25,
-      "master_seconds": 34.25,
-      "psnr_db": 42.056
-    },
-    {
-      "source": "generate_motion.mp4",
-      "source_seconds": 3.0,
-      "master_seconds": 57.0,
-      "psnr_db": 42.578
-    },
-    {
-      "source": "generate_motion.mp4",
-      "source_seconds": 6.25,
-      "master_seconds": 60.25,
-      "psnr_db": 42.586
-    }
-  ],
-  "animated_schematics": [
-    "Moving shared fixation target and independent eye rays",
-    "Surface-triangle anchor with deforming local frame"
-  ],
-  "claim_boundary": "Analytical 35 cm / 40 cm gaze schematic is explicitly the separate research module. Native GNM expressions are a distinct controller. No comparative competitor ranking or deployed-headset result is asserted."
+  "builder_sha256": "ae180e1be5232c43b3887d5c8a422996df0eebaec0db59418d0d7ecc1e45b099"
 }

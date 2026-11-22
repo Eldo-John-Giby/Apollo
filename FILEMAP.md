@@ -253,3 +253,11 @@ exclude generated outputs, dependencies, caches and build artifacts.
 
 
 
+
+## Judge delivery tooling
+
+| File | Responsibility |
+| --- | --- |
+| `tools/build_judge_package.py`, `tools/compact_scene_assets.py` | Build the single-download runtime with shared full-resolution maps and compressed external-image Blender scenes. |
+| `tools/verify_compact_scenes.py` | Compare source and compact scene geometry, UVs, image bytes and rendering settings at sampled frames. |
+| `tools/render_cinematic_cover.py` | Render derived cinematic and HD eye stills while checking unchanged head geometry. |

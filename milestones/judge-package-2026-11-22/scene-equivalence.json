@@ -1,0 +1,57 @@
+{
+  "model/neutral.blend": {
+    "identical": true,
+    "snapshot_sha256": "9b12b113942a63dea6daa2e0e88a7c056de0f1da6817618bd91bb11235a08ac1",
+    "image_count": 0,
+    "sampled_frames": [
+      "1",
+      "26",
+      "102",
+      "192"
+    ]
+  },
+  "model/character.blend": {
+    "identical": true,
+    "snapshot_sha256": "6a10264ee8a57d7198e5a51b33aded96a286feb384784d30349769e93425b75b",
+    "image_count": 21,
+    "sampled_frames": [
+      "1",
+      "26",
+      "102",
+      "192"
+    ]
+  },
+  "timelines/left/expression.blend": {
+    "identical": true,
+    "snapshot_sha256": "021eeaf4c07e489dc91d78a37cac35389fe78aaea1d40d8d60039d7b5766a25f",
+    "image_count": 21,
+    "sampled_frames": [
+      "1",
+      "26",
+      "102",
+      "192"
+    ]
+  },
+  "timelines/right/expression.blend": {
+    "identical": true,
+    "snapshot_sha256": "d715bf2b638a763802ff978f68caddd4e6166780fcfd10b6688454f13e108cbc",
+    "image_count": 21,
+    "sampled_frames": [
+      "1",
+      "26",
+      "102",
+      "192"
+    ]
+  },
+  "timelines/generate-motion/expression.blend": {
+    "identical": true,
+    "snapshot_sha256": "6a10264ee8a57d7198e5a51b33aded96a286feb384784d30349769e93425b75b",
+    "image_count": 21,
+    "sampled_frames": [
+      "1",
+      "26",
+      "102",
+      "192"
+    ]
+  }
+}

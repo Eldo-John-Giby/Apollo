@@ -1,0 +1,12 @@
+{
+  "resolution": [
+    256,
+    256
+  ],
+  "samples": 16,
+  "frame": 26,
+  "mode": "left",
+  "identical_pixels": false,
+  "max_channel_difference": 2,
+  "mean_channel_difference": 0.0057220458984375
+}

@@ -10,9 +10,19 @@ Stable release `apollo-v0.3.0` includes the final technical archive and a separa
 file verification and Windows/Linux offline runtime checks; see
 `milestones/v22-12-second-demonstrations-2026-11-22/qualification/final-qualification-summary.json`.
 Independent human review and organizer-model compatibility remain outstanding.
-Download all submission ZIP parts, `release-assets.json` and
-`reassemble_release.py` into one directory, then run `python reassemble_release.py`.
-Extract the resulting ZIP. The demonstration supplement can be extracted separately.
+For judging, [download the single product ZIP](https://github.com/Eldo-John-Giby/Apollo/releases/download/apollo-v0.3.0/VITVellore_AICA_Product.zip) and extract it.
+The compact runtime retains all five full-resolution material variants and all
+three base motion modes. The launcher restores byte-identical shared maps locally.
+Keep the extracted folder intact: scenes reference shared relative-path images.
+No reassembly is needed. Its packaging derivative passed clean Windows extraction,
+asset-equivalence checks and a preview render; the original full archive retains
+its separate Windows/Linux qualification. See
+`milestones/judge-package-2026-11-22/package.json` for the precise scope.
+
+The original split archive, full PNG sequences and twelve-second packed-scene
+supplement are optional reproducibility downloads. To recover that original archive,
+download its four parts, `release-assets.json` and `reassemble_release.py`, then run
+`python reassemble_release.py`.
 
 ## First render from an extracted v22 runtime
 

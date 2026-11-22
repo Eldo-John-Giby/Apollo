@@ -37,7 +37,7 @@ CHAPTERS = [
     (14, 'Samsung XR relevance', 'For Samsung XR, controlled gaze can support virtual instructors, embodied assistants and avatar evaluation. Apollo provides reproducible facial stimuli for that research, with device integration as the next step. These are proposed applications, rather than deployed headset features.'),
     (10, 'APOLLO', 'Apollo brings detailed materials, identity-preserving motion and native-target portability into one inspectable system. A precise foundation for expressive virtual humans and Samsung XR research.'),
 ]
-VIDEO_SCENES = {0: ('generate_motion.mp4', 0.0), 1: ('left.mp4', 0.0), 3: ('right.mp4', 0.0), 5: ('generate_motion.mp4', 2.0)}
+VIDEO_SCENES = {1: ('left.mp4', 0.0), 3: ('right.mp4', 0.0), 5: ('generate_motion.mp4', 2.0)}
 assert sum(c[0] for c in CHAPTERS) == 120
 
 
@@ -84,6 +84,13 @@ class Edit:
             assert metadata['fps'] == FPS and metadata['duration'] == 12 and metadata['source_size'] == (1024, 1024)
             self.provenance[p.relative_to(ROOT).as_posix()] = digest
         assert delivery['duration_seconds'] == 12 and delivery['frames_per_mode'] == 288
+        self.observations = json.loads((ROOT/'milestones/submission-demo-2026-11-22/pupil-observations.json').read_text())['modes']['left']
+        for name, key in [('apollo-cinematic-eye.png', 'cinematic'), ('apollo-eye-detail-hd.png', 'eyes-hd')]:
+            data = (ROOT/'docs/images'/name).read_bytes()
+            receipt = json.loads((ROOT/'docs/images/apollo-v22-media-provenance.json').read_text())['derived_high_resolution_stills'][name]
+            assert receipt['geometry_unchanged'] and receipt['image_sha256'] == sha(data)
+            self.images[key] = Image.open(io.BytesIO(data)).convert('RGB')
+            self.provenance['docs/images/'+name] = sha(data)
         self.stills = {}
 
     def font(self, size, bold=False, mono=False):
@@ -120,14 +127,19 @@ class Edit:
             return self.stills[index].copy()
         c = self.shell(index)
         if index == 0:
-            self.text(c, 'APOLLO', (96, 262), 138, FG, True)
-            self.text(c, 'Expression, engineered.', (103, 463), 47, FG)
-            self.text(c, 'Synthetic gaze for Samsung XR research', (105, 575), 29, ACCENT)
-            self.text(c, 'TEAM AICA / v0.3.0', (105, 875), 25, MUTED)
+            c.paste(self.images['cinematic'].crop((0, 0, 1280, 1080)), (0, 0))
+            self.text(c, 'APOLLO', (1330, 245), 88, FG, True)
+            self.text(c, 'Expression,\nengineered.', (1335, 405), 48, FG)
+            self.text(c, 'Synthetic gaze\nfor Samsung XR research', (1337, 635), 29, ACCENT)
+            self.text(c, 'TEAM AICA / v0.3.0', (1337, 905), 24, MUTED)
         elif index == 1:
-            self.text(c, 'Control the eyes.\nPreserve the person.', (96, 282), 75, FG, True, 7)
-            self.text(c, 'Binocular gaze. Blink. Refixation.', (103, 550), 33, MUTED)
-            self.text(c, 'Actual released motion / 24 fps', (103, 857), 25, ACCENT)
+            self.text(c, 'Coordinated eyes. Preserved identity.', (96, 190), 64, FG, True)
+            self.text(c, 'SYNCHRONIZED OCULAR DETAIL', (1010, 325), 26, ACCENT, True)
+            self.text(c, 'Screen-left eye', (1010, 636), 27, FG, True)
+            self.text(c, 'Screen-right eye', (1425, 636), 27, FG, True)
+            self.text(c, 'Source-image pupil centroids / pixels', (1010, 814), 26, MUTED)
+            self.text(c, 'Measured from rendered PNGs.\nImage diagnostics, rather than geometric labels.', (1010, 864), 25, MUTED)
+            self.text(c, 'Original motion / 24 fps', (96, 985), 22, ACCENT)
         elif index == 2:
             self.text(c, 'One target. Two independent gaze rays.', (96, 216), 63, FG, True)
             self.text(c, 'Analytical research module / separate from native GNM animation', (103, 315), 29, ACCENT)
@@ -143,7 +155,7 @@ class Edit:
             for x, key, label in [(830, 'color', 'BASE COLOR'), (1168, 'roughness', 'ROUGHNESS'), (1506, 'normal', 'NORMAL')]:
                 self.picture(c, key, (x, 374, 300, 300))
                 self.text(c, label, (x, 697), 22, ACCENT, True)
-            self.picture(c, 'eyes', (830, 779, 976, 250))
+            self.picture(c, 'eyes-hd', (1080, 754, 480, 270))
         elif index == 5:
             self.text(c, 'The details\nfollow the face.', (96, 266), 77, FG, True, 8)
             self.text(c, 'Surface-triangle anchors\nDeformation-aware local frames', (103, 510), 31, MUTED, spacing=19)
@@ -217,8 +229,29 @@ class Edit:
         t, progress = n/FPS, n/(duration*FPS-1)
         c = self.base(index)
         if index in VIDEO_SCENES and video is not None:
-            c.paste(video, (1010, 131))
-        if index == 2:
+            c.paste(video.resize((680, 680), Image.Resampling.LANCZOS) if index == 1 else video, (150, 285) if index == 1 else (1010, 131))
+        if index == 1 and video is not None:
+            row = self.observations[min(n, len(self.observations)-1)]
+            reference = self.observations[0]['image_pupil_centroids_px']
+            for key, x, fx0, fx1 in [('screen-left', 1010, .20, .43), ('screen-right', 1425, .57, .80)]:
+                box = (int(820*fx0), int(820*.37), int(820*fx1), int(820*.51))
+                tile = video.crop(box).resize((365, 220), Image.Resampling.LANCZOS)
+                xy = row['image_pupil_centroids_px'][key]
+                if xy is not None:
+                    cx = (xy[0]/1024*820-box[0])*365/(box[2]-box[0])
+                    cy = (xy[1]/1024*820-box[1])*220/(box[3]-box[1])
+                    d = ImageDraw.Draw(tile)
+                    d.line((cx-12, cy, cx+12, cy), fill='#57E0D1', width=2)
+                    d.line((cx, cy-12, cx, cy+12), fill='#57E0D1', width=2)
+                    self.text(c, f'x {xy[0]:.2f}  y {xy[1]:.2f}', (x, 687), 24, ACCENT)
+                    if reference[key] is not None:
+                        dx, dy = xy[0]-reference[key][0], xy[1]-reference[key][1]
+                        self.text(c, f'dx {dx:+.2f}  dy {dy:+.2f}', (x, 734), 24, MUTED)
+                else:
+                    self.text(c, 'Pupil undetected / occluded', (x, 687), 22, MUTED)
+                c.paste(tile, (x, 390))
+            self.text(c, f'SOURCE FRAME {n+1:03d} / 288', (1010, 965), 23, ACCENT, True)
+        elif index == 2:
             self.fixation(c, t)
         elif index == 3:
             d = ImageDraw.Draw(c)

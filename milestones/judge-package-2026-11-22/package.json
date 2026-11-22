@@ -1,0 +1,11 @@
+{
+  "archive": "VITVellore_AICA_Product.zip",
+  "bytes": 1321895109,
+  "sha256": "6dfe578f2a1bafc7b20c942399c4b016ff78b6480da5f60c278fc1d949c98592",
+  "reduction_percent": 61.08,
+  "scope": "Lossless asset externalization, byte-identical shared maps restored by launcher, original five palettes and three 192-frame modes retained. Evidence frames separate. Windows clean extraction tested; this derivative has not been independently rerun on Linux.",
+  "shared_maps_restored_and_verified": 46,
+  "alternate_variant_legacy_binding": "passed",
+  "preview_comparison": "256px, 16 samples, Left frame 26; max channel difference 2/255, mean 0.005722; low-sample render variation, not byte-identical. Geometry/UV/image bytes/render settings identical at four sampled times per scene.",
+  "verified_payload_count": 91
+}

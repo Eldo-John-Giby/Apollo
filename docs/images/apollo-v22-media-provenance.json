@@ -498,5 +498,61 @@
       "bytes": 48008,
       "sha256": "bf1bf5b755fa8d8231a6857bd93e29170fb63e5f24271c5e6a0fffe889ea2868"
     }
+  },
+  "derived_high_resolution_stills": {
+    "apollo-cinematic-eye.png": {
+      "style": "cinematic",
+      "source_scene_sha256": "1624eb5745558f53117ae644dd4ca0dedb0e0fa96500246e85961dcc1bf70aca",
+      "evaluated_geometry_sha256_before": "34e09b90356bc9cd7b878c62b4c4e1ea945f679dfa432502d1d6f5482b61586d",
+      "evaluated_geometry_sha256_after": "34e09b90356bc9cd7b878c62b4c4e1ea945f679dfa432502d1d6f5482b61586d",
+      "geometry_unchanged": true,
+      "blender": "4.5.15 LTS",
+      "samples": 128,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "lens_mm": 95.0,
+      "fstop": 11.0,
+      "camera_location": [
+        -0.10499999672174454,
+        -0.23499999940395355,
+        0.02500000037252903
+      ],
+      "camera_target": [
+        -0.017999999225139618,
+        -0.014999999664723873,
+        0.004000000189989805
+      ],
+      "image_sha256": "7b7d7fcc6ffc38e2df920daa55731bd3f57a4a9d52bf2986bbaf1f6714ea8b92",
+      "scope": "Separate cinematic beauty camera and lighting. Appearance materials and head geometry unchanged; no new motion or scoring qualification."
+    },
+    "apollo-eye-detail-hd.png": {
+      "style": "detail",
+      "source_scene_sha256": "1624eb5745558f53117ae644dd4ca0dedb0e0fa96500246e85961dcc1bf70aca",
+      "evaluated_geometry_sha256_before": "34e09b90356bc9cd7b878c62b4c4e1ea945f679dfa432502d1d6f5482b61586d",
+      "evaluated_geometry_sha256_after": "34e09b90356bc9cd7b878c62b4c4e1ea945f679dfa432502d1d6f5482b61586d",
+      "geometry_unchanged": true,
+      "blender": "4.5.15 LTS",
+      "samples": 96,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "lens_mm": 75.0,
+      "fstop": 16.0,
+      "camera_location": [
+        0.0,
+        -0.25999999046325684,
+        0.019999999552965164
+      ],
+      "camera_target": [
+        0.0,
+        -0.014000000432133675,
+        0.004999999888241291
+      ],
+      "image_sha256": "17c87e2aa153521e3cdde0ed08f42cdc8febc01bc8556618478913b20e8e0ec5",
+      "scope": "Separate cinematic beauty camera and lighting. Appearance materials and head geometry unchanged; no new motion or scoring qualification."
+    }
   }
 }

@@ -10,14 +10,16 @@
 | **Two-minute product showcase** | [Watch the demo](VITVellore_AICA_Demo.mp4) |
 | **Official presentation** | [VITVellore_AICA.pptx](VITVellore_AICA.pptx) |
 | **AI disclosure form** | [AI disclosure form](LangAI3.0_AI_Disclosure.docx) |
-| **Executable product** | [Apollo v0.3.0 release and downloads](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0) |
+| **Executable product** | [Download the product ZIP — 1.32 GB](https://github.com/Eldo-John-Giby/Apollo/releases/download/apollo-v0.3.0/VITVellore_AICA_Product.zip) |
 | **Three runtime demonstrations** | [Left](videos/left.mp4) · [Right](videos/right.mp4) · [Generate Motion](videos/generate_motion.mp4) |
 
-The three judging documents/media files sit at the repository root. The executable
-product lives in **GitHub Releases**: five texture sets, packed Blender scenes,
-Python rendering code and authenticated PNG sequences. Download all four base ZIP
-parts and the reassembly helper, plus the separate twelve-second demonstration
-supplement. [Package setup](docs/V22_QUICKSTART.md) · [Submission requirements](docs/PS_AUDIT.md)
+The presentation, demo video and disclosure form sit at the repository root.
+Download the **single product ZIP**, extract it, and follow the included README.
+It retains all five full-resolution texture variants, three executable motion modes
+and the three twelve-second preview clips. No split-file reassembly is needed.
+The original full evidence archive and extended scene supplement remain optional
+on the [release page](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0).
+[Package setup](docs/V22_QUICKSTART.md) · [Submission requirements](docs/PS_AUDIT.md)
 
 [![Stable release](https://img.shields.io/badge/release-v0.3.0-243b53)](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0)
 [![Blender](https://img.shields.io/badge/Blender-4.5.15_LTS-e87d0d)](docs/V22_QUICKSTART.md)
@@ -41,7 +43,7 @@ supplement. [Package setup](docs/V22_QUICKSTART.md) · [Submission requirements]
 | **4. Motion and expression** | Left, Right, Generate Motion, eyelid follow, brow dynamics, asymmetric blinks | [Jump to section](#motion-and-expression) |
 | **5. Native-target portability** | Pinned GNM Head v3 with tested `udim` and `legacy` layouts | [Jump to section](#native-target-portability) |
 | **6. Verification and reproducibility** | Clean Windows & Linux runtime qualification, scoped image comparison, 175 passing source tests per platform | [Jump to section](#verification-and-reproducibility) |
-| **7. Reproduce the results** | Step-by-step judge runbook: Python reassembly and CLI rendering commands | [Jump to section](#reproduce-the-results) |
+| **7. Reproduce the results** | Step-by-step judge runbook: Single ZIP download and CLI rendering commands | [Jump to section](#reproduce-the-results) |
 | **8. Research foundations** | Analytical 3D spherical rotation, Rodrigues formula, conic pupil projection | [Jump to section](#research-foundations) |
 | **9. Scope, provenance and attribution** | CC0 & open asset licenses, model provenance, and attribution records | [Jump to section](#scope-provenance-and-attribution) |
 | **10. Repository guide** | Direct index of quickstarts, runbooks, core math, and tool entry points | [Jump to section](#repository-guide) |
@@ -87,9 +89,9 @@ The appearance pipeline combines spatial skin variation, fine surface relief, di
 
 `rose-brown` is the selected default palette, with blue-grey eyes. The remaining variants are `golden-hazel`, `olive-amber`, `neutral-deep` and `cool-grey`. Base color is interpreted as sRGB; scalar surface properties and tangent-space normals use Non-Color data. Binding follows the current PBR manifests.
 
-<p><img src="docs/images/apollo-v22-eye-detail.webp" width="660" alt="Native-resolution eye crop from the current rose-brown judging render, enlarged for display"></p>
+<p><img src="docs/images/apollo-eye-detail-hd.png" width="880" alt="Native-resolution eye crop from the current rose-brown judging render, enlarged for display"></p>
 
-*Eye-region crop from the released judging evidence. Display enlargement does not introduce additional source detail.*
+*Fresh 1920 × 1080 Blender render of the selected v22 character, with both brows and eyes in frame. Full-resolution image available by opening the image. Camera and lighting are derived; character geometry and materials are unchanged.*
 
 ## Motion and expression
 
@@ -153,13 +155,7 @@ The cross-platform image comparison is limited to three held neutral frames. The
 
 ### 1. Obtain the release
 
-Download the assets from [Apollo v0.3.0](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0). For the base runtime, place all four `apollo-v22-submission.zip.partNNN` files beside `release-assets.json` and `reassemble_release.py`, then run:
-
-```bash
-python reassemble_release.py
-```
-
-The utility verifies each part and the assembled ZIP. Extract `apollo-v22-submission.zip` into a fresh directory. The source-code download is a development checkout; runtime commands below expect the extracted package's `model/`, `textures/` and `timelines/` directories.
+Download [the single product ZIP](https://github.com/Eldo-John-Giby/Apollo/releases/download/apollo-v0.3.0/VITVellore_AICA_Product.zip) and extract it into a fresh directory. No reassembly is required. The source-code download is a development checkout; runtime commands below expect the extracted package's `model/`, `textures/` and `timelines/` directories. Keep the extracted folder intact so relative image paths resolve.
 
 Extract `apollo-v22-12-second-demonstrations.zip` separately for the ready-to-play clips and extended, packed timelines. Open a supplement `timelines/<mode>/expression.blend` and play frames **1–288 at 24 fps**. The base timelines use frames **1–192**.
 

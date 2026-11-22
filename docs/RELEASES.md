@@ -137,3 +137,17 @@ receipts are preserved unchanged; stable publication is the user's explicit
 release decision and does not assert human acceptance or an organizer score.
 Compatibility is limited to pinned public GNM Head v3 and tested UV layouts.
 Public access, official PPT and final form submission remain team-owned.
+
+## Single-download judge runtime, 22 November 2026
+
+`VITVellore_AICA_Product.zip` is 1,321,895,109 bytes (61% smaller than the
+original archive), SHA-256
+`6dfe578f2a1bafc7b20c942399c4b016ff78b6480da5f60c278fc1d949c98592`.
+It retains five full-resolution palettes, three base motion modes and preview
+MP4s. Shared image bytes are externalized; identical variant maps are restored
+automatically with hard links or copies. Full PNG evidence remains separate.
+Clean Windows extraction, four-time-point scene equivalence and alternate
+legacy-layout binding passed. A 256px/16-sample render comparison differs by
+max 2/255, mean 0.005722/255. This derivative has not been separately rerun on
+Linux; the original archive qualification remains preserved. Detailed scope:
+`milestones/judge-package-2026-11-22/`.
