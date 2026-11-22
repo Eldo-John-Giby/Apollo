@@ -3,19 +3,19 @@
 # Apollo
 ### Computational gaze synthesis for expressive virtual humans
 
-**Developed by AICA for Samsung PRISM-XR Â· Track 01**
+**Developed by AICA for Samsung PRISM-XR Ã‚Â· Track 01**
 
 [![Stable release](https://img.shields.io/badge/release-v0.3.0-243b53)](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0)
 [![Blender](https://img.shields.io/badge/Blender-4.5.15_LTS-e87d0d)](docs/V22_QUICKSTART.md)
 [![Platform verification](https://img.shields.io/badge/verified-Windows_%2B_Linux-247a64)](milestones/v22-12-second-demonstrations-2026-11-22/qualification/final-qualification-summary.json)
 
-**Five material variants Â· Three motion modes Â· Reproducible execution**
+**Five material variants Ã‚Â· Three motion modes Ã‚Â· Reproducible execution**
 
 <img src="docs/images/apollo-v22-portrait.webp" width="440" alt="Three-quarter render of Apollo's selected v22 character, including the complete head and groom"> <img src="docs/images/apollo-v22-generate-motion.gif" width="440" alt="Twelve-second preview of the final Generate Motion sequence, showing binocular gaze and eyelid closure">
 
 *Actual v22 Blender renders. The animation retains the twelve-second sequence, sampled at 12 fps for this page; release videos run at 24 fps.*
 
-[**Download v0.3.0**](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0) Â· [**Run Apollo**](#reproduce-the-results) Â· [**Inspect the evidence**](#verification-and-reproducibility)
+[**Download v0.3.0**](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0) Ã‚Â· [**Run Apollo**](#reproduce-the-results) Ã‚Â· [**Inspect the evidence**](#verification-and-reproducibility)
 
 </div>
 
@@ -31,10 +31,10 @@ The result is an inspectable submission: textured heads, executable motion, runt
 
 | Deliverable | v0.3.0 implementation |
 | --- | --- |
-| Face and eye texture sets | **5 complete variants**, with 4096 Ã— 4096 skin maps and 2048 Ã— 2048 maps for each eye |
+| Face and eye texture sets | **5 complete variants**, with 4096 Ãƒâ€” 4096 skin maps and 2048 Ãƒâ€” 2048 maps for each eye |
 | Material representation | Base color, roughness, specular and tangent-space normal data, with explicit color-space and binding metadata |
 | Input modes | **Left**, **Right** and **Generate Motion**, using the viewer's screen convention |
-| Runtime demonstrations | **3 twelve-second H.264 clips**, 1024 Ã— 1024 at 24 fps; 288 frames per mode |
+| Runtime demonstrations | **3 twelve-second H.264 clips**, 1024 Ãƒâ€” 1024 at 24 fps; 288 frames per mode |
 | Base technical sequences | **576 PNGs** across three packed, 192-frame timelines at 24 fps |
 | Rendering | Cycles, **512 samples** for motion; authenticated higher-sample judging stills supplied separately |
 | Portability | Pinned GNM Head v3; native topology and both `udim` and `legacy` UV layouts retained |
@@ -46,9 +46,9 @@ The submission follows the published evaluation structure:
 
 | Evaluation criterion | Evidence to inspect |
 | --- | --- |
-| Texture photorealism · 60 points | [Five material variants and ocular detail](#appearance-and-material-diversity) |
-| Kinematic accuracy · 20 points | [Coordinated motion, eyelid closure and pose verification](#motion-and-expression) |
-| Code and UV portability · 20 points | [Fresh native wrapping](#native-target-portability) and [reproducible execution](#reproduce-the-results) |
+| Texture photorealism Â· 60 points | [Five material variants and ocular detail](#appearance-and-material-diversity) |
+| Kinematic accuracy Â· 20 points | [Coordinated motion, eyelid closure and pose verification](#motion-and-expression) |
+| Code and UV portability Â· 20 points | [Fresh native wrapping](#native-target-portability) and [reproducible execution](#reproduce-the-results) |
 
 ## Appearance and material diversity
 
@@ -68,7 +68,7 @@ The appearance pipeline combines spatial skin variation, fine surface relief, di
 
 | Left | Right | Generate Motion |
 | :---: | :---: | :---: |
-| ![Left mode preview with gaze, blink and refixation](docs/images/apollo-v22-left.gif) | ![Right mode preview with gaze, blink and refixation](docs/images/apollo-v22-right.gif) | ![Generate Motion preview with horizontal and vertical gaze and blink](docs/images/apollo-v22-generate-motion.gif) |
+| <img src="docs/images/apollo-v22-left.gif" width="250" alt="Left mode with gaze, blink and refixation"> | <img src="docs/images/apollo-v22-right.gif" width="250" alt="Right mode with gaze, blink and refixation"> | <img src="docs/images/apollo-v22-generate-motion.gif" width="250" alt="Generate Motion with horizontal and vertical gaze and blink"> |
 | [Full-quality clip](videos/left.mp4) | [Full-quality clip](videos/right.mp4) | [Full-quality clip](videos/generate_motion.mp4) |
 
 The native GNM trajectories provide the expression and ocular reference. Apollo transports the selected facial offsets with local surface rotations while keeping protected eye components identical to their native poses. Hair, brows, lashes and tear-region attachments follow the deforming surface through recorded anchors and local orientations.
@@ -87,7 +87,7 @@ Saved base timelines were checked at **383 integer and half-frame sample times p
 
 *Left: full v22 identity and groom. Right: texture-only application to the unchanged native target. These are distinct evaluation outputs.*
 
-Apollo preserves the native vertex order, topology and UV layouts. A separate texture-only pathway demonstrates fresh wrapping on the pinned target without substituting the sculpted character for the evaluator mesh. The five-set native matrix covers **30 cases: five variants Ã— two layouts Ã— three views/lighting conditions**.
+Apollo preserves the native vertex order, topology and UV layouts. A separate texture-only pathway demonstrates fresh wrapping on the pinned target without substituting the sculpted character for the evaluator mesh. The five-set native matrix covers **30 cases: five variants Ãƒâ€” two layouts Ãƒâ€” three views/lighting conditions**.
 
 ```mermaid
 flowchart LR
@@ -120,7 +120,7 @@ Evidence is tied to the exact scenes, maps, source files and images through SHA-
 
 The cross-platform image comparison is limited to three held neutral frames. The source-test counts refer to the authenticated test snapshot included with the release.
 
-**Evidence:** [final qualification summary](milestones/v22-12-second-demonstrations-2026-11-22/qualification/final-qualification-summary.json) Â· [Windows report](milestones/v22-12-second-demonstrations-2026-11-22/qualification/windows-qualification.json) Â· [Linux report](milestones/v22-12-second-demonstrations-2026-11-22/qualification/linux-qualification.json) Â· [demonstration inventory](milestones/v22-12-second-demonstrations-2026-11-22/delivery.json) Â· [release checksums](milestones/stable-v0.3.0/release-assets.json)
+**Evidence:** [final qualification summary](milestones/v22-12-second-demonstrations-2026-11-22/qualification/final-qualification-summary.json) Ã‚Â· [Windows report](milestones/v22-12-second-demonstrations-2026-11-22/qualification/windows-qualification.json) Ã‚Â· [Linux report](milestones/v22-12-second-demonstrations-2026-11-22/qualification/linux-qualification.json) Ã‚Â· [demonstration inventory](milestones/v22-12-second-demonstrations-2026-11-22/delivery.json) Ã‚Â· [release checksums](milestones/stable-v0.3.0/release-assets.json)
 
 ## Reproduce the results
 
@@ -134,7 +134,7 @@ python reassemble_release.py
 
 The utility verifies each part and the assembled ZIP. Extract `apollo-v22-submission.zip` into a fresh directory. The source-code download is a development checkout; runtime commands below expect the extracted package's `model/`, `textures/` and `timelines/` directories.
 
-Extract `apollo-v22-12-second-demonstrations.zip` separately for the ready-to-play clips and extended, packed timelines. Open a supplement `timelines/<mode>/expression.blend` and play frames **1â€“288 at 24 fps**. The base timelines use frames **1â€“192**.
+Extract `apollo-v22-12-second-demonstrations.zip` separately for the ready-to-play clips and extended, packed timelines. Open a supplement `timelines/<mode>/expression.blend` and play frames **1Ã¢â‚¬â€œ288 at 24 fps**. The base timelines use frames **1Ã¢â‚¬â€œ192**.
 
 ### 2. Verify and render
 
@@ -173,7 +173,7 @@ Independent human appearance/motion review remains outstanding. Compatibility is
 
 The implementation builds on attributed external model, skin and eye resources. Licenses, source records and attribution accompany the technical package. The iris reconstruction uses a photographic source region of approximately 440 pixels; a 2K output map is a delivery resolution rather than a claim of 2K captured detail. Preserve the original asset terms when redistributing.
 
-[GNM source and license](assets/gnm/) Â· [Scan provenance](assets/gnm-scan/ATTRIBUTION.md) Â· [Eye-source provenance](assets/gnm-eye-photo/ATTRIBUTION.md) Â· [Selected-identity provenance](assets/v22-provenance.json) Â· [README media provenance](docs/images/apollo-v22-media-provenance.json)
+[GNM source and license](assets/gnm/) Ã‚Â· [Scan provenance](assets/gnm-scan/ATTRIBUTION.md) Ã‚Â· [Eye-source provenance](assets/gnm-eye-photo/ATTRIBUTION.md) Ã‚Â· [Selected-identity provenance](assets/v22-provenance.json) Ã‚Â· [README media provenance](docs/images/apollo-v22-media-provenance.json)
 
 ## Repository guide
 
@@ -190,4 +190,4 @@ The implementation builds on attributed external model, skin and eye resources. 
 
 ---
 
-**AICA Â· Apollo Â· Samsung PRISM-XR Track 01**
+**AICA Ã‚Â· Apollo Ã‚Â· Samsung PRISM-XR Track 01**
