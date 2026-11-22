@@ -45,6 +45,7 @@ preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred
 | `docs/gemini_deep_research_papers_prompt.md` | Prompt for academic literature discovery, not findings. |
 | `docs/Synthetic Gaze Reconnaissance Plan.docx` | Component research report; independently verify reuse/license claims. |
 | `docs/Synthetic Gaze Literature Discovery.docx` | Literature report; independently verify cited claims. |
+| `docs/LangAI3.0_AI_Disclosure.docx` | Official competition AI usage disclosure form for Apollo (Samsung PRISM-XR Hackathon). |
 | `docs/Module 6 Congestion Control.ppt` | Unrelated/undetermined presentation, not used by the pipeline. |
 | `docs/RUNBOOK.md` | Operator setup, fixture workflow, character handoff, framing, verification, Docker and submission steps. |
 | `docs/PERFORMANCE.md` | Measured sample-count timing/noise tradeoffs, secondary-runtime provenance and Docker limitations. |
@@ -218,6 +219,17 @@ Integration requires -Y facing, meter scale, aligned anatomical eyes,
 | `tools/finish_realism.py` | Wait for existing qualification/checkpoints, gate technical export, verify Git bytes and optionally commit/tag/push; never authors media. |
 | `tools/check_release.py` | Verify release manifests, ZIP integrity and source/payload hashes against staged or committed Git blobs. |
 | `tools/export_upgrade.py` | Gate technical milestones, executable delivery, still-image evidence and complete research-dataset ZIP; excludes videos/decks. |
+
+## Local working-copy additions
+
+| File | Responsibility |
+| --- | --- |
+| `tools/encode_videos.py` | Encode 24 fps H.264 MP4 videos for Left, Right and Generate Motion from verified frames. |
+| `build/portrait_realism.py` | Refine regional skin tone, iris fibers and vertical eyelid response on the packed portrait. |
+| `build/ocular_finish.py` | Compare scleral tint and wet lid highlights without altering eye geometry. |
+| `build/groom_realism.py` | Texture brow coverage, soften scalp highlights, and add fitted hairline wisps to the packed portrait. |
+| `tools/studio_portrait.py` | Build a separate 90 mm studio portrait scene with directional light and optional skin and mouth detail. |
+| `tools/soften_studio_jaw.py` | Blend back part of the jaw sculpt using matching face meshes and rerender the studio portrait. |
 
 ## Tests and relationships
 
