@@ -1,0 +1,171 @@
+{
+  "duration_seconds": 120,
+  "decoded_frames": 2880,
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "audio": "None. Silent narration-ready master.",
+  "sha256": "3a3c3e84c68bf473cbf9037efd06f20a9c1c13d79279d447d98d3a41c7e92f93",
+  "bytes": 3627639,
+  "sources": {
+    "judging/full/rose-brown/angle/image.png": "18640aa7a9972c9597ea79b001a9b495d28581ae402bed1021e5fb686e0eaea4",
+    "judging/full/rose-brown/front/full.png": "b329a70acd7164855c07aecd166765ebfc7f46e3449283cbcd959444b79eef63",
+    "judging/full/rose-brown/oblique/image.png": "819f4ca3a98fc7bbe3123e4f7e91221cd877ec30576741e017592d97ccb5c13a",
+    "judging/native/rose-brown/front/fresh-texture-only.png": "07246441d1260905081bacd9c7f162f6cb15f9ec6cb4418e46a035774a20f9f0",
+    "judging/full/golden-hazel/front/full.png": "af4b63e46fa1dae59052a4abdaefdf85afa46e50f0c99e5aab6ccec9ecfa83f4",
+    "judging/full/olive-amber/front/full.png": "fb365a2be128a9a92acdf7fe5a649449bc83bcc5e64e92f28084248d8acd2df9",
+    "judging/full/neutral-deep/front/full.png": "30b68b5062f4648cd97de033036140374144a614cb9b022dd9be40a5499a342d",
+    "judging/full/cool-grey/front/full.png": "e911e9266abeb6d2d14faedc51bd669b31b460ea0703f993c36cdd1ab254bb3c",
+    "videos/left.mp4": "e619811dacbcdf8a7b3625324523ae16dafa7e4d0a42e53a276bea91eec32870",
+    "videos/right.mp4": "4e3864bce5fa77a76abd73cbf28ebdd6da76a2280795f9dc3855dfe5cdfebc08",
+    "videos/generate_motion.mp4": "d555ff8efa32977fcb1cc95cdf4f909f8ed7628d8bc598e3be7f68d416e65feb"
+  },
+  "actual_execution": {
+    "commands": [
+      "python tools/gnm_bundle_verify.py --reject-extra",
+      "blender --offline-mode -b timelines/generate-motion/expression.blend --python inspect_timeline.py"
+    ],
+    "verifier": {
+      "status": "passed_bundle_file_integrity",
+      "files": 831,
+      "manifest_sha256": "e0604db7a625449aa55b2c3c228c6cdb5e3016791eb9d9e9b419006e3651db9a",
+      "qualification": "576 default CPU PNGs inventoried. Independent acceptance, final clean Windows/Linux archive qualification and release promotion remain pending.",
+      "release_ready": false
+    },
+    "timeline": {
+      "first_frame": 1,
+      "last_frame": 192,
+      "fps": 24.0,
+      "engine": "CYCLES",
+      "packed_images": 21
+    },
+    "elapsed_seconds": 16.813,
+    "verifier_stdout_sha256": "449633a986843e2ac95657f62a0b4521b3240e70a23c5191e2be8314eee3e10d",
+    "blender_stdout_sha256": "9057116d68e067042d8d98a79e16d2ec3468ec6c8fc50e9c062b31ad49e8d0cd"
+  },
+  "editing": "Authored typography, restrained still-image push-ins, frame-exact original-speed mode playback. Actual CLI results shown as edited excerpts.",
+  "scope": "Edited product demonstration using actual Blender output. No real-time render-speed or deployed-device claim.",
+  "chapters": [
+    {
+      "start_seconds": 0,
+      "duration_seconds": 6,
+      "title": "APOLLO"
+    },
+    {
+      "start_seconds": 6,
+      "duration_seconds": 12,
+      "title": "Left"
+    },
+    {
+      "start_seconds": 18,
+      "duration_seconds": 12,
+      "title": "Right"
+    },
+    {
+      "start_seconds": 30,
+      "duration_seconds": 12,
+      "title": "Generate Motion"
+    },
+    {
+      "start_seconds": 42,
+      "duration_seconds": 12,
+      "title": "Material diversity"
+    },
+    {
+      "start_seconds": 54,
+      "duration_seconds": 14,
+      "title": "Native portability"
+    },
+    {
+      "start_seconds": 68,
+      "duration_seconds": 20,
+      "title": "Working software"
+    },
+    {
+      "start_seconds": 88,
+      "duration_seconds": 12,
+      "title": "Verification"
+    },
+    {
+      "start_seconds": 100,
+      "duration_seconds": 12,
+      "title": "Samsung XR"
+    },
+    {
+      "start_seconds": 112,
+      "duration_seconds": 8,
+      "title": "Release"
+    }
+  ],
+  "builder_sha256": "553b8127b6882854f43c353e351e8e0ca65f2bdbd2a352a294a49b9bbab7bfba",
+  "actual_metadata": {
+    "codec": "h264",
+    "pix_fmt": "yuv420p(tv, bt709/unknown/unknown, progressive)",
+    "fps": 24.0,
+    "source_size": [
+      1920,
+      1080
+    ],
+    "duration": 120.0
+  },
+  "motion_comparison": [
+    {
+      "mode": "left",
+      "source_seconds": 0.5,
+      "master_seconds": 6.5,
+      "psnr_db": 35.191
+    },
+    {
+      "mode": "left",
+      "source_seconds": 4.25,
+      "master_seconds": 10.25,
+      "psnr_db": 35.862
+    },
+    {
+      "mode": "left",
+      "source_seconds": 10.25,
+      "master_seconds": 16.25,
+      "psnr_db": 35.553
+    },
+    {
+      "mode": "right",
+      "source_seconds": 0.5,
+      "master_seconds": 18.5,
+      "psnr_db": 35.191
+    },
+    {
+      "mode": "right",
+      "source_seconds": 4.25,
+      "master_seconds": 22.25,
+      "psnr_db": 35.847
+    },
+    {
+      "mode": "right",
+      "source_seconds": 10.25,
+      "master_seconds": 28.25,
+      "psnr_db": 35.514
+    },
+    {
+      "mode": "generate-motion",
+      "source_seconds": 0.5,
+      "master_seconds": 30.5,
+      "psnr_db": 35.189
+    },
+    {
+      "mode": "generate-motion",
+      "source_seconds": 4.25,
+      "master_seconds": 34.25,
+      "psnr_db": 35.14
+    },
+    {
+      "mode": "generate-motion",
+      "source_seconds": 10.25,
+      "master_seconds": 40.25,
+      "psnr_db": 35.06
+    }
+  ],
+  "source_line_ending_normalization": {
+    "committed_builder_sha256": "553b8127b6882854f43c353e351e8e0ca65f2bdbd2a352a294a49b9bbab7bfba",
+    "change": "CRLF to LF only; executable content unchanged"
+  }
+}
