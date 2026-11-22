@@ -22,7 +22,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 W, H, FPS = 1920, 1080, 24
-BG, FG, MUTED, ACCENT = '#080D17', '#F4F7FC', '#B4C0D0', '#32D5E6'
+BG, FG, MUTED, ACCENT = '#F3F0E9', '#19212B', '#616B76', '#2449C6'
+THEME = 'Ivory editorial: warm paper, charcoal, cobalt, Bahnschrift headings'
 VARIANTS = ['rose-brown', 'golden-hazel', 'olive-amber', 'neutral-deep', 'cool-grey']
 CHAPTERS = [
     (6, 'APOLLO', 'Meet Apollo. Controlled synthetic gaze for expressive virtual humans, developed by Team AICA for Samsung PRISM-XR.'),
@@ -117,7 +118,7 @@ class Edit:
     def font(self, size, bold=False, mono=False):
         key = (size, bold, mono)
         if key not in self.fonts:
-            name = 'consola.ttf' if mono else 'seguisb.ttf' if bold else 'segoeui.ttf'
+            name = 'consola.ttf' if mono else 'bahnschrift.ttf' if bold else 'segoeui.ttf'
             self.fonts[key] = ImageFont.truetype(str(Path('C:/Windows/Fonts')/name), size)
         return self.fonts[key]
 
@@ -128,6 +129,7 @@ class Edit:
         image = Image.new('RGB', (W, H), BG)
         self.text(image, 'APOLLO', (96, 54), 26, FG, True)
         self.text(image, 'AICA / SAMSUNG PRISM-XR', (1364, 58), 21, MUTED)
+        ImageDraw.Draw(image).line((96, 111, 1824, 111), fill='#D3D0C9', width=1)
         if index not in [0, 9]:
             self.text(image, f'{index:02d}  /  {CHAPTERS[index][1].upper()}', (96, 143), 23, ACCENT, True)
         return image
@@ -234,7 +236,7 @@ class Edit:
             if alpha < 1: c = Image.blend(Image.new('RGB', (W, H), BG), c, alpha)
         elapsed = sum(x[0] for x in CHAPTERS[:index]) + t
         d = ImageDraw.Draw(c)
-        d.line((96, 1034, 1824, 1034), fill='#213044', width=2)
+        d.line((96, 1034, 1824, 1034), fill='#D3D0C9', width=2)
         d.line((96, 1034, 96+int(1728*elapsed/120), 1034), fill=ACCENT, width=2)
         if index == 9 and t > duration-.45:
             c = Image.blend(c, Image.new('RGB', (W, H), BG), (t-(duration-.45))/.45)
@@ -289,7 +291,7 @@ class Edit:
         assert frames == 120*FPS
         assert 'Audio:' not in result.stderr
         (self.work/'decode.log').write_text(result.stderr, encoding='utf-8')
-        return {'duration_seconds': 120, 'decoded_frames': frames, 'width': W, 'height': H, 'fps': FPS, 'audio': 'None. Silent narration-ready master.', 'sha256': sha(target.read_bytes()), 'bytes': target.stat().st_size, 'sources': self.provenance, 'actual_execution': self.execution, 'editing': 'Authored typography, restrained still-image push-ins, frame-exact original-speed mode playback. Actual CLI results shown as edited excerpts.', 'scope': 'Edited product demonstration using actual Blender output. No real-time render-speed or deployed-device claim.', 'chapters': [{'start_seconds': sum(c[0] for c in CHAPTERS[:i]), 'duration_seconds': c[0], 'title': c[1]} for i, c in enumerate(CHAPTERS)]}
+        return {'theme': THEME, 'duration_seconds': 120, 'decoded_frames': frames, 'width': W, 'height': H, 'fps': FPS, 'audio': 'None. Silent narration-ready master.', 'sha256': sha(target.read_bytes()), 'bytes': target.stat().st_size, 'sources': self.provenance, 'actual_execution': self.execution, 'editing': 'Authored typography, restrained still-image push-ins, frame-exact original-speed mode playback. Actual CLI results shown as edited excerpts.', 'scope': 'Edited product demonstration using actual Blender output. No real-time render-speed or deployed-device claim.', 'chapters': [{'start_seconds': sum(c[0] for c in CHAPTERS[:i]), 'duration_seconds': c[0], 'title': c[1]} for i, c in enumerate(CHAPTERS)]}
 
 
 def write_script(path):

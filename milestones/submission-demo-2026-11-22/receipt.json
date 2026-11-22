@@ -1,12 +1,13 @@
 {
+  "theme": "Ivory editorial: warm paper, charcoal, cobalt, Bahnschrift headings",
   "duration_seconds": 120,
   "decoded_frames": 2880,
   "width": 1920,
   "height": 1080,
   "fps": 24,
   "audio": "None. Silent narration-ready master.",
-  "sha256": "3a3c3e84c68bf473cbf9037efd06f20a9c1c13d79279d447d98d3a41c7e92f93",
-  "bytes": 3627639,
+  "sha256": "d14eb499d535a674e6f85ed5ec80a86444c4ea82895160b57038ebdeac40c679",
+  "bytes": 3707562,
   "sources": {
     "judging/full/rose-brown/angle/image.png": "18640aa7a9972c9597ea79b001a9b495d28581ae402bed1021e5fb686e0eaea4",
     "judging/full/rose-brown/front/full.png": "b329a70acd7164855c07aecd166765ebfc7f46e3449283cbcd959444b79eef63",
@@ -97,7 +98,72 @@
       "title": "Release"
     }
   ],
-  "builder_sha256": "553b8127b6882854f43c353e351e8e0ca65f2bdbd2a352a294a49b9bbab7bfba",
+  "builder_sha256": "422f8fa38e5d3401aaa04a628952e0a3d79fec62354a0dcb524ee12aec533eb7",
+  "motion_comparison": [
+    {
+      "mode": "left.mp4",
+      "source_seconds": 0.5,
+      "master_seconds": 6.5,
+      "psnr_db": 42.709,
+      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
+    },
+    {
+      "mode": "left.mp4",
+      "source_seconds": 4.25,
+      "master_seconds": 10.25,
+      "psnr_db": 42.068,
+      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
+    },
+    {
+      "mode": "left.mp4",
+      "source_seconds": 10.25,
+      "master_seconds": 16.25,
+      "psnr_db": 42.092,
+      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
+    },
+    {
+      "mode": "right.mp4",
+      "source_seconds": 0.5,
+      "master_seconds": 18.5,
+      "psnr_db": 42.714,
+      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
+    },
+    {
+      "mode": "right.mp4",
+      "source_seconds": 4.25,
+      "master_seconds": 22.25,
+      "psnr_db": 42.051,
+      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
+    },
+    {
+      "mode": "right.mp4",
+      "source_seconds": 10.25,
+      "master_seconds": 28.25,
+      "psnr_db": 42.143,
+      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
+    },
+    {
+      "mode": "generate_motion.mp4",
+      "source_seconds": 0.5,
+      "master_seconds": 30.5,
+      "psnr_db": 42.685,
+      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
+    },
+    {
+      "mode": "generate_motion.mp4",
+      "source_seconds": 4.25,
+      "master_seconds": 34.25,
+      "psnr_db": 42.472,
+      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
+    },
+    {
+      "mode": "generate_motion.mp4",
+      "source_seconds": 10.25,
+      "master_seconds": 40.25,
+      "psnr_db": 42.471,
+      "comparison": "RGB conversion before exact pixel crop, avoiding YUV420 odd-coordinate rounding"
+    }
+  ],
   "actual_metadata": {
     "codec": "h264",
     "pix_fmt": "yuv420p(tv, bt709/unknown/unknown, progressive)",
@@ -108,64 +174,5 @@
     ],
     "duration": 120.0
   },
-  "motion_comparison": [
-    {
-      "mode": "left",
-      "source_seconds": 0.5,
-      "master_seconds": 6.5,
-      "psnr_db": 35.191
-    },
-    {
-      "mode": "left",
-      "source_seconds": 4.25,
-      "master_seconds": 10.25,
-      "psnr_db": 35.862
-    },
-    {
-      "mode": "left",
-      "source_seconds": 10.25,
-      "master_seconds": 16.25,
-      "psnr_db": 35.553
-    },
-    {
-      "mode": "right",
-      "source_seconds": 0.5,
-      "master_seconds": 18.5,
-      "psnr_db": 35.191
-    },
-    {
-      "mode": "right",
-      "source_seconds": 4.25,
-      "master_seconds": 22.25,
-      "psnr_db": 35.847
-    },
-    {
-      "mode": "right",
-      "source_seconds": 10.25,
-      "master_seconds": 28.25,
-      "psnr_db": 35.514
-    },
-    {
-      "mode": "generate-motion",
-      "source_seconds": 0.5,
-      "master_seconds": 30.5,
-      "psnr_db": 35.189
-    },
-    {
-      "mode": "generate-motion",
-      "source_seconds": 4.25,
-      "master_seconds": 34.25,
-      "psnr_db": 35.14
-    },
-    {
-      "mode": "generate-motion",
-      "source_seconds": 10.25,
-      "master_seconds": 40.25,
-      "psnr_db": 35.06
-    }
-  ],
-  "source_line_ending_normalization": {
-    "committed_builder_sha256": "553b8127b6882854f43c353e351e8e0ca65f2bdbd2a352a294a49b9bbab7bfba",
-    "change": "CRLF to LF only; executable content unchanged"
-  }
+  "timing_unchanged_from_previous_master": true
 }
