@@ -1,6 +1,6 @@
-# Apollo v22 candidate setup
+# Apollo v0.3.0 runtime setup
 
-Apollo's current submission candidate combines the approved v22 face and groom,
+Apollo's stable v0.3.0 submission combines the approved v22 face and groom,
 five complete texture sets and three gaze timelines. A separate texture-only
 output demonstrates application to the unchanged native target. The native
 target is not the replacement hero character.
@@ -22,9 +22,7 @@ Python and numerical runtime. No MCP connection, authoring add-on, MPFB or
 separate GNM installation is needed. Keep the extracted directory intact.
 
 The source checkout is not an extracted runtime: the runner expects `model/`,
-`textures/` and `timelines/` alongside `tools/`. Download the explicitly selected
-release archive when published; a development rehearsal is not a final
-submission. From the extracted runtime directory on Windows:
+`textures/` and `timelines/` alongside `tools/`. Download the stable v0.3.0 archive from GitHub Releases. From the extracted runtime directory on Windows:
 
 ```powershell
 $blenderPath = 'C:/Program Files/Blender Foundation/Blender 4.5/blender.exe'
@@ -32,7 +30,7 @@ python tools/gnm_run.py still --blender $blenderPath --out renders/hero.png
 python tools/gnm_run.py generate-motion --blender $blenderPath --out renders/motion --first 1 --last 3
 ```
 
-These paths were exercised from a clean extracted development archive,
+These paths were exercised from the clean extracted submission archive,
 including spaces in directory names and execution outside the project.
 The still command selects the full packed character when
 `model/character.blend` is present. Motion uses the saved preset: currently
@@ -45,9 +43,10 @@ Linux example, using the absolute installed Blender executable:
 python3 tools/gnm_run.py generate-motion --blender /opt/blender/blender --out 'renders/motion with spaces' --first 1 --last 3
 ```
 
-The clean Linux development rehearsal ran with network disabled and only its
-evidence output mounted. Three held neutral frames passed runtime checks;
-final all-mode, all-frame archive qualification remains separate.
+The final clean Linux qualification verified all 831 packaged payloads and
+exercised three held neutral frames in an offline container. The Windows
+qualification also exercised repair and input rejection. This is the recorded
+runtime scope, rather than exhaustive cross-platform rendering of every frame.
 
 ## Modes, variants and recovery
 
@@ -78,7 +77,7 @@ to bypass checks. All launcher invocations enable Blender offline mode.
 | `model/neutral.blend`, `model/template.npz` | Unchanged native target and topology/UV reference |
 | `textures/<variant>/` | Complete maps and hashed PBR manifest |
 | `timelines/<mode>/expression.blend` | Packed 192-frame, 24 fps animation |
-| `runtime-manifest.json` | Development runtime file hashes and preset provenance |
+| `runtime-manifest.json` | Runtime file hashes and preset provenance |
 | `tools/gnm_run.py` | Offline command-line entry point |
 
 Open `expression.blend` in Blender and play frames 1–192 at 24 fps. It contains
@@ -89,7 +88,7 @@ stills use 1024px/512 samples. The previews are not final delivery sequences.
 
 ## Compatibility, maps and provenance
 
-The tested development target is public Google GNM Head v3, model SHA-256
+The tested target is public Google GNM Head v3, model SHA-256
 `61d78bbfb4ad8e0b38495804a4caef3214d3df00f8c3f68761e63b41ce3747eb`.
 The organizer supplied no model; an undisclosed evaluator asset is untested.
 
@@ -110,4 +109,5 @@ Windows and Linux neutral rehearsal images are not byte-identical: maximum
 RGB-channel difference 5/255, mean 0.0096/255, 99th percentile zero. These
 measurements cover three identical held frames; they do not establish an
 accepted motion tolerance. Exact same-platform reproduction remains required.
-Final archive licensing, hygiene and full-sequence checks remain pending.
+Final archive integrity and hygiene checks passed in the retained qualification
+reports. Independent human appearance and motion review remains outstanding.
