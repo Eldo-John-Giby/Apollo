@@ -1,5 +1,13 @@
 # v22 release qualification and handoff
 
+> Stable publication update, 22 November 2026: the user authorized
+> `apollo-v0.3.0` and integration into main. The final qualification summary in
+> `milestones/v22-12-second-demonstrations-2026-11-22/qualification/` supersedes
+> earlier pending archive/platform gates below. Exact base and supplement
+> archives passed verification and clean Windows/Linux qualification.
+> Independent human review remains outstanding. Historical receipts and progress
+> entries are preserved; see `docs/RELEASES.md` for current release scope.
+
 This checklist preserves the agreed final scope. It is not a release approval.
 Use the evidence matrix in [V22_SUBMISSION.md](V22_SUBMISSION.md) for current
 results. The original portrait and rc.5 fallback remain unchanged.

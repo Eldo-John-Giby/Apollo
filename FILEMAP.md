@@ -5,10 +5,12 @@ Navigation index. Inspect implementation before changing it.
 ## Status and flow
 
 Apollo implements synthetic binocular gaze for Samsung PRISM-XR Track 01.
-The active v22 integration retains the approved face and groom, five 4K/2K PBR
-sets and three packed timelines. Start with `docs/V22_QUICKSTART.md`; current
-evidence and incomplete gates are in `docs/V22_SUBMISSION.md`. Independent
-review, final frozen regeneration and final release qualification remain pending.
+The stable v0.3.0 release contains the approved v22 face and groom, five texture
+sets, three packed timelines and the verified twelve-second demonstrations.
+The exact archives passed clean Windows and Linux runtime qualification.
+Independent human review and organizer-model matching remain outstanding.
+Start with `docs/V22_QUICKSTART.md`; release scope is in `docs/RELEASES.md`.
+`tools/reassemble_release.py` verifies and joins the split release archive.
 The earlier GNM fallback is qualified on pinned public Head v3: five texture
 sets, three timelines, 576 frames and clean offline reproduction. Its detailed
 scan/lid/recovery receipt is under `milestones/gnm-score-final-candidate`;

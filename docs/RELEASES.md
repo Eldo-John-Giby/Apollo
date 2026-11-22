@@ -1,8 +1,7 @@
 # Apollo release versions
 
-Published preview: `apollo-v0.3.0-rc.1` — Apollo v0.3.0-rc.1 — Visual Realism Preview.
-The suffix `-rc.N` marks a prerelease. Full v0.3.0 qualification is deferred;
-see PHASE_HANDOFF.md for completed and remaining checks.
+Current stable release: `apollo-v0.3.0` — Apollo v0.3.0 — V22 Submission.
+Historical `-rc.N` tags remain preserved as prereleases.
 
 Use tags `apollo-vMAJOR.MINOR.PATCH` and display names
 `Apollo vMAJOR.MINOR.PATCH — Short Descriptive Name`.
@@ -14,7 +13,7 @@ Development snapshots are commits, not qualified release tags.
 | --- | --- | --- | --- |
 | `apollo-v0.1.0` | Apollo v0.1.0 — Development Baseline | `c9833302689f6e01bca901c50f3e9c1de6b6a564` | `dev-freeze-2026-11-07` |
 | `apollo-v0.2.0` | Apollo v0.2.0 — Competition Baseline | `b59f61b29f30ac038e157dd3eda6b69f17946049` | `competition-qualified-2026-11-07` |
-| `apollo-v0.3.0` (reserved) | Apollo v0.3.0 — Visual Realism | Not tagged until all technical gates pass | — |
+| `apollo-v0.3.0` | Apollo v0.3.0 — V22 Submission | Tagged release commit on main | — |
 
 At the naming audit on 8 November 2026, GitHub had no Release objects; the two
 existing releases were annotated Git tags. Their replacement tags point to the
@@ -105,3 +104,36 @@ The anonymous teammate packet is prepared with blank responses. Exact
 organizer compatibility and human approval remain unconfirmed. One scan
 identity, authored detail, a thin closure crease and small repaired atlas
 regions remain documented limitations. Earlier releases remain preserved.
+
+## Stable v22 submission, 22 November 2026
+
+The user authorized stable publication and integration into main. This supersedes
+older pending technical/archive statements in the v22 progress documents.
+The qualified source checkpoint is `53839f9`; subsequent release changes update
+handoff documentation and add an archive reassembly utility, without changing
+qualified runtime payloads or regenerating videos.
+
+The unchanged submission ZIP is 3,396,422,662 bytes, SHA-256
+`887f187b92cc80c9ac359d00ab539fbeb34b8327359e24bc873d9e47f5f0de96`.
+It is distributed in numbered parts because GitHub limits individual asset size.
+Download every part plus `release-assets.json` and `reassemble_release.py`, then
+run `python reassemble_release.py`. The utility verifies every part and the
+assembled archive before exposing the completed ZIP.
+
+The separate twelve-second demonstration ZIP is 1,319,405,760 bytes, SHA-256
+`ad76db004e99cc743b07c0bc335481c6d596757fd1a29396f65654835ac5277b`.
+It contains all three 1024px, 24 fps demonstrations and extended packed timelines.
+Base sequences have 192 frames per mode; extended demonstrations have 288.
+
+The exact archives passed clean extraction, payload verification, Windows/Linux
+offline runtime reproduction, repair/rejection tests and hygiene checks.
+Cross-platform comparison covered three held neutral frames: maximum channel
+difference 5/255, mean 0.0096; images are not byte-identical across platforms.
+Source-bound test records retain 175 passing tests per platform. No full render
+or test suite was repeated for unchanged payloads during publication.
+
+Independent human review remains outstanding. Historical `release_ready: false`
+receipts are preserved unchanged; stable publication is the user's explicit
+release decision and does not assert human acceptance or an organizer score.
+Compatibility is limited to pinned public GNM Head v3 and tested UV layouts.
+Public access, official PPT and final form submission remain team-owned.

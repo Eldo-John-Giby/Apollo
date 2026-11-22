@@ -5,10 +5,14 @@ five complete texture sets and three gaze timelines. A separate texture-only
 output demonstrates application to the unchanged native target. The native
 target is not the replacement hero character.
 
-Identity approval is recorded. Independent appearance/motion acceptance, final
-frozen regeneration, 576 final-quality PNGs and the final release archive remain
-pending. Historical rc.5 qualification applies only to that fallback. See
-[the evidence matrix](V22_SUBMISSION.md) for each check's scope.
+Stable release `apollo-v0.3.0` includes the final technical archive and a separate
+12-second demonstration supplement. The exact archives passed clean extraction,
+file verification and Windows/Linux offline runtime checks; see
+`milestones/v22-12-second-demonstrations-2026-11-22/qualification/final-qualification-summary.json`.
+Independent human review and organizer-model compatibility remain outstanding.
+Download all submission ZIP parts, `release-assets.json` and
+`reassemble_release.py` into one directory, then run `python reassemble_release.py`.
+Extract the resulting ZIP. The demonstration supplement can be extracted separately.
 
 ## First render from an extracted v22 runtime
 

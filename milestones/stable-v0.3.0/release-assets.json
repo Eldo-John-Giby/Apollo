@@ -1,0 +1,42 @@
+{
+  "version": "apollo-v0.3.0",
+  "submission_archive": {
+    "filename": "apollo-v22-submission.zip",
+    "bytes": 3396422662,
+    "sha256": "887f187b92cc80c9ac359d00ab539fbeb34b8327359e24bc873d9e47f5f0de96",
+    "parts": [
+      {
+        "filename": "apollo-v22-submission.zip.part001",
+        "bytes": 1048576000,
+        "sha256": "ba51775fb07b2285253f39926659761816562c67c861550cef8614d1a507c252"
+      },
+      {
+        "filename": "apollo-v22-submission.zip.part002",
+        "bytes": 1048576000,
+        "sha256": "7e92ef4ac74414a950f12c8b7f60e6c8d1ec5fe31c54dae7f719a1870cdfe5ab"
+      },
+      {
+        "filename": "apollo-v22-submission.zip.part003",
+        "bytes": 1048576000,
+        "sha256": "52adebc490e5fcc6c0a0d9ebbfc0571413e4e108968eaab0588c1e687f3ef771"
+      },
+      {
+        "filename": "apollo-v22-submission.zip.part004",
+        "bytes": 250694662,
+        "sha256": "661604b9269451f66c422523e9250be4ea91420bf42f3a7ae63a8274994afb84"
+      }
+    ]
+  },
+  "demonstration_archive": {
+    "filename": "apollo-v22-12-second-demonstrations.zip",
+    "bytes": 1319405760,
+    "sha256": "ad76db004e99cc743b07c0bc335481c6d596757fd1a29396f65654835ac5277b",
+    "parts": [
+      {
+        "filename": "apollo-v22-12-second-demonstrations.zip",
+        "bytes": 1319405760,
+        "sha256": "ad76db004e99cc743b07c0bc335481c6d596757fd1a29396f65654835ac5277b"
+      }
+    ]
+  }
+}

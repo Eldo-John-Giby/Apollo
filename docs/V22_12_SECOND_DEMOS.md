@@ -1,5 +1,13 @@
 # Twelve-second v22 demonstrations
 
+> Stable publication update, 22 November 2026: the user authorized
+> `apollo-v0.3.0` and integration into main. The final qualification summary in
+> `milestones/v22-12-second-demonstrations-2026-11-22/qualification/` supersedes
+> earlier pending archive/platform gates below. Exact base and supplement
+> archives passed verification and clean Windows/Linux qualification.
+> Independent human review remains outstanding. Historical receipts and progress
+> entries are preserved; see `docs/RELEASES.md` for current release scope.
+
 These demonstrations were explicitly requested on 22 November 2026. They extend
 the preserved eight-second checkpoint `a2c02d8`; they do not replace or rewrite
 the original technical archive and its 192-frame reproduction contract.
