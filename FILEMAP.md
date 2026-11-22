@@ -35,6 +35,7 @@ preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred
 
 | File | Responsibility |
 | --- | --- |
+| `INDEX.md` | Root quick-navigation index of submission materials, deliverables, runbooks, and qualification reports. |
 | `TEAM_SETUP.md` | Teammate onboarding, pinned tools, packed-scene workflow, MPFB assets, daily checks, collaboration and release boundaries. |
 | `AGENTS.md` | Navigation, standing no-video/no-presentation rule, release naming and checkpoint commits. |
 | `docs/problem_statement.md` | Screenshot-transcribed requirements, rubric, deliverables, unresolved organizer questions. |
