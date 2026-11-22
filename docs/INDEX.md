@@ -9,9 +9,9 @@ Quick navigation index of all submission materials, documentation, runtime code,
 | File | Format | Responsibility / Role in Submission |
 | :--- | :--- | :--- |
 | [VITVellore_AICA.pptx](../VITVellore_AICA.pptx) | PowerPoint | Current nine-slide judging presentation. |
-| [VITVellore_AICA_Demo.mp4](../VITVellore_AICA_Demo.mp4) | MP4 | Two-minute product showcase and animated scientific mechanisms. |
+| [Watch on Google Drive](https://drive.google.com/file/d/1VvcGvrvvZkVslSPpuijQcmTFgwsYwgF_/view?usp=sharing) · [Repository copy](../VITVellore_AICA_Demo.mp4) | MP4 | Two-minute product showcase and animated scientific mechanisms. |
 | [Apollo v0.3.0](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0) | Release assets | Executable product archives, materials, timelines, frames and checksums. |
-| [`LangAI3.0_AI_Disclosure.docx`](../LangAI3.0_AI_Disclosure.docx) | Word Document | Official AI Usage Disclosure Form detailing team info, purpose, prompt logs, and human modifications. |
+| [`AI_Disclosure.docx`](../AI_Disclosure.docx) | Word Document | Official AI Usage Disclosure Form detailing team info, purpose, prompt logs, and human modifications. |
 | [`Apollo_SamsungXR_Presentation.pptx`](archive/Apollo_SamsungXR_Presentation.pptx) | PowerPoint | Historical 14-slide reference deck, preserved for provenance. |
 | [`official_ppt_template_supplied_by_judges.pptx`](official_ppt_template_supplied_by_judges.pptx) | PowerPoint | Official 9-slide template supplied by Samsung PRISM-XR judges. |
 | [`Evaluation_for_SyntheticEyes.pptx`](Evaluation_for_SyntheticEyes.pptx) | PowerPoint | Track 01 technical specifications, requirements blueprint, and 60/20/20 scoring rubric. |

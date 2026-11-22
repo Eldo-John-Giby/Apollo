@@ -7,9 +7,9 @@
 
 | Deliverable | Open or download |
 | --- | --- |
-| **Two-minute product showcase** | [Watch the demo](VITVellore_AICA_Demo.mp4) |
+| **Two-minute product showcase** | [Watch on Google Drive](https://drive.google.com/file/d/1VvcGvrvvZkVslSPpuijQcmTFgwsYwgF_/view?usp=sharing) · [Repository copy](VITVellore_AICA_Demo.mp4) |
 | **Official presentation** | [VITVellore_AICA.pptx](VITVellore_AICA.pptx) |
-| **AI disclosure form** | [AI disclosure form](LangAI3.0_AI_Disclosure.docx) |
+| **AI disclosure form** | [AI disclosure form](AI_Disclosure.docx) |
 | **Executable product** | [Download the product ZIP — 1.32 GB](https://github.com/Eldo-John-Giby/Apollo/releases/download/apollo-v0.3.0/VITVellore_AICA_Product.zip) |
 | **Three runtime demonstrations** | [Left](videos/left.mp4) · [Right](videos/right.mp4) · [Generate Motion](videos/generate_motion.mp4) |
 
