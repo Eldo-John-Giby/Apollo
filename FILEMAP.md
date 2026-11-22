@@ -45,7 +45,8 @@ preview is published as apollo-v0.3.0-rc.1; exhaustive qualification is deferred
 | `docs/gemini_deep_research_papers_prompt.md` | Prompt for academic literature discovery, not findings. |
 | `docs/Synthetic Gaze Reconnaissance Plan.docx` | Component research report; independently verify reuse/license claims. |
 | `docs/Synthetic Gaze Literature Discovery.docx` | Literature report; independently verify cited claims. |
-| `docs/LangAI3.0_AI_Disclosure.docx` | Official competition AI usage disclosure form for Apollo (Samsung PRISM-XR Hackathon). |
+| `LangAI3.0_AI_Disclosure.docx`, `docs/LangAI3.0_AI_Disclosure.docx` | Official competition AI usage disclosure form for Apollo (Samsung PRISM-XR Hackathon). |
+| `Apollo_SamsungXR_Presentation.pptx`, `official_ppt_template_supplied_by_judges.pptx` | Competition presentation deck and judge-supplied presentation template. |
 | `docs/Module 6 Congestion Control.ppt` | Unrelated/undetermined presentation, not used by the pipeline. |
 | `docs/RUNBOOK.md` | Operator setup, fixture workflow, character handoff, framing, verification, Docker and submission steps. |
 | `docs/PERFORMANCE.md` | Measured sample-count timing/noise tradeoffs, secondary-runtime provenance and Docker limitations. |
