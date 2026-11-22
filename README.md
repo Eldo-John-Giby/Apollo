@@ -1,5 +1,3 @@
-<div align="center">
-
 # Apollo
 ### Computational gaze synthesis for expressive virtual humans
 
@@ -11,13 +9,11 @@
 
 **Five material variants · Three motion modes · Reproducible execution**
 
-<img src="docs/images/apollo-v22-portrait.webp" width="440" alt="Three-quarter render of Apollo's selected v22 character, including the complete head and groom"> <img src="docs/images/apollo-v22-generate-motion.gif" width="440" alt="Twelve-second preview of the final Generate Motion sequence, showing binocular gaze and eyelid closure">
+<img src="docs/images/apollo-v22-portrait.webp" width="360" alt="Three-quarter render of Apollo's selected v22 character, including the complete head and groom"> <img src="docs/images/apollo-v22-generate-motion.gif" width="360" alt="Twelve-second preview of the final Generate Motion sequence, showing binocular gaze and eyelid closure">
 
 *Actual v22 Blender renders. The animation retains the twelve-second sequence, sampled at 12 fps for this page; release videos run at 24 fps.*
 
 [**Download v0.3.0**](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0) · [**Run Apollo**](#reproduce-the-results) · [**Inspect the evidence**](#verification-and-reproducibility)
-
-</div>
 
 ## Overview
 
@@ -60,14 +56,14 @@ The appearance pipeline combines spatial skin variation, fine surface relief, di
 
 `rose-brown` is the selected default palette, with blue-grey eyes. The remaining variants are `golden-hazel`, `olive-amber`, `neutral-deep` and `cool-grey`. Base color is interpreted as sRGB; scalar surface properties and tangent-space normals use Non-Color data. Binding follows the current PBR manifests.
 
-<p align="center"><img src="docs/images/apollo-v22-eye-detail.webp" width="660" alt="Native-resolution eye crop from the current rose-brown judging render, enlarged for display"></p>
+<p><img src="docs/images/apollo-v22-eye-detail.webp" width="660" alt="Native-resolution eye crop from the current rose-brown judging render, enlarged for display"></p>
 
 *Eye-region crop from the released judging evidence. Display enlargement does not introduce additional source detail.*
 
 ## Motion and expression
 
 | Left | Right | Generate Motion |
-| :---: | :---: | :---: |
+| :--- | :--- | :--- |
 | <img src="docs/images/apollo-v22-left.gif" width="250" alt="Left mode with gaze, blink and refixation"> | <img src="docs/images/apollo-v22-right.gif" width="250" alt="Right mode with gaze, blink and refixation"> | <img src="docs/images/apollo-v22-generate-motion.gif" width="250" alt="Generate Motion with horizontal and vertical gaze and blink"> |
 | [Full-quality clip](videos/left.mp4) | [Full-quality clip](videos/right.mp4) | [Full-quality clip](videos/generate_motion.mp4) |
 
