@@ -1,129 +1,193 @@
-**Built for the Samsung R&D XR Team by AICA**
+<div align="center">
 
 # Apollo
+### Computational gaze synthesis for expressive virtual humans
 
-**v22 submission candidate:** five portable texture variants and three packed
-192-frame gaze timelines derived from the approved v22 face and groom.
-[v22 setup and first render](docs/V22_QUICKSTART.md) ·
-[Requirements and current evidence](docs/V22_SUBMISSION.md).
-The integrated identity is approved; independent visual review and final release
-qualification remain pending. The earlier qualified pipelines below remain
-available as separate baselines.
+**Developed by AICA for Samsung PRISM-XR Â· Track 01**
 
-**Synthetic binocular gaze with pupil labels you can verify against the render.**
+[![Stable release](https://img.shields.io/badge/release-v0.3.0-243b53)](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0)
+[![Blender](https://img.shields.io/badge/Blender-4.5.15_LTS-e87d0d)](docs/V22_QUICKSTART.md)
+[![Platform verification](https://img.shields.io/badge/verified-Windows_%2B_Linux-247a64)](milestones/v22-12-second-demonstrations-2026-11-22/qualification/final-qualification-summary.json)
 
-Samsung PRISM-XR · Track 01 · Synthetic Eye Movement & Virtual Camera Rendering
+**Five material variants Â· Three motion modes Â· Reproducible execution**
 
-Apollo takes a gaze command, aims both eyes at a shared 3D target, and renders the result through a calibrated Blender camera. Each frame comes with analytical pupil coordinates and camera intrinsics. Separate checks measure the evaluated eye geometry and the rendered pixels, so a plausible-looking image alone cannot pass verification.
+<img src="docs/images/apollo-v22-portrait.webp" width="440" alt="Three-quarter render of Apollo's selected v22 character, including the complete head and groom"> <img src="docs/images/apollo-v22-generate-motion.gif" width="440" alt="Twelve-second preview of the final Generate Motion sequence, showing binocular gaze and eyelid closure">
 
-<p>
-  <img src="docs/images/apollo-portrait.webp" width="300" height="300" alt="Three-quarter Blender portrait of the Apollo CPU appearance candidate">
-  <img src="docs/images/apollo-gaze-sweep.gif" width="300" height="300" alt="Ten actual Apollo renders showing the eyes sweep clockwise through the gaze targets">
-</p>
+*Actual v22 Blender renders. The animation retains the twelve-second sequence, sampled at 12 fps for this page; release videos run at 24 fps.*
 
-*Actual Blender outputs from the CPU appearance candidate. The portrait uses a separate review camera. The GIF loops the ten calibrated poses at display speed.* [Native sweep PNGs and metadata](milestones/photorealism-v2-candidate/README.md)
+[**Download v0.3.0**](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0) Â· [**Run Apollo**](#reproduce-the-results) Â· [**Inspect the evidence**](#verification-and-reproducibility)
 
-## Index
+</div>
 
-[Contributions](#contributions) · [Architecture](#architecture) · [Outputs](#outputs) · [Results and benchmarks](#results-and-benchmarks) · [Quick start](#quick-start) · [Repository guide](#repository-guide)
+## Overview
 
-## Contributions
+Apollo integrates detailed facial appearance, coordinated ocular motion and reproducible rendering into a deployable synthetic gaze pipeline. The current release combines the selected **v22 facial identity and groom** with native Google GNM Head v3 motion, five physically based material variants and automated Blender execution.
 
-1. **One target, two independently solved eyes.** Apollo computes a gaze ray from each eye pivot to the same 3D point and applies a shortest-arc rotation. Absolute commands eliminate drift from incremental input. Reset restores centered binocular fixation. [Gaze solver](apollo_core/core.py)
-2. **Analytical labels from the same calibrated scene that makes the image.** Apollo projects the physical pupil center and the circular pupil boundary into pixel space. The boundary becomes an exact perspective conic. The projection of the physical center and the center of the projected ellipse are recorded as distinct quantities. [Geometry and camera model](docs/SOLUTION_TECHNICAL.md)
-3. **Independent measurements and deliberate failures.** An independent geometry oracle measures deformed meshes, and image checks measure rendered pupils. Injected faults test whether the suite detects bad geometry, half-pupil obstruction and lighting loss. The release gates tie measurements to the exact scene, wrapper and outputs by hash. [Verifier coverage](docs/VERIFIER_COVERAGE.md)
-4. **Replayable delivery and separate research data.** The packed scene runs through a standalone Blender wrapper. The fixed ten-frame protocol and the seeded, resumable research corpus have separate manifests and verification paths. [Release evidence](milestones/competition-upgrade-2026-11-07/README.md) · [Dataset workflow](docs/UPGRADE_RUNBOOK.md)
+The central engineering problem is preserving a recognizable facial identity while transferring expression and gaze without corrupting the target topology, UV coordinates or native eye geometry. Apollo addresses this through surface-local identity transport, deformation-aware attachments and independent verification of saved scenes and rendered outputs.
 
-The engineering contribution is the integration of binocular synthesis, calibrated rendering, analytical labels and independently checked evidence in one replayable pipeline. The character pipeline uses attributed MakeHuman/MPFB assets, with a dedicated Apollo eye rig. [Asset provenance](assets/ATTRIBUTION.md) · [Literature review](docs/Synthetic%20Gaze%20Literature%20Discovery.docx)
+The result is an inspectable submission: textured heads, executable motion, runtime demonstrations and provenance that connects each deliverable to its source inputs. The earlier calibrated gaze and analytical annotation system remains available as a separate research baseline.
 
-## Architecture
+## Submission at a glance
 
-```mermaid
-flowchart TD
-    A["Gaze command, fixed sweep or seeded poses"] --> B["Standalone Blender wrapper"]
-    B --> C["NumPy gaze and projection core"]
-    C --> D["Per-eye rotations and pupil geometry"]
-    D --> E["Packed Blender rig and calibrated camera"]
-    C --> F["Analytical pupil labels and camera intrinsics"]
-    E --> G["Evaluated meshes and rendered PNGs"]
-    F --> H["Geometry, image and visibility checks"]
-    G --> H
-    H --> I["Reports, checksums and release gate"]
-```
-
-The wrapper embeds the NumPy core for standalone playback. The camera sits 40 cm in front of the eye midpoint, with the fixation plane 35 cm in front. Finite gaze inputs are clamped to ±1 and map to ±5 cm on the plane. Positive horizontal input moves image right, and positive vertical input moves image up. Pixel coordinates start at the top left. [Wrapper](wrapper/eyes.py) · [Metadata schema](metadata.schema.json)
-
-```mermaid
-flowchart TD
-    T["One shared 3D fixation point"] --> L["Ray from left eye pivot"]
-    T --> R["Ray from right eye pivot"]
-    L --> LP["Rotate left eye and locate pupil"]
-    R --> RP["Rotate right eye and locate pupil"]
-    LP --> C["Project both pupils through one calibrated camera"]
-    RP --> C
-    C --> P["Pixel centers and pupil ellipses"]
-```
-
-## Outputs
-
-[![Annotated contact sheet of the ten qualified competition renders](docs/images/apollo-contact-sheet.webp)](milestones/competition-upgrade-2026-11-07/contact_sheet.png)
-
-*Qualified competition build. Select the preview for the full annotated contact sheet.*
-
-| Output | What to inspect |
+| Deliverable | v0.3.0 implementation |
 | --- | --- |
-| Official sweep | Ten 1024 × 1024 PNGs, clockwise from the top, and a matching JSON array with gaze inputs, eye rotations, pupil positions and camera intrinsics. [Executable delivery](delivery/apollo/README.md) |
-| Research corpus | 256 seeded poses with a separate manifest and independent pixel analysis. [Corpus manifest](milestones/competition-upgrade-2026-11-07/dataset-256/dataset.json) |
-| Appearance evidence | Packed adult character with fitted lids and tear tissue, brown iris atlas and baked hair. Includes native eye crops and matched comparisons. [Appearance candidate](milestones/photorealism-v2-candidate/README.md) |
-| Replay archive | Packed scene, wrapper, renders, metadata and evidence for reproducing the qualified sweep. [Technical release](milestones/competition-upgrade-2026-11-07/README.md) |
+| Face and eye texture sets | **5 complete variants**, with 4096 Ã— 4096 skin maps and 2048 Ã— 2048 maps for each eye |
+| Material representation | Base color, roughness, specular and tangent-space normal data, with explicit color-space and binding metadata |
+| Input modes | **Left**, **Right** and **Generate Motion**, using the viewer's screen convention |
+| Runtime demonstrations | **3 twelve-second H.264 clips**, 1024 Ã— 1024 at 24 fps; 288 frames per mode |
+| Base technical sequences | **576 PNGs** across three packed, 192-frame timelines at 24 fps |
+| Rendering | Cycles, **512 samples** for motion; authenticated higher-sample judging stills supplied separately |
+| Portability | Pinned GNM Head v3; native topology and both `udim` and `legacy` UV layouts retained |
+| Execution | Python launcher, packed Blender scenes, offline operation and verified frame recovery |
 
-## Results and benchmarks
+The base archive preserves the original eight-second reproduction contract. The separate supplement extends each mode to twelve seconds with new timeline keys, additional gaze transitions and blink events. Its first 192 frames reuse the authenticated base sequence; the extension is not a slowed or looped copy of the original clip.
 
-The competition baseline passed full qualification. The later CPU appearance candidate has targeted checks and a separate native CPU stress evaluation. Each result belongs to its recorded scene and test set.
+The submission follows the published evaluation structure:
 
-| Measurement | Qualified competition baseline | CPU appearance candidate |
-| --- | --- | --- |
-| Release qualification | V1–V17 pass on Windows and Linux with Blender 4.5.15, including applicable 5.2.3 checks | Cross-platform release qualification pending |
-| Independent geometry audit | 1,009 poses checked, 14/14 injected faults detected | 1,009 poses checked, 14/14 injected faults detected |
-| Ten-frame sweep, max blind pupil error | 0.175464 px | 0.108 px, rounded up |
-| Seeded corpus, max independent pixel residual | 256/256 pass, 0.217847 px | 256/256 pass, 0.153842 px |
-| Visibility masks, max centroid residual | 25 poses, 0.030619 px, full visible dark coverage | 113/113 stress poses pass, 0.044821 px, 99.826% minimum visible dark fraction |
-| Rendered faults | Half-pupil obstruction and lighting loss detected | Half-pupil obstruction detected in stress evaluation |
-| Reproduction | Extracted archive regenerated all ten PNGs and metadata byte for byte on the test host. Interrupted corpus resume matched completed output. | Fresh scene rebuild reproduced the center PNG byte for byte. Fresh reset matched center. |
+| Evaluation criterion | Evidence to inspect |
+| --- | --- |
+| Texture photorealism · 60 points | [Five material variants and ocular detail](#appearance-and-material-diversity) |
+| Kinematic accuracy · 20 points | [Coordinated motion, eyelid closure and pose verification](#motion-and-expression) |
+| Code and UV portability · 20 points | [Fresh native wrapping](#native-target-portability) and [reproducible execution](#reproduce-the-results) |
 
-[Competition reports and checksums](milestones/competition-upgrade-2026-11-07/README.md) · [Appearance validation](milestones/photorealism-v2-candidate/README.md) · [113-pose stress evaluation](milestones/appearance-stress-2026-11-10/README.md)
+## Appearance and material diversity
 
-| Cycles CPU workload, 1024 × 1024 | Samples | Observed time |
-| --- | ---: | --- |
-| Earlier radial build, ten-frame sweep | 32 | 23.65 s/frame mean |
-| Earlier radial build, center/up/down | 16 | 12.90 s/frame mean |
-| Earlier radial build, center/up/down | 8 | 5.09 s/frame mean |
-| CPU appearance candidate, single center/up/corner trials | 32 | 54.59 / 58.03 / 72.55 s |
+![Five current v22 character variants, labeled rose-brown, golden-hazel, olive-amber, neutral-deep and cool-grey](docs/images/apollo-v22-texture-variants.webp)
 
-The radial measurements used an Intel Core i5-1135G7 on Windows. The workloads differ, and lower sample counts showed more grain. These are local offline timings and engineering checks. Human naturalness, headset tracking accuracy and official competition scoring were outside the evaluation. [Performance notes](docs/PERFORMANCE.md) · [Appearance benchmark](milestones/photorealism-v2-candidate/README.md)
+*Five authenticated judging renders of the integrated character, displayed under matched frontal framing.*
 
-## Quick start
+The appearance pipeline combines spatial skin variation, fine surface relief, distinct left/right iris maps, layered ocular shading, fitted lashes and the selected hair groom. Material data are separated from their Blender bindings so that texture application can be evaluated independently of the full character presentation.
 
-Use Blender 4.5.15 LTS. From the repository root, replay the qualified sweep into a fresh output directory. The packed scene includes the assets needed for playback.
+`rose-brown` is the selected default palette, with blue-grey eyes. The remaining variants are `golden-hazel`, `olive-amber`, `neutral-deep` and `cool-grey`. Base color is interpreted as sRGB; scalar surface properties and tangent-space normals use Non-Color data. Binding follows the current PBR manifests.
 
-```powershell
-blender -b delivery/apollo/scene.blend --python-exit-code 1 -P delivery/apollo/wrapper/eyes.py -- --out out/replay
+<p align="center"><img src="docs/images/apollo-v22-eye-detail.webp" width="660" alt="Native-resolution eye crop from the current rose-brown judging render, enlarged for display"></p>
+
+*Eye-region crop from the released judging evidence. Display enlargement does not introduce additional source detail.*
+
+## Motion and expression
+
+| Left | Right | Generate Motion |
+| :---: | :---: | :---: |
+| ![Left mode preview with gaze, blink and refixation](docs/images/apollo-v22-left.gif) | ![Right mode preview with gaze, blink and refixation](docs/images/apollo-v22-right.gif) | ![Generate Motion preview with horizontal and vertical gaze and blink](docs/images/apollo-v22-generate-motion.gif) |
+| [Full-quality clip](videos/left.mp4) | [Full-quality clip](videos/right.mp4) | [Full-quality clip](videos/generate_motion.mp4) |
+
+The native GNM trajectories provide the expression and ocular reference. Apollo transports the selected facial offsets with local surface rotations while keeping protected eye components identical to their native poses. Hair, brows, lashes and tear-region attachments follow the deforming surface through recorded anchors and local orientations.
+
+For vertex *i*, the appearance layer takes the form
+
+$$\mathbf{x}^{\mathrm{Apollo}}_i(t)=\mathbf{x}^{\mathrm{GNM}}_i(t)+\mathbf{R}_i(t)\,\Delta\mathbf{x}_i.$$
+
+Here, $\Delta\mathbf{x}_i$ is the selected identity offset and $\mathbf{R}_i(t)$ is the best-fit rotation of its native one-ring neighborhood, estimated by singular value decomposition. Offsets preserve their physical magnitude rather than stretching with eyelid motion; protected native eye components receive zero identity offset. The implementation and its invariants are explicit in [identity transport](apollo_core/identity.py) and [timeline integration](tools/gnm_v22_integrate.py).
+
+Saved base timelines were checked at **383 integer and half-frame sample times per mode**, with separate checks covering eighteen appearance components. The twelve-second extensions include fresh-process scene comparisons and image-based gaze/blink checks. [Extension methodology and receipts](docs/V22_12_SECOND_DEMOS.md)
+
+## Native-target portability
+
+![Matched frontal comparison between the full v22 character and direct texture application to the native GNM target](docs/images/apollo-v22-portability.webp)
+
+*Left: full v22 identity and groom. Right: texture-only application to the unchanged native target. These are distinct evaluation outputs.*
+
+Apollo preserves the native vertex order, topology and UV layouts. A separate texture-only pathway demonstrates fresh wrapping on the pinned target without substituting the sculpted character for the evaluator mesh. The five-set native matrix covers **30 cases: five variants Ã— two layouts Ã— three views/lighting conditions**.
+
+```mermaid
+flowchart LR
+    A["Selected v22 identity and material sources"] --> B["Five PBR texture sets"]
+    A --> C["Surface-local identity transport"]
+    N["Pinned native GNM topology, UVs and motion"] --> C
+    N --> D["Fresh native-target texture wrapping"]
+    B --> C
+    B --> D
+    C --> E["Packed expressive character and timelines"]
+    D --> F["Native-target portability evidence"]
+    E --> G["Offline rendering and independent checks"]
+    F --> G
+    G --> H["Authenticated archives and runtime demonstrations"]
 ```
 
-Render one pose by passing both gaze coordinates.
+## Verification and reproducibility
 
-```powershell
-blender -b delivery/apollo/scene.blend --python-exit-code 1 -P delivery/apollo/wrapper/eyes.py -- --h 1 --v 0 --out out/right.png
+Evidence is tied to the exact scenes, maps, source files and images through SHA-256 manifests. Numerical checks, saved-scene inspection and image diagnostics serve complementary roles: a valid file does not establish correct motion, and an attractive render does not establish portability.
+
+| Evaluation layer | Recorded result and scope |
+| --- | --- |
+| Source tests | **175 passing tests per platform** in retained Windows/Linux test records; unchanged-source reuse is authenticated |
+| Base archive integrity | **831 payload files verified** after clean extraction; ZIP CRC and archive SHA-256 checked |
+| Supplement integrity | **329 payloads verified**, including extended scenes, added frames, videos and receipts |
+| Clean runtime | Exact submission archive exercised on **Windows and Linux**, offline, outside the repository and in paths containing spaces |
+| Recovery and rejection | Verified-frame preservation, missing/corrupt-frame repair, stale-receipt rejection and invalid-range rejection recorded |
+| Image comparison | Three held neutral frames compared across platforms: maximum channel difference **5/255**, mean **0.0096/255**; outputs are not byte-identical across platforms |
+| Delivery hygiene | Packaged text and payload hygiene checks passed for the recorded archives |
+
+The cross-platform image comparison is limited to three held neutral frames. The source-test counts refer to the authenticated test snapshot included with the release.
+
+**Evidence:** [final qualification summary](milestones/v22-12-second-demonstrations-2026-11-22/qualification/final-qualification-summary.json) Â· [Windows report](milestones/v22-12-second-demonstrations-2026-11-22/qualification/windows-qualification.json) Â· [Linux report](milestones/v22-12-second-demonstrations-2026-11-22/qualification/linux-qualification.json) Â· [demonstration inventory](milestones/v22-12-second-demonstrations-2026-11-22/delivery.json) Â· [release checksums](milestones/stable-v0.3.0/release-assets.json)
+
+## Reproduce the results
+
+### 1. Obtain the release
+
+Download the assets from [Apollo v0.3.0](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0). For the base runtime, place all four `apollo-v22-submission.zip.partNNN` files beside `release-assets.json` and `reassemble_release.py`, then run:
+
+```bash
+python reassemble_release.py
 ```
 
-Inside Blender Python, the wrapper exposes `move(h, v)`, `reset()`, `render(path)`, `sweep()`, `state()` and `calibration()`. For development setup, tests, character mapping and rebuilding, see [Team setup](TEAM_SETUP.md) and the [Runbook](docs/RUNBOOK.md).
+The utility verifies each part and the assembled ZIP. Extract `apollo-v22-submission.zip` into a fresh directory. The source-code download is a development checkout; runtime commands below expect the extracted package's `model/`, `textures/` and `timelines/` directories.
+
+Extract `apollo-v22-12-second-demonstrations.zip` separately for the ready-to-play clips and extended, packed timelines. Open a supplement `timelines/<mode>/expression.blend` and play frames **1â€“288 at 24 fps**. The base timelines use frames **1â€“192**.
+
+### 2. Verify and render
+
+Use **Python 3.10+** and **Blender 4.5.15 LTS**, build `5afeabba6097`. The launcher uses Python's standard library; Blender supplies its numerical runtime. Runtime playback does not require MCP, MPFB or a separate GNM installation.
+
+From the freshly extracted base runtime on Windows:
+
+```powershell
+python tools/gnm_bundle_verify.py --reject-extra
+$blenderPath = 'C:/Program Files/Blender Foundation/Blender 4.5/blender.exe'
+python tools/gnm_run.py still --blender $blenderPath --out renders/hero.png
+python tools/gnm_run.py left --blender $blenderPath --out renders/left --first 1 --last 3
+python tools/gnm_run.py right --blender $blenderPath --out renders/right --first 1 --last 3
+python tools/gnm_run.py generate-motion --blender $blenderPath --out renders/motion --first 1 --last 3
+```
+
+On Linux, supply the absolute Blender executable path:
+
+```bash
+python3 tools/gnm_run.py generate-motion --blender /opt/blender/blender --out 'renders/motion with spaces' --first 1 --last 3
+```
+
+Remove `--first` and `--last` to render all 192 base frames. Choose materials and UVs with `--variant olive-amber --layout legacy`; both `udim` and `legacy` are supported. Keep separate output directories for each mode, variant and layout. Repeating the same command preserves verified frames and repairs missing or corrupt images. The launcher enables Blender offline mode.
+
+The released motion preset uses 512 Cycles samples and is intended for offline synthesis. The included videos provide immediate inspection without a new render. [Full setup, variants and recovery behavior](docs/V22_QUICKSTART.md)
+
+## Research foundations
+
+Apollo also retains a calibrated binocular gaze engine for analytical annotation research. It solves per-eye fixation toward a shared 3D target, projects physical pupil centers and pupil-boundary conics through a calibrated camera, and checks geometry against rendered pixels. The fixed ten-pose protocol and seeded 256-image corpus have their own evidence and release boundaries.
+
+These historical measurements are documented separately and are not transferred to the v22 pipeline. See the [mathematical model](docs/SOLUTION_TECHNICAL.md), [verification coverage](docs/VERIFIER_COVERAGE.md), [research workflow](docs/UPGRADE_RUNBOOK.md) and [protected competition baseline](milestones/competition-upgrade-2026-11-07/README.md).
+
+## Scope, provenance and attribution
+
+Independent human appearance/motion review remains outstanding. Compatibility is demonstrated on pinned public GNM Head v3 and its tested layouts; an undisclosed organizer evaluator asset has not been tested. Internal measurements are engineering evidence, rather than an organizer score. The [release notes](docs/RELEASES.md) document the exact qualification scope.
+
+The implementation builds on attributed external model, skin and eye resources. Licenses, source records and attribution accompany the technical package. The iris reconstruction uses a photographic source region of approximately 440 pixels; a 2K output map is a delivery resolution rather than a claim of 2K captured detail. Preserve the original asset terms when redistributing.
+
+[GNM source and license](assets/gnm/) Â· [Scan provenance](assets/gnm-scan/ATTRIBUTION.md) Â· [Eye-source provenance](assets/gnm-eye-photo/ATTRIBUTION.md) Â· [Selected-identity provenance](assets/v22-provenance.json) Â· [README media provenance](docs/images/apollo-v22-media-provenance.json)
 
 ## Repository guide
 
-| Start here | Purpose |
+| Resource | Purpose |
 | --- | --- |
-| [tasks.py](tasks.py) | Build, render, validate, verify and package from the CLI |
-| [apollo_core/](apollo_core/) · [wrapper/](wrapper/) | Reference math and standalone Blender API |
-| [build/](build/) · [tools/](tools/) | Scene construction, research corpus and verification |
-| [FILEMAP.md](FILEMAP.md) | Find implementation and evidence by responsibility |
-| [Release history](docs/RELEASES.md) | Qualified competition baseline, realism preview and development checkpoints |
+| [v22 quickstart](docs/V22_QUICKSTART.md) | Current runtime setup, materials, playback and recovery |
+| [Submission evidence](docs/V22_SUBMISSION.md) | Detailed technical history and evidence boundaries |
+| [Release history](docs/RELEASES.md) | Stable release scope, archive hashes and retained baselines |
+| [GNM integration](docs/GNM_INTEGRATION.md) | Native model preparation, construction and portability |
+| [Core numerical methods](apollo_core/) | Identity transport, geometry, projection and protocol logic |
+| [Build and verification tools](tools/) | Scene integration, texture binding, rendering, checks and packaging |
+| [File map](FILEMAP.md) | Implementation navigation by responsibility |
+| [Team setup](TEAM_SETUP.md) | Development environment and collaboration conventions |
+
+---
+
+**AICA Â· Apollo Â· Samsung PRISM-XR Track 01**
