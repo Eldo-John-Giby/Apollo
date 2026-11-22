@@ -1,5 +1,7 @@
 # Apollo two-minute demo: voice-over guide
 
+Final status: the root `VITVellore_AICA_Demo.mp4` now includes the team-provided narration. The source recording is retained locally under ignored `out/private-narration/` and is not committed. A pitch-preserving 1.0346667× adjustment fits the complete recording into 120 seconds. The opening uses a wider complete-head portrait. The recording instructions below are retained as the original script reference.
+
 Record one continuous human voice-over, using the ranges below as cues. The master is deliberately silent. The pace is approximately 145 words per minute, with room for natural pauses. Recorded footage runs at its original 24 fps. This script replaces the earlier walkthrough narration. Proposed Samsung applications are identified explicitly.
 
 Pronunciation: Apollo = uh-POL-oh; GNM = G-N-M; UV = U-V; PBR = P-B-R.

@@ -1,0 +1,14 @@
+{
+  "duration_seconds": 120,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 24,
+  "audio": "User-provided human narration; AAC 192 kbps; pitch-preserving 1.0346667x speed adjustment from 124.16 seconds",
+  "opening": "Wider complete-head three-quarter portrait replaces the eye macro",
+  "other_chapters": "Preserved original encoded chapters 1 through 10 without video re-encoding",
+  "audio_source_sha256": "ae320fc6724181b68c09f98f855636cf56f019b6b103073b6d098e659917cfd8",
+  "sha256": "e745821416987dc17e6a5a6ca5feb61e590ce57c22ddb0938d7ce6293febd60f",
+  "full_decode": "passed"
+}

@@ -127,7 +127,7 @@ class Edit:
             return self.stills[index].copy()
         c = self.shell(index)
         if index == 0:
-            c.paste(self.images['cinematic'].crop((0, 0, 1280, 1080)), (0, 0))
+            self.picture(c, 'angle', (100, 130, 900, 900))
             self.text(c, 'APOLLO', (1330, 245), 88, FG, True)
             self.text(c, 'Expression,\nengineered.', (1335, 405), 48, FG)
             self.text(c, 'Synthetic gaze\nfor Samsung XR research', (1337, 635), 29, ACCENT)
