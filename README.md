@@ -15,17 +15,20 @@
 
 [**Download v0.3.0**](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0) · [**Run Apollo**](#reproduce-the-results) · [**Inspect the evidence**](#verification-and-reproducibility)
 
-## Project Index
+## Contents
 
-| Category | Primary Artifacts & Links | Description |
+| Section | Overview & Key Deliverables | Jump |
 | :--- | :--- | :--- |
-| **Submission Documents** | • [LangAI3.0_AI_Disclosure.docx](LangAI3.0_AI_Disclosure.docx) <br> • [Apollo_SamsungXR_Presentation.pptx](Apollo_SamsungXR_Presentation.pptx) <br> • [official_ppt_template_supplied_by_judges.pptx](official_ppt_template_supplied_by_judges.pptx) <br> • [XR_Hackathon_Slides.pdf](XR_Hackathon_2026_Consolidated_Slides_for_sharing_v1.pdf) | Official AI usage disclosure form, competition presentation slides, judge templates, and launch deck. |
-| **Runtime Demonstrations** | • [videos/left.mp4](videos/left.mp4) <br> • [videos/right.mp4](videos/right.mp4) <br> • [videos/generate_motion.mp4](videos/generate_motion.mp4) | Three 24 fps runtime-captured motion demonstration videos (<= 15s each; 8–12s duration). |
-| **Release Archives** | • [Apollo v0.3.0 Release](https://github.com/Eldo-John-Giby/Apollo/releases/tag/apollo-v0.3.0) <br> • [reassemble_release.py](tools/reassemble_release.py) | Pinned v22 submission package (3.4 GB split archive, 5 texture sets, 3 packed `.blend` scenes, 576 base PNGs). |
-| **Judge Reproduction** | • [Reproduce the Results](#reproduce-the-results) <br> • [v22 Quickstart](docs/V22_QUICKSTART.md) <br> • [Runbook](docs/RUNBOOK.md) | Step-by-step instructions to unpack, verify, and run CLI rendering across all modes and variants. |
-| **Core Technical Sections** | • [Submission at a Glance](#submission-at-a-glance) <br> • [Appearance & Materials](#appearance-and-material-diversity) <br> • [Motion & Expression](#motion-and-expression) <br> • [Native Portability](#native-target-portability) | Rubric alignment (60/20/20 pts), 5 PBR variants, 3 motion modes, and GNM / FLAME UV mapping. |
-| **Verification & Tests** | • [Qualification Summary](milestones/v22-12-second-demonstrations-2026-11-22/qualification/final-qualification-summary.json) <br> • [Windows](milestones/v22-12-second-demonstrations-2026-11-22/qualification/windows-qualification.json) · [Linux](milestones/v22-12-second-demonstrations-2026-11-22/qualification/linux-qualification.json) <br> • [Test Suite](tests/) (175 tests) | Clean-room Windows and Linux runtime qualification reports, 68.26 dB PSNR comparison, and automated test suite. |
-| **Codebase Navigation** | • [FILEMAP.md](FILEMAP.md) <br> • [Numerical Core](apollo_core/) <br> • [CLI & Verification Tools](tools/) | Navigation directory of all repository components, mathematical modules, and tool scripts. |
+| **1. Overview** | Synthetic gaze synthesis, v22 character identity and GNM motion integration | [Jump to section](#overview) |
+| **2. Submission at a glance** | 60/20/20 rubric alignment: 5 variants, 3 motion modes, 24 fps runtime demos | [Jump to section](#submission-at-a-glance) |
+| **3. Appearance and material diversity** | 5 photorealistic palettes, 4K PBR skin, dual irises, judging stills | [Jump to section](#appearance-and-material-diversity) |
+| **4. Motion and expression** | Left, Right, Generate Motion, eyelid follow, brow dynamics, asymmetric blinks | [Jump to section](#motion-and-expression) |
+| **5. Native-target portability** | Google GNM and FLAME UV layouts (`udim` and `legacy`), seam-free wrapping | [Jump to section](#native-target-portability) |
+| **6. Verification and reproducibility** | Clean Windows & Linux runtime qualification, 68.26 dB PSNR, 182 tests | [Jump to section](#verification-and-reproducibility) |
+| **7. Reproduce the results** | Step-by-step judge runbook: Python reassembly and CLI rendering commands | [Jump to section](#reproduce-the-results) |
+| **8. Research foundations** | Analytical 3D spherical rotation, Rodrigues formula, conic pupil projection | [Jump to section](#research-foundations) |
+| **9. Scope, provenance and attribution** | CC0 & open asset licenses, model provenance, and attribution records | [Jump to section](#scope-provenance-and-attribution) |
+| **10. Repository guide** | Direct index of quickstarts, runbooks, core math, and tool entry points | [Jump to section](#repository-guide) |
 
 ## Overview
 
